@@ -2,7 +2,7 @@ show databases;
 
 create database if not exists newtable;
 
-use if exists newtable;
+use newtable;
 
 select database();
 
@@ -63,5 +63,5 @@ update newbase set price = price + 1000;
 
 update newbase set price = price + 500, name = 'James Gong' where ID = 1;
 
-update newbase set price = price + 200 where ID = 1 or ID = 3 or ID = 2;
+update newbase set price = price + 2000 where ID = 5;
 

@@ -1,10 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<!-- 没啥用 忽略就好了 随便起的名字-->
 	<groupId>org.maven.apache</groupId>
+	<!-- 我们的项目名字-->
 	<artifactId>MavenProject</artifactId>
 	<build>
 		<plugins>
 			<plugin>
+			<!-- Maven Compiler-->
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<release>17</release>
@@ -12,15 +15,17 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<version>3.8.0</version>
 			</plugin>
+			<!-- 执行TestCase用的-->
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<groupId>org.apache.maven.plugins</groupId>
 				<version>3.0.0-M7</version>
 			</plugin>
+			<!-- JavaFX 的功能管理-->
 			<plugin>
 				<artifactId>javafx-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>nz.ac.auckland.se206.App</mainClass>
+					<mainClass>org.maven.apache.MyLauncher</mainClass>
 				</configuration>
 				<groupId>org.openjfx</groupId>
 				<version>0.0.3</version>
@@ -28,7 +33,7 @@
 					<execution>
 						<id>debug</id>
 						<configuration>
-							<mainClass>nz.ac.auckland.se206.App</mainClass>
+							<mainClass>org.maven.apache.MyLauncher</mainClass>
 							<options>
 								<option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005
                   </option>
@@ -37,28 +42,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>com.cosium.code</groupId>
-				<artifactId>git-code-format-maven-plugin</artifactId>
-				<version>3.4</version>
-				<executions>
-					<!-- On commit, format the modified java files -->
-					<execution>
-						<id>install-formatter-hook</id>
-						<goals>
-							<goal>install-hooks</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<googleJavaFormatOptions>
-						<aosp>false</aosp>
-						<fixImportsOnly>false</fixImportsOnly>
-						<skipSortingImports>false</skipSortingImports>
-						<skipRemovingUnusedImports>false</skipRemovingUnusedImports>
-					</googleJavaFormatOptions>
-				</configuration>
-			</plugin>
+			<!-- Maven 项目打包成Executable Jar文件的功能-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -66,101 +50,149 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>nz.ac.auckland.se206.MyLauncher</mainClass>
+							<!-- 从哪里开始运行-->
+							<mainClass>org.maven.apache.MyLauncher</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
 			</plugin>
+			<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-assembly-plugin</artifactId>
+    <executions>
+        <execution>
+            <phase>package</phase>
+            <goals>
+                <goal>single</goal>
+            </goals>
+            <configuration>
+                <archive>
+                <manifest>
+                    <mainClass>
+                        org.maven.apache.MyLauncher
+                    </mainClass>
+                </manifest>
+                </archive>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
 		</plugins>
 	</build>
 	<dependencies>
+	<!-- 请求网络用的-->
 		<dependency>
 			<groupId>com.squareup.okhttp3</groupId>
 			<artifactId>okhttp</artifactId>
 			<version>4.10.0</version>
 		</dependency>
+		<!-- 管理JSON文件用的-->
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20220320</version>
 		</dependency>
+		<!-- 前端Java FX的一个优化Library 里面包含各种优化的部件 比如说按钮 我们要用这个 不用原生的-->
 		<dependency>
 			<groupId>de.jensd</groupId>
 			<artifactId>fontawesomefx-fontawesome</artifactId>
 			<version>4.7.0-9.1.2</version>
 		</dependency>
+		<!-- JAVAFX 功能-->
 		<dependency>
 			<artifactId>javafx-controls</artifactId>
 			<groupId>org.openjfx</groupId>
 			<version>18.0.1</version>
 		</dependency>
+		<!-- JAVFAFX 到 FXML 的链接-->
 		<dependency>
 			<artifactId>javafx-fxml</artifactId>
 			<groupId>org.openjfx</groupId>
 			<version>18.0.1</version>
 		</dependency>
+		<!-- JAVAFX 功能-->
 		<dependency>
 			<artifactId>javafx-graphics</artifactId>
 			<groupId>org.openjfx</groupId>
 			<version>18.0.1</version>
 		</dependency>
+		<!-- 使用读取CSV 文件用的Library-->
 		<dependency>
 			<groupId>com.opencsv</groupId>
 			<artifactId>opencsv</artifactId>
 			<version>5.6</version>
 		</dependency>
+		<!-- MyBatis 的依賴-->
+		<dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.5</version>
+        </dependency>
+        <!-- 链接JAVA 和 MYSQL的-->
+        <dependency>
+        	<groupId>mysql</groupId>
+        	<artifactId>mysql-connector-java</artifactId>
+        	<version>5.1.46</version>
+        </dependency>
+		<!-- Github 上的一个给JAVAFX 一个ICON部件 我没记错的话应该是已经与当前版本不匹配了 懒得删了 直接忽略-->
 		<dependency>
 			<groupId>com.github.jiconfont</groupId>
 			<artifactId>jiconfont</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<!-- 建立于JAVAFX 的一个前端部件库 叫 JFOENIX 我们要一直用这个-->
 		<dependency>
 			<groupId>com.jfoenix</groupId>
 			<artifactId>jfoenix</artifactId>
 			<version>9.0.10</version>
 		</dependency>
-
+		<!-- 导一些JAVA SWING 里面的东西到JAVAFX里面 应该大概率用不上 但万一呢 就留着了-->
 		<dependency>
 			<artifactId>javafx-swing</artifactId>
 			<groupId>org.openjfx</groupId>
 			<version>17.0.0.1</version>
 		</dependency>
+		<!-- 数据接口 如果我们要导数据啥的 比如说获取谷歌地图的数据啥的 就用得上-->
 		<dependency>
 			<artifactId>api</artifactId>
 			<groupId>ai.djl</groupId>
 			<version>0.18.0</version>
 		</dependency>
+		<!-- JAVAFX 功能 MEdia的各种Class 提供背景音乐和音效用的-->
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-media</artifactId>
 			<version>18.0.1</version>
 		</dependency>
+		<!-- PYTHON MACHINE LEARNING 的引擎 百分之99.999 用不上 但留着也不碍事-->
 		<dependency>
 			<artifactId>pytorch-engine</artifactId>
 			<groupId>ai.djl.pytorch</groupId>
 			<version>0.18.0</version>
 		</dependency>
+		<!-- 同上 具体啥区别不清楚 也懒得去查-->
 		<dependency>
 			<artifactId>pytorch-native-cpu</artifactId>
 			<groupId>ai.djl.pytorch</groupId>
 			<version>1.11.0</version>
 		</dependency>
+		<!-- 控制图片大小的 要配合JAVA后端使用 小概率能用上-->
 		<dependency>
 			<artifactId>imgscalr-lib</artifactId>
 			<groupId>org.imgscalr</groupId>
 			<version>4.2</version>
 		</dependency>
-		<dependency>
-			<artifactId>freetts</artifactId>
-			<groupId>net.sf.sociaal</groupId>
-			<version>1.2.2</version>
-		</dependency>
+		<!-- JUNIT 搞Test的-->
 		<dependency>
 			<artifactId>junit-jupiter-engine</artifactId>
 			<groupId>org.junit.jupiter</groupId>
 			<scope>test</scope>
 			<version>5.8.1</version>
 		</dependency>
+		<!-- 写日志的 百分之99.999用不上 但留着呗-->
 		<dependency>
 			<artifactId>slf4j-simple</artifactId>
 			<groupId>org.slf4j</groupId>
@@ -168,9 +200,12 @@
 		</dependency>
 	</dependencies>
 	<properties>
+	<!-- 如名 Maven Compiler-->
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
+		<!-- UTF8mb4 字符集 功能很强大 支持你在String 和 Character里面打各国语言-->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	<!-- 我瞎写的版本号 其实就是我没改 系统默认的 一点用没有-->
 	<version>0.0.1-SNAPSHOT</version>
 </project>
