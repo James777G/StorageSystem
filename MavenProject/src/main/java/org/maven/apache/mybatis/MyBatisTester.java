@@ -8,6 +8,8 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.maven.apache.mapper.UserMapper;
+import org.maven.apache.user.User;
 
 public class MyBatisTester {
 	
@@ -19,7 +21,9 @@ public class MyBatisTester {
 	
 	private static SqlSession sqlSession;
 	
-	public static List<Object> users;
+	public static List<User> users;
+	
+	private static UserMapper userMapper;
 
 	public static void initialize() throws IOException {
 		//这个是字节输入流， ！！！！ 
@@ -36,7 +40,9 @@ public class MyBatisTester {
 	}
 	
 	public static void refreshUsersList() {
-		users = sqlSession.selectList("test.selectAll");
+		userMapper = sqlSession.getMapper(UserMapper.class);
+		
+		users = userMapper.selectAll();
 	}
 	
 	public static void printUsersInfo() {

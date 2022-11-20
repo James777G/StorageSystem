@@ -16,8 +16,8 @@
       </dataSource>
     </environment>
   </environments>
-  <mappers>
-  <!-- SQL语言的映射文件 就相当于HASHMAP 里面 KEY和VALUE的感觉-->
-    <mapper resource="mybatis/UserMapper.xml"/>
+  <mappers>  
+    <!-- 直接进行包扫描 方便多了-->
+    <package name="org.maven.apache.mapper"/>
   </mappers>
 </configuration>

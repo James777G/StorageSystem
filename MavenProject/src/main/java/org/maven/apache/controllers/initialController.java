@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 
 public class initialController {
 	
+	
 	@FXML
 	private Label nameOne;
 	

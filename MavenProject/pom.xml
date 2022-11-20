@@ -42,7 +42,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- Maven 项目打包成Executable Jar文件的功能-->
+			<!-- Maven 项目打包成Executable Jar文件的功能 基本上有了下面的 这个就没啥大用了-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -56,6 +56,8 @@
 					</archive>
 				</configuration>
 			</plugin>
+			<!-- 这个非常强大了， 这个会把Maven Project 打包成 带着所有Dependencies的Executable Jar
+			文件， 从而使得这个一个单独的Executable Jar 文件可以独自运行-->
 			<plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-assembly-plugin</artifactId>
