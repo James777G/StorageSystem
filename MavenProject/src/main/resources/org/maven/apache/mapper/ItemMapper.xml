@@ -6,7 +6,7 @@
   <!-- 名称空间-->
 <mapper namespace="org.maven.apache.mapper.ItemMapper">
   <select id="selectAll" resultType="org.maven.apache.item.Item">
-  <!-- 这个方法获得New Base 表中全部的数据, 返回成一个List， List里面每个Element是一个User-->
+  <!-- 这个方法获得New Base 表中全部的数据, 返回成一个List， List里面每个Element是一个Item-->
     select * from ItemTable;
   </select>
 </mapper>

@@ -2,7 +2,7 @@ package org.maven.apache;
 
 import java.io.IOException;
 
-import org.maven.apache.mybatis.MyBatisTester;
+import org.maven.apache.mybatis.MyBatisConnector;
 
 /**
  * 这个Class的存在 是为了欺骗 Java Virtual Machine（JVM） 因为这个 Class 没有继承 Javafx 的 Application
@@ -23,7 +23,7 @@ public class MyLauncher {
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		MyBatisTester.initialize();
+		MyBatisConnector.initialize();
 		App.main(args);
 
 	}
