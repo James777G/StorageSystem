@@ -78,9 +78,14 @@ ipconfig
 
 ## Glossary
 
-* MySQL:
+* MySQL:<br/>
 一款数据库产品，里面存储的都是表格状数据，可以用SQL语言来实现对数据的增删改查
-* MyBatis:
+* MyBatis:<br/>
 一款前沿的Java的持久层框架，默认使用JDBC作为数据接口，可以实现对于SQL语句的完全代理<br/>
 -----什么叫做完全代理？<br/>
 因为在MySQL里我们说了，对于数据的增删改查是通过SQL语言来进行实现的， 但是我们只有Java语言， 所以MyBatis框架通过配置XML文件实现了只用Java语言全权代替SQL语言的功能
+* JDBC:<br/>
+全称 Java Database Connectivity，是在底层实现Java与数据库进行连接的接口。
+* JFX: <br/>
+全称 JFoenix， 是一款基于JavaFX的前端Library， 里面包含了各种精巧的组件，我们使用了 JFXButton 完全代替了 JavaFX 原生的 Button 
+
