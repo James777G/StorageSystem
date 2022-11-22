@@ -88,4 +88,19 @@ ipconfig
 全称 Java Database Connectivity，是在底层实现Java与数据库进行连接的接口。
 * JFX: <br/>
 全称 JFoenix， 是一款基于JavaFX的前端Library， 里面包含了各种精巧的组件，我们使用了 JFXButton 完全代替了 JavaFX 原生的 Button 
-
+* 持久层：
+任何产品都分为持久层，表现层，和业务层。 持久层负责了与数据库进行对接和调用数据，表现层负责了前端UI，业务层负责了后端的数据逻辑编写。
+* JavaSE:
+Java Standard Edition 标准版 Java
+* JavaEE：
+Java Enterprise Edition 商业版 Java 与 Java 不算框架的话没有什么区别
+* JDK:
+Java Development Kit, Java自带的工具包，里面有List HashMap啥的
+* JVM/JRE:
+Java 编译器
+* org:
+一般带这种名字的网站 就是开源的
+* Apache:
+一种Licence， 就是你随便用，别用我商标就行
+* UTF-8/utf8_mb4:
+一种字符集，功能很强大，包含了大多数的语言
