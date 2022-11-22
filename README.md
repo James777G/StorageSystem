@@ -23,14 +23,27 @@ To run this project, install:
 * Download Dbeavers in your perferred IDE marketplace
 * Add the path to the bin folder to the path environment variable
 
-# For Mac Users: 
+## For Mac Users: 
 ```
 export PATH=${PATH}:%path to bin folder%
 
 ```
+## Initialise your MySQL Server as administrator
+```
+mysqld --initialize-insecure;
+mysqld -install;
+net start MySQL;
+```
+
+## Log into your MySQL Server
+```
+mysql -u root -p;
 
 ```
-$ cd ../lorem
-$ npm install
-$ npm start
+
+## Change your MySQL Server Password
+```
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '%your preferred password%';
+flush privileges;
+
 ```
