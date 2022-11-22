@@ -6,7 +6,7 @@
 * [Setup](#setup)
 
 ## General info
-Warehouse management system to govern your items neatly. Requires Wi-Fi to work locally.
+Warehouse management system to govern your items neatly. Requires Wi-Fi to run locally.
 
 ## Technologies
 Project is created with:
@@ -28,7 +28,7 @@ To run this project, install:
 export PATH=${PATH}:%path to bin folder%
 
 ```
-## Initialise your MySQL Server as administrator
+## Initialise your MySQL Server as administrator/sudo for mac users
 ```
 mysqld --initialize-insecure;
 mysqld -install;
@@ -45,5 +45,16 @@ mysql -u root -p;
 ```
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '%your preferred password%';
 flush privileges;
+
+```
+
+## Create new mysql authorised user to allow remote access using IP address
+
+
+```
+Create new '%root%'@'%' identified by '%root%';
+grant all privileges on *.* to 'root'@'%' with grant option;
+flush privileges;
+
 
 ```
