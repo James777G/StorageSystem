@@ -104,5 +104,5 @@ Java 编译器
 一种Licence， 就是你随便用，别用我商标就行
 * UTF-8/utf8_mb4:<br/>
 一种字符集，功能很强大，包含了大多数的语言
-* DBeaver:
+* DBeaver:<br/>
 编写SQL语言的IDE，最重要的是他是免费的
