@@ -20,8 +20,7 @@
 					"allowPublicKeyRetrieval": "true",
 					"useSSL": "false"
 				},
-				"auth-model": "native",
-				"handlers": {}
+				"auth-model": "native"
 			}
 		}
 	},

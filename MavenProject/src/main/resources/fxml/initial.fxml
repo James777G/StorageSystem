@@ -3,6 +3,9 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="1120.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.initialController">
@@ -71,6 +74,22 @@
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.25999999046325684" green="0.4819999933242798" blue="1.0" opacity="0.6000000238418579" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color green="0.0833333358168602" blue="1.0" opacity="0.3799999952316284" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
       </JFXButton>
       <JFXButton fx:id="buttonOnExit" layoutX="1233.0" layoutY="501.0" onAction="#onExit" prefHeight="156.0" prefWidth="224.0" text="Exit">
          <font>

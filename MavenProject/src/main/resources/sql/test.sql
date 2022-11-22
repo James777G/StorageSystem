@@ -65,3 +65,5 @@ update newbase set price = price + 500, name = 'James Gong' where ID = 1;
 
 update newbase set price = price + 2000 where ID = 5;
 
+
+

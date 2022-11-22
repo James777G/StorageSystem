@@ -1,16 +1,38 @@
 {
 	"folders": {},
 	"connections": {
-		"mysql8-1848eace74f-474a3523093d783e": {
+		"mysql8-1848eaea529-3293cb89baa1198f": {
 			"provider": "mysql",
 			"driver": "mysql8",
-			"name": "192.168.3.13",
+			"name": "localhost",
 			"save-password": true,
 			"read-only": false,
 			"configuration": {
-				"host": "192.168.3.13",
+				"host": "localhost",
 				"port": "3306",
-				"url": "jdbc:mysql://192.168.3.13:3306/",
+				"url": "jdbc:mysql://localhost:3306/",
+				"home": "C:\\Program Files\\mysql-8.0.31-winx64",
+				"type": "dev",
+				"properties": {
+					"connectTimeout": "20000",
+					"rewriteBatchedStatements": "true",
+					"enabledTLSProtocols": "TLSv1,TLSv1.1,TLSv1.2",
+					"allowPublicKeyRetrieval": "true",
+					"useSSL": "false"
+				},
+				"auth-model": "native"
+			}
+		},
+		"mysql8-184939ce0e2-57629406c7d88358": {
+			"provider": "mysql",
+			"driver": "mysql8",
+			"name": "localhost 2",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "3306",
+				"url": "jdbc:mysql://localhost:3306/",
 				"home": "C:\\Program Files\\mysql-8.0.31-winx64",
 				"type": "dev",
 				"auth-model": "native",
