@@ -20,6 +20,14 @@ Project is created with:
 To run this project, install:
 
 * MySQL --- [https://dev.mysql.com/downloads/mysql/] (Link to MySQL Installer)
+* Download Dbeavers in your perferred IDE marketplace
+* Add the path to the bin folder to the path environment variable
+
+# For Mac Users: 
+```
+export PATH=${PATH}:%path to bin folder%
+
+```
 
 ```
 $ cd ../lorem
