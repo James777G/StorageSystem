@@ -19,7 +19,7 @@ Project is created with:
 ## Setup
 To run this project, install:
 
-* MySQL --- [https://dev.mysql.com/downloads/mysql/](Link to MySQL Installer)
+* MySQL --- [https://dev.mysql.com/downloads/mysql/] (Link to MySQL Installer)
 
 ```
 $ cd ../lorem
