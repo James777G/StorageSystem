@@ -106,3 +106,5 @@ Java 编译器
 一种字符集，功能很强大，包含了大多数的语言
 * DBeaver:<br/>
 编写SQL语言的IDE，最重要的是他是免费的
+* API:<br/>
+Application Programming Interface 负责数据的对接，就像上面说的 JDBC 可以实现数据库和 JAVA 的对接， 那么我们称 JDBC 是一个 API
