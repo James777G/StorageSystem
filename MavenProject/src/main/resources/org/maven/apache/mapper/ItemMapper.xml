@@ -25,7 +25,7 @@
   select *
   from ItemTable
   where
-  	ItemName like #{ItemName}
+    ItemName like #{ItemName}
   	and 
   	unit &gt; #{unit}
   </select>

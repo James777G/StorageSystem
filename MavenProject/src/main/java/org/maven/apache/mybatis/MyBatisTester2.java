@@ -21,7 +21,7 @@ public class MyBatisTester2 {
 		ItemMapper itemMapper = MyBatisItemConnector.getItemMapper();
 		result = itemMapper.selectAll();
 		item = itemMapper.selectById(2);
-		result2 = itemMapper.selectByCondition(FuzzySearch.getFuzzyName("ele"), 10);
+		result2 = itemMapper.selectByCondition(FuzzySearch.getFuzzyName("ele"), 200);
 		System.out.println(result2);
 		System.out.println(item.getItemName());
 		System.out.println(result);
