@@ -58,3 +58,10 @@ flush privileges;
 
 
 ```
+
+## View your IPV4 address
+
+```
+ipconfig
+```
+* For mac users please view [https://www.avast.com/c-how-to-find-ip-address#topic-3]
