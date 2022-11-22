@@ -6,7 +6,27 @@
   <!-- 名称空间-->
 <mapper namespace="org.maven.apache.mapper.ItemMapper">
   <select id="selectAll" resultType="org.maven.apache.item.Item">
-  <!-- 这个方法获得New Base 表中全部的数据, 返回成一个List， List里面每个Element是一个Item-->
+  <!-- 这个方法获得Item Table 表中全部的数据, 返回成一个List， List里面每个Element是一个Item-->
     select * from ItemTable;
+  </select>
+  
+  <select id="selectById" parameterType="int" resultType="org.maven.apache.item.Item">
+  <!-- 这个方法获得Item Table 表中一个Item的数据, 返回成一个Item-->
+    select * from ItemTable where ItemId = #{id};
+    <!-- 用#{}来创建？占位符 防止SQL注入， 可以使用${}直接拼接 但可能会出现SQL注入的问题
+    参数传递的时候同#
+    表名或列名不固定同$
+    -->
+  </select>
+  <!-- like 模糊查询
+  {}内的名称需要和 Mapper Class 内部的 @Param 名称一致
+  -->
+  <select id="selectByCondition" resultType="org.maven.apache.item.Item">
+  select *
+  from ItemTable
+  where
+  	ItemName like #{ItemName}
+  	and 
+  	unit &gt; #{unit}
   </select>
 </mapper>
