@@ -104,3 +104,29 @@ Java 编译器
 一种Licence， 就是你随便用，别用我商标就行
 * UTF-8/utf8_mb4:<br/>
 一种字符集，功能很强大，包含了大多数的语言
+
+<form action="Image.html" method ="post">
+
+<!-- 文本输入框 ： input type = "text" 
+value 初始值
+maxlength 最长字符数
+size 文本框长度
+-->
+<p>名字： <input type="text" name="username" value="ghx" maxlength="8" ></p>
+<p>密码： <input type="password" name="pwd"></p>
+<p>
+
+<!-- 单选标签 Radio 
+name: 组
+value 单选框的值 -->
+	<input type="radio" value="boy" name="sex"/>男
+	<input type="radio" value="girl" name="sex"/>女
+</p>
+<p>
+<input type="submit">
+<input type="reset">
+</p>
+
+
+</form>
+
