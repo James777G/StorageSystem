@@ -3,7 +3,6 @@ package org.maven.apache.mybatis;
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.Test;
 import org.maven.apache.item.Item;
 import org.maven.apache.mapper.ItemMapper;
 import org.maven.apache.search.FuzzySearch;

@@ -32,4 +32,8 @@ public class MyBatisConnector {
 		// 通过你的配置文件里的Mapper Map成Java语言
 		sqlSession = sqlSessionFactory.openSession();
 	}
+	
+	public static void closeSession() {
+		sqlSession.close();
+	}
 }

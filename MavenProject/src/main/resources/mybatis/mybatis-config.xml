@@ -49,7 +49,7 @@
     </environment>
     
     
-    <!-- 给GYQ开发用， 下面输入GYQ工作IP地址， GYQ开发时把最上面 enviroments default改成下面的
+    <!-- GYQ给开发用， 下面输入GYQ工作IP地址， GYQ开发时把最上面 enviroments default改成下面的
     environment id 即可使用GYQ本地数据库以便测试 -->
         <environment id="developmentJamesGai">
       <transactionManager type="JDBC"/>

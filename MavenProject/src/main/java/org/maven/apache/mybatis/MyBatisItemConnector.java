@@ -29,8 +29,6 @@ public class MyBatisItemConnector extends MyBatisConnector {
 		items = itemMapper.selectAll();
 	}
 
-	public static void closeSession() {
-		sqlSession.close();
-	}
+
 
 }
