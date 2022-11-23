@@ -25,12 +25,24 @@ public class MyBatisConnector {
 	protected static SqlSessionFactory sqlSessionFactory;
 	protected static SqlSession sqlSession;
 	
-	public static void initialize() throws IOException {
+	/**
+	 * 这个 Method 提供了MyBatis 对于数据库的链接
+	 * @param allowAutoCommit True的时候允许自动提交数据， False的时候不允许
+	 * @throws IOException
+	 */
+	public static void initialize(boolean allowAutoCommit) throws IOException {
 		inputStream = Resources.getResourceAsStream(resource);
 		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 		// 通过 SqlSessionFactory 来构造 SqlSession 对象， SqlSession 简单来讲就是用SQL写的语言
 		// 通过你的配置文件里的Mapper Map成Java语言
-		sqlSession = sqlSessionFactory.openSession();
+		sqlSession = sqlSessionFactory.openSession(allowAutoCommit);
+	}
+	
+	/**
+	 * 对于数据库内部信息的提交更改， MyBatis默认是不允许的，所以你需要手动Commit
+	 */
+	public static void commitData() {
+		sqlSession.commit();
 	}
 	
 	public static void closeSession() {

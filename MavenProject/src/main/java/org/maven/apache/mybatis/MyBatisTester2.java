@@ -13,14 +13,21 @@ public class MyBatisTester2 {
 	public static void main(String[] args) throws IOException {
 		List<Item> result;
 		List<Item> result2;
-		Item item;
+		String name = "thatch";
+		int unit = 200;
+		Item item = new Item();
+		item.setItemName(name);
+		item.setUnit(unit);
+		item.setItemID(1);
 		//处理参数
 		
-		MyBatisConnector.initialize();
+		MyBatisConnector.initialize(true);
 		ItemMapper itemMapper = MyBatisItemConnector.getItemMapper();
+		int count = itemMapper.update(item);
+		System.out.println(count);
 		result = itemMapper.selectAll();
 		item = itemMapper.selectById(2);
-		result2 = itemMapper.selectByCondition(FuzzySearch.getFuzzyName("ele"), 200);
+		result2 = itemMapper.selectByCondition(null, 500);
 		System.out.println(result2);
 		System.out.println(item.getItemName());
 		System.out.println(result);

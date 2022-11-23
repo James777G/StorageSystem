@@ -42,7 +42,7 @@
       <!-- 链接你想要的MySQL服务器信息-->
         <property name="driver" value="com.mysql.jdbc.Driver"/>
         <!-- 仅测试用 之后会改参数-->
-        <property name="url" value="jdbc:mysql://192.168.3.13/ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
+        <property name="url" value="jdbc:mysql:///ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
         <property name="username" value="root"/>
         <property name="password" value="root"/>
       </dataSource>
@@ -57,7 +57,7 @@
       <!-- 链接你想要的MySQL服务器信息-->
         <property name="driver" value="com.mysql.jdbc.Driver"/>
         <!-- 仅测试用 之后会改参数-->
-        <property name="url" value="jdbc:mysql://192.168.3.13/ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
+        <property name="url" value="jdbc:mysql:///ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
         <property name="username" value="root"/>
         <property name="password" value="root"/>
       </dataSource>
@@ -73,7 +73,7 @@
       <!-- 链接你想要的MySQL服务器信息-->
         <property name="driver" value="com.mysql.jdbc.Driver"/>
         <!-- 仅测试用 之后会改参数-->
-        <property name="url" value="jdbc:mysql://192.168.3.13/ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
+        <property name="url" value="jdbc:mysql:///ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
         <property name="username" value="root"/>
         <property name="password" value="root"/>
       </dataSource>
@@ -89,7 +89,7 @@
       <!-- 链接你想要的MySQL服务器信息-->
         <property name="driver" value="com.mysql.jdbc.Driver"/>
         <!-- 仅测试用 之后会改参数-->
-        <property name="url" value="jdbc:mysql://192.168.3.13/ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
+        <property name="url" value="jdbc:mysql:///ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
         <property name="username" value="root"/>
         <property name="password" value="root"/>
       </dataSource>
@@ -105,9 +105,9 @@
       <!-- 链接你想要的MySQL服务器信息-->
         <property name="driver" value="com.mysql.jdbc.Driver"/>
         <!-- 仅测试用 之后会改参数-->
-        <property name="url" value="jdbc:mysql://192.168.3.13/ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
+        <property name="url" value="jdbc:mysql:///ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
         <property name="username" value="root"/>
-        <property name="password" value="root"/>
+        <property name="password" value=""/>
       </dataSource>
     </environment>
     

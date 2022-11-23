@@ -20,13 +20,40 @@
   </select>
   <!-- like 模糊查询
   {}内的名称需要和 Mapper Class 内部的 @Param 名称一致
+  
+  放入恒等式补充语法 动态SQL！！！！！！！！！！
   -->
   <select id="selectByCondition" resultType="org.maven.apache.item.Item">
   select *
   from ItemTable
-  where
-    ItemName like #{ItemName}
+  where 1 = 1
+  <if test="ItemName != null and ItemName != '' ">
+    and ItemName like #{ItemName}
+  </if>
+  <if test="unit != null">
   	and 
   	unit &gt; #{unit}
+  </if>
   </select>
+
+
+  <insert id="add" useGeneratedKeys="true" keyProperty="ItemID">
+  
+  	insert into ItemTable(ItemName, unit)
+  	values (#{itemName},#{unit});
+  	
+  </insert>
+  
+  
+  <update id="update">
+  	update ItemTable
+  	set ItemName = #{ItemName},
+  		unit = #{unit}
+  	where ItemID = #{ItemID}
+  
+  </update>
+  
+  
+  
+  
 </mapper>

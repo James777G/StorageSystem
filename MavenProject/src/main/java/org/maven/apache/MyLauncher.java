@@ -23,7 +23,7 @@ public class MyLauncher {
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		MyBatisConnector.initialize();
+		MyBatisConnector.initialize(true);
 		App.main(args);
 
 	}
