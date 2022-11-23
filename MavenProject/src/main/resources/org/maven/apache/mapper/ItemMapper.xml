@@ -48,7 +48,8 @@
   <update id="update">
   	update ItemTable
   	set ItemName = #{ItemName},
-  		unit = #{unit}
+  		unit = #{unit},
+  		Description = #{description}
   	where ItemID = #{ItemID}
   
   </update>

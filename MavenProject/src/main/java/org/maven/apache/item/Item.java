@@ -5,10 +5,15 @@ public class Item {
 	private int ItemID;
 	private String ItemName;
 	private int Unit;
+	private String Description = "";
+	
+	
+
 
 	@Override
 	public String toString() {
-		return "Item [ItemID=" + ItemID + ", ItemName=" + ItemName + ", Unit=" + Unit + "]";
+		return "Item [ItemID=" + ItemID + ", ItemName=" + ItemName + ", Unit=" + Unit + ", Description=" + Description
+				+ "]";
 	}
 	public int getItemID() {
 		return ItemID;
@@ -27,6 +32,12 @@ public class Item {
 	}
 	public void setUnit(int unit) {
 		Unit = unit;
+	}
+	public String getDescription() {
+		return Description;
+	}
+	public void setDescription(String description) {
+		Description = description;
 	}
 	
 	
