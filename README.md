@@ -54,7 +54,7 @@ flush privileges;
 
 
 ```
-Create new '%root%'@'%' identified by '%root%';
+Create new 'root'@'%' identified by 'root';
 grant all privileges on *.* to 'root'@'%' with grant option;
 flush privileges;
 
