@@ -47,12 +47,41 @@
   
   <update id="update">
   	update ItemTable
-  	set ItemName = #{ItemName},
+  	<set>
+  	<if test="ItemName != null and ItemName !=''">
+  		ItemName = #{ItemName},
+  	</if>
+  	<if test="unit != null">
   		unit = #{unit},
+  	</if>
+  	<if test="description != null and description != ''">
   		Description = #{description}
+  	</if>
+  	</set>
   	where ItemID = #{ItemID}
   
   </update>
+  
+  <delete id="deleteById">
+  	delete from ItemTable where  ItemID = #{id};
+  
+  </delete>
+  
+  <!-- mybatis 会将数组参数，封装为一个Map集合
+     * 默认： array = 数组
+     * 使用 Param 去改变默认Map集合默认Key的名称
+  -->
+  <delete id="deleteByIds">
+  
+  	delete from ItemTable where ItemID
+  	in (
+  	 		<foreach collection="array" item="id" separator=",">
+  	 			#{id}
+  	 		</foreach>
+  									);
+  
+  
+  </delete>
   
   
   

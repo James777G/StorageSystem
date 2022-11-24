@@ -45,6 +45,26 @@ public interface ItemMapper {
 	 */
 	void add(Item item);
 	
+	
+	
+	/**
+	 * 更新一项数据的某个或者某些值
+	 * @param item
+	 * @return
+	 */
 	int update(Item item);
+	
+	
+	
+	/**
+	 * 根据 ID 来进行删除
+	 */
+	void deleteById(int id);
+	
+	/**
+	 * 批量删除
+	 * @param ids[]
+	 */
+	void deleteByIds(int[] ids);
 
 }
