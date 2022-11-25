@@ -1,89 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <!-- 这个文件的文件路径不要动-->
-  <!-- 名称空间-->
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 这个文件的文件路径不要动-->
+<!-- 名称空间-->
 <mapper namespace="org.maven.apache.mapper.ItemMapper">
-  <select id="selectAll" resultType="org.maven.apache.item.Item">
-  <!-- 这个方法获得Item Table 表中全部的数据, 返回成一个List， List里面每个Element是一个Item-->
-    select * from ItemTable;
-  </select>
-  
-  <select id="selectById" parameterType="int" resultType="org.maven.apache.item.Item">
-  <!-- 这个方法获得Item Table 表中一个Item的数据, 返回成一个Item-->
-    select * from ItemTable where ItemId = #{id};
-    <!-- 用#{}来创建？占位符 防止SQL注入， 可以使用${}直接拼接 但可能会出现SQL注入的问题
-    参数传递的时候同#
-    表名或列名不固定同$
+    <select id="selectAll" resultType="org.maven.apache.item.Item">
+        <!-- 这个方法获得Item Table 表中全部的数据, 返回成一个List， List里面每个Element是一个Item-->
+        select * from ItemTable;
+    </select>
+
+    <select id="selectById" parameterType="int" resultType="org.maven.apache.item.Item">
+        <!-- 这个方法获得Item Table 表中一个Item的数据, 返回成一个Item-->
+        select * from ItemTable where ItemId = #{id};
+        <!-- 用#{}来创建？占位符 防止SQL注入， 可以使用${}直接拼接 但可能会出现SQL注入的问题
+        参数传递的时候同#
+        表名或列名不固定同$
+        -->
+    </select>
+    <!-- like 模糊查询
+    {}内的名称需要和 Mapper Class 内部的 @Param 名称一致
+
+    放入恒等式补充语法 动态SQL！！！！！！！！！！
     -->
-  </select>
-  <!-- like 模糊查询
-  {}内的名称需要和 Mapper Class 内部的 @Param 名称一致
-  
-  放入恒等式补充语法 动态SQL！！！！！！！！！！
-  -->
-  <select id="selectByCondition" resultType="org.maven.apache.item.Item">
-  select *
-  from ItemTable
-  where 1 = 1
-  <if test="ItemName != null and ItemName != '' ">
-    and ItemName like #{ItemName}
-  </if>
-  <if test="unit != null">
-  	and 
-  	unit &gt; #{unit}
-  </if>
-  </select>
+    <select id="selectByCondition" resultType="org.maven.apache.item.Item">
+        select *
+        from ItemTable
+        where 1 = 1
+        <if test="ItemName != null and ItemName != '' ">
+            and ItemName like #{ItemName}
+        </if>
+        <if test="unit != null">
+            and
+            unit &gt; #{unit}
+        </if>
+    </select>
 
 
-  <insert id="add" useGeneratedKeys="true" keyProperty="ItemID">
-  
-  	insert into ItemTable(ItemName, unit)
-  	values (#{itemName},#{unit});
-  	
-  </insert>
-  
-  
-  <update id="update">
-  	update ItemTable
-  	<set>
-  	<if test="ItemName != null and ItemName !=''">
-  		ItemName = #{ItemName},
-  	</if>
-  	<if test="unit != null">
-  		unit = #{unit},
-  	</if>
-  	<if test="description != null and description != ''">
-  		Description = #{description}
-  	</if>
-  	</set>
-  	where ItemID = #{ItemID}
-  
-  </update>
-  
-  <delete id="deleteById">
-  	delete from ItemTable where  ItemID = #{id};
-  
-  </delete>
-  
-  <!-- mybatis 会将数组参数，封装为一个Map集合
-     * 默认： array = 数组
-     * 使用 Param 去改变默认Map集合默认Key的名称
-  -->
-  <delete id="deleteByIds">
-  
-  	delete from ItemTable where ItemID
-  	in (
-  	 		<foreach collection="array" item="id" separator=",">
-  	 			#{id}
-  	 		</foreach>
-  									);
-  
-  
-  </delete>
-  
-  
-  
-  
+    <insert id="add" useGeneratedKeys="true" keyProperty="ItemID">
+
+        insert into ItemTable(ItemName, unit)
+        values (#{itemName},#{unit});
+
+    </insert>
+
+
+    <update id="update">
+        update ItemTable
+        <set>
+            <if test="ItemName != null and ItemName !=''">
+                ItemName = #{ItemName},
+            </if>
+            <if test="unit != null">
+                unit = #{unit},
+            </if>
+            <if test="description != null and description != ''">
+                Description = #{description}
+            </if>
+        </set>
+        where ItemID = #{ItemID}
+
+    </update>
+
+    <delete id="deleteById">
+        delete from ItemTable where ItemID = #{id};
+
+    </delete>
+
+    <!-- mybatis 会将数组参数，封装为一个Map集合
+       * 默认： array = 数组
+       * 使用 Param 去改变默认Map集合默认Key的名称
+    -->
+    <delete id="deleteByIds">
+
+        delete from ItemTable where ItemID
+        in (
+        <foreach collection="array" item="id" separator=",">
+            #{id}
+        </foreach>
+        );
+
+
+    </delete>
+
+
 </mapper>
