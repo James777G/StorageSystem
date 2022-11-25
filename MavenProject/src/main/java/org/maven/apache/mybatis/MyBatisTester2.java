@@ -31,6 +31,7 @@ public class MyBatisTester2 {
 		System.out.println(result2);
 		System.out.println(item.getItemName());
 		System.out.println(result);
+		
 		MyBatisItemConnector.closeSession();
 	}
 	

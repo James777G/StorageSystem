@@ -67,3 +67,4 @@ update newbase set price = price + 2000 where ID = 5;
 
 
 
+

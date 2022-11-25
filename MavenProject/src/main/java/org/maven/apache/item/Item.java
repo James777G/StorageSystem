@@ -1,10 +1,10 @@
 package org.maven.apache.item;
 
 
-public class Item {
-	private int ItemID;
+public class Item{
+	private Integer ItemID;
 	private String ItemName;
-	private int Unit;
+	private Integer Unit;
 	private String Description = "";
 	
 	
@@ -16,7 +16,7 @@ public class Item {
 		return "Item [ItemID=" + ItemID + ", ItemName=" + ItemName + ", Unit=" + Unit + ", Description=" + Description
 				+ "]";
 	}
-	public int getItemID() {
+	public Integer getItemID() {
 		return ItemID;
 	}
 	public void setItemID(int itemID) {
@@ -28,7 +28,7 @@ public class Item {
 	public void setItemName(String itemName) {
 		ItemName = itemName;
 	}
-	public int getUnit() {
+	public Integer getUnit() {
 		return Unit;
 	}
 	public void setUnit(int unit) {
