@@ -1,16 +1,21 @@
 .tree-table-row-cell {
     -fx-background-color: -fx-table-cell-border-color, -fx-control-inner-background;
     -fx-background-insets: 0, 0 0 1 0;
-}
 
+}
+.tree-table-cell{
+	-fx-font: 20px "Calibri Light";
+}
 .tree-table-row-cell:hover{
 	-fx-background-color: #cbf2f4;
 }
+
 
 .tree-table-row-cell:odd {
     -fx-background-color: -fx-table-cell-border-color, #F9F9F9;
     -fx-background-insets: 0, 0 0 1 0;
 }
+
 
 .tree-table-row-cell:odd:hover{
 	-fx-background-color: #cbf2f4;

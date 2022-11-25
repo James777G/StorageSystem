@@ -53,7 +53,7 @@ public class ItemPageController implements Initializable {
 			}
 		});
 		
-		nameColumn.setPrefWidth(200);
+		nameColumn.setPrefWidth(300);
 		nameColumn.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<ItemFX, String>, ObservableValue<String>>(){
 			
 			@Override
