@@ -27,7 +27,7 @@ public class MyBatisTester2 {
 		System.out.println(count);
 		result = itemMapper.selectAll();
 		item = itemMapper.selectById(2);
-		result2 = itemMapper.selectByCondition(null, 500);
+		result2 = itemMapper.selectByCondition(FuzzySearch.getFuzzyName("Ele"), 500);
 		System.out.println(result2);
 		System.out.println(item.getItemName());
 		System.out.println(result);

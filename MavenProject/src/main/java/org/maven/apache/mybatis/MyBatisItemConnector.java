@@ -14,13 +14,15 @@ import org.maven.apache.mapper.ItemMapper;
  */
 public class MyBatisItemConnector extends MyBatisConnector {
 
-	protected static ItemMapper itemMapper;
+	private static ItemMapper itemMapper;
 	public static List<Item> items;
 
 	public static ItemMapper getItemMapper() throws IOException {
 		itemMapper = sqlSession.getMapper(ItemMapper.class);
 		return itemMapper;
 	}
+
+
 
 	/**
 	 * update the list of items

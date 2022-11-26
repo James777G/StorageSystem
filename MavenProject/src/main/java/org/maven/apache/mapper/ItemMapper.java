@@ -53,6 +53,8 @@ public interface ItemMapper {
 	 * @return
 	 */
 	int update(Item item);
+
+
 	
 	
 	
@@ -63,7 +65,7 @@ public interface ItemMapper {
 	
 	/**
 	 * 批量删除
-	 * @param ids[]
+	 * @param ids
 	 */
 	void deleteByIds(int[] ids);
 
