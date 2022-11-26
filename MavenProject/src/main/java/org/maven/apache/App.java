@@ -30,7 +30,7 @@ public class App extends Application {
 	}
 
 	  /**
-	   * This method is invoked when the application starts. It loads and shows the "Canvas" scene.
+	   * This method is invoked when the application starts. It loads and shows the scene.
 	   *
 	   * @param stage The primary stage of the application.
 	   * @throws IOException If "src/main/resources/fxml/canvas.fxml" is not found.

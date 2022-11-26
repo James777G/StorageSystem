@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.maven.apache.mybatis.MyBatisConnector;
 
 /**
- * 这个Class的存在 是为了欺骗 Java Virtual Machine（JVM） 因为这个 Class 没有继承 Javafx 的 Application
+ * 这个Class的存在 是为了欺骗 JRE 因为这个 Class 没有继承 Javafx 的 Application
  * Class， 让 JVM 错误的认为这个项目并非是一个 JAVAFX 的项目， 从而不在 RUNTIME 里面找 JAVAFX componenet
  * 
  * 另一条好处 是能让你直接在你的IDE 里面直接运行 JAVAFX 程序， 摆脱在CONSOLE里面输入 JAVAFX：RUN 
