@@ -1,15 +1,14 @@
 package org.maven.apache.item;
 
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Item{
 	private Integer ItemID;
 	private String ItemName;
 	private Integer Unit;
 	private String Description = "";
-	
-	
-
-	
 
 	@Override
 	public String toString() {

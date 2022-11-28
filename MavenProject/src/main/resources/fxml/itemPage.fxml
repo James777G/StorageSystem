@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
@@ -26,5 +27,6 @@
             <Image url="@../image/icons8-logout-rounded-100.png" />
          </image>
       </ImageView>
+      <JFXButton fx:id="JamesButton" layoutX="146.0" layoutY="114.0" text="James" />
     </children>
 </AnchorPane>
