@@ -1,6 +1,5 @@
 package org.maven.apache.controllers;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
@@ -16,8 +15,9 @@ import org.maven.apache.item.Item;
 import org.maven.apache.item.ItemFX;
 import org.maven.apache.item.ItemFXBuilder;
 import org.maven.apache.mapper.ItemMapper;
-import org.maven.apache.mybatis.MyBatisConnector;
-import org.maven.apache.mybatis.MyBatisItemConnector;
+import org.maven.apache.spring.SpringConfiguration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,6 +29,7 @@ public class ItemPageController implements Initializable {
     @FXML
     private JFXTreeTableView<ItemFX> itemTable;
 
+    private ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
 
 
     @FXML
@@ -62,7 +63,7 @@ public class ItemPageController implements Initializable {
 
     @FXML
     private void onExit() {
-        MyBatisConnector.closeSession();
+        context.getBean("closeSession");
         Platform.exit();
         System.exit(0);
     }
@@ -114,7 +115,7 @@ public class ItemPageController implements Initializable {
      * @throws IOException when fail to connect to the database
      */
     private List<ItemFX> getList() throws IOException {
-        ItemMapper itemMapper = MyBatisItemConnector.getItemMapper();
+        ItemMapper itemMapper = (ItemMapper) context.getBean("itemMapper");
         List<Item> items = itemMapper.selectAll();
         return ItemFXBuilder.buildList(items);
     }

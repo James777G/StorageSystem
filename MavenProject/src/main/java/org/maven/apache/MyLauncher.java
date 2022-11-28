@@ -2,8 +2,6 @@ package org.maven.apache;
 
 import java.io.IOException;
 
-import org.maven.apache.mybatis.MyBatisConnector;
-
 /**
  * 这个Class的存在 是为了欺骗 JRE 因为这个 Class 没有继承 Javafx 的 Application
  * Class， 让 JVM 错误的认为这个项目并非是一个 JAVAFX 的项目， 从而不在 RUNTIME 里面找 JAVAFX componenet
@@ -23,9 +21,7 @@ public class MyLauncher {
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		MyBatisConnector.initialize(true);
 		App.main(args);
-
 	}
 
 }

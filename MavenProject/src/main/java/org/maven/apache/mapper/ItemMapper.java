@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.maven.apache.item.Item;
+import org.springframework.stereotype.Component;
 
 /**
  * 这个 Interface 支持模糊搜索
  * @author james
  *
  */
+@Component
 public interface ItemMapper {
 	
 	/**

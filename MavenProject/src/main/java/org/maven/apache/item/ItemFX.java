@@ -4,7 +4,9 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ItemFX extends RecursiveTreeObject<ItemFX> {
 
 	private StringProperty ID;

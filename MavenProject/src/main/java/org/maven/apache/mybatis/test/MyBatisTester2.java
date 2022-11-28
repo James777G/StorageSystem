@@ -1,11 +1,16 @@
-package org.maven.apache.mybatis;
+package org.maven.apache.mybatis.test;
 
 import java.io.IOException;
 import java.util.List;
 
+import ai.djl.Application;
 import org.maven.apache.item.Item;
 import org.maven.apache.mapper.ItemMapper;
+import org.maven.apache.mybatis.MyBatisOperator;
 import org.maven.apache.search.FuzzySearch;
+import org.maven.apache.spring.SpringConfiguration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class MyBatisTester2 {
 	
@@ -20,11 +25,10 @@ public class MyBatisTester2 {
 		item.setUnit(unit);
 		item.setItemID(1);
 		//处理参数
-		
-		MyBatisConnector.initialize(true);
-		ItemMapper itemMapper = MyBatisItemConnector.getItemMapper();
-		int count = itemMapper.update(item);
-		System.out.println(count);
+
+		ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+		ItemMapper itemMapper = (ItemMapper) context.getBean("itemMapper");
+
 		result = itemMapper.selectAll();
 		item = itemMapper.selectById(2);
 		result2 = itemMapper.selectByCondition(FuzzySearch.getFuzzyName("Ele"), 500);
@@ -32,7 +36,7 @@ public class MyBatisTester2 {
 		System.out.println(item.getItemName());
 		System.out.println(result);
 		
-		MyBatisItemConnector.closeSession();
+		MyBatisOperator.closeSession();
 	}
 	
 

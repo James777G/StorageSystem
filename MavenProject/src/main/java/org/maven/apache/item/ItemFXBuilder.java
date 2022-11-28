@@ -5,12 +5,15 @@ import java.util.List;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import org.springframework.stereotype.Component;
 
 /**
  * 这个 Class 是专门用来做 ItemFX 这个 Class 的
  * @author james
  *
  */
+
+
 public class ItemFXBuilder {
 
 	/**
