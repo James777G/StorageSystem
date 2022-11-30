@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <!-- 配置数据库链接环境信息 可以使用多个环境，通过不同的Default属性来切换不同的环境-->
-    <environments default="developmentJamesGong">
+    <environments default="developmentPeterZhang">
 
 
         <environment id="test">
@@ -90,7 +90,7 @@
                 <!-- 仅测试用 之后会改参数-->
                 <property name="url" value="jdbc:mysql:///ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
                 <property name="username" value="root"/>
-                <property name="password" value="root"/>
+                <property name="password" value=""/>
             </dataSource>
         </environment>
 
