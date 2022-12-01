@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.maven.apache.mapper.ItemMapper;
 import org.maven.apache.mybatis.MyBatisOperator;
+import org.maven.apache.spring.factoryBean.SqlSessionFactoryBean;
+import org.maven.apache.spring.factoryBean.SqlSessionFactoryFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,21 +17,30 @@ import java.io.InputStream;
 @Configuration
 public class SpringMybatisConfig {
 
-    private String resource = "mybatis/mybatis-config.xml";
-
     @Bean
-    public SqlSessionFactory sqlSessionFactory() throws IOException {
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        return new SqlSessionFactoryBuilder().build(inputStream);
+    public SqlSessionFactoryFactoryBean sqlSessionFactoryFactoryBean(){
+        return new SqlSessionFactoryFactoryBean();
     }
 
     @Bean
-    public SqlSession sqlSession() throws IOException {
-        return sqlSessionFactory().openSession(true);
+    public SqlSessionFactoryBean sqlSessionFactoryBean(){
+        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+        bean.setSqlSessionFactoryFactoryBean(sqlSessionFactoryFactoryBean());
+        return bean;
     }
 
     @Bean
-    public ItemMapper itemMapper() throws IOException {
+    public SqlSessionFactory sqlSessionFactory() throws Exception {
+        return sqlSessionFactoryFactoryBean().getObject();
+    }
+
+    @Bean
+    public SqlSession sqlSession() throws Exception {
+        return sqlSessionFactoryBean().getObject();
+    }
+
+    @Bean
+    public ItemMapper itemMapper() throws Exception {
         return sqlSession().getMapper(ItemMapper.class);
     }
 
