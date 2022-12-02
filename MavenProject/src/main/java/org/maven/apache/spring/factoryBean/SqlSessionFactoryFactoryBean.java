@@ -11,10 +11,9 @@ import java.io.InputStream;
 @Component
 public class SqlSessionFactoryFactoryBean implements FactoryBean<SqlSessionFactory> {
 
-    private String resource = "mybatis/mybatis-config.xml";
-
     @Override
     public SqlSessionFactory getObject() throws Exception {
+        String resource = "mybatis/mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         return new SqlSessionFactoryBuilder().build(inputStream);
     }
@@ -26,6 +25,6 @@ public class SqlSessionFactoryFactoryBean implements FactoryBean<SqlSessionFacto
 
     @Override
     public boolean isSingleton() {
-        return true;
+        return false;
     }
 }
