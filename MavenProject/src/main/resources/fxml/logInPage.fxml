@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.AutoCompleteTextField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.LogInPage">
    <children>
-      <AutoCompleteTextField layoutX="771.0" layoutY="214.0" />
-      <AutoCompleteTextField layoutX="771.0" layoutY="321.0" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="492.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
-      <AnchorPane prefHeight="720.0" prefWidth="524.0" />
+      <AnchorPane prefHeight="720.0" prefWidth="600.0" style="-fx-background-color: #262626;">
+         <children>
+            <ImageView fitHeight="276.0" fitWidth="328.0" layoutX="137.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
+         </children></AnchorPane>
+      <TextField layoutX="832.0" layoutY="182.0" style="-fx-background-color: white;" text="Username" AnchorPane.bottomAnchor="500.0" AnchorPane.leftAnchor="800.0" AnchorPane.rightAnchor="200.0" />
+      <TextField layoutX="800.0" layoutY="337.0" prefHeight="23.0" prefWidth="200.0" AnchorPane.topAnchor="300.0" />
    </children>
 </AnchorPane>
