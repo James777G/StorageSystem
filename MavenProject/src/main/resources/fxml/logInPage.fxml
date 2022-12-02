@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.LogInPage">
+<AnchorPane prefHeight="720.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.LogInPageController">
    <children>
-      <AnchorPane prefHeight="720.0" prefWidth="600.0" style="-fx-background-color: #262626;">
+      <AnchorPane prefHeight="720.0" prefWidth="600.0" style="-fx-background-color: #23242a;">
          <children>
             <ImageView fitHeight="276.0" fitWidth="328.0" layoutX="137.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
          </children></AnchorPane>
-      <TextField layoutX="832.0" layoutY="182.0" style="-fx-background-color: white;" text="Username" AnchorPane.bottomAnchor="500.0" AnchorPane.leftAnchor="800.0" AnchorPane.rightAnchor="200.0" />
-      <TextField layoutX="800.0" layoutY="337.0" prefHeight="23.0" prefWidth="200.0" AnchorPane.topAnchor="300.0" />
+      <TextField layoutX="680.0" layoutY="182.0" prefHeight="29.0" prefWidth="400.0" promptText="Username" styleClass="text-field" stylesheets="@../css/logInPage.css" AnchorPane.bottomAnchor="400.0" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="100.0" />
+      <TextField layoutX="683.0" layoutY="394.0" prefHeight="29.0" prefWidth="400.0" promptText="Password" styleClass="text-field" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="394.0" />
+      <Label layoutX="831.0" layoutY="117.0" stylesheets="@../css/logInPage.css" text="Sign in" textFill="#23242a" AnchorPane.leftAnchor="831.0">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="826.0" layoutY="527.0" style="-fx-background-color: #23242a;" text="Login" textFill="WHITE" AnchorPane.bottomAnchor="151.0" AnchorPane.leftAnchor="826.0" AnchorPane.rightAnchor="224.0">
+         <font>
+            <Font size="21.0" />
+         </font></JFXButton>
+      <Label layoutX="700.0" layoutY="436.0" text="Forgot your password?" />
    </children>
 </AnchorPane>

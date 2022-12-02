@@ -1,7 +1,5 @@
 .text-field{
-    -fx-font-family: "Quicksand";
-    -fx-padding: 1,1,1,1;
-    -fx-font-size: 18;
+    -fx-background-color: -fx-text-box-border, -fx-background;
     -fx-text: Username;
 }
 
@@ -9,6 +7,8 @@
     -fx-background-insets: 0, 0 0 1 0 ;
     -fx-background-radius: 0 ;
 }
+
 .text-field:focused {
-    -fx-text-fill: grey;
+    -fx-background-color: -fx-focus-color, -fx-background;
+
 }
