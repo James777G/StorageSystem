@@ -12,3 +12,16 @@
     -fx-background-color: -fx-focus-color, -fx-background;
 
 }
+
+.JFXButton{
+    -fx-background-color:  #23242a;
+    -fx-background-radius:  10;
+    -fx-text-fill: #ffffff;
+}
+
+.JFXButton:hover {
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 10;
+    -fx-border-color: #23242a;
+    -fx-text-fill: #23242a;
+}

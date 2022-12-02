@@ -8,11 +8,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.LogInPageController">
+<AnchorPane prefHeight="720.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.LogInPageController">
    <children>
       <AnchorPane prefHeight="720.0" prefWidth="600.0" style="-fx-background-color: #23242a;">
          <children>
             <ImageView fitHeight="276.0" fitWidth="328.0" layoutX="137.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="15.0" layoutY="691.0" prefHeight="26.0" prefWidth="248.0" text="Diamond Homes Limited" textFill="WHITE">
+               <font>
+                  <Font name="ISOCT_IV50" size="12.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="17.0" fitWidth="45.0" layoutX="225.0" layoutY="696.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-copyright-all-rights-reserved-100.png" />
+               </image>
+            </ImageView>
          </children></AnchorPane>
       <TextField layoutX="680.0" layoutY="182.0" prefHeight="29.0" prefWidth="400.0" promptText="Username" styleClass="text-field" stylesheets="@../css/logInPage.css" AnchorPane.bottomAnchor="400.0" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="100.0" />
       <TextField layoutX="683.0" layoutY="394.0" prefHeight="29.0" prefWidth="400.0" promptText="Password" styleClass="text-field" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="350.0" />
@@ -21,12 +31,12 @@
             <Font name="System Bold" size="40.0" />
          </font>
       </Label>
-      <JFXButton layoutX="700.0" layoutY="468.0" prefHeight="42.0" prefWidth="139.0" style="-fx-background-color: #23242a;" text="sign in" textFill="WHITE" AnchorPane.bottomAnchor="210.0" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="380.0">
+      <JFXButton layoutX="700.0" layoutY="468.0" prefHeight="42.0" prefWidth="139.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="sign in" textFill="WHITE" AnchorPane.bottomAnchor="206.0" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="379.66666666666663">
          <font>
             <Font size="21.0" />
          </font></JFXButton>
       <Label layoutX="700.0" layoutY="397.0" text="Forgot your password?" />
-      <JFXButton layoutX="947.0" layoutY="469.0" prefHeight="42.0" prefWidth="139.0" style="-fx-background-color: #23242a;" text="sign up" textFill="WHITE">
+      <JFXButton layoutX="947.0" layoutY="468.0" prefHeight="42.0" prefWidth="139.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="sign up" textFill="WHITE" AnchorPane.bottomAnchor="206.0">
          <font>
             <Font size="21.0" />
          </font>
@@ -46,7 +56,7 @@
             <Image url="@../image/icons8-user-96.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="exitButton" fitHeight="26.0" fitWidth="32.0" layoutX="1170.0" layoutY="7.0" onMouseClicked="#onExit" onMouseEntered="#onEnterExitButton" onMouseExited="#onLeaveExitButton" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="exitButton" fitHeight="26.0" fitWidth="32.0" layoutX="1170.0" layoutY="7.0" onMouseClicked="#onExit" onMouseEntered="#onEnterExitButton" onMouseExited="#onLeaveExitButton" onMousePressed="#onPressExitButton" onMouseReleased="#onReleaseExitButton" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/icons8-multiply-90.png" />
          </image>

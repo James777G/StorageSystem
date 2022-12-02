@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -6,7 +6,84 @@
 <!-- 名称空间-->
 <mapper namespace="org.maven.apache.mapper.UserMapper">
     <select id="selectAll" resultType="org.maven.apache.user.User">
-        <!-- 这个方法获得New Base 表中全部的数据, 返回成一个List， List里面每个Element是一个User-->
-        select * from newbase;
+        <!-- 这个方法获得User Table 表中全部的数据, 返回成一个List， List里面每个Element是一个User-->
+        select * from UserTable;
     </select>
+
+    <select id="selectById" parameterType="int" resultType="org.maven.apache.user.User">
+        <!-- 这个方法获得User Table 表中一个User的数据, 返回成一个User-->
+        select * from UserTable where id = #{id};
+        <!-- 用#{}来创建？占位符 防止SQL注入， 可以使用${}直接拼接 但可能会出现SQL注入的问题
+        参数传递的时候同#
+        表名或列名不固定同$
+        -->
+    </select>
+    <!-- like 模糊查询
+    {}内的名称需要和 Mapper Class 内部的 @Param 名称一致
+
+    放入恒等式补充语法 动态SQL！！！！！！！！！！
+    -->
+    <select id="selectByUsername" resultType="org.maven.apache.user.User">
+        select *
+        from UserTable
+        where 1 = 1
+        <if test="name != null and name != '' ">
+            and username like #{UserName}
+        </if>
+    </select>
+
+    <select id="selectByName" resultType="org.maven.apache.user.User">
+        select *
+        from UserTable
+        where 1 = 1
+        <if test="name != null and name != '' ">
+            and name like #{name}
+        </if>
+    </select>
+
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+
+        insert into UserTable(name, username, password)
+        values (#{name},#{username},#{password});
+
+    </insert>
+
+
+    <update id="update">
+        update UserTable
+        <set>
+            <if test="name != null and name !=''">
+                name = #{Name},
+            </if>
+            <if test="username != null and username != ''">
+                username = #{username}
+            </if>
+        </set>
+        where id = #{id}
+
+    </update>
+
+    <delete id="deleteById">
+        delete from UserTable where id = #{id};
+
+    </delete>
+
+    <!-- mybatis 会将数组参数，封装为一个Map集合
+       * 默认： array = 数组
+       * 使用 Param 去改变默认Map集合默认Key的名称
+    -->
+    <delete id="deleteByIds">
+
+        delete from UserTable where id
+        in (
+        <foreach collection="array" item="id" separator=",">
+            #{id}
+        </foreach>
+        );
+
+
+    </delete>
+
+
 </mapper>
