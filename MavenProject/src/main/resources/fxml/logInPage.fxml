@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.LogInPageController">
+<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.LogInPageController">
    <children>
       <AnchorPane fx:id="signInPane" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-color: white;">
          <children>
@@ -51,7 +51,10 @@
       </AnchorPane>
       <AnchorPane prefHeight="720.0" prefWidth="600.0" style="-fx-background-color: #23242a;">
          <children>
-            <ImageView fitHeight="276.0" fitWidth="328.0" layoutX="137.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="240.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-3d-house-100.png" />
+               </image></ImageView>
             <Label layoutX="28.0" layoutY="693.0" prefHeight="26.0" prefWidth="248.0" text="Diamond Homes Limited" textFill="WHITE">
                <font>
                   <Font name="ISOCT_IV50" size="12.0" />
