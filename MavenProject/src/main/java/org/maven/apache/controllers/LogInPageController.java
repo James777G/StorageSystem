@@ -2,6 +2,8 @@ package org.maven.apache.controllers;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
@@ -45,8 +47,9 @@ public class LogInPageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         signInPane.setOpacity(1);
+        signUpPane.setOpacity(0);
         signUpPane.setVisible(false);
-        signInPane.setPickOnBounds(false);
+        signUpPane.setPickOnBounds(false);
         labelOnSignUp.setCursor(Cursor.HAND);
         labelOnSignIn.setCursor(Cursor.HAND);
         lineOnSignIn.setVisible(false);
@@ -116,20 +119,31 @@ public class LogInPageController implements Initializable {
 
     @FXML
     private void onSignUp(){
-        signInPane.setVisible(false);
         signUpPane.setVisible(true);
-        signUpPane.setOpacity(1);
         signUpPane.setPickOnBounds(true);
         signInPane.setPickOnBounds(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(signInPane, 300, 1, 0);
+        FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(signUpPane, 300, 0, 1);
+        fadeTransition.play();
+        fadeTransition.setOnFinished(event -> {
+            fadeTransition1.play();
+            signInPane.setVisible(false);
+        });
     }
 
     @FXML
     private void onSignIn(){
         signInPane.setVisible(true);
-        signInPane.setOpacity(1);
-        signUpPane.setVisible(false);
         signInPane.setPickOnBounds(true);
         signUpPane.setPickOnBounds(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(signUpPane, 300, 1, 0);
+        FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(signInPane, 300, 0, 1);
+        fadeTransition.play();
+        fadeTransition.setOnFinished(event -> {
+            fadeTransition1.play();
+            signUpPane.setVisible(false);
+        });
+
     }
 
     @FXML
