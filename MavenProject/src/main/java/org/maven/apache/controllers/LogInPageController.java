@@ -3,12 +3,19 @@ package org.maven.apache.controllers;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import org.springframework.context.ApplicationContext;
 
 public class LogInPageController {
 
     @FXML
     private ImageView exitButton;
+
+    @FXML
+    private AnchorPane signUpPane;
+
+    @FXML
+    private AnchorPane signInPane;
 
     @FXML
     private void onExit(){
@@ -38,6 +45,14 @@ public class LogInPageController {
     private void onReleaseExitButton(){
         exitButton.setScaleX(1);
         exitButton.setScaleY(1);
+    }
+
+    @FXML
+    private void onSignUp(){
+        signInPane.setVisible(false);
+        signUpPane.setVisible(true);
+        signUpPane.setOpacity(1);
+        signInPane.setPickOnBounds(false);
     }
 
 }
