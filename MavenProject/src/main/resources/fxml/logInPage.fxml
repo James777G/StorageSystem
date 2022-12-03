@@ -9,9 +9,60 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.LogInPageController">
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.LogInPageController">
    <children>
-      <AnchorPane fx:id="signUpPane" layoutX="600.0" opacity="0.0" prefHeight="720.0" prefWidth="619.0" style="-fx-background-color: white;">
+      <AnchorPane fx:id="signInPane" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-color: white;">
+         <children>
+            <TextField layoutX="680.0" layoutY="182.0" prefHeight="29.0" prefWidth="400.0" promptText="Username" styleClass="text-field" stylesheets="@../css/logInPage.css" AnchorPane.bottomAnchor="400.0" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="100.0" />
+            <Label opacity="0.0" text="Username can not be empty" textFill="#d30000" AnchorPane.bottomAnchor="380.0" AnchorPane.leftAnchor="700.0" />
+            <TextField layoutX="680.0" layoutY="394.0" prefHeight="29.0" prefWidth="400.0" promptText="Password" styleClass="text-field" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="350.0" />
+            <Label opacity="0.0" text="Password can not be empty" textFill="#d30000" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="385.0" />
+            <Label layoutX="831.0" layoutY="117.0" stylesheets="@../css/logInPage.css" text="Sign in" textFill="#23242a" AnchorPane.leftAnchor="831.0">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="808.0" layoutY="472.0" prefHeight="42.0" prefWidth="186.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="sign in" textFill="WHITE" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="808.0" AnchorPane.rightAnchor="225.0">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </JFXButton>
+            <Label layoutX="700.0" layoutY="397.0" text="Forgot your password?" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="385.0" />
+            <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="665.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="667.0" AnchorPane.rightAnchor="510.0">
+               <image>
+                  <Image url="@../image/icons8-user-96.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="666.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="666.0" AnchorPane.rightAnchor="533.0">
+               <image>
+                  <Image url="@../image/icons8-lock-104.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="exitButton" fitHeight="26.0" fitWidth="32.0" layoutX="1170.0" layoutY="7.0" onMouseClicked="#onExit" onMouseEntered="#onEnterExitButton" onMouseExited="#onLeaveExitButton" onMousePressed="#onPressExitButton" onMouseReleased="#onReleaseExitButton" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-multiply-90.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="838.0" layoutY="601.0" onMouseClicked="#onSignUp" text="Do not have an account?" AnchorPane.bottomAnchor="120.0" />
+            <Separator layoutX="801.0" layoutY="568.0" prefWidth="200.0" AnchorPane.bottomAnchor="150.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="720.0" prefWidth="600.0" style="-fx-background-color: #23242a;">
+         <children>
+            <ImageView fitHeight="276.0" fitWidth="328.0" layoutX="137.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="28.0" layoutY="693.0" prefHeight="26.0" prefWidth="248.0" text="Diamond Homes Limited" textFill="WHITE">
+               <font>
+                  <Font name="ISOCT_IV50" size="12.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="17.0" fitWidth="45.0" layoutX="232.0" layoutY="697.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-copyright-all-rights-reserved-100.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="signUpPane" layoutX="600.0" prefHeight="720.0" prefWidth="619.0" style="-fx-background-color: white;">
          <children>
             <Label layoutX="231.0" layoutY="117.0" stylesheets="@../css/logInPage.css" text="Sign up" textFill="#23242a" AnchorPane.leftAnchor="231.0">
                <font>
@@ -43,55 +94,24 @@
             </JFXButton>
             <Label layoutX="240.0" layoutY="643.0" text="Already have an account?" AnchorPane.bottomAnchor="80.0" />
             <Separator layoutX="213.0" layoutY="610.0" prefHeight="22.0" prefWidth="200.0" AnchorPane.bottomAnchor="101.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="signInPane" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-color: white;">
-         <children>
-            <TextField layoutX="680.0" layoutY="182.0" prefHeight="29.0" prefWidth="400.0" promptText="Username" styleClass="text-field" stylesheets="@../css/logInPage.css" AnchorPane.bottomAnchor="400.0" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="100.0" />
-            <Label opacity="0.0" text="Username can not be empty" textFill="#d30000" AnchorPane.bottomAnchor="380.0" AnchorPane.leftAnchor="700.0" />
-            <TextField layoutX="680.0" layoutY="394.0" prefHeight="29.0" prefWidth="400.0" promptText="Password" styleClass="text-field" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="700.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="350.0" />
-            <Label opacity="0.0" text="Password can not be empty" textFill="#d30000" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="385.0" />
-            <Label layoutX="831.0" layoutY="117.0" stylesheets="@../css/logInPage.css" text="Sign in" textFill="#23242a" AnchorPane.leftAnchor="831.0">
-               <font>
-                  <Font name="System Bold" size="40.0" />
-               </font>
-            </Label>
-            <JFXButton layoutX="808.0" layoutY="472.0" prefHeight="42.0" prefWidth="186.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="sign in" textFill="WHITE" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="808.0" AnchorPane.rightAnchor="225.0">
-               <font>
-                  <Font size="21.0" />
-               </font>
-            </JFXButton>
-            <Label layoutX="700.0" layoutY="397.0" text="Forgot your password?" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="385.0" />
-            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="666.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="666.0" AnchorPane.rightAnchor="533.0">
+            <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="74.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/icons8-lock-104.png" />
+                  <Image url="@../image/icons8-find-user-male-96.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="665.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="667.0" AnchorPane.rightAnchor="510.0">
+            <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="74.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-mail-100.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="74.0" layoutY="357.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/icons8-user-96.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="exitButton" fitHeight="26.0" fitWidth="32.0" layoutX="1170.0" layoutY="7.0" onMouseClicked="#onExit" onMouseEntered="#onEnterExitButton" onMouseExited="#onLeaveExitButton" onMousePressed="#onPressExitButton" onMouseReleased="#onReleaseExitButton" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="75.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/icons8-multiply-90.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="838.0" layoutY="601.0" onMouseClicked="#onSignUp" text="Do not have an account?" AnchorPane.bottomAnchor="120.0" />
-            <Separator layoutX="801.0" layoutY="568.0" prefWidth="200.0" AnchorPane.bottomAnchor="150.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="720.0" prefWidth="600.0" style="-fx-background-color: #23242a;">
-         <children>
-            <ImageView fitHeight="276.0" fitWidth="328.0" layoutX="137.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="28.0" layoutY="693.0" prefHeight="26.0" prefWidth="248.0" text="Diamond Homes Limited" textFill="WHITE">
-               <font>
-                  <Font name="ISOCT_IV50" size="12.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="17.0" fitWidth="45.0" layoutX="232.0" layoutY="697.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/icons8-copyright-all-rights-reserved-100.png" />
+                  <Image url="@../image/icons8-lock-104.png" />
                </image>
             </ImageView>
          </children>
