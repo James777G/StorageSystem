@@ -18,7 +18,16 @@ public class LogInPageController {
     private AnchorPane signInPane;
 
     @FXML
+    private ImageView exitButton2;
+
+    @FXML
     private void onExit(){
+        Platform.exit();
+        System.exit(0);
+    }
+
+    @FXML
+    private void onExit2(){
         Platform.exit();
         System.exit(0);
     }
@@ -27,6 +36,30 @@ public class LogInPageController {
     private void onEnterExitButton(){
         exitButton.setScaleX(1.2);
         exitButton.setScaleY(1.2);
+    }
+
+    @FXML
+    private void onEnterExitButton2(){
+        exitButton2.setScaleX(1.2);
+        exitButton2.setScaleY(1.2);
+    }
+
+    @FXML
+    private void onLeaveExitButton2(){
+        exitButton2.setScaleX(1);
+        exitButton2.setScaleY(1);
+    }
+
+    @FXML
+    private void onPressExitButton2(){
+        exitButton2.setScaleX(0.8);
+        exitButton2.setScaleY(0.8);
+    }
+
+    @FXML
+    private void onReleaseExitButton2(){
+        exitButton2.setScaleX(1);
+        exitButton2.setScaleY(1);
     }
 
     @FXML
