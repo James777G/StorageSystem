@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.LogInPageController">
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.LogInPageController">
    <children>
       <AnchorPane fx:id="signInPane" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-color: white;">
          <children>
@@ -96,22 +96,22 @@
             </JFXButton>
             <Label fx:id="labelOnSignIn" layoutX="240.0" layoutY="643.0" onMouseClicked="#onSignIn" onMouseEntered="#onEnterLabelSignIn" onMouseExited="#onExitLabelSignIn" text="Already have an account?" AnchorPane.bottomAnchor="80.0" />
             <Separator layoutX="213.0" layoutY="610.0" prefHeight="22.0" prefWidth="200.0" AnchorPane.bottomAnchor="101.0" />
-            <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="74.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="74.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="74.0">
                <image>
                   <Image url="@../image/icons8-find-user-male-96.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="74.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="74.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="74.0">
                <image>
                   <Image url="@../image/icons8-mail-100.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="74.0" layoutY="357.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="76.0">
+            <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="74.0" layoutY="357.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="74.0">
                <image>
                   <Image url="@../image/icons8-user-96.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="76.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="523.0">
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="76.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="523.0">
                <image>
                   <Image url="@../image/icons8-lock-104.png" />
                </image>
