@@ -7,9 +7,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.LogInPageController">
+<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.LogInPageController">
    <children>
       <AnchorPane fx:id="signInPane" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-color: white;">
          <children>
@@ -43,8 +44,9 @@
                   <Image url="@../image/icons8-multiply-90.png" />
                </image>
             </ImageView>
-            <Label layoutX="838.0" layoutY="601.0" onMouseClicked="#onSignUp" text="Do not have an account?" AnchorPane.bottomAnchor="120.0" />
+            <Label fx:id="labelOnSignUp" layoutX="838.0" layoutY="601.0" onMouseClicked="#onSignUp" onMouseEntered="#onEnterLabelSignUp" onMouseExited="#onExitLabelSignUp" text="Do not have an account?" AnchorPane.bottomAnchor="120.0" />
             <Separator layoutX="801.0" layoutY="568.0" prefWidth="200.0" AnchorPane.bottomAnchor="150.0" />
+            <Line fx:id="lineOnSignUp" endX="60.0" layoutX="910.0" layoutY="600.0" opacity="0.4" startX="-72.0" stroke="#23242a" style="-fx-fill: #23242a;" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="720.0" prefWidth="600.0" style="-fx-background-color: #23242a;">
@@ -92,7 +94,7 @@
                   <Font size="21.0" />
                </font>
             </JFXButton>
-            <Label layoutX="240.0" layoutY="643.0" text="Already have an account?" AnchorPane.bottomAnchor="80.0" />
+            <Label fx:id="labelOnSignIn" layoutX="240.0" layoutY="643.0" onMouseClicked="#onSignIn" onMouseEntered="#onEnterLabelSignIn" onMouseExited="#onExitLabelSignIn" text="Already have an account?" AnchorPane.bottomAnchor="80.0" />
             <Separator layoutX="213.0" layoutY="610.0" prefHeight="22.0" prefWidth="200.0" AnchorPane.bottomAnchor="101.0" />
             <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="74.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -119,6 +121,7 @@
                   <Image url="@../image/icons8-multiply-90.png" />
                </image>
             </ImageView>
+            <Line fx:id="lineOnSignIn" endX="65.33331298828125" layoutX="310.0" layoutY="640.0" opacity="0.4" startX="-69.3333740234375" stroke="#23242a" />
          </children>
       </AnchorPane>
    </children>

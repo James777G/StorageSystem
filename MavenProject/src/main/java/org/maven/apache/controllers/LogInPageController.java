@@ -1,12 +1,21 @@
 package org.maven.apache.controllers;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Line;
+import org.maven.apache.utils.TransitionUtils;
 import org.springframework.context.ApplicationContext;
 
-public class LogInPageController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class LogInPageController implements Initializable {
 
     @FXML
     private ImageView exitButton;
@@ -19,6 +28,31 @@ public class LogInPageController {
 
     @FXML
     private ImageView exitButton2;
+
+    @FXML
+    private Label labelOnSignUp;
+
+    @FXML
+    private Label labelOnSignIn;
+
+    @FXML
+    private Line lineOnSignIn;
+
+    @FXML
+    private Line lineOnSignUp;
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        signInPane.setOpacity(1);
+        signUpPane.setVisible(false);
+        signInPane.setPickOnBounds(false);
+        labelOnSignUp.setCursor(Cursor.HAND);
+        labelOnSignIn.setCursor(Cursor.HAND);
+        lineOnSignIn.setVisible(false);
+        lineOnSignUp.setVisible(false);
+
+    }
 
     @FXML
     private void onExit(){
@@ -85,7 +119,40 @@ public class LogInPageController {
         signInPane.setVisible(false);
         signUpPane.setVisible(true);
         signUpPane.setOpacity(1);
+        signUpPane.setPickOnBounds(true);
         signInPane.setPickOnBounds(false);
     }
+
+    @FXML
+    private void onSignIn(){
+        signInPane.setVisible(true);
+        signInPane.setOpacity(1);
+        signUpPane.setVisible(false);
+        signInPane.setPickOnBounds(true);
+        signUpPane.setPickOnBounds(false);
+    }
+
+    @FXML
+    private void onEnterLabelSignIn(){
+        lineOnSignIn.setVisible(true);
+    }
+
+    @FXML
+    private void onExitLabelSignIn(){
+        lineOnSignIn.setVisible(false);
+    }
+
+    @FXML
+    private void onEnterLabelSignUp(){
+        lineOnSignUp.setVisible(true);
+    }
+
+    @FXML
+    private void onExitLabelSignUp(){
+        lineOnSignUp.setVisible(false);
+    }
+
+
+
 
 }
