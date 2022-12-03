@@ -77,24 +77,35 @@
                   <Font name="System Bold" size="40.0" />
                </font>
             </Label>
-            <TextField layoutX="108.0" layoutY="193.0" prefHeight="29.0" prefWidth="400.0" promptText="Full name" styleClass="text-field" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="210.0" />
-            <TextField layoutX="118.0" layoutY="203.0" prefHeight="29.0" prefWidth="400.0" promptText="E_mail address" styleClass="text-field" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="270.0" />
-            <TextField prefHeight="29.0" prefWidth="400.0" promptText="Username" styleClass="text-field" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="330.0" />
-            <TextField prefHeight="29.0" prefWidth="400.0" promptText="Password" styleClass="text-field" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="390.0" />
-            <Label layoutX="100.0" layoutY="246.0" text="Full name cannot be empty" textFill="#d30000" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="240.0" />
-            <Label layoutX="27.0" layoutY="72.0" text="E_mail address cannot be empty" textFill="#d30000" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="300.0" />
-            <Label layoutX="60.0" layoutY="73.0" text="Username cannot be empty" textFill="#d30000" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="360.0" />
-            <Label layoutX="64.0" layoutY="46.0" text="Password cannot be empty" textFill="#d30000" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="420.0" />
-            <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="472.0" layoutY="394.0" pickOnBounds="true" preserveRatio="true">
+            <TextField layoutX="111.0" layoutY="234.0" prefHeight="29.0" prefWidth="400.0" promptText="Full name" styleClass="text-field" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="234.0" />
+            <TextField layoutX="111.0" layoutY="294.0" prefHeight="29.0" prefWidth="400.0" promptText="E_mail address" styleClass="text-field" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="294.0" />
+            <TextField layoutX="111.0" layoutY="354.0" prefHeight="29.0" prefWidth="400.0" promptText="Username" styleClass="text-field" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="354.0" />
+            <TextField layoutX="111.0" layoutY="414.0" prefHeight="29.0" prefWidth="400.0" promptText="Password" styleClass="text-field" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="414.0" />
+            <Label layoutX="111.0" layoutY="264.0" text="Full name cannot be empty" textFill="#d30000" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="264.0" />
+            <Label layoutX="111.0" layoutY="324.0" text="E_mail address cannot be empty" textFill="#d30000" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="324.0" />
+            <Label layoutX="111.0" layoutY="384.0" text="Username cannot be empty" textFill="#d30000" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="384.0" />
+            <Label layoutX="111.0" layoutY="444.0" text="Password cannot be empty" textFill="#d30000" AnchorPane.leftAnchor="111.0" AnchorPane.topAnchor="444.0" />
+            <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="483.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/icons8-hide-96.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="472.0" layoutY="394.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="483.0" layoutY="418.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/icons8-eye-96.png" />
                </image>
             </ImageView>
+            <JFXButton layoutX="219.0" layoutY="515.0" prefHeight="42.0" prefWidth="186.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Sign up" textFill="WHITE" AnchorPane.leftAnchor="219.0">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </JFXButton>
+            <Label layoutX="244.0" layoutY="596.0" text="Already have an account?" />
+            <Label layoutX="225.0" layoutY="611.0" text="log in with an existing account" underline="true">
+               <font>
+                  <Font name="Century Schoolbook" size="13.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>
