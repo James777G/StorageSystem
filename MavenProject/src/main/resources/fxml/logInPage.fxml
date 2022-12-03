@@ -51,7 +51,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="720.0" prefWidth="600.0" style="-fx-background-color: #23242a;">
          <children>
-            <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="240.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imageOnStorage" fitHeight="120.0" fitWidth="120.0" layoutX="240.0" layoutY="300.0" onMouseEntered="#onEnterImage" onMouseExited="#onExitImage" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/icons8-3d-house-100.png" />
                </image></ImageView>

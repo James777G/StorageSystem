@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
@@ -43,6 +45,8 @@ public class LogInPageController implements Initializable {
     @FXML
     private Line lineOnSignUp;
 
+    @FXML
+    private ImageView imageOnStorage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -54,6 +58,8 @@ public class LogInPageController implements Initializable {
         labelOnSignIn.setCursor(Cursor.HAND);
         lineOnSignIn.setVisible(false);
         lineOnSignUp.setVisible(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(imageOnStorage, 3000, 0, 1);
+        fadeTransition.play();
 
     }
 
@@ -164,6 +170,17 @@ public class LogInPageController implements Initializable {
     @FXML
     private void onExitLabelSignUp(){
         lineOnSignUp.setVisible(false);
+    }
+
+    @FXML
+    private void onEnterImage(){
+        Bloom bloom = new Bloom(0.2);
+        imageOnStorage.setEffect(bloom);
+    }
+
+    @FXML
+    private void onExitImage(){
+        imageOnStorage.setEffect(null);
     }
 
 
