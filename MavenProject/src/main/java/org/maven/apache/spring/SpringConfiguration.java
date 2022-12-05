@@ -6,7 +6,7 @@ import org.springframework.context.annotation.*;
 
 @Configuration
 @EnableAspectJAutoProxy
-@Import({MyBatisAutoConfiguration.class})
+@Import(MyBatisAutoConfiguration.class)
 public class SpringConfiguration {
 
     @Bean

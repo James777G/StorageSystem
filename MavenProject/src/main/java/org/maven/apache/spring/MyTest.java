@@ -19,7 +19,12 @@ public class MyTest {
         ItemMapper itemMapper = (ItemMapper) (context.getBean("itemMapper"));
         UserMapper userMapper = context.getBean("userMapper", UserMapper.class);
         User user = userMapper.selectById(3);
+        User user2 = new User();
+        user2.setPassword("123123134");
+        user2.setUsername("Jerry222");
+        user2.setName("asd");
         List<Item> items = itemMapper.selectAll();
+        userMapper.add(user2);
         System.out.println(user);
         System.out.println(items);
 

@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import ai.djl.Application;
+import org.apache.ibatis.session.SqlSession;
 import org.maven.apache.item.Item;
 import org.maven.apache.mapper.ItemMapper;
 import org.maven.apache.mapper.UserMapper;
@@ -101,6 +102,17 @@ public class MyBatisTester2 {
 		List<User> users = userMapper.selectAll();
 		System.out.println(users);
 	}
-	
+
+	@Test
+	public void testSpring(){
+		ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+		ItemMapper itemMapper = context.getBean("itemMapper", ItemMapper.class);
+		List<Item> items = itemMapper.selectAll();
+		System.out.println(items);
+		SqlSession sqlSession = (SqlSession) context.getBean("sqlSession");
+		sqlSession.clearCache();
+		sqlSession.close();
+	}
+
 
 }
