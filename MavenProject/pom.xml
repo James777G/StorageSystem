@@ -217,11 +217,22 @@
             <groupId>ai.djl.pytorch</groupId>
             <version>1.11.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>5.3.22</version>
+        </dependency>
         <!-- 控制图片大小的 要配合JAVA后端使用 小概率能用上-->
         <dependency>
             <artifactId>imgscalr-lib</artifactId>
             <groupId>org.imgscalr</groupId>
             <version>4.2</version>
+        </dependency>
+        <!-- 连接池-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.2.15</version>
         </dependency>
         <!-- JUNIT 搞Test的-->
         <dependency>
