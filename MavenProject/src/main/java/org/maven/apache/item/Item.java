@@ -3,8 +3,10 @@ package org.maven.apache.item;
 
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 @Component
-public class Item{
+public class Item implements Serializable {
 	private Integer ItemID;
 	private String ItemName;
 	private Integer Unit;

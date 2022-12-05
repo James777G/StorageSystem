@@ -1,22 +1,22 @@
 package org.maven.apache.spring.aspect;
 
-
 import org.aspectj.lang.annotation.After;
-
-import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 @Component
-@Aspect
-public class PointCut {
+public class MapperAspect {
 
-    @Before("execution(* org.maven.apache.mapper.*.*(..))")
+    @Pointcut("execution(* org.maven.apache.mapper.*.*(..))")
+    public void pointcut(){}
+
+    @Before(value="pointcut")
     public void before() {
         System.out.println("======方法执行前======");
     }
 
-    @After("execution(* org.maven.apache.mapper.*.*(..))")
+    @After(value="pointcut")
     public void after() {
         System.out.println("======方法执行后======");
     }

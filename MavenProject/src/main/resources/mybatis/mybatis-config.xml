@@ -1,132 +1,132 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE configuration
-        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-        "https://mybatis.org/dtd/mybatis-3-config.dtd">
-<configuration>
-    <!-- 配置数据库链接环境信息 可以使用多个环境，通过不同的Default属性来切换不同的环境-->
-    <environments default="developmentPeterZhang">
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE configuration-->
+<!--        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"-->
+<!--        "https://mybatis.org/dtd/mybatis-3-config.dtd">-->
+<!--<configuration>-->
+<!--    &lt;!&ndash; 配置数据库链接环境信息 可以使用多个环境，通过不同的Default属性来切换不同的环境&ndash;&gt;-->
+<!--    <environments default="developmentPeterZhang">-->
 
 
-        <environment id="test">
-            <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
-                <!-- 链接你想要的MySQL服务器信息-->
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <!-- 仅测试用 之后会改参数-->
-                <property name="url"
-                          value="jdbc:mysql://192.168.3.13/newtable?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
-                <property name="username" value="ghx"/>
-                <property name="password" value="ghx020719"/>
-            </dataSource>
-        </environment>
+<!--        <environment id="test">-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            <dataSource type="POOLED">-->
+<!--                &lt;!&ndash; 链接你想要的MySQL服务器信息&ndash;&gt;-->
+<!--                <property name="driver" value="com.mysql.jdbc.Driver"/>-->
+<!--                &lt;!&ndash; 仅测试用 之后会改参数&ndash;&gt;-->
+<!--                <property name="url"-->
+<!--                          value="jdbc:mysql://192.168.3.13/newtable?allowPublicKeyRetrieval=true&amp;useSSL=false"/>-->
+<!--                <property name="username" value="ghx"/>-->
+<!--                <property name="password" value="ghx020719"/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
 
 
-        <environment id="developmentJamesGong">
-            <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
-                <!-- 链接你想要的MySQL服务器信息-->
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <!-- 仅测试用 之后会改参数-->
-                <property name="url"
-                          value="jdbc:mysql://192.168.3.13/ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
-                <property name="username" value="ghx"/>
-                <property name="password" value="ghx020719"/>
-            </dataSource>
-        </environment>
+<!--        <environment id="developmentJamesGong">-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            <dataSource type="POOLED">-->
+<!--                &lt;!&ndash; 链接你想要的MySQL服务器信息&ndash;&gt;-->
+<!--                <property name="driver" value="com.mysql.jdbc.Driver"/>-->
+<!--                &lt;!&ndash; 仅测试用 之后会改参数&ndash;&gt;-->
+<!--                <property name="url"-->
+<!--                          value="jdbc:mysql://192.168.3.13/ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>-->
+<!--                <property name="username" value="ghx"/>-->
+<!--                <property name="password" value="ghx020719"/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
 
 
-        <!-- 给WST开发用， 下面输入WST工作IP地址， WST开发时把最上面 enviroments default改成下面的
-        environment id 即可使用WST本地数据库以便测试 -->
-        <environment id="developmentKylyn">
-            <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
-                <!-- 链接你想要的MySQL服务器信息-->
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <!-- 仅测试用 之后会改参数-->
-                <property name="url" value="jdbc:mysql:///ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
-                <property name="username" value="root"/>
-                <property name="password" value="Stw20022222"/>
-            </dataSource>
-        </environment>
+<!--        &lt;!&ndash; 给WST开发用， 下面输入WST工作IP地址， WST开发时把最上面 enviroments default改成下面的-->
+<!--        environment id 即可使用WST本地数据库以便测试 &ndash;&gt;-->
+<!--        <environment id="developmentKylyn">-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            <dataSource type="POOLED">-->
+<!--                &lt;!&ndash; 链接你想要的MySQL服务器信息&ndash;&gt;-->
+<!--                <property name="driver" value="com.mysql.jdbc.Driver"/>-->
+<!--                &lt;!&ndash; 仅测试用 之后会改参数&ndash;&gt;-->
+<!--                <property name="url" value="jdbc:mysql:///ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>-->
+<!--                <property name="username" value="root"/>-->
+<!--                <property name="password" value="Stw20022222"/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
 
 
-        <!-- GYQ给开发用， 下面输入GYQ工作IP地址， GYQ开发时把最上面 enviroments default改成下面的
-        environment id 即可使用GYQ本地数据库以便测试 -->
-        <environment id="developmentJamesGai">
-            <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
-                <!-- 链接你想要的MySQL服务器信息-->
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <!-- 仅测试用 之后会改参数-->
-                <property name="url" value="jdbc:mysql:///ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
-                <property name="username" value="root"/>
-                <property name="password" value=""/>
-            </dataSource>
-        </environment>
+<!--        &lt;!&ndash; GYQ给开发用， 下面输入GYQ工作IP地址， GYQ开发时把最上面 enviroments default改成下面的-->
+<!--        environment id 即可使用GYQ本地数据库以便测试 &ndash;&gt;-->
+<!--        <environment id="developmentJamesGai">-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            <dataSource type="POOLED">-->
+<!--                &lt;!&ndash; 链接你想要的MySQL服务器信息&ndash;&gt;-->
+<!--                <property name="driver" value="com.mysql.jdbc.Driver"/>-->
+<!--                &lt;!&ndash; 仅测试用 之后会改参数&ndash;&gt;-->
+<!--                <property name="url" value="jdbc:mysql:///ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>-->
+<!--                <property name="username" value="root"/>-->
+<!--                <property name="password" value=""/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
 
 
-        <!-- 给WCB开发用， 下面输入WCB工作IP地址， WCB开发时把最上面 enviroments default改成下面的
-        environment id 即可使用WCB本地数据库以便测试 -->
-        <environment id="developmentPeterWang">
-            <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
-                <!-- 链接你想要的MySQL服务器信息-->
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <!-- 仅测试用 之后会改参数-->
-                <property name="url" value="jdbc:mysql:///ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
-                <property name="username" value="root"/>
-                <property name="password" value=""/>
-            </dataSource>
-        </environment>
+<!--        &lt;!&ndash; 给WCB开发用， 下面输入WCB工作IP地址， WCB开发时把最上面 enviroments default改成下面的-->
+<!--        environment id 即可使用WCB本地数据库以便测试 &ndash;&gt;-->
+<!--        <environment id="developmentPeterWang">-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            <dataSource type="POOLED">-->
+<!--                &lt;!&ndash; 链接你想要的MySQL服务器信息&ndash;&gt;-->
+<!--                <property name="driver" value="com.mysql.jdbc.Driver"/>-->
+<!--                &lt;!&ndash; 仅测试用 之后会改参数&ndash;&gt;-->
+<!--                <property name="url" value="jdbc:mysql:///ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>-->
+<!--                <property name="username" value="root"/>-->
+<!--                <property name="password" value=""/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
 
 
-        <!-- 给ZJ开发用， 下面输入ZJ工作IP地址， ZJ开发时把最上面 enviroments default改成下面的
-        environment id 即可使用ZJ本地数据库以便测试 -->
-        <environment id="developmentPeterZhang">
-            <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
-                <!-- 链接你想要的MySQL服务器信息-->
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <!-- 仅测试用 之后会改参数-->
-                <property name="url" value="jdbc:mysql:///ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
-                <property name="username" value="root"/>
-                <property name="password" value=""/>
-            </dataSource>
-        </environment>
+<!--        &lt;!&ndash; 给ZJ开发用， 下面输入ZJ工作IP地址， ZJ开发时把最上面 enviroments default改成下面的-->
+<!--        environment id 即可使用ZJ本地数据库以便测试 &ndash;&gt;-->
+<!--        <environment id="developmentPeterZhang">-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            <dataSource type="POOLED">-->
+<!--                &lt;!&ndash; 链接你想要的MySQL服务器信息&ndash;&gt;-->
+<!--                <property name="driver" value="com.mysql.jdbc.Driver"/>-->
+<!--                &lt;!&ndash; 仅测试用 之后会改参数&ndash;&gt;-->
+<!--                <property name="url" value="jdbc:mysql:///ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>-->
+<!--                <property name="username" value="root"/>-->
+<!--                <property name="password" value=""/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
 
 
-        <!-- 给XU开发用， 下面输入XU工作IP地址， XU开发时把最上面 enviroments default改成下面的
-        environment id 即可使用XU本地数据库以便测试 -->
-        <environment id="developmentXu">
-            <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
-                <!-- 链接你想要的MySQL服务器信息-->
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <!-- 仅测试用 之后会改参数-->
-                <property name="url" value="jdbc:mysql:///ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
-                <property name="username" value="root"/>
-                <property name="password" value="Hji20010805"/>
-            </dataSource>
-        </environment>
+<!--        &lt;!&ndash; 给XU开发用， 下面输入XU工作IP地址， XU开发时把最上面 enviroments default改成下面的-->
+<!--        environment id 即可使用XU本地数据库以便测试 &ndash;&gt;-->
+<!--        <environment id="developmentXu">-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            <dataSource type="POOLED">-->
+<!--                &lt;!&ndash; 链接你想要的MySQL服务器信息&ndash;&gt;-->
+<!--                <property name="driver" value="com.mysql.jdbc.Driver"/>-->
+<!--                &lt;!&ndash; 仅测试用 之后会改参数&ndash;&gt;-->
+<!--                <property name="url" value="jdbc:mysql:///ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>-->
+<!--                <property name="username" value="root"/>-->
+<!--                <property name="password" value="Hji20010805"/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
 
-        <!-- 给Anthony开发用， 下面输入Anthony工作IP地址， Anthony开发时把最上面 enviroments default改成下面的
-        environment id 即可使用XU本地数据库以便测试 -->
-        <environment id="developmentAnthony">
-            <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
-                <!-- 链接你想要的MySQL服务器信息-->
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <!-- 仅测试用 之后会改参数-->
-                <property name="url" value="jdbc:mysql:///ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>
-                <property name="username" value="root"/>
-                <property name="password" value=""/>
-            </dataSource>
-        </environment>
+<!--        &lt;!&ndash; 给Anthony开发用， 下面输入Anthony工作IP地址， Anthony开发时把最上面 enviroments default改成下面的-->
+<!--        environment id 即可使用XU本地数据库以便测试 &ndash;&gt;-->
+<!--        <environment id="developmentAnthony">-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            <dataSource type="POOLED">-->
+<!--                &lt;!&ndash; 链接你想要的MySQL服务器信息&ndash;&gt;-->
+<!--                <property name="driver" value="com.mysql.jdbc.Driver"/>-->
+<!--                &lt;!&ndash; 仅测试用 之后会改参数&ndash;&gt;-->
+<!--                <property name="url" value="jdbc:mysql:///ItemBase?allowPublicKeyRetrieval=true&amp;useSSL=false"/>-->
+<!--                <property name="username" value="root"/>-->
+<!--                <property name="password" value=""/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
 
 
-    </environments>
-    <mappers>
-        <!-- 直接进行包扫描 -->
-        <package name="org.maven.apache.mapper"/>
-    </mappers>
-</configuration>
+<!--    </environments>-->
+<!--    <mappers>-->
+<!--        &lt;!&ndash; 直接进行包扫描 &ndash;&gt;-->
+<!--        <package name="org.maven.apache.mapper"/>-->
+<!--    </mappers>-->
+<!--</configuration>-->
