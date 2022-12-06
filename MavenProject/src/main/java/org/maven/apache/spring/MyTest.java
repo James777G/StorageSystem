@@ -21,7 +21,7 @@ public class MyTest {
         User user = userMapper.selectById(3);
         User user2 = new User();
         user2.setPassword("123123134");
-        user2.setUsername("Jerry222");
+        user2.setUsername("Jerry2223333");
         user2.setName("asd");
         List<Item> items = itemMapper.selectAll();
         userMapper.add(user2);
