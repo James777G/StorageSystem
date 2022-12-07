@@ -228,6 +228,12 @@
             <groupId>org.imgscalr</groupId>
             <version>4.2</version>
         </dependency>
+        <!-- transaction-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>5.1.19.RELEASE</version>
+        </dependency>
         <!-- 连接池-->
         <dependency>
             <groupId>com.alibaba</groupId>

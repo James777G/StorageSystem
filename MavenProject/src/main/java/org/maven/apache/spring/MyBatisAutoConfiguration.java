@@ -65,26 +65,26 @@ public class MyBatisAutoConfiguration {
         return sqlSessionFactoryBean;
     }
 
-    @Bean
-    public SqlSessionFactory sqlSessionFactory(SqlSessionFactoryBean sqlSessionFactoryBean) throws Exception {
-        return sqlSessionFactoryBean.getObject();
-    }
-
-    @Bean
-    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public SqlSession sqlSession(SqlSessionFactory sqlSessionFactory){
-        return sqlSessionFactory.openSession(true);
-    }
-
-    @Bean
-    public ItemMapper itemMapper(SqlSession sqlSession){
-        return sqlSession.getMapper(ItemMapper.class);
-
-    }
-
-    @Bean
-    public UserMapper userMapper(SqlSession sqlSession){
-        return sqlSession.getMapper(UserMapper.class);
-    }
+//    @Bean
+//    public SqlSessionFactory sqlSessionFactory(SqlSessionFactoryBean sqlSessionFactoryBean) throws Exception {
+//        return sqlSessionFactoryBean.getObject();
+//    }
+//
+//    @Bean
+//    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+//    public SqlSession sqlSession(SqlSessionFactory sqlSessionFactory){
+//        return sqlSessionFactory.openSession(true);
+//    }
+//
+//    @Bean
+//    public ItemMapper itemMapper(SqlSession sqlSession){
+//        return sqlSession.getMapper(ItemMapper.class);
+//
+//    }
+//
+//    @Bean
+//    public UserMapper userMapper(SqlSession sqlSession){
+//        return sqlSession.getMapper(UserMapper.class);
+//    }
 
 }
