@@ -1,14 +1,15 @@
 package org.maven.apache.spring.aspect;
 
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MapperAspect {
+public class ServiceAspect {
 
-    @Pointcut("execution(* org.maven.apache.mapper.*.*(..))")
+    @Pointcut("execution(* org.maven.apache.service.*.*(..))")
     public void pointcut(){}
 
     @Before(value="pointcut")
