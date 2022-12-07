@@ -28,5 +28,6 @@
          </image>
       </ImageView>
       <JFXButton fx:id="JamesButton" layoutX="146.0" layoutY="114.0" text="James" />
+      <Button layoutX="293.0" layoutY="77.0" mnemonicParsing="false" onAction="#sendMail" text="Button" />
     </children>
 </AnchorPane>

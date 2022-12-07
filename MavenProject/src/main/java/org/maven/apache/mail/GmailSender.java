@@ -14,6 +14,7 @@ import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.model.Message;
 import org.apache.commons.codec.binary.Base64;
+import org.maven.apache.App;
 import org.testng.annotations.Test;
 
 import javax.mail.Session;
@@ -22,6 +23,8 @@ import javax.mail.internet.MimeMessage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.Set;
@@ -41,6 +44,8 @@ public class GmailSender {
 
     private static final String Test_Mail = "javamailsender.version2@gmail.com";
     private static final String Receiver_Mail = "jamesgong0719@gmail.com";
+
+    private static URL resource = App.class.getResource("/tokens");
     private final Gmail service;
 
     public GmailSender() throws Exception {
@@ -89,7 +94,7 @@ public class GmailSender {
         }
     }
     private static Credential getCredentials(final NetHttpTransport httpTransport,GsonFactory jsonFactory)
-            throws IOException {
+            throws IOException, URISyntaxException {
         // Load client secrets.
         GoogleClientSecrets clientSecrets =
                 GoogleClientSecrets.load(jsonFactory, new InputStreamReader(GmailSender.class.getResourceAsStream("/gmail/client_secret_871291228520-np8foq9jkeqigt21bcstbu9miae17td8.apps.googleusercontent.com.json")));
@@ -97,10 +102,12 @@ public class GmailSender {
         // Build flow and trigger user authorization request.
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
                 httpTransport, jsonFactory, clientSecrets, Set.of(GMAIL_SEND))
-                .setDataStoreFactory(new FileDataStoreFactory(Paths.get("tokens").toFile()))
+                .setDataStoreFactory(new FileDataStoreFactory(Paths.get(resource.toURI()).toFile()))
                 .setAccessType("offline")
                 .build();
         LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
+
+
         return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     }
 

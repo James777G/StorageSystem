@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import org.maven.apache.item.Item;
 import org.maven.apache.item.ItemFX;
 import org.maven.apache.item.ItemFXBuilder;
+import org.maven.apache.mail.GmailSender;
 import org.maven.apache.mapper.ItemMapper;
 import org.maven.apache.spring.SpringConfiguration;
 import org.springframework.context.ApplicationContext;
@@ -120,4 +121,8 @@ public class ItemPageController implements Initializable {
         return ItemFXBuilder.buildList(items);
     }
 
+    @FXML
+    private void sendMail() throws Exception {
+        new GmailSender().sendVerificationCode("123", "1");
+    }
 }
