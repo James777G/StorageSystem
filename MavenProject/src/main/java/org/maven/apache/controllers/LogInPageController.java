@@ -125,20 +125,16 @@ public class LogInPageController implements Initializable {
 
     @FXML
     private void onSignUp(){
-        signUpPane.setVisible(true);
-        signUpPane.setPickOnBounds(true);
-        signInPane.setPickOnBounds(false);
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(signInPane, 300, 1, 0);
-        FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(signUpPane, 300, 0, 1);
-        fadeTransition.play();
-        fadeTransition.setOnFinished(event -> {
-            fadeTransition1.play();
-            signInPane.setVisible(false);
-        });
+        setVisibility(signUpPane, signInPane);
     }
 
     @FXML
     private void onSignIn(){
+        setVisibility(signInPane, signUpPane);
+
+    }
+
+    private void setVisibility(AnchorPane signInPane, AnchorPane signUpPane) {
         signInPane.setVisible(true);
         signInPane.setPickOnBounds(true);
         signUpPane.setPickOnBounds(false);
@@ -149,7 +145,6 @@ public class LogInPageController implements Initializable {
             fadeTransition1.play();
             signUpPane.setVisible(false);
         });
-
     }
 
     @FXML
