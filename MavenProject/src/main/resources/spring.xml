@@ -8,7 +8,7 @@
        http://www.springframework.org/schema/context/spring-content.xsd">
 
     <!-- 开启自动化扫描 -->
-
+    <context:component-scan base-package="org.maven.apache.springmail.SimpleOrderManager"/>
     <!-- 邮件发送器（提供了邮件发送接口，透明创建Java Mail的Mime message ，及邮箱发送位置-->
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.gmail.com" />

@@ -8,8 +8,8 @@ public class MailTest {
     public static void main(String[] args) {
 
         //加载spring上下文环境
-        ApplicationContext factory = new ClassPathXmlApplicationContext("/spring.xml");
-        SimpleOrderManager simpleOrderManager = (SimpleOrderManager)factory.getBean("orderManager");
+        BeanFactory factory = new ClassPathXmlApplicationContext("spring.xml");
+        SimpleOrderManager simpleOrderManager = (SimpleOrderManager)factory.getBean("simpleOrderManager");
 
         simpleOrderManager.placeOrder();
     }
