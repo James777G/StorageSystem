@@ -5,14 +5,27 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-
 @Service
 public class SimpleOrderManager implements OrderManager{
 
-    @Resource
+    public MailSender getMailSender() {
+        return mailSender;
+    }
+
+    public void setMailSender(MailSender mailSender) {
+        this.mailSender = mailSender;
+    }
+
+    public SimpleMailMessage getTemplateMessage() {
+        return templateMessage;
+    }
+
+    public void setTemplateMessage(SimpleMailMessage templateMessage) {
+        this.templateMessage = templateMessage;
+    }
+
     private MailSender mailSender;
-    @Resource
+
     private SimpleMailMessage templateMessage;
 
     @Override

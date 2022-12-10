@@ -211,6 +211,17 @@
             <artifactId>jfoenix</artifactId>
             <version>9.0.10</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.mail</groupId>
+            <artifactId>jakarta.mail-api</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+
         <!-- 导一些JAVA SWING 里面的东西到JAVAFX里面 应该大概率用不上 但万一呢 就留着了-->
         <dependency>
             <artifactId>javafx-swing</artifactId>

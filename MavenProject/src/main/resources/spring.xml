@@ -5,7 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-content.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- 开启自动化扫描 -->
     <context:component-scan base-package="org.maven.apache.springmail"/>
@@ -25,7 +25,7 @@
         <property name="subject" value="Your order"/>
     </bean>
 
-    <bean id="orderManager" class="com.mycompany.businessapp.support.SimpleOrderManager">
+    <bean id="orderManager" class="org.maven.apache.springmail.SimpleOrderManager">
         <property name="mailSender" ref="mailSender"/>
         <property name="templateMessage" ref="templateMessage"/>
     </bean>
