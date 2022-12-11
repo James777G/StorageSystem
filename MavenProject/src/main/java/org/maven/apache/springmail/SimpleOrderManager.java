@@ -30,7 +30,7 @@ public class SimpleOrderManager implements OrderManager{
 
 
     public void placeOrder(MailSender mailSender, SimpleMailMessage simpleMailMessage) {
-        simpleMailMessage.setTo("javamail.springboot@gmail.com");
+        simpleMailMessage.setTo("jamesgong0719@gmail.com");
         simpleMailMessage.setText("Hello spring mail");
         try {
             mailSender.send(simpleMailMessage);
