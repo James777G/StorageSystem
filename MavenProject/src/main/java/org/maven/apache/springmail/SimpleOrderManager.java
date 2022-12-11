@@ -28,17 +28,21 @@ public class SimpleOrderManager implements OrderManager{
 
     private SimpleMailMessage templateMessage;
 
-    @Override
-    public void placeOrder() {
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo("javamail.springboot@gmail.com");
-        msg.setText("Hello spring mail");
+
+    public void placeOrder(MailSender mailSender, SimpleMailMessage simpleMailMessage) {
+        simpleMailMessage.setTo("javamail.springboot@gmail.com");
+        simpleMailMessage.setText("Hello spring mail");
         try {
-            this.mailSender.send(msg);
+            mailSender.send(simpleMailMessage);
         }
         catch (MailException ex) {
             // simply log it and go on...
             System.err.println(ex.getMessage());
         }
+    }
+
+    @Override
+    public void placeOrder() {
+
     }
 }
