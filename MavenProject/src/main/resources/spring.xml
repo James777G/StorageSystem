@@ -16,8 +16,11 @@
         <property name="defaultEncoding" value="utf-8"/>
         <property name="username" value="javamail.springboot" />
         <property name="password" value="wjwbizfjurjknukb"/>
+        <property name="session" ref="sessionFactoryBean"/>
 
     </bean>
+
+    <bean id="sessionFactoryBean" class="org.maven.apache.springmail.SessionFactoryBean"/>
 
     <!-- this is a template message that we can preload with default state -->
     <bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
