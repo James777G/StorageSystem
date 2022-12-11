@@ -5,8 +5,12 @@ import jakarta.mail.Authenticator;
 import jakarta.mail.PasswordAuthentication;
 import jakarta.mail.Session;
 import org.maven.apache.mail.SimpleOrderManager;
+import org.maven.apache.service.mail.MailService;
+import org.maven.apache.service.mail.MailServiceProvider;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -28,6 +32,14 @@ public class MailConfiguration {
     }
 
     @Bean
+    public Properties messageProperties() throws IOException {
+        InputStream inputStream = MailConfiguration.class.getResourceAsStream("/mail/mailText.properties");
+        Properties properties = new Properties();
+        properties.load(inputStream);
+        return properties;
+    }
+
+    @Bean
     public Properties accountProperties() throws IOException {
         InputStream inputStream = MailConfiguration.class.getResourceAsStream("/mail/account.properties");
         Properties properties = new Properties();
@@ -36,6 +48,7 @@ public class MailConfiguration {
     }
 
     @Bean
+    @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public Session session(Properties mailProperties, Properties accountProperties) throws Exception {
         return Session.getInstance(mailProperties, new Authenticator() {
             @Override
@@ -54,10 +67,10 @@ public class MailConfiguration {
     }
 
     @Bean
-    public SimpleMailMessage templateMessage(){
+    public SimpleMailMessage templateMessage(Properties accountProperties, Properties messageProperties){
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setFrom("javamail.springboot@gmail.com");
-        mailMessage.setSubject("Your Order");
+        mailMessage.setFrom(accountProperties.getProperty("username"));
+        mailMessage.setSubject(messageProperties.getProperty("subject"));
         return mailMessage;
     }
 
@@ -67,6 +80,19 @@ public class MailConfiguration {
         orderManager.setMailSender(mailSender);
         orderManager.setTemplateMessage(templateMessage);
         return orderManager;
+    }
+
+    @Bean
+    public String message(Properties messageProperties){
+        return messageProperties.getProperty("mainMessage");
+    }
+
+    @Bean
+    public MailService mailService(SimpleOrderManager orderManager, String message){
+        MailServiceProvider serviceProvider = new MailServiceProvider();
+        serviceProvider.setOrderManager(orderManager);
+        serviceProvider.setMessage(message);
+        return serviceProvider;
     }
 
 }

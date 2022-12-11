@@ -15,7 +15,5 @@ public class Controller {
         SimpleOrderManager simpleOrderManager = (SimpleOrderManager)factory.getBean("simpleOrderManager");
         MailSender mailSender = factory.getBean("mailSender", MailSender.class);
         SimpleMailMessage templateMessage = factory.getBean("templateMessage", SimpleMailMessage.class);
-//
-//        simpleOrderManager.placeOrder(mailSender, templateMessage);
     }
 }
