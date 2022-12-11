@@ -30,7 +30,7 @@ public class SimpleOrderManager implements OrderManager{
 
     @Override
     public void placeOrder() {
-        SimpleMailMessage msg = new SimpleMailMessage(this.templateMessage);
+        SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo("javamail.springboot@gmail.com");
         msg.setText("Hello spring mail");
         try {
