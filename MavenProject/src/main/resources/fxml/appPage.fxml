@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-radius: 20; -fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="286.0" layoutY="68.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 20; -fx-background-color: #dddddd;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <AnchorPane layoutX="273.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="330.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label layoutX="32.0" layoutY="14.0" text="Home" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Separator layoutX="108.0" orientation="VERTICAL" prefHeight="15.0" prefWidth="10.0" scaleX="2.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="20.0" />
+                  <Label layoutX="110.0" layoutY="15.0" text="Welcome back" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="20.0">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="85.0" layoutY="111.0" text="My account" textFill="#23242a" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="100.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="674.0" layoutY="100.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="100.0" />
+                  <Label layoutX="730.0" layoutY="108.0" text="Items" AnchorPane.leftAnchor="730.0" AnchorPane.topAnchor="100.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="865.0" layoutY="102.0" text="Last month" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="10.0" fitWidth="10.0" layoutX="886.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="102.0">
+                     <image>
+                        <Image url="@../image/icons8-triangle-arrow-96.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="720.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="730.0" AnchorPane.topAnchor="150.0">
+                     <image>
+                        <Image url="@../image/icons8-cardboard-box-100.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="785.0" layoutY="153.0" prefHeight="40.0" prefWidth="198.0" text="0" textFill="#64b7f6" AnchorPane.leftAnchor="785.0" AnchorPane.topAnchor="150.0">
+                     <font>
+                        <Font name="System Bold Italic" size="27.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="730.0" layoutY="200.0" text="Restock" textFill="#6f7c80" AnchorPane.leftAnchor="730.0" AnchorPane.topAnchor="225.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="730.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="730.0" AnchorPane.topAnchor="260.0">
+                     <image>
+                        <Image url="@../image/icons8-load-cargo-96.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="shipment" textFill="#6f7c80" AnchorPane.leftAnchor="900.0" AnchorPane.topAnchor="225.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="900.0" AnchorPane.topAnchor="260.0">
+                     <image>
+                        <Image url="@../image/icons8-unload-cargo-96.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="755.0" layoutY="263.0" prefHeight="20.0" prefWidth="10.0" text="+" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="260.0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="920.0" layoutY="260.0" prefHeight="20.0" prefWidth="10.0" text="-" AnchorPane.leftAnchor="921.0" AnchorPane.topAnchor="260.0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="771.0" layoutY="263.0" text="0" AnchorPane.leftAnchor="765.0" AnchorPane.topAnchor="261.0">
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane prefHeight="700.0" prefWidth="65.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1115.0" AnchorPane.topAnchor="0.0" />
+                  <Label text="0" AnchorPane.leftAnchor="933.0" AnchorPane.topAnchor="261.0">
+                     <font>
+                        <Font name="System Bold Italic" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
