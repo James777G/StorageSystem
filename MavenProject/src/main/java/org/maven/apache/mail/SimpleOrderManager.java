@@ -1,4 +1,4 @@
-package org.maven.apache.springmail;
+package org.maven.apache.mail;
 
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
@@ -6,7 +6,12 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SimpleOrderManager implements OrderManager{
+public class SimpleOrderManager{
+
+
+    private MailSender mailSender;
+
+    private SimpleMailMessage templateMessage;
 
     public MailSender getMailSender() {
         return mailSender;
@@ -24,25 +29,17 @@ public class SimpleOrderManager implements OrderManager{
         this.templateMessage = templateMessage;
     }
 
-    private MailSender mailSender;
-
-    private SimpleMailMessage templateMessage;
 
 
-    public void placeOrder(MailSender mailSender, SimpleMailMessage simpleMailMessage) {
-        simpleMailMessage.setTo("jamesgong0719@gmail.com");
-        simpleMailMessage.setText("Hello spring mail");
+    public void placeOrder(String recipientEmail, String text) {
+        templateMessage.setTo(recipientEmail);
+        templateMessage.setText(text);
         try {
-            mailSender.send(simpleMailMessage);
+            mailSender.send(templateMessage);
         }
         catch (MailException ex) {
             // simply log it and go on...
             System.err.println(ex.getMessage());
         }
-    }
-
-    @Override
-    public void placeOrder() {
-
     }
 }

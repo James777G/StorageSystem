@@ -1,23 +1,14 @@
 package org.maven.apache.spring;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.maven.apache.mapper.ItemMapper;
-import org.maven.apache.mapper.UserMapper;
-import org.maven.apache.service.item.ItemServiceProvider;
-import org.maven.apache.service.user.UserServiceProvider;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 import java.io.IOException;

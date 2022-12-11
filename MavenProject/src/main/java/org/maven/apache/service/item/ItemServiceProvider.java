@@ -11,15 +11,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Component
 @Transactional
 public class ItemServiceProvider implements ItemService{
 
     private ItemMapper itemMapper;
 
+    public ItemMapper getItemMapper() {
+        return itemMapper;
+    }
+
+    public void setItemMapper(ItemMapper itemMapper) {
+        this.itemMapper = itemMapper;
+    }
 
     /**
      * This method adds a new item to the item table
