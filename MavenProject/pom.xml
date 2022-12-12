@@ -315,6 +315,12 @@
             <version>1.18.24</version>
             <scope>compile</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.github.palexdev/materialfx -->
+        <dependency>
+            <groupId>io.github.palexdev</groupId>
+            <artifactId>materialfx</artifactId>
+            <version>11.14.0-EA3</version>
+        </dependency>
     </dependencies>
     <properties>
         <!-- 如名 Maven Compiler-->

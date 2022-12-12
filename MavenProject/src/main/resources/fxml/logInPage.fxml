@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -125,6 +126,7 @@
                </image>
             </ImageView>
             <Line fx:id="lineOnSignIn" endX="65.33331298828125" layoutX="310.0" layoutY="640.0" opacity="0.4" startX="-69.3333740234375" stroke="#23242a" />
+            <MFXPasswordField floatingText="Password" layoutX="244.0" layoutY="59.0" prefHeight="49.0" prefWidth="200.0" />
          </children>
       </AnchorPane>
    </children>
