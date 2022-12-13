@@ -6,13 +6,14 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class MailTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         //加载spring上下文环境
         BeanFactory factory = new AnnotationConfigApplicationContext(SpringConfiguration.class);
         MailService simpleOrderManager = (MailService)factory.getBean("mailService");
 
-        simpleOrderManager.sendEmail("jamesgong0719@gmail.com", "666794");
+        simpleOrderManager.sendEmail("jamesgong0719@gmail.com", "666794123");
+        Thread.sleep(10000);
 
 
 
