@@ -53,10 +53,10 @@
                </image>
             </ImageView>
             <Line fx:id="lineOnSignIn" endX="65.33331298828125" layoutX="310.0" layoutY="640.0" opacity="0.4" startX="-69.3333740234375" stroke="#23242a" />
-            <MFXPasswordField floatingText="Password" layoutX="103.0" layoutY="410.0" prefHeight="49.0" prefWidth="419.0" styleClass="newStuff" stylesheets="@../css/logInPage.css" />
-            <MFXTextField floatingText="Username" layoutX="103.0" layoutY="340.0" prefHeight="49.0" prefWidth="419.0" styleClass="newStuff" stylesheets="@../css/logInPage.css" />
-            <MFXTextField floatingText="Email Address" layoutX="103.0" layoutY="270.0" prefHeight="49.0" prefWidth="419.0" styleClass="newStuff" stylesheets="@../css/logInPage.css" />
-            <MFXTextField floatingText="Full Name" layoutX="103.0" layoutY="200.0" prefHeight="49.0" prefWidth="419.0" styleClass="newStuff" stylesheets="@../css/logInPage.css" />
+            <MFXPasswordField floatingText="Password" layoutX="103.0" layoutY="410.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
+            <MFXTextField floatingText="Username" layoutX="103.0" layoutY="340.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
+            <MFXTextField floatingText="Email Address" layoutX="103.0" layoutY="270.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
+            <MFXTextField floatingText="Full Name" layoutX="103.0" layoutY="200.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="signInPane" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-color: white;">
@@ -92,8 +92,8 @@
             <Label fx:id="labelOnSignUp" layoutX="835.0" layoutY="582.0" onMouseClicked="#onSignUp" onMouseEntered="#onEnterLabelSignUp" onMouseExited="#onExitLabelSignUp" text="Do not have an account?" AnchorPane.bottomAnchor="120.66666666666663" />
             <Separator layoutX="801.0" layoutY="568.0" prefWidth="200.0" AnchorPane.bottomAnchor="150.0" />
             <Line fx:id="lineOnSignUp" endX="60.0" layoutX="906.0" layoutY="599.0" opacity="0.4" startX="-72.0" stroke="#23242a" style="-fx-fill: #23242a;" />
-            <MFXTextField floatMode="BORDER" floatingText=" Username " layoutX="700.0" layoutY="250.0" prefHeight="49.0" prefWidth="419.0" styleClass="newStuff" stylesheets="@../css/logInPage.css" />
-            <MFXPasswordField floatMode="BORDER" floatingText=" Password " layoutX="700.0" layoutY="339.0" prefHeight="49.0" prefWidth="419.0" styleClass="newStuff" stylesheets="@../css/logInPage.css" />
+            <MFXTextField floatMode="BORDER" floatingText=" Username " layoutX="700.0" layoutY="250.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
+            <MFXPasswordField floatMode="BORDER" floatingText=" Password " layoutX="700.0" layoutY="339.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="720.0" prefWidth="600.0" style="-fx-background-color: #23242a;">
