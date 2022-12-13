@@ -13,9 +13,6 @@ public class MailTest {
         MailService simpleOrderManager = (MailService)factory.getBean("mailService");
 
         simpleOrderManager.sendEmail("jamesgong0719@gmail.com", "666794123");
-        Thread.sleep(10000);
-
-
 
     }
 }

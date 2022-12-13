@@ -54,10 +54,16 @@
         update UserTable
         <set>
             <if test="name != null and name !=''">
-                name = #{Name},
+                name = #{name},
             </if>
             <if test="username != null and username != ''">
-                username = #{username}
+                username = #{username},
+            </if>
+            <if test="emailAddress != null and emailAddress != ''">
+                emailAddress = #{emailAddress},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
             </if>
         </set>
         where id = #{id}

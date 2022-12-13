@@ -16,9 +16,18 @@ public class User implements Serializable {
     private String username;
     private String password;
     private String name;
+    private String emailAddress;
 
     public int getId() {
         return id;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     public void setId(int id) {

@@ -3,11 +3,6 @@ package org.maven.apache.service.mail;
 import lombok.Data;
 import org.maven.apache.mail.SimpleOrderManager;
 import org.springframework.scheduling.annotation.Async;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 @Data
 public class MailServiceProvider implements MailService {
 

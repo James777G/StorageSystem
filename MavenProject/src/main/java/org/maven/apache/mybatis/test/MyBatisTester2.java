@@ -11,6 +11,7 @@ import org.maven.apache.mapper.ItemMapper;
 import org.maven.apache.mapper.UserMapper;
 import org.maven.apache.mybatis.MyBatisOperator;
 import org.maven.apache.search.FuzzySearch;
+import org.maven.apache.service.user.UserService;
 import org.maven.apache.spring.SpringConfiguration;
 import org.maven.apache.user.User;
 import org.springframework.context.ApplicationContext;
@@ -112,6 +113,17 @@ public class MyBatisTester2 {
 		SqlSession sqlSession = (SqlSession) context.getBean("sqlSession");
 		sqlSession.clearCache();
 		sqlSession.close();
+	}
+
+	@Test
+	public void testUpdateUser(){
+		ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+		UserService userService = context.getBean("userService", UserService.class);
+		List<User> ethan = userService.selectByName("Ethan Duan");
+		User user = ethan.get(0);
+		user.setEmailAddress("hgon777@aucklanduni.ac.nz");
+		userService.update(user);
+
 	}
 
 
