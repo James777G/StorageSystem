@@ -1,15 +1,14 @@
 @import "colors.css";
-@import "parameters.css";
 
 .JFXButton{
     -fx-background-color:  -darkGrey-theme;
-    -fx-background-radius: -logIn-buttonBorder-radius;
+    -fx-background-radius: 10;
     -fx-text-fill: -pure-white;
 }
 
 .JFXButton:hover {
     -fx-background-color: -pure-white;
-    -fx-border-radius: -logIn-buttonBorder-radius;
+    -fx-border-radius: 10;
     -fx-border-color: -darkGrey-theme;
     -fx-text-fill: -darkGrey-theme;
 }
