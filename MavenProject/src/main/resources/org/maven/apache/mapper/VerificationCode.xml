@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 这个文件的文件路径不要动-->
+<!-- 名称空间-->
+<mapper namespace="org.maven.apache.mapper.VerificationCodeMapper">
+
+    <select id="selectAll" resultType="org.maven.apache.verificationCode.VerificationCode">
+        select * from codeTable;
+    </select>
+    <select id="selectByUsername" resultType="org.maven.apache.verificationCode.VerificationCode">
+        select * from codeTable
+        where 1 = 1
+        <if test="username != null and username != ''">
+            and username = #{username}
+        </if>
+    </select>
+</mapper>
