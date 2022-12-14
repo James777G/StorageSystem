@@ -11,12 +11,10 @@
     -fx-border-radius: 10;
     -fx-border-color: -darkGrey-theme;
     -fx-text-fill: -darkGrey-theme;
+
 }
 
 .inputFields{
     -mfx-main: -darkGrey-theme;
 }
 
-.errorMessageDialog{
-    -fx-text-fill: red;
-}

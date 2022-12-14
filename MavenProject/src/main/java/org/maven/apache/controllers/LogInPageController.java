@@ -1,5 +1,6 @@
 package org.maven.apache.controllers;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
@@ -16,6 +17,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import org.maven.apache.App;
+import org.maven.apache.MyLauncher;
+import org.maven.apache.service.item.ItemService;
 import org.maven.apache.utils.TransitionUtils;
 import org.springframework.context.ApplicationContext;
 
@@ -41,6 +44,9 @@ public class LogInPageController implements Initializable {
     private Label labelOnSignUp;
 
     @FXML
+    private MFXGenericDialog confirmDialog;
+
+    @FXML
     private Label labelOnSignIn;
 
     @FXML
@@ -64,6 +70,10 @@ public class LogInPageController implements Initializable {
     @FXML
     private ImageView errorMessageIcon;
 
+    @FXML
+    private ImageView confirmDialogIcon;
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -72,7 +82,13 @@ public class LogInPageController implements Initializable {
         signUpPane.setVisible(false);
         signUpPane.setPickOnBounds(false);
         errorDialog.setVisible(false);
+        errorDialog.setOpacity(1);
         errorDialog.setHeaderIcon(errorMessageIcon);
+        errorDialog.setPickOnBounds(false);
+        confirmDialog.setVisible(false);
+        confirmDialog.setOpacity(1);
+        confirmDialog.setHeaderIcon(confirmDialogIcon);
+        confirmDialog.setPickOnBounds(false);
         labelOnSignUp.setCursor(Cursor.HAND);
         labelOnSignIn.setCursor(Cursor.HAND);
         lineOnSignIn.setCursor(Cursor.HAND);
@@ -234,7 +250,15 @@ public class LogInPageController implements Initializable {
         imageOnStorage.setEffect(null);
     }
 
-
-
+    @FXML
+    private void onSignUpAction(){
+        confirmDialog.setVisible(true);
+        confirmDialog.setPickOnBounds(true);
+    }
+    @FXML
+    private void onCloseConfirmDialog(){
+        confirmDialog.setVisible(false);
+        confirmDialog.setPickOnBounds(false);
+    }
 
 }
