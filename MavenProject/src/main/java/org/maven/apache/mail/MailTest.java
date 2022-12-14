@@ -13,6 +13,17 @@ public class MailTest {
         MailService simpleOrderManager = (MailService)factory.getBean("mailService");
 
         simpleOrderManager.sendEmail("jamesgong0719@gmail.com", "666794123");
+        Thread t1 = new Thread(() -> System.out.println("a"));
+        Thread t2 = new Thread(() -> {
+            try {
+                t1.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("b");
+        });
+
+
 
     }
 }

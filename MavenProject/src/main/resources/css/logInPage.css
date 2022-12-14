@@ -16,3 +16,7 @@
 .inputFields{
     -mfx-main: -darkGrey-theme;
 }
+
+.errorMessageDialog{
+    -fx-text-fill: red;
+}

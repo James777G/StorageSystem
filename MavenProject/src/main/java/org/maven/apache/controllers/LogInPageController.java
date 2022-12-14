@@ -1,5 +1,6 @@
 package org.maven.apache.controllers;
 
+import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -10,13 +11,16 @@ import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
 import javafx.scene.effect.Effect;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
+import org.maven.apache.App;
 import org.maven.apache.utils.TransitionUtils;
 import org.springframework.context.ApplicationContext;
 
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class LogInPageController implements Initializable {
@@ -48,15 +52,35 @@ public class LogInPageController implements Initializable {
     @FXML
     private ImageView imageOnStorage;
 
+    @FXML
+    private Line lineOnForgotPassword;
+
+    @FXML
+    private Label labelOnForgotPassword;
+
+    @FXML
+    private MFXGenericDialog errorDialog;
+
+    @FXML
+    private ImageView errorMessageIcon;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         signInPane.setOpacity(1);
         signUpPane.setOpacity(0);
         signUpPane.setVisible(false);
         signUpPane.setPickOnBounds(false);
+        errorDialog.setVisible(false);
+        errorDialog.setHeaderIcon(errorMessageIcon);
         labelOnSignUp.setCursor(Cursor.HAND);
         labelOnSignIn.setCursor(Cursor.HAND);
+        lineOnSignIn.setCursor(Cursor.HAND);
+        lineOnSignUp.setCursor(Cursor.HAND);
+        labelOnForgotPassword.setCursor(Cursor.HAND);
+        lineOnForgotPassword.setCursor(Cursor.HAND);
         lineOnSignIn.setVisible(false);
+        lineOnForgotPassword.setVisible(false);
         lineOnSignUp.setVisible(false);
         FadeTransition fadeTransition = TransitionUtils.getFadeTransition(imageOnStorage, 3000, 0, 1);
         fadeTransition.play();
@@ -148,6 +172,16 @@ public class LogInPageController implements Initializable {
     }
 
     @FXML
+    private void onEnterForgotPassword(){
+        lineOnForgotPassword.setVisible(true);
+    }
+
+    @FXML
+    private void onExitForgotPassword(){
+        lineOnForgotPassword.setVisible(false);
+    }
+
+    @FXML
     private void onEnterLabelSignIn(){
         lineOnSignIn.setVisible(true);
     }
@@ -168,9 +202,31 @@ public class LogInPageController implements Initializable {
     }
 
     @FXML
+    private void onEnterLineOnForgotPassword(){
+        lineOnForgotPassword.setVisible(true);
+    }
+
+    @FXML
+    private void onExitLineOnForgotPassword(){
+        lineOnForgotPassword.setVisible(false);
+    }
+
+    @FXML
+    private void onCloseErrorDialog(){
+        errorDialog.setVisible(false);
+        errorDialog.setPickOnBounds(false);
+    }
+
+    @FXML
     private void onEnterImage(){
         Bloom bloom = new Bloom(0.2);
         imageOnStorage.setEffect(bloom);
+    }
+
+    @FXML
+    private void onSignInAction(){
+        errorDialog.setVisible(true);
+        errorDialog.setPickOnBounds(true);
     }
 
     @FXML
