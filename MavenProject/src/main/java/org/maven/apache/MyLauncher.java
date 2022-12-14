@@ -1,5 +1,10 @@
 package org.maven.apache;
 
+import ai.djl.Application;
+import org.maven.apache.spring.SpringConfiguration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import java.io.IOException;
 
 /**
@@ -18,7 +23,7 @@ import java.io.IOException;
  *
  */
 public class MyLauncher {
-
+	public static ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		App.main(args);
