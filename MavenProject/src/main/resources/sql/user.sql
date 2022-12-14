@@ -15,7 +15,8 @@ insert into UserTable(name, username, password, emailAddress) values
 ('Peter Wang', 'H2SO4', '54mixieerbulade', ''),
 ('James Gai', 'Ambush', 'sir', ''),
 ('Anthony Feng', 'kumiho', 'kidchild', ''),
-('Chuanxi', 'Chauency Xu', '8888888', ''),
+('Chuanxi', 'Chauency Xu', 'Hji20010805', 'xuxinhuiqiang@gmail.com'),
 ('Kylyn Wu', 'wusitu', 'EXingDDDD', '');
+
 
 
