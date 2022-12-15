@@ -265,8 +265,7 @@ public class LogInPageController implements Initializable {
     @FXML
     private void onSignInAction(){
         //get the user list
-        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
-        UserService userService = context.getBean("userService", UserService.class);
+        UserService userService = MyLauncher.context.getBean("userService", UserService.class);
         List<User> userList = userService.selectAll();
         int index = 0;
         
