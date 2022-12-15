@@ -86,7 +86,7 @@ public class LogInPageController implements Initializable {
     @FXML
     private ImageView confirmDialogIcon;
 
-
+    private static volatile List<User> userList;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -302,10 +302,9 @@ public class LogInPageController implements Initializable {
      * @return boolean
      */
     private boolean isUserNameFound(String userName) {
-    	ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
-        UserService userService = context.getBean("userService", UserService.class);
+        UserService userService = MyLauncher.context.getBean("userService", UserService.class);
         List<User> userList = userService.selectAll();
-    	for (int i = 0; i < userList.size() - 1; i++) {
+    	for (int i = 0; i < userList.size(); i++) {
     		if (userList.get(i).getUsername().equals(userName)) {
         		return true;
         	}
@@ -320,11 +319,10 @@ public class LogInPageController implements Initializable {
      * @return index position
      */
     private int getUserIndex(String userName) {
-    	ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
-        UserService userService = context.getBean("userService", UserService.class);
+        UserService userService = MyLauncher.context.getBean("userService", UserService.class);
         List<User> userList = userService.selectAll();
         int index = 0;
-        for (int i = 0; i < userList.size() - 1; i++) {
+        for (int i = 0; i < userList.size(); i++) {
     		if (userList.get(i).getUsername().equals(userName)) {
         		index = i;
         	}
