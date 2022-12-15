@@ -9,6 +9,9 @@
         insert into codeTable(username, code)
         values (#{username}, #{code});
     </insert>
+    <delete id="deleteById">
+        delete from codeTable where id = #{id};
+    </delete>
 
     <select id="selectAll" resultType="org.maven.apache.verificationCode.VerificationCode">
         select * from codeTable;
