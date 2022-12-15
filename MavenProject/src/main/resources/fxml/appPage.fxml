@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-radius: 20; -fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-radius: 20; -fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="340.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="650.0" AnchorPane.topAnchor="10.0">
          <children>
@@ -45,7 +45,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="286.0" layoutY="68.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 20; -fx-background-color: #dddddd;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <AnchorPane layoutX="286.0" layoutY="68.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 20; -fx-background-color: #dddddd; -fx-border-radius: 20;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
             <AnchorPane layoutX="273.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="330.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -60,9 +60,9 @@
                      </font>
                   </Label>
                   <Separator layoutX="674.0" layoutY="100.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="100.0" />
-                  <Label layoutX="730.0" layoutY="108.0" text="Items" AnchorPane.leftAnchor="730.0" AnchorPane.topAnchor="100.0">
+                  <Label layoutX="730.0" layoutY="108.0" prefHeight="29.0" prefWidth="43.0" text="Items" AnchorPane.leftAnchor="730.0" AnchorPane.topAnchor="100.0">
                      <font>
-                        <Font name="System Bold" size="16.0" />
+                        <Font name="Dubai Medium" size="16.0" />
                      </font>
                   </Label>
                   <Label layoutX="865.0" layoutY="102.0" text="Last month" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0">
@@ -146,7 +146,7 @@
                         <Font name="System Bold Italic" size="20.0" />
                      </font>
                   </Label>
-                  <JFXButton layoutX="40.0" layoutY="122.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Log off" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="120.0">
+                  <JFXButton layoutX="40.0" layoutY="122.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Log off" textFill="#262525" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="120.0">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -155,7 +155,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="700.0" prefWidth="56.0" style="-fx-background-color: white; -fx-border-color: #dddddd; -fx-background-radius: 20;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="1125.0" AnchorPane.topAnchor="10.0">
+      <AnchorPane layoutX="1.0" layoutY="10.0" prefHeight="700.0" prefWidth="71.0" style="-fx-background-color: white; -fx-border-color: #dddddd; -fx-background-radius: 20; -fx-border-radius: 20;" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="1120.0" AnchorPane.topAnchor="10.0">
          <children>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="20.0">
                <image>
