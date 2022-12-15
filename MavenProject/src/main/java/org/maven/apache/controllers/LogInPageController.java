@@ -27,6 +27,7 @@ import org.maven.apache.service.item.ItemService;
 import org.maven.apache.utils.TransitionUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.scheduling.annotation.Async;
 
 import java.net.URL;
 import java.util.List;
@@ -90,6 +91,7 @@ public class LogInPageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.updateUserList();
         signInPane.setOpacity(1);
         signUpPane.setOpacity(0);
         signUpPane.setVisible(false);
@@ -114,6 +116,12 @@ public class LogInPageController implements Initializable {
         FadeTransition fadeTransition = TransitionUtils.getFadeTransition(imageOnStorage, 3000, 0, 1);
         fadeTransition.play();
 
+    }
+
+    @Async
+    public void updateUserList(){
+        UserService userService = MyLauncher.context.getBean("userService", UserService.class);
+        userList = userService.selectAll();
     }
 
     @FXML
@@ -265,8 +273,7 @@ public class LogInPageController implements Initializable {
     @FXML
     private void onSignInAction(){
         //get the user list
-        UserService userService = MyLauncher.context.getBean("userService", UserService.class);
-        List<User> userList = userService.selectAll();
+        updateUserList();
         int index = 0;
         
         
@@ -303,7 +310,6 @@ public class LogInPageController implements Initializable {
      */
     private boolean isUserNameFound(String userName) {
         UserService userService = MyLauncher.context.getBean("userService", UserService.class);
-        List<User> userList = userService.selectAll();
     	for (int i = 0; i < userList.size(); i++) {
     		if (userList.get(i).getUsername().equals(userName)) {
         		return true;
@@ -320,7 +326,6 @@ public class LogInPageController implements Initializable {
      */
     private int getUserIndex(String userName) {
         UserService userService = MyLauncher.context.getBean("userService", UserService.class);
-        List<User> userList = userService.selectAll();
         int index = 0;
         for (int i = 0; i < userList.size(); i++) {
     		if (userList.get(i).getUsername().equals(userName)) {
