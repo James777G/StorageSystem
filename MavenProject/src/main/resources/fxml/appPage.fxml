@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
@@ -9,6 +10,41 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-radius: 20; -fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="340.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="650.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Label layoutX="30.0" layoutY="88.0" text="My details" textFill="#23242a" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="88.0">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="123.0" prefHeight="15.0" prefWidth="119.0" text="(full name)" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="123.0" />
+            <Label layoutX="30.0" layoutY="163.0" prefHeight="19.0" prefWidth="56.0" text="Staff ID" textFill="#23242a" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="163.0">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="105.0" layoutY="163.0" prefHeight="19.0" prefWidth="135.0" text="00000000" textFill="#23242a" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="163.0">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="226.0" text="Email">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="263.0" prefHeight="19.0" prefWidth="205.0" text="000000@*****.com" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="263.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+               <image>
+                  <Image url="@../image/icons8-back-arrow-64.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
       <AnchorPane layoutX="286.0" layoutY="68.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 20; -fx-background-color: #dddddd;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
             <AnchorPane layoutX="273.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="330.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="0.0">
@@ -21,11 +57,6 @@
                   <Label layoutX="110.0" layoutY="15.0" text="Welcome back" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="20.0">
                      <font>
                         <Font name="System Bold Italic" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="85.0" layoutY="111.0" text="My account" textFill="#23242a" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="100.0">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
                   <Separator layoutX="674.0" layoutY="100.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="100.0" />
@@ -95,25 +126,62 @@
                         <Font name="System Bold Italic" size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="85.0" layoutY="135.0" prefHeight="15.0" prefWidth="119.0" text="(full name)" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="130.0" />
-                  <Label layoutX="47.0" layoutY="171.0" prefHeight="19.0" prefWidth="56.0" text="Staff ID" textFill="#23242a" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="160.0">
-                     <font>
-                        <Font name="System Bold Italic" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="89.0" layoutY="160.0" prefHeight="19.0" prefWidth="135.0" text="00000000" textFill="#23242a" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="160.0">
-                     <font>
-                        <Font name="System Bold Italic" size="14.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="490.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="100.0">
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="490.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="100.0">
                      <image>
-                        <Image url="@../image/icons8-staff-96.png" />
+                        <Image url="@../image/icons8-male-user-96.png" />
                      </image>
                   </ImageView>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="610.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-camera-100.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="33.0" layoutY="75.0" text="Hi" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="75.0">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="75.0" layoutY="81.0" text="Name" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="75.0">
+                     <font>
+                        <Font name="System Bold Italic" size="20.0" />
+                     </font>
+                  </Label>
+                  <JFXButton layoutX="40.0" layoutY="122.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Log off" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="120.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="700.0" prefWidth="56.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1115.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="700.0" prefWidth="56.0" style="-fx-background-color: white; -fx-border-color: #dddddd; -fx-background-radius: 20;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="1125.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="20.0">
+               <image>
+                  <Image url="@../image/icons8-menu-rounded-96.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="20.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="140.0">
+               <image>
+                  <Image url="@../image/icons8-home-page-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="24.0" layoutY="309.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="350.0">
+               <image>
+                  <Image url="@../image/icons8-settings-384.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="24.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="280.0">
+               <image>
+                  <Image url="@../image/icons8-user-96.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="21.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="210.0">
+               <image>
+                  <Image url="@../image/icons8-up-down-arrow-96.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>
