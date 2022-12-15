@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97de4d35-4a84-4e8f-ada4-e7f1d2cf29f5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-camera-100.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-staff-96.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022_12_15_12_09__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022_12_15_12_09__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/MavenProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/MavenProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-user-96.png" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-user-96.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MavenProject/target/classes/org/maven/apache/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/target/classes/org/maven/apache/App.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,6 +35,17 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/MavenProject/pom.xml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/App.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/Doc.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/MyLauncher.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/spring/MyBatisAutoConfiguration.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/spring/MyTest.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/spring/SpringConfiguration.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MavenProject/src/main/resources/fxml/itemPage.fxml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MavenProject/src/main/resources/fxml/logInPage.fxml" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

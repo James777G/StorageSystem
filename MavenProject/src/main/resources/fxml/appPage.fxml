@@ -84,19 +84,36 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="771.0" layoutY="263.0" text="0" AnchorPane.leftAnchor="765.0" AnchorPane.topAnchor="261.0">
+                  <Label layoutX="771.0" layoutY="263.0" prefHeight="20.0" prefWidth="89.0" text="0" AnchorPane.leftAnchor="765.0" AnchorPane.topAnchor="261.0">
                      <font>
                         <Font name="System Bold Italic" size="15.0" />
                      </font>
                   </Label>
                   <AnchorPane prefHeight="700.0" prefWidth="65.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1115.0" AnchorPane.topAnchor="0.0" />
-                  <Label text="0" AnchorPane.leftAnchor="933.0" AnchorPane.topAnchor="261.0">
+                  <Label prefHeight="20.0" prefWidth="89.0" text="0" AnchorPane.leftAnchor="933.0" AnchorPane.topAnchor="261.0">
                      <font>
                         <Font name="System Bold Italic" size="15.0" />
                      </font>
                   </Label>
+                  <Label layoutX="85.0" layoutY="135.0" prefHeight="15.0" prefWidth="119.0" text="(full name)" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="130.0" />
+                  <Label layoutX="47.0" layoutY="171.0" prefHeight="19.0" prefWidth="56.0" text="Staff ID" textFill="#23242a" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="160.0">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="89.0" layoutY="160.0" prefHeight="19.0" prefWidth="135.0" text="00000000" textFill="#23242a" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="160.0">
+                     <font>
+                        <Font name="System Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="490.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="100.0">
+                     <image>
+                        <Image url="@../image/icons8-staff-96.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
+            <AnchorPane prefHeight="700.0" prefWidth="56.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1115.0" />
          </children>
       </AnchorPane>
    </children>
