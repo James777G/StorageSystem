@@ -14,7 +14,23 @@ public class SimpleOrderManager{
 
     private SimpleMailMessage templateMessage;
 
-    public void placeOrder(String recipientEmail, String text) {
+    public MailSender getMailSender() {
+		return mailSender;
+	}
+
+	public void setMailSender(MailSender mailSender) {
+		this.mailSender = mailSender;
+	}
+
+	public SimpleMailMessage getTemplateMessage() {
+		return templateMessage;
+	}
+
+	public void setTemplateMessage(SimpleMailMessage templateMessage) {
+		this.templateMessage = templateMessage;
+	}
+
+	public void placeOrder(String recipientEmail, String text) {
         templateMessage.setTo(recipientEmail);
         templateMessage.setText(text);
         try {

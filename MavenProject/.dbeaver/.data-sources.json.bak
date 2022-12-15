@@ -22,22 +22,6 @@
 				},
 				"auth-model": "native"
 			}
-		},
-		"mysql8-184939ce0e2-57629406c7d88358": {
-			"provider": "mysql",
-			"driver": "mysql8",
-			"name": "localhost 2",
-			"save-password": true,
-			"read-only": false,
-			"configuration": {
-				"host": "localhost",
-				"port": "3306",
-				"url": "jdbc:mysql://localhost:3306/",
-				"home": "C:\\Program Files\\mysql-8.0.31-winx64",
-				"type": "dev",
-				"auth-model": "native",
-				"handlers": {}
-			}
 		}
 	},
 	"connection-types": {

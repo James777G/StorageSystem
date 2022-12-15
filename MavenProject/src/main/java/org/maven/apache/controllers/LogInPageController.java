@@ -1,5 +1,6 @@
 package org.maven.apache.controllers;
 
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
@@ -16,10 +17,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import org.maven.apache.App;
+import org.maven.apache.service.user.UserService;
+import org.maven.apache.spring.SpringConfiguration;
+import org.maven.apache.user.User;
 import org.maven.apache.utils.TransitionUtils;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.net.URL;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -57,6 +63,12 @@ public class LogInPageController implements Initializable {
 
     @FXML
     private Label labelOnForgotPassword;
+    
+    @FXML
+    private MFXTextField userNameField;
+    
+    @FXML
+    private MFXTextField passwordField;
 
     @FXML
     private MFXGenericDialog errorDialog;
@@ -222,19 +234,85 @@ public class LogInPageController implements Initializable {
         Bloom bloom = new Bloom(0.2);
         imageOnStorage.setEffect(bloom);
     }
-
-    @FXML
-    private void onSignInAction(){
-        errorDialog.setVisible(true);
-        errorDialog.setPickOnBounds(true);
-    }
-
+    
     @FXML
     private void onExitImage(){
         imageOnStorage.setEffect(null);
     }
 
-
-
+    /**
+     * Sign in button, if the correct username and its corresponding password have been used then head
+     * straight to the next page. Otherwise, sign up for a new user or renter the password
+     */
+    @FXML
+    private void onSignInAction(){
+        //get the user list
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+        UserService userService = context.getBean("userService", UserService.class);
+        List<User> userList = userService.selectAll();
+        int index = 0;
+        
+        
+        if (!isUserNameFound(userNameField.getText())) {
+        	//if the user does not exist, show sign up alert
+        	errorDialog.setVisible(true);
+            errorDialog.setPickOnBounds(true);
+            System.out.println("++++++++++++++++++++++++++++++++++++++");
+    		System.out.println("User does not exist");
+    		System.out.println("++++++++++++++++++++++++++++++++++++++");
+        }else {
+        	//if the user exists, check its verification (correct password)
+        	index = getUserIndex(userNameField.getText());
+        	if (userList.get(index).getPassword().equals(passwordField.getText())) {
+        		//head to the next page
+        		System.out.println("++++++++++++++++++++++++++++++++++++++");
+        		System.out.println("Congrats, you've signed in");
+        		System.out.println("++++++++++++++++++++++++++++++++++++++");
+        	}else {
+        		errorDialog.setVisible(true);
+                errorDialog.setPickOnBounds(true);
+                System.out.println("++++++++++++++++++++++++++++++++++++++");
+        		System.out.println("Incorrect password");
+        		System.out.println("++++++++++++++++++++++++++++++++++++++");
+        	}
+        } 
+    }
+    
+    /**
+     * Find the existence of the input username
+     * 
+     * @param userName
+     * @return boolean
+     */
+    private boolean isUserNameFound(String userName) {
+    	ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+        UserService userService = context.getBean("userService", UserService.class);
+        List<User> userList = userService.selectAll();
+    	for (int i = 0; i < userList.size() - 1; i++) {
+    		if (userList.get(i).getUsername().equals(userName)) {
+        		return true;
+        	}
+    	}
+    	return false;
+    }
+    
+    /**
+     * get the index position of the specified user from the user list
+     * 
+     * @param userName
+     * @return index position
+     */
+    private int getUserIndex(String userName) {
+    	ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+        UserService userService = context.getBean("userService", UserService.class);
+        List<User> userList = userService.selectAll();
+        int index = 0;
+        for (int i = 0; i < userList.size() - 1; i++) {
+    		if (userList.get(i).getUsername().equals(userName)) {
+        		index = i;
+        	}
+    	}
+        return index;
+    }
 
 }
