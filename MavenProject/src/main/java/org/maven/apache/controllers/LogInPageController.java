@@ -1,6 +1,8 @@
 package org.maven.apache.controllers;
 
+
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
@@ -20,6 +22,8 @@ import org.maven.apache.App;
 import org.maven.apache.service.user.UserService;
 import org.maven.apache.spring.SpringConfiguration;
 import org.maven.apache.user.User;
+import org.maven.apache.MyLauncher;
+import org.maven.apache.service.item.ItemService;
 import org.maven.apache.utils.TransitionUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -45,6 +49,9 @@ public class LogInPageController implements Initializable {
 
     @FXML
     private Label labelOnSignUp;
+
+    @FXML
+    private MFXGenericDialog confirmDialog;
 
     @FXML
     private Label labelOnSignIn;
@@ -76,6 +83,10 @@ public class LogInPageController implements Initializable {
     @FXML
     private ImageView errorMessageIcon;
 
+    @FXML
+    private ImageView confirmDialogIcon;
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -84,7 +95,13 @@ public class LogInPageController implements Initializable {
         signUpPane.setVisible(false);
         signUpPane.setPickOnBounds(false);
         errorDialog.setVisible(false);
+        errorDialog.setOpacity(1);
         errorDialog.setHeaderIcon(errorMessageIcon);
+        errorDialog.setPickOnBounds(false);
+        confirmDialog.setVisible(false);
+        confirmDialog.setOpacity(1);
+        confirmDialog.setHeaderIcon(confirmDialogIcon);
+        confirmDialog.setPickOnBounds(false);
         labelOnSignUp.setCursor(Cursor.HAND);
         labelOnSignIn.setCursor(Cursor.HAND);
         lineOnSignIn.setCursor(Cursor.HAND);
@@ -240,6 +257,7 @@ public class LogInPageController implements Initializable {
         imageOnStorage.setEffect(null);
     }
 
+
     /**
      * Sign in button, if the correct username and its corresponding password have been used then head
      * straight to the next page. Otherwise, sign up for a new user or renter the password
@@ -313,6 +331,18 @@ public class LogInPageController implements Initializable {
         	}
     	}
         return index;
+    }
+
+    @FXML
+    private void onSignUpAction(){
+        confirmDialog.setVisible(true);
+        confirmDialog.setPickOnBounds(true);
+    }
+    @FXML
+    private void onCloseConfirmDialog(){
+        confirmDialog.setVisible(false);
+        confirmDialog.setPickOnBounds(false);
+
     }
 
 }

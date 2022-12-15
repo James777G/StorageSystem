@@ -10,6 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
@@ -22,7 +23,7 @@
                   <Font name="System Bold" size="40.0" />
                </font>
             </Label>
-            <JFXButton layoutX="219.0" layoutY="515.0" prefHeight="42.0" prefWidth="186.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Sign up" textFill="WHITE" AnchorPane.bottomAnchor="160.0" AnchorPane.leftAnchor="219.0">
+            <JFXButton layoutX="219.0" layoutY="515.0" onAction="#onSignUpAction" prefHeight="42.0" prefWidth="186.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Sign up" textFill="WHITE" AnchorPane.bottomAnchor="160.0" AnchorPane.leftAnchor="219.0">
                <font>
                   <Font size="21.0" />
                </font>
@@ -121,9 +122,14 @@
                   <Image url="@../image/icons8-brake-warning-100.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="confirmDialogIcon" fitHeight="30.0" fitWidth="30.0" layoutX="200.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-confirm-100.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
-      <MFXGenericDialog fx:id="errorDialog" alwaysOnTop="true" contentText="Your Have Entered Incorrect Username and Password&#10;&#10;Please Check and Sign In Again.&#10;" headerText="Error" layoutX="400.0" layoutY="240.0" onClose="#onCloseErrorDialog" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false" styleClass="errorMessageDialog" stylesheets="@../css/logInPage.css">
+      <MFXGenericDialog fx:id="errorDialog" alwaysOnTop="true" contentText="Your Have Entered Incorrect Username and Password&#10;&#10;Please Check and Sign In Again.&#10;" headerText="Error" layoutX="400.0" layoutY="240.0" onClose="#onCloseErrorDialog" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false" styleClass="errorMessageDialog">
          <center>
             <Label alignment="TOP_LEFT" prefHeight="127.0" prefWidth="378.0" text="You have entered incorrect username and password.&#10;&#10;*Please check and sign in again*&#10;" textFill="#514f4f" BorderPane.alignment="CENTER">
                <font>
@@ -131,5 +137,34 @@
                </font>
             </Label>
          </center></MFXGenericDialog>
+      <MFXGenericDialog fx:id="confirmDialog" headerText="Confirmation" layoutX="400.0" layoutY="230.0" onClose="#onCloseConfirmDialog" prefHeight="269.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false">
+         <center>
+            <Pane prefHeight="189.0" prefWidth="378.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="TOP_LEFT" layoutX="3.0" layoutY="9.0" prefHeight="58.0" prefWidth="370.0" text="Username:">
+                     <font>
+                        <Font name="Dubai Regular" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="TOP_LEFT" layoutX="3.0" layoutY="71.0" prefHeight="58.0" prefWidth="370.0" text="Password:">
+                     <font>
+                        <Font name="Dubai Regular" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="TOP_LEFT" layoutX="3.0" layoutY="129.0" prefHeight="58.0" prefWidth="370.0" text="Email Address:">
+                     <font>
+                        <Font name="Dubai Regular" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </center>
+         <bottom>
+            <JFXButton maxHeight="25.0" maxWidth="85.0" minHeight="25.0" minWidth="85.0" prefHeight="25.0" prefWidth="85.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Confirm" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></JFXButton>
+         </bottom>
+      </MFXGenericDialog>
    </children>
 </AnchorPane>

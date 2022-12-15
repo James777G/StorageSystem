@@ -23,7 +23,7 @@ import java.io.IOException;
  *
  */
 public class MyLauncher {
-	public static ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+	public static final ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		App.main(args);
