@@ -8,6 +8,8 @@ public interface VerificationCodeMapper {
     List<VerificationCode> selectAll();
     VerificationCode selectByUsername(String username);
 
+    void add(VerificationCode verificationCode);
+
 
 
 }

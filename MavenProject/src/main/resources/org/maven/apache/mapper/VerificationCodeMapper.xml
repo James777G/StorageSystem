@@ -5,6 +5,10 @@
 <!-- 这个文件的文件路径不要动-->
 <!-- 名称空间-->
 <mapper namespace="org.maven.apache.mapper.VerificationCodeMapper">
+    <insert id="add">
+        insert into codeTable(username, code)
+        values (#{username}, #{code});
+    </insert>
 
     <select id="selectAll" resultType="org.maven.apache.verificationCode.VerificationCode">
         select * from codeTable;
