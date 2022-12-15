@@ -56,10 +56,10 @@
                </image>
             </ImageView>
             <Line fx:id="lineOnSignIn" endX="65.33331298828125" layoutX="310.0" layoutY="640.0" opacity="0.4" startX="-69.3333740234375" stroke="#23242a" />
-            <MFXPasswordField floatingText="Password" layoutX="103.0" layoutY="410.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
-            <MFXTextField floatingText="Username" layoutX="103.0" layoutY="340.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
-            <MFXTextField floatingText="Email Address" layoutX="103.0" layoutY="270.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
-            <MFXTextField floatingText="Full Name" layoutX="103.0" layoutY="200.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
+            <MFXPasswordField fx:id="signUpPassword" floatingText="Password" layoutX="103.0" layoutY="410.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
+            <MFXTextField fx:id="signUpUserName" floatingText="Username" layoutX="103.0" layoutY="340.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
+            <MFXTextField fx:id="singUpEmailAddress" floatingText="Email Address" layoutX="103.0" layoutY="270.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
+            <MFXTextField fx:id="signUpFullName" floatingText="Full Name" layoutX="103.0" layoutY="200.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="signInPane" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-color: white;">
@@ -141,17 +141,17 @@
          <center>
             <Pane prefHeight="189.0" prefWidth="378.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label alignment="TOP_LEFT" layoutX="3.0" layoutY="9.0" prefHeight="58.0" prefWidth="370.0" text="Username:">
+                  <Label fx:id="confirmationUserName" alignment="TOP_LEFT" layoutX="3.0" layoutY="9.0" prefHeight="58.0" prefWidth="370.0" text="Username:">
                      <font>
                         <Font name="Dubai Regular" size="15.0" />
                      </font>
                   </Label>
-                  <Label alignment="TOP_LEFT" layoutX="3.0" layoutY="71.0" prefHeight="58.0" prefWidth="370.0" text="Password:">
+                  <Label fx:id="confirmationPassword" alignment="TOP_LEFT" layoutX="3.0" layoutY="71.0" prefHeight="58.0" prefWidth="370.0" text="Password:">
                      <font>
                         <Font name="Dubai Regular" size="15.0" />
                      </font>
                   </Label>
-                  <Label alignment="TOP_LEFT" layoutX="3.0" layoutY="129.0" prefHeight="58.0" prefWidth="370.0" text="Email Address:">
+                  <Label fx:id="confirmationEmailAddress" alignment="TOP_LEFT" layoutX="3.0" layoutY="129.0" prefHeight="58.0" prefWidth="370.0" text="Email Address:">
                      <font>
                         <Font name="Dubai Regular" size="15.0" />
                      </font>
