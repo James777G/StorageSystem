@@ -2,40 +2,27 @@ package org.maven.apache.controllers;
 
 
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
-import javafx.scene.effect.Effect;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
-import org.maven.apache.App;
-import org.maven.apache.service.user.UserService;
-import org.maven.apache.spring.SpringConfiguration;
-import org.maven.apache.user.User;
 import org.maven.apache.MyLauncher;
-import org.maven.apache.service.item.ItemService;
+import org.maven.apache.service.user.UserService;
+import org.maven.apache.user.User;
 import org.maven.apache.utils.TransitionUtils;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.scheduling.annotation.Async;
 
 import java.net.URL;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
 
 public class LogInPageController implements Initializable {
 
@@ -74,10 +61,10 @@ public class LogInPageController implements Initializable {
 
     @FXML
     private Label labelOnForgotPassword;
-    
+
     @FXML
     private MFXTextField userNameField;
-    
+
     @FXML
     private MFXTextField passwordField;
 
@@ -124,14 +111,14 @@ public class LogInPageController implements Initializable {
     /**
      * 执行异步操作 查询数据库 并留下缓存
      */
-    public void updateUserList(){
+    public void updateUserList() {
         UserService userService = MyLauncher.context.getBean("userService", UserService.class);
         ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
         threadPoolExecutor.execute(() -> userList = userService.selectAll());
     }
 
     @FXML
-    private void onExit(){
+    private void onExit() {
         Platform.exit();
         ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
         threadPoolExecutor.shutdown();
@@ -139,7 +126,7 @@ public class LogInPageController implements Initializable {
     }
 
     @FXML
-    private void onExit2(){
+    private void onExit2() {
         Platform.exit();
         ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
         threadPoolExecutor.shutdown();
@@ -147,60 +134,60 @@ public class LogInPageController implements Initializable {
     }
 
     @FXML
-    private void onEnterExitButton(){
+    private void onEnterExitButton() {
         exitButton.setScaleX(1.2);
         exitButton.setScaleY(1.2);
     }
 
     @FXML
-    private void onEnterExitButton2(){
+    private void onEnterExitButton2() {
         exitButton2.setScaleX(1.2);
         exitButton2.setScaleY(1.2);
     }
 
     @FXML
-    private void onLeaveExitButton2(){
+    private void onLeaveExitButton2() {
         exitButton2.setScaleX(1);
         exitButton2.setScaleY(1);
     }
 
     @FXML
-    private void onPressExitButton2(){
+    private void onPressExitButton2() {
         exitButton2.setScaleX(0.8);
         exitButton2.setScaleY(0.8);
     }
 
     @FXML
-    private void onReleaseExitButton2(){
+    private void onReleaseExitButton2() {
         exitButton2.setScaleX(1);
         exitButton2.setScaleY(1);
     }
 
     @FXML
-    private void onLeaveExitButton(){
+    private void onLeaveExitButton() {
         exitButton.setScaleX(1);
         exitButton.setScaleY(1);
     }
 
     @FXML
-    private void onPressExitButton(){
+    private void onPressExitButton() {
         exitButton.setScaleX(0.8);
         exitButton.setScaleY(0.8);
     }
 
     @FXML
-    private void onReleaseExitButton(){
+    private void onReleaseExitButton() {
         exitButton.setScaleX(1);
         exitButton.setScaleY(1);
     }
 
     @FXML
-    private void onSignUp(){
+    private void onSignUp() {
         setVisibility(signUpPane, signInPane);
     }
 
     @FXML
-    private void onSignIn(){
+    private void onSignIn() {
         setVisibility(signInPane, signUpPane);
 
     }
@@ -219,59 +206,59 @@ public class LogInPageController implements Initializable {
     }
 
     @FXML
-    private void onEnterForgotPassword(){
+    private void onEnterForgotPassword() {
         lineOnForgotPassword.setVisible(true);
     }
 
     @FXML
-    private void onExitForgotPassword(){
+    private void onExitForgotPassword() {
         lineOnForgotPassword.setVisible(false);
     }
 
     @FXML
-    private void onEnterLabelSignIn(){
+    private void onEnterLabelSignIn() {
         lineOnSignIn.setVisible(true);
     }
 
     @FXML
-    private void onExitLabelSignIn(){
+    private void onExitLabelSignIn() {
         lineOnSignIn.setVisible(false);
     }
 
     @FXML
-    private void onEnterLabelSignUp(){
+    private void onEnterLabelSignUp() {
         lineOnSignUp.setVisible(true);
     }
 
     @FXML
-    private void onExitLabelSignUp(){
+    private void onExitLabelSignUp() {
         lineOnSignUp.setVisible(false);
     }
 
     @FXML
-    private void onEnterLineOnForgotPassword(){
+    private void onEnterLineOnForgotPassword() {
         lineOnForgotPassword.setVisible(true);
     }
 
     @FXML
-    private void onExitLineOnForgotPassword(){
+    private void onExitLineOnForgotPassword() {
         lineOnForgotPassword.setVisible(false);
     }
 
     @FXML
-    private void onCloseErrorDialog(){
+    private void onCloseErrorDialog() {
         errorDialog.setVisible(false);
         errorDialog.setPickOnBounds(false);
     }
 
     @FXML
-    private void onEnterImage(){
+    private void onEnterImage() {
         Bloom bloom = new Bloom(0.2);
         imageOnStorage.setEffect(bloom);
     }
-    
+
     @FXML
-    private void onExitImage(){
+    private void onExitImage() {
         imageOnStorage.setEffect(null);
     }
 
@@ -281,77 +268,67 @@ public class LogInPageController implements Initializable {
      * straight to the next page. Otherwise, sign up for a new user or renter the password
      */
     @FXML
-    private void onSignInAction(){
+    private void onSignInAction() {
         //get the user list
         updateUserList();
-        int index = 0;
-        
-        
-        if (!isUserNameFound(userNameField.getText())) {
-        	//if the user does not exist, show sign up alert
-        	errorDialog.setVisible(true);
+        String username = userNameField.getText();
+        if (!isUserNameFound(username)) {
+            //if the user does not exist, show sign up alert
+            errorDialog.setVisible(true);
             errorDialog.setPickOnBounds(true);
             System.out.println("++++++++++++++++++++++++++++++++++++++");
-    		System.out.println("User does not exist");
-    		System.out.println("++++++++++++++++++++++++++++++++++++++");
-        }else {
-        	//if the user exists, check its verification (correct password)
-        	index = getUserIndex(userNameField.getText());
-        	if (userList.get(index).getPassword().equals(passwordField.getText())) {
-        		//head to the next page
-        		System.out.println("++++++++++++++++++++++++++++++++++++++");
-        		System.out.println("Congrats, you've signed in");
-        		System.out.println("++++++++++++++++++++++++++++++++++++++");
-        	}else {
-        		errorDialog.setVisible(true);
+            System.out.println("User does not exist");
+            System.out.println("++++++++++++++++++++++++++++++++++++++");
+        } else {
+            //if the user exists, check its verification (correct password)
+            if (getUserPassword(username).equals(passwordField.getText())) {
+                //head to the next page
+                System.out.println("++++++++++++++++++++++++++++++++++++++");
+                System.out.println("Congrats, you've signed in");
+                System.out.println("++++++++++++++++++++++++++++++++++++++");
+            } else {
+                errorDialog.setVisible(true);
                 errorDialog.setPickOnBounds(true);
                 System.out.println("++++++++++++++++++++++++++++++++++++++");
-        		System.out.println("Incorrect password");
-        		System.out.println("++++++++++++++++++++++++++++++++++++++");
-        	}
-        } 
+                System.out.println("Incorrect password");
+                System.out.println("++++++++++++++++++++++++++++++++++++++");
+            }
+        }
     }
-    
+
     /**
      * Find the existence of the input username
-     * 
-     * @param userName
+     *
+     * @param userName username from input
      * @return boolean
      */
     private boolean isUserNameFound(String userName) {
-        UserService userService = MyLauncher.context.getBean("userService", UserService.class);
-    	for (int i = 0; i < userList.size(); i++) {
-    		if (userList.get(i).getUsername().equals(userName)) {
-        		return true;
-        	}
-    	}
-    	return false;
+        return userList.stream()
+                .anyMatch(user -> user.getUsername().equals(userName));
     }
-    
+
     /**
      * get the index position of the specified user from the user list
-     * 
-     * @param userName
+     *
+     * @param userName username from input
      * @return index position
      */
-    private int getUserIndex(String userName) {
-        UserService userService = MyLauncher.context.getBean("userService", UserService.class);
-        int index = 0;
-        for (int i = 0; i < userList.size(); i++) {
-    		if (userList.get(i).getUsername().equals(userName)) {
-        		index = i;
-        	}
-    	}
-        return index;
+    private String getUserPassword(String userName) {
+        Optional<String> result = userList.stream()
+                .filter(user -> user.getUsername().equals(userName))
+                .map(User::getPassword)
+                .findFirst();
+        return result.orElse(null);
     }
 
     @FXML
-    private void onSignUpAction(){
+    private void onSignUpAction() {
         confirmDialog.setVisible(true);
         confirmDialog.setPickOnBounds(true);
     }
+
     @FXML
-    private void onCloseConfirmDialog(){
+    private void onCloseConfirmDialog() {
         confirmDialog.setVisible(false);
         confirmDialog.setPickOnBounds(false);
 

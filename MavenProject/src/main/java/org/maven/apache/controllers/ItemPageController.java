@@ -29,11 +29,8 @@ public class ItemPageController implements Initializable {
     @FXML
     private JFXTreeTableView<ItemFX> itemTable;
 
-    private ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+    private final ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
 
-
-    @FXML
-    private ImageView imageOnExit;
 
     private final JFXTreeTableColumn<ItemFX, String> idColumn = new JFXTreeTableColumn<>("ID");
 
@@ -41,7 +38,7 @@ public class ItemPageController implements Initializable {
 
     private final JFXTreeTableColumn<ItemFX, String> unitColumn = new JFXTreeTableColumn<>("Unit");
 
-    private ObservableList<ItemFX> items = FXCollections.observableArrayList();
+    private final ObservableList<ItemFX> items = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 public class MyBatisOperator {
 
-    private static ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+    private static final ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
 
     public static void closeSession(){
         context.getBean("sqlSession", SqlSession.class).close();

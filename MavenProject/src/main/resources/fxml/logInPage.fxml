@@ -166,7 +166,7 @@
                </font></JFXButton>
          </bottom>
       </MFXGenericDialog>
-      <MFXGenericDialog headerText="Verification Code" layoutX="400.0" layoutY="250.0">
+      <MFXGenericDialog headerText="Verification Code" layoutX="400.0" layoutY="250.0" opacity="0.26">
          <center>
             <MFXTextField floatMode="DISABLED" floatingText=" Code " prefHeight="49.0" prefWidth="292.0" promptText="( 6 digits code )" styleClass="inputFields" stylesheets="@../css/logInPage.css" BorderPane.alignment="CENTER">
                <font>
