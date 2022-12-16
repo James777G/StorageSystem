@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
 @ComponentScan(basePackages = "org.maven.apache.service")
-@Import({MyBatisAutoConfiguration.class, TransactionConfiguration.class, MailConfiguration.class})
+@Import({MyBatisAutoConfiguration.class, TransactionConfiguration.class, MailConfiguration.class, ThreadPoolConfiguration.class})
 public class SpringConfiguration {
 
 }

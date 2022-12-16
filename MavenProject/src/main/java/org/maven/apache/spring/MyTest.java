@@ -1,5 +1,6 @@
 package org.maven.apache.spring;
 
+import org.maven.apache.MyLauncher;
 import org.maven.apache.item.Item;
 import org.maven.apache.mapper.ItemMapper;
 import org.maven.apache.mapper.UserMapper;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 public class MyTest {
 
@@ -48,5 +50,14 @@ public class MyTest {
         List<User> users = userService.selectAll();
         System.out.println(users);
 
+    }
+
+    @Test
+    public void test4(){
+        ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
+
+        for(int i = 0; i < 14; i++){
+            threadPoolExecutor.execute(() -> System.out.println("123123"));
+        }
     }
 }

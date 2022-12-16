@@ -3,6 +3,7 @@ package org.maven.apache.mybatis.test;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 import ai.djl.Application;
 import org.apache.ibatis.session.SqlSession;
@@ -141,7 +142,6 @@ public class MyBatisTester2 {
 		System.out.println(code1);
 		List<VerificationCode> verificationCodes = verificationCodeService.selectAll();
 		System.out.println(verificationCodes);
-
 	}
 
 
