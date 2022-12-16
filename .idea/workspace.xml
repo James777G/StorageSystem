@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97de4d35-4a84-4e8f-ada4-e7f1d2cf29f5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-cardboard-box-100 (1).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-cargo-64.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-up-and-down-96.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-cardboard-box-100.png" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-cardboard-box-100.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-load-cargo-96.png" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-load-cargo-96.png" afterDir="false" />
-    </list>
+    <list default="true" id="97de4d35-4a84-4e8f-ada4-e7f1d2cf29f5" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

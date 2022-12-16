@@ -195,7 +195,7 @@
                   </ImageView>
                   <Label layoutX="258.0" layoutY="320.0" text="Warehouse " AnchorPane.leftAnchor="56.0" AnchorPane.topAnchor="320.0" />
                   <Label layoutX="258.0" layoutY="320.0" text="transactions" AnchorPane.leftAnchor="258.0" AnchorPane.topAnchor="320.0" />
-                  <MFXDatePicker layoutX="896.0" layoutY="96.0" prefHeight="38.0" prefWidth="89.0" AnchorPane.leftAnchor="900.0" AnchorPane.topAnchor="95.0" />
+                  <MFXDatePicker layoutX="874.0" layoutY="96.0" prefHeight="38.0" prefWidth="140.0" AnchorPane.leftAnchor="890.0" AnchorPane.topAnchor="95.0" />
                </children>
             </AnchorPane>
             <Label layoutX="136.0" layoutY="390.0" text="Monthly summary">
@@ -249,7 +249,7 @@
             <Separator layoutX="853.0" layoutY="446.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.leftAnchor="840.0" AnchorPane.topAnchor="450.0" />
             <Label layoutX="872.0" layoutY="405.0" />
             <PieChart layoutX="902.0" layoutY="463.0" prefHeight="175.0" prefWidth="205.0" title="pie chart" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="900.0" />
-            <MFXDatePicker layoutX="1004.0" layoutY="447.0" prefHeight="38.0" prefWidth="89.0" style="-fx-background-color: #eeeeee;" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="410.0" />
+            <MFXDatePicker layoutX="1004.0" layoutY="447.0" prefHeight="38.0" prefWidth="140.0" style="-fx-background-color: #eeeeee;" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="410.0" />
          </children>
       </AnchorPane>
    </children>
