@@ -33,6 +33,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 public class LogInPageController implements Initializable {
 
@@ -118,21 +121,28 @@ public class LogInPageController implements Initializable {
 
     }
 
-    @Async
+    /**
+     * 执行异步操作 查询数据库 并留下缓存
+     */
     public void updateUserList(){
         UserService userService = MyLauncher.context.getBean("userService", UserService.class);
-        userList = userService.selectAll();
+        ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
+        threadPoolExecutor.execute(() -> userList = userService.selectAll());
     }
 
     @FXML
     private void onExit(){
         Platform.exit();
+        ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
+        threadPoolExecutor.shutdown();
         System.exit(0);
     }
 
     @FXML
     private void onExit2(){
         Platform.exit();
+        ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
+        threadPoolExecutor.shutdown();
         System.exit(0);
     }
 
