@@ -1,19 +1,16 @@
-package org.maven.apache.mapper;
+package org.maven.apache.service.verificationCode;
 
 import org.maven.apache.verificationCode.VerificationCode;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
-public interface VerificationCodeMapper {
+public interface VerificationCodeService {
+
     List<VerificationCode> selectAll();
+
     VerificationCode selectByUsername(String username);
 
     void add(VerificationCode verificationCode);
 
     void deleteById(int id);
-
-
-
 }

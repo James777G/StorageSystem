@@ -3,17 +3,21 @@ package org.maven.apache.mybatis.test;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 import ai.djl.Application;
 import org.apache.ibatis.session.SqlSession;
+import org.maven.apache.MyLauncher;
 import org.maven.apache.item.Item;
 import org.maven.apache.mapper.ItemMapper;
 import org.maven.apache.mapper.UserMapper;
 import org.maven.apache.mybatis.MyBatisOperator;
 import org.maven.apache.search.FuzzySearch;
 import org.maven.apache.service.user.UserService;
+import org.maven.apache.service.verificationCode.VerificationCodeService;
 import org.maven.apache.spring.SpringConfiguration;
 import org.maven.apache.user.User;
+import org.maven.apache.verificationCode.VerificationCode;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.annotations.Test;
@@ -124,6 +128,20 @@ public class MyBatisTester2 {
 		user.setEmailAddress("hgon777@aucklanduni.ac.nz");
 		userService.update(user);
 
+	}
+
+	@Test
+	public void testVerificationCode(){
+		VerificationCodeService verificationCodeService = MyLauncher.context.getBean("verificationCodeService", VerificationCodeService.class);
+		VerificationCode code = new VerificationCode();
+		code.setUsername("1231232aab");
+		code.setCode(666999);
+		verificationCodeService.add(code);
+		verificationCodeService.deleteById(3);
+		VerificationCode code1 = verificationCodeService.selectByUsername("123123");
+		System.out.println(code1);
+		List<VerificationCode> verificationCodes = verificationCodeService.selectAll();
+		System.out.println(verificationCodes);
 	}
 
 

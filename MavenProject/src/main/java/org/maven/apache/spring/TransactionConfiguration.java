@@ -4,8 +4,10 @@ import javax.sql.DataSource;
 
 import org.maven.apache.mapper.ItemMapper;
 import org.maven.apache.mapper.UserMapper;
+import org.maven.apache.mapper.VerificationCodeMapper;
 import org.maven.apache.service.item.ItemServiceProvider;
 import org.maven.apache.service.user.UserServiceProvider;
+import org.maven.apache.service.verificationCode.VerificationCodeServiceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -27,6 +29,13 @@ public class TransactionConfiguration {
 		UserServiceProvider userService = new UserServiceProvider();
 		userService.setUserMapper(userMapper);
 		return userService;
+	}
+
+	@Bean
+	public VerificationCodeServiceProvider verificationCodeService(VerificationCodeMapper verificationCodeMapper){
+		VerificationCodeServiceProvider verificationCodeService = new VerificationCodeServiceProvider();
+		verificationCodeService.setVerificationCodeMapper(verificationCodeMapper);
+		return verificationCodeService;
 	}
 
 	@Bean
