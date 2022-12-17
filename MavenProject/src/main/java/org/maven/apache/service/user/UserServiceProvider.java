@@ -18,6 +18,13 @@ import java.util.List;
 @Component
 @Transactional
 public class UserServiceProvider implements UserService{
+    public UserMapper getUserMapper() {
+        return userMapper;
+    }
+
+    public void setUserMapper(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
     private UserMapper userMapper;
 

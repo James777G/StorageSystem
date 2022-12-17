@@ -22,10 +22,24 @@ import com.alibaba.druid.pool.DruidDataSource;
 @MapperScan(basePackages = "org.maven.apache.mapper")
 public class MyBatisAutoConfiguration {
 
-	// please change this name to your name when connecting to your local databases
-	// People with username "root" and password "" change to "Common"
-	// Otherwise "Kylyn", "Chauncey"
-	private static final String name = "JamesGong";
+
+    // please change this name to your name when connecting to your local databases
+    // People with username "root" and password "" change to "Common"
+    // Otherwise "Kylyn", "Chauncey"
+    private static final String name = "Common";
+
+    @Bean
+    public Properties properties(){
+        Properties properties = new Properties();
+        String propertiesLocation = "/spring/spring.properties";
+        InputStream inputStream = MyBatisAutoConfiguration.class.getResourceAsStream(propertiesLocation);
+        try {
+            properties.load(inputStream);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return properties;
+    }
 
 	@Bean
 	public Properties properties() {

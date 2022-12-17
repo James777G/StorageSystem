@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -38,7 +39,8 @@ public class App extends Application {
 	  @Override
 	  public void start(final Stage stage) throws IOException {
 		  
-	    final Scene scene = new Scene(loadFxml("logInPage"));
+	    final Scene scene = new Scene(loadFxml("appPage"));
+		scene.setFill(Color.TRANSPARENT);
 	    stage.setScene(scene);
 	    stage.initStyle(StageStyle.TRANSPARENT);
 	    stage.show();

@@ -153,10 +153,10 @@
         </dependency>
         <!-- JAVAX.MAIL -->
         <dependency>
-                <groupId>com.sun.mail</groupId>
-                <artifactId>javax.mail</artifactId>
-                <version>1.6.2</version>
-            </dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
         <!-- 使用读取CSV 文件用的Library-->
         <dependency>
             <groupId>com.opencsv</groupId>

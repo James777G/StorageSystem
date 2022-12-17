@@ -1,0 +1,20 @@
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectModuleManager\">\r\n    <modules>\r\n      <module fileurl=\"file://$PROJECT_DIR$/.idea/StorageSystem.iml\" filepath=\"$PROJECT_DIR$/.idea/StorageSystem.iml\" />\r\n    </modules>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+--- a/.idea/modules.xml	(revision 2586a18e10a3af8c04919e0c42b6b64193ccdaf8)
++++ b/.idea/modules.xml	(date 1671066782133)
+@@ -2,7 +2,7 @@
+ <project version="4">
+   <component name="ProjectModuleManager">
+     <modules>
+-      <module fileurl="file://$PROJECT_DIR$/.idea/StorageSystem.iml" filepath="$PROJECT_DIR$/.idea/StorageSystem.iml" />
++      <module fileurl="file://$PROJECT_DIR$/MavenProject/MavenProject.iml" filepath="$PROJECT_DIR$/MavenProject/MavenProject.iml" />
+     </modules>
+   </component>
+ </project>
+\ No newline at end of file
