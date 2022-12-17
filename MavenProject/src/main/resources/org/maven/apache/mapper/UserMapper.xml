@@ -27,7 +27,7 @@
         select *
         from UserTable
         where 1 = 1
-        <if test="name != null and name != '' ">
+        <if test="username != null and username != '' ">
             and username like #{UserName}
         </if>
     </select>
@@ -44,8 +44,8 @@
 
     <insert id="add" useGeneratedKeys="true" keyProperty="id">
 
-        insert into UserTable(name, username, password)
-        values (#{name},#{username},#{password});
+        insert into UserTable(name, username, password,emailAddress)
+        values (#{name},#{username},#{password},#{emailAddress});
 
     </insert>
 
@@ -54,10 +54,16 @@
         update UserTable
         <set>
             <if test="name != null and name !=''">
-                name = #{Name},
+                name = #{name},
             </if>
             <if test="username != null and username != ''">
-                username = #{username}
+                username = #{username},
+            </if>
+            <if test="emailAddress != null and emailAddress != ''">
+                emailAddress = #{emailAddress},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
             </if>
         </set>
         where id = #{id}

@@ -1,3 +1,4 @@
+
 package org.maven.apache.service.user;
 
 import lombok.AllArgsConstructor;
@@ -26,6 +27,14 @@ public class UserServiceProvider implements UserService{
     }
 
     private UserMapper userMapper;
+
+    public UserMapper getUserMapper() {
+        return userMapper;
+    }
+
+    public void setUserMapper(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
     /**
      * 查看所有

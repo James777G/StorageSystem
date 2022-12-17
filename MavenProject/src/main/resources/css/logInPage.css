@@ -1,28 +1,20 @@
-.text-field{
-    -fx-background-color: -fx-text-box-border, -fx-background;
-    -fx-text: Username;
-}
-
-.text-field {
-    -fx-background-insets: 0, 0 0 1 0 ;
-    -fx-background-radius: 0 ;
-}
-
-.text-field:focused {
-    -fx-background-color: -fx-focus-color, -fx-background;
-
-}
+@import "colors.css";
 
 .JFXButton{
-    -fx-background-color:  #23242a;
-    -fx-background-radius:  10;
-    -fx-text-fill: #ffffff;
+    -fx-background-color:  -darkGrey-theme;
+    -fx-background-radius: 10;
+    -fx-text-fill: -pure-white;
 }
 
 .JFXButton:hover {
-    -fx-background-color: #ffffff;
+    -fx-background-color: -pure-white;
     -fx-border-radius: 10;
-    -fx-border-color: #23242a;
-    -fx-text-fill: #23242a;
+    -fx-border-color: -darkGrey-theme;
+    -fx-text-fill: -darkGrey-theme;
+
+}
+
+.inputFields{
+    -mfx-main: -darkGrey-theme;
 }
 

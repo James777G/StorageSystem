@@ -1,34 +1,42 @@
 {
 	"folders": {},
 	"connections": {
-		"mysql8-1848eaea529-3293cb89baa1198f": {
+		"mysql8-1850f5af9e5-41a9c546f277fd41": {
 			"provider": "mysql",
 			"driver": "mysql8",
-			"name": "localhost",
+			"name": "localhost 2",
 			"save-password": true,
-			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "3306",
+				"url": "jdbc:mysql://localhost:3306/",
+				"home": "/usr/local/mysql-8.0.31-macos12-x86_64",
+				"type": "dev",
+				"auth-model": "native",
+				"handlers": {}
+			}
+		},
+		"mysql8-18514092a00-6bfc8f26febefb71": {
+			"provider": "mysql",
+			"driver": "mysql8",
+			"name": "localhost 2",
+			"save-password": true,
 			"configuration": {
 				"host": "localhost",
 				"port": "3306",
 				"url": "jdbc:mysql://localhost:3306/",
 				"home": "C:\\Program Files\\mysql-8.0.31-winx64",
 				"type": "dev",
-				"properties": {
-					"connectTimeout": "20000",
-					"rewriteBatchedStatements": "true",
-					"enabledTLSProtocols": "TLSv1,TLSv1.1,TLSv1.2",
-					"allowPublicKeyRetrieval": "true",
-					"useSSL": "false"
-				},
-				"auth-model": "native"
+				"auth-model": "native",
+				"handlers": {}
 			}
 		}
 	},
 	"connection-types": {
 		"dev": {
-			"name": "Development",
+			"name": "开发",
 			"color": "255,255,255",
-			"description": "Regular development database",
+			"description": "常规开发数据库",
 			"auto-commit": true,
 			"confirm-execute": false,
 			"confirm-data-change": false,
