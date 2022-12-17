@@ -10,7 +10,6 @@ public class MailServiceProvider implements MailService {
     private SimpleOrderManager orderManager;
 
     @Override
-    @Async
     public void sendEmail(String recipient, String verificationCode) {
         orderManager.placeOrder(recipient, message + " " + verificationCode);
     }
