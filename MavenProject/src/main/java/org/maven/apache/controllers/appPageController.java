@@ -38,7 +38,11 @@ public class appPageController implements Initializable {
     @FXML
     private ImageView transactionPageShiftImage;
     @FXML
-    private Button logOffButton;
+    private Button logOffButton1;
+    @FXML
+    private Button logOffButton11;
+    @FXML
+    private Button logOffButton12;
     /*
     * The FXML attributes under this line are only used for testing
     *
