@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-radius: 20; -fx-background-color: white; -fx-border-radius: 20; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-radius: 20; -fx-background-color: white; -fx-border-radius: 20; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.appPageController">
    <children>
       <AnchorPane opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="340.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="650.0" AnchorPane.topAnchor="10.0">
          <children>
@@ -85,7 +85,7 @@
                         <Image url="@../image/icons8-cardboard-box-100%20(1).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="785.0" layoutY="153.0" prefHeight="40.0" prefWidth="198.0" text="0" textFill="#64b7f6" AnchorPane.leftAnchor="785.0" AnchorPane.topAnchor="150.0">
+                  <Label fx:id="totalItemLabel" layoutX="785.0" layoutY="153.0" prefHeight="40.0" prefWidth="198.0" text="0" textFill="#64b7f6" AnchorPane.leftAnchor="785.0" AnchorPane.topAnchor="150.0">
                      <font>
                         <Font name="Lucida Sans Demibold Roman" size="27.0" />
                      </font>
@@ -120,13 +120,13 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="771.0" layoutY="263.0" prefHeight="20.0" prefWidth="89.0" text="0" AnchorPane.leftAnchor="765.0" AnchorPane.topAnchor="254.0">
+                  <Label fx:id="totalRestockLabel1" layoutX="771.0" layoutY="263.0" prefHeight="20.0" prefWidth="89.0" text="0" AnchorPane.leftAnchor="765.0" AnchorPane.topAnchor="254.0">
                      <font>
                         <Font name="Dubai Bold" size="20.0" />
                      </font>
                   </Label>
                   <AnchorPane prefHeight="700.0" prefWidth="65.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1115.0" AnchorPane.topAnchor="0.0" />
-                  <Label prefHeight="20.0" prefWidth="89.0" text="0" AnchorPane.leftAnchor="933.0" AnchorPane.topAnchor="254.0">
+                  <Label fx:id="totalShipmentLabel1" prefHeight="20.0" prefWidth="89.0" text="0" AnchorPane.leftAnchor="933.0" AnchorPane.topAnchor="254.0">
                      <font>
                         <Font name="Dubai Bold" size="20.0" />
                      </font>
@@ -136,12 +136,12 @@
                         <Font name="Dubai Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="74.0" layoutY="71.0" prefHeight="30.0" prefWidth="53.0" text="Name" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="75.0">
+                  <Label fx:id="usernameLabel" layoutX="74.0" layoutY="71.0" prefHeight="35.0" prefWidth="450.0" text="Name" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="75.0">
                      <font>
                         <Font name="Dubai Bold" size="20.0" />
                      </font>
                   </Label>
-                  <JFXButton layoutX="33.0" layoutY="114.0" prefHeight="35.0" prefWidth="93.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Log off" textFill="#262525" AnchorPane.leftAnchor="33.0" AnchorPane.topAnchor="114.0">
+                  <JFXButton fx:id="logOffButton" layoutX="33.0" layoutY="114.0" prefHeight="35.0" prefWidth="93.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Log off" textFill="#262525" AnchorPane.leftAnchor="33.0" AnchorPane.topAnchor="114.0">
                      <font>
                         <Font name="Dubai Bold" size="14.0" />
                      </font>
@@ -157,7 +157,7 @@
                   <MFXDatePicker layoutX="874.0" layoutY="96.0" prefHeight="38.0" prefWidth="140.0" AnchorPane.leftAnchor="890.0" AnchorPane.topAnchor="95.0" />
                   <Pane layoutX="38.0" layoutY="203.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #eeeeee; -fx-background-radius: 50; -fx-border-radius: 50;">
                      <children>
-                        <ImageView fitHeight="56.0" fitWidth="56.0" layoutX="22.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="warehousePageShiftImage" fitHeight="56.0" fitWidth="56.0" layoutX="22.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/icons8-cardboard-box-100.png" />
                            </image>
@@ -169,7 +169,7 @@
                   </Pane>
                   <Pane layoutX="240.0" layoutY="203.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #eeeeee; -fx-background-radius: 50; -fx-border-radius: 50;">
                      <children>
-                        <ImageView fitHeight="42.0" fitWidth="56.0" layoutX="28.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="transactionPageShiftImage" fitHeight="42.0" fitWidth="56.0" layoutX="28.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/icons8-up-and-down-96.png" />
                            </image>
@@ -181,7 +181,7 @@
                   </Pane>
                   <Pane layoutX="449.0" layoutY="201.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #eeeeee; -fx-background-radius: 50; -fx-border-radius: 50;">
                      <children>
-                        <ImageView fitHeight="42.0" fitWidth="56.0" layoutX="28.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="userPhotoImage" fitHeight="42.0" fitWidth="56.0" layoutX="28.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/icons8-user-64.png" />
                            </image>
@@ -221,19 +221,19 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="55.0" layoutY="56.0" prefHeight="20.0" prefWidth="89.0" text="00000" textFill="#8bc34a" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="53.0">
+                  <Label fx:id="totalRestockLabel2" layoutX="55.0" layoutY="56.0" prefHeight="20.0" prefWidth="89.0" text="00000" textFill="#8bc34a" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="53.0">
                      <font>
                         <Font name="Dubai Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="55.0" layoutY="153.0" prefHeight="20.0" prefWidth="89.0" text="00000" textFill="#ff4122" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="153.0">
+                  <Label fx:id="totalShipmentLabel2" layoutX="55.0" layoutY="153.0" prefHeight="20.0" prefWidth="89.0" text="00000" textFill="#ff4122" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="153.0">
                      <font>
                         <Font name="Dubai Bold" size="15.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
-            <BarChart layoutX="391.0" layoutY="446.0" prefHeight="200.0" prefWidth="414.0" AnchorPane.leftAnchor="380.0" AnchorPane.topAnchor="450.0">
+            <BarChart layoutX="391.0" layoutY="446.0" prefHeight="200.0" prefWidth="414.0" title="Bar Chart of Monthly Summary" AnchorPane.leftAnchor="380.0" AnchorPane.topAnchor="450.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -243,7 +243,7 @@
             </BarChart>
             <Separator layoutX="853.0" layoutY="446.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.leftAnchor="840.0" AnchorPane.topAnchor="450.0" />
             <Label layoutX="872.0" layoutY="405.0" />
-            <PieChart layoutX="902.0" layoutY="463.0" prefHeight="175.0" prefWidth="205.0" title="pie chart" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="900.0" />
+            <PieChart layoutX="902.0" layoutY="463.0" prefHeight="175.0" prefWidth="205.0" title="Monthly Summary %" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="900.0" />
             <MFXDatePicker layoutX="1004.0" layoutY="447.0" prefHeight="38.0" prefWidth="140.0" style="-fx-background-color: #eeeeee;" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="410.0" />
          </children>
          <effect>
