@@ -173,6 +173,18 @@
                         <DropShadow height="5.0" radius="2.0" width="5.0" />
                      </effect>
                   </Pane>
+                  <Pane layoutX="449.0" layoutY="201.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #eeeeee; -fx-background-radius: 50; -fx-border-radius: 50;">
+                     <children>
+                        <ImageView fitHeight="42.0" fitWidth="56.0" layoutX="28.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/icons8-user-64.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <effect>
+                        <DropShadow height="5.0" radius="2.0" width="5.0" />
+                     </effect>
+                  </Pane>
                </children>
             </AnchorPane>
             <Label layoutX="136.0" layoutY="390.0" text="Monthly summary">
