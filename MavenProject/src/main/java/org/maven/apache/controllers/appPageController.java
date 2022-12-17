@@ -53,7 +53,7 @@ public class appPageController implements Initializable {
     @FXML
     private  Button testButton1;
     private String username = "Anthony Feng";
-    private String getTotalItemNUmber(){
+    private int getTotalItemNumber(){
         // According to the itemtable,
         // sum = 3160 (10+20+30+50+100+40+45+45+150+150+200+70+100+500+1000+30+500+30+50+40=3160)
         int sum=0;
@@ -63,12 +63,12 @@ public class appPageController implements Initializable {
         for (Item item : items) {
             sum += item.getUnit();
         }
-        return String.valueOf(sum);
+        return sum;
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         usernameLabel.setText(username);
-        totalItemLabel.setText(this.getTotalItemNUmber());
+        totalItemLabel.setText(String.valueOf(this.getTotalItemNumber()));
     }
 
 }
