@@ -146,8 +146,14 @@
                         <Font name="Dubai Bold" size="14.0" />
                      </font>
                   </JFXButton>
-                  <Label layoutX="258.0" layoutY="320.0" text="Warehouse " AnchorPane.leftAnchor="56.0" AnchorPane.topAnchor="320.0" />
-                  <Label layoutX="258.0" layoutY="320.0" text="transactions" AnchorPane.leftAnchor="258.0" AnchorPane.topAnchor="320.0" />
+                  <Label layoutX="52.0" layoutY="321.0" text="Warehouse " AnchorPane.leftAnchor="52.0" AnchorPane.topAnchor="321.0">
+                     <font>
+                        <Font name="Lucida Sans Demibold Roman" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="258.0" layoutY="320.0" text="Transactions" AnchorPane.leftAnchor="258.0" AnchorPane.topAnchor="320.0">
+                     <font>
+                        <Font name="Lucida Sans Demibold Roman" size="12.0" />
+                     </font></Label>
                   <MFXDatePicker layoutX="874.0" layoutY="96.0" prefHeight="38.0" prefWidth="140.0" AnchorPane.leftAnchor="890.0" AnchorPane.topAnchor="95.0" />
                   <Pane layoutX="38.0" layoutY="203.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #eeeeee; -fx-background-radius: 50; -fx-border-radius: 50;">
                      <children>
