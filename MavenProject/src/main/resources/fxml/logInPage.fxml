@@ -58,7 +58,7 @@
             <Line fx:id="lineOnSignIn" endX="65.33331298828125" layoutX="310.0" layoutY="640.0" opacity="0.4" startX="-69.3333740234375" stroke="#23242a" />
             <MFXPasswordField fx:id="signUpPassword" floatingText="Password" layoutX="103.0" layoutY="410.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
             <MFXTextField fx:id="signUpUserName" floatingText="Username" layoutX="103.0" layoutY="340.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
-            <MFXTextField fx:id="singUpEmailAddress" floatingText="Email Address" layoutX="103.0" layoutY="270.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
+            <MFXTextField fx:id="signUpEmailAddress" floatingText="Email Address" layoutX="103.0" layoutY="270.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
             <MFXTextField fx:id="signUpFullName" floatingText="Full Name" layoutX="103.0" layoutY="200.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
          </children>
       </AnchorPane>
@@ -160,7 +160,7 @@
             </Pane>
          </center>
          <bottom>
-            <JFXButton maxHeight="25.0" maxWidth="85.0" minHeight="25.0" minWidth="85.0" prefHeight="25.0" prefWidth="85.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Confirm" BorderPane.alignment="CENTER">
+            <JFXButton fx:id="confimButton" maxHeight="25.0" maxWidth="85.0" minHeight="25.0" minWidth="85.0" onAction="#onConfirmationButton" prefHeight="25.0" prefWidth="85.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Confirm" BorderPane.alignment="CENTER">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></JFXButton>

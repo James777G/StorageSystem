@@ -1,5 +1,7 @@
 package org.maven.apache.spring;
 
+import java.util.List;
+
 import org.maven.apache.item.Item;
 import org.maven.apache.mapper.ItemMapper;
 import org.maven.apache.mapper.UserMapper;
@@ -10,43 +12,41 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 public class MyTest {
 
+	@Test
+	public void test1() {
+		ApplicationContext context = new AnnotationConfigApplicationContext(MyBatisAutoConfiguration.class);
+		ItemMapper itemMapper = (ItemMapper) (context.getBean("itemMapper"));
+		UserMapper userMapper = context.getBean("userMapper", UserMapper.class);
+		User user = userMapper.selectById(3);
+		User user2 = new User();
+		user2.setPassword("123123134");
+		user2.setUsername("Jerry2223333");
+		user2.setName("asd");
+		List<Item> items = itemMapper.selectAll();
+		userMapper.add(user2);
+		System.out.println(user);
+		System.out.println(items);
 
-    @Test
-    public void test1(){
-        ApplicationContext context = new AnnotationConfigApplicationContext(MyBatisAutoConfiguration.class);
-        ItemMapper itemMapper = (ItemMapper) (context.getBean("itemMapper"));
-        UserMapper userMapper = context.getBean("userMapper", UserMapper.class);
-        User user = userMapper.selectById(3);
-        User user2 = new User();
-        user2.setPassword("123123134");
-        user2.setUsername("Jerry2223333");
-        user2.setName("asd");
-        List<Item> items = itemMapper.selectAll();
-        userMapper.add(user2);
-        System.out.println(user);
-        System.out.println(items);
+	}
 
-    }
+	@Test
+	public void test2() {
+		ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+		ItemService itemService = context.getBean("itemService", ItemService.class);
+		List<Item> items = itemService.selectAll();
+		System.out.println(items);
 
-    @Test
-    public void test2(){
-        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
-        ItemService itemService = context.getBean("itemService", ItemService.class);
-        List<Item> items = itemService.selectAll();
-        System.out.println(items);
+	}
 
-    }
+	@Test
+	public void test3() {
+		ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+		UserService userService = context.getBean("userService", UserService.class);
 
-    @Test
-    public void test3(){
-        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
-        UserService userService = context.getBean("userService", UserService.class);
-        List<User> users = userService.selectAll();
-        System.out.println(users);
+		List<User> users = userService.selectAll();
+		System.out.println(users);
 
-    }
+	}
 }

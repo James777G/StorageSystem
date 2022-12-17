@@ -1,8 +1,12 @@
 package org.maven.apache.controllers;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import org.maven.apache.MyLauncher;
+import org.maven.apache.service.user.UserService;
+import org.maven.apache.user.User;
 import org.maven.apache.utils.TransitionUtils;
 
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
@@ -10,9 +14,13 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
 import javafx.scene.image.ImageView;
@@ -28,6 +36,8 @@ public class LogInPageController implements Initializable {
 	private String signUpUserNameString;
 
 	private String signUpPasswordString;
+
+	UserService userService = MyLauncher.context.getBean("userService", UserService.class);
 
 	@FXML
 	private ImageView exitButton;
@@ -81,10 +91,13 @@ public class LogInPageController implements Initializable {
 	private MFXTextField signUpFullName;
 
 	@FXML
-	private MFXTextField singUpEmailAddress;
+	private MFXTextField signUpEmailAddress;
 
 	@FXML
 	private MFXTextField signUpUserName;
+
+	@FXML
+	private Button confimButton;
 
 	@FXML
 	private Label confirmationUserName;
@@ -288,13 +301,49 @@ public class LogInPageController implements Initializable {
 		confirmDialog.setPickOnBounds(false);
 	}
 
+//the function for button confirmation 
+	@FXML
+	private void onConfirmationButton(ActionEvent event) {
+		if (checkExist()) {
+			Alert existAlert = new Alert(AlertType.WARNING);
+			existAlert.setTitle("Warning");
+			existAlert.setHeaderText("The username already exist");
+			existAlert.setContentText("Please change a user name");
+			existAlert.showAndWait();
+
+		} else {
+			User userSignUp = new User();
+			userSignUp.setName(getSignUpFullNameString());
+			userSignUp.setEmailAddress(getSignUpEmailAddressString());
+			userSignUp.setUsername(getSignUpUserNameString());
+			userSignUp.setPassword(getSignUpPasswordString());
+			userService.add(userSignUp);
+			// if user sign up successfully then would go back to the sign in scene
+			onCloseConfirmDialog();
+			setVisibility(signInPane, signUpPane);
+
+		}
+	}
+
+	// the fucntion for check whether the user already has an account based on
+	// username
+	private boolean checkExist() {
+		// UserServiceProvider userServiceProvider = new UserServiceProvider();
+		List<User> users = userService.selectByUsername(signUpUserNameString);
+		if (users.isEmpty()) {
+			return false;
+		}
+		return true;
+
+	}
+
 	public String getSignUpFullNameString() {
 		signUpFullNameString = signUpFullName.getText();
 		return signUpFullNameString;
 	}
 
 	public String getSignUpEmailAddressString() {
-		signUpEmailAddressString = singUpEmailAddress.getText();
+		signUpEmailAddressString = signUpEmailAddress.getText();
 		return signUpEmailAddressString;
 	}
 

@@ -44,8 +44,8 @@
 
     <insert id="add" useGeneratedKeys="true" keyProperty="id">
 
-        insert into UserTable(name, username, password)
-        values (#{name},#{username},#{password});
+        insert into UserTable(name, username, password,emailAddress)
+        values (#{name},#{username},#{password},#{emailAddress});
 
     </insert>
 
