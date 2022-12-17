@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import org.maven.apache.MyLauncher;
 import org.maven.apache.item.Item;
 import org.maven.apache.mapper.ItemMapper;
 import org.maven.apache.service.item.ItemService;
@@ -52,14 +53,22 @@ public class appPageController implements Initializable {
     @FXML
     private  Button testButton1;
     private String username = "Anthony Feng";
-    private int getTotalItemNUmber(){
-
-        return 0;
+    private String getTotalItemNUmber(){
+        // According to the itemtable,
+        // sum = 3160 (10+20+30+50+100+40+45+45+150+150+200+70+100+500+1000+30+500+30+50+40=3160)
+        int sum=0;
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+        ItemService itemService = context.getBean("itemService", ItemService.class);
+        List<Item> items = itemService.selectAll();
+        for (Item item : items) {
+            sum += item.getUnit();
+        }
+        return String.valueOf(sum);
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         usernameLabel.setText(username);
-
+        totalItemLabel.setText(this.getTotalItemNUmber());
     }
 
 }
