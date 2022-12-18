@@ -137,40 +137,40 @@
                      <font>
                         <Font name="Lucida Sans Demibold Roman" size="12.0" />
                      </font></Label>
-                  <Pane fx:id="warehouseButton" layoutX="38.0" layoutY="203.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #eeeeee; -fx-background-radius: 50; -fx-border-radius: 50;">
+                  <Pane fx:id="warehouseButton" layoutX="38.0" layoutY="203.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #23242a; -fx-background-radius: 50; -fx-border-radius: 50;">
                      <children>
                         <ImageView fx:id="warehousePageShiftImage" fitHeight="56.0" fitWidth="56.0" layoutX="22.0" layoutY="21.0" preserveRatio="true">
                            <image>
-                              <Image url="@../image/icons8-cardboard-box-100.png" />
+                              <Image url="@../image/icons8-3d-house-100.png" />
                            </image>
                         </ImageView>
                      </children>
                      <effect>
-                        <DropShadow height="5.0" radius="2.0" width="5.0" />
+                        <DropShadow height="10.0" radius="4.5" width="10.0" />
                      </effect>
                   </Pane>
-                  <Pane layoutX="240.0" layoutY="203.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #eeeeee; -fx-background-radius: 50; -fx-border-radius: 50;">
+                  <Pane layoutX="240.0" layoutY="203.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #23242a; -fx-background-radius: 50; -fx-border-radius: 50;">
                      <children>
-                        <ImageView fx:id="transactionPageShiftImage" fitHeight="42.0" fitWidth="56.0" layoutX="28.0" layoutY="28.0" preserveRatio="true">
+                        <ImageView fx:id="transactionPageShiftImage" fitHeight="56.0" fitWidth="51.0" layoutX="25.0" layoutY="19.0" preserveRatio="true">
                            <image>
-                              <Image url="@../image/icons8-up-and-down-96.png" />
+                              <Image url="@../image/icons8-cloud-backup-restore-100%20(1).png" />
                            </image>
                         </ImageView>
                      </children>
                      <effect>
-                        <DropShadow height="5.0" radius="2.0" width="5.0" />
+                        <DropShadow height="10.0" radius="4.5" width="10.0" />
                      </effect>
                   </Pane>
-                  <Pane layoutX="449.0" layoutY="204.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #eeeeee; -fx-background-radius: 50; -fx-border-radius: 50;">
+                  <Pane layoutX="449.0" layoutY="204.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #23242a; -fx-background-radius: 50; -fx-border-radius: 50;">
                      <children>
-                        <ImageView fx:id="userPhotoImage" fitHeight="42.0" fitWidth="56.0" layoutX="28.0" layoutY="28.0" preserveRatio="true">
+                        <ImageView fx:id="userPhotoImage" fitHeight="62.0" fitWidth="56.0" layoutX="22.0" layoutY="22.0" preserveRatio="true">
                            <image>
-                              <Image url="@../image/icons8-user-64.png" />
+                              <Image url="@../image/icons8-user-male-96.png" />
                            </image>
                         </ImageView>
                      </children>
                      <effect>
-                        <DropShadow height="5.0" radius="2.0" width="5.0" />
+                        <DropShadow height="10.0" radius="4.5" width="10.0" />
                      </effect>
                   </Pane>
                   <Label layoutX="473.0" layoutY="321.0" text="Workers">

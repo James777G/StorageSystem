@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutorService;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.service.user.UserService;
 import org.maven.apache.user.User;
+import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.TransitionUtils;
 
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
@@ -312,6 +313,7 @@ public class LogInPageController implements Initializable {
 		// get the user list
 		updateUserList();
 		String username = userNameField.getText();
+		User currentUser = getUser(username);
 		if (!isUserNameFound(username)) {
 			// if the user does not exist, show sign up alert
 			errorDialog.setVisible(true);
@@ -321,8 +323,9 @@ public class LogInPageController implements Initializable {
 			System.out.println("++++++++++++++++++++++++++++++++++++++");
 		} else {
 			// if the user exists, check its verification (correct password)
-			if (getUserPassword(username).equals(passwordField.getText())) {
+			if (currentUser.getPassword().equals(passwordField.getText())) {
 				// head to the next page
+				DataUtils.currentUser = currentUser;
 				System.out.println("++++++++++++++++++++++++++++++++++++++");
 				System.out.println("Congrats, you've signed in");
 				System.out.println("++++++++++++++++++++++++++++++++++++++");
@@ -352,9 +355,10 @@ public class LogInPageController implements Initializable {
 	 * @param userName username from input
 	 * @return index position
 	 */
-	private String getUserPassword(String userName) {
-		Optional<String> result = userList.stream().filter(user -> user.getUsername().equals(userName))
-				.map(User::getPassword).findFirst();
+	private User getUser(String userName) {
+		Optional<User> result = userList.stream()
+				.filter(user -> user.getUsername().equals(userName))
+				.findFirst();
 		return result.orElse(null);
 	}
 
