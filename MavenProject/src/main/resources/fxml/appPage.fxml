@@ -15,56 +15,13 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-radius: 20; -fx-background-color: white; -fx-border-radius: 20; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.appPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-radius: 20; -fx-background-color: white; -fx-border-radius: 20; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.appPageController">
    <children>
-      <AnchorPane opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="340.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="650.0" AnchorPane.topAnchor="10.0">
-         <children>
-            <Label layoutX="30.0" layoutY="88.0" text="My details" textFill="#23242a" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="88.0">
-               <font>
-                  <Font name="Dubai Bold" size="20.0" />
-               </font>
-            </Label>
-            <Label layoutX="30.0" layoutY="123.0" prefHeight="15.0" prefWidth="119.0" text="(full name)" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="123.0">
-               <font>
-                  <Font name="Dubai Bold" size="12.0" />
-               </font></Label>
-            <Label layoutX="30.0" layoutY="163.0" prefHeight="19.0" prefWidth="56.0" text="Staff ID" textFill="#23242a" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="163.0">
-               <font>
-                  <Font name="Dubai Bold" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="105.0" layoutY="163.0" prefHeight="19.0" prefWidth="135.0" text="00000000" textFill="#23242a" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="163.0">
-               <font>
-                  <Font name="Dubai Bold" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="30.0" layoutY="226.0" text="Email">
-               <font>
-                  <Font name="Dubai Bold" size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="30.0" layoutY="263.0" prefHeight="19.0" prefWidth="205.0" text="000000@*****.com" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="263.0">
-               <font>
-                  <Font name="Dubai Bold" size="14.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
-               <image>
-                  <Image url="@../image/icons8-back-arrow-64.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="700.0" prefWidth="1050.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="10.0">
-         <children>
-            <Label layoutX="44.0" layoutY="37.0" text="Label" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="286.0" layoutY="68.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 20; -fx-background-color: #eeeeee; -fx-border-radius: 20;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <AnchorPane layoutX="286.0" layoutY="68.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 20; -fx-background-color: #eeeeee; -fx-border-radius: 20;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
             <AnchorPane layoutX="273.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-radius: 20;" AnchorPane.bottomAnchor="330.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label layoutX="31.0" layoutY="17.0" text="Home" AnchorPane.leftAnchor="31.0" AnchorPane.topAnchor="17.0">
+                  <Label layoutX="31.0" layoutY="17.0" text="Home" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="17.0">
                      <font>
                         <Font name="Dubai Bold" size="12.0" />
                      </font></Label>
@@ -327,6 +284,58 @@
          <effect>
             <DropShadow height="7.0" radius="3.0" width="7.0" />
          </effect>
+      </AnchorPane>
+      <AnchorPane opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="340.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="650.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Label layoutX="30.0" layoutY="88.0" text="My details" textFill="#23242a" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="88.0">
+               <font>
+                  <Font name="Dubai Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="123.0" prefHeight="15.0" prefWidth="119.0" text="(full name)" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="123.0">
+               <font>
+                  <Font name="Dubai Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="30.0" layoutY="163.0" prefHeight="19.0" prefWidth="56.0" text="Staff ID" textFill="#23242a" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="163.0">
+               <font>
+                  <Font name="Dubai Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="105.0" layoutY="163.0" prefHeight="19.0" prefWidth="135.0" text="00000000" textFill="#23242a" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="163.0">
+               <font>
+                  <Font name="Dubai Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="226.0" text="Email">
+               <font>
+                  <Font name="Dubai Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="263.0" prefHeight="19.0" prefWidth="205.0" text="000000@*****.com" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="263.0">
+               <font>
+                  <Font name="Dubai Bold" size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+               <image>
+                  <Image url="@../image/icons8-back-arrow-64.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="700.0" prefWidth="1050.0" style="-fx-background-color: #eeeeee;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <AnchorPane layoutX="138.0" layoutY="52.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-region-border: 20;" AnchorPane.bottomAnchor="330.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label text="Warehouse" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="17.0">
+                     <font>
+                        <Font name="Dubai Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="119.0" layoutY="-52.0" orientation="VERTICAL" prefHeight="15.0" prefWidth="10.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="20.0" />
+               </children>
+            </AnchorPane>
+         </children>
       </AnchorPane>
       <AnchorPane layoutX="1.0" layoutY="10.0" prefHeight="700.0" prefWidth="71.0" style="-fx-background-color: white; -fx-border-color: #dddddd; -fx-background-radius: 20; -fx-border-radius: 20;" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="1120.0" AnchorPane.topAnchor="10.0">
          <children>
