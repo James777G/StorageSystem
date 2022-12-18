@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -17,7 +19,45 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-radius: 20; -fx-background-color: white; -fx-border-radius: 20; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.appPageController">
    <children>
-      <AnchorPane layoutX="286.0" layoutY="68.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 20; -fx-background-color: #eeeeee; -fx-border-radius: 20;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <AnchorPane opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="340.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="650.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Label layoutX="30.0" layoutY="88.0" text="My details" textFill="#23242a" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="88.0">
+               <font>
+                  <Font name="Dubai Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="123.0" prefHeight="15.0" prefWidth="119.0" text="(full name)" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="123.0">
+               <font>
+                  <Font name="Dubai Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="30.0" layoutY="163.0" prefHeight="19.0" prefWidth="56.0" text="Staff ID" textFill="#23242a" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="163.0">
+               <font>
+                  <Font name="Dubai Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="105.0" layoutY="163.0" prefHeight="19.0" prefWidth="135.0" text="00000000" textFill="#23242a" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="163.0">
+               <font>
+                  <Font name="Dubai Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="226.0" text="Email">
+               <font>
+                  <Font name="Dubai Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="263.0" prefHeight="19.0" prefWidth="205.0" text="000000@*****.com" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="263.0">
+               <font>
+                  <Font name="Dubai Bold" size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+               <image>
+                  <Image url="@../image/icons8-back-arrow-64.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="286.0" layoutY="68.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 20; -fx-background-color: #eeeeee; -fx-border-radius: 20;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
             <AnchorPane layoutX="273.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-radius: 20;" AnchorPane.bottomAnchor="330.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -285,58 +325,6 @@
             <DropShadow height="7.0" radius="3.0" width="7.0" />
          </effect>
       </AnchorPane>
-      <AnchorPane opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="340.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="650.0" AnchorPane.topAnchor="10.0">
-         <children>
-            <Label layoutX="30.0" layoutY="88.0" text="My details" textFill="#23242a" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="88.0">
-               <font>
-                  <Font name="Dubai Bold" size="20.0" />
-               </font>
-            </Label>
-            <Label layoutX="30.0" layoutY="123.0" prefHeight="15.0" prefWidth="119.0" text="(full name)" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="123.0">
-               <font>
-                  <Font name="Dubai Bold" size="12.0" />
-               </font></Label>
-            <Label layoutX="30.0" layoutY="163.0" prefHeight="19.0" prefWidth="56.0" text="Staff ID" textFill="#23242a" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="163.0">
-               <font>
-                  <Font name="Dubai Bold" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="105.0" layoutY="163.0" prefHeight="19.0" prefWidth="135.0" text="00000000" textFill="#23242a" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="163.0">
-               <font>
-                  <Font name="Dubai Bold" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="30.0" layoutY="226.0" text="Email">
-               <font>
-                  <Font name="Dubai Bold" size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="30.0" layoutY="263.0" prefHeight="19.0" prefWidth="205.0" text="000000@*****.com" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="263.0">
-               <font>
-                  <Font name="Dubai Bold" size="14.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
-               <image>
-                  <Image url="@../image/icons8-back-arrow-64.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="700.0" prefWidth="1050.0" style="-fx-background-color: #eeeeee;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-         <children>
-            <AnchorPane layoutX="138.0" layoutY="52.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-region-border: 20;" AnchorPane.bottomAnchor="330.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <Label text="Warehouse" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="17.0">
-                     <font>
-                        <Font name="Dubai Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Separator layoutX="119.0" layoutY="-52.0" orientation="VERTICAL" prefHeight="15.0" prefWidth="10.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="20.0" />
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
       <AnchorPane layoutX="1.0" layoutY="10.0" prefHeight="700.0" prefWidth="71.0" style="-fx-background-color: white; -fx-border-color: #dddddd; -fx-background-radius: 20; -fx-border-radius: 20;" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="1120.0" AnchorPane.topAnchor="10.0">
          <children>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="14.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="20.0">
@@ -364,6 +352,85 @@
                   <Image url="@../image/icons8-cardboard-box-100%20(1).png" />
                </image>
             </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="700.0" prefWidth="1050.0" style="-fx-background-color: #eeeeee;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <AnchorPane layoutX="138.0" layoutY="52.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-region-border: 20;" AnchorPane.bottomAnchor="330.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label text="Warehouse" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="17.0">
+                     <font>
+                        <Font name="Dubai Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="119.0" layoutY="-52.0" orientation="VERTICAL" prefHeight="15.0" prefWidth="10.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="20.0" />
+                  <Label layoutX="127.0" layoutY="21.0" text="Search product" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="17.0">
+                     <font>
+                        <Font name="Dubai Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <MFXTextField layoutX="110.0" layoutY="79.0" prefHeight="49.0" prefWidth="157.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="750.0" AnchorPane.topAnchor="85.0" />
+                  <Label layoutX="60.0" layoutY="96.0" text="Product ID :" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="940.0" AnchorPane.topAnchor="95.0">
+                     <font>
+                        <Font name="Dubai Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="30.0" layoutY="171.0" text="Brand Name :" AnchorPane.rightAnchor="940.0" AnchorPane.topAnchor="165.0">
+                     <font>
+                        <Font name="Dubai Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <MFXTextField layoutX="121.0" layoutY="160.0" prefHeight="49.0" prefWidth="157.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="750.0" AnchorPane.topAnchor="155.0" />
+                  <Label layoutX="60.0" layoutY="242.0" text="Product Name :" AnchorPane.rightAnchor="940.0" AnchorPane.topAnchor="235.0">
+                     <font>
+                        <Font name="Dubai Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <MFXTextField layoutX="120.0" layoutY="240.0" prefHeight="49.0" prefWidth="157.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="750.0" AnchorPane.topAnchor="225.0" />
+                  <Label layoutX="415.0" layoutY="98.0" text="Status :" AnchorPane.rightAnchor="640.0" AnchorPane.topAnchor="95.0">
+                     <font>
+                        <Font name="Dubai Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="367.0" layoutY="180.0" text="Price :" AnchorPane.rightAnchor="640.0" AnchorPane.topAnchor="165.0">
+                     <font>
+                        <Font name="Dubai Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <MFXTextField layoutX="430.0" layoutY="155.0" prefHeight="49.0" prefWidth="170.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="155.0" />
+                  <MFXComboBox layoutX="430.0" layoutY="89.0" prefHeight="40.0" prefWidth="170.0" />
+                  <ImageView fitHeight="189.0" fitWidth="189.0" layoutX="636.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-cardboard-box-100.png" />
+                     </image>
+                  </ImageView>
+                  <JFXButton layoutX="846.0" layoutY="155.0" prefHeight="38.0" prefWidth="67.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Add" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="200.0">
+                     <font>
+                        <Font name="Dubai Bold" size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="787.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="790.0" AnchorPane.topAnchor="200.0">
+                     <image>
+                        <Image url="@../image/icons8-camera-100.png" />
+                     </image>
+                  </ImageView>
+                  <JFXButton layoutX="943.0" layoutY="154.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Update" AnchorPane.leftAnchor="950.0" AnchorPane.topAnchor="200.0">
+                     <font>
+                        <Font name="Dubai Bold" size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton layoutX="853.0" layoutY="220.0" prefHeight="38.0" prefWidth="67.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Clear" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="250.0">
+                     <font>
+                        <Font name="Dubai Bold" size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton layoutX="943.0" layoutY="250.0" prefHeight="38.0" prefWidth="67.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Delete" AnchorPane.leftAnchor="950.0" AnchorPane.topAnchor="250.0">
+                     <font>
+                        <Font name="Dubai Bold" size="15.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>
