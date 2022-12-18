@@ -17,7 +17,7 @@ public class MailAspect {
         ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
         threadPoolExecutor.execute(() -> {
             try {
-                Object proceed = joinPoint.proceed();
+                joinPoint.proceed();
             } catch (Throwable e) {
                 throw new RuntimeException(e);
             }
