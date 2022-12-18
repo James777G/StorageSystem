@@ -178,7 +178,7 @@
                         <Font name="Lucida Sans Demibold Roman" size="12.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="logOffButton12" buttonType="RAISED" layoutX="24.0" layoutY="130.0" prefHeight="35.0" prefWidth="100.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Log Off" textFill="#262525">
+                  <JFXButton fx:id="logOffButton12" buttonType="RAISED" layoutX="566.0" layoutY="61.0" prefHeight="35.0" prefWidth="100.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Log Off" textFill="#262525">
                      <font>
                         <Font name="Lucida Sans Demibold Roman" size="14.0" />
                      </font>
@@ -189,6 +189,11 @@
                         <Image url="@../image/icons8-settings-384.png" />
                      </image>
                   </ImageView>
+                  <Label fx:id="usernameLabel1" layoutX="34.0" layoutY="126.0" prefHeight="35.0" prefWidth="149.0" text="Explore new:">
+                     <font>
+                        <Font name="Lucida Sans Demibold Italic" size="20.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <Label layoutX="118.0" layoutY="403.0" text="Monthly summary">
