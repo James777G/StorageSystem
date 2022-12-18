@@ -78,7 +78,7 @@
                         <Font name="Lucida Sans Demibold Roman" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="totalItemLabel" layoutX="730.0" layoutY="145.0" prefHeight="40.0" prefWidth="198.0" text="0" textFill="#065c8f" AnchorPane.leftAnchor="730.0" AnchorPane.topAnchor="145.0">
+                  <Label fx:id="totalItemLabel" layoutX="765.0" layoutY="141.0" prefHeight="40.0" prefWidth="198.0" text="0" AnchorPane.leftAnchor="765.0" AnchorPane.topAnchor="141.0">
                      <font>
                         <Font name="Lucida Sans Demibold Roman" size="27.0" />
                      </font>
@@ -194,6 +194,11 @@
                         <Font name="Lucida Sans Demibold Italic" size="20.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="40.0" fitWidth="41.0" layoutX="720.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-calculator-96.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <Label layoutX="118.0" layoutY="403.0" text="Monthly summary">
@@ -306,13 +311,13 @@
             </Pane>
             <LineChart fx:id="lineChart" layoutX="332.0" layoutY="435.0" legendSide="TOP" prefHeight="239.0" prefWidth="440.0" stylesheets="@../css/app.css">
               <xAxis>
-                <CategoryAxis prefHeight="14.0" prefWidth="351.0" side="BOTTOM" styleClass="categoryAxis" stylesheets="@../css/app.css">
+                <CategoryAxis fx:id="categoryAxis" prefHeight="14.0" prefWidth="351.0" side="BOTTOM" styleClass="categoryAxis" stylesheets="@../css/app.css">
                      <tickLabelFont>
                         <Font name="System Bold" size="10.0" />
                      </tickLabelFont></CategoryAxis>
               </xAxis>
               <yAxis>
-                <NumberAxis prefHeight="192.0" prefWidth="18.0" side="TOP" styleClass="categoryAxis" stylesheets="@../css/app.css" tickLength="10.0">
+                <NumberAxis fx:id="numberAxis" prefHeight="192.0" prefWidth="18.0" side="TOP" tickLength="10.0">
                      <tickLabelFont>
                         <Font name="Bank Gothic Light BT" size="10.0" />
                      </tickLabelFont></NumberAxis>

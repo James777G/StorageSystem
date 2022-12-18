@@ -52,10 +52,10 @@ public class appPageController implements Initializable {
     private Pane warehouseButton;
 
     @FXML
-    private NumberAxis N;
+    private NumberAxis numberAxis;
 
     @FXML
-    private CategoryAxis C;
+    private CategoryAxis categoryAxis;
     /*
     * The FXML attributes under this line are only used for testing
     *
