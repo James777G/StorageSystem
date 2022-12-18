@@ -10,6 +10,7 @@ import org.maven.apache.item.Item;
 import org.maven.apache.mapper.ItemMapper;
 import org.maven.apache.mapper.UserMapper;
 import org.maven.apache.service.item.ItemService;
+import org.maven.apache.service.mail.MailService;
 import org.maven.apache.service.user.UserService;
 import org.maven.apache.user.User;
 import org.springframework.context.ApplicationContext;
@@ -65,6 +66,19 @@ public class MyTest {
         for(int i = 0; i < 14; i++){
             threadPoolExecutor.execute(() -> System.out.println("123123"));
         }
+    }
+
+    @Test
+    public void test5() throws InterruptedException {
+        MailService mailService = MyLauncher.context.getBean("mailService", MailService.class);
+        mailService.sendEmail("jamesgong0719@gmail.com", "123456999");
+        System.out.println("woshisheiasd");
+        System.out.println("woshisheiasd");
+        System.out.println("woshisheiasd");
+        System.out.println("woshisheiasd");
+        System.out.println("woshisheiasd");
+        System.out.println("woshisheiasd");
+        Thread.sleep(5000);
     }
 
 }
