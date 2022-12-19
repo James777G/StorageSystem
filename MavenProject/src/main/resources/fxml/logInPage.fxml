@@ -4,13 +4,16 @@
 <?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
@@ -166,24 +169,55 @@
                </font></JFXButton>
          </bottom>
       </MFXGenericDialog>
-      <MFXGenericDialog fx:id="verificationDialog" headerText="Verification Code" layoutX="400.0" layoutY="250.0" maxHeight="200.0" maxWidth="500.0" onClose="#onCloseVerificationDialog" prefHeight="400.0" prefWidth="500.0">
-         <bottom>
-            <JFXButton onAction="#onSendVerificationCode" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="send" BorderPane.alignment="CENTER" />
-         </bottom>
+      <MFXGenericDialog fx:id="verificationDialog" headerText="Verification Code" layoutX="400.0" layoutY="250.0" maxHeight="246.0" maxWidth="500.0" onClose="#onCloseVerificationDialog" prefHeight="246.0" prefWidth="400.0">
          <center>
-            <MFXTextField floatMode="DISABLED" prefHeight="49.0" prefWidth="277.0" promptText="( 6 digits code )" styleClass="inputFields" stylesheets="@../css/logInPage.css" BorderPane.alignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </MFXTextField>
+            <VBox prefHeight="129.0" prefWidth="378.0" BorderPane.alignment="CENTER">
+               <padding>
+                  <Insets bottom="20.0" left="50.0" right="50.0" top="20.0" />
+               </padding>
+               <children>
+                  <MFXTextField fx:id="verificationUsername" floatMode="DISABLED" minHeight="35.0" prefHeight="33.0" prefWidth="261.0" promptText="( Username )">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+                     </VBox.margin>
+                  </MFXTextField>
+                  <MFXTextField floatMode="DISABLED" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" prefWidth="261.0" promptText="( 6 digits code )" styleClass="inputFields" stylesheets="@../css/logInPage.css">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+                     </VBox.margin>
+                  </MFXTextField>
+                  <HBox prefHeight="49.0" prefWidth="256.0">
+                     <children>
+                        <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onSendVerificationCode" prefHeight="25.0" prefWidth="70.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Send">
+                           <HBox.margin>
+                              <Insets left="15.0" right="15.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Calibri Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" cancelButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onSendVerificationCode" prefHeight="25.0" prefWidth="70.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Confirm">
+                           <HBox.margin>
+                              <Insets left="90.0" right="10.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Calibri Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" top="15.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
          </center>
-         <left>
-            <MFXTextField fx:id="verificationUsername" minHeight="49.0" prefHeight="49.0" prefWidth="133.0" promptText="(usernmae)" BorderPane.alignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </MFXTextField>
-         </left>
       </MFXGenericDialog>
    </children>
 </AnchorPane>

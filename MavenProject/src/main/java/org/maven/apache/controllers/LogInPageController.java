@@ -35,23 +35,13 @@ import javafx.scene.shape.Line;
 
 public class LogInPageController implements Initializable {
 
-	private String signUpFullNameString;
-
-	private String signUpEmailAddressString;
-
 	private String signUpUserNameString;
 
-	private String signUpPasswordString;
-	
-	private String emailAddress;
-	
-	private int randNumber;
-	
 	private static volatile List<User> userList;
 
-	private UserService userService = MyLauncher.context.getBean("userService", UserService.class);
+	private final UserService userService = MyLauncher.context.getBean("userService", UserService.class);
 	
-	private MailService mailServiceProvider = MyLauncher.context.getBean("mailService", MailService.class);
+	private final MailService mailServiceProvider = MyLauncher.context.getBean("mailService", MailService.class);
 
 	@FXML
 	private AnchorPane signUpPane;
@@ -395,9 +385,9 @@ public class LogInPageController implements Initializable {
 	 */
 	@FXML
 	private void onSendVerificationCode() {
-		emailAddress = getUser(verificationUsername.getText()).getEmailAddress();
+		String emailAddress = getUser(verificationUsername.getText()).getEmailAddress();
 		Random rnd = new Random();
-		randNumber = rnd.nextInt(999999);
+		int randNumber = rnd.nextInt(999999);
 		mailServiceProvider.sendEmail(emailAddress, String.format("%06d", randNumber));
 	}
 	
@@ -451,23 +441,17 @@ public class LogInPageController implements Initializable {
 	// the fucntion for check whether the user already has an account based on
 	// username
 	private boolean checkExist() {
-		// UserServiceProvider userServiceProvider = new UserServiceProvider();
 		List<User> users = userService.selectByUsername(signUpUserNameString);
-		if (users.isEmpty()) {
-			return false;
-		}
-		return true;
+		return !users.isEmpty();
 
 	}
 
 	public String getSignUpFullNameString() {
-		signUpFullNameString = signUpFullName.getText();
-		return signUpFullNameString;
+		return signUpFullName.getText();
 	}
 
 	public String getSignUpEmailAddressString() {
-		signUpEmailAddressString = signUpEmailAddress.getText();
-		return signUpEmailAddressString;
+		return signUpEmailAddress.getText();
 	}
 
 	public String getSignUpUserNameString() {
@@ -476,8 +460,7 @@ public class LogInPageController implements Initializable {
 	}
 
 	public String getSignUpPasswordString() {
-		signUpPasswordString = signUpPassword.getText();
-		return signUpPasswordString;
+		return signUpPassword.getText();
 	}
 
 }
