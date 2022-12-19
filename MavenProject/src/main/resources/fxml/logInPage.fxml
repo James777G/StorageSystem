@@ -97,10 +97,10 @@
             </ImageView>
             <Label fx:id="labelOnSignUp" layoutX="835.0" layoutY="582.0" onMouseClicked="#onSignUp" onMouseEntered="#onEnterLabelSignUp" onMouseExited="#onExitLabelSignUp" text="Do not have an account?" AnchorPane.bottomAnchor="120.66666666666663" />
             <Separator layoutX="801.0" layoutY="568.0" prefWidth="200.0" AnchorPane.bottomAnchor="150.0" />
-            <Line fx:id="lineOnSignUp" endX="75.0" endY="0.33331298828125" layoutX="906.0" layoutY="599.0" opacity="0.4" startX="-72.0" stroke="#23242a" style="-fx-fill: #23242a;" />
+            <Line fx:id="lineOnSignUp" endX="61.0" endY="0.33331298828125" layoutX="906.0" layoutY="599.0" opacity="0.4" startX="-72.0" stroke="#23242a" style="-fx-fill: #23242a;" />
             <MFXTextField fx:id="userNameField" floatMode="BORDER" floatingText=" Username " layoutX="700.0" layoutY="250.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
             <MFXPasswordField fx:id="passwordField" floatMode="BORDER" floatingText=" Password " layoutX="700.0" layoutY="339.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
-            <Line fx:id="lineOnForgotPassword" endX="66.3333740234375" endY="0.33331298828125" layoutX="1049.0" layoutY="410.0" onMouseEntered="#onEnterLineOnForgotPassword" onMouseExited="#onExitLineOnForgotPassword" opacity="0.4" startX="-69.5" startY="1.0" />
+            <Line fx:id="lineOnForgotPassword" endX="66.3333740234375" endY="0.33331298828125" layoutX="1049.0" layoutY="410.0" onMouseEntered="#onEnterLineOnForgotPassword" onMouseExited="#onExitLineOnForgotPassword" opacity="0.4" startX="-55.0" startY="0.333343505859375" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="720.0" prefWidth="600.0" style="-fx-background-color: #23242a;">
@@ -176,7 +176,7 @@
                   <Insets bottom="20.0" left="50.0" right="50.0" top="20.0" />
                </padding>
                <children>
-                  <MFXTextField fx:id="verificationUsername" floatMode="DISABLED" minHeight="35.0" prefHeight="33.0" prefWidth="261.0" promptText="( Username )">
+                  <MFXTextField fx:id="verificationUsername" floatMode="DISABLED" minHeight="35.0" prefHeight="33.0" prefWidth="261.0" promptText="( Username )" styleClass="inputFields" stylesheets="@../css/logInPage.css">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
