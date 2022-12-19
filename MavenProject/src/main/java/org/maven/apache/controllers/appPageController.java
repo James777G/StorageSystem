@@ -9,17 +9,22 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.item.Item;
 import org.maven.apache.service.item.ItemService;
+import org.maven.apache.service.user.UserService;
+import org.maven.apache.user.User;
+import org.maven.apache.utils.DataUtils;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class appPageController implements Initializable {
+    User user = DataUtils.currentUser;
     @FXML
     private Label totalItemLabel;
     @FXML
@@ -39,15 +44,15 @@ public class appPageController implements Initializable {
     @FXML
     private ImageView transactionPageShiftImage;
     @FXML
+    private ImageView refreshImage;
+    @FXML
     private Button logOffButton1;
     @FXML
     private Button logOffButton11;
     @FXML
     private Button logOffButton12;
-
     @FXML
     private LineChart<?, ?> lineChart;
-
     @FXML
     private Pane warehouseButton;
 
@@ -62,9 +67,18 @@ public class appPageController implements Initializable {
     * the variables declared under this line represents some user information passed from LogInPage
     * !!! ATTENTION: those variables need to be replaced
     * */
+    String refreshName="James Gong";
+    int refreshItemNumber = 1314;
     @FXML
     private  Button testButton1;
 
+    @FXML
+    private void refreshPage(){
+        usernameLabel.setText(refreshName);//Test only
+        //usernameLabel.setText(user.getName());
+        totalItemLabel.setText(String.valueOf(refreshItemNumber)); //Test only
+        // totalItemLabel.setText(String.valueOf(this.getTotalItemNumber()));
+    }
     private int getTotalItemNumber(){
         // According to the itemtable,
         // sum = 3160 (10+20+30+50+100+40+45+45+150+150+200+70+100+500+1000+30+500+30+50+40=3160)
@@ -78,8 +92,13 @@ public class appPageController implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String username = "Anthony Feng";
-        usernameLabel.setText(username);
+        String name = "Anthony Feng";
+        usernameLabel.setText(name);//Test only
+        /* This is the code in the final version but the current user in the Utils class has not been set
+         * so set up string name instead.
+         *
+         *usernameLabel.setText(user.getName());
+         */
         totalItemLabel.setText(String.valueOf(this.getTotalItemNumber()));
 
         XYChart.Series S = new XYChart.Series<>();
