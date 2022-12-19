@@ -3,10 +3,13 @@ package org.maven.apache.controllers;
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 
 import org.maven.apache.MyLauncher;
+import org.maven.apache.service.mail.MailService;
+import org.maven.apache.service.mail.MailServiceProvider;
 import org.maven.apache.service.user.UserService;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.DataUtils;
@@ -39,11 +42,16 @@ public class LogInPageController implements Initializable {
 	private String signUpUserNameString;
 
 	private String signUpPasswordString;
+	
+	private String emailAddress;
+	
+	private int randNumber;
+	
+	private static volatile List<User> userList;
 
-	UserService userService = MyLauncher.context.getBean("userService", UserService.class);
-
-	@FXML
-	private ImageView exitButton;
+	private UserService userService = MyLauncher.context.getBean("userService", UserService.class);
+	
+	private MailService mailServiceProvider = MyLauncher.context.getBean("mailService", MailService.class);
 
 	@FXML
 	private AnchorPane signUpPane;
@@ -53,64 +61,25 @@ public class LogInPageController implements Initializable {
 
 	@FXML
 	private ImageView exitButton2;
-
-	@FXML
-	private Label labelOnSignUp;
-
-	@FXML
-	private MFXGenericDialog confirmDialog;
-
-	@FXML
-	private Label labelOnSignIn;
-
-	@FXML
-	private Line lineOnSignIn;
-
-	@FXML
-	private Line lineOnSignUp;
-
-	@FXML
-	private ImageView imageOnStorage;
-
-	@FXML
-	private Line lineOnForgotPassword;
-
-	@FXML
-	private Label labelOnForgotPassword;
-
-	@FXML
-	private MFXTextField userNameField;
-
-	@FXML
-	private MFXTextField passwordField;
-
-	@FXML
-	private MFXGenericDialog errorDialog;
-
+	
 	@FXML
 	private ImageView errorMessageIcon;
 
 	@FXML
 	private ImageView confirmDialogIcon;
-
-	private static volatile List<User> userList;
-
-	/////////
+	
 	@FXML
-	private MFXPasswordField signUpPassword;
-
+	private ImageView verificationDialogIcon;
+	
 	@FXML
-	private MFXTextField signUpFullName;
-
+	private ImageView exitButton;
+	
 	@FXML
-	private MFXTextField signUpEmailAddress;
+	private ImageView imageOnStorage;
 
 	@FXML
-	private MFXTextField signUpUserName;
-
-	@FXML
-	private Button confimButton;
-
+	private Label labelOnSignUp;
+	
 	@FXML
 	private Label confirmationUserName;
 
@@ -119,6 +88,55 @@ public class LogInPageController implements Initializable {
 
 	@FXML
 	private Label confirmationEmailAddress;
+	
+	@FXML
+	private Label labelOnSignIn;
+	
+	@FXML
+	private Label labelOnForgotPassword;
+
+	@FXML
+	private Line lineOnSignIn;
+
+	@FXML
+	private Line lineOnSignUp;
+
+	@FXML
+	private Line lineOnForgotPassword;
+
+	@FXML
+	private MFXTextField userNameField;
+
+	@FXML
+	private MFXTextField passwordField;
+	
+	@FXML
+	private MFXTextField signUpFullName;
+
+	@FXML
+	private MFXTextField signUpEmailAddress;
+
+	@FXML
+	private MFXTextField signUpUserName;
+	
+	@FXML
+	private MFXTextField verificationUsername;
+
+	@FXML
+	private MFXGenericDialog errorDialog;
+	
+	@FXML
+	private MFXGenericDialog verificationDialog;
+	
+	@FXML
+	private MFXGenericDialog confirmDialog;
+
+	@FXML
+	private MFXPasswordField signUpPassword;
+
+	@FXML
+	private Button confimButton;
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -133,8 +151,12 @@ public class LogInPageController implements Initializable {
 		errorDialog.setPickOnBounds(false);
 		confirmDialog.setVisible(false);
 		confirmDialog.setOpacity(1);
-		confirmDialog.setHeaderIcon(confirmDialogIcon);
+		//confirmDialog.setHeaderIcon(confirmDialogIcon);
 		confirmDialog.setPickOnBounds(false);
+		verificationDialog.setVisible(false);
+		verificationDialog.setOpacity(1);
+		//verificationDialog.setHeaderIcon(verificationDialogIcon);
+		verificationDialog.setPickOnBounds(false);	
 		labelOnSignUp.setCursor(Cursor.HAND);
 		labelOnSignIn.setCursor(Cursor.HAND);
 		lineOnSignIn.setCursor(Cursor.HAND);
@@ -311,7 +333,7 @@ public class LogInPageController implements Initializable {
 	@FXML
 	private void onSignInAction() {
 		// get the user list
-		updateUserList();
+		updateUserList(); // can be changed to comment
 		String username = userNameField.getText();
 		User currentUser = getUser(username);
 		if (!isUserNameFound(username)) {
@@ -350,7 +372,7 @@ public class LogInPageController implements Initializable {
 	}
 
 	/**
-	 * get the index position of the specified user from the user list
+	 * get the user by searching by username
 	 *
 	 * @param userName username from input
 	 * @return index position
@@ -362,6 +384,30 @@ public class LogInPageController implements Initializable {
 		return result.orElse(null);
 	}
 
+	@FXML
+	private void onResetPassword() {
+		verificationDialog.setVisible(true);
+		verificationDialog.setPickOnBounds(true);
+	}
+	
+	/**
+	 * generate a random 6-bit number and send to the email
+	 */
+	@FXML
+	private void onSendVerificationCode() {
+		emailAddress = getUser(verificationUsername.getText()).getEmailAddress();
+		Random rnd = new Random();
+		randNumber = rnd.nextInt(999999);
+		mailServiceProvider.sendEmail(emailAddress, String.format("%06d", randNumber));
+	}
+	
+	
+	@FXML
+	private void onCloseVerificationDialog(){
+		verificationDialog.setVisible(false);
+		verificationDialog.setPickOnBounds(false);
+	}
+	
 	@FXML
 	private void onSignUpAction() {
 		confirmationUserName.setText("Username: " + getSignUpUserNameString());
