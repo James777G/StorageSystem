@@ -78,7 +78,7 @@ public class appPageController implements Initializable {
     @FXML
     private void refreshPage(){
 
-        RotateTransition rotate = RotationUtils.getRotationTransitionBy(refreshImage,500, RotationUtils.Direction.COUNTERCLOCKWISE,360);
+        RotateTransition rotate = RotationUtils.getRotationTransitionFromBy(refreshImage,500,0, RotationUtils.Direction.COUNTERCLOCKWISE,360);
         rotate.play();
         usernameLabel.setText(refreshName);//Test only
         //usernameLabel.setText(user.getName());
