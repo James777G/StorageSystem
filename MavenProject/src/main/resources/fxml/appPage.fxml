@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-radius: 20; -fx-background-color: white; -fx-border-radius: 20; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.appPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-radius: 20; -fx-background-color: white; -fx-border-radius: 20; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.appPageController">
    <children>
       <AnchorPane opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="340.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="650.0" AnchorPane.topAnchor="10.0">
          <children>
@@ -200,9 +200,9 @@
                         <Image url="@../image/icons8-calculator-96.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="refreshImage" fitHeight="30.0" fitWidth="30.0" layoutX="974.0" layoutY="29.0" onMouseClicked="#refreshPage" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="refreshImage" fitHeight="42.0" fitWidth="42.0" layoutX="970.0" layoutY="32.0" onMouseClicked="#refreshPage" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/Refresh-10.png" />
+                        <Image url="@../image/icons8-update-left-rotation-100.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
