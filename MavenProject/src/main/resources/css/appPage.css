@@ -1,0 +1,15 @@
+@import "colors.css";
+
+.JFXButton{
+    -fx-background-color:  -appPage-theme;
+    -fx-background-radius: 5;
+    -fx-text-fill: -pure-white;
+}
+
+.JFXButton:hover {
+    -fx-background-color: -pure-white;
+    -fx-border-radius: 5;
+    -fx-border-color: -appPage-theme;
+    -fx-text-fill: -appPage-theme;
+
+}
