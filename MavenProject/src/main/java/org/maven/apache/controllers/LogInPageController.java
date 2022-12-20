@@ -426,6 +426,7 @@ public class LogInPageController implements Initializable {
 			// TODO change the password in database
 			User userToBeResetPassword = getUser(verificationUsername.getText());
 			userToBeResetPassword.setPassword(newPassword);
+			userService.update(userToBeResetPassword);
 		} else {
 			Alert existAlert = new Alert(AlertType.WARNING);
 			existAlert.setTitle("Warning");

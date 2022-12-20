@@ -140,7 +140,7 @@
                </font>
             </Label>
          </center></MFXGenericDialog>
-      <MFXGenericDialog fx:id="confirmDialog" headerText="Confirmation" layoutX="400.0" layoutY="230.0" onClose="#onCloseConfirmDialog" opacity="0.0" prefHeight="269.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false">
+      <MFXGenericDialog fx:id="confirmDialog" headerText="Confirmation" layoutX="400.0" layoutY="230.0" onClose="#onCloseConfirmDialog" prefHeight="269.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false">
          <center>
             <Pane prefHeight="189.0" prefWidth="378.0" BorderPane.alignment="CENTER">
                <children>
@@ -169,7 +169,7 @@
                </font></JFXButton>
          </bottom>
       </MFXGenericDialog>
-      <MFXGenericDialog fx:id="verificationDialog" headerText="Verification Code" layoutX="400.0" layoutY="250.0" maxHeight="246.0" maxWidth="500.0" onClose="#onCloseVerificationDialog" prefHeight="246.0" prefWidth="400.0">
+      <MFXGenericDialog fx:id="verificationDialog" headerText="Verification Code" layoutX="400.0" layoutY="250.0" maxHeight="246.0" maxWidth="500.0" onClose="#onCloseVerificationDialog" opacity="0.0" prefHeight="246.0" prefWidth="400.0">
          <center>
             <VBox alignment="CENTER" prefHeight="237.0" prefWidth="378.0" BorderPane.alignment="CENTER">
                <padding>
