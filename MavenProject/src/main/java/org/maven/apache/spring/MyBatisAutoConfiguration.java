@@ -26,7 +26,7 @@ public class MyBatisAutoConfiguration {
     // please change this name to your name when connecting to your local databases
     // People with username "root" and password "" change to "Common"
     // Otherwise "Kylyn", "Chauncey"
-    private static final String name = "Common";
+    private static final String name = "JamesGong";
 
     @Bean
     public Properties properties(){

@@ -151,7 +151,6 @@ public class appPageController implements Initializable {
         S2.getData().add(new XYChart.Data<>("6", 12));
         S2.getData().add(new XYChart.Data<>("7", 17));
 
-        lineChart.getData().addAll(S, S1, S2);
     }
 
 }
