@@ -70,6 +70,9 @@ public class LogInPageController implements Initializable {
 
 	@FXML
 	private ImageView imageOnStorage;
+	
+	@FXML
+	private Label notificationLabel;
 
 	@FXML
 	private Label labelOnSignUp;
@@ -171,6 +174,7 @@ public class LogInPageController implements Initializable {
 		FadeTransition fadeTransition = TransitionUtils.getFadeTransition(imageOnStorage, 3000, 0, 1);
 		fadeTransition.play();
 		resetPasswordButton.setDisable(true);
+		notificationLabel.setVisible(false);
 	}
 
 	/**
@@ -338,13 +342,10 @@ public class LogInPageController implements Initializable {
 		updateUserList(); // can be changed to comment
 		String username = userNameField.getText();
 		User currentUser = getUser(username);
-		if (!isUserNameFound(username)) {
+		if (!isUsernameFound(username)) {
 			// if the user does not exist, show sign up alert
 			errorDialog.setVisible(true);
 			errorDialog.setPickOnBounds(true);
-			System.out.println("++++++++++++++++++++++++++++++++++++++");
-			System.out.println("User does not exist");
-			System.out.println("++++++++++++++++++++++++++++++++++++++");
 		} else {
 			// if the user exists, check its verification (correct password)
 			if (currentUser.getPassword().equals(passwordField.getText())) {
@@ -356,9 +357,6 @@ public class LogInPageController implements Initializable {
 			} else {
 				errorDialog.setVisible(true);
 				errorDialog.setPickOnBounds(true);
-				System.out.println("++++++++++++++++++++++++++++++++++++++");
-				System.out.println("Incorrect password");
-				System.out.println("++++++++++++++++++++++++++++++++++++++");
 			}
 		}
 	}
@@ -369,7 +367,7 @@ public class LogInPageController implements Initializable {
 	 * @param userName username from input
 	 * @return boolean
 	 */
-	private boolean isUserNameFound(String userName) {
+	private boolean isUsernameFound(String userName) {
 		return userList.stream().anyMatch(user -> user.getUsername().equals(userName));
 	}
 
@@ -395,12 +393,23 @@ public class LogInPageController implements Initializable {
 	 */
 	@FXML
 	private void onSendVerificationCode() {
-		String emailAddress = getUser(verificationUsername.getText()).getEmailAddress();
-		Random rnd = new Random();
-		int randNumber = rnd.nextInt(999999);
-		verificationCode = String.format("%06d", randNumber);
-		mailServiceProvider.sendEmail(emailAddress, verificationCode);
-		resetPasswordButton.setDisable(false);
+		String inputUsername = verificationUsername.getText();
+		if (isUsernameFound(inputUsername)) {
+			// if the username exists
+			String emailAddress = getUser(inputUsername).getEmailAddress();
+			Random rnd = new Random();
+			int randNumber = rnd.nextInt(999999);
+			verificationCode = String.format("%06d", randNumber);
+			mailServiceProvider.sendEmail(emailAddress, verificationCode);
+			resetPasswordButton.setDisable(false);
+			notificationLabel.setVisible(true);
+			notificationLabel.setText("Email has been sent");
+		}else {
+			// if the username does not exist
+			notificationLabel.setVisible(true);
+			notificationLabel.setText("User does not exist");
+		}
+		
 	}
 
 	/**
@@ -410,6 +419,7 @@ public class LogInPageController implements Initializable {
 	private void onCloseVerificationDialog() {
 		verificationDialog.setVisible(false);
 		verificationDialog.setPickOnBounds(false);
+		notificationLabel.setText("");
 	}
 
 	/**
@@ -419,19 +429,17 @@ public class LogInPageController implements Initializable {
 	private void onResetPassword() {
 		String newPassword = newPasswordField.getText();
 		String inputVerificationCode = verificationCodeField.getText();
-		if (inputVerificationCode.equals(verificationCode)) {
-			System.out.println("++++++++++++++++++++++++++++++++++++++");
-			System.out.println("Your password has been reset");
-			System.out.println("++++++++++++++++++++++++++++++++++++++");
-			// TODO change the password in database
+		if (inputVerificationCode.equals(verificationCode) && inputVerificationCode.length() > 5) {
+			// if the verification code is matched and new password length is at least 6 characters
 			User userToBeResetPassword = getUser(verificationUsername.getText());
 			userToBeResetPassword.setPassword(newPassword);
 			userService.update(userToBeResetPassword);
+			notificationLabel.setVisible(true);
+			notificationLabel.setText("Your password has been reset");
 		} else {
-			Alert existAlert = new Alert(AlertType.WARNING);
-			existAlert.setTitle("Warning");
-			existAlert.setContentText("Incorrect verification code");
-			existAlert.showAndWait();
+			// if the verification code is not matched
+			notificationLabel.setVisible(true);
+			notificationLabel.setText("Incorrect verification code");
 		}
 	}
 
