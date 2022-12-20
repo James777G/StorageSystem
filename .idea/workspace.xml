@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97de4d35-4a84-4e8f-ada4-e7f1d2cf29f5" name="Changes" comment="" />
+    <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/css/appPage.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage2.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-account-96 (2).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-cardboard-box-100 (2).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-mail-96.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-search-500.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-search-512 (1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-search-512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-settings-24 (1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-settings-384 (1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-sort-left-52.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-up-down-arrow-96 (1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-warehouse-100 (1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-warehouse-100.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/css/colors.css" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/css/colors.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -73,7 +91,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="97de4d35-4a84-4e8f-ada4-e7f1d2cf29f5" name="Changes" comment="" />
+      <changelist id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="" />
       <created>1669789273901</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
