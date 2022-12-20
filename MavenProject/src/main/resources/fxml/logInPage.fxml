@@ -58,7 +58,7 @@
                   <Image url="@../image/icons8-multiply-90.png" />
                </image>
             </ImageView>
-            <Line fx:id="lineOnSignIn" endX="65.33331298828125" layoutX="310.0" layoutY="640.0" opacity="0.4" startX="-69.3333740234375" stroke="#23242a" />
+            <Line fx:id="lineOnSignIn" endX="81.0" layoutX="310.0" layoutY="640.0" opacity="0.4" startX="-69.3333740234375" stroke="#23242a" />
             <MFXPasswordField fx:id="signUpPassword" floatingText="Password" layoutX="103.0" layoutY="410.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
             <MFXTextField fx:id="signUpUserName" floatingText="Username" layoutX="103.0" layoutY="340.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
             <MFXTextField fx:id="signUpEmailAddress" floatingText="Email Address" layoutX="103.0" layoutY="270.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
@@ -79,7 +79,7 @@
                   <Font size="21.0" />
                </font>
             </JFXButton>
-            <Label fx:id="labelOnForgotPassword" layoutX="994.0" layoutY="393.0" onMouseClicked="#onResetPassword" onMouseEntered="#onEnterForgotPassword" onMouseExited="#onExitForgotPassword" text="Forgot your password?" AnchorPane.rightAnchor="104.0" AnchorPane.topAnchor="393.0" />
+            <Label fx:id="labelOnForgotPassword" layoutX="994.0" layoutY="393.0" onMouseClicked="#onForgetPassword" onMouseEntered="#onEnterForgotPassword" onMouseExited="#onExitForgotPassword" text="Forgot your password?" AnchorPane.rightAnchor="104.0" AnchorPane.topAnchor="393.0" />
             <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="662.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="662.0" AnchorPane.rightAnchor="528.3333333333333">
                <image>
                   <Image url="@../image/icons8-user-96.png" />
@@ -97,10 +97,10 @@
             </ImageView>
             <Label fx:id="labelOnSignUp" layoutX="835.0" layoutY="582.0" onMouseClicked="#onSignUp" onMouseEntered="#onEnterLabelSignUp" onMouseExited="#onExitLabelSignUp" text="Do not have an account?" AnchorPane.bottomAnchor="120.66666666666663" />
             <Separator layoutX="801.0" layoutY="568.0" prefWidth="200.0" AnchorPane.bottomAnchor="150.0" />
-            <Line fx:id="lineOnSignUp" endX="61.0" endY="0.33331298828125" layoutX="906.0" layoutY="599.0" opacity="0.4" startX="-72.0" stroke="#23242a" style="-fx-fill: #23242a;" />
+            <Line fx:id="lineOnSignUp" endX="75.0" layoutX="906.0" layoutY="599.0" opacity="0.4" startX="-72.0" stroke="#23242a" style="-fx-fill: #23242a;" />
             <MFXTextField fx:id="userNameField" floatMode="BORDER" floatingText=" Username " layoutX="700.0" layoutY="250.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
             <MFXPasswordField fx:id="passwordField" floatMode="BORDER" floatingText=" Password " layoutX="700.0" layoutY="339.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
-            <Line fx:id="lineOnForgotPassword" endX="66.3333740234375" endY="0.33331298828125" layoutX="1049.0" layoutY="410.0" onMouseEntered="#onEnterLineOnForgotPassword" onMouseExited="#onExitLineOnForgotPassword" opacity="0.4" startX="-55.0" startY="0.333343505859375" />
+            <Line fx:id="lineOnForgotPassword" endX="66.3333740234375" endY="0.33331298828125" layoutX="1049.0" layoutY="410.0" onMouseEntered="#onEnterLineOnForgotPassword" onMouseExited="#onExitLineOnForgotPassword" opacity="0.4" startX="-69.5" startY="1.0" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="720.0" prefWidth="600.0" style="-fx-background-color: #23242a;">
@@ -139,8 +139,9 @@
                   <Font name="Dubai Regular" size="15.0" />
                </font>
             </Label>
-         </center></MFXGenericDialog>
-      <MFXGenericDialog fx:id="confirmDialog" headerText="Confirmation" layoutX="400.0" layoutY="230.0" onClose="#onCloseConfirmDialog" opacity="0.0" prefHeight="269.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false">
+         </center>
+      </MFXGenericDialog>
+      <MFXGenericDialog fx:id="confirmDialog" headerText="Confirmation" layoutX="400.0" layoutY="230.0" onClose="#onCloseConfirmDialog" prefHeight="260.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false">
          <center>
             <Pane prefHeight="189.0" prefWidth="378.0" BorderPane.alignment="CENTER">
                <children>
@@ -169,9 +170,9 @@
                </font></JFXButton>
          </bottom>
       </MFXGenericDialog>
-      <MFXGenericDialog fx:id="verificationDialog" headerText="Verification Code" layoutX="400.0" layoutY="250.0" maxHeight="246.0" maxWidth="500.0" onClose="#onCloseVerificationDialog" prefHeight="246.0" prefWidth="400.0">
+      <MFXGenericDialog fx:id="verificationDialog" headerText="Verification Code" layoutX="400.0" layoutY="230.0" maxHeight="310.0" maxWidth="500.0" onClose="#onCloseVerificationDialog" prefHeight="310.0" prefWidth="400.0">
          <center>
-            <VBox prefHeight="129.0" prefWidth="378.0" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" prefHeight="230.0" prefWidth="378.0" BorderPane.alignment="CENTER">
                <padding>
                   <Insets bottom="20.0" left="50.0" right="50.0" top="20.0" />
                </padding>
@@ -184,7 +185,12 @@
                         <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
                      </VBox.margin>
                   </MFXTextField>
-                  <MFXTextField floatMode="DISABLED" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" prefWidth="261.0" promptText="( 6 digits code )" styleClass="inputFields" stylesheets="@../css/logInPage.css">
+                  <MFXTextField fx:id="newPasswordField" minHeight="35.0" prefHeight="35.0" prefWidth="248.0" promptText="( New password )" styleClass="inputFields" stylesheets="@../css/logInPage.css">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </MFXTextField>
+                  <MFXTextField fx:id="verificationCodeField" floatMode="DISABLED" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" prefWidth="261.0" promptText="( 6 digits code )" styleClass="inputFields" stylesheets="@../css/logInPage.css">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -192,32 +198,35 @@
                         <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
                      </VBox.margin>
                   </MFXTextField>
-                  <HBox prefHeight="49.0" prefWidth="256.0">
-                     <children>
-                        <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onSendVerificationCode" prefHeight="25.0" prefWidth="70.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Send">
-                           <HBox.margin>
-                              <Insets left="15.0" right="15.0" />
-                           </HBox.margin>
-                           <font>
-                              <Font name="Calibri Bold" size="12.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton buttonType="RAISED" cancelButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onSendVerificationCode" prefHeight="25.0" prefWidth="70.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Confirm">
-                           <HBox.margin>
-                              <Insets left="90.0" right="10.0" />
-                           </HBox.margin>
-                           <font>
-                              <Font name="Calibri Bold" size="12.0" />
-                           </font>
-                        </JFXButton>
-                     </children>
-                     <padding>
-                        <Insets bottom="15.0" top="15.0" />
-                     </padding>
-                  </HBox>
+                  <Label fx:id="notificationLabel" prefHeight="34.0" prefWidth="211.0" text="Label" textAlignment="CENTER" textFill="RED" />
                </children>
             </VBox>
          </center>
+         <bottom>
+            <HBox maxWidth="200.0" prefHeight="49.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onSendVerificationCode" prefHeight="25.0" prefWidth="70.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Send">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="Calibri Bold" size="12.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="resetPasswordButton" buttonType="RAISED" cancelButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onResetPassword" prefHeight="25.0" prefWidth="70.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Confirm">
+                     <HBox.margin>
+                        <Insets left="90.0" right="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="Calibri Bold" size="12.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+               <padding>
+                  <Insets bottom="15.0" top="15.0" />
+               </padding>
+            </HBox>
+         </bottom>
       </MFXGenericDialog>
    </children>
 </AnchorPane>

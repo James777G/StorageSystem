@@ -1,25 +1,10 @@
 {
 	"folders": {},
 	"connections": {
-		"mysql8-1850f5af9e5-41a9c546f277fd41": {
+		"mysql8-1852d1350de-108ca49d7c9cdc0c": {
 			"provider": "mysql",
 			"driver": "mysql8",
-			"name": "localhost 2",
-			"save-password": true,
-			"configuration": {
-				"host": "localhost",
-				"port": "3306",
-				"url": "jdbc:mysql://localhost:3306/",
-				"home": "/usr/local/mysql-8.0.31-macos12-x86_64",
-				"type": "dev",
-				"auth-model": "native",
-				"handlers": {}
-			}
-		},
-		"mysql8-18514092a00-6bfc8f26febefb71": {
-			"provider": "mysql",
-			"driver": "mysql8",
-			"name": "localhost 2",
+			"name": "localhost",
 			"save-password": true,
 			"configuration": {
 				"host": "localhost",
