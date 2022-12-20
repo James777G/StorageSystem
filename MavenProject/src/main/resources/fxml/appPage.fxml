@@ -200,7 +200,8 @@
                         <Image url="@../image/icons8-calculator-96.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="refreshImage" fitHeight="42.0" fitWidth="42.0" layoutX="970.0" layoutY="32.0" onMouseClicked="#refreshPage" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="refreshImage" fitHeight="30.0" fitWidth="30.0" layoutX="974.0" layoutY="29.0" onMouseClicked="#refreshPage" onMouseEntered="#enterRefreshImage" onMouseExited="#exitRefreshImage" pickOnBounds="true" preserveRatio="true">
+
                      <image>
                         <Image url="@../image/icons8-update-left-rotation-100.png" />
                      </image>
