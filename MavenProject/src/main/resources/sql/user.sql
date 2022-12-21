@@ -19,4 +19,3 @@ insert into UserTable(name, username, password, emailAddress) values
 ('Kylyn Wu', 'wusitu', 'EXingDDDD', '');
 
 
-

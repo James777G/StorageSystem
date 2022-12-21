@@ -3,13 +3,19 @@ package org.maven.apache.controllers;
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 
 import org.maven.apache.MyLauncher;
+import org.maven.apache.service.mail.MailService;
+import org.maven.apache.service.mail.MailServiceProvider;
 import org.maven.apache.service.user.UserService;
 import org.maven.apache.user.User;
+import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.TransitionUtils;
+
+import com.jfoenix.controls.JFXButton;
 
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -31,18 +37,15 @@ import javafx.scene.shape.Line;
 
 public class LogInPageController implements Initializable {
 
-	private String signUpFullNameString;
-
-	private String signUpEmailAddressString;
-
 	private String signUpUserNameString;
 
-	private String signUpPasswordString;
+	private String verificationCode;
 
-	UserService userService = MyLauncher.context.getBean("userService", UserService.class);
+	private static volatile List<User> userList;
 
-	@FXML
-	private ImageView exitButton;
+	private final UserService userService = MyLauncher.context.getBean("userService", UserService.class);
+
+	private final MailService mailServiceProvider = MyLauncher.context.getBean("mailService", MailService.class);
 
 	@FXML
 	private AnchorPane signUpPane;
@@ -54,61 +57,25 @@ public class LogInPageController implements Initializable {
 	private ImageView exitButton2;
 
 	@FXML
-	private Label labelOnSignUp;
-
-	@FXML
-	private MFXGenericDialog confirmDialog;
-
-	@FXML
-	private Label labelOnSignIn;
-
-	@FXML
-	private Line lineOnSignIn;
-
-	@FXML
-	private Line lineOnSignUp;
-
-	@FXML
-	private ImageView imageOnStorage;
-
-	@FXML
-	private Line lineOnForgotPassword;
-
-	@FXML
-	private Label labelOnForgotPassword;
-
-	@FXML
-	private MFXTextField userNameField;
-
-	@FXML
-	private MFXTextField passwordField;
-
-	@FXML
-	private MFXGenericDialog errorDialog;
-
-	@FXML
 	private ImageView errorMessageIcon;
 
 	@FXML
 	private ImageView confirmDialogIcon;
 
-	private static volatile List<User> userList;
-
-	/////////
 	@FXML
-	private MFXPasswordField signUpPassword;
+	private ImageView verificationDialogIcon;
 
 	@FXML
-	private MFXTextField signUpFullName;
+	private ImageView exitButton;
 
 	@FXML
-	private MFXTextField signUpEmailAddress;
+	private ImageView imageOnStorage;
+	
+	@FXML
+	private Label notificationLabel;
 
 	@FXML
-	private MFXTextField signUpUserName;
-
-	@FXML
-	private Button confimButton;
+	private Label labelOnSignUp;
 
 	@FXML
 	private Label confirmationUserName;
@@ -118,6 +85,63 @@ public class LogInPageController implements Initializable {
 
 	@FXML
 	private Label confirmationEmailAddress;
+
+	@FXML
+	private Label labelOnSignIn;
+
+	@FXML
+	private Label labelOnForgotPassword;
+
+	@FXML
+	private Line lineOnSignIn;
+
+	@FXML
+	private Line lineOnSignUp;
+
+	@FXML
+	private Line lineOnForgotPassword;
+
+	@FXML
+	private MFXTextField newPasswordField;
+
+	@FXML
+	private MFXTextField userNameField;
+
+	@FXML
+	private MFXTextField passwordField;
+
+	@FXML
+	private MFXTextField signUpFullName;
+
+	@FXML
+	private MFXTextField signUpEmailAddress;
+
+	@FXML
+	private MFXTextField verificationCodeField;
+
+	@FXML
+	private MFXTextField signUpUserName;
+
+	@FXML
+	private MFXTextField verificationUsername;
+
+	@FXML
+	private MFXGenericDialog errorDialog;
+
+	@FXML
+	private MFXGenericDialog verificationDialog;
+
+	@FXML
+	private MFXGenericDialog confirmDialog;
+
+	@FXML
+	private MFXPasswordField signUpPassword;
+
+	@FXML
+	private Button confimButton;
+
+	@FXML
+	private JFXButton resetPasswordButton;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -132,8 +156,12 @@ public class LogInPageController implements Initializable {
 		errorDialog.setPickOnBounds(false);
 		confirmDialog.setVisible(false);
 		confirmDialog.setOpacity(1);
-		confirmDialog.setHeaderIcon(confirmDialogIcon);
+		// confirmDialog.setHeaderIcon(confirmDialogIcon);
 		confirmDialog.setPickOnBounds(false);
+		verificationDialog.setVisible(false);
+		verificationDialog.setOpacity(1);
+		// verificationDialog.setHeaderIcon(verificationDialogIcon);
+		verificationDialog.setPickOnBounds(false);
 		labelOnSignUp.setCursor(Cursor.HAND);
 		labelOnSignIn.setCursor(Cursor.HAND);
 		lineOnSignIn.setCursor(Cursor.HAND);
@@ -145,7 +173,8 @@ public class LogInPageController implements Initializable {
 		lineOnSignUp.setVisible(false);
 		FadeTransition fadeTransition = TransitionUtils.getFadeTransition(imageOnStorage, 3000, 0, 1);
 		fadeTransition.play();
-
+		resetPasswordButton.setDisable(true);
+		notificationLabel.setVisible(false);
 	}
 
 	/**
@@ -310,28 +339,24 @@ public class LogInPageController implements Initializable {
 	@FXML
 	private void onSignInAction() {
 		// get the user list
-		updateUserList();
+		updateUserList(); // can be changed to comment
 		String username = userNameField.getText();
-		if (!isUserNameFound(username)) {
+		User currentUser = getUser(username);
+		if (!isUsernameFound(username)) {
 			// if the user does not exist, show sign up alert
 			errorDialog.setVisible(true);
 			errorDialog.setPickOnBounds(true);
-			System.out.println("++++++++++++++++++++++++++++++++++++++");
-			System.out.println("User does not exist");
-			System.out.println("++++++++++++++++++++++++++++++++++++++");
 		} else {
 			// if the user exists, check its verification (correct password)
-			if (getUserPassword(username).equals(passwordField.getText())) {
+			if (currentUser.getPassword().equals(passwordField.getText())) {
 				// head to the next page
+				DataUtils.currentUser = currentUser;
 				System.out.println("++++++++++++++++++++++++++++++++++++++");
 				System.out.println("Congrats, you've signed in");
 				System.out.println("++++++++++++++++++++++++++++++++++++++");
 			} else {
 				errorDialog.setVisible(true);
 				errorDialog.setPickOnBounds(true);
-				System.out.println("++++++++++++++++++++++++++++++++++++++");
-				System.out.println("Incorrect password");
-				System.out.println("++++++++++++++++++++++++++++++++++++++");
 			}
 		}
 	}
@@ -342,20 +367,80 @@ public class LogInPageController implements Initializable {
 	 * @param userName username from input
 	 * @return boolean
 	 */
-	private boolean isUserNameFound(String userName) {
+	private boolean isUsernameFound(String userName) {
 		return userList.stream().anyMatch(user -> user.getUsername().equals(userName));
 	}
 
 	/**
-	 * get the index position of the specified user from the user list
+	 * get the user by searching by username
 	 *
 	 * @param userName username from input
 	 * @return index position
 	 */
-	private String getUserPassword(String userName) {
-		Optional<String> result = userList.stream().filter(user -> user.getUsername().equals(userName))
-				.map(User::getPassword).findFirst();
+	private User getUser(String userName) {
+		Optional<User> result = userList.stream().filter(user -> user.getUsername().equals(userName)).findFirst();
 		return result.orElse(null);
+	}
+
+	@FXML
+	private void onForgetPassword() {
+		verificationDialog.setVisible(true);
+		verificationDialog.setPickOnBounds(true);
+	}
+
+	/**
+	 * generate a random 6-bit number and send to the email
+	 */
+	@FXML
+	private void onSendVerificationCode() {
+		String inputUsername = verificationUsername.getText();
+		if (isUsernameFound(inputUsername)) {
+			// if the username exists
+			String emailAddress = getUser(inputUsername).getEmailAddress();
+			Random rnd = new Random();
+			int randNumber = rnd.nextInt(999999);
+			verificationCode = String.format("%06d", randNumber);
+			mailServiceProvider.sendEmail(emailAddress, verificationCode);
+			resetPasswordButton.setDisable(false);
+			notificationLabel.setVisible(true);
+			notificationLabel.setText("Email has been sent");
+		}else {
+			// if the username does not exist
+			notificationLabel.setVisible(true);
+			notificationLabel.setText("User does not exist");
+		}
+		
+	}
+
+	/**
+	 * close the verification dialog
+	 */
+	@FXML
+	private void onCloseVerificationDialog() {
+		verificationDialog.setVisible(false);
+		verificationDialog.setPickOnBounds(false);
+		notificationLabel.setText("");
+	}
+
+	/**
+	 * assign the new password to the user
+	 */
+	@FXML
+	private void onResetPassword() {
+		String newPassword = newPasswordField.getText();
+		String inputVerificationCode = verificationCodeField.getText();
+		if (inputVerificationCode.equals(verificationCode) && inputVerificationCode.length() > 5) {
+			// if the verification code is matched and new password length is at least 6 characters
+			User userToBeResetPassword = getUser(verificationUsername.getText());
+			userToBeResetPassword.setPassword(newPassword);
+			userService.update(userToBeResetPassword);
+			notificationLabel.setVisible(true);
+			notificationLabel.setText("Your password has been reset");
+		} else {
+			// if the verification code is not matched
+			notificationLabel.setVisible(true);
+			notificationLabel.setText("Incorrect verification code");
+		}
 	}
 
 	@FXML
@@ -401,23 +486,17 @@ public class LogInPageController implements Initializable {
 	// the fucntion for check whether the user already has an account based on
 	// username
 	private boolean checkExist() {
-		// UserServiceProvider userServiceProvider = new UserServiceProvider();
 		List<User> users = userService.selectByUsername(signUpUserNameString);
-		if (users.isEmpty()) {
-			return false;
-		}
-		return true;
+		return !users.isEmpty();
 
 	}
 
 	public String getSignUpFullNameString() {
-		signUpFullNameString = signUpFullName.getText();
-		return signUpFullNameString;
+		return signUpFullName.getText();
 	}
 
 	public String getSignUpEmailAddressString() {
-		signUpEmailAddressString = signUpEmailAddress.getText();
-		return signUpEmailAddressString;
+		return signUpEmailAddress.getText();
 	}
 
 	public String getSignUpUserNameString() {
@@ -426,8 +505,7 @@ public class LogInPageController implements Initializable {
 	}
 
 	public String getSignUpPasswordString() {
-		signUpPasswordString = signUpPassword.getText();
-		return signUpPasswordString;
+		return signUpPassword.getText();
 	}
 
 }

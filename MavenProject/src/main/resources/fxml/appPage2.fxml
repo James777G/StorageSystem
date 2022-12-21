@@ -11,6 +11,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.AppPage2">
    <children>
       <AnchorPane prefHeight="60.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -96,7 +97,7 @@
       </AnchorPane>
       <AnchorPane layoutY="60.0" prefHeight="625.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
          <children>
-            <MFXTextField layoutX="326.0" layoutY="110.0" prefHeight="49.0" prefWidth="549.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="350.0">
+            <MFXTextField floatMode="DISABLED" layoutX="326.0" layoutY="110.0" prefHeight="49.0" prefWidth="549.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="350.0">
                <textFill>
                   <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
                </textFill>

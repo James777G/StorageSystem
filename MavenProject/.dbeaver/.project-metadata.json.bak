@@ -1,1 +1,1 @@
-{"resources":{"src/main/resources/sql/item.sql":{"default-datasource":"mysql8-1848eaea529-3293cb89baa1198f","default-catalog":"itembase"},"src/main/resources/sql/test.sql":{"default-datasource":"mysql8-1848eaea529-3293cb89baa1198f","default-catalog":"newtable"},"src/main/resources/sql/user.sql":{"default-datasource":"mysql8-1848eaea529-3293cb89baa1198f","default-catalog":"itembase"}}}
+{"resources":{"src/main/resources/sql/user.sql":{"default-datasource":"mysql8-18514c92380-35912efc44c6dfa9","default-catalog":"itembase"}}}
