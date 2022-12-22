@@ -1,0 +1,6 @@
+@import "colors.css";
+
+.JFXButton:hover {
+    -fx-border-color: -darkGrey-theme;
+
+}

@@ -39,7 +39,7 @@ public class App extends Application {
 	  @Override
 	  public void start(final Stage stage) throws IOException {
 		  
-	    final Scene scene = new Scene(loadFxml("logInPage"));
+	    final Scene scene = new Scene(loadFxml("LogInPage"));
 		scene.setFill(Color.TRANSPARENT);
 	    stage.setScene(scene);
 	    stage.initStyle(StageStyle.TRANSPARENT);
