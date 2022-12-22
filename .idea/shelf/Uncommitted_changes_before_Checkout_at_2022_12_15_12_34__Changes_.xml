@@ -1,9 +1,0 @@
-<changelist name="Uncommitted_changes_before_Checkout_at_2022_12_15_12_34_[Changes]" date="1671068078701" recycled="true" deleted="true">
-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022_12_15_12_34_[Changes]/shelved.patch" />
-  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 2022/12/15 12:34 [Changes]" />
-  <binary>
-    <option name="BEFORE_PATH" value="MavenProject/target/classes/org/maven/apache/App.class" />
-    <option name="AFTER_PATH" value="MavenProject/target/classes/org/maven/apache/App.class" />
-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022_12_15_12_34_[Changes]/App.class" />
-  </binary>
-</changelist>
