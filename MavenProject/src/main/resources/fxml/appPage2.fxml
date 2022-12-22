@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
@@ -12,18 +11,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
-<?import io.github.palexdev.materialfx.controls.MFXTextField?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.text.Font?>
-
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.AppPage2">
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
    <children>
       <AnchorPane prefHeight="60.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -89,7 +77,7 @@
                   <Image url="@../image/icons8-user-96.png" />
                </image>
             </ImageView>
-            <Label layoutX="1106.0" layoutY="15.0" text="Username" textFill="#223c40" AnchorPane.leftAnchor="1110.0" AnchorPane.topAnchor="10.0">
+            <Label fx:id="usernameLabel" layoutX="1106.0" layoutY="15.0" text="Username" textFill="#223c40" AnchorPane.leftAnchor="1110.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Candara Bold" size="12.0" />
                </font>
@@ -317,7 +305,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="1002.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #dddddd; -fx-background-color: white;" AnchorPane.leftAnchor="1030.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane layoutX="1002.0" prefHeight="182.0" prefWidth="171.0" style="-fx-border-color: #dddddd; -fx-background-color: white;" AnchorPane.leftAnchor="1030.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <AnchorPane layoutX="2.0" layoutY="42.0" prefHeight="68.0" prefWidth="168.0" style="-fx-background-color: #eeeeee;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                      <children>
@@ -348,21 +336,23 @@
                         <Image url="@../image/icons8-settings-384%20(1).png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="20.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0">
-                     <image>
-                        <Image url="@../image/icons8-logout-64.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="85.0" layoutY="170.0" text="Log out" textFill="#223c40" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="169.0">
-                     <font>
-                        <Font name="Candara Bold" size="15.0" />
-                     </font>
-                  </Label>
                   <Label layoutX="84.0" layoutY="125.0" prefHeight="13.0" prefWidth="53.0" text="Settings" textFill="#223c40" AnchorPane.leftAnchor="84.0" AnchorPane.topAnchor="123.0">
                      <font>
                         <Font name="Candara Bold" size="15.0" />
                      </font>
                   </Label>
+                  <JFXButton fx:id="backButton" layoutX="1.0" layoutY="152.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onBackToLoginPage" prefHeight="40.0" prefWidth="168.0" styleClass="JFXButton" stylesheets="@../css/appPage2.css" text="Log out" textFill="#223c40">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/icons8-logout-64.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Candara Bold" size="15.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </AnchorPane>
          </children>
