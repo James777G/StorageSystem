@@ -1,6 +1,5 @@
 package org.maven.apache.controllers;
 
-import io.github.palexdev.materialfx.effects.ripple.MFXCircleRippleGenerator;
 import javafx.animation.RotateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,14 +9,11 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.item.Item;
 import org.maven.apache.service.item.ItemService;
-import org.maven.apache.service.user.UserService;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.RotationUtils;
