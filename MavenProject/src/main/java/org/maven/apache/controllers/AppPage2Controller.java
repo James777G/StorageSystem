@@ -2,6 +2,7 @@ package org.maven.apache.controllers;
 
 import java.io.IOException;
 
+import com.jfoenix.controls.JFXButton;
 import org.maven.apache.App;
 
 import javafx.fxml.FXML;
@@ -18,6 +19,18 @@ public class AppPage2Controller {
 	
 	@FXML
 	private ImageView backArrow;
+
+	@FXML
+	private JFXButton warehouseButton;
+
+	@FXML
+	private JFXButton messageButton;
+
+	@FXML
+	private JFXButton staffButton;
+
+	@FXML
+	private JFXButton transactionButton;
 	
 	@FXML
 	private void onBackToLoginPage() throws IOException {
@@ -39,5 +52,44 @@ public class AppPage2Controller {
 		backArrow.setFitWidth(13);
 		backArrow.setFitHeight(13);
 	}
-	
+
+	@FXML
+	private void enterWarehouseButton(){
+		warehouseButton.setOpacity(1);
+	}
+
+	@FXML
+	private void exitWarehouseButton(){
+		warehouseButton.setOpacity(0);
+	}
+
+	@FXML
+	private void enterStaffButton(){
+		staffButton.setOpacity(1);
+	}
+
+	@FXML
+	private void exitStaffButton(){
+		staffButton.setOpacity(0);
+	}
+
+	@FXML
+	private void enterTransactionButton(){
+		transactionButton.setOpacity(1);
+	}
+
+	@FXML
+	private void exitTransactionButton(){
+		transactionButton.setOpacity(0);
+	}
+
+	@FXML
+	private void enterMessageButton(){
+		messageButton.setOpacity(1);
+	}
+
+	@FXML
+	private void exitMessageButton(){
+		messageButton.setOpacity(0);
+	}
 }
