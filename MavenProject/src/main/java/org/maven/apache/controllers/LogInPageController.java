@@ -1,5 +1,6 @@
 package org.maven.apache.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
@@ -7,9 +8,9 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 
+import org.maven.apache.App;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.service.mail.MailService;
-import org.maven.apache.service.mail.MailServiceProvider;
 import org.maven.apache.service.user.UserService;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.DataUtils;
@@ -24,8 +25,10 @@ import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -34,6 +37,7 @@ import javafx.scene.effect.Bloom;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
+import javafx.stage.Stage;
 
 public class LogInPageController implements Initializable {
 
@@ -70,7 +74,7 @@ public class LogInPageController implements Initializable {
 
 	@FXML
 	private ImageView imageOnStorage;
-	
+
 	@FXML
 	private Label notificationLabel;
 
@@ -142,6 +146,9 @@ public class LogInPageController implements Initializable {
 
 	@FXML
 	private JFXButton resetPasswordButton;
+
+	@FXML
+	private JFXButton loginButton;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -335,9 +342,11 @@ public class LogInPageController implements Initializable {
 	 * Sign in button, if the correct username and its corresponding password have
 	 * been used then head straight to the next page. Otherwise, sign up for a new
 	 * user or renter the password
+	 * 
+	 * @throws IOException
 	 */
 	@FXML
-	private void onSignInAction() {
+	private void onSignInAction() throws IOException {
 		// get the user list
 		updateUserList(); // can be changed to comment
 		String username = userNameField.getText();
@@ -349,16 +358,19 @@ public class LogInPageController implements Initializable {
 		} else {
 			// if the user exists, check its verification (correct password)
 			if (currentUser.getPassword().equals(passwordField.getText())) {
-				// head to the next page
+				// head to the app page (appPage2)
 				DataUtils.currentUser = currentUser;
-				System.out.println("++++++++++++++++++++++++++++++++++++++");
-				System.out.println("Congrats, you've signed in");
-				System.out.println("++++++++++++++++++++++++++++++++++++++");
+				Stage stage = (Stage) loginButton.getScene().getWindow();
+				FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/appPage2.fxml"));
+				Scene scene = new Scene(loader.load());
+				stage.setScene(scene);
+				stage.show();
 			} else {
 				errorDialog.setVisible(true);
 				errorDialog.setPickOnBounds(true);
 			}
 		}
+
 	}
 
 	/**
@@ -404,12 +416,12 @@ public class LogInPageController implements Initializable {
 			resetPasswordButton.setDisable(false);
 			notificationLabel.setVisible(true);
 			notificationLabel.setText("Email has been sent");
-		}else {
+		} else {
 			// if the username does not exist
 			notificationLabel.setVisible(true);
 			notificationLabel.setText("User does not exist");
 		}
-		
+
 	}
 
 	/**
@@ -430,7 +442,8 @@ public class LogInPageController implements Initializable {
 		String newPassword = newPasswordField.getText();
 		String inputVerificationCode = verificationCodeField.getText();
 		if (inputVerificationCode.equals(verificationCode) && inputVerificationCode.length() > 5) {
-			// if the verification code is matched and new password length is at least 6 characters
+			// if the verification code is matched and new password length is at least 6
+			// characters
 			User userToBeResetPassword = getUser(verificationUsername.getText());
 			userToBeResetPassword.setPassword(newPassword);
 			userService.update(userToBeResetPassword);
@@ -488,7 +501,6 @@ public class LogInPageController implements Initializable {
 	private boolean checkExist() {
 		List<User> users = userService.selectByUsername(signUpUserNameString);
 		return !users.isEmpty();
-
 	}
 
 	public String getSignUpFullNameString() {
