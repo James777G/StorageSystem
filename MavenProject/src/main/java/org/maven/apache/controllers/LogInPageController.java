@@ -370,8 +370,8 @@ public class LogInPageController implements Initializable {
 				errorDialog.setPickOnBounds(true);
 			}
 		}
-
 	}
+	
 
 	/**
 	 * Find the existence of the input username

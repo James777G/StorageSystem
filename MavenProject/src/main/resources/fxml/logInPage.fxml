@@ -74,7 +74,7 @@
                   <Font name="System Bold" size="40.0" />
                </font>
             </Label>
-            <JFXButton fx:id="loginButton" layoutX="808.0" layoutY="472.0" onAction="#onSignInAction" prefHeight="42.0" prefWidth="186.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="sign in" textFill="WHITE" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="808.0" AnchorPane.rightAnchor="225.0">
+            <JFXButton fx:id="loginButton" defaultButton="true" layoutX="808.0" layoutY="472.0" onAction="#onSignInAction" prefHeight="42.0" prefWidth="186.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="sign in" textFill="WHITE" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="808.0" AnchorPane.rightAnchor="225.0">
                <font>
                   <Font size="21.0" />
                </font>
