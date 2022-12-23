@@ -31,9 +31,6 @@ public class AppPage2Controller implements Initializable {
 	
 	@FXML
 	private Button backButton;
-	
-	@FXML
-	private ImageView backArrow;
 
 	@FXML
 	private JFXButton warehouseButton;
@@ -56,17 +53,16 @@ public class AppPage2Controller implements Initializable {
 	@FXML
 	private MFXTableView<Item> itemTable;
 
+	@FXML
+	private MFXTableView everythingTable; //need data type??
+
 	private final MFXTableColumn<Item> nameColumn = new MFXTableColumn<>("Product Name");
 	private final MFXTableColumn<Item> idColumn = new MFXTableColumn<>("Product ID");
 	private final MFXTableColumn<Item> amountColumn = new MFXTableColumn<>("Product Amount");
-
 	private final MFXTableColumn<Item> descriptionColumn = new MFXTableColumn<>("Product Description");
 
-
-	
 	//pass the user from login page
 	private final User user = DataUtils.currentUser;
-
 
 	private final ObservableList<Item> dataList = FXCollections.observableArrayList();
 
@@ -102,18 +98,23 @@ public class AppPage2Controller implements Initializable {
 		stage.setScene(scene);
 		stage.show();
 	}
-	
 
 	@FXML
-	private void onEnterBackArrow() {
-		backArrow.setFitWidth(16);
-		backArrow.setFitHeight(16);
+	private void onSearch() {
+
 	}
-	
+
 	@FXML
-	private void onExitBackArrow() {
-		backArrow.setFitWidth(13);
-		backArrow.setFitHeight(13);
+	private void onEnterSearch(){
+		searchImage.setFitWidth(25);
+		searchImage.setFitHeight(25);
+
+	}
+
+	@FXML
+	private void onExitSearch(){
+		searchImage.setFitWidth(20);
+		searchImage.setFitHeight(20);
 	}
 
 	@FXML
