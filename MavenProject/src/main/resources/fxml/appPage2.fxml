@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXCheckbox?>
 <?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.control.Label?>
@@ -114,26 +115,11 @@
                   <Font name="Candara Bold" size="20.0" />
                </font>
             </Label>
-            <Label layoutX="451.0" layoutY="320.0" text="Status" textFill="#223c40" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="330.0">
+            <Label layoutX="451.0" layoutY="320.0" text="Status" textFill="#223c40" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="320.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />
                </font>
             </Label>
-            <JFXButton layoutX="443.0" layoutY="354.0" styleClass="JFXButton" stylesheets="@../css/appPage.css" text="All" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="350.0">
-               <font>
-                  <Font name="Candara Bold" size="15.0" />
-               </font>
-            </JFXButton>
-            <JFXButton layoutX="491.0" layoutY="350.0" styleClass="JFXButton" stylesheets="@../css/appPage.css" text="Taken" AnchorPane.leftAnchor="490.0" AnchorPane.topAnchor="350.0">
-               <font>
-                  <Font name="Candara Bold" size="15.0" />
-               </font>
-            </JFXButton>
-            <JFXButton layoutX="559.0" layoutY="346.0" styleClass="JFXButton" stylesheets="@../css/appPage.css" text="Restock" AnchorPane.leftAnchor="551.0" AnchorPane.topAnchor="350.0">
-               <font>
-                  <Font name="Candara Bold" size="15.0" />
-               </font>
-            </JFXButton>
             <Label layoutX="738.0" layoutY="321.0" text="Max amount" textFill="#223c40" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="320.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />
@@ -361,12 +347,22 @@
                      </image>
                   </ImageView>
                </graphic></JFXButton>
+            <MFXCheckbox layoutX="435.0" layoutY="355.0" styleClass="allCheckBox" stylesheets="@../css/appPage2.css" text="All" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="350.0">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+            </MFXCheckbox>
+            <MFXCheckbox layoutX="452.0" layoutY="381.0" styleClass="takenCheckBox" stylesheets="@../css/appPage2.css" text="Taken" textFill="#ff4137" AnchorPane.leftAnchor="450.0">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+            </MFXCheckbox>
+            <MFXCheckbox layoutX="538.0" layoutY="353.0" styleClass="restockCheckBox" stylesheets="@../css/appPage2.css" text="Restock" textFill="#759751" AnchorPane.topAnchor="350.0">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+            </MFXCheckbox>
          </children>
       </AnchorPane>
-      <Label layoutX="501.0" layoutY="21.0" prefHeight="40.0" prefWidth="59.0" text="Warehouse" textFill="#223c40" AnchorPane.bottomAnchor="9.0">
-         <font>
-            <Font name="Candara Bold" size="12.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

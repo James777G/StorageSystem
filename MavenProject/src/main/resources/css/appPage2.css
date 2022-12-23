@@ -8,3 +8,14 @@
     -fx-border-radius: 5 5 10 10;
     -fx-background-color: white;
 }
+.allCheckBox{
+    -mfx-main: -darkGrey-theme;
+}
+.takenCheckBox{
+    -mfx-main:  #feccc9;
+    -mfx-secondary: #ff4137;
+}
+.restockCheckBox{
+    -mfx-main:   #ddeab1;
+    -mfx-secondary: #759751;
+}
