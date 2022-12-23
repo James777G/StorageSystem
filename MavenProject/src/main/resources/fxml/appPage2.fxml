@@ -3,12 +3,14 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXCheckbox?>
 <?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXTableView?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
@@ -99,7 +101,7 @@
             <JFXButton fx:id="messageButton" layoutX="899.0" layoutY="8.0" onMouseEntered="#enterMessageButton" onMouseExited="#exitMessageButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-color: #223c40; -fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="60.0" prefHeight="625.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+      <AnchorPane layoutY="60.0" opacity="0.0" prefHeight="625.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
          <children>
             <MFXTextField floatMode="DISABLED" layoutX="326.0" layoutY="110.0" prefHeight="49.0" prefWidth="549.0" promptText="Search For Anything" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="350.0">
                <textFill>
@@ -364,5 +366,10 @@
             </MFXCheckbox>
          </children>
       </AnchorPane>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+         <center>
+            <MFXTableView fx:id="itemTable" prefHeight="343.0" prefWidth="819.0" stylesheets="@../css/appPage2.css" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>

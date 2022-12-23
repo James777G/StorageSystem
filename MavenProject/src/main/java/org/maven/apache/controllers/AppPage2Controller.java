@@ -2,11 +2,20 @@ package org.maven.apache.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
+import io.github.palexdev.materialfx.controls.MFXTableColumn;
+import io.github.palexdev.materialfx.controls.MFXTableView;
+import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.image.ImageView;
 import org.maven.apache.App;
+import org.maven.apache.MyLauncher;
+import org.maven.apache.item.Item;
+import org.maven.apache.service.item.ItemService;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.DataUtils;
 
@@ -43,9 +52,25 @@ public class AppPage2Controller implements Initializable {
 
 	@FXML
 	private ImageView searchImage;
+
+	@FXML
+	private MFXTableView<Item> itemTable;
+
+	private final MFXTableColumn<Item> nameColumn = new MFXTableColumn<>("Product Name");
+	private final MFXTableColumn<Item> idColumn = new MFXTableColumn<>("Product ID");
+	private final MFXTableColumn<Item> amountColumn = new MFXTableColumn<>("Product Amount");
+
+	private final MFXTableColumn<Item> descriptionColumn = new MFXTableColumn<>("Product Description");
+
+
 	
 	//pass the user from login page
 	private final User user = DataUtils.currentUser;
+
+
+	private final ObservableList<Item> dataList = FXCollections.observableArrayList();
+
+	private final List<Item> items = MyLauncher.context.getBean("itemService", ItemService.class).selectAll();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -55,6 +80,17 @@ public class AppPage2Controller implements Initializable {
 		transactionButton.setOpacity(0);
 		messageButton.setOpacity(0);
 		searchImage.setPickOnBounds(false);
+		dataList.addAll(items);
+		itemTable.autosize();
+		itemTable.setItems(dataList);
+		itemTable.getTableColumns().add(idColumn);
+		itemTable.getTableColumns().add(nameColumn);
+		itemTable.getTableColumns().add(amountColumn);
+		itemTable.getTableColumns().add(descriptionColumn);
+		nameColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getItemName));
+		idColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getItemID));
+		descriptionColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getDescription));
+		amountColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getUnit));
 	}
 
 	
