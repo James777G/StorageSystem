@@ -39,7 +39,7 @@ public interface ItemService {
      * @param item an instance of Item
      * @return an integer showing how many number of rows in the table are affected
      */
-    int update(Item item);
+   int update(Item item);
 
     /**
      * deletes an item in the item table by its id

@@ -7,7 +7,15 @@ public class DateTransaction {
     private String ItemName;
     private Integer AddUnit;
     private Integer RemoveUnit;
+    private Integer CurrentUnit;
     private Timestamp RecordTime;
+    public Integer getCurrentUnit() {
+        return CurrentUnit;
+    }
+
+    public void setCurrentUnit(Integer currentUnit) {
+        CurrentUnit = currentUnit;
+    }
 
     public Integer getItemID() {
         return ItemID;

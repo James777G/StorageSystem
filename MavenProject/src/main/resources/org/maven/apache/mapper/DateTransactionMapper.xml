@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 这个文件的文件路径不要动-->
+<!-- 名称空间-->
+<mapper namespace="org.maven.apache.mapper.DateTransactionMapper">
+
+
+    <insert id="addTransaction">
+insert into DateTransactionTable(ItemName, AddUnit,RemoveUnit,CurrentUnit,RecordTime)
+        values (#{itemName},#{AddUnit},#{RemoveUnit},#{number}#{now()});
+    </insert>
+
+
+    <update id="addUnitNumber">
+        update DateTransactionTable
+        <set>
+        AddUnit =#{number}
+        </set>
+        where ItemID = #{ItemID}
+
+    </update>
+
+    <update id="removeUnitNumber">
+        update DateTransactionTable
+        <set>
+           RemoveUnit =#{number}
+        </set>
+        where ItemID = #{ItemID}
+
+    </update>
+    <update id="currentUnitNumber">
+
+        update DateTransactionTable
+        <set>
+            CurrentUnit =#{number}
+        </set>
+        where ItemID = #{ItemID}
+    </update>
+
+
+    <delete id="deleteById">
+        delete from DateTransactionTable where ItemID = #{id};
+    </delete>
+
+
+    <select id="selectAll" resultType="org.maven.apache.dateTransaction.DateTransaction">
+    select * from DateTransactionTable;
+
+    </select>
+
+
+</mapper>

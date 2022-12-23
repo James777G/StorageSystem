@@ -1,10 +1,11 @@
-package org.maven.apache.mapper;
+package org.maven.apache.service.DateTransaction;
 
 import org.maven.apache.dateTransaction.DateTransaction;
 
+import java.sql.Timestamp;
 import java.util.List;
 
-public interface DateTransactionMapper {
+public interface dateTransactionService {
 
     /**
      * would get all the information in the table
@@ -12,14 +13,12 @@ public interface DateTransactionMapper {
      */
     List<DateTransaction> selectAll();
 
-    DateTransaction selectById(int id);
 
     /**
      * This method is for if the transation regrist wrong the data could be delete
      * @param id
      */
     void deleteById(int id);
-
 
     /**
      * insert the information to the table the input should be the calculation od the addunit and removeunit
@@ -45,4 +44,10 @@ public interface DateTransactionMapper {
      */
     void currentUnitNumber(int number);
 
+    /**
+     * return the information that happen on that day
+     * @param date
+     * @return
+     */
+    List<DateTransaction> askedDate(Timestamp date);
 }
