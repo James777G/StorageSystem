@@ -353,12 +353,14 @@
                   </JFXButton>
                </children>
             </AnchorPane>
-            <JFXButton layoutX="640.0" layoutY="218.0" prefHeight="50.0" prefWidth="50.0" styleClass="searchButton" stylesheets="@../css/appPage.css" textFill="#223c40" AnchorPane.bottomAnchor="480.0" AnchorPane.leftAnchor="850.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="110.0" />
-            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="865.0" layoutY="125.0" preserveRatio="true">
-               <image>
-                  <Image url="@../image/icons8-search-64.png" />
-               </image>
-            </ImageView>
+            <JFXButton contentDisplay="CENTER" layoutX="640.0" layoutY="218.0" prefHeight="50.0" prefWidth="50.0" styleClass="searchButton" stylesheets="@../css/appPage.css" textFill="#223c40" AnchorPane.bottomAnchor="480.0" AnchorPane.leftAnchor="850.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="110.0">
+               <graphic>
+                  <ImageView fx:id="searchImage" fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-search-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
          </children>
       </AnchorPane>
       <Label layoutX="501.0" layoutY="21.0" prefHeight="40.0" prefWidth="59.0" text="Warehouse" textFill="#223c40" AnchorPane.bottomAnchor="9.0">

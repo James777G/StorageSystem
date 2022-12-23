@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.scene.image.ImageView;
 import org.maven.apache.App;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.DataUtils;
@@ -23,7 +24,6 @@ public class AppPage2Controller implements Initializable {
 	private Button backButton;
 	
 	@FXML
-
 	private ImageView backArrow;
 
 	@FXML
@@ -38,14 +38,23 @@ public class AppPage2Controller implements Initializable {
 	@FXML
 	private JFXButton transactionButton;
 
+	@FXML
 	private Label usernameLabel;
+
+	@FXML
+	private ImageView searchImage;
 	
 	//pass the user from login page
-	private User user = DataUtils.currentUser;
+	private final User user = DataUtils.currentUser;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		usernameLabel.setText(user.getName());
+		warehouseButton.setOpacity(0);
+		staffButton.setOpacity(0);
+		transactionButton.setOpacity(0);
+		messageButton.setOpacity(0);
+		searchImage.setPickOnBounds(false);
 	}
 
 	

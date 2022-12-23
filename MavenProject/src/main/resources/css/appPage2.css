@@ -2,5 +2,9 @@
 
 .JFXButton:hover {
     -fx-border-color: -darkGrey-theme;
-
+}
+.resultPane{
+    -fx-background-radius: 5 5 10 10;
+    -fx-border-radius: 5 5 10 10;
+    -fx-background-color: white;
 }
