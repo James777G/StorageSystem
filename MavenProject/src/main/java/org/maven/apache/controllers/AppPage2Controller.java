@@ -51,6 +51,9 @@ public class AppPage2Controller implements Initializable {
 	private ImageView searchImage;
 
 	@FXML
+	private ImageView foldArrow;
+
+	@FXML
 	private MFXTableView<Item> itemTable;
 
 	@FXML
@@ -67,6 +70,14 @@ public class AppPage2Controller implements Initializable {
 	private final ObservableList<Item> dataList = FXCollections.observableArrayList();
 
 	private final List<Item> items = MyLauncher.context.getBean("itemService", ItemService.class).selectAll();
+
+	private double tableOpacity = 1;
+
+	private int rotateAngle = 0;
+
+	private boolean isPickOnBounds = true;
+
+	private boolean isTableShown = false;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -87,9 +98,9 @@ public class AppPage2Controller implements Initializable {
 		idColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getItemID));
 		descriptionColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getDescription));
 		amountColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getUnit));
+		everythingTable.setPickOnBounds(false);
 	}
 
-	
 	@FXML
 	private void onBackToLoginPage() throws IOException {
 		Stage stage = (Stage) backButton.getScene().getWindow();
@@ -99,9 +110,16 @@ public class AppPage2Controller implements Initializable {
 		stage.show();
 	}
 
+	/**
+	 * show the list of relevant cargos and transactions
+	 */
 	@FXML
 	private void onSearch() {
-
+		everythingTable.setOpacity(1);
+		everythingTable.setPickOnBounds(true);
+		isTableShown = true;
+		foldArrow.setRotate(180);
+		rotateAngle = 180;
 	}
 
 	@FXML
@@ -115,6 +133,56 @@ public class AppPage2Controller implements Initializable {
 	private void onExitSearch(){
 		searchImage.setFitWidth(20);
 		searchImage.setFitHeight(20);
+	}
+
+	@FXML
+	private void onEnterFoldArrow(){
+		foldArrow.setFitWidth(25);
+		foldArrow.setFitHeight(25);
+	}
+
+	@FXML
+	private void onExitFoldArrow(){
+		foldArrow.setFitWidth(20);
+		foldArrow.setFitHeight(20);
+	}
+
+	/**
+	 * fold or unfold the table that contains cargos and transactions
+	 */
+	@FXML
+	private void onClickFoldArrow(){
+		if (isTableShown){
+			// table is shown, should close it
+			tableOpacity = 0;
+			isPickOnBounds = false;
+			isTableShown = false;
+			rotateAngle = rotateAngle - 180;
+			// angle should be 180 (rotate from original image)
+		}else {
+			// table is closed, should expand it
+			tableOpacity = 1;
+			isPickOnBounds = true;
+			isTableShown = true;
+			rotateAngle = rotateAngle + 180;
+			// angle should be 0 (image view unchanged)
+		}
+		//set the appearance of the table and fold arrow
+		everythingTable.setOpacity(tableOpacity);
+		everythingTable.setPickOnBounds(isPickOnBounds);
+		foldArrow.setRotate(rotateAngle);
+	}
+
+	@FXML
+	private void onReleaseFoldArrow(){
+		foldArrow.setFitWidth(25);
+		foldArrow.setFitHeight(25);
+	}
+
+	@FXML
+	private void onPressFoldArrow(){
+		foldArrow.setFitWidth(20);
+		foldArrow.setFitHeight(20);
 	}
 
 	@FXML
