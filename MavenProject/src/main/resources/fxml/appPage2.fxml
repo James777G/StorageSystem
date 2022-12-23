@@ -95,10 +95,10 @@
                   <Font name="Candara Bold" size="12.0" />
                </font>
             </Label>
-            <JFXButton fx:id="warehouseButton" layoutX="443.0" layoutY="9.0" onMouseEntered="#enterWarehouseButton" onMouseExited="#exitWarehouseButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-color: #223c40; -fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
-            <JFXButton fx:id="transactionButton" layoutX="600.0" layoutY="10.0" onMouseEntered="#enterTransactionButton" onMouseExited="#exitTransactionButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-color: #223c40; -fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
-            <JFXButton fx:id="staffButton" layoutX="780.0" layoutY="4.0" onMouseEntered="#enterStaffButton" onMouseExited="#exitStaffButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-color: #223c40; -fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
-            <JFXButton fx:id="messageButton" layoutX="899.0" layoutY="8.0" onMouseEntered="#enterMessageButton" onMouseExited="#exitMessageButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-color: #223c40; -fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
+            <JFXButton fx:id="warehouseButton" layoutX="443.0" layoutY="9.0" onMouseEntered="#enterWarehouseButton" onMouseExited="#exitWarehouseButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
+            <JFXButton fx:id="transactionButton" layoutX="600.0" layoutY="10.0" onMouseEntered="#enterTransactionButton" onMouseExited="#exitTransactionButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
+            <JFXButton fx:id="staffButton" layoutX="780.0" layoutY="4.0" onMouseEntered="#enterStaffButton" onMouseExited="#exitStaffButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
+            <JFXButton fx:id="messageButton" layoutX="899.0" layoutY="8.0" onMouseEntered="#enterMessageButton" onMouseExited="#exitMessageButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutY="60.0" opacity="0.0" prefHeight="625.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
@@ -366,9 +366,123 @@
             </MFXCheckbox>
          </children>
       </AnchorPane>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+         <bottom>
+            <MFXTableView fx:id="itemTable" footerVisible="false" prefHeight="343.0" prefWidth="1225.0" stylesheets="@../css/appPage2.css" BorderPane.alignment="CENTER" />
+         </bottom>
+         <top>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <MFXTextField floatMode="DISABLED" floatingText="Product Name" layoutX="243.0" layoutY="112.0" prefHeight="45.0" prefWidth="198.0" promptText="Product Name" AnchorPane.bottomAnchor="42.66666666666666" AnchorPane.leftAnchor="243.0">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </MFXTextField>
+                  <MFXTextField floatMode="DISABLED" layoutX="543.0" layoutY="112.0" prefHeight="45.0" prefWidth="114.0" promptText="Lower Bound" AnchorPane.bottomAnchor="42.66666666666666">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </MFXTextField>
+                  <ImageView fitHeight="30.0" fitWidth="33.0" layoutX="207.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-exclusive-product-30.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="30.0" fitWidth="25.0" layoutX="513.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="510.0">
+                     <image>
+                        <Image url="@../image/icons8-amount-32.png" />
+                     </image>
+                  </ImageView>
+                  <MFXTextField floatMode="DISABLED" layoutX="61.0" layoutY="113.0" prefHeight="45.0" prefWidth="107.0" promptText="Product ID">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </MFXTextField>
+                  <ImageView fitHeight="30.0" fitWidth="80.0" layoutX="26.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="52.0">
+                     <image>
+                        <Image url="@../image/icons8-checked-identification-documents-64%20(1).png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="28.0" layoutY="18.0" prefHeight="30.0" prefWidth="114.0" text="Filter Panel" textFill="#223c40">
+                     <font>
+                        <Font name="Calibri Bold Italic" size="20.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="37.0" fitWidth="30.0" layoutX="670.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-less-than-100%20(1).png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="37.0" fitWidth="38.0" layoutX="705.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-stack-of-coins-48.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="37.0" fitWidth="30.0" layoutX="757.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="750.0">
+                     <image>
+                        <Image url="@../image/icons8-less-than-100%20(1).png" />
+                     </image>
+                  </ImageView>
+                  <MFXTextField floatMode="DISABLED" layoutX="799.0" layoutY="112.0" prefHeight="45.0" prefWidth="114.0" promptText="Upper Bound">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </MFXTextField>
+                  <JFXButton contentDisplay="CENTER" layoutX="1075.0" layoutY="16.0" maxHeight="35.0" maxWidth="35.0" minHeight="35.0" minWidth="35.0" prefHeight="35.0" prefWidth="35.0" styleClass="controlButtonTick" stylesheets="@../css/appPage2.css" textFill="TRANSPARENT" AnchorPane.bottomAnchor="150.0" AnchorPane.rightAnchor="85.0">
+                     <graphic>
+                        <ImageView fitHeight="37.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/icons8-done-64.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton contentDisplay="CENTER" layoutX="1146.0" layoutY="14.0" maxHeight="35.0" maxWidth="35.0" minHeight="35.0" minWidth="35.0" prefHeight="35.0" prefWidth="35.0" styleClass="controlButtonRefresh" stylesheets="@../css/appPage2.css" textFill="TRANSPARENT" AnchorPane.bottomAnchor="150.66666666666666" AnchorPane.rightAnchor="20.0">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/icons8-reset-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </top>
          <center>
-            <MFXTableView fx:id="itemTable" prefHeight="343.0" prefWidth="819.0" stylesheets="@../css/appPage2.css" BorderPane.alignment="CENTER" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="1091.0" layoutY="52.0" text="Add new">
+                     <font>
+                        <Font name="Calibri Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <JFXButton alignment="CENTER" contentDisplay="CENTER" layoutX="1051.0" layoutY="46.0" prefHeight="30.0" prefWidth="30.0" textFill="#ffffff00" AnchorPane.bottomAnchor="17.33333333333333">
+                     <graphic>
+                        <ImageView fitHeight="51.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/icons8-add-new-100.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton contentDisplay="CENTER" layoutX="25.0" layoutY="50.0" prefHeight="30.0" prefWidth="26.0" textFill="TRANSPARENT" AnchorPane.bottomAnchor="17.3">
+                     <graphic>
+                        <ImageView fitHeight="69.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/icons8-change-64.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <Label layoutX="71.0" layoutY="52.0" text="Edit existing">
+                     <font>
+                        <Font name="Calibri Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="4.0" layoutY="2.0" maxWidth="1.7976931348623157E308" prefHeight="2.0" prefWidth="1192.0" />
+               </children>
+            </AnchorPane>
          </center>
       </BorderPane>
    </children>
