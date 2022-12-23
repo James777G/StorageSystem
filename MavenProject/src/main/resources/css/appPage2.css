@@ -19,3 +19,13 @@
     -mfx-main:   #ddeab1;
     -mfx-secondary: #759751;
 }
+
+
+.mfx-table-column{
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+.mfx-table-row-cell {
+    -fx-font-size: 14;
+    -fx-font-weight: regular;
+}
