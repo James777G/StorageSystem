@@ -4,18 +4,28 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
 
 import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.MFXTableView;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 import org.maven.apache.App;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.item.Item;
+import org.maven.apache.search.FuzzySearch;
 import org.maven.apache.service.item.ItemService;
+import org.maven.apache.thread.DedicatedThreadPoolExecutor;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.DataUtils;
 
@@ -26,6 +36,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+
+import javax.swing.*;
 
 public class AppPage2Controller implements Initializable {
 	
@@ -54,10 +66,13 @@ public class AppPage2Controller implements Initializable {
 	private ImageView foldArrow;
 
 	@FXML
+	private MFXTextField searchField;
+
+	@FXML
 	private MFXTableView<Item> itemTable;
 
 	@FXML
-	private MFXTableView everythingTable; //need data type??
+	private MFXTableView searchTable; //need parameter data type??
 
 	private final MFXTableColumn<Item> nameColumn = new MFXTableColumn<>("Product Name");
 	private final MFXTableColumn<Item> idColumn = new MFXTableColumn<>("Product ID");
@@ -70,6 +85,7 @@ public class AppPage2Controller implements Initializable {
 	private final ObservableList<Item> dataList = FXCollections.observableArrayList();
 
 	private final List<Item> items = MyLauncher.context.getBean("itemService", ItemService.class).selectAll();
+	// get the item list from table stored in database
 
 	private double tableOpacity = 1;
 
@@ -88,17 +104,25 @@ public class AppPage2Controller implements Initializable {
 		messageButton.setOpacity(0);
 		searchImage.setPickOnBounds(false);
 		dataList.addAll(items);
+		// load columns in itemTable
 		itemTable.autosize();
 		itemTable.setItems(dataList);
 		itemTable.getTableColumns().add(idColumn);
 		itemTable.getTableColumns().add(nameColumn);
 		itemTable.getTableColumns().add(amountColumn);
 		itemTable.getTableColumns().add(descriptionColumn);
+		// load columns in searchTable
+		searchTable.autosize();
+		searchTable.getTableColumns().add(idColumn);
+		searchTable.getTableColumns().add(nameColumn);
+		searchTable.getTableColumns().add(amountColumn);
+		searchTable.getTableColumns().add(descriptionColumn);
 		nameColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getItemName));
 		idColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getItemID));
 		descriptionColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getDescription));
 		amountColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getUnit));
-		everythingTable.setPickOnBounds(false);
+		searchTable.setPickOnBounds(false);
+		searchPerSec();
 	}
 
 	@FXML
@@ -115,18 +139,64 @@ public class AppPage2Controller implements Initializable {
 	 */
 	@FXML
 	private void onSearch() {
-		everythingTable.setOpacity(1);
-		everythingTable.setPickOnBounds(true);
+		searchTable.setOpacity(1);
+		searchTable.setPickOnBounds(true);
 		isTableShown = true;
 		foldArrow.setRotate(180);
 		rotateAngle = 180;
+
+		List<Item> searchedItems = MyLauncher.context.getBean("itemService", ItemService.class).selectByCondition(FuzzySearch.getFuzzyName(searchField.getText()), Integer.MIN_VALUE);
+		ObservableList<Item> itemInfo = FXCollections.observableArrayList();
+		itemInfo.addAll(searchedItems);
+		searchTable.setItems(itemInfo);
 	}
+
+	/**
+	 * perform fuzzy search and add items to the table in background
+	 */
+	private void searchOnBackground(){
+		Task<Void> backgroundTask = new Task<Void>() {
+			@Override
+			protected Void call() throws Exception {
+				searchPerSec();
+				return null;
+			}
+		};
+		backgroundTask.setOnSucceeded(event ->{
+
+		});
+
+	}
+
+	/**
+	 * perform fuzzy search per sec
+	 */
+	private void searchPerSec(){
+		Timeline timeline = new Timeline();
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		if (timeline != null) {
+			timeline.stop();
+		}
+		KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event){
+				List<Item> searchedItems = MyLauncher.context.getBean("itemService", ItemService.class).selectByCondition(FuzzySearch.getFuzzyName(searchField.getText()), Integer.MIN_VALUE);
+				ObservableList<Item> itemInfo = FXCollections.observableArrayList();
+				itemInfo.addAll(searchedItems);
+				searchTable.setItems(itemInfo);
+			}
+		});
+		timeline.getKeyFrames().add(keyFrame);
+		timeline.playFromStart();
+	}
+
+
+
 
 	@FXML
 	private void onEnterSearch(){
 		searchImage.setFitWidth(25);
 		searchImage.setFitHeight(25);
-
 	}
 
 	@FXML
@@ -168,8 +238,8 @@ public class AppPage2Controller implements Initializable {
 			// angle should be 0 (image view unchanged)
 		}
 		//set the appearance of the table and fold arrow
-		everythingTable.setOpacity(tableOpacity);
-		everythingTable.setPickOnBounds(isPickOnBounds);
+		searchTable.setOpacity(tableOpacity);
+		searchTable.setPickOnBounds(isPickOnBounds);
 		foldArrow.setRotate(rotateAngle);
 	}
 
