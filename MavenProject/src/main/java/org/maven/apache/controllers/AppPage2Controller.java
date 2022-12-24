@@ -54,7 +54,7 @@ public class AppPage2Controller implements Initializable {
 	private Label usernameLabel;
 
 	@FXML
-	private StackPane extendPane;
+	private AnchorPane extendPane;
 
 	@FXML
 	private void onClickExtend(){
