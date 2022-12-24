@@ -1,15 +1,5 @@
 package org.maven.apache.controllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-<<<<<<< HEAD
-import java.util.concurrent.ExecutorService;
-=======
-import java.util.function.Function;
->>>>>>> 82200d6cf16309c89b591bc9f3301464640e57ce
-
 import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.MFXTableView;
@@ -17,31 +7,33 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.image.ImageView;
-import javafx.util.Duration;
-import org.maven.apache.App;
-import org.maven.apache.MyLauncher;
-import org.maven.apache.item.Item;
-import org.maven.apache.search.FuzzySearch;
-import org.maven.apache.service.item.ItemService;
-import org.maven.apache.thread.DedicatedThreadPoolExecutor;
-import org.maven.apache.user.User;
-import org.maven.apache.utils.DataUtils;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.maven.apache.App;
+import org.maven.apache.MyLauncher;
+import org.maven.apache.item.Item;
+import org.maven.apache.search.FuzzySearch;
+import org.maven.apache.service.item.ItemService;
+import org.maven.apache.user.User;
+import org.maven.apache.utils.DataUtils;
 
-import javax.swing.*;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class AppPage2Controller implements Initializable {
 	
@@ -62,9 +54,6 @@ public class AppPage2Controller implements Initializable {
 
 	@FXML
 	private Label usernameLabel;
-
-	@FXML
-	private ImageView searchImage;
 
 	@FXML
 	private ImageView foldArrow;
@@ -98,6 +87,9 @@ public class AppPage2Controller implements Initializable {
 	private boolean isPickOnBounds = true;
 
 	private boolean isTableShown = false;
+
+	Timeline timeline = new Timeline();
+
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -106,7 +98,6 @@ public class AppPage2Controller implements Initializable {
 		staffButton.setOpacity(0);
 		transactionButton.setOpacity(0);
 		messageButton.setOpacity(0);
-		searchImage.setPickOnBounds(false);
 		dataList.addAll(items);
 		// load columns in itemTable
 		itemTable.autosize();
@@ -130,11 +121,14 @@ public class AppPage2Controller implements Initializable {
 		descriptionColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getDescription));
 		amountColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getUnit));
 		searchTable.setPickOnBounds(false);
-		searchPerSec();
+		// initialize search per sec
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		searchOnBackground();
 	}
 
 	@FXML
 	private void onBackToLoginPage() throws IOException {
+		timeline.stop(); // stop searching per sec
 		Stage stage = (Stage) backButton.getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/logInPage.fxml"));
 		Scene scene = new Scene(loader.load());
@@ -143,45 +137,26 @@ public class AppPage2Controller implements Initializable {
 	}
 
 	/**
-	 * show the list of relevant cargos and transactions
-	 */
-	@FXML
-	private void onSearch() {
-		searchTable.setOpacity(1);
-		searchTable.setPickOnBounds(true);
-		isTableShown = true;
-		foldArrow.setRotate(180);
-		rotateAngle = 180;
-
-		List<Item> searchedItems = MyLauncher.context.getBean("itemService", ItemService.class).selectByCondition(FuzzySearch.getFuzzyName(searchField.getText()), Integer.MIN_VALUE);
-		ObservableList<Item> itemInfo = FXCollections.observableArrayList();
-		itemInfo.addAll(searchedItems);
-		searchTable.setItems(itemInfo);
-	}
-
-	/**
-	 * perform fuzzy search and add items to the table in background
+	 * perform fuzzy search and show the list of relevant cargos in background
 	 */
 	private void searchOnBackground(){
 		Task<Void> backgroundTask = new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
-				searchPerSec();
+				Platform.runLater(() -> {
+					searchPerSec();
+				});
 				return null;
 			}
 		};
-		backgroundTask.setOnSucceeded(event ->{
-
-		});
-
+		Thread backgroundThread = new Thread(backgroundTask);
+		backgroundThread.start();
 	}
 
 	/**
 	 * perform fuzzy search per sec
 	 */
 	private void searchPerSec(){
-		Timeline timeline = new Timeline();
-		timeline.setCycleCount(Timeline.INDEFINITE);
 		if (timeline != null) {
 			timeline.stop();
 		}
@@ -196,21 +171,6 @@ public class AppPage2Controller implements Initializable {
 		});
 		timeline.getKeyFrames().add(keyFrame);
 		timeline.playFromStart();
-	}
-
-
-
-
-	@FXML
-	private void onEnterSearch(){
-		searchImage.setFitWidth(25);
-		searchImage.setFitHeight(25);
-	}
-
-	@FXML
-	private void onExitSearch(){
-		searchImage.setFitWidth(20);
-		searchImage.setFitHeight(20);
 	}
 
 	@FXML
