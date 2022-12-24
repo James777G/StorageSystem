@@ -506,54 +506,6 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <AnchorPane layoutY="120.0" prefHeight="80.0" prefWidth="1201.0" style="-fx-background-color: #bbbbbb;" AnchorPane.topAnchor="120.0">
-               <children>
-                  <Label layoutX="451.0" layoutY="14.0" prefHeight="40.0" prefWidth="300.0" text="CARGO NAME ******" textFill="#223c40" AnchorPane.leftAnchor="451.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="10.0">
-                     <font>
-                        <Font name="Candara Bold" size="24.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="571.0" layoutY="50.0" prefHeight="25.0" prefWidth="59.0" text="Discription" textFill="#296d98" underline="true" AnchorPane.leftAnchor="571.0" AnchorPane.rightAnchor="571.0" AnchorPane.topAnchor="50.0">
-                     <font>
-                        <Font name="Candara Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="113.0" layoutY="55.0" prefHeight="130.0" prefWidth="130.0" style="-fx-background-radius: 1000; -fx-border-radius: 1000; -fx-background-color: #eeeeee; -fx-border-color: #0DaD8D; -fx-border-width: 2;">
-               <children>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="15.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
-                     <image>
-                        <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutY="200.0" prefHeight="60.0" prefWidth="1201.0" style="-fx-background-color: #dddddd;">
-               <children>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="90.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="90.0">
-                     <image>
-                        <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="130.0" layoutY="34.0" text="Cargo" textFill="#223c40" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="131.0">
-                     <font>
-                        <Font name="Candara Bold" size="15.0" />
-                     </font>
-                  </Label>
-                  <AnchorPane layoutX="65.0" layoutY="54.0" prefHeight="2.0" prefWidth="80.0" style="-fx-background-color: #0DaD8D;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="90.0" />
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="178.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="200.0">
-                     <image>
-                        <Image url="@../image/icons8-bar-chart-64.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="226.0" layoutY="28.0" text="Data" textFill="#223c40" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="241.0">
-                     <font>
-                        <Font name="Candara Bold" size="15.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
             <AnchorPane layoutX="440.0" layoutY="340.0" prefHeight="60.0" prefWidth="901.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
                <effect>
                   <DropShadow>
@@ -820,6 +772,68 @@
                         <Font name="Candara Bold" size="19.0" />
                      </font>
                   </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutY="200.0" prefHeight="60.0" prefWidth="1201.0" style="-fx-background-color: #dddddd;">
+               <children>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="90.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="90.0">
+                     <image>
+                        <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="130.0" layoutY="34.0" text="Cargo" textFill="#223c40" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="131.0">
+                     <font>
+                        <Font name="Candara Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane layoutX="65.0" layoutY="54.0" prefHeight="2.0" prefWidth="80.0" style="-fx-background-color: #0DaD8D;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="90.0" />
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="178.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="200.0">
+                     <image>
+                        <Image url="@../image/icons8-bar-chart-64.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="226.0" layoutY="28.0" text="Data" textFill="#223c40" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="241.0">
+                     <font>
+                        <Font name="Candara Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.6196078658103943" green="0.6196078658103943" blue="0.6196078658103943" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </AnchorPane>
+            <AnchorPane layoutY="120.0" prefHeight="80.0" prefWidth="1201.0" style="-fx-background-color: #bbbbbb;" AnchorPane.topAnchor="120.0">
+               <children>
+                  <Label layoutX="451.0" layoutY="14.0" prefHeight="40.0" prefWidth="300.0" text="CARGO NAME ******" textFill="#223c40" AnchorPane.leftAnchor="451.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="10.0">
+                     <font>
+                        <Font name="Candara Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="571.0" layoutY="50.0" prefHeight="25.0" prefWidth="59.0" text="Discription" textFill="#296d98" underline="true" AnchorPane.leftAnchor="571.0" AnchorPane.rightAnchor="571.0" AnchorPane.topAnchor="50.0">
+                     <font>
+                        <Font name="Candara Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX">
+                     <color>
+                        <Color red="0.6196078658103943" green="0.6196078658103943" blue="0.6196078658103943" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </AnchorPane>
+            <AnchorPane layoutX="113.0" layoutY="55.0" prefHeight="130.0" prefWidth="130.0" style="-fx-background-radius: 1000; -fx-border-radius: 1000; -fx-background-color: #eeeeee; -fx-border-color: #0DaD8D; -fx-border-width: 2;">
+               <children>
+                  <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="15.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+                     <image>
+                        <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
          </children>
