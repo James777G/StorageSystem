@@ -1,7 +1,21 @@
 package org.maven.apache.controllers;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import org.maven.apache.App;
 
 import javafx.fxml.FXML;
@@ -10,15 +24,114 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.maven.apache.user.User;
+import org.maven.apache.utils.DataUtils;
+import org.maven.apache.utils.RotationUtils;
 
-public class AppPage2Controller {
-	
+
+public class AppPage2Controller implements Initializable {
+
+	private User user = DataUtils.currentUser;
+
+	private Boolean isArrowDown = false;
+
 	@FXML
 	private Button backButton;
 	
 	@FXML
 	private ImageView backArrow;
-	
+
+	@FXML
+	private ImageView extendImage;
+
+	@FXML
+	private ImageView refreshImage;
+
+	@FXML
+	private Label usernameLabel;
+
+	@FXML
+	private AnchorPane slidePane;
+
+	@FXML
+	private void onClickExtend(){
+		RotateTransition rotate;
+		Rectangle2D boxBounds = new Rectangle2D(100, 100, 170, 200);
+		Rectangle clipRect = new Rectangle();
+		clipRect.setWidth(boxBounds.getWidth());
+		slidePane.setClip(clipRect);
+		if (isArrowDown){
+			rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,0, -90);
+			/* Animation for scroll up. */
+			Timeline timelineUp = new Timeline();
+			timelineUp.setCycleCount(1);
+			timelineUp.setAutoReverse(true);
+			final KeyValue kvUp1 = new KeyValue(clipRect.heightProperty(), 0);
+			final KeyValue kvUp2 = new KeyValue(clipRect.translateYProperty(), boxBounds.getHeight());
+			final KeyValue kvUp3 = new KeyValue(slidePane.translateYProperty(), -boxBounds.getHeight());
+			final KeyFrame kfUp = new KeyFrame(Duration.millis(2000), kvUp1, kvUp2, kvUp3);
+			timelineUp.getKeyFrames().add(kfUp);
+			isArrowDown = false;
+		}else{
+			//EventHandler onFinished = new EventHandler() {
+			//	public void handle(ActionEvent t) {
+			//		timelineBounce.play();
+			//	}
+			//};
+			rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,-90, 0);
+			Timeline timelineDown = new Timeline();
+			timelineDown.setCycleCount(1);
+			timelineDown.setAutoReverse(true);
+			final KeyValue kvDwn1 = new KeyValue(clipRect.heightProperty(), boxBounds.getHeight());
+			final KeyValue kvDwn2 = new KeyValue(clipRect.translateYProperty(), 0);
+			final KeyValue kvDwn3 = new KeyValue(slidePane.translateYProperty(), 0);
+			final KeyFrame kfDwn = new KeyFrame(Duration.millis(200), kvDwn1, kvDwn2, kvDwn3);
+			timelineDown.getKeyFrames().add(kfDwn);
+			isArrowDown = true;
+		}
+		rotate.play();
+
+	}
+
+	@FXML
+	private void onEnterExtend() {
+		/*Rectangle2D boxBounds = new Rectangle2D(100, 100, 170, 200);
+		Rectangle clipRect = new Rectangle();
+		clipRect.setWidth(boxBounds.getWidth());
+		slidePane.setClip(clipRect);
+		/* Animation for scroll up.
+		Timeline timelineUp = new Timeline();
+		timelineUp.setCycleCount(1);
+		timelineUp.setAutoReverse(true);
+		final KeyValue kvUp1 = new KeyValue(clipRect.heightProperty(), 0);
+		final KeyValue kvUp2 = new KeyValue(clipRect.translateYProperty(), boxBounds.getHeight());
+		final KeyValue kvUp3 = new KeyValue(slidePane.translateYProperty(), -boxBounds.getHeight());
+		final KeyFrame kfUp = new KeyFrame(Duration.millis(200), kvUp1, kvUp2, kvUp3);
+		timelineUp.getKeyFrames().add(kfUp);*/
+	}
+
+	@FXML
+	private void onExitExtend(){
+
+	}
+
+	@FXML
+	private void refreshPage(){
+
+		RotateTransition rotate = RotationUtils.getRotationTransitionFromBy(refreshImage,500,0, RotationUtils.Direction.COUNTERCLOCKWISE,360);
+		rotate.play();
+
+	}
+	@FXML
+	private void enterRefreshImage(){
+		refreshImage.setScaleX(1.2);
+		refreshImage.setScaleY(1.2);
+	}
+	@FXML
+	private void exitRefreshImage(){
+		refreshImage.setScaleX(1);
+		refreshImage.setScaleY(1);
+	}
 	@FXML
 	private void onBackToLoginPage() throws IOException {
 		Stage stage = (Stage) backButton.getScene().getWindow();
@@ -39,5 +152,9 @@ public class AppPage2Controller {
 		backArrow.setFitWidth(13);
 		backArrow.setFitHeight(13);
 	}
-	
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		usernameLabel.setText(user.getName());
+	}
 }
