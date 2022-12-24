@@ -5,15 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-3d-boxes-48.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-logout-64.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-search-128.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-search-64.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-us-dollar-26.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/userPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022_12_15_12_09__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022_12_15_12_09__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022_12_15_12_34__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022_12_15_12_34__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022_12_15_13_00__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022_12_15_13_00__Changes_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage2.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-us-dollar-52.png" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-us-dollar-52.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +36,7 @@
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/App.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/Doc.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/MyLauncher.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/AppPage2Controller.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/ItemPageController.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/spring/MyBatisAutoConfiguration.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/spring/MyTest.java" root0="FORCE_HIGHLIGHTING" />
