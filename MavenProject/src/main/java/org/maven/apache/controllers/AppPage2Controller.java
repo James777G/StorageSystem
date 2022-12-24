@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.RotateTransition;
@@ -14,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import org.maven.apache.App;
@@ -34,7 +36,8 @@ public class AppPage2Controller implements Initializable {
 	private User user = DataUtils.currentUser;
 
 	private Boolean isArrowDown = false;
-
+	@FXML
+	private Button testButton;
 	@FXML
 	private Button backButton;
 	
@@ -51,18 +54,19 @@ public class AppPage2Controller implements Initializable {
 	private Label usernameLabel;
 
 	@FXML
-	private AnchorPane slidePane;
+	private StackPane extendPane;
 
 	@FXML
 	private void onClickExtend(){
+		System.out.println("Clicked");
 		RotateTransition rotate;
-		Rectangle2D boxBounds = new Rectangle2D(100, 100, 170, 200);
+		/*Rectangle2D boxBounds = new Rectangle2D(100, 100, 170, 200);
 		Rectangle clipRect = new Rectangle();
 		clipRect.setWidth(boxBounds.getWidth());
-		slidePane.setClip(clipRect);
+		slidePane.setClip(clipRect);*/
 		if (isArrowDown){
-			rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,0, -90);
-			/* Animation for scroll up. */
+			rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,0, 90);
+			/* Animation for scroll up.
 			Timeline timelineUp = new Timeline();
 			timelineUp.setCycleCount(1);
 			timelineUp.setAutoReverse(true);
@@ -70,7 +74,7 @@ public class AppPage2Controller implements Initializable {
 			final KeyValue kvUp2 = new KeyValue(clipRect.translateYProperty(), boxBounds.getHeight());
 			final KeyValue kvUp3 = new KeyValue(slidePane.translateYProperty(), -boxBounds.getHeight());
 			final KeyFrame kfUp = new KeyFrame(Duration.millis(2000), kvUp1, kvUp2, kvUp3);
-			timelineUp.getKeyFrames().add(kfUp);
+			timelineUp.getKeyFrames().add(kfUp);*/
 			isArrowDown = false;
 		}else{
 			//EventHandler onFinished = new EventHandler() {
@@ -78,15 +82,15 @@ public class AppPage2Controller implements Initializable {
 			//		timelineBounce.play();
 			//	}
 			//};
-			rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,-90, 0);
-			Timeline timelineDown = new Timeline();
+			rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,90, 0);
+			/*Timeline timelineDown = new Timeline();
 			timelineDown.setCycleCount(1);
 			timelineDown.setAutoReverse(true);
 			final KeyValue kvDwn1 = new KeyValue(clipRect.heightProperty(), boxBounds.getHeight());
 			final KeyValue kvDwn2 = new KeyValue(clipRect.translateYProperty(), 0);
 			final KeyValue kvDwn3 = new KeyValue(slidePane.translateYProperty(), 0);
 			final KeyFrame kfDwn = new KeyFrame(Duration.millis(200), kvDwn1, kvDwn2, kvDwn3);
-			timelineDown.getKeyFrames().add(kfDwn);
+			timelineDown.getKeyFrames().add(kfDwn);*/
 			isArrowDown = true;
 		}
 		rotate.play();
@@ -95,6 +99,7 @@ public class AppPage2Controller implements Initializable {
 
 	@FXML
 	private void onEnterExtend() {
+		System.out.println("Entered");
 		/*Rectangle2D boxBounds = new Rectangle2D(100, 100, 170, 200);
 		Rectangle clipRect = new Rectangle();
 		clipRect.setWidth(boxBounds.getWidth());
@@ -112,7 +117,7 @@ public class AppPage2Controller implements Initializable {
 
 	@FXML
 	private void onExitExtend(){
-
+		System.out.println("Exit");
 	}
 
 	@FXML
