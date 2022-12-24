@@ -1,14 +1,17 @@
 package org.maven.apache.spring;
 
 
+import java.sql.Timestamp;
 import java.util.List;
 
 
 import org.maven.apache.MyLauncher;
 
+import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.item.Item;
 import org.maven.apache.mapper.ItemMapper;
 import org.maven.apache.mapper.UserMapper;
+import org.maven.apache.service.DateTransaction.DateTransactionService;
 import org.maven.apache.service.item.ItemService;
 import org.maven.apache.service.mail.MailService;
 import org.maven.apache.service.user.UserService;
@@ -81,4 +84,15 @@ public class MyTest {
         Thread.sleep(5000);
     }
 
+
+    @Test
+    public void test6(){
+
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+        DateTransactionService dateTransactionservice = context.getBean("dateTransactionService", DateTransactionService.class);
+       List<DateTransaction> dateTransaction = dateTransactionservice.selectAll();
+
+List<DateTransaction> date = dateTransactionservice.askedDate("2022-12-24");
+        System.out.println(dateTransaction);
+    }
 }

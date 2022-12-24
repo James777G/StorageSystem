@@ -1,7 +1,9 @@
 package org.maven.apache.dateTransaction;
 
-import java.sql.Timestamp;
+import lombok.Data;
 
+import java.sql.Timestamp;
+@Data
 public class DateTransaction {
     private Integer ItemID;
     private String ItemName;

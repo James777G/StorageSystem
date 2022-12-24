@@ -1,9 +1,11 @@
 package org.maven.apache.mapper;
 
 import org.maven.apache.dateTransaction.DateTransaction;
+import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
 import java.util.List;
-
+@Component
 public interface DateTransactionMapper {
 
     /**
@@ -12,6 +14,11 @@ public interface DateTransactionMapper {
      */
     List<DateTransaction> selectAll();
 
+    /**
+     * the method get all the information of that id represents
+     * @param id
+     * @return
+     */
     DateTransaction selectById(int id);
 
     /**
@@ -44,5 +51,12 @@ public interface DateTransactionMapper {
      * @param number attention this number should be the calculation of the addUnit and removeUnit
      */
     void currentUnitNumber(int number);
+
+    /**
+     * Used to get the list of information based on date input
+     * @param dateWanted the format of the dateWanted should be exactly like 2022-12-24
+     * @return
+     */
+    public List<DateTransaction> askedDate(String dateWanted);
 
 }

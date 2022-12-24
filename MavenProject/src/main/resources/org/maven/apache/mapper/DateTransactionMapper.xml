@@ -18,7 +18,7 @@ insert into DateTransactionTable(ItemName, AddUnit,RemoveUnit,CurrentUnit,Record
         <set>
         AddUnit =#{number}
         </set>
-        where ItemID = #{ItemID}
+        where ItemID = #{ItemID};
 
     </update>
 
@@ -27,7 +27,7 @@ insert into DateTransactionTable(ItemName, AddUnit,RemoveUnit,CurrentUnit,Record
         <set>
            RemoveUnit =#{number}
         </set>
-        where ItemID = #{ItemID}
+        where ItemID = #{ItemID};
 
     </update>
     <update id="currentUnitNumber">
@@ -36,7 +36,7 @@ insert into DateTransactionTable(ItemName, AddUnit,RemoveUnit,CurrentUnit,Record
         <set>
             CurrentUnit =#{number}
         </set>
-        where ItemID = #{ItemID}
+        where ItemID = #{ItemID};
     </update>
 
 
@@ -48,6 +48,15 @@ insert into DateTransactionTable(ItemName, AddUnit,RemoveUnit,CurrentUnit,Record
     <select id="selectAll" resultType="org.maven.apache.dateTransaction.DateTransaction">
     select * from DateTransactionTable;
 
+    </select>
+    <select id="selectById" resultType="org.maven.apache.dateTransaction.DateTransaction">
+        select ItemId,ItemName,AddUnit,RemoveUnit,CurrentUnit,RecordTime
+        from DateTransactionTable
+        where ItemID = #{id};
+    </select>
+
+    <select id="askedDate" resultType="org.maven.apache.dateTransaction.DateTransaction">
+        SELECT * FROM DateTransactionTable WHERE DATEDIFF(dd, #{dateWanted}, GETDATE()) = 0;
     </select>
 
 

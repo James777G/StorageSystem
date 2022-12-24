@@ -5,7 +5,7 @@ import org.maven.apache.dateTransaction.DateTransaction;
 import java.sql.Timestamp;
 import java.util.List;
 
-public interface dateTransactionService {
+public interface DateTransactionService {
 
     /**
      * would get all the information in the table
@@ -45,9 +45,9 @@ public interface dateTransactionService {
     void currentUnitNumber(int number);
 
     /**
-     * return the information that happen on that day
-     * @param date
+     * Used to get the list of information based on date input
+     * @param dateWanted the format of the dateWanted should be exactly like 2022-12-24
      * @return
      */
-    List<DateTransaction> askedDate(Timestamp date);
+    public List<DateTransaction> askedDate(String dateWanted);
 }

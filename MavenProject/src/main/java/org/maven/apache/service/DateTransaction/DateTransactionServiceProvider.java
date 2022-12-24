@@ -2,13 +2,12 @@ package org.maven.apache.service.DateTransaction;
 
 import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.mapper.DateTransactionMapper;
-import org.maven.apache.mapper.ItemMapper;
 
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
-public class dateTransactionServiceProvider implements dateTransactionService{
+public class DateTransactionServiceProvider implements DateTransactionService {
 
     private DateTransactionMapper DateTransactionMapper;
 
@@ -50,17 +49,7 @@ DateTransactionMapper.removeUnitNumber(number);
         DateTransactionMapper.currentUnitNumber(number);
     }
 
-    @Override
-    public List<DateTransaction> askedDate(Timestamp date) {
-        List<DateTransaction> allTable = selectAll();
-        List<DateTransaction> askedDate= new LinkedList<>();
-        for(DateTransaction eachDate:allTable){
-            if(eachDate.getRecordTime().getDate()==date.getDate()){
-                DateTransactionMapper.selectById(eachDate.getItemID());
-                askedDate.add(eachDate);
-            }
-        }
-
-        return askedDate ;
+    public List<DateTransaction> askedDate(String dateWanted){
+        return DateTransactionMapper.askedDate(dateWanted);
     }
 }
