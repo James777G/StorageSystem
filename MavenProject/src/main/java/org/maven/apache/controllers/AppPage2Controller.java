@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+<<<<<<< HEAD
 import java.util.concurrent.ExecutorService;
+=======
+import java.util.function.Function;
+>>>>>>> 82200d6cf16309c89b591bc9f3301464640e57ce
 
 import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
@@ -107,6 +111,10 @@ public class AppPage2Controller implements Initializable {
 		// load columns in itemTable
 		itemTable.autosize();
 		itemTable.setItems(dataList);
+		idColumn.setPrefWidth(100);
+		nameColumn.setPrefWidth(350);
+		amountColumn.setPrefWidth(200);
+		descriptionColumn.setPrefWidth(575);
 		itemTable.getTableColumns().add(idColumn);
 		itemTable.getTableColumns().add(nameColumn);
 		itemTable.getTableColumns().add(amountColumn);

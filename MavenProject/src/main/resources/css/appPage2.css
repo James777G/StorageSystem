@@ -29,3 +29,20 @@
     -fx-font-size: 14;
     -fx-font-weight: regular;
 }
+.controlButtonTick{
+    -fx-background-color: white;
+    -fx-background-radius: 100;
+    -fx-border-radius: 100;
+}
+.controlButtonTick:hover{
+    -fx-background-color: #feccc9;
+}
+
+.controlButtonRefresh{
+    -fx-background-color: white;
+    -fx-background-radius: 100;
+    -fx-border-radius: 100;
+}
+.controlButtonRefresh:hover{
+    -fx-background-color: #ddeab1;
+}
