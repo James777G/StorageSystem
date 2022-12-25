@@ -30,23 +30,23 @@ public class DateTransactionServiceProvider implements DateTransactionService {
     }
 
     @Override
-    public void addTransaction(int number) {
-        DateTransactionMapper.addTransaction(number);
+    public void addTransaction(DateTransaction dateTransaction) {
+        DateTransactionMapper.addTransaction(dateTransaction);
     }
 
     @Override
-    public void addUnitNumber(int number) {
-    DateTransactionMapper.addUnitNumber(number);
+    public void addUnitNumber(int updateNumber,int id) {
+    DateTransactionMapper.addUnitNumber(updateNumber,id);
     }
 
     @Override
-    public void removeUnitNumber(int number) {
-DateTransactionMapper.removeUnitNumber(number);
+    public void removeUnitNumber(int number,int id) {
+DateTransactionMapper.removeUnitNumber(number,id);
     }
 
     @Override
-    public void currentUnitNumber(int number) {
-        DateTransactionMapper.currentUnitNumber(number);
+    public void currentUnitNumber(int number,int id) {
+        DateTransactionMapper.currentUnitNumber(number,id);
     }
 
     public List<DateTransaction> askedDate(String dateWanted){

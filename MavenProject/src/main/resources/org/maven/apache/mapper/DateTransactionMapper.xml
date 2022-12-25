@@ -7,18 +7,18 @@
 <mapper namespace="org.maven.apache.mapper.DateTransactionMapper">
 
 
-    <insert id="addTransaction">
+    <insert id="addTransaction" useGeneratedKeys="true" keyProperty="ItemID">
 insert into DateTransactionTable(ItemName, AddUnit,RemoveUnit,CurrentUnit,RecordTime)
-        values (#{itemName},#{AddUnit},#{RemoveUnit},#{number}#{now()});
+        values (#{ItemName},#{AddUnit},#{RemoveUnit},#{CurrentUnit},now());
     </insert>
 
 
     <update id="addUnitNumber">
         update DateTransactionTable
         <set>
-        AddUnit =#{number}
+        AddUnit =#{updateNumber}
         </set>
-        where ItemID = #{ItemID};
+        where ItemID = #{id};
 
     </update>
 
@@ -27,7 +27,7 @@ insert into DateTransactionTable(ItemName, AddUnit,RemoveUnit,CurrentUnit,Record
         <set>
            RemoveUnit =#{number}
         </set>
-        where ItemID = #{ItemID};
+        where ItemID = #{id};
 
     </update>
     <update id="currentUnitNumber">
@@ -36,7 +36,7 @@ insert into DateTransactionTable(ItemName, AddUnit,RemoveUnit,CurrentUnit,Record
         <set>
             CurrentUnit =#{number}
         </set>
-        where ItemID = #{ItemID};
+        where ItemID = #{id};
     </update>
 
 
@@ -56,7 +56,8 @@ insert into DateTransactionTable(ItemName, AddUnit,RemoveUnit,CurrentUnit,Record
     </select>
 
     <select id="askedDate" resultType="org.maven.apache.dateTransaction.DateTransaction">
-        SELECT * FROM DateTransactionTable WHERE DATEDIFF(dd, #{dateWanted}, GETDATE()) = 0;
+        select * from  DateTransactionTable
+        where RecordTime like '2022-12-24%'
     </select>
 
 

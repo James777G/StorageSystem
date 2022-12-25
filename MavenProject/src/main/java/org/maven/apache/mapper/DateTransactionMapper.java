@@ -28,35 +28,23 @@ public interface DateTransactionMapper {
     void deleteById(int id);
 
 
-    /**
-     * insert the information to the table the input should be the calculation od the addunit and removeunit
-     * @param number the calculation od the addunit and removeunit
-     */
-    void addTransaction(int number);
 
-    /**
-     *Used to change the number that if the AddUnit is wrong
-     * @param number
-     */
-    void addUnitNumber(int number);
+    void addTransaction(DateTransaction dateTransaction);
 
-    /**
-     * *Used to change the number that if the RemoveUnit is wrong
-     * @param number
-     */
-    void removeUnitNumber(int number);
 
-    /**
-     * *Used to change the currentUnitvalue
-     * @param number attention this number should be the calculation of the addUnit and removeUnit
-     */
-    void currentUnitNumber(int number);
+    void addUnitNumber(int updateNumber,int id);
+
+
+    void removeUnitNumber(int number,int id);
+
+
+    void currentUnitNumber(int number,int id);
 
     /**
      * Used to get the list of information based on date input
      * @param dateWanted the format of the dateWanted should be exactly like 2022-12-24
      * @return
      */
-    public List<DateTransaction> askedDate(String dateWanted);
+     List<DateTransaction> askedDate(String dateWanted);
 
 }

@@ -11,11 +11,28 @@ public class DateTransaction {
     private Integer RemoveUnit;
     private Integer CurrentUnit;
     private Timestamp RecordTime;
+
+
+
+
     public Integer getCurrentUnit() {
+
+        if(CurrentUnit==null){
+            CurrentUnit=0;
+        }
+
+
         return CurrentUnit;
     }
 
+    /**
+     * input should be the calculation of original currentUnit + addUnit-removeUnit
+     * @param currentUnit
+     */
     public void setCurrentUnit(Integer currentUnit) {
+        if(currentUnit<0){
+            System.out.println("Wrong current unit less than 0");
+        }
         CurrentUnit = currentUnit;
     }
 

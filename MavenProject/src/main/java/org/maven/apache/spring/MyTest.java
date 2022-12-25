@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 
+import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import org.maven.apache.MyLauncher;
 
 import org.maven.apache.dateTransaction.DateTransaction;
@@ -90,9 +91,20 @@ public class MyTest {
 
         ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
         DateTransactionService dateTransactionservice = context.getBean("dateTransactionService", DateTransactionService.class);
-       List<DateTransaction> dateTransaction = dateTransactionservice.selectAll();
+    //dateTransactionservice.deleteById(3);
+dateTransactionservice.currentUnitNumber(30,4);
+        //   List<DateTransaction> dateTransaction = dateTransactionservice.selectAll();
 
-List<DateTransaction> date = dateTransactionservice.askedDate("2022-12-24");
-        System.out.println(dateTransaction);
+       // List<DateTransaction> date = dateTransactionservice.askedDate("2022-12-24");
+    //    DateTransaction dateTransaction = new DateTransaction();
+
+//        dateTransaction.setAddUnit(20);
+//        dateTransaction.setRemoveUnit(10);
+//        dateTransaction.setCurrentUnit(dateTransaction.getCurrentUnit()+ dateTransaction.getAddUnit()-dateTransaction.getRemoveUnit());
+//        dateTransaction.setItemName("Pepper");
+      //  System.out.println( "sdferhrtFRYGIHG:  "+ dateTransaction.getCurrentUnit());
+       // dateTransactionservice.addTransaction(dateTransaction);
+       // dateTransactionservice.addUnitNumber(999,3);
+       // System.out.println(date);
     }
 }
