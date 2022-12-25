@@ -88,7 +88,7 @@ public class AppPage2Controller implements Initializable {
 
 	private boolean isTableShown = false;
 
-	Timeline timeline = new Timeline();
+	private Timeline timeline = new Timeline();
 
 	
 	@Override
