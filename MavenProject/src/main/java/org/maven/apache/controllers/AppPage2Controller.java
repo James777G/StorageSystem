@@ -123,7 +123,7 @@ public class AppPage2Controller implements Initializable {
 		searchTable.setPickOnBounds(false);
 		// initialize search per sec
 		timeline.setCycleCount(Timeline.INDEFINITE);
-		searchOnBackground();
+		searchOnBackgroundPerSec();
 	}
 
 	@FXML
@@ -137,36 +137,30 @@ public class AppPage2Controller implements Initializable {
 	}
 
 	/**
-	 * perform fuzzy search and show the list of relevant cargos in background
+	 * perform fuzzy search and show the list of relevant cargos in background per sec
 	 */
-	private void searchOnBackground(){
-		Task<Void> backgroundTask = new Task<Void>() {
-			@Override
-			protected Void call() throws Exception {
-				Platform.runLater(() -> {
-					searchPerSec();
-				});
-				return null;
-			}
-		};
-		Thread backgroundThread = new Thread(backgroundTask);
-		backgroundThread.start();
-	}
-
-	/**
-	 * perform fuzzy search per sec
-	 */
-	private void searchPerSec(){
+	private void searchOnBackgroundPerSec(){
 		if (timeline != null) {
 			timeline.stop();
 		}
 		KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event){
-				List<Item> searchedItems = MyLauncher.context.getBean("itemService", ItemService.class).selectByCondition(FuzzySearch.getFuzzyName(searchField.getText()), Integer.MIN_VALUE);
-				ObservableList<Item> itemInfo = FXCollections.observableArrayList();
-				itemInfo.addAll(searchedItems);
-				searchTable.setItems(itemInfo);
+				Task<Void> backgroundTask = new Task<Void>() {
+					@Override
+					protected Void call() throws Exception {
+						List<Item> searchedItems = MyLauncher.context.getBean("itemService", ItemService.class).selectByCondition(FuzzySearch.getFuzzyName(searchField.getText()), Integer.MIN_VALUE);
+						ObservableList<Item> itemInfo = FXCollections.observableArrayList();
+						itemInfo.addAll(searchedItems);
+
+						Platform.runLater(() -> {
+							searchTable.setItems(itemInfo);
+						});
+						return null;
+					}
+				};
+				Thread backgroundThread = new Thread(backgroundTask);
+				backgroundThread.start();
 			}
 		});
 		timeline.getKeyFrames().add(keyFrame);
