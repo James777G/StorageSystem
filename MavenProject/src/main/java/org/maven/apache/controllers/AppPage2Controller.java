@@ -1,15 +1,21 @@
 package org.maven.apache.controllers;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXDrawer;
+import javafx.animation.KeyFrame;
 import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import org.maven.apache.App;
 
 import javafx.fxml.FXML;
@@ -29,8 +35,11 @@ public class AppPage2Controller implements Initializable {
 
 	private boolean isEnterExtend = false;
 
+	private  boolean isEnterExtended = false;
 	private Boolean isArrowDown = false;
 
+	@FXML
+	private VBox vbox ;
 	@FXML
 	private Button testButton;
 
@@ -60,7 +69,7 @@ public class AppPage2Controller implements Initializable {
 	@FXML
 	private void onEnterExtend(){
 		System.out.println("Entered");
-		if(!(userDrawer.isOpened())){
+		if(userDrawer.isClosed()){
 			userDrawer.open();
 			RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,90, 0);
 			rotate.play();
@@ -72,36 +81,27 @@ public class AppPage2Controller implements Initializable {
 		}else{
 			rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,90, 0);
 			isArrowDown = true;
-		}*/
+		}
 
 		if(userDrawer.isOpened()){
 			userDrawer.close();
 		}else{
 			userDrawer.open();
-		}
+		}*/
 		isEnterExtend = true;
 	}
 
 	@FXML
-	private void onExitExtend(){
+	private void onExitExtend() {
 		System.out.println("Exit");
-		RotateTransition rotate;
-		if (isArrowDown){
-			rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,0, 90);
-			isArrowDown = false;
-		}else{
-			rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,90, 0);
-			isArrowDown = true;
-		}
-		rotate.play();
-		if((userDrawer.isOpened()) && (DataUtils.isEnterExtended)){
+		if((userDrawer.isOpened()) && (!isEnterExtended)){
+			System.out.println("Exit Extend");
+			RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,0, 90);
+			rotate.play();
 			userDrawer.close();
-		}else{
-			userDrawer.open();
 		}
 		isEnterExtend = false;
 	}
-
 	@FXML
 	private void refreshPage(){
 
@@ -143,7 +143,17 @@ public class AppPage2Controller implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
-			VBox vbox = FXMLLoader.load(getClass().getResource("/fxml/userPage.fxml"));
+			vbox = FXMLLoader.load(getClass().getResource("/fxml/userPage.fxml"));
+			vbox.setOnMouseEntered(event -> {
+				isEnterExtended = true;
+			});
+			vbox.setOnMouseExited(event -> {
+				if (!isEnterExtend){
+					RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,0, 90);
+					rotate.play();
+					userDrawer.close();
+				}
+			});
 			System.out.println("trying");
 			userDrawer.setSidePane(vbox);
 		} catch (IOException e) {
