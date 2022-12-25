@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -31,6 +32,8 @@ import javafx.stage.Stage;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.RotationUtils;
+
+import javax.swing.*;
 
 
 public class AppPage2Controller implements Initializable {
@@ -107,7 +110,7 @@ public class AppPage2Controller implements Initializable {
 	}
 
 	@FXML
-	private void onEnterExtend() {
+	private void onEnterExtend(ActionEvent event) throws IOException {
 		System.out.println("Entered");
 		/*Rectangle2D boxBounds = new Rectangle2D(100, 100, 170, 200);
 		Rectangle clipRect = new Rectangle();
@@ -122,6 +125,15 @@ public class AppPage2Controller implements Initializable {
 		final KeyValue kvUp3 = new KeyValue(slidePane.translateYProperty(), -boxBounds.getHeight());
 		final KeyFrame kfUp = new KeyFrame(Duration.millis(200), kvUp1, kvUp2, kvUp3);
 		timelineUp.getKeyFrames().add(kfUp);*/
+
+
+		// display userPage scene
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("userPage.fxml"));
+		Parent root = loader.load();
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.show();
+
 	}
 
 	@FXML
