@@ -231,7 +231,7 @@
                   <Image url="@../image/Refresh-10.png" />
                </image>
             </ImageView>
-            <JFXDrawer defaultDrawerSize="300.0" direction="TOP" layoutX="1030.0" prefHeight="200.0" prefWidth="170.0" AnchorPane.bottomAnchor="440.0" />
+            <JFXDrawer fx:id="userDrawer" defaultDrawerSize="300.0" direction="TOP" layoutX="1030.0" prefHeight="200.0" prefWidth="170.0" AnchorPane.bottomAnchor="440.0" />
          </children>
          <cursor>
             <Cursor fx:constant="CLOSED_HAND" />
@@ -316,7 +316,7 @@
                         <Font name="Candara Bold" size="12.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="extendImage" fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="22.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0">
+                  <ImageView fx:id="extendImage" fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" AnchorPane.bottomAnchor="22.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="23.0">
                      <image>
                         <Image url="@../image/icons8-triangle-arrow-96.png" />
                      </image>

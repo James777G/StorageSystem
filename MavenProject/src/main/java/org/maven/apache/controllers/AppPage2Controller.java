@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDrawer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.RotateTransition;
@@ -16,6 +17,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import org.maven.apache.App;
@@ -57,6 +59,9 @@ public class AppPage2Controller implements Initializable {
 	private AnchorPane extendPane;
 
 	@FXML
+	private JFXDrawer userDrawer;
+
+	@FXML
 	private void onClickExtend(){
 		System.out.println("Clicked");
 		RotateTransition rotate;
@@ -94,7 +99,11 @@ public class AppPage2Controller implements Initializable {
 			isArrowDown = true;
 		}
 		rotate.play();
-
+		if(userDrawer.isOpened()){
+			userDrawer.close();
+		}else{
+			userDrawer.open();
+		}
 	}
 
 	@FXML
@@ -160,6 +169,13 @@ public class AppPage2Controller implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		usernameLabel.setText(user.getName());
+		try {
+			VBox vbox = FXMLLoader.load(getClass().getResource("/fxml/userPage.fxml"));
+			System.out.println("trying");
+			userDrawer.setSidePane(vbox);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		//usernameLabel.setText(user.getName());
 	}
 }
