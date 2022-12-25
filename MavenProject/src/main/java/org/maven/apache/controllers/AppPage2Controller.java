@@ -125,15 +125,6 @@ public class AppPage2Controller implements Initializable {
 		final KeyValue kvUp3 = new KeyValue(slidePane.translateYProperty(), -boxBounds.getHeight());
 		final KeyFrame kfUp = new KeyFrame(Duration.millis(200), kvUp1, kvUp2, kvUp3);
 		timelineUp.getKeyFrames().add(kfUp);*/
-
-
-		// display userPage scene
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("userPage.fxml"));
-		Parent root = loader.load();
-		Stage stage = new Stage();
-		stage.setScene(new Scene(root));
-		stage.show();
-
 	}
 
 	@FXML
