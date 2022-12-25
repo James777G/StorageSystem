@@ -304,7 +304,7 @@
                   </ImageView>
                </graphic>
             </Label>
-            <AnchorPane layoutX="1030.0" onMouseClicked="#onClickExtend" onMouseEntered="#onEnterExtend" onMouseExited="#onExitExtend" prefHeight="60.0" prefWidth="170.0">
+            <AnchorPane layoutX="1030.0" onMouseClicked="#onClickExtend" onMouseEntered="#onEnterExtend" prefHeight="60.0" prefWidth="170.0">
                <children>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <image>

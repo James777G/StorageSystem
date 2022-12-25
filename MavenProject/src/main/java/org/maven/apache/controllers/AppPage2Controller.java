@@ -35,7 +35,7 @@ public class AppPage2Controller implements Initializable {
 
 	private boolean isEnterExtend = false;
 
-	private  boolean isEnterExtended = false;
+	private  boolean isEnterExtended = true;
 	private Boolean isArrowDown = false;
 
 	@FXML
@@ -63,45 +63,32 @@ public class AppPage2Controller implements Initializable {
 
 	@FXML
 	private void onClickExtend(){
-		System.out.println("Clicked");
-	}
-
-	@FXML
-	private void onEnterExtend(){
-		System.out.println("Entered");
-		if(userDrawer.isClosed()){
-			userDrawer.open();
-			RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,90, 0);
-			rotate.play();
-		}
-		/*RotateTransition rotate;
-		if (isArrowDown){
+		RotateTransition rotate;
+		if (userDrawer.isOpened()){
 			rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,0, 90);
 			isArrowDown = false;
 		}else{
 			rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,90, 0);
 			isArrowDown = true;
 		}
-
+		rotate.play();
 		if(userDrawer.isOpened()){
 			userDrawer.close();
 		}else{
 			userDrawer.open();
-		}*/
-		isEnterExtend = true;
+		}
 	}
 
+
 	@FXML
-	private void onExitExtend() {
-		System.out.println("Exit");
-		if((userDrawer.isOpened()) && (!isEnterExtended)){
-			System.out.println("Exit Extend");
-			RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,0, 90);
+	private void onEnterExtend(){
+		if(userDrawer.isClosed()){
+			userDrawer.open();
+			RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,90, 0);
 			rotate.play();
-			userDrawer.close();
 		}
-		isEnterExtend = false;
 	}
+
 	@FXML
 	private void refreshPage(){
 
@@ -144,21 +131,16 @@ public class AppPage2Controller implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
 			vbox = FXMLLoader.load(getClass().getResource("/fxml/userPage.fxml"));
-			vbox.setOnMouseEntered(event -> {
-				isEnterExtended = true;
-			});
 			vbox.setOnMouseExited(event -> {
-				if (!isEnterExtend){
-					RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,0, 90);
-					rotate.play();
-					userDrawer.close();
-				}
+				RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,0, 90);
+				rotate.play();
+				userDrawer.close();
 			});
 			System.out.println("trying");
 			userDrawer.setSidePane(vbox);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		//usernameLabel.setText(user.getName());
+		usernameLabel.setText(user.getName());
 	}
 }
