@@ -4,23 +4,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.RotateTransition;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 import org.maven.apache.App;
 
 import javafx.fxml.FXML;
@@ -33,16 +22,18 @@ import org.maven.apache.user.User;
 import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.RotationUtils;
 
-import javax.swing.*;
-
 
 public class AppPage2Controller implements Initializable {
 
 	private User user = DataUtils.currentUser;
 
+	private boolean isEnterExtend = false;
+
 	private Boolean isArrowDown = false;
+
 	@FXML
 	private Button testButton;
+
 	@FXML
 	private Button backButton;
 	
@@ -59,77 +50,56 @@ public class AppPage2Controller implements Initializable {
 	private Label usernameLabel;
 
 	@FXML
-	private AnchorPane extendPane;
-
-	@FXML
 	private JFXDrawer userDrawer;
 
 	@FXML
 	private void onClickExtend(){
 		System.out.println("Clicked");
-		RotateTransition rotate;
-		/*Rectangle2D boxBounds = new Rectangle2D(100, 100, 170, 200);
-		Rectangle clipRect = new Rectangle();
-		clipRect.setWidth(boxBounds.getWidth());
-		slidePane.setClip(clipRect);*/
-		if (isArrowDown){
-			rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,0, 90);
-			/* Animation for scroll up.
-			Timeline timelineUp = new Timeline();
-			timelineUp.setCycleCount(1);
-			timelineUp.setAutoReverse(true);
-			final KeyValue kvUp1 = new KeyValue(clipRect.heightProperty(), 0);
-			final KeyValue kvUp2 = new KeyValue(clipRect.translateYProperty(), boxBounds.getHeight());
-			final KeyValue kvUp3 = new KeyValue(slidePane.translateYProperty(), -boxBounds.getHeight());
-			final KeyFrame kfUp = new KeyFrame(Duration.millis(2000), kvUp1, kvUp2, kvUp3);
-			timelineUp.getKeyFrames().add(kfUp);*/
-			isArrowDown = false;
-		}else{
-			//EventHandler onFinished = new EventHandler() {
-			//	public void handle(ActionEvent t) {
-			//		timelineBounce.play();
-			//	}
-			//};
-			rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,90, 0);
-			/*Timeline timelineDown = new Timeline();
-			timelineDown.setCycleCount(1);
-			timelineDown.setAutoReverse(true);
-			final KeyValue kvDwn1 = new KeyValue(clipRect.heightProperty(), boxBounds.getHeight());
-			final KeyValue kvDwn2 = new KeyValue(clipRect.translateYProperty(), 0);
-			final KeyValue kvDwn3 = new KeyValue(slidePane.translateYProperty(), 0);
-			final KeyFrame kfDwn = new KeyFrame(Duration.millis(200), kvDwn1, kvDwn2, kvDwn3);
-			timelineDown.getKeyFrames().add(kfDwn);*/
-			isArrowDown = true;
-		}
-		rotate.play();
-		if(userDrawer.isOpened()){
-			userDrawer.close();
-		}else{
-			userDrawer.open();
-		}
 	}
 
 	@FXML
 	private void onEnterExtend(){
 		System.out.println("Entered");
-		/*Rectangle2D boxBounds = new Rectangle2D(100, 100, 170, 200);
-		Rectangle clipRect = new Rectangle();
-		clipRect.setWidth(boxBounds.getWidth());
-		slidePane.setClip(clipRect);
-		/* Animation for scroll up.
-		Timeline timelineUp = new Timeline();
-		timelineUp.setCycleCount(1);
-		timelineUp.setAutoReverse(true);
-		final KeyValue kvUp1 = new KeyValue(clipRect.heightProperty(), 0);
-		final KeyValue kvUp2 = new KeyValue(clipRect.translateYProperty(), boxBounds.getHeight());
-		final KeyValue kvUp3 = new KeyValue(slidePane.translateYProperty(), -boxBounds.getHeight());
-		final KeyFrame kfUp = new KeyFrame(Duration.millis(200), kvUp1, kvUp2, kvUp3);
-		timelineUp.getKeyFrames().add(kfUp);*/
+		if(!(userDrawer.isOpened())){
+			userDrawer.open();
+			RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,90, 0);
+			rotate.play();
+		}
+		/*RotateTransition rotate;
+		if (isArrowDown){
+			rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,0, 90);
+			isArrowDown = false;
+		}else{
+			rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,90, 0);
+			isArrowDown = true;
+		}*/
+
+		if(userDrawer.isOpened()){
+			userDrawer.close();
+		}else{
+			userDrawer.open();
+		}
+		isEnterExtend = true;
 	}
 
 	@FXML
 	private void onExitExtend(){
 		System.out.println("Exit");
+		RotateTransition rotate;
+		if (isArrowDown){
+			rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,0, 90);
+			isArrowDown = false;
+		}else{
+			rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,90, 0);
+			isArrowDown = true;
+		}
+		rotate.play();
+		if((userDrawer.isOpened()) && (DataUtils.isEnterExtended)){
+			userDrawer.close();
+		}else{
+			userDrawer.open();
+		}
+		isEnterExtend = false;
 	}
 
 	@FXML
