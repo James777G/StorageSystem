@@ -110,7 +110,7 @@ public class AppPage2Controller implements Initializable {
 	}
 
 	@FXML
-	private void onEnterExtend(ActionEvent event) throws IOException {
+	private void onEnterExtend(){
 		System.out.println("Entered");
 		/*Rectangle2D boxBounds = new Rectangle2D(100, 100, 170, 200);
 		Rectangle clipRect = new Rectangle();
