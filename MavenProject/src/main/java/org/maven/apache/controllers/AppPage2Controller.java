@@ -8,9 +8,10 @@ import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -29,232 +30,220 @@ import org.maven.apache.search.FuzzySearch;
 import org.maven.apache.service.item.ItemService;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.DataUtils;
+import org.maven.apache.utils.SearchUtils;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
 
 public class AppPage2Controller implements Initializable {
-	
-	@FXML
-	private Button backButton;
 
-	@FXML
-	private JFXButton warehouseButton;
+    @FXML
+    private Button backButton;
 
-	@FXML
-	private JFXButton messageButton;
+    @FXML
+    private JFXButton warehouseButton;
 
-	@FXML
-	private JFXButton staffButton;
+    @FXML
+    private JFXButton messageButton;
 
-	@FXML
-	private JFXButton transactionButton;
+    @FXML
+    private JFXButton staffButton;
 
-	@FXML
-	private Label usernameLabel;
+    @FXML
+    private JFXButton transactionButton;
 
-	@FXML
-	private ImageView foldArrow;
+    @FXML
+    private Label usernameLabel;
 
-	@FXML
-	private MFXTextField searchField;
+    @FXML
+    private ImageView foldArrow;
 
-	@FXML
-	private MFXTableView<Item> itemTable;
+    @FXML
+    private MFXTextField searchField;
 
-	@FXML
-	private MFXTableView searchTable; //need parameter data type??
+    @FXML
+    private MFXTableView<Item> itemTable;
 
-	private final MFXTableColumn<Item> nameColumn = new MFXTableColumn<>("Product Name");
-	private final MFXTableColumn<Item> idColumn = new MFXTableColumn<>("Product ID");
-	private final MFXTableColumn<Item> amountColumn = new MFXTableColumn<>("Product Amount");
-	private final MFXTableColumn<Item> descriptionColumn = new MFXTableColumn<>("Product Description");
+    @FXML
+    private MFXTableView<Item> searchTable; //need parameter data type??
 
-	//pass the user from login page
-	private final User user = DataUtils.currentUser;
+    private final MFXTableColumn<Item> nameColumn = new MFXTableColumn<>("Product Name");
+    private final MFXTableColumn<Item> idColumn = new MFXTableColumn<>("Product ID");
+    private final MFXTableColumn<Item> amountColumn = new MFXTableColumn<>("Product Amount");
+    private final MFXTableColumn<Item> descriptionColumn = new MFXTableColumn<>("Product Description");
 
-	private final ObservableList<Item> dataList = FXCollections.observableArrayList();
+    //pass the user from login page
+    private final User user = DataUtils.currentUser;
 
-	private final List<Item> items = MyLauncher.context.getBean("itemService", ItemService.class).selectAll();
-	// get the item list from table stored in database
+    private final ObservableList<Item> dataList = FXCollections.observableArrayList();
 
-	private double tableOpacity = 1;
+    private final List<Item> items = MyLauncher.context.getBean("itemService", ItemService.class).selectAll();
+    // get the item list from table stored in database
 
-	private int rotateAngle = 0;
+    private double tableOpacity = 1;
 
-	private boolean isPickOnBounds = true;
+    private int rotateAngle = 0;
 
-	private boolean isTableShown = false;
+    private boolean isPickOnBounds = true;
 
-	private Timeline timeline = new Timeline();
+    private boolean isTableShown = false;
 
-	
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		usernameLabel.setText(user.getName());
-		warehouseButton.setOpacity(0);
-		staffButton.setOpacity(0);
-		transactionButton.setOpacity(0);
-		messageButton.setOpacity(0);
-		dataList.addAll(items);
-		// load columns in itemTable
-		itemTable.autosize();
-		itemTable.setItems(dataList);
-		idColumn.setPrefWidth(100);
-		nameColumn.setPrefWidth(350);
-		amountColumn.setPrefWidth(200);
-		descriptionColumn.setPrefWidth(575);
-		itemTable.getTableColumns().add(idColumn);
-		itemTable.getTableColumns().add(nameColumn);
-		itemTable.getTableColumns().add(amountColumn);
-		itemTable.getTableColumns().add(descriptionColumn);
-		// load columns in searchTable
-		searchTable.autosize();
-		searchTable.getTableColumns().add(idColumn);
-		searchTable.getTableColumns().add(nameColumn);
-		searchTable.getTableColumns().add(amountColumn);
-		searchTable.getTableColumns().add(descriptionColumn);
-		nameColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getItemName));
-		idColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getItemID));
-		descriptionColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getDescription));
-		amountColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getUnit));
-		searchTable.setPickOnBounds(false);
-		// initialize search per sec
-		timeline.setCycleCount(Timeline.INDEFINITE);
-		searchOnBackgroundPerSec();
-	}
+    private final Timeline timeline = new Timeline();
 
-	@FXML
-	private void onBackToLoginPage() throws IOException {
-		timeline.stop(); // stop searching per sec
-		Stage stage = (Stage) backButton.getScene().getWindow();
-		FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/logInPage.fxml"));
-		Scene scene = new Scene(loader.load());
-		stage.setScene(scene);
-		stage.show();
-	}
 
-	/**
-	 * perform fuzzy search and show the list of relevant cargos in background per sec
-	 */
-	private void searchOnBackgroundPerSec(){
-		if (timeline != null) {
-			timeline.stop();
-		}
-		KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event){
-				Task<Void> backgroundTask = new Task<Void>() {
-					@Override
-					protected Void call() throws Exception {
-						List<Item> searchedItems = MyLauncher.context.getBean("itemService", ItemService.class).selectByCondition(FuzzySearch.getFuzzyName(searchField.getText()), Integer.MIN_VALUE);
-						ObservableList<Item> itemInfo = FXCollections.observableArrayList();
-						itemInfo.addAll(searchedItems);
 
-						Platform.runLater(() -> {
-							searchTable.setItems(itemInfo);
-						});
-						return null;
-					}
-				};
-				Thread backgroundThread = new Thread(backgroundTask);
-				backgroundThread.start();
-			}
-		});
-		timeline.getKeyFrames().add(keyFrame);
-		timeline.playFromStart();
-	}
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        usernameLabel.setText(user.getName());
+        warehouseButton.setOpacity(0);
+        staffButton.setOpacity(0);
+        transactionButton.setOpacity(0);
+        messageButton.setOpacity(0);
+        dataList.addAll(items);
+        // load columns in itemTable
+        itemTable.autosize();
+        itemTable.setItems(dataList);
+        idColumn.setPrefWidth(100);
+        nameColumn.setPrefWidth(350);
+        amountColumn.setPrefWidth(200);
+        descriptionColumn.setPrefWidth(575);
+        itemTable.getTableColumns().add(idColumn);
+        itemTable.getTableColumns().add(nameColumn);
+        itemTable.getTableColumns().add(amountColumn);
+        itemTable.getTableColumns().add(descriptionColumn);
+        // load columns in searchTable
+        searchTable.autosize();
+        searchTable.getTableColumns().add(idColumn);
+        searchTable.getTableColumns().add(nameColumn);
+        searchTable.getTableColumns().add(amountColumn);
+        searchTable.getTableColumns().add(descriptionColumn);
+        nameColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getItemName));
+        idColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getItemID));
+        descriptionColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getDescription));
+        amountColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getUnit));
+        searchTable.setPickOnBounds(false);
+        // initialize search per sec
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        searchField.delegateFocusedProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue){
+                searchOnBackgroundPerSec();
+            }else{
+                timeline.stop();
+            }
+        });
+    }
 
-	@FXML
-	private void onEnterFoldArrow(){
-		foldArrow.setFitWidth(25);
-		foldArrow.setFitHeight(25);
-	}
+    @FXML
+    private void onBackToLoginPage() throws IOException {
+        timeline.stop(); // stop searching per sec
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/logInPage.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.show();
+    }
 
-	@FXML
-	private void onExitFoldArrow(){
-		foldArrow.setFitWidth(20);
-		foldArrow.setFitHeight(20);
-	}
+    /**
+     * perform fuzzy search and show the list of relevant cargos in background per sec
+     */
+    private void searchOnBackgroundPerSec() {
+        timeline.stop();
+        KeyFrame keyFrame = SearchUtils.generateKeyFrame(searchTable, searchField);
+        timeline.getKeyFrames().add(keyFrame);
+        timeline.playFromStart();
+    }
 
-	/**
-	 * fold or unfold the table that contains cargos and transactions
-	 */
-	@FXML
-	private void onClickFoldArrow(){
-		if (isTableShown){
-			// table is shown, should close it
-			tableOpacity = 0;
-			isPickOnBounds = false;
-			isTableShown = false;
-			rotateAngle = rotateAngle - 180;
-			// angle should be 180 (rotate from original image)
-		}else {
-			// table is closed, should expand it
-			tableOpacity = 1;
-			isPickOnBounds = true;
-			isTableShown = true;
-			rotateAngle = rotateAngle + 180;
-			// angle should be 0 (image view unchanged)
-		}
-		//set the appearance of the table and fold arrow
-		searchTable.setOpacity(tableOpacity);
-		searchTable.setPickOnBounds(isPickOnBounds);
-		foldArrow.setRotate(rotateAngle);
-	}
+    @FXML
+    private void onEnterFoldArrow() {
+        foldArrow.setFitWidth(25);
+        foldArrow.setFitHeight(25);
+    }
 
-	@FXML
-	private void onReleaseFoldArrow(){
-		foldArrow.setFitWidth(25);
-		foldArrow.setFitHeight(25);
-	}
+    @FXML
+    private void onExitFoldArrow() {
+        foldArrow.setFitWidth(20);
+        foldArrow.setFitHeight(20);
+    }
 
-	@FXML
-	private void onPressFoldArrow(){
-		foldArrow.setFitWidth(20);
-		foldArrow.setFitHeight(20);
-	}
+    /**
+     * fold or unfold the table that contains cargos and transactions
+     */
+    @FXML
+    private void onClickFoldArrow() {
+        if (isTableShown) {
+            // table is shown, should close it
+            tableOpacity = 0;
+            isPickOnBounds = false;
+            isTableShown = false;
+            rotateAngle = rotateAngle - 180;
+            // angle should be 180 (rotate from original image)
+        } else {
+            // table is closed, should expand it
+            tableOpacity = 1;
+            isPickOnBounds = true;
+            isTableShown = true;
+            rotateAngle = rotateAngle + 180;
+            // angle should be 0 (image view unchanged)
+        }
+        //set the appearance of the table and fold arrow
+        searchTable.setOpacity(tableOpacity);
+        searchTable.setPickOnBounds(isPickOnBounds);
+        foldArrow.setRotate(rotateAngle);
+    }
 
-	@FXML
-	private void enterWarehouseButton(){
-		warehouseButton.setOpacity(1);
-	}
+    @FXML
+    private void onReleaseFoldArrow() {
+        foldArrow.setFitWidth(25);
+        foldArrow.setFitHeight(25);
+    }
 
-	@FXML
-	private void exitWarehouseButton(){
-		warehouseButton.setOpacity(0);
-	}
+    @FXML
+    private void onPressFoldArrow() {
+        foldArrow.setFitWidth(20);
+        foldArrow.setFitHeight(20);
+    }
 
-	@FXML
-	private void enterStaffButton(){
-		staffButton.setOpacity(1);
-	}
+    @FXML
+    private void enterWarehouseButton() {
+        warehouseButton.setOpacity(1);
+    }
 
-	@FXML
-	private void exitStaffButton(){
-		staffButton.setOpacity(0);
-	}
+    @FXML
+    private void exitWarehouseButton() {
+        warehouseButton.setOpacity(0);
+    }
 
-	@FXML
-	private void enterTransactionButton(){
-		transactionButton.setOpacity(1);
-	}
+    @FXML
+    private void enterStaffButton() {
+        staffButton.setOpacity(1);
+    }
 
-	@FXML
-	private void exitTransactionButton(){
-		transactionButton.setOpacity(0);
-	}
+    @FXML
+    private void exitStaffButton() {
+        staffButton.setOpacity(0);
+    }
 
-	@FXML
-	private void enterMessageButton(){
-		messageButton.setOpacity(1);
-	}
+    @FXML
+    private void enterTransactionButton() {
+        transactionButton.setOpacity(1);
+    }
 
-	@FXML
-	private void exitMessageButton(){
-		messageButton.setOpacity(0);
-	}
+    @FXML
+    private void exitTransactionButton() {
+        transactionButton.setOpacity(0);
+    }
+
+    @FXML
+    private void enterMessageButton() {
+        messageButton.setOpacity(1);
+    }
+
+    @FXML
+    private void exitMessageButton() {
+        messageButton.setOpacity(0);
+    }
 
 }
