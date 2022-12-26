@@ -9,6 +9,8 @@ Unit int not null,
 Description varchar(100)
 );
 
+
+
 insert into ItemTable(ItemName, Unit) values
 ('Thatch', 10),
 ('Wood', 20),
@@ -29,9 +31,12 @@ insert into ItemTable(ItemName, Unit) values
 ('charcoal', 20),
 ('concealed gas ball', 500);
 
+
 insert into ItemTable(ItemName, Unit, Description) values
 ('simple bullet', 30, 'used for pistol'),
 ('bullet', 50, '');
+
+
 
 
 

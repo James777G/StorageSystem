@@ -20,23 +20,32 @@ public interface DateTransactionService {
      */
     void deleteById(int id);
 
+    /**
+     * the method get all the information of that id represents
+     * @param id
+     * @return
+     */
+    DateTransaction selectById(int id);
 
 
     void addTransaction(DateTransaction dateTransaction);
 
 
-    void addUnitNumber(int updateNumber,int id);
+    void changeAddUnitNumber(DateTransaction dateTransaction);
 
 
-    void removeUnitNumber(int number,int id);
+    void changeRemoveUnitNumber(DateTransaction dateTransaction);
 
 
-    void currentUnitNumber(int number,int id);
+    void changeCurrentUnitNumber(DateTransaction dateTransaction);
 
+    String getCurrentTime();
     /**
      * Used to get the list of information based on date input
      * @param dateWanted the format of the dateWanted should be exactly like 2022-12-24
      * @return
      */
     public List<DateTransaction> askedDate(String dateWanted);
+
+    void IdGapInside();
 }

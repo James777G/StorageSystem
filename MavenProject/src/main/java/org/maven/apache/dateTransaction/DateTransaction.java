@@ -10,7 +10,7 @@ public class DateTransaction {
     private Integer AddUnit;
     private Integer RemoveUnit;
     private Integer CurrentUnit;
-    private Timestamp RecordTime;
+    private String RecordTime;
 
 
 
@@ -68,11 +68,11 @@ public class DateTransaction {
         RemoveUnit = removeUnit;
     }
 
-    public Timestamp getRecordTime() {
+    public String getRecordTime() {
         return RecordTime;
     }
 
-    public void setRecordTime(Timestamp recordTime) {
+    public void setRecordTime(String recordTime) {
         RecordTime = recordTime;
     }
 }

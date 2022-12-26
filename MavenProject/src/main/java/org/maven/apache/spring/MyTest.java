@@ -2,6 +2,9 @@ package org.maven.apache.spring;
 
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -91,20 +94,48 @@ public class MyTest {
 
         ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
         DateTransactionService dateTransactionservice = context.getBean("dateTransactionService", DateTransactionService.class);
-    //dateTransactionservice.deleteById(3);
-dateTransactionservice.currentUnitNumber(30,4);
-        //   List<DateTransaction> dateTransaction = dateTransactionservice.selectAll();
+    dateTransactionservice.deleteById(3);
+    dateTransactionservice.IdGapInside();
+//dateTransactionservice.
 
-       // List<DateTransaction> date = dateTransactionservice.askedDate("2022-12-24");
-    //    DateTransaction dateTransaction = new DateTransaction();
 
+//        Calendar calendar= Calendar.getInstance();
+//        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd :hh:mm:ss");
+//        System.out.println(dateFormat.format(calendar.getTime()));
+
+
+        //  List<DateTransaction> dateTransaction = dateTransactionservice.selectAll();
+//DateTransaction dateTransaction = dateTransactionservice.selectById(1);
+//dateTransaction.setAddUnit(999);
+//dateTransactionservice.addUnitNumber(dateTransaction);
+//        List<DateTransaction> date = dateTransactionservice.askedDate("2022-12-21");
+//        System.out.println(date.get(0).getItemName());
+//        System.out.println(date.get(0).getItemID());
+//        DateTransaction dateTransaction = new DateTransaction();
+//
 //        dateTransaction.setAddUnit(20);
 //        dateTransaction.setRemoveUnit(10);
 //        dateTransaction.setCurrentUnit(dateTransaction.getCurrentUnit()+ dateTransaction.getAddUnit()-dateTransaction.getRemoveUnit());
 //        dateTransaction.setItemName("Pepper");
-      //  System.out.println( "sdferhrtFRYGIHG:  "+ dateTransaction.getCurrentUnit());
-       // dateTransactionservice.addTransaction(dateTransaction);
+//        dateTransaction.setRecordTime(dateTransactionservice.getCurrentTime());
+//      //  System.out.println( "sdferhrtFRYGIHG:  "+ dateTransaction.getCurrentUnit());
+//       dateTransactionservice.addTransaction(dateTransaction);
+//
+
+
        // dateTransactionservice.addUnitNumber(999,3);
        // System.out.println(date);
+    }
+
+    @Test
+    public void test7(){
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+        ItemService itemService = context.getBean("itemService", ItemService.class);
+        itemService.deleteById(1);
+        Item item=new Item();
+        item.setItemName("head phone");
+        item.setUnit(34);
+        itemService.addNewItem(item);
+        itemService.update(item);
     }
 }

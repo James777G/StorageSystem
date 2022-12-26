@@ -9,34 +9,45 @@
 
     <insert id="addTransaction" useGeneratedKeys="true" keyProperty="ItemID">
 insert into DateTransactionTable(ItemName, AddUnit,RemoveUnit,CurrentUnit,RecordTime)
-        values (#{ItemName},#{AddUnit},#{RemoveUnit},#{CurrentUnit},now());
+        values (#{ItemName},#{AddUnit},#{RemoveUnit},#{CurrentUnit},#{RecordTime});
     </insert>
 
 
-    <update id="addUnitNumber">
+    <update id="changeAddUnitNumber">
         update DateTransactionTable
         <set>
-        AddUnit =#{updateNumber}
+        AddUnit =#{AddUnit}
         </set>
-        where ItemID = #{id};
+        where ItemID = #{ItemID};
 
     </update>
 
-    <update id="removeUnitNumber">
+    <update id="changeRemoveUnitNumber">
         update DateTransactionTable
         <set>
-           RemoveUnit =#{number}
+           RemoveUnit =#{RemoveUnit}
         </set>
-        where ItemID = #{id};
+        where ItemID = #{ItemID};
 
     </update>
-    <update id="currentUnitNumber">
+    <update id="changeCurrentUnitNumber">
 
         update DateTransactionTable
         <set>
-            CurrentUnit =#{number}
+            CurrentUnit =#{CurrentUnit}
         </set>
-        where ItemID = #{id};
+        where ItemID = #{ItemID};
+    </update>
+
+    <update id="IdGapInside">
+        SET @auto_id = 0;
+        update DateTransactionTable
+        <set>
+
+            ItemID = (@auto_id := @auto_id + 1)
+        </set>
+        where 1=1;
+        ALTER TABLE DateTransactionTable AUTO_INCREMENT = 1;
     </update>
 
 
@@ -49,7 +60,7 @@ insert into DateTransactionTable(ItemName, AddUnit,RemoveUnit,CurrentUnit,Record
     select * from DateTransactionTable;
 
     </select>
-    <select id="selectById" resultType="org.maven.apache.dateTransaction.DateTransaction">
+    <select id="selectById" parameterType="int" resultType="org.maven.apache.dateTransaction.DateTransaction">
         select ItemId,ItemName,AddUnit,RemoveUnit,CurrentUnit,RecordTime
         from DateTransactionTable
         where ItemID = #{id};
@@ -57,7 +68,7 @@ insert into DateTransactionTable(ItemName, AddUnit,RemoveUnit,CurrentUnit,Record
 
     <select id="askedDate" resultType="org.maven.apache.dateTransaction.DateTransaction">
         select * from  DateTransactionTable
-        where RecordTime like '2022-12-24%'
+        where RecordTime like #{dateWanted};
     </select>
 
 

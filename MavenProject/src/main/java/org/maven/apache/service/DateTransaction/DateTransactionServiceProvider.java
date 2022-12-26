@@ -3,8 +3,8 @@ package org.maven.apache.service.DateTransaction;
 import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.mapper.DateTransactionMapper;
 
-import java.sql.Timestamp;
-import java.util.LinkedList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class DateTransactionServiceProvider implements DateTransactionService {
@@ -30,26 +30,44 @@ public class DateTransactionServiceProvider implements DateTransactionService {
     }
 
     @Override
+    public DateTransaction selectById(int id) {
+        return DateTransactionMapper.selectById(id);
+    }
+
+    @Override
     public void addTransaction(DateTransaction dateTransaction) {
         DateTransactionMapper.addTransaction(dateTransaction);
     }
 
     @Override
-    public void addUnitNumber(int updateNumber,int id) {
-    DateTransactionMapper.addUnitNumber(updateNumber,id);
+    public void changeAddUnitNumber(DateTransaction dateTransaction){
+        DateTransactionMapper.changeAddUnitNumber(dateTransaction);
     }
 
     @Override
-    public void removeUnitNumber(int number,int id) {
-DateTransactionMapper.removeUnitNumber(number,id);
+    public void changeRemoveUnitNumber(DateTransaction dateTransaction) {
+DateTransactionMapper.changeRemoveUnitNumber(dateTransaction);
     }
 
     @Override
-    public void currentUnitNumber(int number,int id) {
-        DateTransactionMapper.currentUnitNumber(number,id);
+    public void changeCurrentUnitNumber(DateTransaction dateTransaction) {
+        DateTransactionMapper.changeCurrentUnitNumber(dateTransaction);
+    }
+
+    @Override
+    public String getCurrentTime() {
+        Date date = new Date();
+        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd :HH:mm:ss");
+        String timeNow = dateFormat.format(date);
+        return timeNow;
     }
 
     public List<DateTransaction> askedDate(String dateWanted){
-        return DateTransactionMapper.askedDate(dateWanted);
+        return DateTransactionMapper.askedDate(dateWanted+"%");
+    }
+
+    @Override
+    public void IdGapInside() {
+        DateTransactionMapper.IdGapInside();
     }
 }

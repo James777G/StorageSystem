@@ -27,18 +27,19 @@ public interface DateTransactionMapper {
      */
     void deleteById(int id);
 
-
+    void  IdGapInside();
 
     void addTransaction(DateTransaction dateTransaction);
 
 
-    void addUnitNumber(int updateNumber,int id);
+    void changeAddUnitNumber(DateTransaction dateTransaction);
 
 
-    void removeUnitNumber(int number,int id);
+
+    void changeRemoveUnitNumber(DateTransaction dateTransaction);
 
 
-    void currentUnitNumber(int number,int id);
+    void changeCurrentUnitNumber(DateTransaction dateTransaction);
 
     /**
      * Used to get the list of information based on date input
