@@ -870,7 +870,7 @@
                   <Image url="@../image/Refresh-10.png" />
                </image>
             </ImageView>
-            <JFXDrawer defaultDrawerSize="200.0" direction="TOP" layoutX="1030.0" prefHeight="200.0" prefWidth="170.0" />
+            <JFXDrawer fx:id="userDrawer" defaultDrawerSize="300.0" direction="TOP" layoutX="1030.0" prefHeight="200.0" prefWidth="170.0" />
          </children>
       </AnchorPane>
    </children>
