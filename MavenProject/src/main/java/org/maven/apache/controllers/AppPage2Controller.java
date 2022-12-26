@@ -36,10 +36,11 @@ public class AppPage2Controller implements Initializable {
 	private boolean isEnterExtend = false;
 
 	private  boolean isEnterExtended = true;
-	private Boolean isArrowDown = false;
+	private boolean isArrowDown = false;
 
 	@FXML
 	private VBox vbox ;
+
 	@FXML
 	private Button testButton;
 
@@ -59,12 +60,12 @@ public class AppPage2Controller implements Initializable {
 	private Label usernameLabel;
 
 	@FXML
-	private JFXDrawer userDrawer;
+	private JFXDrawer VBoxDrawer;
 
 	@FXML
 	private void onClickExtend(){
 		RotateTransition rotate;
-		if (userDrawer.isOpened()){
+		if (VBoxDrawer.isOpened()){
 			rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,0, 90);
 			isArrowDown = false;
 		}else{
@@ -72,18 +73,17 @@ public class AppPage2Controller implements Initializable {
 			isArrowDown = true;
 		}
 		rotate.play();
-		if(userDrawer.isOpened()){
-			userDrawer.close();
+		if(VBoxDrawer.isOpened()){
+			VBoxDrawer.close();
 		}else{
-			userDrawer.open();
+			VBoxDrawer.open();
 		}
 	}
 
-
 	@FXML
 	private void onEnterExtend(){
-		if(userDrawer.isClosed()){
-			userDrawer.open();
+		if(VBoxDrawer.isClosed()){
+			VBoxDrawer.open();
 			RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,90, 0);
 			rotate.play();
 		}
@@ -91,10 +91,8 @@ public class AppPage2Controller implements Initializable {
 
 	@FXML
 	private void refreshPage(){
-
 		RotateTransition rotate = RotationUtils.getRotationTransitionFromBy(refreshImage,500,0, RotationUtils.Direction.COUNTERCLOCKWISE,360);
 		rotate.play();
-
 	}
 	@FXML
 	private void enterRefreshImage(){
@@ -130,14 +128,14 @@ public class AppPage2Controller implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
-			vbox = FXMLLoader.load(getClass().getResource("/fxml/userPage.fxml"));
+			vbox = FXMLLoader.load(getClass().getResource("/fxml/VBox.fxml"));
 			vbox.setOnMouseExited(event -> {
 				RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendImage,300,0, 90);
 				rotate.play();
-				userDrawer.close();
+				VBoxDrawer.close();
 			});
 			System.out.println("trying");
-			userDrawer.setSidePane(vbox);
+			VBoxDrawer.setSidePane(vbox);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
    <children>
       <AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -231,7 +231,7 @@
                   <Image url="@../image/Refresh-10.png" />
                </image>
             </ImageView>
-            <JFXDrawer fx:id="userDrawer" defaultDrawerSize="300.0" direction="TOP" layoutX="1030.0" prefHeight="200.0" prefWidth="170.0" AnchorPane.bottomAnchor="440.0" />
+            <JFXDrawer fx:id="VBoxDrawer" defaultDrawerSize="300.0" direction="TOP" layoutX="1030.0" prefHeight="200.0" prefWidth="170.0" AnchorPane.bottomAnchor="440.0" />
          </children>
          <cursor>
             <Cursor fx:constant="CLOSED_HAND" />

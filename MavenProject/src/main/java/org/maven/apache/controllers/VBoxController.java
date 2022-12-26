@@ -8,7 +8,7 @@ import org.maven.apache.utils.DataUtils;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class userPageController implements Initializable {
+public class VBoxController implements Initializable {
 
     @FXML
     private VBox vbox;
