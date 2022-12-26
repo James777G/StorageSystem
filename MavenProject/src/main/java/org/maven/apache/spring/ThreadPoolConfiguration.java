@@ -10,7 +10,7 @@ import java.util.concurrent.*;
 public class ThreadPoolConfiguration {
     @Bean
     public DedicatedThreadPoolExecutor threadPoolExecutor(){
-        BlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<Runnable>(10);
-        return new DedicatedThreadPoolExecutor(2, 4, 60, TimeUnit.SECONDS, workQueue, new ThreadPoolExecutor.AbortPolicy());
+        BlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<Runnable>(200);
+        return new DedicatedThreadPoolExecutor(4, 4, 60, TimeUnit.SECONDS, workQueue, new ThreadPoolExecutor.AbortPolicy());
     }
 }
