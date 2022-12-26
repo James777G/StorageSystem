@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/transactionPage.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-bar-chart-50.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-bar-chart-75.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-cheque-52 (1).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-sort-down-100.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-sort-left-100.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-warehouse-100.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage2.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/transactionPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/transactionPage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
