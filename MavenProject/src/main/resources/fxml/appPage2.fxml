@@ -910,7 +910,7 @@
                   <Image url="@../image/icons8-triangle-arrow-96.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="67.0" fitWidth="57.0" layoutX="59.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="refreshImage" fitHeight="67.0" fitWidth="57.0" layoutX="59.0" layoutY="337.0" onMouseClicked="#refreshPage" onMouseEntered="#enterRefreshImage" onMouseExited="#exitRefreshImage" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/Refresh-10.png" />
                </image>
