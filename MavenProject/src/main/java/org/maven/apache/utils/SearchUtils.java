@@ -25,11 +25,11 @@ public class SearchUtils {
 
     public static KeyFrame generateKeyFrame(MFXTableView<Item> searchTable, MFXTextField searchField){
         return new KeyFrame(Duration.seconds(0.2), event -> {
-            executorService.execute(() -> {
-                if(atomicInteger.compareAndSet(0, 1)){
+            if (atomicInteger.compareAndSet(0, 1)) {
+                executorService.execute(() -> {
                     task(searchTable, searchField);
-                }
-            });
+                });
+            }
         });
     }
     private static void task(MFXTableView<Item> searchTable, MFXTextField searchField){
