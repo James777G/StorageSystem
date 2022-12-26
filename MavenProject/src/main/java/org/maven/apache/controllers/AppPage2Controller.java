@@ -1,6 +1,7 @@
 package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDrawer;
 import io.github.palexdev.materialfx.controls.MFXTableColumn;
 import io.github.palexdev.materialfx.controls.MFXTableView;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -22,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.maven.apache.App;
@@ -67,6 +69,9 @@ public class AppPage2Controller implements Initializable {
     private ImageView refreshImage;
 
     @FXML
+    private ImageView extendArrow;
+
+    @FXML
     private MFXTextField searchField;
 
     @FXML
@@ -102,6 +107,18 @@ public class AppPage2Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            VBox vbox = FXMLLoader.load(getClass().getResource("/fxml/menuPage.fxml"));
+            vbox.setOnMouseExited(event -> {
+                RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,0, 90);
+                rotate.play();
+                VBoxDrawer.close();
+            });
+            System.out.println("trying");
+            VBoxDrawer.setSidePane(vbox);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         usernameLabel.setText(user.getName());
         warehouseButton.setOpacity(0);
         staffButton.setOpacity(0);
@@ -111,10 +128,6 @@ public class AppPage2Controller implements Initializable {
         // load columns in itemTable
         itemTable.autosize();
         itemTable.setItems(dataList);
-        idColumn.setPrefWidth(100);
-        nameColumn.setPrefWidth(350);
-        amountColumn.setPrefWidth(200);
-        descriptionColumn.setPrefWidth(575);
         itemTable.getTableColumns().add(idColumn);
         itemTable.getTableColumns().add(nameColumn);
         itemTable.getTableColumns().add(amountColumn);
@@ -140,16 +153,42 @@ public class AppPage2Controller implements Initializable {
             }
         });
     }
+    @FXML
+    private JFXDrawer VBoxDrawer;
 
     @FXML
-    private void onBackToLoginPage() throws IOException {
-        timeline.stop(); // stop searching per sec
-        Stage stage = (Stage) backButton.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/logInPage.fxml"));
-        Scene scene = new Scene(loader.load());
-        stage.setScene(scene);
-        stage.show();
+    private void onClickExtend(){
+        RotateTransition rotate;
+        if (VBoxDrawer.isOpened()){
+            rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,0, 90);
+        }else{
+            rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,90, 0);
+        }
+        rotate.play();
+        if(VBoxDrawer.isOpened()){
+            VBoxDrawer.close();
+        }else{
+            VBoxDrawer.open();
+        }
     }
+
+    @FXML
+    private void onEnterExtend(){
+        if(VBoxDrawer.isClosed()){
+            VBoxDrawer.open();
+            RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,90, 0);
+            rotate.play();
+        }
+    }
+//    @FXML
+//    private void onBackToLoginPage() throws IOException {
+//        timeline.stop(); // stop searching per sec
+//        Stage stage = (Stage) backButton.getScene().getWindow();
+//        FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/logInPage.fxml"));
+//        Scene scene = new Scene(loader.load());
+//        stage.setScene(scene);
+//        stage.show();
+//    }
 
     /**
      * perform fuzzy search and show the list of relevant cargos in background per sec
