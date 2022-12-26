@@ -16,7 +16,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
    <children>
       <AnchorPane prefHeight="60.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -908,6 +908,11 @@
             <ImageView fx:id="foldArrow" fitHeight="20.0" fitWidth="20.0" layoutX="810.0" layoutY="125.0" onMouseClicked="#onClickFoldArrow" onMouseEntered="#onEnterFoldArrow" onMouseExited="#onExitFoldArrow" onMousePressed="#onPressFoldArrow" onMouseReleased="#onReleaseFoldArrow" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/icons8-triangle-arrow-96.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="refreshImage" fitHeight="67.0" fitWidth="57.0" layoutX="59.0" layoutY="337.0" onMouseClicked="#refreshPage" onMouseEntered="#enterRefreshImage" onMouseExited="#exitRefreshImage" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/Refresh-10.png" />
                </image>
             </ImageView>
          </children>

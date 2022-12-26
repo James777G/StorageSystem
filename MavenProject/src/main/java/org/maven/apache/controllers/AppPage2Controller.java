@@ -6,6 +6,7 @@ import io.github.palexdev.materialfx.controls.MFXTableView;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import javafx.animation.KeyFrame;
+import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -30,6 +31,7 @@ import org.maven.apache.search.FuzzySearch;
 import org.maven.apache.service.item.ItemService;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.DataUtils;
+import org.maven.apache.utils.RotationUtils;
 import org.maven.apache.utils.SearchUtils;
 
 import java.io.IOException;
@@ -60,6 +62,9 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private ImageView foldArrow;
+
+    @FXML
+    private ImageView refreshImage;
 
     @FXML
     private MFXTextField searchField;
@@ -246,4 +251,20 @@ public class AppPage2Controller implements Initializable {
         messageButton.setOpacity(0);
     }
 
+    @FXML
+    private void refreshPage(){
+        RotateTransition rotate = RotationUtils.getRotationTransitionFromBy(refreshImage,500,0, RotationUtils.Direction.COUNTERCLOCKWISE,360);
+        rotate.play();
+    }
+    @FXML
+    private void enterRefreshImage(){
+        refreshImage.setScaleX(1.2);
+        refreshImage.setScaleY(1.2);
+    }
+    @FXML
+    private void exitRefreshImage(){
+        refreshImage.setScaleX(1);
+        refreshImage.setScaleY(1);
+    }
 }
+
