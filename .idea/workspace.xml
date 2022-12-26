@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/AppPage2Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/AppPage2Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-warehouse-100.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage2.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/transactionPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/transactionPage.fxml" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="feature/refresh_button_AppPage2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -51,6 +55,9 @@
     </option>
   </component>
   <component name="ProjectId" id="2IFtgksiyztrQIHqR8COvDECfQM" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
