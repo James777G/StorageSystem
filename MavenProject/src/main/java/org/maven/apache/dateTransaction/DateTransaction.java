@@ -31,7 +31,7 @@ public class DateTransaction {
      */
     public void setCurrentUnit(Integer currentUnit) {
         if(currentUnit<0){
-            System.out.println("Wrong current unit less than 0");
+            System.out.println("Wrong current unit less than 0 in datetransaction.Datetransaction file");
         }
         CurrentUnit = currentUnit;
     }
