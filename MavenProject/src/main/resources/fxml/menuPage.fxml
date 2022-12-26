@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="170.0" spacing="10.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label text="Your Status" textFill="#223c40">
+         <font>
+            <Font name="Candara Bold" size="12.0" />
+         </font>
+      </Label>
+      <AnchorPane prefHeight="68.0" prefWidth="168.0" style="-fx-background-color: #eeeeee;">
+         <children>
+            <Label layoutX="64.0" layoutY="6.0" text="ONLINE" textFill="#759751" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="6.0">
+               <font>
+                  <Font name="Candara Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="61.0" layoutY="26.0" text="OFFLINE" textFill="#ff6f68" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="26.0">
+               <font>
+                  <Font name="Candara Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="60.0" layoutY="46.0" text="INVISIBLE" textFill="#aaaaaa">
+               <font>
+                  <Font name="Candara Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label prefHeight="25.0" prefWidth="85.0" text="Settings" textFill="#223c40">
+         <font>
+            <Font name="Candara Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-settings-384%20(1).png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <JFXButton fx:id="backButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onBackToLoginPage" prefHeight="40.0" prefWidth="168.0" styleClass="JFXButton" stylesheets="@../css/appPage2.css" text="Log out" textFill="#223c40">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-logout-64.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="Candara Bold" size="15.0" />
+         </font>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </JFXButton>
+   </children>
+   <padding>
+      <Insets bottom="2.0" top="2.0" />
+   </padding>
+</VBox>
