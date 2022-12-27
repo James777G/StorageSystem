@@ -45,9 +45,6 @@ import java.util.concurrent.ExecutorService;
 public class AppPage2Controller implements Initializable {
 
     @FXML
-    private Button backButton;
-
-    @FXML
     private JFXButton warehouseButton;
 
     @FXML
@@ -135,7 +132,6 @@ public class AppPage2Controller implements Initializable {
         amountColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getUnit));
         searchTable.setPickOnBounds(false);
         // initialize search per sec
-        timeline.setCycleCount(Timeline.INDEFINITE);
         searchField.delegateFocusedProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue){
                 searchOnBackgroundPerSec();
@@ -157,7 +153,6 @@ public class AppPage2Controller implements Initializable {
             throw new RuntimeException(e);
         }
     }
-
 
     @FXML
     private void onClickExtend(){
@@ -183,22 +178,13 @@ public class AppPage2Controller implements Initializable {
             rotate.play();
         }
     }
-//    @FXML
-//    private void onBackToLoginPage() throws IOException {
-//        timeline.stop(); // stop searching per sec
-//        Stage stage = (Stage) backButton.getScene().getWindow();
-//        FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/logInPage.fxml"));
-//        Scene scene = new Scene(loader.load());
-//        stage.setScene(scene);
-//        stage.show();
-//    }
 
     /**
      * perform fuzzy search and show the list of relevant cargos in background per sec
      */
     private void searchOnBackgroundPerSec() {
-        timeline.stop();
         KeyFrame keyFrame = SearchUtils.generateKeyFrame(searchTable, searchField);
+        timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.getKeyFrames().add(keyFrame);
         timeline.playFromStart();
     }

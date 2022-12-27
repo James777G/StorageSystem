@@ -19,7 +19,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class SearchUtils {
 
     private static final AtomicInteger atomicInteger= new AtomicInteger();
-
     private static final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
     private static final ItemService itemService = MyLauncher.context.getBean("itemService", ItemService.class);
 
