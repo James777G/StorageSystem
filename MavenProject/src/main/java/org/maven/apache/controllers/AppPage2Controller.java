@@ -80,6 +80,9 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private MFXTableView<Item> searchTable; //need parameter data type??
 
+    @FXML
+    private JFXDrawer VBoxDrawer;
+
     private final MFXTableColumn<Item> nameColumn = new MFXTableColumn<>("Product Name");
     private final MFXTableColumn<Item> idColumn = new MFXTableColumn<>("Product ID");
     private final MFXTableColumn<Item> amountColumn = new MFXTableColumn<>("Product Amount");
@@ -154,8 +157,7 @@ public class AppPage2Controller implements Initializable {
             throw new RuntimeException(e);
         }
     }
-    @FXML
-    private JFXDrawer VBoxDrawer;
+
 
     @FXML
     private void onClickExtend(){
