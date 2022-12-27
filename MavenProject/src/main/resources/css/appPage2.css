@@ -2,5 +2,47 @@
 
 .JFXButton:hover {
     -fx-border-color: -darkGrey-theme;
+}
+.resultPane{
+    -fx-background-radius: 5 5 10 10;
+    -fx-border-radius: 5 5 10 10;
+    -fx-background-color: white;
+}
+.allCheckBox{
+    -mfx-main: -darkGrey-theme;
+}
+.takenCheckBox{
+    -mfx-main:  #feccc9;
+    -mfx-secondary: #ff4137;
+}
+.restockCheckBox{
+    -mfx-main:   #ddeab1;
+    -mfx-secondary: #759751;
+}
 
+
+.mfx-table-column{
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+.mfx-table-row-cell {
+    -fx-font-size: 14;
+    -fx-font-weight: regular;
+}
+.controlButtonTick{
+    -fx-background-color: white;
+    -fx-background-radius: 100;
+    -fx-border-radius: 100;
+}
+.controlButtonTick:hover{
+    -fx-background-color: #feccc9;
+}
+
+.controlButtonRefresh{
+    -fx-background-color: white;
+    -fx-background-radius: 100;
+    -fx-border-radius: 100;
+}
+.controlButtonRefresh:hover{
+    -fx-background-color: #ddeab1;
 }
