@@ -107,18 +107,6 @@ public class AppPage2Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            VBox vbox = FXMLLoader.load(getClass().getResource("/fxml/menuPage.fxml"));
-            vbox.setOnMouseExited(event -> {
-                RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,0, 90);
-                rotate.play();
-                VBoxDrawer.close();
-            });
-            System.out.println("trying");
-            VBoxDrawer.setSidePane(vbox);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         usernameLabel.setText(user.getName());
         warehouseButton.setOpacity(0);
         staffButton.setOpacity(0);
@@ -152,6 +140,19 @@ public class AppPage2Controller implements Initializable {
                 timeline.stop();
             }
         });
+        // load the menu VBox to drawer
+        try {
+            VBox vbox = FXMLLoader.load(getClass().getResource("/fxml/menuPage.fxml"));
+            vbox.setOnMouseExited(event -> {
+                RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,0, 90);
+                rotate.play();
+                VBoxDrawer.close();
+            });
+            System.out.println("trying");
+            VBoxDrawer.setSidePane(vbox);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     @FXML
     private JFXDrawer VBoxDrawer;
