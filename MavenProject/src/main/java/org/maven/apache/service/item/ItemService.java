@@ -39,11 +39,10 @@ public interface ItemService {
      * @param item an instance of Item
      * @return an integer showing how many number of rows in the table are affected
      */
-   int update(Item item);
+    int update(Item item);
 
     /**
-     * deletes an item in the item table by its id after remove the item if there is the missing number between
-     * two id could call fixIdGapInside method
+     * deletes an item in the item table by its id
      * @param id an integer ItemID
      */
     void deleteById(int id);
@@ -53,10 +52,5 @@ public interface ItemService {
      * @param ids an array of IDs
      */
     void deleteByIds(int[] ids);
-
-    /**
-     * fix if the table have missing id
-     */
-    void fixIdGapInside();
 
 }

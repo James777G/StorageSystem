@@ -57,7 +57,7 @@ public interface ItemMapper {
 	int update(Item item);
 
 
-	void fixIdGapInside();
+	
 	
 	
 	/**
