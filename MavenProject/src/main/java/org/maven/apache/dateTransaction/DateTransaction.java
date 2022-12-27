@@ -77,9 +77,12 @@ public class DateTransaction {
     }
 
     public int calculateCurrentUnit(){
-        int calculation = AddUnit - RemoveUnit;
+        if(CurrentUnit==null){
+            CurrentUnit=0;
+        }
+        int calculation = CurrentUnit+ AddUnit - RemoveUnit;
         if(calculation<0){
-            System.out.println("calculation is ");
+            System.out.println("Remain number should not be minus ");
         }
         return calculation;
     }

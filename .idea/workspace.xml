@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="check">
+    <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="a new function to get the calculation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/dateTransaction/DateTransaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/dateTransaction/DateTransaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/spring/MyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/spring/MyTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,13 +40,13 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/spring/MyTest.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/MyLauncher.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/spring/MyBatisAutoConfiguration.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/spring/SpringConfiguration.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/MavenProject/src/main/resources/fxml/itemPage.fxml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/Doc.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/resources/fxml/logInPage.fxml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/ItemPageController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/MyLauncher.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MavenProject/src/main/resources/fxml/itemPage.fxml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/App.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MavenProject/pom.xml" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -66,6 +65,7 @@
     <property name="DatabaseDriversLRU" value="redshift&#10;mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="database.main" />
   </component>
   <component name="RecentsManager">
@@ -134,7 +134,8 @@
       <workItem from="1671712044621" duration="771000" />
       <workItem from="1671713444168" duration="35029000" />
       <workItem from="1672047719299" duration="9311000" />
-      <workItem from="1672131872951" duration="1227000" />
+      <workItem from="1672131872951" duration="2224000" />
+      <workItem from="1672177916098" duration="240000" />
     </task>
     <task id="LOCAL-00001" summary="create new package and check whether intelllij could work">
       <created>1671750796270</created>
@@ -178,7 +179,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672056613020</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="a new function to get the calculation">
+      <created>1672133281683</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1672133281683</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,6 +211,7 @@
     <MESSAGE value="有几个function不好用 找不到parameter 可能是需要再次建立实体类转换成bean" />
     <MESSAGE value="after delete the id the id would missing could call fixIdGapInside method" />
     <MESSAGE value="check" />
-    <option name="LAST_COMMIT_MESSAGE" value="check" />
+    <MESSAGE value="a new function to get the calculation" />
+    <option name="LAST_COMMIT_MESSAGE" value="a new function to get the calculation" />
   </component>
 </project>
