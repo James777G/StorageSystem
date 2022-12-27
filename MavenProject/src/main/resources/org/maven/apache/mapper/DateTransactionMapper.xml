@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 这个文件的文件路径不要动-->
+<!-- 名称空间-->
+<mapper namespace="org.maven.apache.mapper.DateTransactionMapper">
+
+
+    <insert id="addTransaction" useGeneratedKeys="true" keyProperty="ItemID">
+insert into DateTransactionTable(ItemName, AddUnit,RemoveUnit,CurrentUnit,RecordTime)
+        values (#{ItemName},#{AddUnit},#{RemoveUnit},#{CurrentUnit},#{RecordTime});
+    </insert>
+
+
+    <update id="changeAddUnitNumber">
+        update DateTransactionTable
+        <set>
+        AddUnit =#{AddUnit}
+        </set>
+        where ItemID = #{ItemID};
+
+    </update>
+
+    <update id="changeRemoveUnitNumber">
+        update DateTransactionTable
+        <set>
+           RemoveUnit =#{RemoveUnit}
+        </set>
+        where ItemID = #{ItemID};
+
+    </update>
+    <update id="changeCurrentUnitNumber">
+
+        update DateTransactionTable
+        <set>
+            CurrentUnit =#{CurrentUnit}
+        </set>
+        where ItemID = #{ItemID};
+    </update>
+
+    <update id="IdGapInside">
+        SET @auto_id = 0;
+        update DateTransactionTable
+        <set>
+
+            ItemID = (@auto_id := @auto_id + 1)
+        </set>
+        where 1=1;
+        ALTER TABLE DateTransactionTable AUTO_INCREMENT = 1;
+    </update>
+
+
+    <delete id="deleteById">
+        delete from DateTransactionTable where ItemID = #{id};
+    </delete>
+
+
+    <select id="selectAll" resultType="org.maven.apache.dateTransaction.DateTransaction">
+    select * from DateTransactionTable;
+
+    </select>
+    <select id="selectById" parameterType="int" resultType="org.maven.apache.dateTransaction.DateTransaction">
+        select ItemId,ItemName,AddUnit,RemoveUnit,CurrentUnit,RecordTime
+        from DateTransactionTable
+        where ItemID = #{id};
+    </select>
+
+    <select id="askedDate" resultType="org.maven.apache.dateTransaction.DateTransaction">
+        select * from  DateTransactionTable
+        where RecordTime like #{dateWanted};
+    </select>
+
+
+</mapper>

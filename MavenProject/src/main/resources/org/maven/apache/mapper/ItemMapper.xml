@@ -45,6 +45,7 @@
     </insert>
 
 
+
     <update id="update">
         update ItemTable
         <set>
@@ -60,6 +61,17 @@
         </set>
         where ItemID = #{ItemID}
 
+    </update>
+
+    <update id="fixIdGapInside">
+        SET @auto_id = 0;
+        update ItemTable
+        <set>
+
+            ItemID = (@auto_id := @auto_id + 1)
+        </set>
+        where 1=1;
+        ALTER TABLE ItemTable AUTO_INCREMENT = 1;
     </update>
 
     <delete id="deleteById">
