@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="after delete the id the id would missing could call fixIdGapInside method" />
+    <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="check">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/dateTransaction/DateTransaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/dateTransaction/DateTransaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/spring/MyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/spring/MyTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -129,7 +133,8 @@
       <workItem from="1671711848373" duration="1000" />
       <workItem from="1671712044621" duration="771000" />
       <workItem from="1671713444168" duration="35029000" />
-      <workItem from="1672047719299" duration="7921000" />
+      <workItem from="1672047719299" duration="9311000" />
+      <workItem from="1672131872951" duration="1227000" />
     </task>
     <task id="LOCAL-00001" summary="create new package and check whether intelllij could work">
       <created>1671750796270</created>
@@ -166,7 +171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672056066858</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="check">
+      <created>1672056613020</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1672056613020</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -190,6 +202,7 @@
     <MESSAGE value="the function is all done but not test yet" />
     <MESSAGE value="有几个function不好用 找不到parameter 可能是需要再次建立实体类转换成bean" />
     <MESSAGE value="after delete the id the id would missing could call fixIdGapInside method" />
-    <option name="LAST_COMMIT_MESSAGE" value="after delete the id the id would missing could call fixIdGapInside method" />
+    <MESSAGE value="check" />
+    <option name="LAST_COMMIT_MESSAGE" value="check" />
   </component>
 </project>

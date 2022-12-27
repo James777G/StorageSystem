@@ -75,4 +75,12 @@ public class DateTransaction {
     public void setRecordTime(String recordTime) {
         RecordTime = recordTime;
     }
+
+    public int calculateCurrentUnit(){
+        int calculation = AddUnit - RemoveUnit;
+        if(calculation<0){
+            System.out.println("calculation is ");
+        }
+        return calculation;
+    }
 }

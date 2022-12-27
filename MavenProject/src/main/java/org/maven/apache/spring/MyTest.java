@@ -94,8 +94,8 @@ public class MyTest {
 
         ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
         DateTransactionService dateTransactionservice = context.getBean("dateTransactionService", DateTransactionService.class);
-    dateTransactionservice.deleteById(3);
-    dateTransactionservice.IdGapInside();
+//    dateTransactionservice.deleteById(3);
+//    dateTransactionservice.IdGapInside();
 //dateTransactionservice.
 
 
@@ -111,13 +111,15 @@ public class MyTest {
 //        List<DateTransaction> date = dateTransactionservice.askedDate("2022-12-21");
 //        System.out.println(date.get(0).getItemName());
 //        System.out.println(date.get(0).getItemID());
-//        DateTransaction dateTransaction = new DateTransaction();
-//
-//        dateTransaction.setAddUnit(20);
-//        dateTransaction.setRemoveUnit(10);
-//        dateTransaction.setCurrentUnit(dateTransaction.getCurrentUnit()+ dateTransaction.getAddUnit()-dateTransaction.getRemoveUnit());
+        DateTransaction dateTransaction = new DateTransaction();
+
+        dateTransaction.setAddUnit(20);
+        dateTransaction.setRemoveUnit(10);
+//        dateTransaction.setCurrentUnit(dateTransaction.calculateCurrentUnit());
 //        dateTransaction.setItemName("Pepper");
 //        dateTransaction.setRecordTime(dateTransactionservice.getCurrentTime());
+
+        System.out.println(dateTransaction.calculateCurrentUnit());
 //      //  System.out.println( "sdferhrtFRYGIHG:  "+ dateTransaction.getCurrentUnit());
 //       dateTransactionservice.addTransaction(dateTransaction);
 //
