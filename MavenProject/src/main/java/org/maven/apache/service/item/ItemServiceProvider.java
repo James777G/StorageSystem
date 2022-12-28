@@ -105,12 +105,4 @@ public class ItemServiceProvider implements ItemService{
     public void deleteByIds(int[] ids) {
         itemMapper.deleteByIds(ids);
     }
-
-    @Override
-    public void fixIdGapInside() {
-        itemMapper.fixIdGapInside();
-    }
-
-
-
 }
