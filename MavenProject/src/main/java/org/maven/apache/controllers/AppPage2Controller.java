@@ -28,9 +28,12 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.maven.apache.App;
 import org.maven.apache.MyLauncher;
+import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.item.Item;
 import org.maven.apache.search.FuzzySearch;
+import org.maven.apache.service.DateTransaction.DateTransactionService;
 import org.maven.apache.service.item.ItemService;
+import org.maven.apache.service.user.UserService;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.RotationUtils;
@@ -292,6 +295,12 @@ public class AppPage2Controller implements Initializable {
     private void exitRefreshImage(){
         refreshImage.setScaleX(1);
         refreshImage.setScaleY(1);
+    }
+    
+
+    private void getDataTransitionData(){
+        DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransaction" , DateTransactionService.class);
+        List<DateTransaction> dateTransactionList = dateTransactionService.selectAll();
     }
 }
 

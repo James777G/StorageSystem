@@ -529,7 +529,7 @@
             </Label>
             <AnchorPane layoutX="120.0" layoutY="496.0" prefHeight="80.0" prefWidth="180.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="500.0">
                <children>
-                  <Label layoutX="73.0" layoutY="14.0" prefHeight="17.0" prefWidth="107.0" text="Cargo name*****" textFill="#23242a" underline="true" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="10.0">
+                  <Label fx:id="cargoNameLabel01" layoutX="73.0" layoutY="14.0" prefHeight="17.0" prefWidth="107.0" text="Cargo name*****" textFill="#23242a" underline="true" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="10.0">
                      <font>
                         <Font name="Candara Bold" size="13.0" />
                      </font>
@@ -539,7 +539,7 @@
                         <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="88.0" layoutY="32.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="32.0">
+                  <Label fx:id="cargoAmountLabel01" layoutX="88.0" layoutY="32.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="32.0">
                      <font>
                         <Font name="Candara Bold" size="14.0" />
                      </font>
@@ -555,7 +555,7 @@
                         <Image url="@../image/icons8-user-96.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="41.0" layoutY="70.0" text="Staff name*******" textFill="#223c40" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="60.0">
+                  <Label fx:id="staffNameLabel01" layoutX="41.0" layoutY="70.0" text="Staff name*******" textFill="#223c40" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="60.0">
                      <font>
                         <Font name="Candara Bold" size="12.0" />
                      </font>
@@ -569,7 +569,7 @@
             </Label>
             <AnchorPane layoutX="424.0" layoutY="498.0" prefHeight="80.0" prefWidth="180.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-radius: 15;" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="500.0">
                <children>
-                  <Label layoutX="73.0" layoutY="14.0" prefHeight="17.0" prefWidth="107.0" text="Cargo name*****" textFill="#23242a" underline="true" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="10.0">
+                  <Label fx:id="cargoNameLabel02" layoutX="73.0" layoutY="14.0" prefHeight="17.0" prefWidth="107.0" text="Cargo name*****" textFill="#23242a" underline="true" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="10.0">
                      <font>
                         <Font name="Candara Bold" size="13.0" />
                      </font>
@@ -579,7 +579,7 @@
                         <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="88.0" layoutY="32.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="32.0">
+                  <Label fx:id="cargoAmountLabel02" layoutX="88.0" layoutY="32.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="32.0">
                      <font>
                         <Font name="Candara Bold" size="14.0" />
                      </font>
@@ -595,7 +595,7 @@
                         <Image url="@../image/icons8-user-96.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="41.0" layoutY="70.0" text="Staff name*******" textFill="#223c40" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="60.0">
+                  <Label fx:id="staffNameLabel02" layoutX="41.0" layoutY="70.0" text="Staff name*******" textFill="#223c40" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="60.0">
                      <font>
                         <Font name="Candara Bold" size="12.0" />
                      </font>
@@ -604,7 +604,7 @@
             </AnchorPane>
             <AnchorPane layoutX="695.0" layoutY="502.0" prefHeight="80.0" prefWidth="180.0" AnchorPane.leftAnchor="620.0" AnchorPane.topAnchor="500.0">
                <children>
-                  <Label layoutX="73.0" layoutY="14.0" prefHeight="17.0" prefWidth="107.0" text="Cargo name*****" textFill="#23242a" underline="true" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="10.0">
+                  <Label fx:id="cargoNameLabel03" layoutX="73.0" layoutY="14.0" prefHeight="17.0" prefWidth="107.0" text="Cargo name*****" textFill="#23242a" underline="true" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="10.0">
                      <font>
                         <Font name="Candara Bold" size="13.0" />
                      </font>
@@ -614,7 +614,7 @@
                         <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="88.0" layoutY="32.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="32.0">
+                  <Label fx:id="cargoAmountLabel03" layoutX="88.0" layoutY="32.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="32.0">
                      <font>
                         <Font name="Candara Bold" size="14.0" />
                      </font>
@@ -630,7 +630,7 @@
                         <Image url="@../image/icons8-user-96.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="41.0" layoutY="70.0" text="Staff name*******" textFill="#223c40" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="60.0">
+                  <Label fx:id="staffNameLabel03" layoutX="41.0" layoutY="70.0" text="Staff name*******" textFill="#223c40" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="60.0">
                      <font>
                         <Font name="Candara Bold" size="12.0" />
                      </font>
@@ -639,7 +639,7 @@
             </AnchorPane>
             <AnchorPane layoutX="897.0" layoutY="499.0" prefHeight="80.0" prefWidth="180.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-radius: 15;" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="500.0">
                <children>
-                  <Label layoutX="73.0" layoutY="14.0" prefHeight="17.0" prefWidth="107.0" text="Cargo name*****" textFill="#23242a" underline="true" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="10.0">
+                  <Label fx:id="cargoNameLabel04" layoutX="73.0" layoutY="14.0" prefHeight="17.0" prefWidth="107.0" text="Cargo name*****" textFill="#23242a" underline="true" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="10.0">
                      <font>
                         <Font name="Candara Bold" size="13.0" />
                      </font>
@@ -649,7 +649,7 @@
                         <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="88.0" layoutY="32.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="32.0">
+                  <Label fx:id="cargoAmountLabel04" layoutX="88.0" layoutY="32.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="32.0">
                      <font>
                         <Font name="Candara Bold" size="14.0" />
                      </font>
@@ -665,7 +665,7 @@
                         <Image url="@../image/icons8-user-96.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="41.0" layoutY="70.0" text="Staff name*******" textFill="#223c40" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="60.0">
+                  <Label fx:id="staffNameLabel04" layoutX="41.0" layoutY="70.0" text="Staff name*******" textFill="#223c40" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="60.0">
                      <font>
                         <Font name="Candara Bold" size="12.0" />
                      </font>
