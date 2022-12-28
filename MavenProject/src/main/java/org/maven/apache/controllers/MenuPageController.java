@@ -15,16 +15,15 @@ import java.util.ResourceBundle;
 public class MenuPageController implements Initializable {
 
     @FXML
-    private JFXButton backButton;
+    private JFXButton signOffButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
     @FXML
-    private void onBackToLoginPage() throws IOException {
-        //timeline.stop(); // stop searching per sec
-        Stage stage = (Stage) backButton.getScene().getWindow();
+    private void onSignOff() throws IOException {
+        Stage stage = (Stage) signOffButton.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/logInPage.fxml"));
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);

@@ -131,7 +131,7 @@ public class AppPage2Controller implements Initializable {
         descriptionColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getDescription));
         amountColumn.setRowCellFactory(item -> new MFXTableRowCell<>(Item::getUnit));
         searchTable.setPickOnBounds(false);
-        // initialize search per sec
+        // initialize search per sec when search field is chosen
         searchField.delegateFocusedProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue){
                 searchOnBackgroundPerSec();
@@ -143,11 +143,10 @@ public class AppPage2Controller implements Initializable {
         try {
             VBox vbox = FXMLLoader.load(getClass().getResource("/fxml/menuPage.fxml"));
             vbox.setOnMouseExited(event -> {
-                RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,0, 90);
+                RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,180, 90);
                 rotate.play();
                 VBoxDrawer.close();
             });
-            System.out.println("trying");
             VBoxDrawer.setSidePane(vbox);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -158,9 +157,9 @@ public class AppPage2Controller implements Initializable {
     private void onClickExtend(){
         RotateTransition rotate;
         if (VBoxDrawer.isOpened()){
-            rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,0, 90);
+            rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,180, 90);
         }else{
-            rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,90, 0);
+            rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,90, 180);
         }
         rotate.play();
         if(VBoxDrawer.isOpened()){
