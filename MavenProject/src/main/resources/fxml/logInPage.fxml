@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.LogInPageController">
@@ -58,11 +57,11 @@
                   <Image url="@../image/icons8-multiply-90.png" />
                </image>
             </ImageView>
-            <Line fx:id="lineOnSignIn" endX="81.0" layoutX="310.0" layoutY="640.0" opacity="0.4" startX="-69.3333740234375" stroke="#23242a" />
             <MFXPasswordField fx:id="signUpPassword" floatingText="Password" layoutX="103.0" layoutY="410.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
             <MFXTextField fx:id="signUpUserName" floatingText="Username" layoutX="103.0" layoutY="340.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
             <MFXTextField fx:id="signUpEmailAddress" floatingText="Email Address" layoutX="103.0" layoutY="270.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
             <MFXTextField fx:id="signUpFullName" floatingText="Full Name" layoutX="103.0" layoutY="200.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
+            <AnchorPane fx:id="lineOnSignIn" layoutX="238.0" layoutY="639.0" prefHeight="1.0" prefWidth="155.0" style="-fx-background-color: black;" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="signInPane" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-color: white;">
@@ -95,12 +94,12 @@
                   <Image url="@../image/icons8-multiply-90.png" />
                </image>
             </ImageView>
-            <Label fx:id="labelOnSignUp" layoutX="835.0" layoutY="582.0" onMouseClicked="#onSignUp" onMouseEntered="#onEnterLabelSignUp" onMouseExited="#onExitLabelSignUp" text="Do not have an account?" AnchorPane.bottomAnchor="120.66666666666663" />
+            <Label fx:id="labelOnSignUp" layoutX="835.0" layoutY="582.0" onMouseClicked="#onSignUp" onMouseEntered="#onEnterSignUp" onMouseExited="#onExitSignUp" text="Do not have an account?" AnchorPane.bottomAnchor="120.66666666666663" />
             <Separator layoutX="801.0" layoutY="568.0" prefWidth="200.0" AnchorPane.bottomAnchor="150.0" />
-            <Line fx:id="lineOnSignUp" endX="75.0" layoutX="906.0" layoutY="599.0" opacity="0.4" startX="-72.0" stroke="#23242a" style="-fx-fill: #23242a;" />
             <MFXTextField fx:id="userNameField" floatMode="BORDER" floatingText=" Username " layoutX="700.0" layoutY="250.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
             <MFXPasswordField fx:id="passwordField" floatMode="BORDER" floatingText=" Password " layoutX="700.0" layoutY="339.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
-            <Line fx:id="lineOnForgotPassword" endX="66.3333740234375" endY="0.33331298828125" layoutX="1049.0" layoutY="410.0" onMouseEntered="#onEnterLineOnForgotPassword" onMouseExited="#onExitLineOnForgotPassword" opacity="0.4" startX="-69.5" startY="1.0" />
+            <AnchorPane fx:id="lineOnForgotPassword" layoutX="980.0" layoutY="411.0" prefHeight="1.0" prefWidth="136.0" style="-fx-background-color: black;" />
+            <AnchorPane fx:id="lineOnSignUp" layoutX="835.0" layoutY="598.0" prefHeight="1.0" prefWidth="146.0" style="-fx-background-color: black;" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="720.0" prefWidth="600.0" style="-fx-background-color: #23242a;">

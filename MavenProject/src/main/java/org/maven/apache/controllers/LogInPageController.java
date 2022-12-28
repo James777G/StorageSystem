@@ -64,12 +64,6 @@ public class LogInPageController implements Initializable {
 	private ImageView errorMessageIcon;
 
 	@FXML
-	private ImageView confirmDialogIcon;
-
-	@FXML
-	private ImageView verificationDialogIcon;
-
-	@FXML
 	private ImageView exitButton;
 
 	@FXML
@@ -97,13 +91,13 @@ public class LogInPageController implements Initializable {
 	private Label labelOnForgotPassword;
 
 	@FXML
-	private Line lineOnSignIn;
+	private AnchorPane lineOnSignIn;
 
 	@FXML
-	private Line lineOnSignUp;
+	private AnchorPane lineOnSignUp;
 
 	@FXML
-	private Line lineOnForgotPassword;
+	private AnchorPane lineOnForgotPassword;
 
 	@FXML
 	private MFXTextField newPasswordField;
@@ -142,9 +136,6 @@ public class LogInPageController implements Initializable {
 	private MFXPasswordField signUpPassword;
 
 	@FXML
-	private Button confimButton;
-
-	@FXML
 	private JFXButton resetPasswordButton;
 
 	@FXML
@@ -163,11 +154,9 @@ public class LogInPageController implements Initializable {
 		errorDialog.setPickOnBounds(false);
 		confirmDialog.setVisible(false);
 		confirmDialog.setOpacity(1);
-		// confirmDialog.setHeaderIcon(confirmDialogIcon);
 		confirmDialog.setPickOnBounds(false);
 		verificationDialog.setVisible(false);
 		verificationDialog.setOpacity(1);
-		// verificationDialog.setHeaderIcon(verificationDialogIcon);
 		verificationDialog.setPickOnBounds(false);
 		labelOnSignUp.setCursor(Cursor.HAND);
 		labelOnSignIn.setCursor(Cursor.HAND);
@@ -302,24 +291,15 @@ public class LogInPageController implements Initializable {
 	}
 
 	@FXML
-	private void onEnterLabelSignUp() {
+	private void onEnterSignUp() {
 		lineOnSignUp.setVisible(true);
 	}
 
 	@FXML
-	private void onExitLabelSignUp() {
+	private void onExitSignUp() {
 		lineOnSignUp.setVisible(false);
 	}
 
-	@FXML
-	private void onEnterLineOnForgotPassword() {
-		lineOnForgotPassword.setVisible(true);
-	}
-
-	@FXML
-	private void onExitLineOnForgotPassword() {
-		lineOnForgotPassword.setVisible(false);
-	}
 
 	@FXML
 	private void onCloseErrorDialog() {
