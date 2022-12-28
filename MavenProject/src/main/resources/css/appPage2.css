@@ -19,7 +19,9 @@
     -mfx-main:   #ddeab1;
     -mfx-secondary: #759751;
 }
-
+.resultButton:hover{
+    -fx-background-color: #d9d9d9;
+}
 
 .mfx-table-column{
     -fx-font-size: 14;
