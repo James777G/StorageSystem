@@ -7,6 +7,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXPagination?>
 <?import io.github.palexdev.materialfx.controls.MFXTableView?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -18,7 +19,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
    <children>
       <BorderPane opacity="0.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
          <center>
@@ -481,9 +482,9 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="60.0" prefHeight="625.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
+      <AnchorPane prefHeight="700.0" prefWidth="1201.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <MFXTextField fx:id="searchField" floatMode="DISABLED" layoutX="326.0" layoutY="110.0" prefHeight="49.0" prefWidth="549.0" promptText="Search For Anything" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="350.0">
+            <MFXTextField fx:id="searchField" floatMode="DISABLED" layoutX="326.0" layoutY="110.0" prefHeight="49.0" prefWidth="549.0" promptText="Search For Anything" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="110.0">
                <textFill>
                   <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
                </textFill>
@@ -512,8 +513,8 @@
                   <Font name="Candara Bold" size="15.0" />
                </font>
             </Label>
-            <Separator layoutX="775.0" layoutY="337.0" prefHeight="3.0" prefWidth="89.0" />
-            <Separator layoutX="775.0" layoutY="377.0" prefHeight="3.0" prefWidth="89.0" />
+            <Separator layoutX="775.0" layoutY="337.0" prefHeight="3.0" prefWidth="89.0" AnchorPane.topAnchor="337.0" />
+            <Separator layoutX="775.0" layoutY="377.0" prefHeight="3.0" prefWidth="89.0" AnchorPane.topAnchor="377.0" />
             <Label layoutX="976.0" layoutY="344.0" text="Region" textFill="#223c40" AnchorPane.leftAnchor="950.0" AnchorPane.topAnchor="320.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />
@@ -676,7 +677,7 @@
                   <Font name="Calibri Bold" size="14.0" />
                </font>
             </MFXCheckbox>
-            <MFXCheckbox layoutX="452.0" layoutY="381.0" styleClass="takenCheckBox" stylesheets="@../css/appPage2.css" text="Taken" textFill="#ff4137" AnchorPane.leftAnchor="450.0">
+            <MFXCheckbox layoutX="452.0" layoutY="381.0" styleClass="takenCheckBox" stylesheets="@../css/appPage2.css" text="Taken" textFill="#ff4137" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="381.0">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
                </font>
@@ -686,21 +687,24 @@
                   <Font name="Calibri Bold" size="14.0" />
                </font>
             </MFXCheckbox>
-            <MFXTableView fx:id="searchTable" layoutX="300.0" layoutY="159.0" opacity="0.0" prefHeight="329.0" prefWidth="551.0" />
-            <ImageView fx:id="foldArrow" fitHeight="20.0" fitWidth="20.0" layoutX="810.0" layoutY="125.0" onMouseClicked="#onClickFoldArrow" onMouseEntered="#onEnterFoldArrow" onMouseExited="#onExitFoldArrow" onMousePressed="#onPressFoldArrow" onMouseReleased="#onReleaseFoldArrow" pickOnBounds="true" preserveRatio="true">
+            <MFXTableView fx:id="searchTable" layoutX="300.0" layoutY="159.0" opacity="0.0" prefHeight="329.0" prefWidth="551.0" AnchorPane.topAnchor="159.0" />
+            <ImageView fx:id="foldArrow" fitHeight="20.0" fitWidth="20.0" layoutX="810.0" layoutY="125.0" onMouseClicked="#onClickFoldArrow" onMouseEntered="#onEnterFoldArrow" onMouseExited="#onExitFoldArrow" onMousePressed="#onPressFoldArrow" onMouseReleased="#onReleaseFoldArrow" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="125.0">
                <image>
                   <Image url="@../image/icons8-triangle-arrow-96.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="refreshImage" fitHeight="67.0" fitWidth="57.0" layoutX="59.0" layoutY="337.0" onMouseClicked="#refreshPage" onMouseEntered="#enterRefreshImage" onMouseExited="#exitRefreshImage" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="refreshImage" fitHeight="67.0" fitWidth="57.0" layoutX="59.0" layoutY="337.0" onMouseClicked="#refreshPage" onMouseEntered="#enterRefreshImage" onMouseExited="#exitRefreshImage" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="337.0">
                <image>
                   <Image url="@../image/Refresh-10.png" />
                </image>
             </ImageView>
-            <JFXDrawer fx:id="VBoxDrawer" defaultDrawerSize="300.0" direction="TOP" layoutX="1030.0" prefHeight="200.0" prefWidth="170.0" />
+            <JFXDrawer fx:id="VBoxDrawer" defaultDrawerSize="300.0" direction="TOP" layoutX="1030.0" prefHeight="200.0" prefWidth="170.0" AnchorPane.topAnchor="0.0" />
          </children>
+         <padding>
+            <Insets top="60.0" />
+         </padding>
       </AnchorPane>
-      <AnchorPane prefHeight="60.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="60.0" prefWidth="1200.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="86.0" layoutY="14.0" prefHeight="15.0" prefWidth="68.0" text="Storage" textFill="#23242a" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="5.0">
                <font>

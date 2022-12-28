@@ -143,7 +143,7 @@ public class AppPage2Controller implements Initializable {
         try {
             VBox vbox = FXMLLoader.load(getClass().getResource("/fxml/menuPage.fxml"));
             vbox.setOnMouseExited(event -> {
-                RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,180, 90);
+                RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,-90, 0);
                 rotate.play();
                 VBoxDrawer.close();
             });
@@ -157,9 +157,9 @@ public class AppPage2Controller implements Initializable {
     private void onClickExtend(){
         RotateTransition rotate;
         if (VBoxDrawer.isOpened()){
-            rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,180, 90);
+            rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,-90, 0);
         }else{
-            rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,90, 180);
+            rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,0, -90);
         }
         rotate.play();
         if(VBoxDrawer.isOpened()){
@@ -173,7 +173,7 @@ public class AppPage2Controller implements Initializable {
     private void onEnterExtend(){
         if(VBoxDrawer.isClosed()){
             VBoxDrawer.open();
-            RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,90, 0);
+            RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,0, -90);
             rotate.play();
         }
     }
