@@ -1,5 +1,6 @@
 package org.maven.apache.utils;
 
+import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXTableView;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.animation.KeyFrame;
@@ -15,6 +16,8 @@ import org.maven.apache.service.item.ItemService;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class SearchUtils {
 
@@ -22,22 +25,27 @@ public class SearchUtils {
     private static final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
     private static final ItemService itemService = MyLauncher.context.getBean("itemService", ItemService.class);
 
-    public static KeyFrame generateKeyFrame(MFXTableView<Item> searchTable, MFXTextField searchField){
+    public static KeyFrame generateKeyFrame(JFXButton[] buttonList, MFXTextField searchField){
         return new KeyFrame(Duration.seconds(0.2), event -> {
             if (atomicInteger.compareAndSet(0, 1)) {
                 executorService.execute(() -> {
-                    task(searchTable, searchField);
+                    task(buttonList, searchField);
                 });
             }
         });
     }
-    private static void task(MFXTableView<Item> searchTable, MFXTextField searchField){
+    private static void task(JFXButton[] buttonList, MFXTextField searchField){
         List<Item> searchedItems = itemService.selectByCondition(FuzzySearch.getFuzzyName(searchField.getText()), Integer.MIN_VALUE);
-        ObservableList<Item> itemInfo = FXCollections.observableArrayList();
-        itemInfo.addAll(searchedItems);
+        List<String> collect = searchedItems.stream()
+                .map(Item::getItemName)
+                .toList();
+
         Platform.runLater(() -> {
-            searchTable.setItems(itemInfo);
+            for(int i=0; i < buttonList.length; i++){
+                buttonList[i].setText(collect.get(i));
+            }
         });
+        searchedItems = null;
         atomicInteger.compareAndSet(1, 0);
     }
 }
