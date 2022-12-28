@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="a new function to get the calculation">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MavenProject/MavenProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/MavenProject.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/LogInPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/LogInPageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/logInPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/logInPage.fxml" afterDir="false" />
     </list>

@@ -131,6 +131,7 @@
             </ImageView>
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="720.0" prefWidth="1220.0" style="-fx-background-color: grey;" />
       <MFXGenericDialog fx:id="errorDialog" alwaysOnTop="true" contentText="&#10;&#10;" headerText="Error" layoutX="400.0" layoutY="240.0" onClose="#onCloseErrorDialog" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false" styleClass="errorMessageDialog">
          <center>
             <Label alignment="TOP_LEFT" prefHeight="127.0" prefWidth="378.0" text="You have entered incorrect username and password.&#10;&#10;*Please check and sign in again*&#10;" textFill="#514f4f" BorderPane.alignment="CENTER">

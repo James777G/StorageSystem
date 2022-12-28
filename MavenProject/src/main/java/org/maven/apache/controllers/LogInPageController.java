@@ -100,6 +100,9 @@ public class LogInPageController implements Initializable {
 	private AnchorPane lineOnForgotPassword;
 
 	@FXML
+	private AnchorPane blockPane;
+
+	@FXML
 	private MFXTextField newPasswordField;
 
 	@FXML
@@ -171,6 +174,8 @@ public class LogInPageController implements Initializable {
 		fadeTransition.play();
 		resetPasswordButton.setDisable(true);
 		notificationLabel.setVisible(false);
+		blockPane.setVisible(false);
+		blockPane.setPickOnBounds(false);
 	}
 
 	/**
@@ -254,7 +259,6 @@ public class LogInPageController implements Initializable {
 	@FXML
 	private void onSignIn() {
 		setVisibility(signInPane, signUpPane);
-
 	}
 
 	private void setVisibility(AnchorPane signInPane, AnchorPane signUpPane) {
@@ -300,11 +304,12 @@ public class LogInPageController implements Initializable {
 		lineOnSignUp.setVisible(false);
 	}
 
-
 	@FXML
 	private void onCloseErrorDialog() {
 		errorDialog.setVisible(false);
 		errorDialog.setPickOnBounds(false);
+		blockPane.setVisible(false);
+		blockPane.setPickOnBounds(false);
 	}
 
 	@FXML
@@ -332,9 +337,11 @@ public class LogInPageController implements Initializable {
 		String username = userNameField.getText();
 		User currentUser = getUser(username);
 		if (!isUsernameFound(username)) {
-			// if the user does not exist, show sign up alert
+			// if the user does not exist, show alert
 			errorDialog.setVisible(true);
 			errorDialog.setPickOnBounds(true);
+			blockPane.setVisible(true);
+			blockPane.setPickOnBounds(true);
 		} else {
 			// if the user exists, check its verification (correct password)
 			if (currentUser.getPassword().equals(passwordField.getText())) {
@@ -346,12 +353,14 @@ public class LogInPageController implements Initializable {
 				stage.setScene(scene);
 				stage.show();
 			} else {
+				// incorrect username or password
 				errorDialog.setVisible(true);
 				errorDialog.setPickOnBounds(true);
+				blockPane.setVisible(true);
+				blockPane.setPickOnBounds(true);
 			}
 		}
 	}
-	
 
 	/**
 	 * Find the existence of the input username
@@ -378,6 +387,8 @@ public class LogInPageController implements Initializable {
 	private void onForgetPassword() {
 		verificationDialog.setVisible(true);
 		verificationDialog.setPickOnBounds(true);
+		blockPane.setVisible(true);
+		blockPane.setPickOnBounds(true);
 	}
 
 	/**
@@ -401,7 +412,6 @@ public class LogInPageController implements Initializable {
 			notificationLabel.setVisible(true);
 			notificationLabel.setText("User does not exist");
 		}
-
 	}
 
 	/**
@@ -412,6 +422,8 @@ public class LogInPageController implements Initializable {
 		verificationDialog.setVisible(false);
 		verificationDialog.setPickOnBounds(false);
 		notificationLabel.setText("");
+		blockPane.setVisible(false);
+		blockPane.setPickOnBounds(false);
 	}
 
 	/**
@@ -443,13 +455,16 @@ public class LogInPageController implements Initializable {
 		confirmationEmailAddress.setText("Email Address: " + getSignUpEmailAddressString());
 		confirmDialog.setVisible(true);
 		confirmDialog.setPickOnBounds(true);
+		blockPane.setVisible(true);
+		blockPane.setPickOnBounds(true);
 	}
 
 	@FXML
 	private void onCloseConfirmDialog() {
 		confirmDialog.setVisible(false);
 		confirmDialog.setPickOnBounds(false);
-
+		blockPane.setVisible(false);
+		blockPane.setPickOnBounds(false);
 	}
 
 	// the function for button confirmation
@@ -461,7 +476,6 @@ public class LogInPageController implements Initializable {
 			existAlert.setHeaderText("The username already exist");
 			existAlert.setContentText("Please change a user name");
 			existAlert.showAndWait();
-
 		} else {
 			User userSignUp = new User();
 			userSignUp.setName(getSignUpFullNameString());
@@ -472,7 +486,6 @@ public class LogInPageController implements Initializable {
 			// if user sign up successfully then would go back to the sign in scene
 			onCloseConfirmDialog();
 			setVisibility(signInPane, signUpPane);
-
 		}
 	}
 
