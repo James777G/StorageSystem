@@ -1,6 +1,6 @@
 package org.maven.apache;
 
-import ai.djl.Application;
+
 import org.maven.apache.spring.SpringConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
