@@ -49,7 +49,7 @@ public class LogInPageController implements Initializable {
 
 	private final UserService userService = MyLauncher.context.getBean("userService", UserService.class);
 
-	private final MailService mailServiceProvider = MyLauncher.context.getBean("mailService", MailService.class);
+	private final MailService mailService = MyLauncher.context.getBean("mailService", MailService.class);
 
 	@FXML
 	private AnchorPane signUpPane;
@@ -412,7 +412,7 @@ public class LogInPageController implements Initializable {
 			Random rnd = new Random();
 			int randNumber = rnd.nextInt(999999);
 			verificationCode = String.format("%06d", randNumber);
-			mailServiceProvider.sendEmail(emailAddress, verificationCode);
+			mailService.sendEmail(emailAddress, verificationCode);
 			resetPasswordButton.setDisable(false);
 			notificationLabel.setVisible(true);
 			notificationLabel.setText("Email has been sent");
