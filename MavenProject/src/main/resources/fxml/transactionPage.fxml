@@ -12,7 +12,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.TransactionPageController">
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.TransactionPageController">
    <children>
       <AnchorPane layoutX="20.0" layoutY="20.0" prefHeight="700.0" prefWidth="1201.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
@@ -33,14 +33,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <AnchorPane layoutX="440.0" layoutY="340.0" prefHeight="60.0" prefWidth="901.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="240.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color red="0.6196078658103943" green="0.6196078658103943" blue="0.6196078658103943" />
-                     </color>
-                  </DropShadow>
-               </effect>
+            <AnchorPane layoutX="440.0" layoutY="340.0" prefHeight="60.0" prefWidth="901.0" style="-fx-background-color: white;" styleClass="headerRow" stylesheets="@../css/transactionPage.css" AnchorPane.bottomAnchor="240.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
                <children>
                   <Label layoutX="45.0" layoutY="21.0" text="Order" textFill="#223c40" AnchorPane.topAnchor="20.0">
                      <font>
@@ -330,13 +323,6 @@
                      </children>
                   </AnchorPane>
                </children>
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color red="0.6196078658103943" green="0.6196078658103943" blue="0.6196078658103943" />
-                     </color>
-                  </DropShadow>
-               </effect>
             </AnchorPane>
             <AnchorPane layoutY="120.0" prefHeight="80.0" prefWidth="1201.0" style="-fx-background-color: #bbbbbb;" AnchorPane.bottomAnchor="440.0">
                <children>
@@ -351,13 +337,6 @@
                      </font>
                   </Label>
                </children>
-               <effect>
-                  <DropShadow blurType="ONE_PASS_BOX">
-                     <color>
-                        <Color red="0.6196078658103943" green="0.6196078658103943" blue="0.6196078658103943" />
-                     </color>
-                  </DropShadow>
-               </effect>
             </AnchorPane>
             <AnchorPane layoutX="113.0" layoutY="55.0" prefHeight="130.0" prefWidth="130.0" style="-fx-background-radius: 1000; -fx-border-radius: 1000; -fx-background-color: #eeeeee; -fx-border-color: #0DaD8D; -fx-border-width: 2;" AnchorPane.bottomAnchor="455.0">
                <children>
