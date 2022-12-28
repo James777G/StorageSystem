@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="170.0" spacing="10.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.MenuPageController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="170.0" spacing="10.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.MenuPageController">
    <children>
       <Label text="Your Status" textFill="#223c40">
          <font>
@@ -35,10 +35,13 @@
             </Label>
          </children>
       </AnchorPane>
-      <Label prefHeight="25.0" prefWidth="85.0" text="Settings" textFill="#223c40">
+      <JFXButton fx:id="signOffButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onSignOff" prefHeight="40.0" prefWidth="170.0" styleClass="JFXButton" stylesheets="@../css/appPage2.css" text="                Settings" textFill="#223c40">
          <font>
             <Font name="Candara Bold" size="15.0" />
          </font>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -46,8 +49,14 @@
                </image>
             </ImageView>
          </graphic>
-      </Label>
-      <JFXButton fx:id="signOffButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onSignOff" prefHeight="60.0" prefWidth="168.0" styleClass="JFXButton" stylesheets="@../css/appPage2.css" text="Log out" textFill="#223c40">
+      </JFXButton>
+      <JFXButton fx:id="signOffButton1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onSignOff" prefHeight="40.0" prefWidth="170.0" styleClass="JFXButton" stylesheets="@../css/appPage2.css" text="                 Log out" textFill="#223c40">
+         <font>
+            <Font name="Candara Bold" size="15.0" />
+         </font>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -55,12 +64,6 @@
                </image>
             </ImageView>
          </graphic>
-         <font>
-            <Font name="Candara Bold" size="15.0" />
-         </font>
-         <padding>
-            <Insets right="10.0" />
-         </padding>
       </JFXButton>
    </children>
    <padding>
