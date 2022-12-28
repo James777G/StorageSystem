@@ -513,8 +513,8 @@
                   <Font name="Candara Bold" size="15.0" />
                </font>
             </Label>
-            <Separator layoutX="775.0" layoutY="337.0" prefHeight="3.0" prefWidth="89.0" />
-            <Separator layoutX="775.0" layoutY="377.0" prefHeight="3.0" prefWidth="89.0" />
+            <Separator layoutX="775.0" layoutY="337.0" prefHeight="3.0" prefWidth="89.0" AnchorPane.topAnchor="337.0" />
+            <Separator layoutX="775.0" layoutY="377.0" prefHeight="3.0" prefWidth="89.0" AnchorPane.topAnchor="377.0" />
             <Label layoutX="976.0" layoutY="344.0" text="Region" textFill="#223c40" AnchorPane.leftAnchor="950.0" AnchorPane.topAnchor="320.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />
