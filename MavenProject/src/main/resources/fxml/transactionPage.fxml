@@ -12,7 +12,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.TransactionPage">
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.TransactionPageController">
    <children>
       <AnchorPane layoutX="20.0" layoutY="20.0" prefHeight="700.0" prefWidth="1201.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
@@ -153,12 +153,12 @@
                         <Font name="Candara Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+                  <Label fx:id="orderLabel1" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
                      <font>
                         <Font name="Candara Bold" size="19.0" />
                      </font>
                   </Label>
-                  <Label layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
+                  <Label fx:id="amountLabel1" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
                      <font>
                         <Font name="Candara Bold" size="19.0" />
                      </font>
@@ -173,7 +173,7 @@
                         <Image url="@../image/icons8-3d-boxes-48.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="683.0" layoutY="16.0" prefHeight="22.0" prefWidth="168.0" text="xxxx/xx/xx/xxxx" textFill="#223c40">
+                  <Label fx:id="dateLabel1" layoutX="683.0" layoutY="16.0" prefHeight="22.0" prefWidth="168.0" text="xxxx/xx/xx/xxxx" textFill="#223c40">
                      <font>
                         <Font name="Candara Bold" size="19.0" />
                      </font>
@@ -193,12 +193,12 @@
                         <Font name="Candara Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+                  <Label fx:id="orderLabel2" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
                      <font>
                         <Font name="Candara Bold" size="19.0" />
                      </font>
                   </Label>
-                  <Label layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
+                  <Label fx:id="amountLabel2" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
                      <font>
                         <Font name="Candara Bold" size="19.0" />
                      </font>
@@ -213,7 +213,7 @@
                         <Image url="@../image/icons8-3d-boxes-48.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="683.0" layoutY="16.0" prefHeight="22.0" prefWidth="168.0" text="xxxx/xx/xx/xxxx" textFill="#223c40">
+                  <Label fx:id="dateLabel2" layoutX="683.0" layoutY="16.0" prefHeight="22.0" prefWidth="168.0" text="xxxx/xx/xx/xxxx" textFill="#223c40">
                      <font>
                         <Font name="Candara Bold" size="19.0" />
                      </font>
@@ -232,12 +232,12 @@
                         <Font name="Candara Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+                  <Label fx:id="orderLabel3" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
                      <font>
                         <Font name="Candara Bold" size="19.0" />
                      </font>
                   </Label>
-                  <Label layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
+                  <Label fx:id="amountLabel3" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
                      <font>
                         <Font name="Candara Bold" size="19.0" />
                      </font>
@@ -252,7 +252,7 @@
                         <Image url="@../image/icons8-3d-boxes-48.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="683.0" layoutY="16.0" prefHeight="22.0" prefWidth="168.0" text="xxxx/xx/xx/xxxx" textFill="#223c40">
+                  <Label fx:id="dateLabel3" layoutX="683.0" layoutY="16.0" prefHeight="22.0" prefWidth="168.0" text="xxxx/xx/xx/xxxx" textFill="#223c40">
                      <font>
                         <Font name="Candara Bold" size="19.0" />
                      </font>
@@ -271,12 +271,12 @@
                         <Font name="Candara Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+                  <Label fx:id="orderLabel4" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
                      <font>
                         <Font name="Candara Bold" size="19.0" />
                      </font>
                   </Label>
-                  <Label layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
+                  <Label fx:id="amountLabel4" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
                      <font>
                         <Font name="Candara Bold" size="19.0" />
                      </font>
@@ -291,7 +291,7 @@
                         <Image url="@../image/icons8-3d-boxes-48.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="683.0" layoutY="16.0" prefHeight="22.0" prefWidth="168.0" text="xxxx/xx/xx/xxxx" textFill="#223c40">
+                  <Label fx:id="dateLabel4" layoutX="683.0" layoutY="16.0" prefHeight="22.0" prefWidth="168.0" text="xxxx/xx/xx/xxxx" textFill="#223c40">
                      <font>
                         <Font name="Candara Bold" size="19.0" />
                      </font>
