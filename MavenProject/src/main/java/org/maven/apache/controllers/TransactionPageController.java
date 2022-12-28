@@ -46,7 +46,6 @@ public class TransactionPageController {
     private void onMoveToData(){
         TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionOnX(movingLinePane,500,105);
         translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
-        System.out.println(movingLinePane.getTranslateX());
         translateTransition.play();
     }
 
@@ -54,7 +53,6 @@ public class TransactionPageController {
     private void onMoveToCargo(){
         TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionOnX(movingLinePane,500,-105);
         translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
-        System.out.println(movingLinePane.getTranslateX());
         translateTransition.play();
     }
 
