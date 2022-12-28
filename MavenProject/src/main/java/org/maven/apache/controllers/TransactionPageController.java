@@ -1,11 +1,13 @@
 package org.maven.apache.controllers;
 
+import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 import javafx.scene.control.Label;
+import org.maven.apache.utils.TranslateUtils;
 
 public class TransactionPageController {
 
@@ -42,8 +44,17 @@ public class TransactionPageController {
 
     @FXML
     private void onMoveToData(){
-        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500),movingLinePane);
-        translateTransition.setToX(105);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionOnX(movingLinePane,500,105);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        System.out.println(movingLinePane.getTranslateX());
+        translateTransition.play();
+    }
+
+    @FXML
+    private void onMoveToCargo(){
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionOnX(movingLinePane,500,-105);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        System.out.println(movingLinePane.getTranslateX());
         translateTransition.play();
     }
 

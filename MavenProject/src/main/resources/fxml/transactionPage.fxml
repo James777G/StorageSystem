@@ -315,7 +315,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="cargoPane" layoutX="92.0" layoutY="7.0" prefHeight="40.0" prefWidth="105.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="20.0">
+                  <AnchorPane fx:id="cargoPane" layoutX="92.0" layoutY="7.0" onMouseClicked="#onMoveToCargo" prefHeight="40.0" prefWidth="105.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="20.0">
                      <children>
                         <Label prefHeight="18.0" prefWidth="42.0" text="Cargo" textFill="#223c40" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="2.3333333333333286">
                            <font>
