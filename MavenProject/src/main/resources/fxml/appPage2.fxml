@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
-<?import io.github.palexdev.materialfx.controls.MFXCheckbox?>
 <?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXPagination?>
 <?import io.github.palexdev.materialfx.controls.MFXTableView?>
@@ -485,6 +484,35 @@
       </AnchorPane>
       <AnchorPane fx:id="appPagePane" onMouseClicked="#onClickAppPagePane" prefHeight="700.0" prefWidth="1201.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <VBox fx:id="searchTable" layoutX="300.0" layoutY="219.0" opacity="0.0" prefHeight="200.0" prefWidth="551.0" styleClass="resultPane" stylesheets="@../css/appPage2.css">
+               <children>
+                  <JFXButton fx:id="buttonOne" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="buttonTwo" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="buttonThree" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="buttonFour" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="buttonFive" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </VBox>
             <MFXTextField fx:id="searchField" floatMode="DISABLED" layoutX="326.0" layoutY="110.0" onMouseClicked="#onClickSearchBar" prefHeight="49.0" prefWidth="549.0" promptText="Search For Anything" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="110.0">
                <textFill>
                   <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
@@ -673,56 +701,12 @@
                   </Label>
                </children>
             </AnchorPane>
-            <MFXCheckbox layoutX="435.0" layoutY="355.0" styleClass="allCheckBox" stylesheets="@../css/appPage2.css" text="All" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="350.0">
-               <font>
-                  <Font name="Calibri Bold" size="14.0" />
-               </font>
-            </MFXCheckbox>
-            <MFXCheckbox layoutX="452.0" layoutY="381.0" styleClass="takenCheckBox" stylesheets="@../css/appPage2.css" text="Taken" textFill="#ff4137" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="381.0">
-               <font>
-                  <Font name="Calibri Bold" size="14.0" />
-               </font>
-            </MFXCheckbox>
-            <MFXCheckbox layoutX="538.0" layoutY="353.0" styleClass="restockCheckBox" stylesheets="@../css/appPage2.css" text="Restock" textFill="#759751" AnchorPane.topAnchor="350.0">
-               <font>
-                  <Font name="Calibri Bold" size="14.0" />
-               </font>
-            </MFXCheckbox>
             <ImageView fx:id="refreshImage" fitHeight="67.0" fitWidth="57.0" layoutX="59.0" layoutY="337.0" onMouseClicked="#refreshPage" onMouseEntered="#enterRefreshImage" onMouseExited="#exitRefreshImage" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="337.0">
                <image>
                   <Image url="@../image/Refresh-10.png" />
                </image>
             </ImageView>
             <JFXDrawer fx:id="VBoxDrawer" defaultDrawerSize="300.0" direction="TOP" layoutX="1030.0" prefHeight="200.0" prefWidth="170.0" AnchorPane.topAnchor="0.0" />
-            <VBox fx:id="searchTable" layoutX="300.0" layoutY="219.0" prefHeight="200.0" prefWidth="551.0" styleClass="resultPane" stylesheets="@../css/appPage2.css">
-               <children>
-                  <JFXButton fx:id="buttonOne" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="buttonTwo" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="buttonThree" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="buttonFour" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="buttonFive" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-               </children>
-            </VBox>
             <JFXButton contentDisplay="CENTER" layoutX="851.0" layoutY="170.0" onAction="#onClickSearch" prefHeight="50.0" prefWidth="50.0" styleClass="searchButton" stylesheets="@../css/appPage.css" textFill="#223c4000">
                <graphic>
                   <ImageView fx:id="searchImage11" fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
