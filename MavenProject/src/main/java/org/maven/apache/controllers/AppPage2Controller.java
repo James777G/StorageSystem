@@ -5,26 +5,28 @@ import com.jfoenix.controls.JFXDrawer;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.animation.KeyFrame;
 import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import org.maven.apache.MyLauncher;
-import org.maven.apache.dateTransaction.DateTransaction;
-import org.maven.apache.service.DateTransaction.DateTransactionService;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.maven.apache.App;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.RotationUtils;
+import org.maven.apache.utils.ScaleUtils;
 import org.maven.apache.utils.SearchUtils;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -289,19 +291,29 @@ public class AppPage2Controller implements Initializable {
 
 	@FXML
 	private void enterRefreshImage() {
-		refreshImage.setScaleX(1.2);
-		refreshImage.setScaleY(1.2);
+//        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200),refreshImage);
+//        scaleTransition.setToX(1.2);
+//        scaleTransition.setToY(1.2);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(refreshImage,200,1.2);
+        scaleTransition.play();
 	}
 
 	@FXML
 	private void exitRefreshImage() {
-		refreshImage.setScaleX(1);
-		refreshImage.setScaleY(1);
+//        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200),refreshImage);
+//        scaleTransition.setToX(1);
+//        scaleTransition.setToY(1);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(refreshImage,200,1);
+        scaleTransition.play();
 	}
 
-	private void getDataTransitionData() {
-		DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransaction",
-				DateTransactionService.class);
-		List<DateTransaction> dateTransactionList = dateTransactionService.selectAll();
-	}
+
+    @FXML
+    private void onTransactionPage() throws IOException {
+        Stage stage = (Stage) transactionButton.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/transactionPage.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.show();
+    }
 }
