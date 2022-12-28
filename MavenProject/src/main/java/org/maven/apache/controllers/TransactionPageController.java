@@ -47,20 +47,20 @@ public class TransactionPageController {
     @FXML
     private void onMoveToData(){
         if (!isMovingLineOnData){
+            isMovingLineOnData = true;
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionOnX(movingLinePane,500,105);
             translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
             translateTransition.play();
-            isMovingLineOnData = true;
         }
     }
 
     @FXML
     private void onMoveToCargo(){
         if(isMovingLineOnData){
+            isMovingLineOnData = false;
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionOnX(movingLinePane,500,-105);
             translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
             translateTransition.play();
-            isMovingLineOnData = false;
         }
     }
 
