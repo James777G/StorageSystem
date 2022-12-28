@@ -11,6 +11,8 @@ import org.maven.apache.utils.TranslateUtils;
 
 public class TransactionPageController {
 
+    private boolean isMovingLineOnData = false;
+
 //    private final DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
 //
 //    private List<DateTransaction> transactionList = dateTransactionService.selectAll();
@@ -44,16 +46,22 @@ public class TransactionPageController {
 
     @FXML
     private void onMoveToData(){
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionOnX(movingLinePane,500,105);
-        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
-        translateTransition.play();
+        if (!isMovingLineOnData){
+            TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionOnX(movingLinePane,500,105);
+            translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+            translateTransition.play();
+            isMovingLineOnData = true;
+        }
     }
 
     @FXML
     private void onMoveToCargo(){
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionOnX(movingLinePane,500,-105);
-        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
-        translateTransition.play();
+        if(isMovingLineOnData){
+            TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionOnX(movingLinePane,500,-105);
+            translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+            translateTransition.play();
+            isMovingLineOnData = false;
+        }
     }
 
 
