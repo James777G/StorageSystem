@@ -2,6 +2,8 @@ package org.maven.apache.controllers;
 
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
@@ -44,23 +46,36 @@ public class TransactionPageController {
     @FXML
     private Label[] dateLabelArray = {dateLabel1, dateLabel2, dateLabel3, dateLabel4};
 
+    private boolean isRunning = false;
+
     @FXML
     private void onMoveToData(){
-        if (!isMovingLineOnData){
-            isMovingLineOnData = true;
+        if (!isMovingLineOnData && !isRunning){
+            isRunning = true;
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionOnX(movingLinePane,500,105);
             translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+            translateTransition.setOnFinished(event -> {
+                isRunning = false;
+                isMovingLineOnData = true;
+            });
             translateTransition.play();
+
+
         }
     }
 
     @FXML
     private void onMoveToCargo(){
-        if(isMovingLineOnData){
-            isMovingLineOnData = false;
+        if(isMovingLineOnData && !isRunning ){
+            isRunning = true;
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionOnX(movingLinePane,500,-105);
             translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+            translateTransition.setOnFinished(event -> {
+                isRunning = false;
+                isMovingLineOnData = false;
+            });
             translateTransition.play();
+
         }
     }
 
