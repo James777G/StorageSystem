@@ -716,6 +716,54 @@
                   </ImageView>
                </graphic>
             </JFXButton>
+            <JFXButton fx:id="warehouseButton1111" layoutX="520.0" layoutY="414.0" onMouseEntered="#enterWarehouseButton" onMouseExited="#exitWarehouseButton" prefHeight="30.0" prefWidth="90.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00">
+               <graphic>
+                  <Label text="  Restock" textFill="WHITE">
+                     <font>
+                        <Font name="Candara Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <AnchorPane prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
+                           <children>
+                              <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                           </children>
+                        </AnchorPane>
+                     </graphic>
+                  </Label>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="warehouseButton11112" layoutX="382.0" layoutY="421.0" onMouseEntered="#enterWarehouseButton" onMouseExited="#exitWarehouseButton" prefHeight="30.0" prefWidth="65.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.topAnchor="421.0">
+               <graphic>
+                  <Label text="   All" textFill="WHITE">
+                     <font>
+                        <Font name="Candara Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <AnchorPane prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
+                           <children>
+                              <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                           </children>
+                        </AnchorPane>
+                     </graphic>
+                  </Label>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="warehouseButton11111" layoutX="527.0" layoutY="436.0" onMouseEntered="#enterWarehouseButton" onMouseExited="#exitWarehouseButton" prefHeight="30.0" prefWidth="75.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00">
+               <graphic>
+                  <Label text="  Taken" textFill="WHITE">
+                     <font>
+                        <Font name="Candara Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <AnchorPane prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
+                           <children>
+                              <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                           </children>
+                        </AnchorPane>
+                     </graphic>
+                  </Label>
+               </graphic>
+            </JFXButton>
          </children>
          <padding>
             <Insets top="60.0" />
@@ -736,7 +784,7 @@
             <AnchorPane layoutX="-67.0" layoutY="-67.0" prefHeight="60.0" prefWidth="5.0" style="-fx-background-color: #167980;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="25.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/icons8-warehouse-100%20(2).png" />
+                  <Image url="@../image/icons8-warehouse-100.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="459.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="15.0">
