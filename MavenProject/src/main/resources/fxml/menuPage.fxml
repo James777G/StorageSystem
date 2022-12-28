@@ -47,7 +47,7 @@
             </ImageView>
          </graphic>
       </Label>
-      <JFXButton fx:id="backButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onBackToLoginPage" prefHeight="40.0" prefWidth="168.0" styleClass="JFXButton" stylesheets="@../css/appPage2.css" text="Log out" textFill="#223c40">
+      <JFXButton fx:id="signOffButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onSignOff" prefHeight="60.0" prefWidth="168.0" styleClass="JFXButton" stylesheets="@../css/appPage2.css" text="Log out" textFill="#223c40">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
