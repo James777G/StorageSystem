@@ -27,10 +27,19 @@ public class ThreadUtils {
 
     private static final AtomicInteger atomicInteger02 = new AtomicInteger();
 
+    private static final AtomicInteger atomicInteger03 = new AtomicInteger();
+
     private static final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
 
     private static final ItemService itemService = MyLauncher.context.getBean("itemService", ItemService.class);
 
+    /**
+     * generate the timeline for searching frequently
+     *
+     * @param buttonList
+     * @param searchField
+     * @return
+     */
     public static KeyFrame generateSearchKeyFrame(JFXButton[] buttonList, MFXTextField searchField){
         return new KeyFrame(Duration.seconds(0.2), event -> {
             if (atomicInteger01.compareAndSet(0, 1)) {
@@ -41,6 +50,12 @@ public class ThreadUtils {
         });
     }
 
+    /**
+     * define the searching task
+     *
+     * @param buttonList
+     * @param searchField
+     */
     private static void searchTask(JFXButton[] buttonList, MFXTextField searchField){
         List<Item> searchedItems = itemService.selectByCondition(FuzzySearch.getFuzzyName(searchField.getText()), Integer.MIN_VALUE);
         List<String> collect = searchedItems.stream()
@@ -56,19 +71,33 @@ public class ThreadUtils {
         atomicInteger01.compareAndSet(1, 0);
     }
 
-    public static KeyFrame generateVerificationKeyFrame(MFXTextField textField, ImageView check, ImageView cross){
+    /**
+     * generate the timeline for verifying username frequently
+     *
+     * @param textField
+     * @param check
+     * @param cross
+     * @return
+     */
+    public static KeyFrame generateUsernameVerificationKeyFrame(MFXTextField textField, ImageView check, ImageView cross){
         return new KeyFrame(Duration.seconds(1), event -> {
             if (atomicInteger02.compareAndSet(0, 1)){
                 executorService.execute(() -> {
                     usernameVerificationTask(textField, check, cross);
-                    System.out.println("verifying");
+                    System.out.println("verifying username");
                 });
             }
         });
     }
 
+    /**
+     * define the task for verifying username
+     *
+     * @param textField
+     * @param check
+     * @param cross
+     */
     private static void usernameVerificationTask(MFXTextField textField, ImageView check, ImageView cross){
-        System.out.println(textField.getText());
         if (LogInPageController.isUsernameFound(textField.getText())){
             Platform.runLater(() -> {
                 // if user exists
@@ -85,5 +114,43 @@ public class ThreadUtils {
         atomicInteger02.compareAndSet(1, 0);
     }
 
+    /**
+     * generate the timeline for verifying password frequently
+     *
+     * @param textField
+     * @param check
+     * @param cross
+     * @return
+     */
+    public static KeyFrame generatePasswordVerificationKeyFrame(MFXTextField textField, ImageView check, ImageView cross){
+        return new KeyFrame(Duration.seconds(1), event -> {
+            if (atomicInteger03.compareAndSet(0, 1)){
+                executorService.execute(() -> {
+                    passwordVerificationTask(textField, check, cross);
+                    System.out.println("verifying password");
+                });
+            }
+        });
+    }
+
+    /**
+     * define the task for verifying password
+     *
+     * @param textField
+     * @param check
+     * @param cross
+     */
+    private static void passwordVerificationTask(MFXTextField textField, ImageView check, ImageView cross){
+        if (textField.getText().length() > 5){
+            // at least six characters
+            check.setVisible(true);
+            cross.setVisible(false);
+        }else{
+            // less than six characters
+            check.setVisible(false);
+            cross.setVisible(true);
+        }
+        atomicInteger03.compareAndSet(1, 0);
+    }
 
 }

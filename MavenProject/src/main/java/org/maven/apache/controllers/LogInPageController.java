@@ -54,7 +54,9 @@ public class LogInPageController implements Initializable {
 
 	private final MailService mailService = MyLauncher.context.getBean("mailService", MailService.class);
 
-	private final Timeline timeline = new Timeline();
+	private final Timeline usernameTimeline = new Timeline();
+
+	private final Timeline passwordTimeline = new Timeline();
 
 	@FXML
 	private ImageView exitButton2;
@@ -73,6 +75,12 @@ public class LogInPageController implements Initializable {
 
 	@FXML
 	private ImageView usernameCheck;
+
+	@FXML
+	private ImageView passwordCross;
+
+	@FXML
+	private ImageView passwordCheck;
 
 	@FXML
 	private Label notificationLabel;
@@ -189,6 +197,8 @@ public class LogInPageController implements Initializable {
 		blockPane.setPickOnBounds(false);
 		usernameCross.setVisible(false);
 		usernameCheck.setVisible(false);
+		passwordCross.setVisible(false);
+		passwordCheck.setVisible(false);
 	}
 
 	/**
@@ -402,12 +412,16 @@ public class LogInPageController implements Initializable {
 		verificationDialog.setPickOnBounds(true);
 		blockPane.setVisible(true);
 		blockPane.setPickOnBounds(true);
-		//initialize verification per sec
-		KeyFrame keyFrame = ThreadUtils.generateVerificationKeyFrame(verificationUsername, usernameCheck, usernameCross);
-		timeline.getKeyFrames().add(keyFrame);
-		timeline.setCycleCount(Timeline.INDEFINITE);
-		timeline.playFromStart();
-
+		// initialize username verification per sec
+		KeyFrame usernameKeyFrame = ThreadUtils.generateUsernameVerificationKeyFrame(verificationUsername, usernameCheck, usernameCross);
+		usernameTimeline.getKeyFrames().add(usernameKeyFrame);
+		usernameTimeline.setCycleCount(Timeline.INDEFINITE);
+		usernameTimeline.playFromStart();
+		// initialize password verification per sec
+		KeyFrame passwordKeyFrame = ThreadUtils.generatePasswordVerificationKeyFrame(newPasswordField, passwordCheck, passwordCross);
+		passwordTimeline.getKeyFrames().add(passwordKeyFrame);
+		passwordTimeline.setCycleCount(Timeline.INDEFINITE);
+		passwordTimeline.playFromStart();
 	}
 
 	/**
@@ -446,7 +460,8 @@ public class LogInPageController implements Initializable {
 		verificationUsername.clear();
 		newPasswordField.clear();
 		verificationCodeField.clear();
-		timeline.stop();
+		usernameTimeline.stop();
+		passwordTimeline.stop();
 	}
 
 	/**
