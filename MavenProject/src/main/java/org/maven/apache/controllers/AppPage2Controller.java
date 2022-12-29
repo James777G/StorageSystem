@@ -314,8 +314,9 @@ public class AppPage2Controller implements Initializable {
 
 	@FXML
 	private void refreshPage() {
-		RotateTransition rotate = RotationUtils.getRotationTransitionFromBy(refreshImage, 500, 0,
+		RotateTransition rotate = RotationUtils.getRotationTransitionFromBy(refreshImage, 1500, 0,
 				RotationUtils.Direction.COUNTERCLOCKWISE, 360);
+        rotate = RotationUtils.addEaseOutTranslateInterpolator(rotate);
         rotate.setOnFinished(event -> isRotating = false);
         if(!isRotating){
             isRotating = true;
