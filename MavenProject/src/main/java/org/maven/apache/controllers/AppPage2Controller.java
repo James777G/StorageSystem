@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.maven.apache.App;
@@ -117,6 +118,9 @@ public class AppPage2Controller implements Initializable {
 	@FXML
 	private Label staffNameLabel04;
 
+    @FXML
+    private StackPane stackPane;
+
 	//pass the user from login page
     private final User user = DataUtils.currentUser;
 
@@ -136,6 +140,10 @@ public class AppPage2Controller implements Initializable {
         searchTable.setPickOnBounds(false);
         searchTable.setOpacity(0);
         setButtonList();
+        setTransactionPane();
+        stackPane.setPickOnBounds(false);
+        stackPane.setOpacity(0);
+        stackPane.setVisible(false);
         // initialize search per sec when search field is chosen
         searchField.delegateFocusedProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue){
@@ -166,6 +174,14 @@ public class AppPage2Controller implements Initializable {
         searchTable.setPickOnBounds(true);
     }
 
+    private void setTransactionPane(){
+        try {
+            AnchorPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/transactionPage.fxml")));
+            stackPane.getChildren().add(pane);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     private void setDrawer(){
         try {
             VBox vbox = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/menuPage.fxml")));
@@ -179,7 +195,15 @@ public class AppPage2Controller implements Initializable {
             throw new RuntimeException(e);
         }
     }
-
+    @FXML
+    private void onEnterAppPage(){
+        appPagePane.setOpacity(1);
+        appPagePane.setPickOnBounds(true);
+        appPagePane.setVisible(true);
+        stackPane.setOpacity(1);
+        stackPane.setPickOnBounds(false);
+        stackPane.setVisible(false);
+    }
     private void setButtonList(){
         buttonOne.setAlignment(Pos.CENTER_LEFT);
         buttonTwo.setAlignment(Pos.CENTER_LEFT);
@@ -300,11 +324,12 @@ public class AppPage2Controller implements Initializable {
 	}
 
     @FXML
-    private void onTransactionPage() throws IOException {
-        Stage stage = (Stage) transactionButton.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/transactionPage.fxml"));
-        Scene scene = new Scene(loader.load());
-        stage.setScene(scene);
-        stage.show();
+    private void onTransactionPage() {
+        appPagePane.setPickOnBounds(false);
+        appPagePane.setOpacity(0);
+        appPagePane.setVisible(false);
+        stackPane.setPickOnBounds(true);
+        stackPane.setOpacity(1);
+        stackPane.setVisible(true);
     }
 }
