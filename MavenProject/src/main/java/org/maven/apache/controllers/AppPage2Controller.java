@@ -13,14 +13,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import org.maven.apache.App;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.RotationUtils;
@@ -124,6 +121,8 @@ public class AppPage2Controller implements Initializable {
 	//pass the user from login page
     private final User user = DataUtils.currentUser;
 
+    private boolean isTriangleRotating = false;
+
     private final JFXButton[] buttonList = new JFXButton[5];
 
     private boolean isRotating = false;
@@ -187,7 +186,11 @@ public class AppPage2Controller implements Initializable {
             VBox vbox = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/menuPage.fxml")));
             vbox.setOnMouseExited(event -> {
                 RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,-90, 0);
-                rotate.play();
+                rotate.setOnFinished(event1 -> isTriangleRotating = false);
+                if(!isTriangleRotating){
+                    isTriangleRotating = true;
+                    rotate.play();
+                }
                 VBoxDrawer.close();
             });
             VBoxDrawer.setSidePane(vbox);
@@ -225,7 +228,11 @@ public class AppPage2Controller implements Initializable {
         }else{
             rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,0, -90);
         }
-        rotate.play();
+        rotate.setOnFinished(event -> isTriangleRotating = false);
+        if(!isTriangleRotating){
+            isTriangleRotating = true;
+            rotate.play();
+        }
         if(VBoxDrawer.isOpened()){
             VBoxDrawer.close();
         }else{
@@ -245,7 +252,12 @@ public class AppPage2Controller implements Initializable {
         if(VBoxDrawer.isClosed()){
             VBoxDrawer.open();
             RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendArrow,300,0, -90);
-            rotate.play();
+            rotate.setOnFinished(event -> isTriangleRotating = false);
+            if(!isTriangleRotating){
+                isTriangleRotating = true;
+                rotate.play();
+            }
+
         }
     }
 
