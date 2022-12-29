@@ -3,3 +3,12 @@
     -fx-border-width: 0 0 2.5 0;
     -fx-border-color:  #bbbbbb;
 }
+
+.addPane{
+    -fx-background-color:  #b33d18;
+    -fx-background-radius: 1000;
+    -fx-border-radius: 1000;
+}
+.addPane:hover{
+    -fx-background-color: #cc461b;
+}
