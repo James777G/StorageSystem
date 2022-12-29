@@ -32,12 +32,12 @@ public interface DateTransactionMapper {
 	void deleteById(int id);
 
 	/**
-	 * if id is not continuous
+	 * if id is not continuous use this to fix
 	 */
 	void IdGapInside();
 
 	/**
-	 * a new add
+	 * a new transaction insert to the table
 	 * 
 	 * @param dateTransaction
 	 */
