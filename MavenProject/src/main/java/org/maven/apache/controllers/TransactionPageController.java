@@ -2,6 +2,7 @@ package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.Interpolator;
+import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 import javafx.scene.control.Label;
+import org.maven.apache.utils.ScaleUtils;
 import org.maven.apache.utils.TranslateUtils;
 
 import java.net.URL;
@@ -169,6 +171,19 @@ public class TransactionPageController implements Initializable {
         }
     }
 
+    @FXML
+    private void onEnterAddButton(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(addButton,500,1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitAddButton(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(addButton,500,1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
