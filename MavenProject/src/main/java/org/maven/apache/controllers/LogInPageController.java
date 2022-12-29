@@ -104,6 +104,12 @@ public class LogInPageController implements Initializable {
 	private Label labelOnForgotPassword;
 
 	@FXML
+	private Label usernameNotificationLabel;
+
+	@FXML
+	private Label newPasswordNotificationLabel;
+
+	@FXML
 	private AnchorPane signUpPane;
 
 	@FXML
@@ -192,7 +198,6 @@ public class LogInPageController implements Initializable {
 		FadeTransition fadeTransition = TransitionUtils.getFadeTransition(imageOnStorage, 3000, 0, 1);
 		fadeTransition.play();
 		resetPasswordButton.setDisable(true);
-		notificationLabel.setVisible(false);
 		blockPane.setVisible(false);
 		blockPane.setPickOnBounds(false);
 		usernameCross.setVisible(false);
@@ -413,12 +418,12 @@ public class LogInPageController implements Initializable {
 		blockPane.setVisible(true);
 		blockPane.setPickOnBounds(true);
 		// initialize username verification per sec
-		KeyFrame usernameKeyFrame = ThreadUtils.generateUsernameVerificationKeyFrame(verificationUsername, usernameCheck, usernameCross);
+		KeyFrame usernameKeyFrame = ThreadUtils.generateUsernameVerificationKeyFrame(verificationUsername, usernameCheck, usernameCross, usernameNotificationLabel);
 		usernameTimeline.getKeyFrames().add(usernameKeyFrame);
 		usernameTimeline.setCycleCount(Timeline.INDEFINITE);
 		usernameTimeline.playFromStart();
 		// initialize password verification per sec
-		KeyFrame passwordKeyFrame = ThreadUtils.generatePasswordVerificationKeyFrame(newPasswordField, passwordCheck, passwordCross);
+		KeyFrame passwordKeyFrame = ThreadUtils.generatePasswordVerificationKeyFrame(newPasswordField, passwordCheck, passwordCross, newPasswordNotificationLabel);
 		passwordTimeline.getKeyFrames().add(passwordKeyFrame);
 		passwordTimeline.setCycleCount(Timeline.INDEFINITE);
 		passwordTimeline.playFromStart();
@@ -441,10 +446,6 @@ public class LogInPageController implements Initializable {
 			resetPasswordButton.setDisable(false);
 			notificationLabel.setVisible(true);
 			notificationLabel.setText("Email has been sent");
-		} else {
-			// if the username does not exist
-			notificationLabel.setVisible(true);
-			notificationLabel.setText("User does not exist");
 		}
 	}
 
@@ -478,11 +479,9 @@ public class LogInPageController implements Initializable {
 			User userToBeResetPassword = getUser(verificationUsername.getText());
 			userToBeResetPassword.setPassword(newPassword);
 			userService.update(userToBeResetPassword);
-			notificationLabel.setVisible(true);
 			notificationLabel.setText("Your password has been reset");
 		} else {
 			// if the verification code is not matched
-			notificationLabel.setVisible(true);
 			notificationLabel.setText("Incorrect verification code");
 		}
 	}

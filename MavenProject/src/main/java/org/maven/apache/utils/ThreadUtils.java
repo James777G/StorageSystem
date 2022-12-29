@@ -79,11 +79,11 @@ public class ThreadUtils {
      * @param cross
      * @return
      */
-    public static KeyFrame generateUsernameVerificationKeyFrame(MFXTextField textField, ImageView check, ImageView cross){
+    public static KeyFrame generateUsernameVerificationKeyFrame(MFXTextField textField, ImageView check, ImageView cross, Label label){
         return new KeyFrame(Duration.seconds(1), event -> {
             if (atomicInteger02.compareAndSet(0, 1)){
                 executorService.execute(() -> {
-                    usernameVerificationTask(textField, check, cross);
+                    usernameVerificationTask(textField, check, cross, label);
                 });
             }
         });
@@ -96,18 +96,20 @@ public class ThreadUtils {
      * @param check
      * @param cross
      */
-    private static void usernameVerificationTask(MFXTextField textField, ImageView check, ImageView cross){
+    private static void usernameVerificationTask(MFXTextField textField, ImageView check, ImageView cross, Label label){
         if (LogInPageController.isUsernameFound(textField.getText())){
             Platform.runLater(() -> {
                 // if user exists
                 check.setVisible(true);
                 cross.setVisible(false);
+                label.setText("");
             });
         }else{
             Platform.runLater(() -> {
                 // if user does not exist
                 check.setVisible(false);
                 cross.setVisible(true);
+                label.setText("User does not exist");
             });
         }
         atomicInteger02.compareAndSet(1, 0);
@@ -121,11 +123,11 @@ public class ThreadUtils {
      * @param cross
      * @return
      */
-    public static KeyFrame generatePasswordVerificationKeyFrame(MFXTextField textField, ImageView check, ImageView cross){
+    public static KeyFrame generatePasswordVerificationKeyFrame(MFXTextField textField, ImageView check, ImageView cross, Label label){
         return new KeyFrame(Duration.seconds(1), event -> {
             if (atomicInteger03.compareAndSet(0, 1)){
                 executorService.execute(() -> {
-                    passwordVerificationTask(textField, check, cross);
+                    passwordVerificationTask(textField, check, cross, label);
                 });
             }
         });
@@ -138,15 +140,22 @@ public class ThreadUtils {
      * @param check
      * @param cross
      */
-    private static void passwordVerificationTask(MFXTextField textField, ImageView check, ImageView cross){
+    private static void passwordVerificationTask(MFXTextField textField, ImageView check, ImageView cross, Label label){
         if (textField.getText().length() > 5){
-            // at least six characters
-            check.setVisible(true);
-            cross.setVisible(false);
+            Platform.runLater(() -> {
+                // at least six characters
+                check.setVisible(true);
+                cross.setVisible(false);
+                label.setText("");
+            });
         }else{
-            // less than six characters
-            check.setVisible(false);
-            cross.setVisible(true);
+           Platform.runLater(() -> {
+                // less than six characters
+                check.setVisible(false);
+                cross.setVisible(true);
+                label.setText("At least six characters");
+
+            });
         }
         atomicInteger03.compareAndSet(1, 0);
     }
