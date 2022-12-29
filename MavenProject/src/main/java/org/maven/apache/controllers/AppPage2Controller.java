@@ -3,10 +3,7 @@ package org.maven.apache.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import javafx.animation.KeyFrame;
-import javafx.animation.RotateTransition;
-import javafx.animation.ScaleTransition;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -19,10 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.maven.apache.user.User;
-import org.maven.apache.utils.DataUtils;
-import org.maven.apache.utils.RotationUtils;
-import org.maven.apache.utils.ScaleUtils;
-import org.maven.apache.utils.ThreadUtils;
+import org.maven.apache.utils.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -129,6 +123,10 @@ public class AppPage2Controller implements Initializable {
 
     private final Timeline timeline = new Timeline();
 
+    private boolean isOnAppPage = true;
+
+    private boolean isOnTransactionPage = false;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         usernameLabel.setText(user.getName());
@@ -200,12 +198,21 @@ public class AppPage2Controller implements Initializable {
     }
     @FXML
     private void onEnterAppPage(){
-        appPagePane.setOpacity(1);
-        appPagePane.setPickOnBounds(true);
-        appPagePane.setVisible(true);
-        stackPane.setOpacity(1);
-        stackPane.setPickOnBounds(false);
-        stackPane.setVisible(false);
+        if(!isOnAppPage){
+            appPagePane.setPickOnBounds(true);
+            appPagePane.setVisible(true);
+            stackPane.setPickOnBounds(false);
+
+            FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 0, 1);
+            FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);
+            fadeTransition1.setOnFinished(event -> {
+                fadeTransition.play();
+                stackPane.setVisible(false);
+            });
+            fadeTransition1.play();
+            isOnAppPage = true;
+            isOnTransactionPage = false;
+        }
     }
     private void setButtonList(){
         buttonOne.setAlignment(Pos.CENTER_LEFT);
@@ -338,11 +345,19 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onTransactionPage() {
-        appPagePane.setPickOnBounds(false);
-        appPagePane.setOpacity(0);
-        appPagePane.setVisible(false);
-        stackPane.setPickOnBounds(true);
-        stackPane.setOpacity(1);
-        stackPane.setVisible(true);
+        if(!isOnTransactionPage){
+            appPagePane.setPickOnBounds(false);
+            stackPane.setPickOnBounds(true);
+            stackPane.setVisible(true);
+            FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 1, 0);
+            FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPane, 300, 0, 1);
+            fadeTransition.setOnFinished(event -> {
+                fadeTransition1.play();
+                appPagePane.setVisible(false);
+            });
+            fadeTransition.play();
+            isOnAppPage = false;
+            isOnTransactionPage = true;
+        }
     }
 }
