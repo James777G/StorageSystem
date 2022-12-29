@@ -12,6 +12,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane maxHeight="640.0" minHeight="640.0" prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.TransactionPageController">
    <children>
       <AnchorPane layoutX="20.0" layoutY="20.0" prefHeight="640.0" prefWidth="1201.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -95,7 +96,7 @@
                   </Label>
                   <Separator layoutX="689.0" layoutY="36.0" prefWidth="100.0" AnchorPane.leftAnchor="689.0" AnchorPane.topAnchor="34.0" />
                   <Separator layoutX="662.0" layoutY="65.0" prefWidth="100.0" AnchorPane.leftAnchor="689.0" />
-                  <JFXButton layoutX="241.0" layoutY="37.0" prefHeight="30.0" prefWidth="90.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="242.0" AnchorPane.topAnchor="37.0">
+                  <JFXButton fx:id="restockSelectButton" layoutX="241.0" layoutY="37.0" onAction="#onClickRestockSelectButton" prefHeight="30.0" prefWidth="90.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" text="Button" textFill="#ffffff00" AnchorPane.leftAnchor="242.0" AnchorPane.topAnchor="37.0">
                      <graphic>
                         <Label text="  Restock" textFill="WHITE">
                            <font>
@@ -105,13 +106,18 @@
                               <AnchorPane prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
                                  <children>
                                     <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                    <AnchorPane fx:id="onRestockSelectPane" layoutY="1.0" prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: #76FF03; -fx-background-radius: 1000;" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                       </children>
+                                    </AnchorPane>
                                  </children>
                               </AnchorPane>
                            </graphic>
                         </Label>
                      </graphic>
                   </JFXButton>
-                  <JFXButton prefHeight="30.0" prefWidth="65.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="37.0">
+                  <JFXButton fx:id="allSelectButton" onAction="#onClickAllSelectButton" prefHeight="30.0" prefWidth="65.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="37.0">
                      <graphic>
                         <Label text="   All" textFill="WHITE">
                            <font>
@@ -121,13 +127,18 @@
                               <AnchorPane prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
                                  <children>
                                     <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                    <AnchorPane fx:id="onAllSelectPane" prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: #76FF03; -fx-background-radius: 1000;">
+                                       <children>
+                                          <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                       </children>
+                                    </AnchorPane>
                                  </children>
                               </AnchorPane>
                            </graphic>
                         </Label>
                      </graphic>
                   </JFXButton>
-                  <JFXButton prefHeight="30.0" prefWidth="75.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="166.0" AnchorPane.topAnchor="37.0">
+                  <JFXButton fx:id="takenSelectButton" onAction="#onClickTakenSelectButton" prefHeight="30.0" prefWidth="75.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="166.0" AnchorPane.topAnchor="37.0">
                      <graphic>
                         <Label text="  Taken" textFill="WHITE">
                            <font>
@@ -137,6 +148,11 @@
                               <AnchorPane prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
                                  <children>
                                     <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                    <AnchorPane fx:id="onTakenSelectPane" layoutX="-1.0" layoutY="-1.0" prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: #76FF03; -fx-background-radius: 1000;" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                       </children>
+                                    </AnchorPane>
                                  </children>
                               </AnchorPane>
                            </graphic>
@@ -362,7 +378,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane layoutY="120.0" prefHeight="80.0" prefWidth="1201.0" style="-fx-background-color: #bbbbbb;" AnchorPane.bottomAnchor="440.0">
+            <AnchorPane layoutX="8.0" layoutY="178.0" prefHeight="80.0" prefWidth="1201.0" style="-fx-background-color: #bbbbbb;" AnchorPane.bottomAnchor="442.0">
                <children>
                   <Label layoutX="451.0" layoutY="14.0" prefHeight="40.0" prefWidth="300.0" text="CARGO NAME ******" textFill="#223c40" AnchorPane.leftAnchor="451.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="10.0">
                      <font>
