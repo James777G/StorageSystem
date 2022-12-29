@@ -4,15 +4,19 @@ import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.animation.KeyFrame;
 import javafx.application.Platform;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.controllers.LogInPageController;
 import org.maven.apache.item.Item;
 import org.maven.apache.search.FuzzySearch;
 import org.maven.apache.service.item.ItemService;
-import javafx.scene.control.Label;
-import io.github.palexdev.materialfx.controls.MFXTextField;
 
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -23,10 +27,23 @@ public class ThreadUtils {
 
     private static final AtomicInteger atomicInteger02 = new AtomicInteger();
 
+    private static final AtomicInteger atomicInteger03 = new AtomicInteger();
+
     private static final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
 
     private static final ItemService itemService = MyLauncher.context.getBean("itemService", ItemService.class);
 
+    private static boolean isUsernameOk = false;
+
+    private static boolean isPasswordOk = false;
+
+    /**
+     * generate the timeline for searching frequently
+     *
+     * @param buttonList
+     * @param searchField
+     * @return
+     */
     public static KeyFrame generateSearchKeyFrame(JFXButton[] buttonList, MFXTextField searchField){
         return new KeyFrame(Duration.seconds(0.2), event -> {
             if (atomicInteger01.compareAndSet(0, 1)) {
@@ -37,6 +54,12 @@ public class ThreadUtils {
         });
     }
 
+    /**
+     * define the searching task
+     *
+     * @param buttonList
+     * @param searchField
+     */
     private static void searchTask(JFXButton[] buttonList, MFXTextField searchField){
         List<Item> searchedItems = itemService.selectByCondition(FuzzySearch.getFuzzyName(searchField.getText()), Integer.MIN_VALUE);
         List<String> collect = searchedItems.stream()
@@ -52,30 +75,103 @@ public class ThreadUtils {
         atomicInteger01.compareAndSet(1, 0);
     }
 
-    public static KeyFrame generateVerificationKeyFrame(MFXTextField textField, Label label01, Label label02){
-        return new KeyFrame(Duration.seconds(1), event -> {
+    /**
+     * generate the timeline for verifying username frequently
+     *
+     * @param textField
+     * @param check
+     * @param cross
+     * @return
+     */
+    public static KeyFrame generateUsernameVerificationKeyFrame(MFXTextField textField, ImageView check, ImageView cross, Label label){
+        return new KeyFrame(Duration.seconds(0.5), event -> {
             if (atomicInteger02.compareAndSet(0, 1)){
                 executorService.execute(() -> {
-                    usernameVerificationTask(textField, label01, label02);
-                    System.out.println("verifying");
+                    usernameVerificationTask(textField, check, cross, label);
                 });
             }
         });
     }
 
-    private static void usernameVerificationTask(MFXTextField textField, Label label01, Label label02){
-        System.out.println(textField.getText());
+    /**
+     * define the task for verifying username
+     *
+     * @param textField
+     * @param check
+     * @param cross
+     */
+    private static void usernameVerificationTask(MFXTextField textField, ImageView check, ImageView cross, Label label){
         if (LogInPageController.isUsernameFound(textField.getText())){
             Platform.runLater(() -> {
-                label01.setText("Yes");
+                // if user exists
+                isUsernameOk = true;
+                check.setVisible(true);
+                cross.setVisible(false);
+                label.setText("");
             });
         }else{
             Platform.runLater(() -> {
-                label02.setText("No");
+                // if user does not exist
+                isUsernameOk = false;
+                check.setVisible(false);
+                cross.setVisible(true);
+                label.setText("User does not exist");
             });
         }
         atomicInteger02.compareAndSet(1, 0);
     }
 
+    /**
+     * generate the timeline for verifying password frequently
+     *
+     * @param textField
+     * @param check
+     * @param cross
+     * @return
+     */
+    public static KeyFrame generatePasswordVerificationKeyFrame(MFXTextField textField, ImageView check, ImageView cross, Label label, JFXButton button){
+        return new KeyFrame(Duration.seconds(0.5), event -> {
+            if (atomicInteger03.compareAndSet(0, 1)){
+                executorService.execute(() -> {
+                    passwordVerificationTask(textField, check, cross, label, button);
+                });
+            }
+        });
+    }
+
+    /**
+     * define the task for verifying password
+     *
+     * @param textField
+     * @param check
+     * @param cross
+     */
+    private static void passwordVerificationTask(MFXTextField textField, ImageView check, ImageView cross, Label label, JFXButton button){
+        if (textField.getText().length() > 5){
+            Platform.runLater(() -> {
+                // at least six characters
+                isPasswordOk = true;
+                check.setVisible(true);
+                cross.setVisible(false);
+                label.setText("");
+            });
+        }else{
+           Platform.runLater(() -> {
+                // less than six characters
+                isPasswordOk = false;
+                check.setVisible(false);
+                cross.setVisible(true);
+                label.setText("At least six characters");
+            });
+        }
+        if (isUsernameOk && isPasswordOk && !LogInPageController.isCounting){
+            // set the button sending email available
+            button.setDisable(false);
+        }else{
+            // set the button sending email disable
+            button.setDisable(true);
+        }
+        atomicInteger03.compareAndSet(1, 0);
+    }
 
 }

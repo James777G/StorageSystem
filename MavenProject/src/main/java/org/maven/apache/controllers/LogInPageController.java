@@ -8,7 +8,9 @@ import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,6 +23,7 @@ import javafx.scene.effect.Bloom;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.maven.apache.App;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.service.mail.MailService;
@@ -45,19 +48,19 @@ public class LogInPageController implements Initializable {
 
 	private String verificationCode;
 
+	private int time;
+
 	private static volatile List<User> userList;
 
 	private final UserService userService = MyLauncher.context.getBean("userService", UserService.class);
 
 	private final MailService mailService = MyLauncher.context.getBean("mailService", MailService.class);
 
-	private final Timeline timeline = new Timeline();
+	private final Timeline usernameTimeline = new Timeline();
 
-	@FXML
-	private AnchorPane signUpPane;
+	private final Timeline passwordTimeline = new Timeline();
 
-	@FXML
-	private AnchorPane signInPane;
+	public static boolean isCounting = false;
 
 	@FXML
 	private ImageView exitButton2;
@@ -70,6 +73,18 @@ public class LogInPageController implements Initializable {
 
 	@FXML
 	private ImageView imageOnStorage;
+
+	@FXML
+	private ImageView usernameCross;
+
+	@FXML
+	private ImageView usernameCheck;
+
+	@FXML
+	private ImageView passwordCross;
+
+	@FXML
+	private ImageView passwordCheck;
 
 	@FXML
 	private Label notificationLabel;
@@ -93,7 +108,19 @@ public class LogInPageController implements Initializable {
 	private Label labelOnForgotPassword;
 
 	@FXML
-	private Label label01, label02;
+	private Label usernameNotificationLabel;
+
+	@FXML
+	private Label newPasswordNotificationLabel;
+
+	@FXML
+	private Label countLabel;
+
+	@FXML
+	private AnchorPane signUpPane;
+
+	@FXML
+	private AnchorPane signInPane;
 
 	@FXML
 	private AnchorPane lineOnSignIn;
@@ -149,6 +176,9 @@ public class LogInPageController implements Initializable {
 	@FXML
 	private JFXButton loginButton;
 
+	@FXML
+	private JFXButton sendVerificationCodeButton;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.updateUserList();
@@ -166,6 +196,7 @@ public class LogInPageController implements Initializable {
 		verificationDialog.setVisible(false);
 		verificationDialog.setOpacity(1);
 		verificationDialog.setPickOnBounds(false);
+		sendVerificationCodeButton.setDisable(true);
 		labelOnSignUp.setCursor(Cursor.HAND);
 		labelOnSignIn.setCursor(Cursor.HAND);
 		lineOnSignIn.setCursor(Cursor.HAND);
@@ -178,9 +209,12 @@ public class LogInPageController implements Initializable {
 		FadeTransition fadeTransition = TransitionUtils.getFadeTransition(imageOnStorage, 3000, 0, 1);
 		fadeTransition.play();
 		resetPasswordButton.setDisable(true);
-		notificationLabel.setVisible(false);
 		blockPane.setVisible(false);
 		blockPane.setPickOnBounds(false);
+		usernameCross.setVisible(false);
+		usernameCheck.setVisible(false);
+		passwordCross.setVisible(false);
+		passwordCheck.setVisible(false);
 	}
 
 	/**
@@ -394,11 +428,16 @@ public class LogInPageController implements Initializable {
 		verificationDialog.setPickOnBounds(true);
 		blockPane.setVisible(true);
 		blockPane.setPickOnBounds(true);
-		//initialize verification per sec
-		KeyFrame keyFrame = ThreadUtils.generateVerificationKeyFrame(verificationUsername, label01, label02);
-		timeline.getKeyFrames().add(keyFrame);
-		timeline.setCycleCount(Timeline.INDEFINITE);
-		timeline.playFromStart();
+		// initialize username verification per sec
+		KeyFrame usernameKeyFrame = ThreadUtils.generateUsernameVerificationKeyFrame(verificationUsername, usernameCheck, usernameCross, usernameNotificationLabel);
+		usernameTimeline.getKeyFrames().add(usernameKeyFrame);
+		usernameTimeline.setCycleCount(Timeline.INDEFINITE);
+		usernameTimeline.playFromStart();
+		// initialize password verification per sec
+		KeyFrame passwordKeyFrame = ThreadUtils.generatePasswordVerificationKeyFrame(newPasswordField, passwordCheck, passwordCross, newPasswordNotificationLabel, sendVerificationCodeButton);
+		passwordTimeline.getKeyFrames().add(passwordKeyFrame);
+		passwordTimeline.setCycleCount(Timeline.INDEFINITE);
+		passwordTimeline.playFromStart();
 	}
 
 	/**
@@ -407,8 +446,9 @@ public class LogInPageController implements Initializable {
 	@FXML
 	private void onSendVerificationCode() {
 		String inputUsername = verificationUsername.getText();
-		if (isUsernameFound(inputUsername)) {
-			// if the username exists
+		int newPasswordLength = newPasswordField.getText().length();
+		if (isUsernameFound(inputUsername) && newPasswordLength > 5) {
+			// if username exists and password length is at least six
 			String emailAddress = getUser(inputUsername).getEmailAddress();
 			Random rnd = new Random();
 			int randNumber = rnd.nextInt(999999);
@@ -417,11 +457,53 @@ public class LogInPageController implements Initializable {
 			resetPasswordButton.setDisable(false);
 			notificationLabel.setVisible(true);
 			notificationLabel.setText("Email has been sent");
-		} else {
-			// if the username does not exist
-			notificationLabel.setVisible(true);
-			notificationLabel.setText("User does not exist");
+			// verification code can be resent in 60 seconds
+			sendVerificationCodeButton.setDisable(true);
+			countToOneMinute(sendVerificationCodeButton, 60);
 		}
+	}
+
+	/**
+	 * resending email would be available in 60sec
+	 *
+	 */
+	private void countToOneMinute(JFXButton button, int seconds){
+		isCounting = true;
+		Timeline countTimeline = new Timeline();
+		time = seconds;
+		passwordTimeline.stop();
+		usernameTimeline.stop();
+		countTimeline.setCycleCount(Timeline.INDEFINITE);
+		KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				time--;
+				Task<Void> countTask = new Task<>(){
+					@Override
+					protected Void call() {
+						if (time == 0){
+							Platform.runLater(() -> {
+								countLabel.setText("");
+							});
+							isCounting = false;
+							countTimeline.stop();
+							button.setDisable(true);
+							passwordTimeline.playFromStart();
+							usernameTimeline.playFromStart();
+						}else{
+							Platform.runLater(() -> {
+								countLabel.setText(time + " ");
+							});
+						}
+						return null;
+					}
+				};
+				Thread countThread = new Thread(countTask);
+				countThread.start();
+			}
+		});
+		countTimeline.getKeyFrames().add(keyFrame);
+		countTimeline.playFromStart();
 	}
 
 	/**
@@ -434,6 +516,11 @@ public class LogInPageController implements Initializable {
 		notificationLabel.setText("");
 		blockPane.setVisible(false);
 		blockPane.setPickOnBounds(false);
+		verificationUsername.clear();
+		newPasswordField.clear();
+		verificationCodeField.clear();
+		usernameTimeline.stop();
+		passwordTimeline.stop();
 	}
 
 	/**
@@ -449,11 +536,9 @@ public class LogInPageController implements Initializable {
 			User userToBeResetPassword = getUser(verificationUsername.getText());
 			userToBeResetPassword.setPassword(newPassword);
 			userService.update(userToBeResetPassword);
-			notificationLabel.setVisible(true);
 			notificationLabel.setText("Your password has been reset");
 		} else {
 			// if the verification code is not matched
-			notificationLabel.setVisible(true);
 			notificationLabel.setText("Incorrect verification code");
 		}
 	}
@@ -477,7 +562,7 @@ public class LogInPageController implements Initializable {
 		blockPane.setPickOnBounds(false);
 	}
 
-	// the function for button confirmation
+	// the function for button confirmation in order to add a new user to database
 	@FXML
 	private void onConfirmationButton(ActionEvent event) {
 		if (checkExist()) {
