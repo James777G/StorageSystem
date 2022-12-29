@@ -8,7 +8,9 @@ import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,6 +23,7 @@ import javafx.scene.effect.Bloom;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.maven.apache.App;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.service.mail.MailService;
@@ -32,6 +35,7 @@ import org.maven.apache.utils.TransitionUtils;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -44,6 +48,8 @@ public class LogInPageController implements Initializable {
 
 	private String verificationCode;
 
+	private int time;
+
 	private static volatile List<User> userList;
 
 	private final UserService userService = MyLauncher.context.getBean("userService", UserService.class);
@@ -53,6 +59,8 @@ public class LogInPageController implements Initializable {
 	private final Timeline usernameTimeline = new Timeline();
 
 	private final Timeline passwordTimeline = new Timeline();
+
+	public static boolean isCounting = false;
 
 	@FXML
 	private ImageView exitButton2;
@@ -104,6 +112,9 @@ public class LogInPageController implements Initializable {
 
 	@FXML
 	private Label newPasswordNotificationLabel;
+
+	@FXML
+	private Label countLabel;
 
 	@FXML
 	private AnchorPane signUpPane;
@@ -437,7 +448,7 @@ public class LogInPageController implements Initializable {
 		String inputUsername = verificationUsername.getText();
 		int newPasswordLength = newPasswordField.getText().length();
 		if (isUsernameFound(inputUsername) && newPasswordLength > 5) {
-			// if the username exists
+			// if username exists and password length is at least six
 			String emailAddress = getUser(inputUsername).getEmailAddress();
 			Random rnd = new Random();
 			int randNumber = rnd.nextInt(999999);
@@ -446,7 +457,53 @@ public class LogInPageController implements Initializable {
 			resetPasswordButton.setDisable(false);
 			notificationLabel.setVisible(true);
 			notificationLabel.setText("Email has been sent");
+			// verification code can be resent in 60 seconds
+			sendVerificationCodeButton.setDisable(true);
+			countToOneMinute(sendVerificationCodeButton, 60);
 		}
+	}
+
+	/**
+	 * resending email would be available in 60sec
+	 *
+	 */
+	private void countToOneMinute(JFXButton button, int seconds){
+		isCounting = true;
+		Timeline countTimeline = new Timeline();
+		time = seconds;
+		passwordTimeline.stop();
+		usernameTimeline.stop();
+		countTimeline.setCycleCount(Timeline.INDEFINITE);
+		KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				time--;
+				Task<Void> countTask = new Task<>(){
+					@Override
+					protected Void call() {
+						if (time == 0){
+							Platform.runLater(() -> {
+								countLabel.setText("");
+							});
+							isCounting = false;
+							countTimeline.stop();
+							button.setDisable(true);
+							passwordTimeline.playFromStart();
+							usernameTimeline.playFromStart();
+						}else{
+							Platform.runLater(() -> {
+								countLabel.setText(time + " ");
+							});
+						}
+						return null;
+					}
+				};
+				Thread countThread = new Thread(countTask);
+				countThread.start();
+			}
+		});
+		countTimeline.getKeyFrames().add(keyFrame);
+		countTimeline.playFromStart();
 	}
 
 	/**
