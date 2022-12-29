@@ -1,27 +1,12 @@
 package org.maven.apache.controllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-import java.util.ResourceBundle;
-import java.util.concurrent.ExecutorService;
-
-import org.maven.apache.App;
-import org.maven.apache.MyLauncher;
-import org.maven.apache.service.mail.MailService;
-import org.maven.apache.service.user.UserService;
-import org.maven.apache.user.User;
-import org.maven.apache.utils.DataUtils;
-import org.maven.apache.utils.TransitionUtils;
-
 import com.jfoenix.controls.JFXButton;
-
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,13 +16,28 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+import org.maven.apache.App;
+import org.maven.apache.MyLauncher;
+import org.maven.apache.service.mail.MailService;
+import org.maven.apache.service.user.UserService;
+import org.maven.apache.user.User;
+import org.maven.apache.utils.DataUtils;
+import org.maven.apache.utils.ThreadUtils;
+import org.maven.apache.utils.TransitionUtils;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.Time;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
+import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
 
 public class LogInPageController implements Initializable {
 
@@ -51,6 +51,8 @@ public class LogInPageController implements Initializable {
 
 	private final MailService mailService = MyLauncher.context.getBean("mailService", MailService.class);
 
+	private final Timeline timeline = new Timeline();
+
 	@FXML
 	private AnchorPane signUpPane;
 
@@ -62,12 +64,6 @@ public class LogInPageController implements Initializable {
 
 	@FXML
 	private ImageView errorMessageIcon;
-
-	@FXML
-	private ImageView confirmDialogIcon;
-
-	@FXML
-	private ImageView verificationDialogIcon;
 
 	@FXML
 	private ImageView exitButton;
@@ -97,13 +93,19 @@ public class LogInPageController implements Initializable {
 	private Label labelOnForgotPassword;
 
 	@FXML
-	private Line lineOnSignIn;
+	private Label label01, label02;
 
 	@FXML
-	private Line lineOnSignUp;
+	private AnchorPane lineOnSignIn;
 
 	@FXML
-	private Line lineOnForgotPassword;
+	private AnchorPane lineOnSignUp;
+
+	@FXML
+	private AnchorPane lineOnForgotPassword;
+
+	@FXML
+	private AnchorPane blockPane;
 
 	@FXML
 	private MFXTextField newPasswordField;
@@ -142,9 +144,6 @@ public class LogInPageController implements Initializable {
 	private MFXPasswordField signUpPassword;
 
 	@FXML
-	private Button confimButton;
-
-	@FXML
 	private JFXButton resetPasswordButton;
 
 	@FXML
@@ -163,11 +162,9 @@ public class LogInPageController implements Initializable {
 		errorDialog.setPickOnBounds(false);
 		confirmDialog.setVisible(false);
 		confirmDialog.setOpacity(1);
-		// confirmDialog.setHeaderIcon(confirmDialogIcon);
 		confirmDialog.setPickOnBounds(false);
 		verificationDialog.setVisible(false);
 		verificationDialog.setOpacity(1);
-		// verificationDialog.setHeaderIcon(verificationDialogIcon);
 		verificationDialog.setPickOnBounds(false);
 		labelOnSignUp.setCursor(Cursor.HAND);
 		labelOnSignIn.setCursor(Cursor.HAND);
@@ -182,6 +179,8 @@ public class LogInPageController implements Initializable {
 		fadeTransition.play();
 		resetPasswordButton.setDisable(true);
 		notificationLabel.setVisible(false);
+		blockPane.setVisible(false);
+		blockPane.setPickOnBounds(false);
 	}
 
 	/**
@@ -265,7 +264,6 @@ public class LogInPageController implements Initializable {
 	@FXML
 	private void onSignIn() {
 		setVisibility(signInPane, signUpPane);
-
 	}
 
 	private void setVisibility(AnchorPane signInPane, AnchorPane signUpPane) {
@@ -302,29 +300,21 @@ public class LogInPageController implements Initializable {
 	}
 
 	@FXML
-	private void onEnterLabelSignUp() {
+	private void onEnterSignUp() {
 		lineOnSignUp.setVisible(true);
 	}
 
 	@FXML
-	private void onExitLabelSignUp() {
+	private void onExitSignUp() {
 		lineOnSignUp.setVisible(false);
-	}
-
-	@FXML
-	private void onEnterLineOnForgotPassword() {
-		lineOnForgotPassword.setVisible(true);
-	}
-
-	@FXML
-	private void onExitLineOnForgotPassword() {
-		lineOnForgotPassword.setVisible(false);
 	}
 
 	@FXML
 	private void onCloseErrorDialog() {
 		errorDialog.setVisible(false);
 		errorDialog.setPickOnBounds(false);
+		blockPane.setVisible(false);
+		blockPane.setPickOnBounds(false);
 	}
 
 	@FXML
@@ -352,9 +342,11 @@ public class LogInPageController implements Initializable {
 		String username = userNameField.getText();
 		User currentUser = getUser(username);
 		if (!isUsernameFound(username)) {
-			// if the user does not exist, show sign up alert
+			// if the user does not exist, show alert
 			errorDialog.setVisible(true);
 			errorDialog.setPickOnBounds(true);
+			blockPane.setVisible(true);
+			blockPane.setPickOnBounds(true);
 		} else {
 			// if the user exists, check its verification (correct password)
 			if (currentUser.getPassword().equals(passwordField.getText())) {
@@ -366,12 +358,14 @@ public class LogInPageController implements Initializable {
 				stage.setScene(scene);
 				stage.show();
 			} else {
+				// incorrect username or password
 				errorDialog.setVisible(true);
 				errorDialog.setPickOnBounds(true);
+				blockPane.setVisible(true);
+				blockPane.setPickOnBounds(true);
 			}
 		}
 	}
-	
 
 	/**
 	 * Find the existence of the input username
@@ -379,7 +373,7 @@ public class LogInPageController implements Initializable {
 	 * @param userName username from input
 	 * @return boolean
 	 */
-	private boolean isUsernameFound(String userName) {
+	public static boolean isUsernameFound(String userName) {
 		return userList.stream().anyMatch(user -> user.getUsername().equals(userName));
 	}
 
@@ -398,6 +392,13 @@ public class LogInPageController implements Initializable {
 	private void onForgetPassword() {
 		verificationDialog.setVisible(true);
 		verificationDialog.setPickOnBounds(true);
+		blockPane.setVisible(true);
+		blockPane.setPickOnBounds(true);
+		//initialize verification per sec
+		KeyFrame keyFrame = ThreadUtils.generateVerificationKeyFrame(verificationUsername, label01, label02);
+		timeline.getKeyFrames().add(keyFrame);
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.playFromStart();
 	}
 
 	/**
@@ -421,7 +422,6 @@ public class LogInPageController implements Initializable {
 			notificationLabel.setVisible(true);
 			notificationLabel.setText("User does not exist");
 		}
-
 	}
 
 	/**
@@ -432,6 +432,8 @@ public class LogInPageController implements Initializable {
 		verificationDialog.setVisible(false);
 		verificationDialog.setPickOnBounds(false);
 		notificationLabel.setText("");
+		blockPane.setVisible(false);
+		blockPane.setPickOnBounds(false);
 	}
 
 	/**
@@ -463,13 +465,16 @@ public class LogInPageController implements Initializable {
 		confirmationEmailAddress.setText("Email Address: " + getSignUpEmailAddressString());
 		confirmDialog.setVisible(true);
 		confirmDialog.setPickOnBounds(true);
+		blockPane.setVisible(true);
+		blockPane.setPickOnBounds(true);
 	}
 
 	@FXML
 	private void onCloseConfirmDialog() {
 		confirmDialog.setVisible(false);
 		confirmDialog.setPickOnBounds(false);
-
+		blockPane.setVisible(false);
+		blockPane.setPickOnBounds(false);
 	}
 
 	// the function for button confirmation
@@ -481,7 +486,6 @@ public class LogInPageController implements Initializable {
 			existAlert.setHeaderText("The username already exist");
 			existAlert.setContentText("Please change a user name");
 			existAlert.showAndWait();
-
 		} else {
 			User userSignUp = new User();
 			userSignUp.setName(getSignUpFullNameString());
@@ -492,7 +496,6 @@ public class LogInPageController implements Initializable {
 			// if user sign up successfully then would go back to the sign in scene
 			onCloseConfirmDialog();
 			setVisibility(signInPane, signUpPane);
-
 		}
 	}
 

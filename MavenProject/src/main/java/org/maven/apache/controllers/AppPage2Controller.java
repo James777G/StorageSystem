@@ -24,7 +24,7 @@ import org.maven.apache.user.User;
 import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.RotationUtils;
 import org.maven.apache.utils.ScaleUtils;
-import org.maven.apache.utils.SearchUtils;
+import org.maven.apache.utils.ThreadUtils;
 
 import java.io.IOException;
 import java.net.URL;
@@ -117,8 +117,6 @@ public class AppPage2Controller implements Initializable {
 	@FXML
 	private Label staffNameLabel04;
 
-
-
 	//pass the user from login page
     private final User user = DataUtils.currentUser;
 
@@ -127,8 +125,6 @@ public class AppPage2Controller implements Initializable {
     private boolean isRotating = false;
 
     private final Timeline timeline = new Timeline();
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -229,15 +225,12 @@ public class AppPage2Controller implements Initializable {
         }
     }
 
-
-
-
 	/**
 	 * perform fuzzy search and show the list of relevant cargos in background per
 	 * sec
 	 */
 	private void searchOnBackgroundPerSec() {
-		KeyFrame keyFrame = SearchUtils.generateKeyFrame(buttonList, searchField);
+		KeyFrame keyFrame = ThreadUtils.generateSearchKeyFrame(buttonList, searchField);
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.getKeyFrames().add(keyFrame);
 		timeline.playFromStart();
@@ -305,7 +298,6 @@ public class AppPage2Controller implements Initializable {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(refreshImage,200,1);
         scaleTransition.play();
 	}
-
 
     @FXML
     private void onTransactionPage() throws IOException {
