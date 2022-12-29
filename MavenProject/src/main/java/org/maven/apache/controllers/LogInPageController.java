@@ -434,6 +434,10 @@ public class LogInPageController implements Initializable {
 		notificationLabel.setText("");
 		blockPane.setVisible(false);
 		blockPane.setPickOnBounds(false);
+		verificationUsername.clear();
+		newPasswordField.clear();
+		verificationCodeField.clear();
+		timeline.stop();
 	}
 
 	/**
