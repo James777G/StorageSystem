@@ -177,6 +177,8 @@
                   <Insets bottom="20.0" left="50.0" right="50.0" top="20.0" />
                </padding>
                <children>
+                  <Label fx:id="label01" text="Label" />
+                  <Label fx:id="label02" text="Label" />
                   <MFXTextField fx:id="verificationUsername" floatMode="DISABLED" minHeight="35.0" prefHeight="33.0" prefWidth="261.0" promptText="( Username )" styleClass="inputFields" stylesheets="@../css/logInPage.css">
                      <font>
                         <Font name="System Bold" size="12.0" />

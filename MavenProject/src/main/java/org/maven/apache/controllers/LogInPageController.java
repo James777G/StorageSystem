@@ -1,27 +1,12 @@
 package org.maven.apache.controllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-import java.util.ResourceBundle;
-import java.util.concurrent.ExecutorService;
-
-import org.maven.apache.App;
-import org.maven.apache.MyLauncher;
-import org.maven.apache.service.mail.MailService;
-import org.maven.apache.service.user.UserService;
-import org.maven.apache.user.User;
-import org.maven.apache.utils.DataUtils;
-import org.maven.apache.utils.TransitionUtils;
-
 import com.jfoenix.controls.JFXButton;
-
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,13 +16,28 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+import org.maven.apache.App;
+import org.maven.apache.MyLauncher;
+import org.maven.apache.service.mail.MailService;
+import org.maven.apache.service.user.UserService;
+import org.maven.apache.user.User;
+import org.maven.apache.utils.DataUtils;
+import org.maven.apache.utils.ThreadUtils;
+import org.maven.apache.utils.TransitionUtils;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.Time;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
+import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
 
 public class LogInPageController implements Initializable {
 
@@ -50,6 +50,8 @@ public class LogInPageController implements Initializable {
 	private final UserService userService = MyLauncher.context.getBean("userService", UserService.class);
 
 	private final MailService mailService = MyLauncher.context.getBean("mailService", MailService.class);
+
+	private final Timeline timeline = new Timeline();
 
 	@FXML
 	private AnchorPane signUpPane;
@@ -89,6 +91,9 @@ public class LogInPageController implements Initializable {
 
 	@FXML
 	private Label labelOnForgotPassword;
+
+	@FXML
+	private Label label01, label02;
 
 	@FXML
 	private AnchorPane lineOnSignIn;
@@ -368,7 +373,7 @@ public class LogInPageController implements Initializable {
 	 * @param userName username from input
 	 * @return boolean
 	 */
-	private boolean isUsernameFound(String userName) {
+	public static boolean isUsernameFound(String userName) {
 		return userList.stream().anyMatch(user -> user.getUsername().equals(userName));
 	}
 
@@ -389,6 +394,11 @@ public class LogInPageController implements Initializable {
 		verificationDialog.setPickOnBounds(true);
 		blockPane.setVisible(true);
 		blockPane.setPickOnBounds(true);
+		//initialize verification per sec
+		KeyFrame keyFrame = ThreadUtils.generateVerificationKeyFrame(verificationUsername, label01, label02);
+		timeline.getKeyFrames().add(keyFrame);
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.playFromStart();
 	}
 
 	/**
