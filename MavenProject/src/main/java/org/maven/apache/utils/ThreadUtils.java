@@ -84,7 +84,7 @@ public class ThreadUtils {
      * @return
      */
     public static KeyFrame generateUsernameVerificationKeyFrame(MFXTextField textField, ImageView check, ImageView cross, Label label){
-        return new KeyFrame(Duration.seconds(1), event -> {
+        return new KeyFrame(Duration.seconds(0.5), event -> {
             if (atomicInteger02.compareAndSet(0, 1)){
                 executorService.execute(() -> {
                     usernameVerificationTask(textField, check, cross, label);
@@ -130,7 +130,7 @@ public class ThreadUtils {
      * @return
      */
     public static KeyFrame generatePasswordVerificationKeyFrame(MFXTextField textField, ImageView check, ImageView cross, Label label, JFXButton button){
-        return new KeyFrame(Duration.seconds(1), event -> {
+        return new KeyFrame(Duration.seconds(0.5), event -> {
             if (atomicInteger03.compareAndSet(0, 1)){
                 executorService.execute(() -> {
                     passwordVerificationTask(textField, check, cross, label, button);
