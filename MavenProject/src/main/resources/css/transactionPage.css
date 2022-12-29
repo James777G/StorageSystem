@@ -1,0 +1,5 @@
+.headerRow{
+    -fx-background-color: white;
+    -fx-border-width: 0 0 2.5 0;
+    -fx-border-color:  #bbbbbb;
+}
