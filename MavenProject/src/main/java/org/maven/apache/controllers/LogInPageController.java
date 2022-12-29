@@ -20,9 +20,6 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import org.maven.apache.App;
 import org.maven.apache.MyLauncher;
@@ -33,7 +30,6 @@ import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.ThreadUtils;
 import org.maven.apache.utils.TransitionUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -169,6 +165,9 @@ public class LogInPageController implements Initializable {
 	@FXML
 	private JFXButton loginButton;
 
+	@FXML
+	private JFXButton sendVerificationCodeButton;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.updateUserList();
@@ -186,6 +185,7 @@ public class LogInPageController implements Initializable {
 		verificationDialog.setVisible(false);
 		verificationDialog.setOpacity(1);
 		verificationDialog.setPickOnBounds(false);
+		sendVerificationCodeButton.setDisable(true);
 		labelOnSignUp.setCursor(Cursor.HAND);
 		labelOnSignIn.setCursor(Cursor.HAND);
 		lineOnSignIn.setCursor(Cursor.HAND);
@@ -423,7 +423,7 @@ public class LogInPageController implements Initializable {
 		usernameTimeline.setCycleCount(Timeline.INDEFINITE);
 		usernameTimeline.playFromStart();
 		// initialize password verification per sec
-		KeyFrame passwordKeyFrame = ThreadUtils.generatePasswordVerificationKeyFrame(newPasswordField, passwordCheck, passwordCross, newPasswordNotificationLabel);
+		KeyFrame passwordKeyFrame = ThreadUtils.generatePasswordVerificationKeyFrame(newPasswordField, passwordCheck, passwordCross, newPasswordNotificationLabel, sendVerificationCodeButton);
 		passwordTimeline.getKeyFrames().add(passwordKeyFrame);
 		passwordTimeline.setCycleCount(Timeline.INDEFINITE);
 		passwordTimeline.playFromStart();

@@ -33,6 +33,10 @@ public class ThreadUtils {
 
     private static final ItemService itemService = MyLauncher.context.getBean("itemService", ItemService.class);
 
+    private static boolean isUsernameOk = false;
+
+    private static boolean isPasswordOk = false;
+
     /**
      * generate the timeline for searching frequently
      *
@@ -100,6 +104,7 @@ public class ThreadUtils {
         if (LogInPageController.isUsernameFound(textField.getText())){
             Platform.runLater(() -> {
                 // if user exists
+                isUsernameOk = true;
                 check.setVisible(true);
                 cross.setVisible(false);
                 label.setText("");
@@ -107,6 +112,7 @@ public class ThreadUtils {
         }else{
             Platform.runLater(() -> {
                 // if user does not exist
+                isUsernameOk = false;
                 check.setVisible(false);
                 cross.setVisible(true);
                 label.setText("User does not exist");
@@ -123,11 +129,11 @@ public class ThreadUtils {
      * @param cross
      * @return
      */
-    public static KeyFrame generatePasswordVerificationKeyFrame(MFXTextField textField, ImageView check, ImageView cross, Label label){
+    public static KeyFrame generatePasswordVerificationKeyFrame(MFXTextField textField, ImageView check, ImageView cross, Label label, JFXButton button){
         return new KeyFrame(Duration.seconds(1), event -> {
             if (atomicInteger03.compareAndSet(0, 1)){
                 executorService.execute(() -> {
-                    passwordVerificationTask(textField, check, cross, label);
+                    passwordVerificationTask(textField, check, cross, label, button);
                 });
             }
         });
@@ -140,10 +146,11 @@ public class ThreadUtils {
      * @param check
      * @param cross
      */
-    private static void passwordVerificationTask(MFXTextField textField, ImageView check, ImageView cross, Label label){
+    private static void passwordVerificationTask(MFXTextField textField, ImageView check, ImageView cross, Label label, JFXButton button){
         if (textField.getText().length() > 5){
             Platform.runLater(() -> {
                 // at least six characters
+                isPasswordOk = true;
                 check.setVisible(true);
                 cross.setVisible(false);
                 label.setText("");
@@ -151,11 +158,18 @@ public class ThreadUtils {
         }else{
            Platform.runLater(() -> {
                 // less than six characters
+                isPasswordOk = false;
                 check.setVisible(false);
                 cross.setVisible(true);
                 label.setText("At least six characters");
-
             });
+        }
+        if (isUsernameOk && isPasswordOk){
+            // set the button sending email available
+            button.setDisable(false);
+        }else{
+            // set the button sending email disable
+            button.setDisable(true);
         }
         atomicInteger03.compareAndSet(1, 0);
     }

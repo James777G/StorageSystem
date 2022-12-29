@@ -207,7 +207,7 @@
                         <Insets right="15.0" top="10.0" />
                      </VBox.margin>
                   </MFXTextField>
-                  <Label fx:id="notificationLabel" alignment="TOP_CENTER" prefHeight="18.0" prefWidth="200.0" text="Label" textAlignment="CENTER" textFill="RED">
+                  <Label fx:id="notificationLabel" alignment="TOP_CENTER" prefHeight="18.0" prefWidth="200.0" textAlignment="CENTER" textFill="RED">
                      <VBox.margin>
                         <Insets left="15.0" right="15.0" top="10.0" />
                      </VBox.margin></Label>
@@ -217,7 +217,7 @@
          <bottom>
             <HBox maxWidth="200.0" prefHeight="49.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onSendVerificationCode" prefHeight="25.0" prefWidth="70.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Send">
+                  <JFXButton fx:id="sendVerificationCodeButton" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onSendVerificationCode" prefHeight="25.0" prefWidth="70.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Send">
                      <HBox.margin>
                         <Insets left="15.0" right="15.0" />
                      </HBox.margin>
