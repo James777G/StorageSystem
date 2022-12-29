@@ -170,37 +170,41 @@
                </font></JFXButton>
          </bottom>
       </MFXGenericDialog>
-      <MFXGenericDialog fx:id="verificationDialog" headerText="Verification Code" layoutX="400.0" layoutY="230.0" maxHeight="310.0" maxWidth="500.0" onClose="#onCloseVerificationDialog" prefHeight="310.0" prefWidth="400.0">
+      <MFXGenericDialog fx:id="verificationDialog" headerText="Verification Code" layoutX="400.0" layoutY="230.0" maxHeight="310.0" maxWidth="500.0" onClose="#onCloseVerificationDialog" prefHeight="310.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false">
          <center>
-            <VBox alignment="CENTER" prefHeight="230.0" prefWidth="378.0" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" prefHeight="218.0" prefWidth="273.0" BorderPane.alignment="CENTER">
                <padding>
-                  <Insets bottom="20.0" left="50.0" right="50.0" top="20.0" />
+                  <Insets bottom="20.0" left="50.0" right="20.0" top="20.0" />
                </padding>
                <children>
-                  <Label fx:id="label01" text="Label" />
-                  <Label fx:id="label02" text="Label" />
-                  <MFXTextField fx:id="verificationUsername" floatMode="DISABLED" minHeight="35.0" prefHeight="33.0" prefWidth="261.0" promptText="( Username )" styleClass="inputFields" stylesheets="@../css/logInPage.css">
+                  <MFXTextField fx:id="verificationUsername" floatMode="DISABLED" minHeight="35.0" prefHeight="35.0" prefWidth="200.0" promptText="( Username )" styleClass="inputFields" stylesheets="@../css/logInPage.css">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+                        <Insets bottom="10.0" right="15.0" top="10.0" />
                      </VBox.margin>
                   </MFXTextField>
-                  <MFXTextField fx:id="newPasswordField" minHeight="35.0" prefHeight="35.0" prefWidth="248.0" promptText="( New password )" styleClass="inputFields" stylesheets="@../css/logInPage.css">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </MFXTextField>
-                  <MFXTextField fx:id="verificationCodeField" floatMode="DISABLED" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" prefWidth="261.0" promptText="( 6 digits code )" styleClass="inputFields" stylesheets="@../css/logInPage.css">
+                  <MFXTextField fx:id="newPasswordField" floatMode="DISABLED" minHeight="35.0" prefHeight="35.0" prefWidth="200.0" promptText="( New password )" styleClass="inputFields" stylesheets="@../css/logInPage.css">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+                        <Insets bottom="10.0" right="15.0" top="10.0" />
                      </VBox.margin>
                   </MFXTextField>
-                  <Label fx:id="notificationLabel" prefHeight="34.0" prefWidth="211.0" text="Label" textAlignment="CENTER" textFill="RED" />
+                  <MFXTextField fx:id="verificationCodeField" floatMode="DISABLED" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" prefWidth="200.0" promptText="( 6 digits code )" styleClass="inputFields" stylesheets="@../css/logInPage.css">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" right="15.0" top="10.0" />
+                     </VBox.margin>
+                  </MFXTextField>
+                  <Label fx:id="notificationLabel" prefHeight="34.0" prefWidth="211.0" text="Label" textAlignment="CENTER" textFill="RED">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+                     </VBox.margin></Label>
                </children>
             </VBox>
          </center>
@@ -229,6 +233,22 @@
                </padding>
             </HBox>
          </bottom>
+         <right>
+            <Pane prefHeight="182.0" prefWidth="86.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="usernameCross" fitHeight="30.0" fitWidth="30.0" layoutX="-15.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-multiply-30.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="usernameCheck" fitHeight="42.0" fitWidth="30.0" layoutX="-15.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-checkmark-24.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </right>
       </MFXGenericDialog>
    </children>
 </AnchorPane>

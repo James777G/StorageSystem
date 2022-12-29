@@ -20,6 +20,9 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import org.maven.apache.App;
 import org.maven.apache.MyLauncher;
@@ -30,9 +33,9 @@ import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.ThreadUtils;
 import org.maven.apache.utils.TransitionUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -54,12 +57,6 @@ public class LogInPageController implements Initializable {
 	private final Timeline timeline = new Timeline();
 
 	@FXML
-	private AnchorPane signUpPane;
-
-	@FXML
-	private AnchorPane signInPane;
-
-	@FXML
 	private ImageView exitButton2;
 
 	@FXML
@@ -70,6 +67,12 @@ public class LogInPageController implements Initializable {
 
 	@FXML
 	private ImageView imageOnStorage;
+
+	@FXML
+	private ImageView usernameCross;
+
+	@FXML
+	private ImageView usernameCheck;
 
 	@FXML
 	private Label notificationLabel;
@@ -93,7 +96,10 @@ public class LogInPageController implements Initializable {
 	private Label labelOnForgotPassword;
 
 	@FXML
-	private Label label01, label02;
+	private AnchorPane signUpPane;
+
+	@FXML
+	private AnchorPane signInPane;
 
 	@FXML
 	private AnchorPane lineOnSignIn;
@@ -181,6 +187,8 @@ public class LogInPageController implements Initializable {
 		notificationLabel.setVisible(false);
 		blockPane.setVisible(false);
 		blockPane.setPickOnBounds(false);
+		usernameCross.setVisible(false);
+		usernameCheck.setVisible(false);
 	}
 
 	/**
@@ -395,10 +403,11 @@ public class LogInPageController implements Initializable {
 		blockPane.setVisible(true);
 		blockPane.setPickOnBounds(true);
 		//initialize verification per sec
-		KeyFrame keyFrame = ThreadUtils.generateVerificationKeyFrame(verificationUsername, label01, label02);
+		KeyFrame keyFrame = ThreadUtils.generateVerificationKeyFrame(verificationUsername, usernameCheck, usernameCross);
 		timeline.getKeyFrames().add(keyFrame);
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.playFromStart();
+
 	}
 
 	/**

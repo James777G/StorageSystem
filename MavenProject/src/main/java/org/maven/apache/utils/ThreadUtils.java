@@ -4,15 +4,19 @@ import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.animation.KeyFrame;
 import javafx.application.Platform;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.controllers.LogInPageController;
 import org.maven.apache.item.Item;
 import org.maven.apache.search.FuzzySearch;
 import org.maven.apache.service.item.ItemService;
-import javafx.scene.control.Label;
-import io.github.palexdev.materialfx.controls.MFXTextField;
 
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -52,26 +56,30 @@ public class ThreadUtils {
         atomicInteger01.compareAndSet(1, 0);
     }
 
-    public static KeyFrame generateVerificationKeyFrame(MFXTextField textField, Label label01, Label label02){
+    public static KeyFrame generateVerificationKeyFrame(MFXTextField textField, ImageView check, ImageView cross){
         return new KeyFrame(Duration.seconds(1), event -> {
             if (atomicInteger02.compareAndSet(0, 1)){
                 executorService.execute(() -> {
-                    usernameVerificationTask(textField, label01, label02);
+                    usernameVerificationTask(textField, check, cross);
                     System.out.println("verifying");
                 });
             }
         });
     }
 
-    private static void usernameVerificationTask(MFXTextField textField, Label label01, Label label02){
+    private static void usernameVerificationTask(MFXTextField textField, ImageView check, ImageView cross){
         System.out.println(textField.getText());
         if (LogInPageController.isUsernameFound(textField.getText())){
             Platform.runLater(() -> {
-                label01.setText("Yes");
+                // if user exists
+                check.setVisible(true);
+                cross.setVisible(false);
             });
         }else{
             Platform.runLater(() -> {
-                label02.setText("No");
+                // if user does not exist
+                check.setVisible(false);
+                cross.setVisible(true);
             });
         }
         atomicInteger02.compareAndSet(1, 0);
