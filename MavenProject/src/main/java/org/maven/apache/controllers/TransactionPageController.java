@@ -5,13 +5,18 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 import javafx.scene.control.Label;
 import org.maven.apache.utils.TranslateUtils;
 
-public class TransactionPageController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class TransactionPageController implements Initializable {
 
     private boolean isMovingLineOnData = false;
 
@@ -36,6 +41,9 @@ public class TransactionPageController {
 
     @FXML
     private Label dateLabel1, dateLabel2, dateLabel3, dateLabel4;
+
+    @FXML
+    private AnchorPane addButton;
 
     @FXML
     private Label[] orderLabelArray = {orderLabel1, orderLabel2, orderLabel3, orderLabel4};
@@ -80,4 +88,8 @@ public class TransactionPageController {
     }
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        addButton.setCursor(Cursor.HAND);
+    }
 }

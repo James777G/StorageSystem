@@ -7,6 +7,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,7 +19,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import org.maven.apache.App;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.DataUtils;
@@ -120,6 +121,8 @@ public class AppPage2Controller implements Initializable {
     private final User user = DataUtils.currentUser;
 
     private final JFXButton[] buttonList = new JFXButton[5];
+
+    private boolean isRotating = false;
 
     private final Timeline timeline = new Timeline();
 
@@ -277,7 +280,11 @@ public class AppPage2Controller implements Initializable {
 	private void refreshPage() {
 		RotateTransition rotate = RotationUtils.getRotationTransitionFromBy(refreshImage, 500, 0,
 				RotationUtils.Direction.COUNTERCLOCKWISE, 360);
-		rotate.play();
+        rotate.setOnFinished(event -> isRotating = false);
+        if(!isRotating){
+            isRotating = true;
+            rotate.play();
+        }
 	}
 
 	@FXML
