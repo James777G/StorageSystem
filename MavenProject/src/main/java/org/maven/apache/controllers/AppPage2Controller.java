@@ -333,13 +333,15 @@ public class AppPage2Controller implements Initializable {
 
 	@FXML
 	private void enterRefreshImage() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(refreshImage,200,1.2);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(refreshImage,500,1.2);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
 	}
 
 	@FXML
 	private void exitRefreshImage() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(refreshImage,200,1);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(refreshImage,500,1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
 	}
 
