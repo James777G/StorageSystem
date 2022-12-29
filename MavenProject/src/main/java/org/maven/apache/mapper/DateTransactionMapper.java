@@ -2,6 +2,7 @@ package org.maven.apache.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.maven.apache.dateTransaction.DateTransaction;
 import org.springframework.stereotype.Component;
 
@@ -73,5 +74,21 @@ public interface DateTransactionMapper {
 	 * @return
 	 */
 	List<DateTransaction> askedDate(String dateWanted);
+
+
+
+	List<DateTransaction> pageAskedNOOrder(@Param("pageNumberCal") int pageNumberCal ,@Param("pageSize") int pageSize);
+
+	List<DateTransaction> pageAskedDateAscend(@Param("pageNumberCal") int pageNumberCal ,@Param("pageSize") int pageSize);
+
+	List<DateTransaction> pageAskedDateDescend(@Param("pageNumberCal") int pageNumberCal ,@Param("pageSize") int pageSize);
+
+	List<DateTransaction> pageAskedAddUnitAscend(@Param("pageNumberCal") int pageNumberCal ,@Param("pageSize") int pageSize);
+
+	List<DateTransaction> pageAskedAddUnitDescend(@Param("pageNumberCal") int pageNumberCal ,@Param("pageSize") int pageSize);
+
+	List<DateTransaction> pageAskedRemoveUnitAscend(@Param("pageNumberCal") int pageNumberCal ,@Param("pageSize") int pageSize);
+
+	List<DateTransaction> pageAskedRemoveUnitDescend(@Param("pageNumberCal") int pageNumberCal ,@Param("pageSize") int pageSize);
 
 }

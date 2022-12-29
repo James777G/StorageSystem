@@ -328,5 +328,6 @@ public class AppPage2Controller implements Initializable {
 		DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransaction",
 				DateTransactionService.class);
 		List<DateTransaction> dateTransactionList = dateTransactionService.selectAll();
+
 	}
 }

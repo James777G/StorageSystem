@@ -8,15 +8,15 @@
 
 
     <insert id="addTransaction" useGeneratedKeys="true" keyProperty="ItemID">
-insert into DateTransactionTable(ItemName, AddUnit,RemoveUnit,CurrentUnit,RecordTime)
-        values (#{ItemName},#{AddUnit},#{RemoveUnit},#{CurrentUnit},#{RecordTime});
+        insert into DateTransactionTable(ItemName, StaffName,AddUnit,RemoveUnit,CurrentUnit,RecordTime)
+        values (#{ItemName},#{StaffName},#{AddUnit},#{RemoveUnit},#{CurrentUnit},#{RecordTime});
     </insert>
 
 
     <update id="changeAddUnitNumber">
         update DateTransactionTable
         <set>
-        AddUnit =#{AddUnit}
+            AddUnit =#{AddUnit}
         </set>
         where ItemID = #{ItemID};
 
@@ -25,7 +25,7 @@ insert into DateTransactionTable(ItemName, AddUnit,RemoveUnit,CurrentUnit,Record
     <update id="changeRemoveUnitNumber">
         update DateTransactionTable
         <set>
-           RemoveUnit =#{RemoveUnit}
+            RemoveUnit =#{RemoveUnit}
         </set>
         where ItemID = #{ItemID};
 
@@ -57,7 +57,7 @@ insert into DateTransactionTable(ItemName, AddUnit,RemoveUnit,CurrentUnit,Record
 
 
     <select id="selectAll" resultType="org.maven.apache.dateTransaction.DateTransaction">
-    select * from DateTransactionTable;
+        select * from DateTransactionTable;
 
     </select>
     <select id="selectById" parameterType="int" resultType="org.maven.apache.dateTransaction.DateTransaction">
@@ -67,8 +67,54 @@ insert into DateTransactionTable(ItemName, AddUnit,RemoveUnit,CurrentUnit,Record
     </select>
 
     <select id="askedDate" resultType="org.maven.apache.dateTransaction.DateTransaction">
-        select * from  DateTransactionTable
+        select * from DateTransactionTable
         where RecordTime like #{dateWanted};
+    </select>
+
+    <select id="pageAskedNOOrder" resultType="org.maven.apache.dateTransaction.DateTransaction">
+        select * from DateTransactionTable
+
+        Limit #{pageNumberCal},#{pageSize};
+    </select>
+
+    <select id="pageAskedDateAscend" resultType="org.maven.apache.dateTransaction.DateTransaction">
+        select * from DateTransactionTable
+        order by str_to_date(RecordTime, '%Y-%m-%d :%H:%i:%s') asc
+        Limit #{pageNumberCal},#{pageSize};
+    </select>
+
+    <select id="pageAskedDateDescend" resultType="org.maven.apache.dateTransaction.DateTransaction">
+        select * from DateTransactionTable
+        order by str_to_date(RecordTime, '%Y-%m-%d :%H:%i:%s') desc
+        Limit #{pageNumberCal},#{pageSize};
+    </select>
+
+    <select id="pageAskedAddUnitAscend" resultType="org.maven.apache.dateTransaction.DateTransaction">
+        SELECT  *
+        from DateTransactionTable
+        order by AddUnit asc
+        Limit #{pageNumberCal},#{pageSize};
+    </select>
+
+    <select id="pageAskedAddUnitDescend" resultType="org.maven.apache.dateTransaction.DateTransaction">
+        SELECT  *
+        from DateTransactionTable
+        order by AddUnit desc
+        Limit #{pageNumberCal},#{pageSize};
+    </select>
+
+    <select id="pageAskedRemoveUnitAscend" resultType="org.maven.apache.dateTransaction.DateTransaction">
+        SELECT  *
+        from DateTransactionTable
+        order by RemoveUnit asc
+        Limit #{pageNumberCal},#{pageSize};
+
+    </select>
+    <select id="pageAskedRemoveUnitDescend" resultType="org.maven.apache.dateTransaction.DateTransaction">
+        SELECT  *
+        from DateTransactionTable
+        order by RemoveUnit desc
+        Limit #{pageNumberCal},#{pageSize};
     </select>
 
 

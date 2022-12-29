@@ -2,6 +2,7 @@ package org.maven.apache.service.DateTransaction;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.maven.apache.dateTransaction.DateTransaction;
 
 public interface DateTransactionService {
@@ -47,5 +48,22 @@ public interface DateTransactionService {
 	 */
 	public List<DateTransaction> askedDate(String dateWanted);
 
+	/**
+	 * this method should be use after using delete by id
+	 */
 	void IdGapInside();
+
+	List<DateTransaction> pageAskedNOOrder(  int pageNumber, int pageSize);
+
+	List<DateTransaction> pageAskedDateAscend( int pageNumber , int pageSize);
+
+	List<DateTransaction> pageAskedDateDescend( int pageNumber , int pageSize);
+
+	List<DateTransaction> pageAskedAddUnitAscend(int pageNumber , int pageSize);
+
+	List<DateTransaction> pageAskedAddUnitDescend(int pageNumber , int pageSize);
+
+	List<DateTransaction> pageAskedRemoveUnitAscend(int pageNumber , int pageSize);
+	List<DateTransaction> pageAskedRemoveUnitDescend(int pageNumber , int pageSize);
+
 }

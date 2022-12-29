@@ -2,9 +2,11 @@ package org.maven.apache.spring;
 
 import javax.sql.DataSource;
 
+import org.maven.apache.mapper.DateTransactionMapper;
 import org.maven.apache.mapper.ItemMapper;
 import org.maven.apache.mapper.UserMapper;
 import org.maven.apache.mapper.VerificationCodeMapper;
+import org.maven.apache.service.DateTransaction.DateTransactionServiceProvider;
 import org.maven.apache.service.item.ItemServiceProvider;
 import org.maven.apache.service.user.UserServiceProvider;
 import org.maven.apache.service.verificationCode.VerificationCodeServiceProvider;
@@ -30,6 +32,13 @@ public class TransactionConfiguration {
 		UserServiceProvider userService = new UserServiceProvider();
 		userService.setUserMapper(userMapper);
 		return userService;
+	}
+
+	@Bean
+	public DateTransactionServiceProvider dateTransactionService(DateTransactionMapper dateTransactionMapper){
+		DateTransactionServiceProvider dateTransactionService = new DateTransactionServiceProvider();
+		dateTransactionService.setDateTransactionMapper(dateTransactionMapper);
+		return dateTransactionService;
 	}
 
 	@Bean
