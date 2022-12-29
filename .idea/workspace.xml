@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="add some comments" />
+    <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="merge?" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +16,9 @@
         <option value="FxmlFile" />
       </list>
     </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="main" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -150,7 +153,7 @@
       <workItem from="1671784182487" duration="9799000" />
       <workItem from="1671843234020" duration="6021000" />
       <workItem from="1671851351784" duration="1934000" />
-      <workItem from="1672271512346" duration="16630000" />
+      <workItem from="1672271512346" duration="16942000" />
     </task>
     <task id="LOCAL-00001" summary="have 7 new functions">
       <created>1672354762382</created>
@@ -166,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672355168103</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="merge?">
+      <created>1672355785105</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1672355785105</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,7 +197,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="have 7 new functions" />
     <MESSAGE value="add some comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="add some comments" />
+    <MESSAGE value="merge?" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge?" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
