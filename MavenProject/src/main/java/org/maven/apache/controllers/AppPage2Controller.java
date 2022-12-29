@@ -4,12 +4,11 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.animation.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -123,9 +122,7 @@ public class AppPage2Controller implements Initializable {
 
     private final Timeline timeline = new Timeline();
 
-    private boolean isOnAppPage = true;
-
-    private boolean isOnTransactionPage = false;
+    private Node currentPage = appPagePane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -198,7 +195,7 @@ public class AppPage2Controller implements Initializable {
     }
     @FXML
     private void onEnterAppPage(){
-        if(!isOnAppPage){
+        if(currentPage != appPagePane){
             appPagePane.setPickOnBounds(true);
             appPagePane.setVisible(true);
             stackPane.setPickOnBounds(false);
@@ -210,8 +207,7 @@ public class AppPage2Controller implements Initializable {
                 stackPane.setVisible(false);
             });
             fadeTransition1.play();
-            isOnAppPage = true;
-            isOnTransactionPage = false;
+            currentPage = appPagePane;
         }
     }
     private void setButtonList(){
@@ -344,7 +340,7 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onTransactionPage() {
-        if(!isOnTransactionPage){
+        if(currentPage != stackPane){
             appPagePane.setPickOnBounds(false);
             stackPane.setPickOnBounds(true);
             stackPane.setVisible(true);
@@ -355,8 +351,7 @@ public class AppPage2Controller implements Initializable {
                 appPagePane.setVisible(false);
             });
             fadeTransition.play();
-            isOnAppPage = false;
-            isOnTransactionPage = true;
+            currentPage = stackPane;
         }
     }
 }
