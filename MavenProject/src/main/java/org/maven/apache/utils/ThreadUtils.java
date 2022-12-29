@@ -84,7 +84,6 @@ public class ThreadUtils {
             if (atomicInteger02.compareAndSet(0, 1)){
                 executorService.execute(() -> {
                     usernameVerificationTask(textField, check, cross);
-                    System.out.println("verifying username");
                 });
             }
         });
@@ -127,7 +126,6 @@ public class ThreadUtils {
             if (atomicInteger03.compareAndSet(0, 1)){
                 executorService.execute(() -> {
                     passwordVerificationTask(textField, check, cross);
-                    System.out.println("verifying password");
                 });
             }
         });

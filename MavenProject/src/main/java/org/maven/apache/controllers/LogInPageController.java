@@ -430,7 +430,8 @@ public class LogInPageController implements Initializable {
 	@FXML
 	private void onSendVerificationCode() {
 		String inputUsername = verificationUsername.getText();
-		if (isUsernameFound(inputUsername)) {
+		int newPasswordLength = newPasswordField.getText().length();
+		if (isUsernameFound(inputUsername) && newPasswordLength > 5) {
 			// if the username exists
 			String emailAddress = getUser(inputUsername).getEmailAddress();
 			Random rnd = new Random();
@@ -505,7 +506,7 @@ public class LogInPageController implements Initializable {
 		blockPane.setPickOnBounds(false);
 	}
 
-	// the function for button confirmation
+	// the function for button confirmation in order to add a new user to database
 	@FXML
 	private void onConfirmationButton(ActionEvent event) {
 		if (checkExist()) {

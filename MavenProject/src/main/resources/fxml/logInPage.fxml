@@ -185,6 +185,7 @@
                         <Insets bottom="10.0" right="15.0" top="10.0" />
                      </VBox.margin>
                   </MFXTextField>
+                  <Label alignment="TOP_CENTER" prefHeight="18.0" prefWidth="189.0" text="Label" textAlignment="CENTER" textFill="RED" />
                   <MFXTextField fx:id="newPasswordField" floatMode="DISABLED" minHeight="35.0" prefHeight="35.0" prefWidth="200.0" promptText="( New password )" styleClass="inputFields" stylesheets="@../css/logInPage.css">
                      <font>
                         <Font name="System Bold" size="12.0" />
