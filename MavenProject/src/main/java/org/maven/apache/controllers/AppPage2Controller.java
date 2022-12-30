@@ -145,7 +145,7 @@ public class AppPage2Controller implements Initializable {
 
     private final Timeline timeline = new Timeline();
 
-    private Node currentPage = appPagePane;
+    private Node currentPage;
 
     enum ButtonSelected {
         ALL,
@@ -159,6 +159,7 @@ public class AppPage2Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        currentPage = appPagePane;
         DataUtils.publicSettingsDialog = settingsDialog;
         settingsDialog.setPickOnBounds(false);
         settingsDialog.setOpacity(0);
