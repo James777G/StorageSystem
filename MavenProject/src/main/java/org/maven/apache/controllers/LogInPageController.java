@@ -6,6 +6,7 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
+import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -31,6 +32,7 @@ import org.maven.apache.service.mail.MailService;
 import org.maven.apache.service.user.UserService;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.DataUtils;
+import org.maven.apache.utils.ScaleUtils;
 import org.maven.apache.utils.ThreadUtils;
 import org.maven.apache.utils.TransitionUtils;
 
@@ -251,50 +253,58 @@ public class LogInPageController implements Initializable {
 
 	@FXML
 	private void onEnterExitButton() {
-		exitButton.setScaleX(1.2);
-		exitButton.setScaleY(1.2);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton, 500, 1.2);
+		scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+		scaleTransition.play();
 	}
 
 	@FXML
 	private void onEnterExitButton2() {
-		exitButton2.setScaleX(1.2);
-		exitButton2.setScaleY(1.2);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton2, 500, 1.2);
+		scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+		scaleTransition.play();
 	}
 
 	@FXML
 	private void onLeaveExitButton2() {
-		exitButton2.setScaleX(1);
-		exitButton2.setScaleY(1);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton2, 500, 1);
+		scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+		scaleTransition.play();
 	}
 
 	@FXML
 	private void onPressExitButton2() {
-		exitButton2.setScaleX(0.8);
-		exitButton2.setScaleY(0.8);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton2, 500, 0.8);
+		scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+		scaleTransition.play();
 	}
 
 	@FXML
 	private void onReleaseExitButton2() {
-		exitButton2.setScaleX(1);
-		exitButton2.setScaleY(1);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton2, 500, 1);
+		scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+		scaleTransition.play();
 	}
 
 	@FXML
 	private void onLeaveExitButton() {
-		exitButton.setScaleX(1);
-		exitButton.setScaleY(1);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton, 500, 1);
+		scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+		scaleTransition.play();
 	}
 
 	@FXML
 	private void onPressExitButton() {
-		exitButton.setScaleX(0.8);
-		exitButton.setScaleY(0.8);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton, 500, 0.8);
+		scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+		scaleTransition.play();
 	}
 
 	@FXML
 	private void onReleaseExitButton() {
-		exitButton.setScaleX(1);
-		exitButton.setScaleY(1);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton, 500, 1);
+		scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+		scaleTransition.play();
 	}
 
 	@FXML
