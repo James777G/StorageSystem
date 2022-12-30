@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.effect.Bloom;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -179,6 +180,9 @@ public class LogInPageController implements Initializable {
 	@FXML
 	private JFXButton sendVerificationCodeButton;
 
+	@FXML
+	private ProgressIndicator loadIndicator;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.updateUserList();
@@ -215,6 +219,9 @@ public class LogInPageController implements Initializable {
 		usernameCheck.setVisible(false);
 		passwordCross.setVisible(false);
 		passwordCheck.setVisible(false);
+		loadIndicator.setStyle(" -fx-progress-color: black;");
+		loadIndicator.setVisible(false);
+		loginButton.setDisable(false);
 	}
 
 	/**
@@ -370,8 +377,9 @@ public class LogInPageController implements Initializable {
 	 * @throws IOException
 	 */
 	@FXML
-	private void onSignInAction() throws IOException {
+	private void onSignInAction(){
 		// get the user list
+		loginButton.setDisable(true);
 		updateUserList(); // can be changed to comment
 		String username = userNameField.getText();
 		User currentUser = getUser(username);
@@ -384,13 +392,25 @@ public class LogInPageController implements Initializable {
 		} else {
 			// if the user exists, check its verification (correct password)
 			if (currentUser.getPassword().equals(passwordField.getText())) {
-				// head to the app page (appPage2)
-				DataUtils.currentUser = currentUser;
-				Stage stage = (Stage) loginButton.getScene().getWindow();
-				FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/appPage2.fxml"));
-				Scene scene = new Scene(loader.load());
-				stage.setScene(scene);
-				stage.show();
+				// show progress indicator
+				loadIndicator.setVisible(true);
+				// head to the app page (appPage2) in the background
+				ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
+				threadPoolExecutor.execute(() -> {
+					DataUtils.currentUser = currentUser;
+					Stage stage = (Stage) loginButton.getScene().getWindow();
+					FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/appPage2.fxml"));
+					final Scene scene;
+					try {
+						scene = new Scene(loader.load());
+					} catch (IOException e) {
+						throw new RuntimeException(e);
+					}
+					Platform.runLater(() -> {
+						stage.setScene(scene);
+						stage.show();
+					});
+				});
 			} else {
 				// incorrect username or password
 				errorDialog.setVisible(true);
