@@ -377,7 +377,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="8.0" layoutY="178.0" prefHeight="80.0" prefWidth="1201.0" style="-fx-background-color: #bbbbbb;" AnchorPane.bottomAnchor="442.0">
+            <AnchorPane layoutX="8.0" layoutY="178.0" prefHeight="80.0" prefWidth="1201.0" style="-fx-background-color: #bbbbbb;" AnchorPane.bottomAnchor="442.0" AnchorPane.leftAnchor="0.0">
                <children>
                   <Label layoutX="451.0" layoutY="14.0" prefHeight="40.0" prefWidth="300.0" text="CARGO NAME ******" textFill="#223c40" AnchorPane.leftAnchor="451.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="10.0">
                      <font>
