@@ -67,10 +67,28 @@ public class AppPage2Controller implements Initializable {
     private JFXButton buttonFive;
 
     @FXML
+    private JFXButton statusAllButton;
+
+    @FXML
+    private JFXButton statusTakenButton;
+
+    @FXML
+    private JFXButton statusRestockButton;
+
+    @FXML
     private JFXDrawer VBoxDrawer;
 
     @FXML
     private AnchorPane appPagePane;
+
+    @FXML
+    private AnchorPane allStatusPane;
+
+    @FXML
+    private AnchorPane takenStatusPane;
+
+    @FXML
+    private AnchorPane restockStatusPane;
 
 	@FXML
 	private Label cargoNameLabel01;
@@ -123,6 +141,14 @@ public class AppPage2Controller implements Initializable {
     private final Timeline timeline = new Timeline();
 
     private Node currentPage = appPagePane;
+
+    enum ButtonSelected {
+        ALL,
+        TAKEN,
+        RESTOCK
+    }
+
+    private ButtonSelected buttonSelected = ButtonSelected.ALL;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -357,4 +383,59 @@ public class AppPage2Controller implements Initializable {
             currentPage = stackPane;
         }
     }
+
+    @FXML
+    private void onClickAll(){
+        switch(buttonSelected){
+            case ALL:
+                break;
+            case TAKEN:
+                allStatusPane.setVisible(true);
+                takenStatusPane.setVisible(false);
+                buttonSelected = ButtonSelected.ALL;
+                break;
+            case RESTOCK:
+                allStatusPane.setVisible(true);
+                restockStatusPane.setVisible(false);
+                buttonSelected = ButtonSelected.ALL;
+                break;
+        }
+    }
+
+    @FXML
+    private void onClickTaken(){
+        switch(buttonSelected){
+            case ALL:
+                takenStatusPane.setVisible(true);
+                allStatusPane.setVisible(false);
+                buttonSelected = ButtonSelected.TAKEN;
+                break;
+            case TAKEN:
+                break;
+            case RESTOCK:
+                takenStatusPane.setVisible(true);
+                restockStatusPane.setVisible(false);
+                buttonSelected = ButtonSelected.TAKEN;
+                break;
+        }
+    }
+
+    @FXML
+    private void onClickRestock(){
+        switch(buttonSelected){
+            case ALL:
+                restockStatusPane.setVisible(true);
+                allStatusPane.setVisible(false);
+                buttonSelected = ButtonSelected.RESTOCK;
+                break;
+            case TAKEN:
+                restockStatusPane.setVisible(true);
+                takenStatusPane.setVisible(false);
+                buttonSelected = ButtonSelected.RESTOCK;
+                break;
+            case RESTOCK:
+                break;
+        }
+    }
+
 }
