@@ -3,6 +3,7 @@ package org.maven.apache.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -129,6 +130,10 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private StackPane stackPane;
 
+    @FXML
+    protected MFXGenericDialog settingsDialog;
+
+
 	//pass the user from login page
     private final User user = DataUtils.currentUser;
 
@@ -150,8 +155,14 @@ public class AppPage2Controller implements Initializable {
 
     private ButtonSelected buttonSelected = ButtonSelected.ALL;
 
+    private MenuPageController menuPageController;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        DataUtils.publicSettingsDialog = settingsDialog;
+        settingsDialog.setPickOnBounds(false);
+        settingsDialog.setOpacity(0);
+        settingsDialog.setVisible(false);
         usernameLabel.setText(user.getName());
         warehouseButton.setOpacity(0);
         staffButton.setOpacity(0);
@@ -187,6 +198,11 @@ public class AppPage2Controller implements Initializable {
         searchTable.setPickOnBounds(true);
     }
 
+    private void onClickSettingsTwo(MFXGenericDialog genericDialog) {
+        genericDialog.setOpacity(1);
+        genericDialog.setPickOnBounds(true);
+        genericDialog.setVisible(true);
+    }
     @FXML
     private void onClickSearchBar(){
         searchOnBackgroundPerSec();
@@ -382,6 +398,13 @@ public class AppPage2Controller implements Initializable {
             fadeTransition.play();
             currentPage = stackPane;
         }
+    }
+
+    @FXML
+    private void onCloseSettings(){
+        settingsDialog.setOpacity(0);
+        settingsDialog.setPickOnBounds(false);
+        settingsDialog.setVisible(false);
     }
 
     @FXML
