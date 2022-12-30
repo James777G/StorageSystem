@@ -15,7 +15,7 @@ public interface DateTransactionService {
 	List<DateTransaction> selectAll();
 
 	/**
-	 * This method is for if the transation regrist wrong the data could be delete
+	 * This method is for if the transaction register wrong the data could be delete
 	 * 
 	 * @param id
 	 */
