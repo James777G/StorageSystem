@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="350.0" prefWidth="600.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.EditCargoPane">
+   <children>
+      <AnchorPane prefWidth="200.0" style="-fx-background-color: #223c40;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="21.0" layoutY="22.0" prefHeight="130.0" prefWidth="130.0" style="-fx-background-radius: 1000; -fx-border-radius: 1000; -fx-background-color: #eeeeee; -fx-border-color: #0DaD8D; -fx-border-width: 2;" AnchorPane.leftAnchor="33.0" AnchorPane.topAnchor="40.0">
+               <children>
+                  <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="15.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+                     <image>
+                        <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Separator layoutY="286.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" />
+            <Label layoutY="190.0" prefHeight="40.0" prefWidth="200.0" text="      CARGO NAME" textFill="WHITE" AnchorPane.topAnchor="200.0">
+               <font>
+                  <Font name="Candara Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="200.0" layoutY="-38.0" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="17.0" layoutY="24.0" text="Place order" textFill="#223c40" AnchorPane.topAnchor="19.0">
+               <font>
+                  <Font name="Candara Bold" size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Separator layoutX="200.0" layoutY="60.0" prefWidth="400.0" AnchorPane.leftAnchor="200.0" />
+      <Label layoutX="220.0" layoutY="71.0" text="Status" textFill="#223c40" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="80.0">
+         <font>
+            <Font name="Candara" size="15.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="takenSelectButton1" layoutX="208.0" layoutY="83.0" onAction="#onClickTakenSelectButton" prefHeight="30.0" prefWidth="75.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="105.0">
+         <graphic>
+            <Label text="  Taken" textFill="WHITE">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <AnchorPane prefHeight="9.0" prefWidth="9.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
+                     <children>
+                        <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                        <AnchorPane fx:id="onTakenSelectPane1" layoutX="-1.0" layoutY="-1.0" prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000;" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </graphic>
+            </Label>
+         </graphic>
+      </JFXButton>
+      <JFXButton fx:id="restockSelectButton1" layoutX="275.0" layoutY="73.0" onAction="#onClickRestockSelectButton" prefHeight="30.0" prefWidth="90.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" text="Button" textFill="#ffffff00" AnchorPane.leftAnchor="296.0" AnchorPane.topAnchor="105.0">
+         <graphic>
+            <Label text="  Restock" textFill="WHITE">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <AnchorPane prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
+                     <children>
+                        <AnchorPane layoutX="2.0" layoutY="7.0" opacity="0.0" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                        <AnchorPane fx:id="onRestockSelectPane1" layoutY="1.0" prefHeight="9.0" prefWidth="9.0" style="-fx-background-color: #76FF03; -fx-background-radius: 1000;" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </graphic>
+            </Label>
+         </graphic>
+      </JFXButton>
+      <Label layoutX="226.0" layoutY="153.0" text="Item name" textFill="#223c40" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="155.0">
+         <font>
+            <Font name="Candara" size="15.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="220.0" layoutY="175.0" prefHeight="40.0" prefWidth="360.0" style="-fx-background-color: #e4ece6; -fx-border-color: #e0e0e0; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="180.0">
+         <children>
+            <MFXTextField floatMode="DISABLED" layoutY="9.0" prefHeight="30.0" prefWidth="300.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+               <textFill>
+                  <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
+               </textFill>
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+            </MFXTextField>
+            <AnchorPane layoutX="305.0" layoutY="7.0" prefHeight="30.0" prefWidth="1.0" style="-fx-background-color: #757575;" />
+            <ImageView fitHeight="25.0" fitWidth="35.0" layoutX="321.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="9.0">
+               <image>
+                  <Image url="@../image/icons8-clear-symbol-52.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Label layoutX="264.0" layoutY="245.0" text="Staff Name" textFill="#223c40" AnchorPane.leftAnchor="260.0" AnchorPane.topAnchor="245.0">
+         <font>
+            <Font name="Candara" size="15.0" />
+         </font>
+      </Label>
+      <MFXTextField floatMode="DISABLED" layoutX="264.0" layoutY="270.0" prefHeight="32.0" prefWidth="152.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="260.0" AnchorPane.topAnchor="270.0">
+         <textFill>
+            <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
+         </textFill>
+         <font>
+            <Font name="Calibri Bold" size="15.0" />
+         </font>
+      </MFXTextField>
+      <Separator layoutX="258.0" layoutY="313.0" prefWidth="300.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="50.0" />
+      <Label layoutX="436.0" layoutY="245.0" text="Quantity" textFill="#223c40" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="245.0">
+         <font>
+            <Font name="Candara" size="15.0" />
+         </font>
+      </Label>
+      <MFXTextField floatMode="DISABLED" layoutX="436.0" layoutY="270.0" prefHeight="32.0" prefWidth="75.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="270.0">
+         <textFill>
+            <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
+         </textFill>
+         <font>
+            <Font name="Calibri Bold" size="15.0" />
+         </font>
+      </MFXTextField>
+      <JFXButton fx:id="takenSelectButton11" layoutX="519.0" layoutY="315.0" onAction="#onClickTakenSelectButton" prefHeight="30.0" prefWidth="143.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="10.0">
+         <graphic>
+            <Label prefHeight="18.0" prefWidth="128.0" text="               Post" textFill="WHITE">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+            </Label>
+         </graphic>
+      </JFXButton>
+   </children>
+   <effect>
+      <DropShadow blurType="ONE_PASS_BOX">
+         <color>
+            <Color red="0.6196078658103943" green="0.6196078658103943" blue="0.6196078658103943" />
+         </color>
+      </DropShadow>
+   </effect>
+</AnchorPane>

@@ -4,19 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="merge in intellij">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_win_18_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_win_18_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_win_18_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_win_18_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_media_win_18_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_swing_win_17_0_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_testng_testng_7_7_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022_12_15_13_00__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2022_12_15_13_00__Changes_.xml" afterDir="false" />
+    <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/editCargoPane.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/warehousePage.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-clear-symbol-52.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-warehouse-96.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MavenProject/MavenProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/MavenProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/LogInPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/LogInPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage2.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/transactionPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/transactionPage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -67,6 +62,7 @@
   "keyToString": {
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/MySQL/OnePiece/StorageSystem/MavenProject/src/main/resources/image",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
