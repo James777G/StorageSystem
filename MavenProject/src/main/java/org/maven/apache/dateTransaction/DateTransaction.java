@@ -10,6 +10,16 @@ public class DateTransaction {
 	private Integer RemoveUnit;
 	private Integer CurrentUnit;
 	private String RecordTime;
+	private String StaffName;
+	public String getStaffName() {
+		return StaffName;
+	}
+
+	public void setStaffName(String staffName) {
+		StaffName = staffName;
+	}
+
+
 
 	public Integer getCurrentUnit() {
 

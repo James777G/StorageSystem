@@ -12,9 +12,9 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.TransactionPageController">
+<AnchorPane maxHeight="640.0" minHeight="640.0" prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.TransactionPageController">
    <children>
-      <AnchorPane layoutX="20.0" layoutY="20.0" prefHeight="700.0" prefWidth="1201.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <AnchorPane layoutX="20.0" layoutY="20.0" prefHeight="640.0" prefWidth="1201.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <MFXTextField floatMode="DISABLED" layoutX="267.0" layoutY="114.0" prefHeight="50.0" prefWidth="549.0" promptText="Search For Anything" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.bottomAnchor="550.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="350.0">
                <textFill>
@@ -33,14 +33,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <AnchorPane layoutX="440.0" layoutY="340.0" prefHeight="60.0" prefWidth="901.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="240.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color red="0.6196078658103943" green="0.6196078658103943" blue="0.6196078658103943" />
-                     </color>
-                  </DropShadow>
-               </effect>
+            <AnchorPane layoutX="440.0" layoutY="340.0" prefHeight="60.0" prefWidth="901.0" style="-fx-background-color: white;" styleClass="headerRow" stylesheets="@../css/transactionPage.css" AnchorPane.bottomAnchor="240.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
                <children>
                   <Label layoutX="45.0" layoutY="21.0" text="Order" textFill="#223c40" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="20.0">
                      <font>
@@ -102,7 +95,7 @@
                   </Label>
                   <Separator layoutX="689.0" layoutY="36.0" prefWidth="100.0" AnchorPane.leftAnchor="689.0" AnchorPane.topAnchor="34.0" />
                   <Separator layoutX="662.0" layoutY="65.0" prefWidth="100.0" AnchorPane.leftAnchor="689.0" />
-                  <JFXButton fx:id="warehouseButton1111" layoutX="241.0" layoutY="37.0" onMouseEntered="#enterWarehouseButton" onMouseExited="#exitWarehouseButton" prefHeight="30.0" prefWidth="90.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="242.0" AnchorPane.topAnchor="37.0">
+                  <JFXButton fx:id="restockSelectButton" layoutX="241.0" layoutY="37.0" onAction="#onClickRestockSelectButton" prefHeight="30.0" prefWidth="90.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" text="Button" textFill="#ffffff00" AnchorPane.leftAnchor="242.0" AnchorPane.topAnchor="37.0">
                      <graphic>
                         <Label text="  Restock" textFill="WHITE">
                            <font>
@@ -112,13 +105,18 @@
                               <AnchorPane prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
                                  <children>
                                     <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                    <AnchorPane fx:id="onRestockSelectPane" layoutY="1.0" prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: #76FF03; -fx-background-radius: 1000;" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                       </children>
+                                    </AnchorPane>
                                  </children>
                               </AnchorPane>
                            </graphic>
                         </Label>
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="warehouseButton11112" onMouseEntered="#enterWarehouseButton" onMouseExited="#exitWarehouseButton" prefHeight="30.0" prefWidth="65.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="37.0">
+                  <JFXButton fx:id="allSelectButton" onAction="#onClickAllSelectButton" prefHeight="30.0" prefWidth="65.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="37.0">
                      <graphic>
                         <Label text="   All" textFill="WHITE">
                            <font>
@@ -128,13 +126,18 @@
                               <AnchorPane prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
                                  <children>
                                     <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                    <AnchorPane fx:id="onAllSelectPane" prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: #76FF03; -fx-background-radius: 1000;">
+                                       <children>
+                                          <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                       </children>
+                                    </AnchorPane>
                                  </children>
                               </AnchorPane>
                            </graphic>
                         </Label>
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="warehouseButton11111" onMouseEntered="#enterWarehouseButton" onMouseExited="#exitWarehouseButton" prefHeight="30.0" prefWidth="75.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="166.0" AnchorPane.topAnchor="37.0">
+                  <JFXButton fx:id="takenSelectButton" onAction="#onClickTakenSelectButton" prefHeight="30.0" prefWidth="75.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="166.0" AnchorPane.topAnchor="37.0">
                      <graphic>
                         <Label text="  Taken" textFill="WHITE">
                            <font>
@@ -144,6 +147,11 @@
                               <AnchorPane prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
                                  <children>
                                     <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                    <AnchorPane fx:id="onTakenSelectPane" layoutX="-1.0" layoutY="-1.0" prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: #76FF03; -fx-background-radius: 1000;" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                       </children>
+                                    </AnchorPane>
                                  </children>
                               </AnchorPane>
                            </graphic>
@@ -368,15 +376,8 @@
                      </children>
                   </AnchorPane>
                </children>
-               <effect>
-                  <DropShadow>
-                     <color>
-                        <Color red="0.6196078658103943" green="0.6196078658103943" blue="0.6196078658103943" />
-                     </color>
-                  </DropShadow>
-               </effect>
             </AnchorPane>
-            <AnchorPane layoutY="120.0" prefHeight="80.0" prefWidth="1201.0" style="-fx-background-color: #bbbbbb;" AnchorPane.bottomAnchor="440.0">
+            <AnchorPane layoutX="8.0" layoutY="178.0" prefHeight="80.0" prefWidth="1201.0" style="-fx-background-color: #bbbbbb;" AnchorPane.bottomAnchor="442.0" AnchorPane.leftAnchor="0.0">
                <children>
                   <Label layoutX="451.0" layoutY="14.0" prefHeight="40.0" prefWidth="300.0" text="CARGO NAME ******" textFill="#223c40" AnchorPane.leftAnchor="451.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="10.0">
                      <font>
@@ -389,13 +390,6 @@
                      </font>
                   </Label>
                </children>
-               <effect>
-                  <DropShadow blurType="ONE_PASS_BOX">
-                     <color>
-                        <Color red="0.6196078658103943" green="0.6196078658103943" blue="0.6196078658103943" />
-                     </color>
-                  </DropShadow>
-               </effect>
             </AnchorPane>
             <AnchorPane layoutX="113.0" layoutY="55.0" prefHeight="130.0" prefWidth="130.0" style="-fx-background-radius: 1000; -fx-border-radius: 1000; -fx-background-color: #eeeeee; -fx-border-color: #0DaD8D; -fx-border-width: 2;" AnchorPane.bottomAnchor="455.0">
                <children>
@@ -408,7 +402,7 @@
             </AnchorPane>
             <AnchorPane layoutX="1107.0" layoutY="595.0" prefHeight="80.0" prefWidth="60.0" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="20.0">
                <children>
-                  <AnchorPane layoutX="4.0" layoutY="8.0" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #b33d18; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="addButton" layoutX="4.0" layoutY="8.0" onMouseEntered="#onEnterAddButton" onMouseExited="#onExitAddButton" prefHeight="60.0" prefWidth="60.0" styleClass="addPane" stylesheets="@../css/transactionPage.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <effect>
                         <DropShadow blurType="ONE_PASS_BOX">
                            <color>
@@ -417,7 +411,7 @@
                         </DropShadow>
                      </effect>
                      <children>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="10.0" preserveRatio="true">
                            <image>
                               <Image url="@../image/icons8-add-new-96.png" />
                            </image>
@@ -430,8 +424,6 @@
                      </font>
                   </Label>
                </children></AnchorPane>
-            <Label layoutX="1091.0" layoutY="553.0" text="鼠标悬浮的时候" />
-            <Label layoutX="1079.0" layoutY="578.0" text="b33d18变成cc461b" />
          </children>
       </AnchorPane>
    </children>

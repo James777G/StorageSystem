@@ -28,7 +28,7 @@ public class MyBatisAutoConfiguration {
     // Otherwise "Kylyn", "Chauncey"
 	// Change name to "Common" to access local database
 	// Change name to "Public" to access remote database
-    private static final String name = "Common";
+    private static final String name = "Public";
 
     @Bean
     public Properties properties(){

@@ -2,6 +2,7 @@ package org.maven.apache.service.DateTransaction;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.maven.apache.dateTransaction.DateTransaction;
 
 public interface DateTransactionService {
@@ -14,7 +15,7 @@ public interface DateTransactionService {
 	List<DateTransaction> selectAll();
 
 	/**
-	 * This method is for if the transation regrist wrong the data could be delete
+	 * This method is for if the transaction register wrong the data could be delete
 	 * 
 	 * @param id
 	 */
@@ -27,15 +28,38 @@ public interface DateTransactionService {
 	 * @return
 	 */
 	DateTransaction selectById(int id);
+	/**
+	 * a new transaction insert to the table
+	 *
+	 * @param dateTransaction
+	 */
 
 	void addTransaction(DateTransaction dateTransaction);
+	/**
+	 * if the insert Add number is wrong
+	 *
+	 * @param dateTransaction
+	 */
 
 	void changeAddUnitNumber(DateTransaction dateTransaction);
-
+	/**
+	 * if the remove number is wrong
+	 *
+	 * @param dateTransaction
+	 */
 	void changeRemoveUnitNumber(DateTransaction dateTransaction);
-
+	/**
+	 * if the insert current number is wrong
+	 *
+	 * @param dateTransaction
+	 */
 	void changeCurrentUnitNumber(DateTransaction dateTransaction);
 
+	/**
+	 * return a string that shows the current system time
+	 * the format is "yyyy-MM-dd :HH:mm:ss"
+	 * @return
+	 */
 	String getCurrentTime();
 
 	/**
@@ -47,5 +71,65 @@ public interface DateTransactionService {
 	 */
 	public List<DateTransaction> askedDate(String dateWanted);
 
+	/**
+	 * this method should be use after using delete by id
+	 */
 	void IdGapInside();
+
+	/**
+	 * just separate the page with no order
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	List<DateTransaction> pageAskedNOOrder(  int pageNumber, int pageSize);
+
+	/**
+	 * based on date to separate the page by ascending order
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	List<DateTransaction> pageAskedDateAscend( int pageNumber , int pageSize);
+
+	/**
+	 * based on date to separate the page by descending order
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	List<DateTransaction> pageAskedDateDescend( int pageNumber , int pageSize);
+
+	/**
+	 * based on addUnit to separate the page by ascending order
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	List<DateTransaction> pageAskedAddUnitAscend(int pageNumber , int pageSize);
+
+	/**
+	 * based on addUnit to separate the page by descending order
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	List<DateTransaction> pageAskedAddUnitDescend(int pageNumber , int pageSize);
+
+	/**
+	 * based on RemoveUnit to separate the page by ascending order
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	List<DateTransaction> pageAskedRemoveUnitAscend(int pageNumber , int pageSize);
+
+	/**
+	 * based on RemoveUnit to separate the page by descending order
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	List<DateTransaction> pageAskedRemoveUnitDescend(int pageNumber , int pageSize);
+
 }
