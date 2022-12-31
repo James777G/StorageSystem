@@ -2,7 +2,6 @@ package org.maven.apache.utils;
 
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
-import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
 import javafx.util.Duration;
 import lombok.val;
@@ -16,6 +15,7 @@ import lombok.val;
  * We can only reach counterclockwise rotation by passing in -ve angles
  */
 
+@SuppressWarnings("all")
 public class RotationUtils {
     public enum Direction{
         CLOCKWISE,

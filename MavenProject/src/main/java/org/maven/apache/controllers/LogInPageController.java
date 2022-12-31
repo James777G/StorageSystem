@@ -10,8 +10,6 @@ import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -38,7 +36,6 @@ import org.maven.apache.utils.TransitionUtils;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -383,8 +380,7 @@ public class LogInPageController implements Initializable {
 	 * Sign in button, if the correct username and its corresponding password have
 	 * been used then head straight to the next page. Otherwise, sign up for a new
 	 * user or renter the password
-	 * 
-	 * @throws IOException
+	 *
 	 */
 	@FXML
 	private void onSignInAction(){
@@ -489,7 +485,7 @@ public class LogInPageController implements Initializable {
 			notificationLabel.setText("Email has been sent");
 			// verification code can be resent in 60 seconds
 			sendVerificationCodeButton.setDisable(true);
-			countToOneMinute(sendVerificationCodeButton, 60);
+			countToOneMinute(sendVerificationCodeButton);
 		}
 	}
 
@@ -497,40 +493,33 @@ public class LogInPageController implements Initializable {
 	 * resending email would be available in 60sec
 	 *
 	 */
-	private void countToOneMinute(JFXButton button, int seconds){
+	private void countToOneMinute(JFXButton button){
 		isCounting = true;
 		Timeline countTimeline = new Timeline();
-		time = seconds;
+		time = 60;
 		passwordTimeline.stop();
 		usernameTimeline.stop();
 		countTimeline.setCycleCount(Timeline.INDEFINITE);
-		KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				time--;
-				Task<Void> countTask = new Task<>(){
-					@Override
-					protected Void call() {
-						if (time == 0){
-							Platform.runLater(() -> {
-								countLabel.setText("");
-							});
-							isCounting = false;
-							countTimeline.stop();
-							button.setDisable(true);
-							passwordTimeline.playFromStart();
-							usernameTimeline.playFromStart();
-						}else{
-							Platform.runLater(() -> {
-								countLabel.setText(time + " ");
-							});
-						}
-						return null;
+		KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), event -> {
+			time--;
+			Task<Void> countTask = new Task<>(){
+				@Override
+				protected Void call() {
+					if (time == 0){
+						Platform.runLater(() -> countLabel.setText(""));
+						isCounting = false;
+						countTimeline.stop();
+						button.setDisable(true);
+						passwordTimeline.playFromStart();
+						usernameTimeline.playFromStart();
+					}else{
+						Platform.runLater(() -> countLabel.setText(time + " "));
 					}
-				};
-				Thread countThread = new Thread(countTask);
-				countThread.start();
-			}
+					return null;
+				}
+			};
+			Thread countThread = new Thread(countTask);
+			countThread.start();
 		});
 		countTimeline.getKeyFrames().add(keyFrame);
 		countTimeline.playFromStart();
@@ -594,7 +583,7 @@ public class LogInPageController implements Initializable {
 
 	// the function for button confirmation in order to add a new user to database
 	@FXML
-	private void onConfirmationButton(ActionEvent event) {
+	private void onConfirmationButton() {
 		if (checkExist()) {
 			Alert existAlert = new Alert(AlertType.WARNING);
 			existAlert.setTitle("Warning");
@@ -614,7 +603,7 @@ public class LogInPageController implements Initializable {
 		}
 	}
 
-	// the fucntion for check whether the user already has an account based on
+	// the function for check whether the user already has an account based on
 	// username
 	private boolean checkExist() {
 		List<User> users = userService.selectByUsername(signUpUserNameString);
