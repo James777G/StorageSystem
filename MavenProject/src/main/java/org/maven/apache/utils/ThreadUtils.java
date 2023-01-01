@@ -164,13 +164,9 @@ public class ThreadUtils {
                 label.setText("At least six characters");
             });
         }
-        if (isUsernameOk && isPasswordOk && !LogInPageController.isCounting){
-            // set the button sending email available
-            button.setDisable(false);
-        }else{
-            // set the button sending email disable
-            button.setDisable(true);
-        }
+        // set the button sending email available
+        // set the button sending email disable
+        button.setDisable(!isUsernameOk || !isPasswordOk || LogInPageController.isCounting);
         atomicInteger03.compareAndSet(1, 0);
     }
 

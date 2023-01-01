@@ -2,8 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
-<?import com.jfoenix.controls.JFXHamburger?>
-<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
 <?import javafx.geometry.Insets?>
@@ -21,38 +19,11 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
    <children>
+      <StackPane fx:id="stackPane" prefHeight="640.0" prefWidth="1200.0" AnchorPane.topAnchor="60.0" />
       <AnchorPane fx:id="appPagePane" onMouseClicked="#onClickAppPagePane" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;">
          <children>
-            <VBox fx:id="searchTable" layoutX="300.0" layoutY="219.0" opacity="0.0" prefHeight="200.0" prefWidth="551.0" styleClass="resultPane" stylesheets="@../css/appPage2.css">
-               <children>
-                  <JFXButton fx:id="buttonOne" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="buttonTwo" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="buttonThree" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="buttonFour" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="buttonFive" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-               </children>
-            </VBox>
-            <MFXTextField fx:id="searchField" floatMode="DISABLED" layoutX="326.0" layoutY="110.0" onMouseClicked="#onClickSearchBar" prefHeight="50.0" prefWidth="549.0" promptText="Search For Anything" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="110.0">
+            <MFXTextField fx:id="searchField" floatMode="DISABLED" layoutX="326.0" layoutY="110.0" onMouseClicked="#onClickSearchBar" prefHeight="50.0" prefWidth="549.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="110.0">
+
                <textFill>
                   <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
                </textFill>
@@ -83,12 +54,6 @@
             </Label>
             <Separator layoutX="775.0" layoutY="337.0" prefHeight="3.0" prefWidth="89.0" AnchorPane.topAnchor="337.0" />
             <Separator layoutX="775.0" layoutY="377.0" prefHeight="3.0" prefWidth="89.0" AnchorPane.topAnchor="377.0" />
-            <Label layoutX="976.0" layoutY="344.0" text="Region" textFill="#223c40" AnchorPane.leftAnchor="950.0" AnchorPane.topAnchor="320.0">
-               <font>
-                  <Font name="Candara Bold" size="15.0" />
-               </font>
-            </Label>
-            <MFXComboBox layoutX="956.0" layoutY="349.0" prefHeight="40.0" prefWidth="152.0" AnchorPane.leftAnchor="950.0" AnchorPane.topAnchor="345.0" />
             <Separator layoutX="100.0" layoutY="417.0" prefWidth="200.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="420.0" />
             <Label layoutX="111.0" layoutY="441.0" prefHeight="20.0" prefWidth="43.0" style="-fx-background-color: #feccc9; -fx-background-radius: 5;" text=" Taken" textFill="#ff4137" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="430.0">
                <font>
@@ -254,23 +219,28 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="warehouseButton1111" layoutX="520.0" layoutY="414.0" onMouseEntered="#enterWarehouseButton" onMouseExited="#exitWarehouseButton" prefHeight="30.0" prefWidth="90.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="572.0" AnchorPane.topAnchor="345.0">
+            <JFXButton fx:id="statusRestockButton" layoutX="520.0" layoutY="414.0" onAction="#onClickRestock" prefHeight="30.0" prefWidth="90.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="572.0" AnchorPane.topAnchor="345.0">
                <graphic>
                   <Label text="  Restock" textFill="WHITE">
                      <font>
                         <Font name="Candara Bold" size="15.0" />
                      </font>
                      <graphic>
-                        <AnchorPane prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
+                        <AnchorPane prefHeight="9.0" prefWidth="9.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
                            <children>
-                              <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                              <AnchorPane layoutX="2.0" layoutY="7.0" opacity="0.0" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                              <AnchorPane fx:id="restockStatusPane" prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: #76FF03; -fx-background-radius: 1000;" visible="false">
+                                 <children>
+                                    <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                 </children>
+                              </AnchorPane>
                            </children>
                         </AnchorPane>
                      </graphic>
                   </Label>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="warehouseButton11112" layoutX="382.0" layoutY="421.0" onMouseEntered="#enterWarehouseButton" onMouseExited="#exitWarehouseButton" prefHeight="30.0" prefWidth="65.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="345.0">
+            <JFXButton fx:id="statusAllButton" layoutX="382.0" layoutY="421.0" onAction="#onClickAll" prefHeight="30.0" prefWidth="65.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="345.0">
                <graphic>
                   <Label text="   All" textFill="WHITE">
                      <font>
@@ -280,34 +250,82 @@
                         <AnchorPane prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
                            <children>
                               <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                              <AnchorPane fx:id="allStatusPane" prefHeight="9.0" prefWidth="9.0" style="-fx-background-radius: 1000;">
+                                 <children>
+                                    <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                 </children>
+                              </AnchorPane>
                            </children>
                         </AnchorPane>
                      </graphic>
                   </Label>
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="warehouseButton11111" layoutX="527.0" layoutY="436.0" onMouseEntered="#enterWarehouseButton" onMouseExited="#exitWarehouseButton" prefHeight="30.0" prefWidth="75.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="496.0" AnchorPane.topAnchor="345.0">
+            <JFXButton fx:id="statusTakenButton" layoutX="527.0" layoutY="436.0" onAction="#onClickTaken" prefHeight="30.0" prefWidth="75.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="496.0" AnchorPane.topAnchor="345.0">
                <graphic>
                   <Label text="  Taken" textFill="WHITE">
                      <font>
                         <Font name="Candara Bold" size="15.0" />
                      </font>
                      <graphic>
-                        <AnchorPane prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
+                        <AnchorPane prefHeight="9.0" prefWidth="9.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
                            <children>
-                              <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                              <AnchorPane layoutX="2.0" layoutY="7.0" opacity="0.0" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
                            </children>
                         </AnchorPane>
                      </graphic>
                   </Label>
                </graphic>
             </JFXButton>
+            <VBox fx:id="searchTable" layoutX="300.0" layoutY="219.0" opacity="0.0" prefHeight="200.0" prefWidth="551.0" styleClass="resultPane" stylesheets="@../css/appPage2.css">
+               <children>
+                  <JFXButton fx:id="buttonOne" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="buttonTwo" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="buttonThree" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="buttonFour" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="buttonFive" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="551.0" styleClass="resultButton" textAlignment="JUSTIFY">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <JFXButton layoutX="971.0" layoutY="412.0" onAction="#onClickStuff" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Download Excel" textFill="WHITE" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="350.0">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <Label layoutX="941.0" layoutY="371.0" prefHeight="25.0" prefWidth="55.0" text="Excel:" textFill="#223c40">
+               <font>
+                  <Font name="Calibri Bold" size="16.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1057.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-downloads-96.png" />
+               </image>
+            </ImageView>
          </children>
          <padding>
             <Insets top="60.0" />
          </padding>
       </AnchorPane>
-      <StackPane fx:id="stackPane" prefHeight="640.0" prefWidth="1200.0" AnchorPane.topAnchor="60.0" />
       <AnchorPane prefHeight="297.0" prefWidth="170.0" AnchorPane.leftAnchor="1030.0" AnchorPane.topAnchor="0.0">
          <children>
             <JFXDrawer fx:id="VBoxDrawer" defaultDrawerSize="300.0" direction="TOP" layoutY="58.0" maxHeight="200.0" maxWidth="170.0" minHeight="200.0" minWidth="170.0" prefHeight="200.0" prefWidth="170.0" AnchorPane.topAnchor="60.0" />
@@ -405,13 +423,36 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <MFXGenericDialog showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
+
+      <MFXGenericDialog fx:id="settingsDialog" headerText="Account Info" onClose="#onCloseSettings" opacity="0.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <JFXHamburger layoutX="19.0" layoutY="17.0" />
+                  <VBox layoutX="89.0" layoutY="17.0" prefHeight="300.0" prefWidth="478.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+                     <children>
+                        <MFXTextField floatMode="BORDER" floatingText=" Username " prefHeight="40.0" prefWidth="478.0">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </MFXTextField>
+                        <MFXTextField floatMode="BORDER" floatingText=" Email Address " prefHeight="40.0" prefWidth="478.0">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </MFXTextField>
+                        <MFXTextField floatMode="BORDER" floatingText=" Password " prefHeight="40.0" prefWidth="478.0">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </MFXTextField>
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </VBox>
                </children>
             </AnchorPane>
-         </center></MFXGenericDialog>
+         </center>
+      </MFXGenericDialog>
    </children>
 </AnchorPane>

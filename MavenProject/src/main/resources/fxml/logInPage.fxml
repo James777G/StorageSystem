@@ -6,6 +6,7 @@
 <?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -100,6 +101,7 @@
             <MFXPasswordField fx:id="passwordField" floatMode="BORDER" floatingText=" Password " layoutX="700.0" layoutY="339.0" prefHeight="49.0" prefWidth="419.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" />
             <AnchorPane fx:id="lineOnForgotPassword" layoutX="980.0" layoutY="411.0" prefHeight="1.0" prefWidth="136.0" style="-fx-background-color: black;" />
             <AnchorPane fx:id="lineOnSignUp" layoutX="835.0" layoutY="598.0" prefHeight="1.0" prefWidth="146.0" style="-fx-background-color: black;" />
+            <ProgressIndicator fx:id="loadIndicator" layoutX="1014.0" layoutY="479.0" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="720.0" prefWidth="600.0" style="-fx-background-color: #23242a;">

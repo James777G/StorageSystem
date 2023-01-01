@@ -6,11 +6,10 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
+import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.effect.Bloom;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -30,12 +30,12 @@ import org.maven.apache.service.mail.MailService;
 import org.maven.apache.service.user.UserService;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.DataUtils;
+import org.maven.apache.utils.ScaleUtils;
 import org.maven.apache.utils.ThreadUtils;
 import org.maven.apache.utils.TransitionUtils;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -179,6 +179,9 @@ public class LogInPageController implements Initializable {
 	@FXML
 	private JFXButton sendVerificationCodeButton;
 
+	@FXML
+	private ProgressIndicator loadIndicator;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.updateUserList();
@@ -215,6 +218,9 @@ public class LogInPageController implements Initializable {
 		usernameCheck.setVisible(false);
 		passwordCross.setVisible(false);
 		passwordCheck.setVisible(false);
+		loadIndicator.setStyle(" -fx-progress-color: black;");
+		loadIndicator.setVisible(false);
+		loginButton.setDisable(false);
 	}
 
 	/**
@@ -244,50 +250,58 @@ public class LogInPageController implements Initializable {
 
 	@FXML
 	private void onEnterExitButton() {
-		exitButton.setScaleX(1.2);
-		exitButton.setScaleY(1.2);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton, 500, 1.2);
+		scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+		scaleTransition.play();
 	}
 
 	@FXML
 	private void onEnterExitButton2() {
-		exitButton2.setScaleX(1.2);
-		exitButton2.setScaleY(1.2);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton2, 500, 1.2);
+		scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+		scaleTransition.play();
 	}
 
 	@FXML
 	private void onLeaveExitButton2() {
-		exitButton2.setScaleX(1);
-		exitButton2.setScaleY(1);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton2, 500, 1);
+		scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+		scaleTransition.play();
 	}
 
 	@FXML
 	private void onPressExitButton2() {
-		exitButton2.setScaleX(0.8);
-		exitButton2.setScaleY(0.8);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton2, 500, 0.8);
+		scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+		scaleTransition.play();
 	}
 
 	@FXML
 	private void onReleaseExitButton2() {
-		exitButton2.setScaleX(1);
-		exitButton2.setScaleY(1);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton2, 500, 1);
+		scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+		scaleTransition.play();
 	}
 
 	@FXML
 	private void onLeaveExitButton() {
-		exitButton.setScaleX(1);
-		exitButton.setScaleY(1);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton, 500, 1);
+		scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+		scaleTransition.play();
 	}
 
 	@FXML
 	private void onPressExitButton() {
-		exitButton.setScaleX(0.8);
-		exitButton.setScaleY(0.8);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton, 500, 0.8);
+		scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+		scaleTransition.play();
 	}
 
 	@FXML
 	private void onReleaseExitButton() {
-		exitButton.setScaleX(1);
-		exitButton.setScaleY(1);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton, 500, 1);
+		scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+		scaleTransition.play();
 	}
 
 	@FXML
@@ -366,12 +380,12 @@ public class LogInPageController implements Initializable {
 	 * Sign in button, if the correct username and its corresponding password have
 	 * been used then head straight to the next page. Otherwise, sign up for a new
 	 * user or renter the password
-	 * 
-	 * @throws IOException
+	 *
 	 */
 	@FXML
-	private void onSignInAction() throws IOException {
+	private void onSignInAction(){
 		// get the user list
+		loginButton.setDisable(true);
 		updateUserList(); // can be changed to comment
 		String username = userNameField.getText();
 		User currentUser = getUser(username);
@@ -384,13 +398,25 @@ public class LogInPageController implements Initializable {
 		} else {
 			// if the user exists, check its verification (correct password)
 			if (currentUser.getPassword().equals(passwordField.getText())) {
-				// head to the app page (appPage2)
-				DataUtils.currentUser = currentUser;
-				Stage stage = (Stage) loginButton.getScene().getWindow();
-				FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/appPage2.fxml"));
-				Scene scene = new Scene(loader.load());
-				stage.setScene(scene);
-				stage.show();
+				// show progress indicator
+				loadIndicator.setVisible(true);
+				// head to the app page (appPage2) in the background
+				ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
+				threadPoolExecutor.execute(() -> {
+					DataUtils.currentUser = currentUser;
+					Stage stage = (Stage) loginButton.getScene().getWindow();
+					FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/appPage2.fxml"));
+					final Scene scene;
+					try {
+						scene = new Scene(loader.load());
+					} catch (IOException e) {
+						throw new RuntimeException(e);
+					}
+					Platform.runLater(() -> {
+						stage.setScene(scene);
+						stage.show();
+					});
+				});
 			} else {
 				// incorrect username or password
 				errorDialog.setVisible(true);
@@ -459,7 +485,7 @@ public class LogInPageController implements Initializable {
 			notificationLabel.setText("Email has been sent");
 			// verification code can be resent in 60 seconds
 			sendVerificationCodeButton.setDisable(true);
-			countToOneMinute(sendVerificationCodeButton, 60);
+			countToOneMinute(sendVerificationCodeButton);
 		}
 	}
 
@@ -467,40 +493,33 @@ public class LogInPageController implements Initializable {
 	 * resending email would be available in 60sec
 	 *
 	 */
-	private void countToOneMinute(JFXButton button, int seconds){
+	private void countToOneMinute(JFXButton button){
 		isCounting = true;
 		Timeline countTimeline = new Timeline();
-		time = seconds;
+		time = 60;
 		passwordTimeline.stop();
 		usernameTimeline.stop();
 		countTimeline.setCycleCount(Timeline.INDEFINITE);
-		KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				time--;
-				Task<Void> countTask = new Task<>(){
-					@Override
-					protected Void call() {
-						if (time == 0){
-							Platform.runLater(() -> {
-								countLabel.setText("");
-							});
-							isCounting = false;
-							countTimeline.stop();
-							button.setDisable(true);
-							passwordTimeline.playFromStart();
-							usernameTimeline.playFromStart();
-						}else{
-							Platform.runLater(() -> {
-								countLabel.setText(time + " ");
-							});
-						}
-						return null;
+		KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), event -> {
+			time--;
+			Task<Void> countTask = new Task<>(){
+				@Override
+				protected Void call() {
+					if (time == 0){
+						Platform.runLater(() -> countLabel.setText(""));
+						isCounting = false;
+						countTimeline.stop();
+						button.setDisable(true);
+						passwordTimeline.playFromStart();
+						usernameTimeline.playFromStart();
+					}else{
+						Platform.runLater(() -> countLabel.setText(time + " "));
 					}
-				};
-				Thread countThread = new Thread(countTask);
-				countThread.start();
-			}
+					return null;
+				}
+			};
+			Thread countThread = new Thread(countTask);
+			countThread.start();
 		});
 		countTimeline.getKeyFrames().add(keyFrame);
 		countTimeline.playFromStart();
@@ -564,7 +583,7 @@ public class LogInPageController implements Initializable {
 
 	// the function for button confirmation in order to add a new user to database
 	@FXML
-	private void onConfirmationButton(ActionEvent event) {
+	private void onConfirmationButton() {
 		if (checkExist()) {
 			Alert existAlert = new Alert(AlertType.WARNING);
 			existAlert.setTitle("Warning");
@@ -584,7 +603,7 @@ public class LogInPageController implements Initializable {
 		}
 	}
 
-	// the fucntion for check whether the user already has an account based on
+	// the function for check whether the user already has an account based on
 	// username
 	private boolean checkExist() {
 		List<User> users = userService.selectByUsername(signUpUserNameString);

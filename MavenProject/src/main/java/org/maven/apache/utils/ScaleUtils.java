@@ -1,13 +1,12 @@
 package org.maven.apache.utils;
 
 import javafx.animation.Interpolator;
-import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
 import javafx.util.Duration;
 import lombok.val;
 
+@SuppressWarnings("all")
 public class ScaleUtils {
 
     /**
