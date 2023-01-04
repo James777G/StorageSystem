@@ -194,8 +194,8 @@
                                     </AnchorPane>
                                  </graphic>
                               </Label>
-                           </graphic>
-                        </JFXButton>
+                           </children>
+                        </AnchorPane>
                         <JFXButton fx:id="allSelectButton" onAction="#onClickAllSelectButton" prefHeight="30.0" prefWidth="65.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="37.0">
                            <graphic>
                               <AnchorPane prefHeight="9.0" prefWidth="9.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
@@ -207,8 +207,8 @@
                                     </AnchorPane>
                                  </graphic>
                               </Label>
-                           </graphic>
-                        </JFXButton>
+                           </children>
+                        </AnchorPane>
                      </children>
                      <effect>
                         <DropShadow blurType="ONE_PASS_BOX">
