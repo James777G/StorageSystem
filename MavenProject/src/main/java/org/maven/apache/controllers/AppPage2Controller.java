@@ -112,7 +112,7 @@ public class AppPage2Controller implements Initializable {
     private AnchorPane cargoBox4Pane;
 
     @FXML
-    private AnchorPane[] cargoBoxPanes = {cargoBox1Pane,cargoBox2Pane,cargoBox3Pane,cargoBox4Pane};
+    private AnchorPane[] cargoBoxPanes = new AnchorPane[4];//{cargoBox1Pane,cargoBox2Pane,cargoBox3Pane,cargoBox4Pane};
 
     @FXML
     private Label cargoNameLabel01;
@@ -127,7 +127,7 @@ public class AppPage2Controller implements Initializable {
     private Label cargoNameLabel04;
 
     @FXML
-    private Label[] cargoNameLabels = {cargoNameLabel01,cargoNameLabel02,cargoNameLabel03,cargoNameLabel04};
+    private Label[] cargoNameLabels = new Label[4];//{cargoNameLabel01,cargoNameLabel02,cargoNameLabel03,cargoNameLabel04};
 
     @FXML
     private Label cargoAmountLabel01;
@@ -142,7 +142,7 @@ public class AppPage2Controller implements Initializable {
     private Label cargoAmountLabel04;
 
     @FXML
-    private Label[] cargoAmountLabels = {cargoAmountLabel01,cargoAmountLabel02,cargoAmountLabel03,cargoAmountLabel04};
+    private Label[] cargoAmountLabels = new Label[4];//{cargoAmountLabel01,cargoAmountLabel02,cargoAmountLabel03,cargoAmountLabel04};
 
     @FXML
     private Label staffNameLabel01;
@@ -157,7 +157,7 @@ public class AppPage2Controller implements Initializable {
     private Label staffNameLabel04;
 
     @FXML
-    private Label[] staffNameLabels = {staffNameLabel01,staffNameLabel02,staffNameLabel03,staffNameLabel04};
+    private Label[] staffNameLabels = new Label[4];//{staffNameLabel01,staffNameLabel02,staffNameLabel03,staffNameLabel04}
 
     @FXML
     private Label redTakenLabel;
@@ -265,6 +265,7 @@ public class AppPage2Controller implements Initializable {
 //            }
 //        }
         createRestockAndTakenLists();
+        initializeLabels();
         System.out.println(dateTransactions_Taken);
         System.out.println(dateTransactions_Restock);
         System.out.println(dateTransactions_Taken.size());
@@ -282,6 +283,25 @@ public class AppPage2Controller implements Initializable {
 //        staffNameLabel02.setText(dateTransactions_Taken.get(1).getStaffName());
 //        staffNameLabel03.setText(dateTransactions_Restock.get(0).getStaffName());
 //        staffNameLabel04.setText(dateTransactions_Restock.get(1).getStaffName());
+    }
+
+    private void initializeLabels() {
+        cargoNameLabels[0]=cargoNameLabel01;
+        cargoNameLabels[1]=cargoNameLabel02;
+        cargoNameLabels[2]=cargoNameLabel03;
+        cargoNameLabels[3]=cargoNameLabel04;
+        cargoAmountLabels[0]=cargoAmountLabel01;
+        cargoAmountLabels[1]=cargoAmountLabel02;
+        cargoAmountLabels[2]=cargoAmountLabel03;
+        cargoAmountLabels[3]=cargoAmountLabel04;
+        staffNameLabels[0]=staffNameLabel01;
+        staffNameLabels[1]=staffNameLabel02;
+        staffNameLabels[2]=staffNameLabel03;
+        staffNameLabels[3]=staffNameLabel04;
+        cargoBoxPanes[0]=cargoBox1Pane;
+        cargoBoxPanes[1]=cargoBox2Pane;
+        cargoBoxPanes[2]=cargoBox3Pane;
+        cargoBoxPanes[3]=cargoBox4Pane;
     }
 
     /**
@@ -312,9 +332,8 @@ public class AppPage2Controller implements Initializable {
 
     private void fillCargoBoxesInformation(ButtonSelected buttonSelected){
         int boxNumber = 4;
-        System.out.println(Arrays.stream(cargoBoxPanes).toList());
         for(int index = 0; index < boxNumber; index++){
-            Arrays.stream(cargoBoxPanes).toList().get(index).setOpacity(0);
+            cargoBoxPanes[index].setOpacity(0);
             cargoBoxPanes[index].setVisible(false);
             cargoBoxPanes[index].setPickOnBounds(false);
         }
@@ -329,8 +348,21 @@ public class AppPage2Controller implements Initializable {
 //                cargoAmountLabel02.setText(dateTransactions_Taken.get(1).getRemoveUnit().toString());
 //                cargoAmountLabel03.setText(dateTransactions_Restock.get(0).getAddUnit().toString());
 //                cargoAmountLabel04.setText(dateTransactions_Restock.get(1).getAddUnit().toString());
-                if(dateTransactions_Taken.size() < 2) {
+                if (dateTransactions_Taken.size() == 0) {
+                    takenBoxNumber = 0;
+                    redTakenLabel.setOpacity(0);
+                    redTakenLabel.setVisible(false);
+                    redTakenLabel.setPickOnBounds(false);
+                    greenRestockLabel.setTranslateX(-500);
+                } else if(dateTransactions_Taken.size() < 2) {
                     takenBoxNumber = dateTransactions_Taken.size();
+                    greenRestockLabel.setTranslateX(-500 + 250 * takenBoxNumber);
+                }
+                if (dateTransactions_Restock.size() == 0) {
+                    restockBoxNumber = 0;
+                    greenRestockLabel.setOpacity(0);
+                    greenRestockLabel.setVisible(false);
+                    greenRestockLabel.setPickOnBounds(false);
                 } else if (dateTransactions_Restock.size() < 2) {
                     restockBoxNumber = dateTransactions_Restock.size();
                 }
@@ -338,13 +370,17 @@ public class AppPage2Controller implements Initializable {
                     cargoBoxPanes[indexTaken].setOpacity(1);
                     cargoBoxPanes[indexTaken].setVisible(true);
                     cargoBoxPanes[indexTaken].setPickOnBounds(true);
+                    cargoNameLabels[indexTaken].setText(dateTransactions_Taken.get(indexTaken).getItemName());
                     cargoAmountLabels[indexTaken].setText(dateTransactions_Taken.get(indexTaken).getRemoveUnit().toString());
+                    staffNameLabels[indexTaken].setText(dateTransactions_Taken.get(indexTaken).getStaffName());
                 }
                 for(int indexRestock = 0; indexRestock < restockBoxNumber; indexRestock++){
                     cargoBoxPanes[indexRestock+takenBoxNumber].setOpacity(1);
                     cargoBoxPanes[indexRestock+takenBoxNumber].setVisible(true);
                     cargoBoxPanes[indexRestock+takenBoxNumber].setPickOnBounds(true);
-                    cargoAmountLabels[indexRestock+takenBoxNumber].setText(dateTransactions_Taken.get(indexRestock+takenBoxNumber).getRemoveUnit().toString());
+                    cargoNameLabels[indexRestock+takenBoxNumber].setText(dateTransactions_Restock.get(indexRestock).getItemName());
+                    cargoAmountLabels[indexRestock+takenBoxNumber].setText(dateTransactions_Restock.get(indexRestock).getAddUnit().toString());
+                    staffNameLabels[indexRestock+takenBoxNumber].setText(dateTransactions_Restock.get(indexRestock).getStaffName());
                 }
 
             }
