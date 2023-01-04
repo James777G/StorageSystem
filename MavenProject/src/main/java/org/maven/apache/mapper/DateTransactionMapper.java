@@ -95,4 +95,7 @@ public interface DateTransactionMapper {
 
 	List<DateTransaction> pageAskedCurrentUnitDescend(@Param("pageNumberCal") int pageNumberCal ,@Param("pageSize") int pageSize);
 
+	List<DateTransaction> pageAskedDateAddUnitDescend();
+
+	List<DateTransaction> pageAskedDateRemoveUnitDescend();
 }
