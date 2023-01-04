@@ -1,6 +1,7 @@
 package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
+
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.ScaleTransition;
@@ -9,24 +10,46 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+
+import io.github.palexdev.materialfx.controls.MFXPagination;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 import javafx.scene.control.Label;
 import org.maven.apache.utils.DataUtils;
+
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import org.maven.apache.MyLauncher;
+import org.maven.apache.dateTransaction.DateTransaction;
+import org.maven.apache.service.DateTransaction.DateTransactionService;
+import org.maven.apache.service.user.UserService;
+
 import org.maven.apache.utils.ScaleUtils;
 import org.maven.apache.utils.TransitionUtils;
 import org.maven.apache.utils.TranslateUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.net.URL;
+
 import java.util.Objects;
+
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
 
 public class TransactionPageController implements Initializable {
 
@@ -40,9 +63,9 @@ public class TransactionPageController implements Initializable {
     
     private boolean isMovingLineOnData = false;
 
-//    private final DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
-//
-//    private List<DateTransaction> transactionList = dateTransactionService.selectAll();
+    private boolean isRunning = false;
+
+    private final DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
 
     @FXML
     private AnchorPane movingLinePane;
@@ -65,7 +88,6 @@ public class TransactionPageController implements Initializable {
     @FXML
     private AnchorPane onRestockSelectPane;
 
-
     @FXML
     private JFXButton allSelectButton;
 
@@ -76,7 +98,10 @@ public class TransactionPageController implements Initializable {
     private JFXButton restockSelectButton;
 
     @FXML
-    private Label orderLabel1, orderLabel2, orderLabel3, orderLabel4;
+    private Label staffLabel1, staffLabel2, staffLabel3, staffLabel4;
+
+    @FXML
+    private Label orderLabel1, orderLabel2, orderLabel3, orderLabel4; //order ID
 
     @FXML
     private Label amountLabel1, amountLabel2, amountLabel3, amountLabel4;
@@ -93,13 +118,30 @@ public class TransactionPageController implements Initializable {
     @FXML
     private Label[] orderLabelArray = {orderLabel1, orderLabel2, orderLabel3, orderLabel4};
 
-    @FXML
-    private Label[] amountLabelArray = {amountLabel1, amountLabel2, amountLabel3, amountLabel4};
+    private MFXPagination transactionPagination;
+
 
     @FXML
-    private Label[] dateLabelArray = {dateLabel1, dateLabel2, dateLabel3, dateLabel4};
+    private ImageView sortByAmount;
 
-    private boolean isRunning = false;
+    @FXML
+    private ImageView sortByDate;
+
+    private Label[] staffLabelArray = new Label[4];
+
+    private Label[] orderLabelArray = new Label[4];;
+
+    private Label[] amountLabelArray = new Label[4];;
+
+    private Label[] dateLabelArray = new Label[4];
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        addButton.setCursor(Cursor.HAND);
+        initializeLabels();
+        setPaginationPages();
+        setTransactionList(1);
+    }
 
     private Node currentPage;
 
@@ -128,6 +170,7 @@ public class TransactionPageController implements Initializable {
                 fadeTransitionForCargo.play();
 
             }
+
         }
 
     }
@@ -235,5 +278,120 @@ public class TransactionPageController implements Initializable {
         dataTransactionPage.setPickOnBounds(false);
         dataTransactionPage.setOpacity(0);
         dataTransactionPage.setVisible(false);
+    /**
+     * initialize the labels which can be stored in arrays
+     */
+    private void initializeLabels(){
+        // initialize staff labels
+        staffLabelArray[0] = staffLabel1;
+        staffLabelArray[1] = staffLabel2;
+        staffLabelArray[2] = staffLabel3;
+        staffLabelArray[3] = staffLabel4;
+        // initialize order id labels
+        orderLabelArray[0] = orderLabel1;
+        orderLabelArray[1] = orderLabel2;
+        orderLabelArray[2] = orderLabel3;
+        orderLabelArray[3] = orderLabel4;
+        // initialize amount labels
+        amountLabelArray[0] = amountLabel1;
+        amountLabelArray[1] = amountLabel2;
+        amountLabelArray[2] = amountLabel3;
+        amountLabelArray[3] = amountLabel4;
+        // initialize record time labels
+        dateLabelArray[0] = dateLabel1;
+        dateLabelArray[1] = dateLabel2;
+        dateLabelArray[2] = dateLabel3;
+        dateLabelArray[3] = dateLabel4;
     }
+
+    /**
+     * set how many pages do we need in total
+     */
+    private void setPaginationPages(){
+        int numOfPages;
+        List<DateTransaction> transactionList = dateTransactionService.selectAll();
+        if ((transactionList.size() % 4) != 0 ){
+            // if the list does not contain exact number of pages
+            numOfPages = (transactionList.size() / 4)  + 1;
+        }else{
+            // if the list contains exact number of pages
+            numOfPages = transactionList.size() / 4;
+        }
+        transactionPagination.setMaxPage(numOfPages);
+    }
+
+    /**
+     * get the current page number when pagination is clicked
+     */
+    @FXML
+    private void onClickPagination(){
+        int currentPage = transactionPagination.getCurrentPage();
+        ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
+        threadPoolExecutor.execute(() ->setTransactionList(currentPage));
+    }
+
+    /**
+     * set the transaction list with no order
+     */
+    private void setTransactionList(int currentPage){
+        List<DateTransaction> list = dateTransactionService.pageAskedNOOrder(currentPage, 4);
+        Platform.runLater(() -> {
+            for (int i = 0; i < list.size(); i++){
+                staffLabelArray[i].setText(list.get(i).getStaffName());
+                orderLabelArray[i].setText(String.valueOf(list.get(i).getItemID()));
+                amountLabelArray[i].setText(String.valueOf(list.get(i).getCurrentUnit()));
+                dateLabelArray[i].setText(list.get(i).getRecordTime());
+            }
+        });
+    }
+
+    @FXML
+    private void onEnterAmount(){
+        sortByAmount.setScaleX(2);
+        sortByAmount.setScaleY(2);
+    }
+
+    @FXML
+    private void onExitAmount(){
+        sortByAmount.setScaleX(1);
+        sortByAmount.setScaleY(1);
+    }
+
+    @FXML
+    private void onPressedAmount(){
+        sortByAmount.setScaleX(1.5);
+        sortByAmount.setScaleY(1.5);
+    }
+
+    @FXML
+    private void onReleaseAmount(){
+        sortByAmount.setScaleX(2);
+        sortByAmount.setScaleY(2);
+    }
+
+    @FXML
+    private void onEnterDate(){
+        sortByDate.setScaleX(2);
+        sortByDate.setScaleY(2);
+    }
+
+    @FXML
+    private void onExitDate(){
+        sortByDate.setScaleX(1);
+        sortByDate.setScaleY(1);
+    }
+
+    @FXML
+    private void onPressedDate(){
+        sortByDate.setScaleX(1.5);
+        sortByDate.setScaleY(1.5);
+    }
+
+    @FXML
+    private void onReleaseDate(){
+        sortByDate.setScaleX(2);
+        sortByDate.setScaleY(2);
+    }
+
+
 }

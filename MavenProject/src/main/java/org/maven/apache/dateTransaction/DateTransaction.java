@@ -11,6 +11,17 @@ public class DateTransaction {
 	private Integer CurrentUnit;
 	private String RecordTime;
 	private String StaffName;
+	private String Purpose;
+
+	public String getPurpose() {
+		return Purpose;
+	}
+
+	public void setPurpose(String purpose) {
+		Purpose = purpose;
+	}
+
+
 	public String getStaffName() {
 		return StaffName;
 	}

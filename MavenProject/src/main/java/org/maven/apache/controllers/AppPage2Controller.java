@@ -186,10 +186,12 @@ public class AppPage2Controller implements Initializable {
                 searchOnBackgroundPerSec();
                 searchTable.setOpacity(1);
                 searchTable.setPickOnBounds(true);
+                searchTable.setVisible(true);
             } else {
                 timeline.stop();
                 searchTable.setOpacity(0);
                 searchTable.setPickOnBounds(false);
+                searchTable.setVisible(false);
             }
         });
         // load the menu VBox to drawer
@@ -211,6 +213,7 @@ public class AppPage2Controller implements Initializable {
         searchOnBackgroundPerSec();
         searchTable.setOpacity(1);
         searchTable.setPickOnBounds(true);
+        searchTable.setVisible(true);
     }
 
     private void onClickSettingsTwo(MFXGenericDialog genericDialog) {
@@ -224,6 +227,7 @@ public class AppPage2Controller implements Initializable {
         searchOnBackgroundPerSec();
         searchTable.setOpacity(1);
         searchTable.setPickOnBounds(true);
+        searchTable.setVisible(true);
     }
 
     private void setTransactionPane() {
@@ -311,6 +315,7 @@ public class AppPage2Controller implements Initializable {
         timeline.stop();
         searchTable.setOpacity(0);
         searchTable.setPickOnBounds(false);
+        searchTable.setVisible(false);
     }
 
     @FXML
