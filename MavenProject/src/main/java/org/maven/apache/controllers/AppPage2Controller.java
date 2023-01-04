@@ -18,7 +18,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.maven.apache.MyLauncher;
+import org.maven.apache.dateTransaction.DateTransaction;
+import org.maven.apache.service.DateTransaction.DateTransactionService;
 import org.maven.apache.service.excel.ExcelConverterService;
+import org.maven.apache.service.user.UserService;
 import org.maven.apache.spring.ExcelConverterConfiguration;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.*;
@@ -26,6 +29,8 @@ import org.maven.apache.utils.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -153,6 +158,10 @@ public class AppPage2Controller implements Initializable {
 
     private Node currentPage;
 
+    private final DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
+
+    private int i = 0;
+    private int j = 0;
     enum ButtonSelected {
         ALL,
         TAKEN,
@@ -196,6 +205,40 @@ public class AppPage2Controller implements Initializable {
         });
         // load the menu VBox to drawer
         setDrawer();
+        List<DateTransaction> dateTransactions = dateTransactionService.selectAll();
+        List<DateTransaction> dateTransactions_Date = dateTransactionService.pageAskedDateDescend(1,dateTransactions.size());
+        List<DateTransaction> dateTransactions_Taken = new ArrayList<DateTransaction>();
+        List<DateTransaction> dateTransactions_Restock = new ArrayList<DateTransaction>();
+        for (DateTransaction dateTransaction : dateTransactions_Date) {
+            if (dateTransaction.getAddUnit() == 0) {
+                dateTransactions_Taken.add(i, dateTransaction);
+                if (i < 3) {
+                    i++;
+                }
+            } else if (dateTransaction.getRemoveUnit() == 0) {
+                dateTransactions_Restock.add(j, dateTransaction);
+                if (j < 3) {
+                    j++;
+                }
+            }
+            if(i+j == 6){
+                break;
+            }
+        }
+        System.out.println(dateTransactions_Taken);
+        System.out.println(dateTransactions_Restock);
+        cargoNameLabel01.setText(dateTransactions_Taken.get(0).getItemName());
+        cargoNameLabel02.setText(dateTransactions_Taken.get(1).getItemName());
+        cargoNameLabel03.setText(dateTransactions_Restock.get(0).getItemName());
+        cargoNameLabel04.setText(dateTransactions_Restock.get(1).getItemName());
+        cargoAmountLabel01.setText(dateTransactions_Taken.get(0).getRemoveUnit().toString());
+        cargoAmountLabel02.setText(dateTransactions_Taken.get(1).getRemoveUnit().toString());
+        cargoAmountLabel03.setText(dateTransactions_Restock.get(0).getAddUnit().toString());
+        cargoAmountLabel04.setText(dateTransactions_Restock.get(1).getAddUnit().toString());
+        staffNameLabel01.setText(dateTransactions_Taken.get(0).getStaffName());
+        staffNameLabel02.setText(dateTransactions_Taken.get(1).getStaffName());
+        staffNameLabel03.setText(dateTransactions_Restock.get(0).getStaffName());
+        staffNameLabel04.setText(dateTransactions_Restock.get(1).getStaffName());
     }
 
     @FXML
