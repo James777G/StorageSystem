@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.dateTransaction.DateTransaction;
@@ -84,6 +85,12 @@ public class TransactionPageController implements Initializable {
 
     @FXML
     private MFXPagination transactionPagination;
+
+    @FXML
+    private ImageView sortByAmount;
+
+    @FXML
+    private ImageView sortByDate;
 
     private Label[] staffLabelArray = new Label[4];
 
@@ -262,6 +269,30 @@ public class TransactionPageController implements Initializable {
                 dateLabelArray[i].setText(list.get(i).getRecordTime());
             }
         });
+    }
+
+    @FXML
+    private void onEnterAmount(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(sortByAmount, 200, 1.7);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitAmount(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(sortByAmount, 300, 1);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onEnterDate(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(sortByDate, 200, 1.7);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitDate(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(sortByDate, 300, 1);
+        scaleTransition.play();
     }
 
 
