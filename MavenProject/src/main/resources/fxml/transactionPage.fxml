@@ -111,10 +111,9 @@
                            <graphic>
                               <AnchorPane prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
                                  <children>
-                                    <AnchorPane layoutX="2.0" layoutY="7.0" opacity="0.0" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
-                                    <AnchorPane fx:id="onRestockSelectPane" layoutY="1.0" prefHeight="9.0" prefWidth="9.0" style="-fx-background-color: #76FF03; -fx-background-radius: 1000;" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <AnchorPane prefHeight="9.0" prefWidth="9.0" style="-fx-background-radius: 1000;">
                                        <children>
-                                          <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                          <AnchorPane fx:id="onRestockSelectPane" layoutX="2.0" layoutY="7.0" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" visible="false" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -132,10 +131,9 @@
                            <graphic>
                               <AnchorPane prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
                                  <children>
-                                    <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
-                                    <AnchorPane fx:id="onAllSelectPane" prefHeight="9.0" prefWidth="9.0" style="-fx-background-radius: 1000;">
+                                    <AnchorPane prefHeight="9.0" prefWidth="9.0" style="-fx-background-radius: 1000;">
                                        <children>
-                                          <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                          <AnchorPane fx:id="onAllSelectPane" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -153,10 +151,9 @@
                            <graphic>
                               <AnchorPane prefHeight="9.0" prefWidth="9.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
                                  <children>
-                                    <AnchorPane layoutX="2.0" layoutY="7.0" opacity="0.0" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
-                                    <AnchorPane fx:id="onTakenSelectPane" layoutX="-1.0" layoutY="-1.0" prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000;" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <AnchorPane prefHeight="9.0" prefWidth="9.0" style="-fx-background-radius: 1000;">
                                        <children>
-                                          <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                          <AnchorPane fx:id="onTakenSelectPane" layoutX="2.0" layoutY="7.0" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" visible="false" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>

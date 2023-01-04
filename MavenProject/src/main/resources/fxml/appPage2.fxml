@@ -17,7 +17,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
    <children>
       <StackPane fx:id="stackPane" prefHeight="640.0" prefWidth="1200.0" AnchorPane.topAnchor="60.0" />
       <AnchorPane fx:id="appPagePane" onMouseClicked="#onClickAppPagePane" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;">
@@ -221,19 +221,14 @@
             </JFXButton>
             <JFXButton fx:id="statusRestockButton" layoutX="520.0" layoutY="414.0" onAction="#onClickRestock" prefHeight="30.0" prefWidth="90.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="572.0" AnchorPane.topAnchor="345.0">
                <graphic>
-                  <Label text="  Restock" textFill="WHITE">
+                  <Label pickOnBounds="false" text="  Restock" textFill="WHITE">
                      <font>
                         <Font name="Candara Bold" size="15.0" />
                      </font>
                      <graphic>
-                        <AnchorPane prefHeight="9.0" prefWidth="9.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
+                        <AnchorPane pickOnBounds="false" prefHeight="9.0" prefWidth="9.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
                            <children>
-                              <AnchorPane layoutX="2.0" layoutY="7.0" opacity="0.0" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
-                              <AnchorPane fx:id="restockStatusPane" prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: #76FF03; -fx-background-radius: 1000;" visible="false">
-                                 <children>
-                                    <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
-                                 </children>
-                              </AnchorPane>
+                              <AnchorPane fx:id="restockStatusPane" layoutX="1.0" layoutY="4.0" pickOnBounds="false" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" visible="false" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
                            </children>
                         </AnchorPane>
                      </graphic>
@@ -242,17 +237,16 @@
             </JFXButton>
             <JFXButton fx:id="statusAllButton" layoutX="382.0" layoutY="421.0" onAction="#onClickAll" prefHeight="30.0" prefWidth="65.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="345.0">
                <graphic>
-                  <Label text="   All" textFill="WHITE">
+                  <Label pickOnBounds="false" text="   All" textFill="WHITE">
                      <font>
                         <Font name="Candara Bold" size="15.0" />
                      </font>
                      <graphic>
-                        <AnchorPane prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
+                        <AnchorPane pickOnBounds="false" prefHeight="8.0" prefWidth="8.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
                            <children>
-                              <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="2.0" prefWidth="2.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
-                              <AnchorPane fx:id="allStatusPane" prefHeight="9.0" prefWidth="9.0" style="-fx-background-radius: 1000;">
+                              <AnchorPane pickOnBounds="false" prefHeight="9.0" prefWidth="9.0" style="-fx-background-radius: 1000;">
                                  <children>
-                                    <AnchorPane layoutX="2.0" layoutY="7.0" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                    <AnchorPane fx:id="allStatusPane" layoutX="2.0" layoutY="7.0" pickOnBounds="false" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -263,14 +257,14 @@
             </JFXButton>
             <JFXButton fx:id="statusTakenButton" layoutX="527.0" layoutY="436.0" onAction="#onClickTaken" prefHeight="30.0" prefWidth="75.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="496.0" AnchorPane.topAnchor="345.0">
                <graphic>
-                  <Label text="  Taken" textFill="WHITE">
+                  <Label pickOnBounds="false" text="  Taken" textFill="WHITE">
                      <font>
                         <Font name="Candara Bold" size="15.0" />
                      </font>
                      <graphic>
-                        <AnchorPane prefHeight="9.0" prefWidth="9.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
+                        <AnchorPane pickOnBounds="false" prefHeight="9.0" prefWidth="9.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
                            <children>
-                              <AnchorPane layoutX="2.0" layoutY="7.0" opacity="0.0" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                              <AnchorPane fx:id="takenStatusPane" layoutX="2.0" layoutY="7.0" pickOnBounds="false" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" visible="false" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
                            </children>
                         </AnchorPane>
                      </graphic>
@@ -424,7 +418,7 @@
          </children>
       </AnchorPane>
 
-      <MFXGenericDialog fx:id="settingsDialog" headerText="Account Info" onClose="#onCloseSettings" opacity="0.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
+      <MFXGenericDialog fx:id="settingsDialog" headerText="Account Info" onClose="#onCloseSettings" opacity="0.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="0.0">
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
