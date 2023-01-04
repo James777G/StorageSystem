@@ -1,22 +1,22 @@
 package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import javafx.animation.Interpolator;
+import io.github.palexdev.materialfx.controls.MFXPagination;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
-import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
-
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import org.maven.apache.MyLauncher;
+import org.maven.apache.dateTransaction.DateTransaction;
+import org.maven.apache.service.DateTransaction.DateTransactionService;
 import org.maven.apache.utils.ScaleUtils;
 import org.maven.apache.utils.TranslateUtils;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class TransactionPageController implements Initializable {
@@ -31,9 +31,11 @@ public class TransactionPageController implements Initializable {
     
     private boolean isMovingLineOnData = false;
 
-//    private final DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
-//
-//    private List<DateTransaction> transactionList = dateTransactionService.selectAll();
+    private boolean isRunning = false;
+
+    private final DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
+
+    private int numOfPages;
 
     @FXML
     private AnchorPane movingLinePane;
@@ -56,7 +58,6 @@ public class TransactionPageController implements Initializable {
     @FXML
     private AnchorPane onRestockSelectPane;
 
-
     @FXML
     private JFXButton allSelectButton;
 
@@ -67,7 +68,10 @@ public class TransactionPageController implements Initializable {
     private JFXButton restockSelectButton;
 
     @FXML
-    private Label orderLabel1, orderLabel2, orderLabel3, orderLabel4;
+    private Label staffLabel1, staffLabel2, staffLabel3, staffLabel4;
+
+    @FXML
+    private Label orderLabel1, orderLabel2, orderLabel3, orderLabel4; //order ID
 
     @FXML
     private Label amountLabel1, amountLabel2, amountLabel3, amountLabel4;
@@ -76,15 +80,24 @@ public class TransactionPageController implements Initializable {
     private Label dateLabel1, dateLabel2, dateLabel3, dateLabel4;
 
     @FXML
-    private Label[] orderLabelArray = {orderLabel1, orderLabel2, orderLabel3, orderLabel4};
+    private MFXPagination transactionPagination;
 
-    @FXML
-    private Label[] amountLabelArray = {amountLabel1, amountLabel2, amountLabel3, amountLabel4};
+    private Label[] staffLabelArray = new Label[4];
 
-    @FXML
-    private Label[] dateLabelArray = {dateLabel1, dateLabel2, dateLabel3, dateLabel4};
+    private Label[] orderLabelArray = new Label[4];;
 
-    private boolean isRunning = false;
+    private Label[] amountLabelArray = new Label[4];;
+
+    private Label[] dateLabelArray = new Label[4];
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        addButton.setCursor(Cursor.HAND);
+        initializeLabels();
+        numOfPages = setPaginationPages();
+        setTransactionList(numOfPages);
+
+    }
 
     @FXML
     private void onMoveToData(){
@@ -97,8 +110,6 @@ public class TransactionPageController implements Initializable {
                 isMovingLineOnData = true;
             });
             translateTransition.play();
-
-
         }
     }
 
@@ -113,7 +124,6 @@ public class TransactionPageController implements Initializable {
                 isMovingLineOnData = false;
             });
             translateTransition.play();
-
         }
     }
 
@@ -185,8 +195,61 @@ public class TransactionPageController implements Initializable {
         scaleTransition.play();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        addButton.setCursor(Cursor.HAND);
+    /**
+     * initialize the labels which can be stored in arrays
+     */
+    private void initializeLabels(){
+        // initialize staff labels
+        staffLabelArray[0] = staffLabel1;
+        staffLabelArray[1] = staffLabel2;
+        staffLabelArray[2] = staffLabel3;
+        staffLabelArray[3] = staffLabel4;
+        // initialize order id labels
+        orderLabelArray[0] = orderLabel1;
+        orderLabelArray[1] = orderLabel2;
+        orderLabelArray[2] = orderLabel3;
+        orderLabelArray[3] = orderLabel4;
+        // initialize amount labels
+        amountLabelArray[0] = amountLabel1;
+        amountLabelArray[1] = amountLabel2;
+        amountLabelArray[2] = amountLabel3;
+        amountLabelArray[3] = amountLabel4;
+        // initialize record time labels
+        dateLabelArray[0] = dateLabel1;
+        dateLabelArray[1] = dateLabel2;
+        dateLabelArray[2] = dateLabel3;
+        dateLabelArray[3] = dateLabel4;
     }
+
+    /**
+     * set how many pages do we need in total
+     */
+    private int setPaginationPages(){
+        int numOfPages;
+        List<DateTransaction> transactionList = dateTransactionService.selectAll();
+        if ((transactionList.size() % 4) != 0 ){
+            // if the list does not contain exact number of pages
+            numOfPages = (transactionList.size() / 4)  + 1;
+        }else{
+            // if the list contains exact number of pages
+            numOfPages = transactionList.size() / 4;
+        }
+        transactionPagination.setMaxPage(numOfPages);
+        return numOfPages;
+    }
+
+    /**
+     * set the transaction list with no order
+     */
+    private void setTransactionList(int numOfPages){
+        List<DateTransaction> list = dateTransactionService.pageAskedNOOrder(1, 4);
+        for (int i = 0; i < 4; i++){
+            staffLabelArray[i].setText(list.get(i).getStaffName());
+            orderLabelArray[i].setText(String.valueOf(list.get(i).getItemID()));
+            amountLabelArray[i].setText(String.valueOf(list.get(i).getCurrentUnit()));
+            dateLabelArray[i].setText(list.get(i).getRecordTime());
+        }
+    }
+
+
 }
