@@ -132,4 +132,20 @@ public interface DateTransactionService {
 	 */
 	List<DateTransaction> pageAskedRemoveUnitDescend(int pageNumber , int pageSize);
 
+	/**
+	 * based on CurrentUnit to separate the page by ascending order
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	List<DateTransaction> pageAskedCurrentUnitAscend(int pageNumber , int pageSize);
+
+	/**
+	 * based on CurrentUnit to separate the page by descending  order
+	 * @param pageNumber
+	 * @param pageSize
+	 * @return
+	 */
+	List<DateTransaction> pageAskedCurrentUnitDescend(int pageNumber , int pageSize);
+
 }

@@ -29,3 +29,5 @@ values ('Thatch', 'Tom', 10, 3, 17, '2022-12-21 :01:00:34','sell'),
 insert into DateTransactionTable(ItemName, StaffName, AddUnit, RemoveUnit, CurrentUnit, RecordTime,Purpose)
 values ('cup', 'light', 10, 3, 17, '2022-12-29 :02:00:34','**');
 
+insert into DateTransactionTable(ItemName, StaffName, AddUnit, RemoveUnit, CurrentUnit, RecordTime,Purpose)
+values ('fan', 'haha', 10, 0, 10, '2022-12-29 :02:01:34','**');
