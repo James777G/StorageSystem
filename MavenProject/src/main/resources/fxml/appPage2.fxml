@@ -56,14 +56,14 @@
             <Separator layoutX="775.0" layoutY="337.0" prefHeight="3.0" prefWidth="89.0" AnchorPane.topAnchor="337.0" />
             <Separator layoutX="775.0" layoutY="377.0" prefHeight="3.0" prefWidth="89.0" AnchorPane.topAnchor="377.0" />
             <Separator layoutX="100.0" layoutY="417.0" prefWidth="200.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="420.0" />
-            <Label layoutX="111.0" layoutY="441.0" prefHeight="20.0" prefWidth="43.0" style="-fx-background-color: #feccc9; -fx-background-radius: 5;" text=" Taken" textFill="#ff4137" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="430.0">
+            <Label fx:id="redTakenLabel" layoutX="111.0" layoutY="441.0" prefHeight="20.0" prefWidth="43.0" style="-fx-background-color: #feccc9; -fx-background-radius: 5;" text=" Taken" textFill="#ff4137" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="430.0">
                <font>
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="120.0" layoutY="496.0" prefHeight="80.0" prefWidth="180.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="500.0">
+            <AnchorPane fx:id="cargoBox1Pane" layoutX="120.0" layoutY="496.0" prefHeight="80.0" prefWidth="180.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="500.0">
                <children>
-                  <Label fx:id="cargoNameLabel01" layoutX="73.0" layoutY="14.0" prefHeight="17.0" prefWidth="107.0" text="Cargo name*****" textFill="#23242a" underline="true" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="10.0">
+                  <Label fx:id="cargoNameLabel01" layoutX="73.0" layoutY="14.0" prefHeight="17.0" prefWidth="107.0" text="Cargo name*****" textAlignment="CENTER" textFill="#23242a" underline="true" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="10.0">
                      <font>
                         <Font name="Candara Bold" size="13.0" />
                      </font>
@@ -73,7 +73,7 @@
                         <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="cargoAmountLabel01" layoutX="88.0" layoutY="32.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="32.0">
+                  <Label fx:id="cargoAmountLabel01" alignment="CENTER_RIGHT" layoutX="88.0" layoutY="32.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="32.0">
                      <font>
                         <Font name="Candara Bold" size="14.0" />
                      </font>
@@ -96,24 +96,27 @@
                   </Label>
                </children>
             </AnchorPane>
-            <Label layoutX="564.0" layoutY="430.0" prefHeight="20.0" prefWidth="55.0" style="-fx-background-color: #ddeab1#c7ddb5; -fx-background-radius: 5;" text=" Restock" textFill="#759751" AnchorPane.leftAnchor="610.0" AnchorPane.topAnchor="430.0">
+            <Label fx:id="greenRestockLabel" layoutX="564.0" layoutY="430.0" prefHeight="20.0" prefWidth="55.0" style="-fx-background-color: #ddeab1#c7ddb5; -fx-background-radius: 5;" text=" Restock" textFill="#759751" AnchorPane.leftAnchor="610.0" AnchorPane.topAnchor="430.0">
                <font>
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="424.0" layoutY="498.0" prefHeight="80.0" prefWidth="180.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="500.0">
+            <AnchorPane fx:id="cargoBox2Pane" layoutX="424.0" layoutY="498.0" prefHeight="80.0" prefWidth="180.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="500.0">
                <children>
-                  <Label fx:id="cargoNameLabel02" layoutX="73.0" layoutY="14.0" prefHeight="17.0" prefWidth="107.0" text="Cargo name*****" textFill="#23242a" underline="true" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="10.0">
+                  <Label fx:id="cargoNameLabel02" layoutX="73.0" layoutY="14.0" prefHeight="17.0" prefWidth="101.0" text="Cargo name*****" textFill="#23242a" underline="true" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="10.0">
                      <font>
                         <Font name="Candara Bold" size="13.0" />
                      </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                   </Label>
                   <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="10.0">
                      <image>
                         <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="cargoAmountLabel02" layoutX="88.0" layoutY="32.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="32.0">
+                  <Label fx:id="cargoAmountLabel02" alignment="CENTER_RIGHT" layoutX="88.0" layoutY="32.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="32.0">
                      <font>
                         <Font name="Candara Bold" size="14.0" />
                      </font>
@@ -136,7 +139,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="695.0" layoutY="502.0" prefHeight="80.0" prefWidth="180.0" AnchorPane.leftAnchor="620.0" AnchorPane.topAnchor="500.0">
+            <AnchorPane fx:id="cargoBox3Pane" layoutX="695.0" layoutY="502.0" prefHeight="80.0" prefWidth="180.0" AnchorPane.leftAnchor="620.0" AnchorPane.topAnchor="500.0">
                <children>
                   <Label fx:id="cargoNameLabel03" layoutX="73.0" layoutY="14.0" prefHeight="17.0" prefWidth="107.0" text="Cargo name*****" textFill="#23242a" underline="true" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="10.0">
                      <font>
@@ -148,7 +151,7 @@
                         <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="cargoAmountLabel03" layoutX="88.0" layoutY="32.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="32.0">
+                  <Label fx:id="cargoAmountLabel03" alignment="CENTER_RIGHT" layoutX="88.0" layoutY="32.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="32.0">
                      <font>
                         <Font name="Candara Bold" size="14.0" />
                      </font>
@@ -171,7 +174,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="897.0" layoutY="499.0" prefHeight="80.0" prefWidth="180.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="500.0">
+            <AnchorPane fx:id="cargoBox4Pane" layoutX="897.0" layoutY="499.0" prefHeight="80.0" prefWidth="180.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="500.0">
                <children>
                   <Label fx:id="cargoNameLabel04" layoutX="73.0" layoutY="14.0" prefHeight="17.0" prefWidth="107.0" text="Cargo name*****" textFill="#23242a" underline="true" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="10.0">
                      <font>
@@ -183,7 +186,7 @@
                         <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="cargoAmountLabel04" layoutX="88.0" layoutY="32.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="32.0">
+                  <Label fx:id="cargoAmountLabel04" alignment="CENTER_RIGHT" layoutX="88.0" layoutY="32.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="32.0">
                      <font>
                         <Font name="Candara Bold" size="14.0" />
                      </font>
