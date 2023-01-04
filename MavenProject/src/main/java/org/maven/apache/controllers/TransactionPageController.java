@@ -34,13 +34,25 @@ public class TransactionPageController implements Initializable {
         RESTOCK
     }
 
+    enum SortBy {
+        ALL, DATEASCEND, DATEDESCEND
+    }
+
+    private Node currentPage;
+
     private ButtonSelected buttonSelected = ButtonSelected.ALL;
+
+    private SortBy sortBy = SortBy.ALL;
 
     private boolean isMovingLineOnData = false;
 
     private boolean isRunning = false;
 
+    private boolean isAscend = false;
+
     private final DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
+
+    private List<DateTransaction> sortedList;
 
     @FXML
     private AnchorPane movingLinePane;
@@ -105,10 +117,8 @@ public class TransactionPageController implements Initializable {
     private Label[] staffLabelArray = new Label[4];
 
     private Label[] orderLabelArray = new Label[4];
-    ;
 
     private Label[] amountLabelArray = new Label[4];
-    ;
 
     private Label[] dateLabelArray = new Label[4];
 
@@ -127,10 +137,7 @@ public class TransactionPageController implements Initializable {
         dataTransactionPage.setPickOnBounds(false);
         dataTransactionPage.setOpacity(0);
         dataTransactionPage.setVisible(false);
-
     }
-
-    private Node currentPage;
 
     @FXML
     private void onMoveToData() {
@@ -155,11 +162,8 @@ public class TransactionPageController implements Initializable {
                     fadeTransitionForData.play();
                 });
                 fadeTransitionForCargo.play();
-
             }
-
         }
-
     }
 
     @FXML
@@ -307,18 +311,44 @@ public class TransactionPageController implements Initializable {
         }
 
         /**
-         * set the transaction list with no order
+         * set the transaction list by a specific condition
          */
-        private void setTransactionList ( int currentPage){
-            List<DateTransaction> list = dateTransactionService.pageAskedNOOrder(currentPage, 4);
+        private void setTransactionList (int currentPage){
+            // sort the list by a specific condition
+//            switch(sortBy){
+//                case ALL:
+                    sortedList = dateTransactionService.pageAskedNOOrder(currentPage, 4);
+//                case DATEASCEND:
+//                    sortedList = dateTransactionService.pageAskedDateAscend(currentPage, 4);
+//                case DATEDESCEND:
+//                    sortedList = dateTransactionService.pageAskedDateDescend(currentPage, 4);
+//            }
             Platform.runLater(() -> {
-                for (int i = 0; i < list.size(); i++) {
-                    staffLabelArray[i].setText(list.get(i).getStaffName());
-                    orderLabelArray[i].setText(String.valueOf(list.get(i).getItemID()));
-                    amountLabelArray[i].setText(String.valueOf(list.get(i).getCurrentUnit()));
-                    dateLabelArray[i].setText(list.get(i).getRecordTime());
+                // set non-empty labels
+                for (int i = 0; i < sortedList.size(); i++) {
+                    staffLabelArray[i].setText(sortedList.get(i).getStaffName());
+                    orderLabelArray[i].setText(String.valueOf(sortedList.get(i).getItemID()));
+                    amountLabelArray[i].setText(String.valueOf(sortedList.get(i).getCurrentUnit()));
+                    dateLabelArray[i].setText(sortedList.get(i).getRecordTime());
+                }
+                // set empty labels
+                if (sortedList.size() != 4){
+                    for (int j = 3; j >= sortedList.size(); j--){
+                        staffLabelArray[j].setText("");
+                        orderLabelArray[j].setText("");
+                        amountLabelArray[j].setText("");
+                        dateLabelArray[j].setText("");
+                    }
                 }
             });
+        }
+
+    /**
+     * sort the list by amount (current unit, added unit, removed unit)
+     */
+    @FXML
+        private void onClickAmount(){
+
         }
 
         @FXML
@@ -343,6 +373,22 @@ public class TransactionPageController implements Initializable {
         private void onReleaseAmount () {
             sortByAmount.setScaleX(2);
             sortByAmount.setScaleY(2);
+        }
+
+    /**
+     * sort the list by date
+     */
+    @FXML
+        private void onClickDate(){
+            if (isAscend){
+                sortBy = SortBy.DATEASCEND;
+                isAscend = false;
+                onClickPagination();
+            }else{
+                sortBy = SortBy.DATEDESCEND;
+                isAscend = true;
+                onClickPagination();
+            }
         }
 
         @FXML
