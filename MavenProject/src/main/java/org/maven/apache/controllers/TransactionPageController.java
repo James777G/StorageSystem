@@ -99,6 +99,9 @@ public class TransactionPageController implements Initializable {
     @FXML
     private ImageView sortByDate;
 
+    @FXML
+    private AnchorPane editCargoPane;
+
     private Label[] staffLabelArray = new Label[4];
 
     private Label[] orderLabelArray = new Label[4];
@@ -111,6 +114,10 @@ public class TransactionPageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        editCargoPane.getChildren().add(DataUtils.editCargoPane);
+        editCargoPane.setOpacity(0);
+        editCargoPane.setPickOnBounds(false);
+        editCargoPane.setVisible(false);
         addButton.setCursor(Cursor.HAND);
         initializeLabels();
         setPaginationPages();
@@ -153,6 +160,13 @@ public class TransactionPageController implements Initializable {
 
         }
 
+    }
+
+    @FXML
+    private void onClickAddButton(){
+        editCargoPane.setOpacity(1);
+        editCargoPane.setPickOnBounds(true);
+        editCargoPane.setVisible(true);
     }
 
     @FXML
@@ -255,16 +269,6 @@ public class TransactionPageController implements Initializable {
          */
         private void initializeLabels () {
             // initialize staff labels
-            staffLabelArray[0] = staffLabel1;
-            staffLabelArray[1] = staffLabel2;
-            staffLabelArray[2] = staffLabel3;
-            staffLabelArray[3] = staffLabel4;
-            // initialize order id labels
-            orderLabelArray[0] = orderLabel1;
-            orderLabelArray[1] = orderLabel2;
-            orderLabelArray[2] = orderLabel3;
-            orderLabelArray[3] = orderLabel4;
-            // initialize amount labels
             amountLabelArray[0] = amountLabel1;
             amountLabelArray[1] = amountLabel2;
             amountLabelArray[2] = amountLabel3;
