@@ -150,12 +150,13 @@ System.out.println(dateTransactionservice.getCurrentTime());
     public void test9 (){
         ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
         DateTransactionService dateTransactionservice = context.getBean("dateTransactionService", DateTransactionService.class);
-        List<DateTransaction> dateTransaction = dateTransactionservice.pageAskedRemoveUnitDescend(1,4);
+        List<DateTransaction> dateTransaction = dateTransactionservice.pageAskedDateDescend(1,4);
        // List<DateTransaction> allDare = dateTransactionservice.selectAll();
       //  System.out.println("jingdfe"+allDare.size());
       //  System.out.println("shumu"+dateTransaction.size());
         for(DateTransaction dare:dateTransaction){
-            System.out.println(dare.getItemID() + " Name: "+ dare.getItemName() + " AddUnit: "+dare.getAddUnit()+" removeUnit: "+dare.getAddUnit());
+            System.out.println(dare.getItemID() + " Name: "+ dare.getItemName() + " AddUnit: "+dare.getAddUnit()+" removeUnit: "+dare.getAddUnit()
+            + "CurrentUnit" + dare.getCurrentUnit()+ "Time"+dare.getRecordTime());
         }
     }
 }

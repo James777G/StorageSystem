@@ -116,6 +116,19 @@
         order by RemoveUnit desc
         Limit #{pageNumberCal},#{pageSize};
     </select>
+    <select id="pageAskedCurrentUnitAscend" resultType="org.maven.apache.dateTransaction.DateTransaction">
+        SELECT  *
+        from DateTransactionTable
+        order by CurrentUnit asc
+        Limit #{pageNumberCal},#{pageSize};
+
+    </select>
+    <select id="pageAskedCurrentUnitDescend" resultType="org.maven.apache.dateTransaction.DateTransaction">
+        SELECT  *
+        from DateTransactionTable
+        order by CurrentUnit desc
+        Limit #{pageNumberCal},#{pageSize};
+    </select>
 
 
 </mapper>
