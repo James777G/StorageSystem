@@ -139,6 +139,9 @@ public class AppPage2Controller implements Initializable {
     @FXML
     protected MFXGenericDialog settingsDialog;
 
+    @FXML
+    private StackPane stackPaneForWarehouse;
+
 
     //pass the user from login page
     private final User user = DataUtils.currentUser;
@@ -175,8 +178,12 @@ public class AppPage2Controller implements Initializable {
         messageButton.setOpacity(0);
         searchTable.setPickOnBounds(false);
         searchTable.setOpacity(0);
+        stackPaneForWarehouse.setOpacity(0);
+        stackPaneForWarehouse.setPickOnBounds(false);
+        stackPaneForWarehouse.setVisible(false);
         setButtonList();
         setTransactionPane();
+        setWarehousePane();
         stackPane.setPickOnBounds(false);
         stackPane.setOpacity(0);
         stackPane.setVisible(false);
@@ -196,6 +203,41 @@ public class AppPage2Controller implements Initializable {
         });
         // load the menu VBox to drawer
         setDrawer();
+    }
+
+    @FXML
+    @SuppressWarnings("all")
+    private void onClickWarehouseButton(){
+        if (currentPage != stackPaneForWarehouse) {
+            if(currentPage == appPagePane){
+                appPagePane.setPickOnBounds(false);
+                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 1, 0);
+                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 0, 1);
+                fadeTransition.setOnFinished(event -> {
+                    fadeTransition1.play();
+                    appPagePane.setVisible(false);
+                    stackPaneForWarehouse.setPickOnBounds(true);
+                    stackPaneForWarehouse.setVisible(true);
+                });
+                fadeTransition.play();
+                currentPage = stackPaneForWarehouse;
+            }
+            if(currentPage == stackPane){
+                stackPane.setPickOnBounds(false);
+
+                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);
+                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 0, 1);
+                fadeTransition.setOnFinished(event -> {
+                    fadeTransition1.play();
+                    stackPane.setVisible(false);
+                    stackPaneForWarehouse.setPickOnBounds(true);
+                    stackPaneForWarehouse.setVisible(true);
+                });
+                fadeTransition.play();
+                currentPage = stackPaneForWarehouse;
+            }
+        }
+
     }
 
     @FXML
@@ -232,10 +274,19 @@ public class AppPage2Controller implements Initializable {
 
     private void setTransactionPane() {
         try {
-            AnchorPane dataPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/transactionPage_data.fxml")));
-            DataUtils.publicDataPane = dataPane;
+            DataUtils.publicDataPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/transactionPage_data.fxml")));
+            DataUtils.editCargoPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/editCargoPane.fxml")));
             AnchorPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/transactionPage.fxml")));
             stackPane.getChildren().add(pane);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void setWarehousePane(){
+        try{
+            AnchorPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/warehousePage.fxml")));
+            stackPaneForWarehouse.getChildren().add(pane);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

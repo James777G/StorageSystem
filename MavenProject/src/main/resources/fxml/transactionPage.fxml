@@ -421,7 +421,7 @@
             <AnchorPane fx:id="dataTransactionPage" prefHeight="380.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
             <AnchorPane layoutX="1107.0" layoutY="595.0" prefHeight="80.0" prefWidth="60.0" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="20.0">
                <children>
-                  <AnchorPane fx:id="addButton" layoutX="4.0" layoutY="8.0" onMouseEntered="#onEnterAddButton" onMouseExited="#onExitAddButton" prefHeight="60.0" prefWidth="60.0" styleClass="addPane" stylesheets="@../css/transactionPage.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="addButton" layoutX="4.0" layoutY="8.0" onMouseClicked="#onClickAddButton" onMouseEntered="#onEnterAddButton" onMouseExited="#onExitAddButton" prefHeight="60.0" prefWidth="60.0" styleClass="addPane" stylesheets="@../css/transactionPage.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <effect>
                         <DropShadow blurType="ONE_PASS_BOX">
                            <color>
@@ -443,6 +443,7 @@
                      </font>
                   </Label>
                </children></AnchorPane>
+            <AnchorPane fx:id="editCargoPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="130.0" />
          </children>
       </AnchorPane>
    </children>
