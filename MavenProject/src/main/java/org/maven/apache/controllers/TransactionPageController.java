@@ -262,7 +262,7 @@ public class TransactionPageController implements Initializable {
     private void setTransactionList(int currentPage){
         List<DateTransaction> list = dateTransactionService.pageAskedNOOrder(currentPage, 4);
         Platform.runLater(() -> {
-            for (int i = 0; i < 4; i++){
+            for (int i = 0; i < list.size(); i++){
                 staffLabelArray[i].setText(list.get(i).getStaffName());
                 orderLabelArray[i].setText(String.valueOf(list.get(i).getItemID()));
                 amountLabelArray[i].setText(String.valueOf(list.get(i).getCurrentUnit()));
@@ -273,26 +273,50 @@ public class TransactionPageController implements Initializable {
 
     @FXML
     private void onEnterAmount(){
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(sortByAmount, 200, 1.7);
-        scaleTransition.play();
+        sortByAmount.setScaleX(2);
+        sortByAmount.setScaleY(2);
     }
 
     @FXML
     private void onExitAmount(){
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(sortByAmount, 300, 1);
-        scaleTransition.play();
+        sortByAmount.setScaleX(1);
+        sortByAmount.setScaleY(1);
+    }
+
+    @FXML
+    private void onPressedAmount(){
+        sortByAmount.setScaleX(1.5);
+        sortByAmount.setScaleY(1.5);
+    }
+
+    @FXML
+    private void onReleaseAmount(){
+        sortByAmount.setScaleX(2);
+        sortByAmount.setScaleY(2);
     }
 
     @FXML
     private void onEnterDate(){
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(sortByDate, 200, 1.7);
-        scaleTransition.play();
+        sortByDate.setScaleX(2);
+        sortByDate.setScaleY(2);
     }
 
     @FXML
     private void onExitDate(){
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(sortByDate, 300, 1);
-        scaleTransition.play();
+        sortByDate.setScaleX(1);
+        sortByDate.setScaleY(1);
+    }
+
+    @FXML
+    private void onPressedDate(){
+        sortByDate.setScaleX(1.5);
+        sortByDate.setScaleY(1.5);
+    }
+
+    @FXML
+    private void onReleaseDate(){
+        sortByDate.setScaleX(2);
+        sortByDate.setScaleY(2);
     }
 
 

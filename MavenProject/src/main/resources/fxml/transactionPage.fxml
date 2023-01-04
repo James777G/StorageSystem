@@ -52,7 +52,7 @@
                         <Font name="Candara Bold" size="15.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="sortByAmount" fitHeight="13.0" fitWidth="13.0" layoutX="592.0" layoutY="21.0" onMouseEntered="#onEnterAmount" onMouseExited="#onExitAmount" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="590.0" AnchorPane.topAnchor="24.0">
+                  <ImageView fx:id="sortByAmount" fitHeight="13.0" fitWidth="13.0" layoutX="592.0" layoutY="21.0" onMouseEntered="#onEnterAmount" onMouseExited="#onExitAmount" onMousePressed="#onPressedAmount" onMouseReleased="#onReleaseAmount" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="590.0" AnchorPane.topAnchor="24.0">
                      <image>
                         <Image url="@../image/icons8-sort-down-100.png" />
                      </image>
@@ -69,7 +69,7 @@
                      </font>
                   </Label>
                   <Separator layoutX="706.0" layoutY="44.0" prefWidth="100.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="675.0" />
-                  <ImageView fx:id="sortByDate" fitHeight="13.0" fitWidth="13.0" layoutX="753.0" layoutY="24.0" onMouseEntered="#onEnterDate" onMouseExited="#onExitDate" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="755.0" AnchorPane.topAnchor="24.0">
+                  <ImageView fx:id="sortByDate" fitHeight="13.0" fitWidth="13.0" layoutX="753.0" layoutY="24.0" onMouseEntered="#onEnterDate" onMouseExited="#onExitDate" onMousePressed="#onPressedDate" onMouseReleased="#onReleaseDate" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="755.0" AnchorPane.topAnchor="24.0">
                      <image>
                         <Image url="@../image/icons8-sort-down-100.png" />
                      </image>
