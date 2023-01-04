@@ -135,7 +135,7 @@ public class MyTest {
 				DateTransactionService.class);
 		List<DateTransaction> dateTransaction = dateTransactionservice.pageAskedNOOrder(1, 4);
 		for (DateTransaction dare : dateTransaction) {
-			System.out.println(dare.getItemID() + dare.getItemName());
+			System.out.println(dare.getItemID() + dare.getItemName()+dare.getAddUnit());
 		}
 	}
 
@@ -144,15 +144,11 @@ public class MyTest {
 		ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
 		DateTransactionService dateTransactionservice = context.getBean("dateTransactionService",
 				DateTransactionService.class);
-		List<DateTransaction> dateTransaction = dateTransactionservice.pageAskedDateRemoveUnitDescend();
+		List<DateTransaction> dateTransaction = dateTransactionservice.pageAskedDateAddUnitDescend();
 		// List<DateTransaction> allDare = dateTransactionservice.selectAll();
 		// System.out.println("jingdfe"+allDare.size());
 		// System.out.println("shumu"+dateTransaction.size());
-		for (DateTransaction dare : dateTransaction) {
-			System.out.println(dare.getItemID() + " Name: " + dare.getItemName() + " AddUnit: " + dare.getAddUnit()
-					+ " removeUnit: " + dare.getAddUnit() + " CurrentUnit" + dare.getCurrentUnit() + " Time"
-					+ dare.getRecordTime());
-		}
+		System.out.println(dateTransaction.toString());
 	}
 
 	@Test
@@ -171,25 +167,12 @@ public class MyTest {
 		}
 	}
 
-	public static void main(String[] args) {
-		ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
-		DateTransactionService dateTransactionservice = context.getBean("dateTransactionService",
-				DateTransactionService.class);
-		List<DateTransaction> dateTransaction = dateTransactionservice.pageAskedCurrentUnitDescend(1, 4);
-		// List<DateTransaction> allDare = dateTransactionservice.selectAll();
-		// System.out.println("jingdfe"+allDare.size());
-		// System.out.println("shumu"+dateTransaction.size());
-		for (DateTransaction dare : dateTransaction) {
-			System.out.println(dare.getItemID() + " Name: " + dare.getItemName() + " AddUnit: " + dare.getAddUnit()
-					+ " removeUnit: " + dare.getAddUnit() + " CurrentUnit" + dare.getCurrentUnit() + " Time"
-					+ dare.getRecordTime());
-		}
-	}
 
-//    public static void main(String[] args) {
-//        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
-//        UserService userService = context.getBean("userService", UserService.class);
-//        List<User> users = userService.selectAll();
-//        System.out.println(users);
-//    }
+
+    public static void main(String[] args) {
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+        UserService userService = context.getBean("userService", UserService.class);
+        List<User> users = userService.selectAll();
+        System.out.println(users);
+    }
 }

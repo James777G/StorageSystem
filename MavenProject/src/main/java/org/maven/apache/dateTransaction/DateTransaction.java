@@ -13,6 +13,21 @@ public class DateTransaction {
 	private String StaffName;
 	private String Purpose;
 
+
+	@Override
+	public String toString() {
+		return "DateTransaction{" +
+				"ItemID=" + ItemID +
+				", ItemName='" + ItemName + '\'' +
+				", AddUnit=" + AddUnit +
+				", RemoveUnit=" + RemoveUnit +
+				", CurrentUnit=" + CurrentUnit +
+				", RecordTime='" + RecordTime + '\'' +
+				", StaffName='" + StaffName + '\'' +
+				", Purpose='" + Purpose + '\'' +
+				'}';
+	}
+
 	public String getPurpose() {
 		return Purpose;
 	}
