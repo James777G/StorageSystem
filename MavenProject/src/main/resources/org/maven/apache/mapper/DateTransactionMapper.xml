@@ -123,11 +123,28 @@
         Limit #{pageNumberCal},#{pageSize};
 
     </select>
+
     <select id="pageAskedCurrentUnitDescend" resultType="org.maven.apache.dateTransaction.DateTransaction">
         SELECT  *
         from DateTransactionTable
         order by CurrentUnit desc
         Limit #{pageNumberCal},#{pageSize};
+    </select>
+
+    <select id="pageAskedDateAddUnitDescend" resultType="org.maven.apache.dateTransaction.DateTransaction">
+        SELECT *
+        from DateTransactionTable
+        where RemoveUnit =0
+        order by RecordTime desc
+        limit 0,4;
+    </select>
+
+    <select id="pageAskedDateRemoveUnitDescend" resultType="org.maven.apache.dateTransaction.DateTransaction">
+        SELECT *
+        from DateTransactionTable
+        where AddUnit =0
+        order by RecordTime desc
+        limit 0,4;
     </select>
 
 

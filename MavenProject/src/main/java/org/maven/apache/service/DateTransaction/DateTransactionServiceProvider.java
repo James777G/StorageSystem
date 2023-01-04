@@ -153,6 +153,18 @@ public class DateTransactionServiceProvider implements DateTransactionService {
         return DateTransactionMapper.pageAskedCurrentUnitDescend(pageCal,pageSize);
     }
 
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public List<DateTransaction> pageAskedDateAddUnitDescend() {
+        return DateTransactionMapper.pageAskedDateAddUnitDescend();
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public List<DateTransaction> pageAskedDateRemoveUnitDescend() {
+        return DateTransactionMapper.pageAskedDateRemoveUnitDescend();
+    }
+
     private int pageNumberCal(int pageNumber, int pageSize) {
         if (pageSize < 0 || pageNumber < 0) {
             System.out.println("input should be greater than 0");
