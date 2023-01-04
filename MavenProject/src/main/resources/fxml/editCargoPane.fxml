@@ -11,8 +11,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="350.0" prefWidth="600.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.EditCargoPane">
+<AnchorPane prefHeight="350.0" prefWidth="600.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.EditCargoPageController">
    <children>
       <AnchorPane prefWidth="200.0" style="-fx-background-color: #223c40;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -48,7 +47,7 @@
             <Font name="Candara" size="15.0" />
          </font>
       </Label>
-      <JFXButton fx:id="takenSelectButton1" layoutX="208.0" layoutY="83.0" onAction="#onClickTakenSelectButton" prefHeight="30.0" prefWidth="75.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="105.0">
+      <JFXButton fx:id="takenSelectButton1" layoutX="208.0" layoutY="83.0" prefHeight="30.0" prefWidth="75.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="105.0">
          <graphic>
             <Label text="  Taken" textFill="WHITE">
                <font>
@@ -69,7 +68,7 @@
             </Label>
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="restockSelectButton1" layoutX="275.0" layoutY="73.0" onAction="#onClickRestockSelectButton" prefHeight="30.0" prefWidth="90.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" text="Button" textFill="#ffffff00" AnchorPane.leftAnchor="296.0" AnchorPane.topAnchor="105.0">
+      <JFXButton fx:id="restockSelectButton1" layoutX="275.0" layoutY="73.0" prefHeight="30.0" prefWidth="90.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" text="Button" textFill="#ffffff00" AnchorPane.leftAnchor="296.0" AnchorPane.topAnchor="105.0">
          <graphic>
             <Label text="  Restock" textFill="WHITE">
                <font>
@@ -140,7 +139,7 @@
             <Font name="Calibri Bold" size="15.0" />
          </font>
       </MFXTextField>
-      <JFXButton fx:id="takenSelectButton11" layoutX="519.0" layoutY="315.0" onAction="#onClickTakenSelectButton" prefHeight="30.0" prefWidth="143.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="10.0">
+      <JFXButton fx:id="takenSelectButton11" layoutX="519.0" layoutY="315.0" prefHeight="30.0" prefWidth="143.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="10.0">
          <graphic>
             <Label prefHeight="18.0" prefWidth="128.0" text="               Post" textFill="WHITE">
                <font>

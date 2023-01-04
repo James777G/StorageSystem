@@ -17,8 +17,9 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
    <children>
+      <StackPane fx:id="stackPaneForWarehouse" layoutX="10.0" layoutY="10.0" prefHeight="640.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <StackPane fx:id="stackPane" prefHeight="640.0" prefWidth="1200.0" AnchorPane.topAnchor="60.0" />
       <AnchorPane fx:id="appPagePane" onMouseClicked="#onClickAppPagePane" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;">
          <children>
@@ -387,7 +388,7 @@
                   <Font name="Candara Bold" size="12.0" />
                </font>
             </Label>
-            <JFXButton fx:id="warehouseButton" layoutX="443.0" layoutY="9.0" onMouseEntered="#enterWarehouseButton" onMouseExited="#exitWarehouseButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
+            <JFXButton fx:id="warehouseButton" layoutX="443.0" layoutY="9.0" onAction="#onClickWarehouseButton" onMouseEntered="#enterWarehouseButton" onMouseExited="#exitWarehouseButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
             <JFXButton fx:id="transactionButton" layoutX="600.0" layoutY="10.0" onAction="#onTransactionPage" onMouseEntered="#enterTransactionButton" onMouseExited="#exitTransactionButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
             <JFXButton fx:id="staffButton" layoutX="780.0" layoutY="4.0" onMouseEntered="#enterStaffButton" onMouseExited="#exitStaffButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
             <JFXButton fx:id="messageButton" layoutX="899.0" layoutY="8.0" onMouseEntered="#enterMessageButton" onMouseExited="#exitMessageButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
