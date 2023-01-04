@@ -158,4 +158,16 @@ System.out.println(dateTransactionservice.getCurrentTime());
             System.out.println(dare.getItemID() + " Name: "+ dare.getItemName() + " AddUnit: "+dare.getAddUnit()+" removeUnit: "+dare.getAddUnit());
         }
     }
+
+    @Test
+    public void test100(){
+
+    }
+
+    public static void main(String[] args) {
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+        UserService userService = context.getBean("userService", UserService.class);
+        List<User> users = userService.selectAll();
+        System.out.println(users);
+    }
 }
