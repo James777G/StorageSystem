@@ -218,7 +218,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <MFXPagination fx:id="transactionPagination" layoutX="553.0" layoutY="600.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="556.0" />
+            <MFXPagination fx:id="transactionPagination" layoutX="553.0" layoutY="600.0" onMouseClicked="#onClickPagination" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="556.0" />
             <AnchorPane layoutX="150.0" layoutY="468.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="140.0" AnchorPane.leftAnchor="150.0">
                <children>
                   <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="20.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="12.0">

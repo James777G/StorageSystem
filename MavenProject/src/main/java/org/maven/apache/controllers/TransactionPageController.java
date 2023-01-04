@@ -4,6 +4,9 @@ import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXPagination;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
@@ -12,12 +15,14 @@ import javafx.scene.layout.AnchorPane;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
+import org.maven.apache.service.user.UserService;
 import org.maven.apache.utils.ScaleUtils;
 import org.maven.apache.utils.TranslateUtils;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
 
 public class TransactionPageController implements Initializable {
 
@@ -34,8 +39,6 @@ public class TransactionPageController implements Initializable {
     private boolean isRunning = false;
 
     private final DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
-
-    private int numOfPages;
 
     @FXML
     private AnchorPane movingLinePane;
@@ -94,9 +97,8 @@ public class TransactionPageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         addButton.setCursor(Cursor.HAND);
         initializeLabels();
-        numOfPages = setPaginationPages();
-        setTransactionList(numOfPages);
-
+        setPaginationPages();
+        setTransactionList(1);
     }
 
     @FXML
@@ -224,7 +226,7 @@ public class TransactionPageController implements Initializable {
     /**
      * set how many pages do we need in total
      */
-    private int setPaginationPages(){
+    private void setPaginationPages(){
         int numOfPages;
         List<DateTransaction> transactionList = dateTransactionService.selectAll();
         if ((transactionList.size() % 4) != 0 ){
@@ -235,20 +237,31 @@ public class TransactionPageController implements Initializable {
             numOfPages = transactionList.size() / 4;
         }
         transactionPagination.setMaxPage(numOfPages);
-        return numOfPages;
+    }
+
+    /**
+     * get the current page number when pagination is clicked
+     */
+    @FXML
+    private void onClickPagination(){
+        int currentPage = transactionPagination.getCurrentPage();
+        ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
+        threadPoolExecutor.execute(() ->setTransactionList(currentPage));
     }
 
     /**
      * set the transaction list with no order
      */
-    private void setTransactionList(int numOfPages){
-        List<DateTransaction> list = dateTransactionService.pageAskedNOOrder(1, 4);
-        for (int i = 0; i < 4; i++){
-            staffLabelArray[i].setText(list.get(i).getStaffName());
-            orderLabelArray[i].setText(String.valueOf(list.get(i).getItemID()));
-            amountLabelArray[i].setText(String.valueOf(list.get(i).getCurrentUnit()));
-            dateLabelArray[i].setText(list.get(i).getRecordTime());
-        }
+    private void setTransactionList(int currentPage){
+        List<DateTransaction> list = dateTransactionService.pageAskedNOOrder(currentPage, 4);
+        Platform.runLater(() -> {
+            for (int i = 0; i < 4; i++){
+                staffLabelArray[i].setText(list.get(i).getStaffName());
+                orderLabelArray[i].setText(String.valueOf(list.get(i).getItemID()));
+                amountLabelArray[i].setText(String.valueOf(list.get(i).getCurrentUnit()));
+                dateLabelArray[i].setText(list.get(i).getRecordTime());
+            }
+        });
     }
 
 
