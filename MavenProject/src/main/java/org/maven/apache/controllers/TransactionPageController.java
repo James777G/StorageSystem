@@ -90,6 +90,7 @@ public class TransactionPageController implements Initializable {
     @FXML
     private AnchorPane cargoPage;
 
+    @FXML
     private MFXPagination transactionPagination;
 
     @FXML
