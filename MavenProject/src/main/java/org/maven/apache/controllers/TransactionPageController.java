@@ -88,7 +88,7 @@ public class TransactionPageController implements Initializable {
     private Label staffLabel1, staffLabel2, staffLabel3, staffLabel4;
 
     @FXML
-    private Label orderLabel1, orderLabel2, orderLabel3, orderLabel4; //order ID
+    private Label idLabel1, idLabel2, idLabel3, idLabel4; //order ID
 
     @FXML
     private Label amountLabel1, amountLabel2, amountLabel3, amountLabel4;
@@ -116,7 +116,7 @@ public class TransactionPageController implements Initializable {
 
     private Label[] staffLabelArray = new Label[4];
 
-    private Label[] orderLabelArray = new Label[4];
+    private Label[] idLabelArray = new Label[4];
 
     private Label[] amountLabelArray = new Label[4];
 
@@ -167,7 +167,7 @@ public class TransactionPageController implements Initializable {
     }
 
     @FXML
-    private void onClickAddButton(){
+    private void onClickAddButton() {
         editCargoPane.setOpacity(1);
         editCargoPane.setPickOnBounds(true);
         editCargoPane.setVisible(true);
@@ -268,151 +268,161 @@ public class TransactionPageController implements Initializable {
         scaleTransition.play();
     }
 
-        /**
-         * initialize the labels which can be stored in arrays
-         */
-        private void initializeLabels () {
-            // initialize staff labels
-            amountLabelArray[0] = amountLabel1;
-            amountLabelArray[1] = amountLabel2;
-            amountLabelArray[2] = amountLabel3;
-            amountLabelArray[3] = amountLabel4;
-            // initialize record time labels
-            dateLabelArray[0] = dateLabel1;
-            dateLabelArray[1] = dateLabel2;
-            dateLabelArray[2] = dateLabel3;
-            dateLabelArray[3] = dateLabel4;
-        }
+    /**
+     * initialize the labels which can be stored in arrays
+     */
+    private void initializeLabels() {
+        // initialize staff labels
+        staffLabelArray[0] = staffLabel1;
+        staffLabelArray[1] = staffLabel2;
+        staffLabelArray[2] = staffLabel3;
+        staffLabelArray[3] = staffLabel4;
+        // initialize transaction id labels
+        idLabelArray[0] = idLabel1;
+        idLabelArray[1] = idLabel2;
+        idLabelArray[2] = idLabel3;
+        idLabelArray[3] = idLabel4;
+        // initialize amount labels
+        amountLabelArray[0] = amountLabel1;
+        amountLabelArray[1] = amountLabel2;
+        amountLabelArray[2] = amountLabel3;
+        amountLabelArray[3] = amountLabel4;
+        // initialize record time labels
+        dateLabelArray[0] = dateLabel1;
+        dateLabelArray[1] = dateLabel2;
+        dateLabelArray[2] = dateLabel3;
+        dateLabelArray[3] = dateLabel4;
+    }
 
-        /**
-         * set how many pages do we need in total
-         */
-        private void setPaginationPages () {
-            int numOfPages;
-            List<DateTransaction> transactionList = dateTransactionService.selectAll();
-            if ((transactionList.size() % 4) != 0) {
-                // if the list does not contain exact number of pages
-                numOfPages = (transactionList.size() / 4) + 1;
-            } else {
-                // if the list contains exact number of pages
-                numOfPages = transactionList.size() / 4;
-            }
-            transactionPagination.setMaxPage(numOfPages);
+    /**
+     * set how many pages do we need in total
+     */
+    private void setPaginationPages() {
+        int numOfPages;
+        List<DateTransaction> transactionList = dateTransactionService.selectAll();
+        if ((transactionList.size() % 4) != 0) {
+            // if the list does not contain exact number of pages
+            numOfPages = (transactionList.size() / 4) + 1;
+        } else {
+            // if the list contains exact number of pages
+            numOfPages = transactionList.size() / 4;
         }
+        transactionPagination.setMaxPage(numOfPages);
+    }
 
-        /**
-         * get the current page number when pagination is clicked
-         */
-        @FXML
-        private void onClickPagination () {
-            int currentPage = transactionPagination.getCurrentPage();
-            ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
-            threadPoolExecutor.execute(() -> setTransactionList(currentPage));
-        }
+    /**
+     * get the current page number when pagination is clicked
+     */
+    @FXML
+    private void onClickPagination() {
+        int currentPage = transactionPagination.getCurrentPage();
+        ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
+        threadPoolExecutor.execute(() -> setTransactionList(currentPage));
+    }
 
-        /**
-         * set the transaction list by a specific condition
-         */
-        private void setTransactionList (int currentPage){
-            // sort the list by a specific condition
+    /**
+     * set the transaction list by a specific condition
+     */
+    private void setTransactionList(int currentPage) {
+        // sort the list by a specific condition
 //            switch(sortBy){
 //                case ALL:
-                    sortedList = dateTransactionService.pageAskedNOOrder(currentPage, 4);
+        sortedList = dateTransactionService.pageAskedNOOrder(currentPage, 4);
 //                case DATEASCEND:
 //                    sortedList = dateTransactionService.pageAskedDateAscend(currentPage, 4);
 //                case DATEDESCEND:
 //                    sortedList = dateTransactionService.pageAskedDateDescend(currentPage, 4);
 //            }
-            Platform.runLater(() -> {
-                // set non-empty labels
-                for (int i = 0; i < sortedList.size(); i++) {
-                    staffLabelArray[i].setText(sortedList.get(i).getStaffName());
-                    orderLabelArray[i].setText(String.valueOf(sortedList.get(i).getItemID()));
-                    amountLabelArray[i].setText(String.valueOf(sortedList.get(i).getCurrentUnit()));
-                    dateLabelArray[i].setText(sortedList.get(i).getRecordTime());
+        Platform.runLater(() -> {
+            // set non-empty labels
+            for (int i = 0; i < sortedList.size(); i++) {
+                staffLabelArray[i].setText(sortedList.get(i).getStaffName());
+                idLabelArray[i].setText(String.valueOf(sortedList.get(i).getItemID()));
+                amountLabelArray[i].setText(String.valueOf(sortedList.get(i).getCurrentUnit()));
+                dateLabelArray[i].setText(sortedList.get(i).getRecordTime());
+            }
+            // set empty labels
+            if (sortedList.size() != 4) {
+                for (int j = 3; j >= sortedList.size(); j--) {
+                    staffLabelArray[j].setText("");
+                    idLabelArray[j].setText("");
+                    amountLabelArray[j].setText("");
+                    dateLabelArray[j].setText("");
                 }
-                // set empty labels
-                if (sortedList.size() != 4){
-                    for (int j = 3; j >= sortedList.size(); j--){
-                        staffLabelArray[j].setText("");
-                        orderLabelArray[j].setText("");
-                        amountLabelArray[j].setText("");
-                        dateLabelArray[j].setText("");
-                    }
-                }
-            });
-        }
+            }
+        });
+    }
 
     /**
      * sort the list by amount (current unit, added unit, removed unit)
      */
     @FXML
-        private void onClickAmount(){
+    private void onClickAmount() {
 
-        }
+    }
 
-        @FXML
-        private void onEnterAmount () {
-            sortByAmount.setScaleX(2);
-            sortByAmount.setScaleY(2);
-        }
+    @FXML
+    private void onEnterAmount() {
+        sortByAmount.setScaleX(2);
+        sortByAmount.setScaleY(2);
+    }
 
-        @FXML
-        private void onExitAmount () {
-            sortByAmount.setScaleX(1);
-            sortByAmount.setScaleY(1);
-        }
+    @FXML
+    private void onExitAmount() {
+        sortByAmount.setScaleX(1);
+        sortByAmount.setScaleY(1);
+    }
 
-        @FXML
-        private void onPressedAmount () {
-            sortByAmount.setScaleX(1.5);
-            sortByAmount.setScaleY(1.5);
-        }
+    @FXML
+    private void onPressedAmount() {
+        sortByAmount.setScaleX(1.5);
+        sortByAmount.setScaleY(1.5);
+    }
 
-        @FXML
-        private void onReleaseAmount () {
-            sortByAmount.setScaleX(2);
-            sortByAmount.setScaleY(2);
-        }
+    @FXML
+    private void onReleaseAmount() {
+        sortByAmount.setScaleX(2);
+        sortByAmount.setScaleY(2);
+    }
 
     /**
      * sort the list by date
      */
     @FXML
-        private void onClickDate(){
-            if (isAscend){
-                sortBy = SortBy.DATEASCEND;
-                isAscend = false;
-                onClickPagination();
-            }else{
-                sortBy = SortBy.DATEDESCEND;
-                isAscend = true;
-                onClickPagination();
-            }
+    private void onClickDate() {
+        if (isAscend) {
+            sortBy = SortBy.DATEASCEND;
+            isAscend = false;
+            onClickPagination();
+        } else {
+            sortBy = SortBy.DATEDESCEND;
+            isAscend = true;
+            onClickPagination();
         }
+    }
 
-        @FXML
-        private void onEnterDate () {
-            sortByDate.setScaleX(2);
-            sortByDate.setScaleY(2);
-        }
+    @FXML
+    private void onEnterDate() {
+        sortByDate.setScaleX(2);
+        sortByDate.setScaleY(2);
+    }
 
-        @FXML
-        private void onExitDate () {
-            sortByDate.setScaleX(1);
-            sortByDate.setScaleY(1);
-        }
+    @FXML
+    private void onExitDate() {
+        sortByDate.setScaleX(1);
+        sortByDate.setScaleY(1);
+    }
 
-        @FXML
-        private void onPressedDate () {
-            sortByDate.setScaleX(1.5);
-            sortByDate.setScaleY(1.5);
-        }
+    @FXML
+    private void onPressedDate() {
+        sortByDate.setScaleX(1.5);
+        sortByDate.setScaleY(1.5);
+    }
 
-        @FXML
-        private void onReleaseDate () {
-            sortByDate.setScaleX(2);
-            sortByDate.setScaleY(2);
-        }
+    @FXML
+    private void onReleaseDate() {
+        sortByDate.setScaleX(2);
+        sortByDate.setScaleY(2);
+    }
 
 }

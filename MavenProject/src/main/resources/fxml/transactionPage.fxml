@@ -185,7 +185,7 @@
                               <Font name="Candara Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="orderLabel1" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+                        <Label fx:id="idLabel1" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
                            <font>
                               <Font name="Candara Bold" size="19.0" />
                            </font>
@@ -230,7 +230,7 @@
                               <Font name="Candara Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="orderLabel2" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+                        <Label fx:id="idLabel2" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
                            <font>
                               <Font name="Candara Bold" size="19.0" />
                            </font>
@@ -274,7 +274,7 @@
                               <Font name="Candara Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="orderLabel3" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+                        <Label fx:id="idLabel3" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
                            <font>
                               <Font name="Candara Bold" size="19.0" />
                            </font>
@@ -318,7 +318,7 @@
                               <Font name="Candara Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="orderLabel4" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+                        <Label fx:id="idLabel4" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
                            <font>
                               <Font name="Candara Bold" size="19.0" />
                            </font>
