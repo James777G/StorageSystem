@@ -53,4 +53,42 @@ public interface ItemService {
      */
     void deleteByIds(int[] ids);
 
+    /**
+     * separate the item with no order in page asked
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    List<Item> pageAskedNOOrder(int pageNumber, int pageSize);
+
+    /**
+     * separate the item with unit by ascending order
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    List<Item> pageAskedUnitAscend(int pageNumber, int pageSize);
+    /**
+     * separate the item with unit by descending order
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    List<Item> pageAskedUnitDescend(int pageNumber, int pageSize);
+    /**
+     * separate the item with ItemID by ascending order
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    List<Item> pageAskedItemIDAscend(int pageNumber, int pageSize);
+    /**
+     * separate the item with ItemID by descending order
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    List<Item> pageAskedItemIDDescend(int pageNumber, int pageSize);
+
+
 }

@@ -36,7 +36,6 @@
         </if>
     </select>
 
-
     <insert id="add" useGeneratedKeys="true" keyProperty="ItemID">
 
         insert into ItemTable(ItemName, unit)
@@ -82,6 +81,39 @@
 
 
     </delete>
+
+    <select id="pageAskedNOOrder" resultType="org.maven.apache.item.Item">
+        select * from ItemTable
+
+        Limit #{pageNumberCal},#{pageSize};
+    </select>
+
+    <select id="pageAskedUnitAscend" resultType="org.maven.apache.item.Item">
+        SELECT  *
+        from ItemTable
+        order by Unit asc
+        Limit #{pageNumberCal},#{pageSize};
+    </select>
+
+    <select id="pageAskedUnitDescend" resultType="org.maven.apache.item.Item">
+        SELECT  *
+        from ItemTable
+        order by Unit desc
+        Limit #{pageNumberCal},#{pageSize};
+    </select>
+
+    <select id="pageAskedItemIDAscend" resultType="org.maven.apache.item.Item">
+        SELECT  *
+        from ItemTable
+        order by ItemID asc
+        Limit #{pageNumberCal},#{pageSize};
+    </select>
+    <select id="pageAskedItemIDDescend" resultType="org.maven.apache.item.Item">
+        SELECT  *
+        from ItemTable
+        order by ItemID desc
+        Limit #{pageNumberCal},#{pageSize};
+    </select>
 
 
 </mapper>

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
+import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.item.Item;
@@ -167,6 +168,14 @@ public class MyTest {
 		}
 	}
 
+	@Test
+	public void test11() {
+		ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+		ItemService itemService = context.getBean("itemService", ItemService.class);
+		//List<Item> itemList = itemService.pageAskedItemIDAscend(1,4);
+		List<Item> itemList = itemService.pageAskedUnitDescend(1,4);
+		System.out.println(itemList);
+	}
 
 
     public static void main(String[] args) {

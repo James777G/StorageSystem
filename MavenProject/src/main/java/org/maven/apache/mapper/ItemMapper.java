@@ -3,6 +3,7 @@ package org.maven.apache.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.item.Item;
 import org.springframework.stereotype.Component;
 
@@ -70,5 +71,44 @@ public interface ItemMapper {
 	 * @param ids
 	 */
 	void deleteByIds(int[] ids);
+
+	/**
+	 * separate the item with no order in page asked
+	 * @param pageNumberCal
+	 * @param pageSize
+	 * @return
+	 */
+	List<Item> pageAskedNOOrder(@Param("pageNumberCal") int pageNumberCal , @Param("pageSize") int pageSize);
+
+	/**
+	 * separate the item with unit by ascending order
+	 * @param pageNumberCal
+	 * @param pageSize
+	 * @return
+	 */
+	List<Item> pageAskedUnitAscend(@Param("pageNumberCal") int pageNumberCal ,@Param("pageSize") int pageSize);
+	/**
+	 * separate the item with unit by descending order
+	 * @param pageNumberCal
+	 * @param pageSize
+	 * @return
+	 */
+	List<Item> pageAskedUnitDescend(@Param("pageNumberCal") int pageNumberCal ,@Param("pageSize") int pageSize);
+	/**
+	 * separate the item with ItemID by ascending order
+	 * @param pageNumberCal
+	 * @param pageSize
+	 * @return
+	 */
+	List<Item> pageAskedItemIDAscend(@Param("pageNumberCal") int pageNumberCal ,@Param("pageSize") int pageSize);
+	/**
+	 * separate the item with ItemID by descending order
+	 * @param pageNumberCal
+	 * @param pageSize
+	 * @return
+	 */
+	List<Item> pageAskedItemIDDescend(@Param("pageNumberCal") int pageNumberCal ,@Param("pageSize") int pageSize);
+
+
 
 }
