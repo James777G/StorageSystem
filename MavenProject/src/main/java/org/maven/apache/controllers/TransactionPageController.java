@@ -29,13 +29,11 @@ import java.util.concurrent.ExecutorService;
 public class TransactionPageController implements Initializable {
 
     enum ButtonSelected {
-        ALL,
-        TAKEN,
-        RESTOCK
+        ALL, TAKEN, RESTOCK
     }
 
     enum SortBy {
-        ALL, DATEASCEND, DATEDESCEND
+        ALL, DATEASCEND, DATEDESCEND, AMOUNTASCEND, AMOUNTDESCEND
     }
 
     private Node currentPage;
@@ -48,7 +46,9 @@ public class TransactionPageController implements Initializable {
 
     private boolean isRunning = false;
 
-    private boolean isAscend = false;
+    private boolean isDateAscend = false;
+
+    private boolean isAmountAscend = false;
 
     private final DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
 
@@ -311,28 +311,33 @@ public class TransactionPageController implements Initializable {
     }
 
     /**
-     * get the current page number when pagination is clicked
+     * set the sorting property
      */
-    @FXML
-    private void onClickPagination() {
-        int currentPage = transactionPagination.getCurrentPage();
-        ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
-        threadPoolExecutor.execute(() -> setTransactionList(currentPage));
+    private void setSortCondition(int currentPage){
+        switch (sortBy) {
+            case ALL:
+                sortedList = dateTransactionService.pageAskedNOOrder(currentPage, 4);
+                break;
+            case DATEASCEND:
+                sortedList = dateTransactionService.pageAskedDateAscend(currentPage, 4);
+                break;
+            case DATEDESCEND:
+                sortedList = dateTransactionService.pageAskedDateDescend(currentPage, 4);
+                break;
+            case AMOUNTASCEND:
+                sortedList = dateTransactionService.pageAskedCurrentUnitAscend(currentPage, 4);
+                break;
+            case AMOUNTDESCEND:
+                sortedList = dateTransactionService.pageAskedCurrentUnitDescend(currentPage, 4);
+                break;
+        }
     }
 
     /**
-     * set the transaction list by a specific condition
+     * set the transaction list by a specific property
      */
     private void setTransactionList(int currentPage) {
-        // sort the list by a specific condition
-//            switch(sortBy){
-//                case ALL:
-        sortedList = dateTransactionService.pageAskedNOOrder(currentPage, 4);
-//                case DATEASCEND:
-//                    sortedList = dateTransactionService.pageAskedDateAscend(currentPage, 4);
-//                case DATEDESCEND:
-//                    sortedList = dateTransactionService.pageAskedDateDescend(currentPage, 4);
-//            }
+        setSortCondition(currentPage);
         Platform.runLater(() -> {
             // set non-empty labels
             for (int i = 0; i < sortedList.size(); i++) {
@@ -354,10 +359,29 @@ public class TransactionPageController implements Initializable {
     }
 
     /**
+     * show the content of transaction list from current page when the pagination is clicked
+     */
+    @FXML
+    private void onClickPagination() {
+        int currentPage = transactionPagination.getCurrentPage();
+        ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
+        threadPoolExecutor.execute(() -> setTransactionList(currentPage));
+    }
+
+    /**
      * sort the list by amount (current unit, added unit, removed unit)
      */
     @FXML
     private void onClickAmount() {
+        if (isAmountAscend) {
+            sortBy = SortBy.AMOUNTASCEND;
+            isAmountAscend = false;
+            onClickPagination();
+        } else {
+            sortBy = SortBy.AMOUNTDESCEND;
+            isAmountAscend = true;
+            onClickPagination();
+        }
 
     }
 
@@ -390,13 +414,13 @@ public class TransactionPageController implements Initializable {
      */
     @FXML
     private void onClickDate() {
-        if (isAscend) {
+        if (isDateAscend) {
             sortBy = SortBy.DATEASCEND;
-            isAscend = false;
+            isDateAscend = false;
             onClickPagination();
         } else {
             sortBy = SortBy.DATEDESCEND;
-            isAscend = true;
+            isDateAscend = true;
             onClickPagination();
         }
     }
