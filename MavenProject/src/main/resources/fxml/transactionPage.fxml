@@ -210,7 +210,7 @@
                               <Font name="Candara Bold" size="19.0" />
                            </font>
                         </Label>
-                        <Label layoutX="41.0" layoutY="16.0" prefHeight="20.0" prefWidth="43.0" style="-fx-background-color: #feccc9; -fx-background-radius: 5;" text=" Taken" textFill="#ff4137" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="15.0">
+                        <Label fx:id="statusLabel1" layoutX="41.0" layoutY="16.0" prefHeight="20.0" prefWidth="82.0" style="-fx-background-color: grey; -fx-background-radius: 5;" text=" Current Unit" textFill="WHITE" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="15.0">
                            <font>
                               <Font name="Candara Bold" size="14.0" />
                            </font>
@@ -255,7 +255,7 @@
                               <Font name="Candara Bold" size="19.0" />
                            </font>
                         </Label>
-                        <Label layoutX="40.0" layoutY="16.0" prefHeight="20.0" prefWidth="43.0" style="-fx-background-color: #feccc9; -fx-background-radius: 5;" text=" Taken" textFill="#ff4137" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="15.0">
+                        <Label fx:id="statusLabel2" layoutX="40.0" layoutY="16.0" prefHeight="20.0" prefWidth="82.0" style="-fx-background-color: grey; -fx-background-radius: 5;" text=" Current Unit" textFill="WHITE" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="15.0">
                            <font>
                               <Font name="Candara Bold" size="14.0" />
                            </font>
@@ -299,7 +299,7 @@
                               <Font name="Candara Bold" size="19.0" />
                            </font>
                         </Label>
-                        <Label layoutX="41.0" layoutY="15.0" prefHeight="20.0" prefWidth="55.0" style="-fx-background-color: #ddeab1#c7ddb5; -fx-background-radius: 5;" text=" Restock" textFill="#759751" AnchorPane.leftAnchor="36.0" AnchorPane.topAnchor="15.0">
+                        <Label fx:id="statusLabel3" layoutX="41.0" layoutY="15.0" prefHeight="20.0" prefWidth="82.0" style="-fx-background-color: grey; -fx-background-radius: 5;" text=" Current Unit" textFill="WHITE" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="15.0">
                            <font>
                               <Font name="Candara Bold" size="14.0" />
                            </font>
@@ -343,7 +343,7 @@
                               <Font name="Candara Bold" size="19.0" />
                            </font>
                         </Label>
-                        <Label layoutX="23.0" layoutY="19.0" prefHeight="20.0" prefWidth="55.0" style="-fx-background-color: #ddeab1#c7ddb5; -fx-background-radius: 5;" text=" Restock" textFill="#759751" AnchorPane.leftAnchor="36.0" AnchorPane.topAnchor="15.0">
+                        <Label fx:id="statusLabel4" layoutX="23.0" layoutY="19.0" prefHeight="20.0" prefWidth="82.0" style="-fx-background-color: grey; -fx-background-radius: 5;" text=" Current Unit" textFill="WHITE" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="15.0">
                            <font>
                               <Font name="Candara Bold" size="14.0" />
                            </font>

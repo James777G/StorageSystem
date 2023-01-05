@@ -29,13 +29,11 @@ import java.util.concurrent.ExecutorService;
 public class TransactionPageController implements Initializable {
 
     enum ButtonSelected {
-        ALL,
-        TAKEN,
-        RESTOCK
+        ALL, TAKEN, RESTOCK
     }
 
     enum SortBy {
-        ALL, DATEASCEND, DATEDESCEND
+        ALL, DATEASCEND, DATEDESCEND, ALLASCEND, ALLDESCEND, RESTOCKASCEND, RESTOCKDESCEND, TAKENASCEND, TAKENDDESCEND
     }
 
     private Node currentPage;
@@ -48,7 +46,19 @@ public class TransactionPageController implements Initializable {
 
     private boolean isRunning = false;
 
-    private boolean isAscend = false;
+    private boolean isDateAscend = false;
+
+    private boolean isAmountAscend = false;
+
+    private boolean isAll = true;
+
+    private boolean isRestock = false;
+
+    private boolean isTaken = false;
+
+    private boolean isRestockAscend = false;
+
+    private boolean isTakenAscend = false;
 
     private final DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
 
@@ -97,6 +107,9 @@ public class TransactionPageController implements Initializable {
     private Label dateLabel1, dateLabel2, dateLabel3, dateLabel4;
 
     @FXML
+    private Label statusLabel1, statusLabel2, statusLabel3, statusLabel4;
+
+    @FXML
     private AnchorPane dataTransactionPage;
 
     @FXML
@@ -122,6 +135,8 @@ public class TransactionPageController implements Initializable {
 
     private Label[] dateLabelArray = new Label[4];
 
+    private Label[] statusLabelArray = new Label[4];
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         editCargoPane.getChildren().add(DataUtils.editCargoPane);
@@ -137,6 +152,9 @@ public class TransactionPageController implements Initializable {
         dataTransactionPage.setPickOnBounds(false);
         dataTransactionPage.setOpacity(0);
         dataTransactionPage.setVisible(false);
+        allSelectButton.setDisable(true);
+        restockSelectButton.setDisable(false);
+        takenSelectButton.setDisable(false);
     }
 
     @FXML
@@ -216,6 +234,13 @@ public class TransactionPageController implements Initializable {
                 buttonSelected = ButtonSelected.ALL;
                 break;
         }
+        isAll = true;
+        isRestock = false;
+        isTaken = false;
+        allSelectButton.setDisable(true);
+        restockSelectButton.setDisable(false);
+        takenSelectButton.setDisable(false);
+        onClickPagination();
     }
 
     @FXML
@@ -234,6 +259,13 @@ public class TransactionPageController implements Initializable {
                 buttonSelected = ButtonSelected.TAKEN;
                 break;
         }
+        isAll = false;
+        isRestock = false;
+        isTaken = true;
+        allSelectButton.setDisable(false);
+        restockSelectButton.setDisable(false);
+        takenSelectButton.setDisable(true);
+        onClickPagination();
     }
 
     @FXML
@@ -252,6 +284,13 @@ public class TransactionPageController implements Initializable {
             case RESTOCK:
                 break;
         }
+        isAll = false;
+        isRestock = true;
+        isTaken = false;
+        allSelectButton.setDisable(false);
+        restockSelectButton.setDisable(true);
+        takenSelectButton.setDisable(false);
+        onClickPagination();
     }
 
     @FXML
@@ -292,6 +331,11 @@ public class TransactionPageController implements Initializable {
         dateLabelArray[1] = dateLabel2;
         dateLabelArray[2] = dateLabel3;
         dateLabelArray[3] = dateLabel4;
+        // initialize status labels
+        statusLabelArray[0] = statusLabel1;
+        statusLabelArray[1] = statusLabel2;
+        statusLabelArray[2] = statusLabel3;
+        statusLabelArray[3] = statusLabel4;
     }
 
     /**
@@ -311,34 +355,57 @@ public class TransactionPageController implements Initializable {
     }
 
     /**
-     * get the current page number when pagination is clicked
+     * set the sorting property
      */
-    @FXML
-    private void onClickPagination() {
-        int currentPage = transactionPagination.getCurrentPage();
-        ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
-        threadPoolExecutor.execute(() -> setTransactionList(currentPage));
+    private void setSortCondition(int currentPage){
+        switch (sortBy) {
+            case ALL:
+                sortedList = dateTransactionService.pageAskedNOOrder(currentPage, 4);
+                break;
+            case DATEASCEND:
+                sortedList = dateTransactionService.pageAskedDateAscend(currentPage, 4);
+                break;
+            case DATEDESCEND:
+                sortedList = dateTransactionService.pageAskedDateDescend(currentPage, 4);
+                break;
+            case ALLASCEND:
+                sortedList = dateTransactionService.pageAskedCurrentUnitAscend(currentPage, 4);
+                break;
+            case ALLDESCEND:
+                sortedList = dateTransactionService.pageAskedCurrentUnitDescend(currentPage, 4);
+                break;
+            case RESTOCKASCEND:
+                sortedList = dateTransactionService.pageAskedAddUnitAscend(currentPage, 4);
+                break;
+            case RESTOCKDESCEND:
+                sortedList = dateTransactionService.pageAskedAddUnitDescend(currentPage, 4);
+                break;
+            case TAKENASCEND:
+                sortedList = dateTransactionService.pageAskedRemoveUnitAscend(currentPage, 4);
+                break;
+            case TAKENDDESCEND:
+                sortedList = dateTransactionService.pageAskedRemoveUnitDescend(currentPage, 4);
+                break;
+        }
     }
 
     /**
-     * set the transaction list by a specific condition
+     * set the transaction list by a specific property
      */
     private void setTransactionList(int currentPage) {
-        // sort the list by a specific condition
-//            switch(sortBy){
-//                case ALL:
-        sortedList = dateTransactionService.pageAskedNOOrder(currentPage, 4);
-//                case DATEASCEND:
-//                    sortedList = dateTransactionService.pageAskedDateAscend(currentPage, 4);
-//                case DATEDESCEND:
-//                    sortedList = dateTransactionService.pageAskedDateDescend(currentPage, 4);
-//            }
+        setSortCondition(currentPage);
         Platform.runLater(() -> {
             // set non-empty labels
             for (int i = 0; i < sortedList.size(); i++) {
                 staffLabelArray[i].setText(sortedList.get(i).getStaffName());
                 idLabelArray[i].setText(String.valueOf(sortedList.get(i).getItemID()));
-                amountLabelArray[i].setText(String.valueOf(sortedList.get(i).getCurrentUnit()));
+                if (isAll && !isRestock && !isTaken){
+                    amountLabelArray[i].setText(String.valueOf(sortedList.get(i).getCurrentUnit()));
+                }else if (!isAll && isRestock && !isTaken){
+                    amountLabelArray[i].setText(String.valueOf(sortedList.get(i).getAddUnit()));
+                }else if (!isAll && !isRestock && isTaken){
+                    amountLabelArray[i].setText(String.valueOf(sortedList.get(i).getRemoveUnit()));
+                }
                 dateLabelArray[i].setText(sortedList.get(i).getRecordTime());
             }
             // set empty labels
@@ -354,11 +421,80 @@ public class TransactionPageController implements Initializable {
     }
 
     /**
-     * sort the list by amount (current unit, added unit, removed unit)
+     * set the status (current unit, restock unit, taken unit) labels
+     */
+    private void setUnitStatus(){
+        if (isAll && !isRestock && !isTaken){
+            for (int i = 0; i < 4; i++){
+                statusLabelArray[i].setText(" Current Unit");
+                statusLabelArray[i].setStyle("-fx-background-color: grey; -fx-text-fill: white; -fx-background-radius: 5");
+                statusLabelArray[i].setPrefWidth(82);
+            }
+        }else if (!isAll && isRestock && !isTaken){
+            for (int i = 0; i < 4; i++){
+                statusLabelArray[i].setText(" Restock");
+                statusLabelArray[i].setStyle("-fx-background-color: #ddeab1#c7ddb5; -fx-text-fill: #759751; -fx-background-radius: 5");
+                statusLabelArray[i].setPrefWidth(56);
+            }
+        }else if (!isAll && !isRestock && isTaken){
+            for (int i = 0; i < 4; i++){
+                statusLabelArray[i].setText(" Taken");
+                statusLabelArray[i].setStyle("-fx-background-color: #feccc9; -fx-text-fill: #ff4137; -fx-background-radius: 5");
+                statusLabelArray[i].setPrefWidth(44);
+            }
+        }
+    }
+
+    /**
+     * show the content of transaction list from current page when the pagination is clicked
+     */
+    @FXML
+    private void onClickPagination() {
+        int currentPage = transactionPagination.getCurrentPage();
+        ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
+        threadPoolExecutor.execute(() -> setTransactionList(currentPage));
+        setUnitStatus();
+    }
+
+    /**
+     * sort the list by amount (all unit, restock unit, taken unit)
      */
     @FXML
     private void onClickAmount() {
-
+        if (isAll && !isRestock && !isTaken){
+            // sort by all unit
+            if (isAmountAscend) {
+                sortBy = SortBy.ALLASCEND;
+                isAmountAscend = false;
+                onClickPagination();
+            } else {
+                sortBy = SortBy.ALLDESCEND;
+                isAmountAscend = true;
+                onClickPagination();
+            }
+        }else if (!isAll && isRestock && !isTaken){
+            // sort by restock unit
+            if (isRestockAscend){
+                sortBy = SortBy.RESTOCKASCEND;
+                isRestockAscend = false;
+                onClickPagination();
+            }else{
+                sortBy = SortBy.RESTOCKDESCEND;
+                isRestockAscend = true;
+                onClickPagination();
+            }
+        }else if (!isAll && !isRestock && isTaken){
+            // sort by removed unit
+            if (isTakenAscend) {
+                sortBy = SortBy.TAKENASCEND;
+                isTakenAscend = false;
+                onClickPagination();
+            }else{
+                sortBy = SortBy.TAKENDDESCEND;
+                isTakenAscend = true;
+                onClickPagination();
+            }
+        }
     }
 
     @FXML
@@ -390,13 +526,13 @@ public class TransactionPageController implements Initializable {
      */
     @FXML
     private void onClickDate() {
-        if (isAscend) {
+        if (isDateAscend) {
             sortBy = SortBy.DATEASCEND;
-            isAscend = false;
+            isDateAscend = false;
             onClickPagination();
         } else {
             sortBy = SortBy.DATEDESCEND;
-            isAscend = true;
+            isDateAscend = true;
             onClickPagination();
         }
     }
