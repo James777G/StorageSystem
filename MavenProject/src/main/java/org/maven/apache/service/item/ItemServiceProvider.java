@@ -105,4 +105,77 @@ public class ItemServiceProvider implements ItemService{
     public void deleteByIds(int[] ids) {
         itemMapper.deleteByIds(ids);
     }
+
+    /**
+     * separate the item with no order in page asked
+     *
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public List<Item> pageAskedNOOrder(int pageNumber, int pageSize) {
+        int pageCal = pageNumberCal(pageNumber, pageSize);
+        return itemMapper.pageAskedNOOrder(pageCal,pageSize);
+    }
+
+    /**
+     * separate the item with unit by ascending order
+     *
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public List<Item> pageAskedUnitAscend(int pageNumber, int pageSize) {
+        int pageCal = pageNumberCal(pageNumber, pageSize);
+        return itemMapper.pageAskedUnitAscend(pageCal,pageSize);
+    }
+
+    /**
+     * separate the item with unit by descending order
+     *
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public List<Item> pageAskedUnitDescend(int pageNumber, int pageSize) {
+        int pageCal = pageNumberCal(pageNumber, pageSize);
+        return itemMapper.pageAskedUnitDescend(pageCal,pageSize);
+    }
+
+    /**
+     * separate the item with ItemID by ascending order
+     *
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public List<Item> pageAskedItemIDAscend(int pageNumber, int pageSize) {
+        int pageCal = pageNumberCal(pageNumber, pageSize);
+        return itemMapper.pageAskedItemIDAscend(pageCal,pageSize);
+    }
+
+    /**
+     * separate the item with ItemID by descending order
+     *
+     * @param pageNumber
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public List<Item> pageAskedItemIDDescend(int pageNumber, int pageSize) {
+        int pageCal = pageNumberCal(pageNumber, pageSize);
+        return itemMapper.pageAskedItemIDDescend(pageCal,pageSize);
+    }
+
+    private int pageNumberCal(int pageNumber, int pageSize) {
+        if (pageSize < 0 || pageNumber < 0) {
+            System.out.println("input should be greater than 0");
+        }
+        return (pageNumber - 1) * pageSize;
+    }
+
 }
