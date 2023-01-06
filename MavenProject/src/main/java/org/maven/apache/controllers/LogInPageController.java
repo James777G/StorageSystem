@@ -202,7 +202,6 @@ public class LogInPageController implements Initializable {
 		lineOnSignUp.setVisible(false);
 		FadeTransition fadeTransition = TransitionUtils.getFadeTransition(imageOnStorage, 3000, 0, 1);
 		fadeTransition.play();
-		resetPasswordButton.setDisable(true);
 		blockPane.setVisible(false);
 		usernameCross.setVisible(false);
 		usernameCheck.setVisible(false);
@@ -437,6 +436,7 @@ public class LogInPageController implements Initializable {
 	private void onForgetPassword() {
 		verificationDialog.setVisible(true);
 		blockPane.setVisible(true);
+		resetPasswordButton.setDisable(true);
 		// initialize username verification per sec
 		KeyFrame usernameKeyFrame = ThreadUtils.generateUsernameVerificationKeyFrame(verificationUsername, usernameCheck, usernameCross, usernameNotificationLabel);
 		usernameTimeline.getKeyFrames().add(usernameKeyFrame);
