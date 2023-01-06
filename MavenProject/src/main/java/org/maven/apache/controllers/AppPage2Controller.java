@@ -32,6 +32,15 @@ import java.util.*;
 public class AppPage2Controller implements Initializable {
 
     @FXML
+    private ImageView refreshImage;
+
+    @FXML
+    private ImageView extendArrow;
+
+    @FXML
+    private VBox searchTable;
+
+    @FXML
     private JFXButton warehouseButton;
 
     @FXML
@@ -42,21 +51,6 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private JFXButton transactionButton;
-
-    @FXML
-    private Label usernameLabel;
-
-    @FXML
-    private ImageView refreshImage;
-
-    @FXML
-    private ImageView extendArrow;
-
-    @FXML
-    private MFXTextField searchField;
-
-    @FXML
-    private VBox searchTable;
 
     @FXML
     private JFXButton buttonOne;
@@ -113,6 +107,15 @@ public class AppPage2Controller implements Initializable {
     private AnchorPane[] cargoBoxPanes = new AnchorPane[4];//{cargoBox1Pane,cargoBox2Pane,cargoBox3Pane,cargoBox4Pane};
 
     @FXML
+    private StackPane stackPane;
+
+    @FXML
+    private StackPane stackPaneForWarehouse;
+
+    @FXML
+    private Label usernameLabel;
+
+    @FXML
     private Label cargoNameLabel01;
 
     @FXML
@@ -164,14 +167,10 @@ public class AppPage2Controller implements Initializable {
     private Label greenRestockLabel;
 
     @FXML
-    private StackPane stackPane;
+    private MFXTextField searchField;
 
     @FXML
     protected MFXGenericDialog settingsDialog;
-
-    @FXML
-    private StackPane stackPaneForWarehouse;
-
 
     //pass the user from login page
     private final User user = DataUtils.currentUser;
@@ -214,8 +213,6 @@ public class AppPage2Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         currentPage = appPagePane;
         DataUtils.publicSettingsDialog = settingsDialog;
-        settingsDialog.setPickOnBounds(false);
-        settingsDialog.setOpacity(0);
         settingsDialog.setVisible(false);
         usernameLabel.setText(user.getName());
         warehouseButton.setOpacity(0);
@@ -740,9 +737,9 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onCloseSettings() {
-        settingsDialog.setOpacity(0);
-        settingsDialog.setPickOnBounds(false);
         settingsDialog.setVisible(false);
+
+
     }
 
     @FXML
@@ -821,6 +818,26 @@ public class AppPage2Controller implements Initializable {
         greenRestockLabel.setPickOnBounds(true);
         greenRestockLabel.setTranslateX(-500);
         fillCargoBoxesInformation(buttonSelected);
+
+    }
+
+    @FXML
+    private void onUpdateUsername(){
+
+    }
+
+    @FXML
+    private void onUpdateEmail(){
+
+    }
+
+    @FXML
+    private void onUpdatePassword(){
+
+    }
+
+    @FXML
+    private void onConfirmUpdateInfo(){
 
     }
 

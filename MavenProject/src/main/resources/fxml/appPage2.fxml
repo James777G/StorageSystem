@@ -422,35 +422,41 @@
          </children>
       </AnchorPane>
 
-      <MFXGenericDialog fx:id="settingsDialog" headerText="Account Info" onClose="#onCloseSettings" opacity="0.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="0.0">
+      <MFXGenericDialog fx:id="settingsDialog" headerText="Account Info" onClose="#onCloseSettings" prefWidth="700.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="0.0">
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox layoutX="89.0" layoutY="17.0" prefHeight="300.0" prefWidth="478.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+                  <Label layoutX="116.0" layoutY="-1.0" prefHeight="30.0" prefWidth="106.0" text="Update your ">
+                     <font>
+                        <Font name="Candara Bold" size="17.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="updateUsernameButton" layoutX="222.0" layoutY="5.0" onAction="#onUpdateUsername" prefHeight="25.0" prefWidth="89.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" text="Username" textAlignment="CENTER" textFill="WHITE" />
+                  <JFXButton fx:id="updateEmailButton" layoutX="351.0" layoutY="5.0" onAction="#onUpdateEmail" prefHeight="25.0" prefWidth="82.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" text="Email" textAlignment="CENTER" textFill="WHITE" />
+                  <JFXButton fx:id="updatePasswordButton" layoutX="474.0" layoutY="5.0" onAction="#onUpdatePassword" prefHeight="25.0" prefWidth="89.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" text="Password" textAlignment="CENTER" textFill="WHITE" />
+                  <VBox layoutX="89.0" layoutY="45.0" pickOnBounds="false" prefHeight="135.0" prefWidth="478.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="40.0">
                      <children>
-                        <MFXTextField floatMode="BORDER" floatingText=" Username " prefHeight="40.0" prefWidth="478.0">
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </MFXTextField>
-                        <MFXTextField floatMode="BORDER" floatingText=" Email Address " prefHeight="40.0" prefWidth="478.0">
+                        <MFXTextField fx:id="oldInfoTextField" floatMode="BORDER" floatingText=" Current Account Info" prefHeight="40.0" prefWidth="478.0">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
                         </MFXTextField>
-                        <MFXTextField floatMode="BORDER" floatingText=" Password " prefHeight="40.0" prefWidth="478.0">
+                        <MFXTextField fx:id="newInfoTextField" floatMode="BORDER" floatingText=" New Account Info" prefHeight="40.0" prefWidth="478.0">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
                         </MFXTextField>
                      </children>
                      <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="10.0" />
                      </padding>
                   </VBox>
                </children>
             </AnchorPane>
          </center>
+         <bottom>
+            <JFXButton fx:id="confirmUpdateInfo" onAction="#onConfirmUpdateInfo" prefHeight="25.0" prefWidth="89.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" text="Confirm" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER" />
+         </bottom>
       </MFXGenericDialog>
    </children>
 </AnchorPane>
