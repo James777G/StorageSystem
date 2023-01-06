@@ -357,6 +357,13 @@ public class LogInPageController implements Initializable {
 		lineOnSignUp.setVisible(false);
 	}
 
+	private void callErrorDialog(){
+		errorDialog.setVisible(true);
+		errorDialog.setPickOnBounds(true);
+		blockPane.setVisible(true);
+		blockPane.setPickOnBounds(true);
+	}
+
 	@FXML
 	private void onCloseErrorDialog() {
 		errorDialog.setVisible(false);
@@ -391,10 +398,7 @@ public class LogInPageController implements Initializable {
 		User currentUser = getUser(username);
 		if (!isUsernameFound(username)) {
 			// if the user does not exist, show alert
-			errorDialog.setVisible(true);
-			errorDialog.setPickOnBounds(true);
-			blockPane.setVisible(true);
-			blockPane.setPickOnBounds(true);
+			callErrorDialog();
 		} else {
 			// if the user exists, check its verification (correct password)
 			if (currentUser.getPassword().equals(passwordField.getText())) {
@@ -419,10 +423,7 @@ public class LogInPageController implements Initializable {
 				});
 			} else {
 				// incorrect username or password
-				errorDialog.setVisible(true);
-				errorDialog.setPickOnBounds(true);
-				blockPane.setVisible(true);
-				blockPane.setPickOnBounds(true);
+				callErrorDialog();
 			}
 		}
 	}
