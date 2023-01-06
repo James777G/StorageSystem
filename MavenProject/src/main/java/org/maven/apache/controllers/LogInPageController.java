@@ -185,20 +185,11 @@ public class LogInPageController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		this.updateUserList();
-		signInPane.setOpacity(1);
-		signUpPane.setOpacity(0);
 		signUpPane.setVisible(false);
-		signUpPane.setPickOnBounds(false);
 		errorDialog.setVisible(false);
-		errorDialog.setOpacity(1);
 		errorDialog.setHeaderIcon(errorMessageIcon);
-		errorDialog.setPickOnBounds(false);
 		confirmDialog.setVisible(false);
-		confirmDialog.setOpacity(1);
-		confirmDialog.setPickOnBounds(false);
 		verificationDialog.setVisible(false);
-		verificationDialog.setOpacity(1);
-		verificationDialog.setPickOnBounds(false);
 		sendVerificationCodeButton.setDisable(true);
 		labelOnSignUp.setCursor(Cursor.HAND);
 		labelOnSignIn.setCursor(Cursor.HAND);
@@ -211,9 +202,7 @@ public class LogInPageController implements Initializable {
 		lineOnSignUp.setVisible(false);
 		FadeTransition fadeTransition = TransitionUtils.getFadeTransition(imageOnStorage, 3000, 0, 1);
 		fadeTransition.play();
-		resetPasswordButton.setDisable(true);
 		blockPane.setVisible(false);
-		blockPane.setPickOnBounds(false);
 		usernameCross.setVisible(false);
 		usernameCheck.setVisible(false);
 		passwordCross.setVisible(false);
@@ -316,8 +305,6 @@ public class LogInPageController implements Initializable {
 
 	private void setVisibility(AnchorPane signInPane, AnchorPane signUpPane) {
 		signInPane.setVisible(true);
-		signInPane.setPickOnBounds(true);
-		signUpPane.setPickOnBounds(false);
 		FadeTransition fadeTransition = TransitionUtils.getFadeTransition(signUpPane, 300, 1, 0);
 		FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(signInPane, 300, 0, 1);
 		fadeTransition.play();
@@ -357,12 +344,15 @@ public class LogInPageController implements Initializable {
 		lineOnSignUp.setVisible(false);
 	}
 
+	private void callErrorDialog(){
+		errorDialog.setVisible(true);
+		blockPane.setVisible(true);
+	}
+
 	@FXML
 	private void onCloseErrorDialog() {
 		errorDialog.setVisible(false);
-		errorDialog.setPickOnBounds(false);
 		blockPane.setVisible(false);
-		blockPane.setPickOnBounds(false);
 	}
 
 	@FXML
@@ -385,20 +375,17 @@ public class LogInPageController implements Initializable {
 	@FXML
 	private void onSignInAction(){
 		// get the user list
-		loginButton.setDisable(true);
-		updateUserList(); // can be changed to comment
+		updateUserList();
 		String username = userNameField.getText();
 		User currentUser = getUser(username);
 		if (!isUsernameFound(username)) {
 			// if the user does not exist, show alert
-			errorDialog.setVisible(true);
-			errorDialog.setPickOnBounds(true);
-			blockPane.setVisible(true);
-			blockPane.setPickOnBounds(true);
+			callErrorDialog();
 		} else {
 			// if the user exists, check its verification (correct password)
 			if (currentUser.getPassword().equals(passwordField.getText())) {
-				// show progress indicator
+				// show progress indicator and disable signing button
+				loginButton.setDisable(true);
 				loadIndicator.setVisible(true);
 				// head to the app page (appPage2) in the background
 				ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
@@ -419,10 +406,7 @@ public class LogInPageController implements Initializable {
 				});
 			} else {
 				// incorrect username or password
-				errorDialog.setVisible(true);
-				errorDialog.setPickOnBounds(true);
-				blockPane.setVisible(true);
-				blockPane.setPickOnBounds(true);
+				callErrorDialog();
 			}
 		}
 	}
@@ -451,9 +435,8 @@ public class LogInPageController implements Initializable {
 	@FXML
 	private void onForgetPassword() {
 		verificationDialog.setVisible(true);
-		verificationDialog.setPickOnBounds(true);
 		blockPane.setVisible(true);
-		blockPane.setPickOnBounds(true);
+		resetPasswordButton.setDisable(true);
 		// initialize username verification per sec
 		KeyFrame usernameKeyFrame = ThreadUtils.generateUsernameVerificationKeyFrame(verificationUsername, usernameCheck, usernameCross, usernameNotificationLabel);
 		usernameTimeline.getKeyFrames().add(usernameKeyFrame);
@@ -531,10 +514,8 @@ public class LogInPageController implements Initializable {
 	@FXML
 	private void onCloseVerificationDialog() {
 		verificationDialog.setVisible(false);
-		verificationDialog.setPickOnBounds(false);
 		notificationLabel.setText("");
 		blockPane.setVisible(false);
-		blockPane.setPickOnBounds(false);
 		verificationUsername.clear();
 		newPasswordField.clear();
 		verificationCodeField.clear();
@@ -568,17 +549,13 @@ public class LogInPageController implements Initializable {
 		confirmationPassword.setText("Password: " + getSignUpPasswordString());
 		confirmationEmailAddress.setText("Email Address: " + getSignUpEmailAddressString());
 		confirmDialog.setVisible(true);
-		confirmDialog.setPickOnBounds(true);
 		blockPane.setVisible(true);
-		blockPane.setPickOnBounds(true);
 	}
 
 	@FXML
 	private void onCloseConfirmDialog() {
 		confirmDialog.setVisible(false);
-		confirmDialog.setPickOnBounds(false);
 		blockPane.setVisible(false);
-		blockPane.setPickOnBounds(false);
 	}
 
 	// the function for button confirmation in order to add a new user to database
