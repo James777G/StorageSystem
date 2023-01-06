@@ -21,6 +21,7 @@ import org.maven.apache.MyLauncher;
 import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
 import org.maven.apache.service.excel.ExcelConverterService;
+import org.maven.apache.service.user.UserService;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.*;
 
@@ -773,6 +774,8 @@ public class AppPage2Controller implements Initializable {
         updateUsernameButton.setDisable(false);
         updateEmailButton.setDisable(false);
         updatePasswordButton.setDisable(false);
+        currentInfoTextField.setFloatingText(" Current Account Info");
+        newInfoTextField.setFloatingText(" New Account Info");
     }
 
     @FXML
@@ -855,38 +858,68 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onUpdateUsername(){
-        isUpdatingUsername = true;
-        isUpdatingEmail = false;
-        isUpdatingPassword = false;
-        updateUsernameButton.setDisable(true);
-        updateEmailButton.setDisable(false);
-        updatePasswordButton.setDisable(false);
-
+        updateSettingDialog("Username");
     }
 
     @FXML
     private void onUpdateEmail(){
-        isUpdatingUsername = false;
-        isUpdatingEmail = true;
-        isUpdatingPassword = false;
-        updateUsernameButton.setDisable(false);
-        updateEmailButton.setDisable(true);
-        updatePasswordButton.setDisable(false);
-
+        updateSettingDialog("Email");
     }
 
     @FXML
     private void onUpdatePassword(){
-        isUpdatingUsername = false;
-        isUpdatingEmail = false;
-        isUpdatingPassword = true;updateUsernameButton.setDisable(false);
-        updateEmailButton.setDisable(false);
-        updatePasswordButton.setDisable(true);
+        updateSettingDialog("Password");
+    }
 
+    /**
+     * set the status of buttons and textfields pursuant to the property that is being updated
+     * @param infoType
+     */
+    private void updateSettingDialog(String infoType){
+        switch (infoType){
+            case "Username":
+                isUpdatingUsername = true;
+                isUpdatingEmail = false;
+                isUpdatingPassword = false;
+                updateUsernameButton.setDisable(true);
+                updateEmailButton.setDisable(false);
+                updatePasswordButton.setDisable(false);
+                break;
+            case "Email":
+                isUpdatingUsername = false;
+                isUpdatingEmail = true;
+                isUpdatingPassword = false;
+                updateUsernameButton.setDisable(false);
+                updateEmailButton.setDisable(true);
+                updatePasswordButton.setDisable(false);
+                break;
+            case "Password":
+                isUpdatingUsername = false;
+                isUpdatingEmail = false;
+                isUpdatingPassword = true;
+                updateUsernameButton.setDisable(false);
+                updateEmailButton.setDisable(false);
+                updatePasswordButton.setDisable(true);
+                break;
+        }
+        currentInfoTextField.setFloatingText(" Current " + infoType);
+        newInfoTextField.setFloatingText(" New " + infoType);
+        currentInfoTextField.clear();
+        newInfoTextField.clear();
     }
 
     @FXML
     private void onConfirmUpdateInfo(){
+        if (isUpdatingUsername && !isUpdatingEmail && !isUpdatingPassword){
+            // updating username
+
+        }else if (!isUpdatingUsername && isUpdatingEmail && !isUpdatingPassword){
+            // updating email
+
+        }else if (!isUpdatingUsername && !isUpdatingEmail && isUpdatingPassword){
+            // updating password
+
+        }
 
     }
 
