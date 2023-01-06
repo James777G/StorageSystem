@@ -2,6 +2,7 @@ package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.*;
@@ -43,6 +44,12 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private VBox searchTable;
+
+    @FXML
+    private VBox passwordVBox;
+
+    @FXML
+    private VBox infoVBox;
 
     @FXML
     private JFXButton warehouseButton;
@@ -193,6 +200,12 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private MFXTextField newInfoTextField;
+
+    @FXML
+    private MFXPasswordField currentPasswordField;
+
+    @FXML
+    private MFXPasswordField newPasswordField;
 
     @FXML
     protected MFXGenericDialog settingsDialog;
@@ -777,8 +790,12 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void onCloseSettings() {
         settingsDialog.setVisible(false);
+        infoVBox.setVisible(true);
+        passwordVBox.setVisible(false);
         currentInfoTextField.clear();
         newInfoTextField.clear();
+        currentPasswordField.clear();
+        newPasswordField.clear();
         updateUsernameButton.setDisable(false);
         updateEmailButton.setDisable(false);
         updatePasswordButton.setDisable(false);
@@ -872,16 +889,22 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void onUpdateUsername(){
         updateSettingDialog("Username");
+        infoVBox.setVisible(true);
+        passwordVBox.setVisible(false);
     }
 
     @FXML
     private void onUpdateEmail(){
         updateSettingDialog("Email");
+        infoVBox.setVisible(true);
+        passwordVBox.setVisible(false);
     }
 
     @FXML
     private void onUpdatePassword(){
         updateSettingDialog("Password");
+        infoVBox.setVisible(false);
+        passwordVBox.setVisible(true);
     }
 
     /**
@@ -897,6 +920,8 @@ public class AppPage2Controller implements Initializable {
                 updateUsernameButton.setDisable(true);
                 updateEmailButton.setDisable(false);
                 updatePasswordButton.setDisable(false);
+                currentInfoTextField.setFloatingText(" Current " + infoType);
+                newInfoTextField.setFloatingText(" New " + infoType);
                 break;
             case "Email":
                 isUpdatingUsername = false;
@@ -905,6 +930,8 @@ public class AppPage2Controller implements Initializable {
                 updateUsernameButton.setDisable(false);
                 updateEmailButton.setDisable(true);
                 updatePasswordButton.setDisable(false);
+                currentInfoTextField.setFloatingText(" Current " + infoType);
+                newInfoTextField.setFloatingText(" New " + infoType);
                 break;
             case "Password":
                 isUpdatingUsername = false;
@@ -916,10 +943,10 @@ public class AppPage2Controller implements Initializable {
                 break;
         }
         confirmUpdateInfo.setDisable(false);
-        currentInfoTextField.setFloatingText(" Current " + infoType);
-        newInfoTextField.setFloatingText(" New " + infoType);
         currentInfoTextField.clear();
         newInfoTextField.clear();
+        currentPasswordField.clear();
+        newPasswordField.clear();
         notificationLabel.setText("");
     }
 
@@ -930,10 +957,15 @@ public class AppPage2Controller implements Initializable {
     private void onConfirmUpdateInfo(){
         User currentUser = DataUtils.currentUser;
         String currentUsername = currentUser.getUsername();
-        String currentEmail = currentUser.getEmailAddress();
-        String currentPassword = currentUser.getPassword();
+        String currentUserEmail = currentUser.getEmailAddress();
+        String currentUserPassword = currentUser.getPassword();
         String currentInfo = currentInfoTextField.getText();
+        // get current username and email
         String newInfo = newInfoTextField.getText();
+        // get current password
+        String currentPassword = currentPasswordField.getText();
+        //get new passwrod
+        String newPassword = newPasswordField.getText();
         if (isUpdatingUsername && !isUpdatingEmail && !isUpdatingPassword){
             // updating username
             if (currentInfo.equals(currentUsername) && newInfo.length() > 1){
@@ -946,7 +978,7 @@ public class AppPage2Controller implements Initializable {
             }
         }else if (!isUpdatingUsername && isUpdatingEmail && !isUpdatingPassword){
             // updating email
-            if (currentInfo.equals(currentEmail) && newInfo.length() > 5 && newInfo.contains("@") && newInfo.contains(".com")){
+            if (currentInfo.equals(currentUserEmail) && newInfo.length() > 5 && newInfo.contains("@") && newInfo.contains(".com")){
                 // old email is matched with database and
                 // new email contains characters "@" and string ".com"
                 // and has length of at least 6
@@ -954,17 +986,17 @@ public class AppPage2Controller implements Initializable {
                 userService.update(currentUser);
                 notificationLabel.setText("Email updated");
             }else{
-                System.out.println("Invalid old or new Email");
+                notificationLabel.setText("Invalid old or new Email");
             }
         }else if (!isUpdatingUsername && !isUpdatingEmail && isUpdatingPassword){
             // updating password
-            if (currentInfo.equals(currentPassword) && newInfo.length() > 5){
+            if (currentPassword.equals(currentUserPassword) && newPassword.length() > 5){
                 // old password is matched and new password has length of at least 6
-                currentUser.setPassword(newInfo);
+                currentUser.setPassword(newPassword);
                 userService.update(currentUser);
                 notificationLabel.setText("Password updated");
             }else{
-                System.out.println("Invalid old or new Password");
+                notificationLabel.setText("Invalid old or new Password");
             }
         }
 
