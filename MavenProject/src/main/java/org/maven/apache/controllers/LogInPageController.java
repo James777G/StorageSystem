@@ -392,8 +392,7 @@ public class LogInPageController implements Initializable {
 	@FXML
 	private void onSignInAction(){
 		// get the user list
-		loginButton.setDisable(true);
-		updateUserList(); // can be changed to comment
+		updateUserList();
 		String username = userNameField.getText();
 		User currentUser = getUser(username);
 		if (!isUsernameFound(username)) {
@@ -402,7 +401,8 @@ public class LogInPageController implements Initializable {
 		} else {
 			// if the user exists, check its verification (correct password)
 			if (currentUser.getPassword().equals(passwordField.getText())) {
-				// show progress indicator
+				// show progress indicator and disable signing button
+				loginButton.setDisable(true);
 				loadIndicator.setVisible(true);
 				// head to the app page (appPage2) in the background
 				ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
