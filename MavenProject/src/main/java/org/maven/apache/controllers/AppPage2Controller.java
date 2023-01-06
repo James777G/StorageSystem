@@ -2,6 +2,7 @@ package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.*;
@@ -21,15 +22,34 @@ import org.maven.apache.MyLauncher;
 import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
 import org.maven.apache.service.excel.ExcelConverterService;
+import org.maven.apache.service.user.UserService;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
 public class AppPage2Controller implements Initializable {
+
+    @FXML
+    private ImageView refreshImage;
+
+    @FXML
+    private ImageView extendArrow;
+
+    @FXML
+    private VBox searchTable;
+
+    @FXML
+    private VBox passwordVBox;
+
+    @FXML
+    private VBox infoVBox;
 
     @FXML
     private JFXButton warehouseButton;
@@ -42,21 +62,6 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private JFXButton transactionButton;
-
-    @FXML
-    private Label usernameLabel;
-
-    @FXML
-    private ImageView refreshImage;
-
-    @FXML
-    private ImageView extendArrow;
-
-    @FXML
-    private MFXTextField searchField;
-
-    @FXML
-    private VBox searchTable;
 
     @FXML
     private JFXButton buttonOne;
@@ -81,6 +86,18 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private JFXButton statusRestockButton;
+
+    @FXML
+    private JFXButton updateUsernameButton;
+
+    @FXML
+    private JFXButton updateEmailButton;
+
+    @FXML
+    private JFXButton updatePasswordButton;
+
+    @FXML
+    private JFXButton confirmUpdateInfo;
 
     @FXML
     private JFXDrawer VBoxDrawer;
@@ -111,6 +128,15 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private AnchorPane[] cargoBoxPanes = new AnchorPane[4];//{cargoBox1Pane,cargoBox2Pane,cargoBox3Pane,cargoBox4Pane};
+
+    @FXML
+    private StackPane stackPane;
+
+    @FXML
+    private StackPane stackPaneForWarehouse;
+
+    @FXML
+    private Label usernameLabel;
 
     @FXML
     private Label cargoNameLabel01;
@@ -164,23 +190,40 @@ public class AppPage2Controller implements Initializable {
     private Label greenRestockLabel;
 
     @FXML
-    private StackPane stackPane;
+    private Label notificationLabel;
+
+    @FXML
+    private MFXTextField searchField;
+
+    @FXML
+    private MFXTextField currentInfoTextField;
+
+    @FXML
+    private MFXTextField newInfoTextField;
+
+    @FXML
+    private MFXPasswordField currentPasswordField;
+
+    @FXML
+    private MFXPasswordField newPasswordField;
 
     @FXML
     protected MFXGenericDialog settingsDialog;
-
-    @FXML
-    private StackPane stackPaneForWarehouse;
-
 
     //pass the user from login page
     private final User user = DataUtils.currentUser;
 
     private boolean isTriangleRotating = false;
 
-    private final JFXButton[] buttonList = new JFXButton[5];
-
     private boolean isRotating = false;
+
+    private boolean isUpdatingUsername = false;
+
+    private boolean isUpdatingEmail = false;
+
+    private boolean isUpdatingPassword = false;
+
+    private final JFXButton[] buttonList = new JFXButton[5];
 
     private final Timeline timeline = new Timeline();
 
@@ -188,16 +231,21 @@ public class AppPage2Controller implements Initializable {
 
     private final DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
 
+    private final UserService userService = MyLauncher.context.getBean("userService", UserService.class);
+
     private int i = 0;
+
     private int j = 0;
+
+    private int takenBoxNumber = 2;
+
+    private int restockBoxNumber = 2;
+
     enum ButtonSelected {
         ALL,
         TAKEN,
         RESTOCK
     }
-
-    private int takenBoxNumber = 2;
-    private int restockBoxNumber = 2;
 
     /**
      * These lists are for testing purpose only
@@ -214,8 +262,6 @@ public class AppPage2Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         currentPage = appPagePane;
         DataUtils.publicSettingsDialog = settingsDialog;
-        settingsDialog.setPickOnBounds(false);
-        settingsDialog.setOpacity(0);
         settingsDialog.setVisible(false);
         usernameLabel.setText(user.getName());
         warehouseButton.setOpacity(0);
@@ -249,6 +295,7 @@ public class AppPage2Controller implements Initializable {
         });
         // load the menu VBox to drawer
         setDrawer();
+        confirmUpdateInfo.setDisable(true);
 //        List<DateTransaction> dateTransactions = dateTransactionService.selectAll();
 //        List<DateTransaction> dateTransactions_Date = dateTransactionService.pageAskedDateDescend(1,dateTransactions.size());
 //        List<DateTransaction> dateTransactions_Taken = new ArrayList<DateTransaction>();
@@ -734,15 +781,31 @@ public class AppPage2Controller implements Initializable {
                 fadeTransition.play();
                 currentPage = stackPane;
             }
-
         }
     }
 
+    /**
+     * close and erase all operations in setting dialog
+     */
     @FXML
     private void onCloseSettings() {
-        settingsDialog.setOpacity(0);
-        settingsDialog.setPickOnBounds(false);
         settingsDialog.setVisible(false);
+        infoVBox.setVisible(true);
+        passwordVBox.setVisible(false);
+        currentInfoTextField.clear();
+        newInfoTextField.clear();
+        currentPasswordField.clear();
+        newPasswordField.clear();
+        updateUsernameButton.setDisable(false);
+        updateEmailButton.setDisable(false);
+        updatePasswordButton.setDisable(false);
+        confirmUpdateInfo.setDisable(true);
+        isUpdatingUsername = false;
+        isUpdatingEmail = false;
+        isUpdatingPassword = false;
+        currentInfoTextField.setFloatingText(" Current Account Info");
+        newInfoTextField.setFloatingText(" New Account Info");
+        notificationLabel.setText("");
     }
 
     @FXML
@@ -821,6 +884,121 @@ public class AppPage2Controller implements Initializable {
         greenRestockLabel.setPickOnBounds(true);
         greenRestockLabel.setTranslateX(-500);
         fillCargoBoxesInformation(buttonSelected);
+    }
+
+    @FXML
+    private void onUpdateUsername(){
+        updateSettingDialog("Username");
+        infoVBox.setVisible(true);
+        passwordVBox.setVisible(false);
+    }
+
+    @FXML
+    private void onUpdateEmail(){
+        updateSettingDialog("Email");
+        infoVBox.setVisible(true);
+        passwordVBox.setVisible(false);
+    }
+
+    @FXML
+    private void onUpdatePassword(){
+        updateSettingDialog("Password");
+        infoVBox.setVisible(false);
+        passwordVBox.setVisible(true);
+    }
+
+    /**
+     * set the status of buttons and textfields pursuant to the property that is being updated
+     * @param infoType
+     */
+    private void updateSettingDialog(String infoType){
+        switch (infoType){
+            case "Username":
+                isUpdatingUsername = true;
+                isUpdatingEmail = false;
+                isUpdatingPassword = false;
+                updateUsernameButton.setDisable(true);
+                updateEmailButton.setDisable(false);
+                updatePasswordButton.setDisable(false);
+                currentInfoTextField.setFloatingText(" Current " + infoType);
+                newInfoTextField.setFloatingText(" New " + infoType);
+                break;
+            case "Email":
+                isUpdatingUsername = false;
+                isUpdatingEmail = true;
+                isUpdatingPassword = false;
+                updateUsernameButton.setDisable(false);
+                updateEmailButton.setDisable(true);
+                updatePasswordButton.setDisable(false);
+                currentInfoTextField.setFloatingText(" Current " + infoType);
+                newInfoTextField.setFloatingText(" New " + infoType);
+                break;
+            case "Password":
+                isUpdatingUsername = false;
+                isUpdatingEmail = false;
+                isUpdatingPassword = true;
+                updateUsernameButton.setDisable(false);
+                updateEmailButton.setDisable(false);
+                updatePasswordButton.setDisable(true);
+                break;
+        }
+        confirmUpdateInfo.setDisable(false);
+        currentInfoTextField.clear();
+        newInfoTextField.clear();
+        currentPasswordField.clear();
+        newPasswordField.clear();
+        notificationLabel.setText("");
+    }
+
+    /**
+     * update any account info for current logged in user
+     */
+    @FXML
+    private void onConfirmUpdateInfo(){
+        User currentUser = DataUtils.currentUser;
+        String currentUsername = currentUser.getUsername();
+        String currentUserEmail = currentUser.getEmailAddress();
+        String currentUserPassword = currentUser.getPassword();
+        String currentInfo = currentInfoTextField.getText();
+        // get current username and email
+        String newInfo = newInfoTextField.getText();
+        // get current password
+        String currentPassword = currentPasswordField.getText();
+        //get new passwrod
+        String newPassword = newPasswordField.getText();
+        if (isUpdatingUsername && !isUpdatingEmail && !isUpdatingPassword){
+            // updating username
+            if (currentInfo.equals(currentUsername) && newInfo.length() > 1){
+                // old username is matched with database and new username has length of at least 2
+                currentUser.setUsername(newInfo);
+                userService.update(currentUser);
+                notificationLabel.setText("Username updated");
+            }else{
+                notificationLabel.setText("Invalid old or new Username");
+            }
+        }else if (!isUpdatingUsername && isUpdatingEmail && !isUpdatingPassword){
+            // updating email
+            if (currentInfo.equals(currentUserEmail) && newInfo.length() > 5 && newInfo.contains("@") && newInfo.contains(".com")){
+                // old email is matched with database and
+                // new email contains characters "@" and string ".com"
+                // and has length of at least 6
+                currentUser.setEmailAddress(newInfo);
+                userService.update(currentUser);
+                notificationLabel.setText("Email updated");
+            }else{
+                notificationLabel.setText("Invalid old or new Email");
+            }
+        }else if (!isUpdatingUsername && !isUpdatingEmail && isUpdatingPassword){
+            // updating password
+            if (currentPassword.equals(currentUserPassword) && newPassword.length() > 5){
+                // old password is matched and new password has length of at least 6
+                currentUser.setPassword(newPassword);
+                userService.update(currentUser);
+                notificationLabel.setText("Password updated");
+            }else{
+                notificationLabel.setText("Invalid old or new Password");
+            }
+        }
 
     }
 

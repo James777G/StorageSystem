@@ -179,7 +179,7 @@
                   <Insets bottom="20.0" left="50.0" right="20.0" top="20.0" />
                </padding>
                <children>
-                  <MFXTextField fx:id="verificationUsername" floatMode="DISABLED" minHeight="35.0" prefHeight="35.0" prefWidth="200.0" promptText="( Username )" styleClass="inputFields" stylesheets="@../css/logInPage.css">
+                  <MFXTextField fx:id="verificationUsername" floatMode="BORDER" floatingText="( Username )" minHeight="35.0" prefHeight="35.0" prefWidth="200.0" styleClass="inputFields" stylesheets="@../css/logInPage.css">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -188,7 +188,7 @@
                      </VBox.margin>
                   </MFXTextField>
                   <Label fx:id="usernameNotificationLabel" alignment="TOP_CENTER" prefHeight="18.0" prefWidth="189.0" textFill="RED" />
-                  <MFXTextField fx:id="newPasswordField" floatMode="DISABLED" minHeight="35.0" prefHeight="35.0" prefWidth="200.0" promptText="( New password )" styleClass="inputFields" stylesheets="@../css/logInPage.css">
+                  <MFXTextField fx:id="newPasswordField" floatMode="BORDER" floatingText="( New password )" minHeight="35.0" prefHeight="35.0" prefWidth="200.0" styleClass="inputFields" stylesheets="@../css/logInPage.css">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -201,7 +201,7 @@
                         <Insets left="10.0" right="15.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <MFXTextField fx:id="verificationCodeField" floatMode="DISABLED" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" prefWidth="200.0" promptText="( 6 digits code )" styleClass="inputFields" stylesheets="@../css/logInPage.css">
+                  <MFXTextField fx:id="verificationCodeField" floatMode="BORDER" floatingText="( 6 digits code )" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" prefWidth="200.0" styleClass="inputFields" stylesheets="@../css/logInPage.css">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
