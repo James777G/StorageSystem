@@ -27,7 +27,10 @@ import org.maven.apache.utils.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
 public class AppPage2Controller implements Initializable {
 
@@ -196,6 +199,12 @@ public class AppPage2Controller implements Initializable {
     private boolean isTriangleRotating = false;
 
     private boolean isRotating = false;
+
+    private boolean isUpdatingUsername = false;
+
+    private boolean isUpdatingEmail = false;
+
+    private boolean isUpdatingPassword = false;
 
     private final JFXButton[] buttonList = new JFXButton[5];
 
@@ -842,21 +851,37 @@ public class AppPage2Controller implements Initializable {
         greenRestockLabel.setPickOnBounds(true);
         greenRestockLabel.setTranslateX(-500);
         fillCargoBoxesInformation(buttonSelected);
-
     }
 
     @FXML
     private void onUpdateUsername(){
+        isUpdatingUsername = true;
+        isUpdatingEmail = false;
+        isUpdatingPassword = false;
+        updateUsernameButton.setDisable(true);
+        updateEmailButton.setDisable(false);
+        updatePasswordButton.setDisable(false);
 
     }
 
     @FXML
     private void onUpdateEmail(){
+        isUpdatingUsername = false;
+        isUpdatingEmail = true;
+        isUpdatingPassword = false;
+        updateUsernameButton.setDisable(false);
+        updateEmailButton.setDisable(true);
+        updatePasswordButton.setDisable(false);
 
     }
 
     @FXML
     private void onUpdatePassword(){
+        isUpdatingUsername = false;
+        isUpdatingEmail = false;
+        isUpdatingPassword = true;updateUsernameButton.setDisable(false);
+        updateEmailButton.setDisable(false);
+        updatePasswordButton.setDisable(true);
 
     }
 
