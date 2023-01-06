@@ -183,6 +183,9 @@ public class AppPage2Controller implements Initializable {
     private Label greenRestockLabel;
 
     @FXML
+    private Label notificationLabel;
+
+    @FXML
     private MFXTextField searchField;
 
     @FXML
@@ -214,6 +217,8 @@ public class AppPage2Controller implements Initializable {
     private Node currentPage;
 
     private final DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
+
+    private final UserService userService = MyLauncher.context.getBean("userService", UserService.class);
 
     private int i = 0;
 
@@ -277,6 +282,7 @@ public class AppPage2Controller implements Initializable {
         });
         // load the menu VBox to drawer
         setDrawer();
+        confirmUpdateInfo.setDisable(true);
 //        List<DateTransaction> dateTransactions = dateTransactionService.selectAll();
 //        List<DateTransaction> dateTransactions_Date = dateTransactionService.pageAskedDateDescend(1,dateTransactions.size());
 //        List<DateTransaction> dateTransactions_Taken = new ArrayList<DateTransaction>();
@@ -762,10 +768,12 @@ public class AppPage2Controller implements Initializable {
                 fadeTransition.play();
                 currentPage = stackPane;
             }
-
         }
     }
 
+    /**
+     * close and erase all operations in setting dialog
+     */
     @FXML
     private void onCloseSettings() {
         settingsDialog.setVisible(false);
@@ -774,8 +782,13 @@ public class AppPage2Controller implements Initializable {
         updateUsernameButton.setDisable(false);
         updateEmailButton.setDisable(false);
         updatePasswordButton.setDisable(false);
+        confirmUpdateInfo.setDisable(true);
+        isUpdatingUsername = false;
+        isUpdatingEmail = false;
+        isUpdatingPassword = false;
         currentInfoTextField.setFloatingText(" Current Account Info");
         newInfoTextField.setFloatingText(" New Account Info");
+        notificationLabel.setText("");
     }
 
     @FXML
@@ -902,23 +915,57 @@ public class AppPage2Controller implements Initializable {
                 updatePasswordButton.setDisable(true);
                 break;
         }
+        confirmUpdateInfo.setDisable(false);
         currentInfoTextField.setFloatingText(" Current " + infoType);
         newInfoTextField.setFloatingText(" New " + infoType);
         currentInfoTextField.clear();
         newInfoTextField.clear();
+        notificationLabel.setText("");
     }
 
+    /**
+     * update any account info for current logged in user
+     */
     @FXML
     private void onConfirmUpdateInfo(){
+        User currentUser = DataUtils.currentUser;
+        String currentUsername = currentUser.getUsername();
+        String currentEmail = currentUser.getEmailAddress();
+        String currentPassword = currentUser.getPassword();
+        String currentInfo = currentInfoTextField.getText();
+        String newInfo = newInfoTextField.getText();
         if (isUpdatingUsername && !isUpdatingEmail && !isUpdatingPassword){
             // updating username
-
+            if (currentInfo.equals(currentUsername) && newInfo.length() > 1){
+                // old username is matched with database and new username has length of at least 2
+                currentUser.setUsername(newInfo);
+                userService.update(currentUser);
+                notificationLabel.setText("Username updated");
+            }else{
+                notificationLabel.setText("Invalid old or new Username");
+            }
         }else if (!isUpdatingUsername && isUpdatingEmail && !isUpdatingPassword){
             // updating email
-
+            if (currentInfo.equals(currentEmail) && newInfo.length() > 5 && newInfo.contains("@") && newInfo.contains(".com")){
+                // old email is matched with database and
+                // new email contains characters "@" and string ".com"
+                // and has length of at least 6
+                currentUser.setEmailAddress(newInfo);
+                userService.update(currentUser);
+                notificationLabel.setText("Email updated");
+            }else{
+                System.out.println("Invalid old or new Email");
+            }
         }else if (!isUpdatingUsername && !isUpdatingEmail && isUpdatingPassword){
             // updating password
-
+            if (currentInfo.equals(currentPassword) && newInfo.length() > 5){
+                // old password is matched and new password has length of at least 6
+                currentUser.setPassword(newInfo);
+                userService.update(currentUser);
+                notificationLabel.setText("Password updated");
+            }else{
+                System.out.println("Invalid old or new Password");
+            }
         }
 
     }
