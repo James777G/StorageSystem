@@ -12,10 +12,12 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="640.0" minHeight="640.0" prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.TransactionPageController">
+<AnchorPane maxHeight="640.0" minHeight="640.0" prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.TransactionPageController">
    <children>
       <AnchorPane layoutX="20.0" layoutY="20.0" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
+            <AnchorPane fx:id="editCargoPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="130.0" />
+            <AnchorPane fx:id="dataTransactionPage" prefHeight="380.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
             <MFXTextField floatMode="DISABLED" layoutX="267.0" layoutY="114.0" prefHeight="50.0" prefWidth="550.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.bottomAnchor="550.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="350.0">
                <textFill>
                   <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
@@ -185,14 +187,14 @@
                               <Font name="Candara Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="idLabel1" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+                        <Label fx:id="idLabel1" layoutX="355.0" layoutY="14.0" text="12" textFill="#223c40" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="15.0">
                            <font>
-                              <Font name="Candara Bold" size="19.0" />
+                              <Font name="Arial Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="amountLabel1" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
+                        <Label fx:id="amountLabel1" layoutX="555.0" layoutY="16.0" text="9" textFill="#223c40" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="15.0">
                            <font>
-                              <Font name="Candara Bold" size="19.0" />
+                              <Font name="Arial Bold" size="16.0" />
                            </font>
                         </Label>
                         <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="410.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="13.0">
@@ -230,14 +232,14 @@
                               <Font name="Candara Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="idLabel2" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+                        <Label fx:id="idLabel2" layoutX="355.0" layoutY="14.0" text="34" textFill="#223c40" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="15.0">
                            <font>
-                              <Font name="Candara Bold" size="19.0" />
+                              <Font name="Arial Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="amountLabel2" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
+                        <Label fx:id="amountLabel2" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="15.0">
                            <font>
-                              <Font name="Candara Bold" size="19.0" />
+                              <Font name="Arial Bold" size="16.0" />
                            </font>
                         </Label>
                         <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="410.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="13.0">
@@ -274,14 +276,14 @@
                               <Font name="Candara Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="idLabel3" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+                        <Label fx:id="idLabel3" layoutX="355.0" layoutY="14.0" text="56" textFill="#223c40" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="15.0">
                            <font>
-                              <Font name="Candara Bold" size="19.0" />
+                              <Font name="Arial Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="amountLabel3" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
+                        <Label fx:id="amountLabel3" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="15.0">
                            <font>
-                              <Font name="Candara Bold" size="19.0" />
+                              <Font name="Arial Bold" size="16.0" />
                            </font>
                         </Label>
                         <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="410.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="13.0">
@@ -318,14 +320,14 @@
                               <Font name="Candara Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="idLabel4" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+                        <Label fx:id="idLabel4" layoutX="355.0" layoutY="14.0" text="78" textFill="#223c40" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="15.0">
                            <font>
-                              <Font name="Candara Bold" size="19.0" />
+                              <Font name="Arial Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="amountLabel4" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
+                        <Label fx:id="amountLabel4" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="15.0">
                            <font>
-                              <Font name="Candara Bold" size="19.0" />
+                              <Font name="Arial Bold" size="16.0" />
                            </font>
                         </Label>
                         <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="410.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="13.0">
@@ -418,7 +420,6 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="dataTransactionPage" prefHeight="380.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
             <AnchorPane layoutX="1107.0" layoutY="595.0" prefHeight="80.0" prefWidth="60.0" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="20.0">
                <children>
                   <AnchorPane fx:id="addButton" layoutX="4.0" layoutY="8.0" onMouseClicked="#onClickAddButton" onMouseEntered="#onEnterAddButton" onMouseExited="#onExitAddButton" prefHeight="60.0" prefWidth="60.0" styleClass="addPane" stylesheets="@../css/transactionPage.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -443,7 +444,6 @@
                      </font>
                   </Label>
                </children></AnchorPane>
-            <AnchorPane fx:id="editCargoPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="130.0" />
          </children>
       </AnchorPane>
    </children>
