@@ -18,6 +18,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
@@ -223,6 +224,8 @@ public class AppPage2Controller implements Initializable {
 
     private boolean isUpdatingPassword = false;
 
+    private boolean isSearchTableMoving = false;
+
     private final JFXButton[] buttonList = new JFXButton[5];
 
     private final Timeline timeline = new Timeline();
@@ -296,45 +299,13 @@ public class AppPage2Controller implements Initializable {
         // load the menu VBox to drawer
         setDrawer();
         confirmUpdateInfo.setDisable(true);
-//        List<DateTransaction> dateTransactions = dateTransactionService.selectAll();
-//        List<DateTransaction> dateTransactions_Date = dateTransactionService.pageAskedDateDescend(1,dateTransactions.size());
-//        List<DateTransaction> dateTransactions_Taken = new ArrayList<DateTransaction>();
-//        List<DateTransaction> dateTransactions_Restock = new ArrayList<DateTransaction>();
-//        for (DateTransaction dateTransaction : dateTransactions_Date) {
-//            if (dateTransaction.getAddUnit() == 0) {
-//                dateTransactions_Taken.add(i, dateTransaction);
-//                if (i < 3) {
-//                    i++;
-//                }
-//            } else if (dateTransaction.getRemoveUnit() == 0) {
-//                dateTransactions_Restock.add(j, dateTransaction);
-//                if (j < 3) {
-//                    j++;
-//                }
-//            }
-//            if(i+j == 6){
-//                break;
-//            }
-//        }
-        createRestockAndTakenLists();
+        createRestockAndTakenLists(); // Will be replaced by SQL statement
         initializeLabels();
         System.out.println(dateTransactions_Taken);
         System.out.println(dateTransactions_Restock);
         System.out.println(dateTransactions_Taken.size());
         System.out.println(dateTransactions_Restock.size());
         fillCargoBoxesInformation(buttonSelected);
-//        cargoNameLabel01.setText(dateTransactions_Taken.get(0).getItemName());
-//        cargoNameLabel02.setText(dateTransactions_Taken.get(1).getItemName());
-//        cargoNameLabel03.setText(dateTransactions_Restock.get(0).getItemName());
-//        cargoNameLabel04.setText(dateTransactions_Restock.get(1).getItemName());
-//        cargoAmountLabel01.setText(dateTransactions_Taken.get(0).getRemoveUnit().toString());
-//        cargoAmountLabel02.setText(dateTransactions_Taken.get(1).getRemoveUnit().toString());
-//        cargoAmountLabel03.setText(dateTransactions_Restock.get(0).getAddUnit().toString());
-//        cargoAmountLabel04.setText(dateTransactions_Restock.get(1).getAddUnit().toString());
-//        staffNameLabel01.setText(dateTransactions_Taken.get(0).getStaffName());
-//        staffNameLabel02.setText(dateTransactions_Taken.get(1).getStaffName());
-//        staffNameLabel03.setText(dateTransactions_Restock.get(0).getStaffName());
-//        staffNameLabel04.setText(dateTransactions_Restock.get(1).getStaffName());
     }
 
     private void initializeLabels() {
@@ -385,96 +356,92 @@ public class AppPage2Controller implements Initializable {
     private void fillCargoBoxesInformation(ButtonSelected buttonSelected){
         int boxNumber = 4;
         for(int index = 0; index < boxNumber; index++){
-            cargoBoxPanes[index].setOpacity(0);
-            cargoBoxPanes[index].setVisible(false);
-            cargoBoxPanes[index].setPickOnBounds(false);
+            cargoBoxPanes[index].setOpacity(1);
+            cargoBoxPanes[index].setVisible(true);
+            cargoBoxPanes[index].setPickOnBounds(true);
         }
-//        cargoNameLabel01.setText(cargoBox1.getItemName());
-//        cargoNameLabel02.setText(cargoBox2.getItemName());
-//        cargoNameLabel03.setText(cargoBox3.getItemName());
-//        cargoNameLabel04.setText(cargoBox4.getItemName());
-        System.out.println(buttonSelected);
         switch (buttonSelected) {
             case ALL -> {
-//                cargoAmountLabel01.setText(dateTransactions_Taken.get(0).getRemoveUnit().toString());
-//                cargoAmountLabel02.setText(dateTransactions_Taken.get(1).getRemoveUnit().toString());
-//                cargoAmountLabel03.setText(dateTransactions_Restock.get(0).getAddUnit().toString());
-//                cargoAmountLabel04.setText(dateTransactions_Restock.get(1).getAddUnit().toString());
-                if (dateTransactions_Taken.size() == 0) {
-                    takenBoxNumber = 0;
-                    redTakenLabel.setOpacity(0);
-                    redTakenLabel.setVisible(false);
-                    redTakenLabel.setPickOnBounds(false);
-                    greenRestockLabel.setTranslateX(-500);
-                } else if(dateTransactions_Taken.size() < 2) {
+                redTakenLabel.setOpacity(1);
+                redTakenLabel.setVisible(true);
+                redTakenLabel.setPickOnBounds(true);
+                greenRestockLabel.setOpacity(1);
+                greenRestockLabel.setVisible(true);
+                greenRestockLabel.setPickOnBounds(true);
+                greenRestockLabel.setTranslateX(0);
+                if(dateTransactions_Taken.size() < 2) {
                     takenBoxNumber = dateTransactions_Taken.size();
-                    greenRestockLabel.setTranslateX(-500 + 250 * takenBoxNumber);
+                    for(int hideAllTaken = 1 ; hideAllTaken >= dateTransactions_Taken.size() ; hideAllTaken--){
+                        cargoBoxPanes[hideAllTaken].setOpacity(0);
+                        cargoBoxPanes[hideAllTaken].setVisible(false);
+                        cargoBoxPanes[hideAllTaken].setPickOnBounds(false);
+                    }
                 }
-                if (dateTransactions_Restock.size() == 0) {
-                    restockBoxNumber = 0;
-                    greenRestockLabel.setOpacity(0);
-                    greenRestockLabel.setVisible(false);
-                    greenRestockLabel.setPickOnBounds(false);
-                } else if (dateTransactions_Restock.size() < 2) {
+                if (dateTransactions_Restock.size() < 2) {
                     restockBoxNumber = dateTransactions_Restock.size();
+                    for(int hideAllRestock = 3 ; hideAllRestock >= dateTransactions_Restock.size() + 2; hideAllRestock--){
+                        cargoBoxPanes[hideAllRestock].setOpacity(0);
+                        cargoBoxPanes[hideAllRestock].setVisible(false);
+                        cargoBoxPanes[hideAllRestock].setPickOnBounds(false);
+                    }
                 }
                 for(int indexTaken = 0; indexTaken < takenBoxNumber; indexTaken++){
-                    cargoBoxPanes[indexTaken].setOpacity(1);
-                    cargoBoxPanes[indexTaken].setVisible(true);
-                    cargoBoxPanes[indexTaken].setPickOnBounds(true);
                     cargoNameLabels[indexTaken].setText(dateTransactions_Taken.get(indexTaken).getItemName());
                     cargoAmountLabels[indexTaken].setText(dateTransactions_Taken.get(indexTaken).getRemoveUnit().toString());
                     staffNameLabels[indexTaken].setText(dateTransactions_Taken.get(indexTaken).getStaffName());
                 }
                 for(int indexRestock = 0; indexRestock < restockBoxNumber; indexRestock++){
-                    cargoBoxPanes[indexRestock+takenBoxNumber].setOpacity(1);
-                    cargoBoxPanes[indexRestock+takenBoxNumber].setVisible(true);
-                    cargoBoxPanes[indexRestock+takenBoxNumber].setPickOnBounds(true);
-                    cargoNameLabels[indexRestock+takenBoxNumber].setText(dateTransactions_Restock.get(indexRestock).getItemName());
-                    cargoAmountLabels[indexRestock+takenBoxNumber].setText(dateTransactions_Restock.get(indexRestock).getAddUnit().toString());
-                    staffNameLabels[indexRestock+takenBoxNumber].setText(dateTransactions_Restock.get(indexRestock).getStaffName());
+                    cargoNameLabels[indexRestock+2].setText(dateTransactions_Restock.get(indexRestock).getItemName());
+                    cargoAmountLabels[indexRestock+2].setText(dateTransactions_Restock.get(indexRestock).getAddUnit().toString());
+                    staffNameLabels[indexRestock+2].setText(dateTransactions_Restock.get(indexRestock).getStaffName());
                 }
 
             }
             case TAKEN -> {
+                redTakenLabel.setOpacity(1);
+                redTakenLabel.setVisible(true);
+                redTakenLabel.setPickOnBounds(true);
+                greenRestockLabel.setOpacity(0);
+                greenRestockLabel.setVisible(false);
+                greenRestockLabel.setPickOnBounds(false);
                 if(dateTransactions_Taken.size() < 4){
                     boxNumber = dateTransactions_Taken.size();
+                    for(int hideTaken = 3; hideTaken > dateTransactions_Taken.size()-1; hideTaken--){
+                        cargoBoxPanes[hideTaken].setOpacity(0);
+                        cargoBoxPanes[hideTaken].setVisible(false);
+                        cargoBoxPanes[hideTaken].setPickOnBounds(false);
+                    }
                 }
                 for(int index = 0; index < boxNumber; index++) {
-                    cargoBoxPanes[index].setOpacity(1);
-                    cargoBoxPanes[index].setVisible(true);
-                    cargoBoxPanes[index].setPickOnBounds(true);
                     cargoNameLabels[index].setText(dateTransactions_Taken.get(index).getItemName());
                     cargoAmountLabels[index].setText(dateTransactions_Taken.get(index).getRemoveUnit().toString());
                     staffNameLabels[index].setText(dateTransactions_Taken.get(index).getStaffName());
-//                    cargoAmountLabel02.setText(cargoBox2.getRemoveUnit().toString());
-//                    cargoAmountLabel03.setText(cargoBox3.getRemoveUnit().toString());
-//                    cargoAmountLabel04.setText(cargoBox4.getRemoveUnit().toString());
                 }
 
             }
             case RESTOCK -> {
+                redTakenLabel.setOpacity(0);
+                redTakenLabel.setVisible(false);
+                redTakenLabel.setPickOnBounds(false);
+                greenRestockLabel.setOpacity(1);
+                greenRestockLabel.setVisible(true);
+                greenRestockLabel.setPickOnBounds(true);
+                greenRestockLabel.setTranslateX(-500);
                 if(dateTransactions_Restock.size() < 4){
                     boxNumber = dateTransactions_Restock.size();
+                    for(int hideRestock = 3; hideRestock > dateTransactions_Restock.size()-1; hideRestock--){
+                        cargoBoxPanes[hideRestock].setOpacity(0);
+                        cargoBoxPanes[hideRestock].setVisible(false);
+                        cargoBoxPanes[hideRestock].setPickOnBounds(false);
+                    }
                 }
                 for(int index = 0; index < boxNumber; index++) {
-                    cargoBoxPanes[index].setOpacity(1);
-                    cargoBoxPanes[index].setVisible(true);
-                    cargoBoxPanes[index].setPickOnBounds(true);
                     cargoNameLabels[index].setText(dateTransactions_Restock.get(index).getItemName());
                     cargoAmountLabels[index].setText(dateTransactions_Restock.get(index).getAddUnit().toString());
                     staffNameLabels[index].setText(dateTransactions_Restock.get(index).getStaffName());
-//                    cargoAmountLabel02.setText(cargoBox2.getAddUnit().toString());
-//                    cargoAmountLabel03.setText(cargoBox3.getAddUnit().toString());
-//                    cargoAmountLabel04.setText(cargoBox4.getAddUnit().toString());
                 }
             }
         }
-
-//        staffNameLabel01.setText(cargoBox1.getStaffName());
-//        staffNameLabel02.setText(cargoBox2.getStaffName());
-//        staffNameLabel03.setText(cargoBox3.getStaffName());
-//        staffNameLabel04.setText(cargoBox4.getStaffName());
     }
 
     @FXML
@@ -538,10 +505,29 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onClickSearchBar() {
-        searchOnBackgroundPerSec();
-        searchTable.setOpacity(1);
-        searchTable.setPickOnBounds(true);
-        searchTable.setVisible(true);
+        if(!isSearchTableMoving) {
+            isSearchTableMoving = true;
+            searchOnBackgroundPerSec();
+            searchTable.setOpacity(1);
+            searchTable.setPickOnBounds(true);
+            searchTable.setVisible(true);
+            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(500), searchTable);
+            scaleTransition.setFromY(0);
+            scaleTransition.setToY(1);
+            scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+            scaleTransition.setOnFinished(event -> {
+                isSearchTableMoving = false;
+            });
+            scaleTransition.play();
+            TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), searchTable);
+            translateTransition.setFromY(-100);
+            translateTransition.setToY(0);
+            translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+            translateTransition.setOnFinished(event -> {
+                isSearchTableMoving = false;
+            });
+            translateTransition.play();
+        }
     }
 
     private void setTransactionPane() {
@@ -654,10 +640,29 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onClickAppPagePane() {
-        timeline.stop();
-        searchTable.setOpacity(0);
-        searchTable.setPickOnBounds(false);
-        searchTable.setVisible(false);
+        if(!isSearchTableMoving) {
+            isSearchTableMoving = true;
+            timeline.stop();
+            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(500), searchTable);
+            scaleTransition.setFromY(1);
+            scaleTransition.setToY(0);
+            scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+            scaleTransition.setOnFinished(event -> {
+                isSearchTableMoving = false;
+            });
+            scaleTransition.play();
+            TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), searchTable);
+            translateTransition.setFromY(0);
+            translateTransition.setToY(-100);
+            translateTransition = TranslateUtils.addEaseInOutTranslateInterpolator(translateTransition);
+            translateTransition.setOnFinished(event -> {
+                isSearchTableMoving = false;
+            });
+            translateTransition.play();
+            searchTable.setOpacity(0);
+            searchTable.setPickOnBounds(false);
+            searchTable.setVisible(false);
+        }
     }
 
     @FXML
@@ -824,13 +829,6 @@ public class AppPage2Controller implements Initializable {
                 buttonSelected = ButtonSelected.ALL;
                 break;
         }
-        redTakenLabel.setOpacity(1);
-        redTakenLabel.setVisible(true);
-        redTakenLabel.setPickOnBounds(true);
-        greenRestockLabel.setOpacity(1);
-        greenRestockLabel.setVisible(true);
-        greenRestockLabel.setPickOnBounds(true);
-        greenRestockLabel.setTranslateX(0);
         fillCargoBoxesInformation(buttonSelected);
     }
 
@@ -850,13 +848,6 @@ public class AppPage2Controller implements Initializable {
                 buttonSelected = ButtonSelected.TAKEN;
                 break;
         }
-        redTakenLabel.setOpacity(1);
-        redTakenLabel.setVisible(true);
-        redTakenLabel.setPickOnBounds(true);
-        greenRestockLabel.setOpacity(0);
-        greenRestockLabel.setVisible(false);
-        greenRestockLabel.setPickOnBounds(false);
-        greenRestockLabel.setTranslateX(0);
         fillCargoBoxesInformation(buttonSelected);
     }
 
@@ -876,13 +867,6 @@ public class AppPage2Controller implements Initializable {
             case RESTOCK:
                 break;
         }
-        redTakenLabel.setOpacity(0);
-        redTakenLabel.setVisible(false);
-        redTakenLabel.setPickOnBounds(false);
-        greenRestockLabel.setOpacity(1);
-        greenRestockLabel.setVisible(true);
-        greenRestockLabel.setPickOnBounds(true);
-        greenRestockLabel.setTranslateX(-500);
         fillCargoBoxesInformation(buttonSelected);
     }
 
