@@ -152,9 +152,6 @@ public class TransactionPageController implements Initializable {
         dataTransactionPage.setPickOnBounds(false);
         dataTransactionPage.setOpacity(0);
         dataTransactionPage.setVisible(false);
-        allSelectButton.setDisable(true);
-        restockSelectButton.setDisable(false);
-        takenSelectButton.setDisable(false);
     }
 
     @FXML
@@ -237,9 +234,6 @@ public class TransactionPageController implements Initializable {
         isAll = true;
         isRestock = false;
         isTaken = false;
-        allSelectButton.setDisable(true);
-        restockSelectButton.setDisable(false);
-        takenSelectButton.setDisable(false);
         onClickPagination();
     }
 
@@ -262,9 +256,6 @@ public class TransactionPageController implements Initializable {
         isAll = false;
         isRestock = false;
         isTaken = true;
-        allSelectButton.setDisable(false);
-        restockSelectButton.setDisable(false);
-        takenSelectButton.setDisable(true);
         onClickPagination();
     }
 
@@ -287,9 +278,6 @@ public class TransactionPageController implements Initializable {
         isAll = false;
         isRestock = true;
         isTaken = false;
-        allSelectButton.setDisable(false);
-        restockSelectButton.setDisable(true);
-        takenSelectButton.setDisable(false);
         onClickPagination();
     }
 
