@@ -436,12 +436,12 @@
                   <JFXButton fx:id="updatePasswordButton" layoutX="474.0" layoutY="5.0" onAction="#onUpdatePassword" prefHeight="25.0" prefWidth="89.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" text="Password" textAlignment="CENTER" textFill="WHITE" />
                   <VBox layoutX="89.0" layoutY="45.0" pickOnBounds="false" prefHeight="135.0" prefWidth="478.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="40.0">
                      <children>
-                        <MFXTextField fx:id="oldInfoTextField" floatMode="BORDER" floatingText=" Current Account Info" prefHeight="40.0" prefWidth="478.0">
+                        <MFXTextField fx:id="currentInfoTextField" floatMode="BORDER" floatingText=" Current Account Info" graphicTextGap="5.0" prefHeight="40.0" prefWidth="478.0">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
                         </MFXTextField>
-                        <MFXTextField fx:id="newInfoTextField" floatMode="BORDER" floatingText=" New Account Info" prefHeight="40.0" prefWidth="478.0">
+                        <MFXTextField fx:id="newInfoTextField" floatMode="BORDER" floatingText=" New Account Info" graphicTextGap="5.0" prefHeight="40.0" prefWidth="478.0">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>

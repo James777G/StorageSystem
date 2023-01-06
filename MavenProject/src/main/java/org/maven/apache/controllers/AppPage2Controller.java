@@ -77,6 +77,18 @@ public class AppPage2Controller implements Initializable {
     private JFXButton statusRestockButton;
 
     @FXML
+    private JFXButton updateUsernameButton;
+
+    @FXML
+    private JFXButton updateEmailButton;
+
+    @FXML
+    private JFXButton updatePasswordButton;
+
+    @FXML
+    private JFXButton confirmUpdateInfo;
+
+    @FXML
     private JFXDrawer VBoxDrawer;
 
     @FXML
@@ -170,6 +182,12 @@ public class AppPage2Controller implements Initializable {
     private MFXTextField searchField;
 
     @FXML
+    private MFXTextField currentInfoTextField;
+
+    @FXML
+    private MFXTextField newInfoTextField;
+
+    @FXML
     protected MFXGenericDialog settingsDialog;
 
     //pass the user from login page
@@ -177,9 +195,9 @@ public class AppPage2Controller implements Initializable {
 
     private boolean isTriangleRotating = false;
 
-    private final JFXButton[] buttonList = new JFXButton[5];
-
     private boolean isRotating = false;
+
+    private final JFXButton[] buttonList = new JFXButton[5];
 
     private final Timeline timeline = new Timeline();
 
@@ -188,15 +206,18 @@ public class AppPage2Controller implements Initializable {
     private final DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
 
     private int i = 0;
+
     private int j = 0;
+
+    private int takenBoxNumber = 2;
+
+    private int restockBoxNumber = 2;
+
     enum ButtonSelected {
         ALL,
         TAKEN,
         RESTOCK
     }
-
-    private int takenBoxNumber = 2;
-    private int restockBoxNumber = 2;
 
     /**
      * These lists are for testing purpose only
@@ -738,8 +759,11 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void onCloseSettings() {
         settingsDialog.setVisible(false);
-
-
+        currentInfoTextField.clear();
+        newInfoTextField.clear();
+        updateUsernameButton.setDisable(false);
+        updateEmailButton.setDisable(false);
+        updatePasswordButton.setDisable(false);
     }
 
     @FXML
