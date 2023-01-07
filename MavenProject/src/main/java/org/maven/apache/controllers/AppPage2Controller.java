@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -197,7 +198,7 @@ public class AppPage2Controller implements Initializable {
     private Label notificationLabel;
 
     @FXML
-    private MFXTextField searchField;
+    private TextField searchField;
 
     @FXML
     private MFXTextField currentInfoTextField;
@@ -257,15 +258,19 @@ public class AppPage2Controller implements Initializable {
      * These lists are for testing purpose only
      */
     private List<DateTransaction> dateTransactions = dateTransactionService.selectAll();
-    private List<DateTransaction> dateTransactions_Date = dateTransactionService.pageAskedDateDescend(1,dateTransactions.size());
+    private List<DateTransaction> dateTransactions_Date = dateTransactionService.pageAskedDateDescend(1, dateTransactions.size());
     private List<DateTransaction> dateTransactions_Taken = new ArrayList<DateTransaction>();
     private List<DateTransaction> dateTransactions_Restock = new ArrayList<DateTransaction>();
     /* testing ends*/
 
     private ButtonSelected buttonSelected = ButtonSelected.ALL;
 
+    private boolean isSearchTableOut = false;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        searchField.deselect();
         currentPage = appPagePane;
         DataUtils.publicSettingsDialog = settingsDialog;
         settingsDialog.setVisible(false);
@@ -286,17 +291,12 @@ public class AppPage2Controller implements Initializable {
         stackPane.setOpacity(0);
         stackPane.setVisible(false);
         // initialize search per sec when search field is chosen
-        searchField.delegateFocusedProperty().addListener((observable, oldValue, newValue) -> {
+        searchField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 searchOnBackgroundPerSec();
-                searchTable.setOpacity(1);
-                searchTable.setPickOnBounds(true);
-                searchTable.setVisible(true);
             } else {
                 timeline.stop();
-                searchTable.setOpacity(0);
-                searchTable.setPickOnBounds(false);
-                searchTable.setVisible(false);
+                isSearchTableOut = false;
             }
         });
         // load the menu VBox to drawer
@@ -314,29 +314,28 @@ public class AppPage2Controller implements Initializable {
     }
 
     private void initializeLabels() {
-        cargoNameLabels[0]=cargoNameLabel01;
-        cargoNameLabels[1]=cargoNameLabel02;
-        cargoNameLabels[2]=cargoNameLabel03;
-        cargoNameLabels[3]=cargoNameLabel04;
-        cargoAmountLabels[0]=cargoAmountLabel01;
-        cargoAmountLabels[1]=cargoAmountLabel02;
-        cargoAmountLabels[2]=cargoAmountLabel03;
-        cargoAmountLabels[3]=cargoAmountLabel04;
-        staffNameLabels[0]=staffNameLabel01;
-        staffNameLabels[1]=staffNameLabel02;
-        staffNameLabels[2]=staffNameLabel03;
-        staffNameLabels[3]=staffNameLabel04;
-        cargoBoxPanes[0]=cargoBox1Pane;
-        cargoBoxPanes[1]=cargoBox2Pane;
-        cargoBoxPanes[2]=cargoBox3Pane;
-        cargoBoxPanes[3]=cargoBox4Pane;
+        cargoNameLabels[0] = cargoNameLabel01;
+        cargoNameLabels[1] = cargoNameLabel02;
+        cargoNameLabels[2] = cargoNameLabel03;
+        cargoNameLabels[3] = cargoNameLabel04;
+        cargoAmountLabels[0] = cargoAmountLabel01;
+        cargoAmountLabels[1] = cargoAmountLabel02;
+        cargoAmountLabels[2] = cargoAmountLabel03;
+        cargoAmountLabels[3] = cargoAmountLabel04;
+        staffNameLabels[0] = staffNameLabel01;
+        staffNameLabels[1] = staffNameLabel02;
+        staffNameLabels[2] = staffNameLabel03;
+        staffNameLabels[3] = staffNameLabel04;
+        cargoBoxPanes[0] = cargoBox1Pane;
+        cargoBoxPanes[1] = cargoBox2Pane;
+        cargoBoxPanes[2] = cargoBox3Pane;
+        cargoBoxPanes[3] = cargoBox4Pane;
     }
 
     /**
      * This method is for testing only
-     *
      */
-    private void createRestockAndTakenLists(){
+    private void createRestockAndTakenLists() {
         for (DateTransaction dateTransaction : dateTransactions_Date) {
             if (dateTransaction.getAddUnit() == 0) {
                 if (i < 4) {
@@ -349,7 +348,7 @@ public class AppPage2Controller implements Initializable {
                     j++;
                 }
             }
-            if(i+j == 8){
+            if (i + j == 8) {
                 break;
             }
         }
@@ -358,9 +357,9 @@ public class AppPage2Controller implements Initializable {
        Test ends.
      */
 
-    private void fillCargoBoxesInformation(ButtonSelected buttonSelected){
+    private void fillCargoBoxesInformation(ButtonSelected buttonSelected) {
         int boxNumber = 4;
-        for(int index = 0; index < boxNumber; index++){
+        for (int index = 0; index < boxNumber; index++) {
             cargoBoxPanes[index].setOpacity(1);
             cargoBoxPanes[index].setVisible(true);
             cargoBoxPanes[index].setPickOnBounds(true);
@@ -374,9 +373,9 @@ public class AppPage2Controller implements Initializable {
                 greenRestockLabel.setVisible(true);
                 greenRestockLabel.setPickOnBounds(true);
                 greenRestockLabel.setTranslateX(0);
-                if(dateTransactions_Taken.size() < 2) {
+                if (dateTransactions_Taken.size() < 2) {
                     takenBoxNumber = dateTransactions_Taken.size();
-                    for(int hideAllTaken = 1 ; hideAllTaken >= dateTransactions_Taken.size() ; hideAllTaken--){
+                    for (int hideAllTaken = 1; hideAllTaken >= dateTransactions_Taken.size(); hideAllTaken--) {
                         cargoBoxPanes[hideAllTaken].setOpacity(0);
                         cargoBoxPanes[hideAllTaken].setVisible(false);
                         cargoBoxPanes[hideAllTaken].setPickOnBounds(false);
@@ -384,21 +383,21 @@ public class AppPage2Controller implements Initializable {
                 }
                 if (dateTransactions_Restock.size() < 2) {
                     restockBoxNumber = dateTransactions_Restock.size();
-                    for(int hideAllRestock = 3 ; hideAllRestock >= dateTransactions_Restock.size() + 2; hideAllRestock--){
+                    for (int hideAllRestock = 3; hideAllRestock >= dateTransactions_Restock.size() + 2; hideAllRestock--) {
                         cargoBoxPanes[hideAllRestock].setOpacity(0);
                         cargoBoxPanes[hideAllRestock].setVisible(false);
                         cargoBoxPanes[hideAllRestock].setPickOnBounds(false);
                     }
                 }
-                for(int indexTaken = 0; indexTaken < takenBoxNumber; indexTaken++){
+                for (int indexTaken = 0; indexTaken < takenBoxNumber; indexTaken++) {
                     cargoNameLabels[indexTaken].setText(dateTransactions_Taken.get(indexTaken).getItemName());
                     cargoAmountLabels[indexTaken].setText(dateTransactions_Taken.get(indexTaken).getRemoveUnit().toString());
                     staffNameLabels[indexTaken].setText(dateTransactions_Taken.get(indexTaken).getStaffName());
                 }
-                for(int indexRestock = 0; indexRestock < restockBoxNumber; indexRestock++){
-                    cargoNameLabels[indexRestock+2].setText(dateTransactions_Restock.get(indexRestock).getItemName());
-                    cargoAmountLabels[indexRestock+2].setText(dateTransactions_Restock.get(indexRestock).getAddUnit().toString());
-                    staffNameLabels[indexRestock+2].setText(dateTransactions_Restock.get(indexRestock).getStaffName());
+                for (int indexRestock = 0; indexRestock < restockBoxNumber; indexRestock++) {
+                    cargoNameLabels[indexRestock + 2].setText(dateTransactions_Restock.get(indexRestock).getItemName());
+                    cargoAmountLabels[indexRestock + 2].setText(dateTransactions_Restock.get(indexRestock).getAddUnit().toString());
+                    staffNameLabels[indexRestock + 2].setText(dateTransactions_Restock.get(indexRestock).getStaffName());
                 }
 
             }
@@ -409,15 +408,15 @@ public class AppPage2Controller implements Initializable {
                 greenRestockLabel.setOpacity(0);
                 greenRestockLabel.setVisible(false);
                 greenRestockLabel.setPickOnBounds(false);
-                if(dateTransactions_Taken.size() < 4){
+                if (dateTransactions_Taken.size() < 4) {
                     boxNumber = dateTransactions_Taken.size();
-                    for(int hideTaken = 3; hideTaken > dateTransactions_Taken.size()-1; hideTaken--){
+                    for (int hideTaken = 3; hideTaken > dateTransactions_Taken.size() - 1; hideTaken--) {
                         cargoBoxPanes[hideTaken].setOpacity(0);
                         cargoBoxPanes[hideTaken].setVisible(false);
                         cargoBoxPanes[hideTaken].setPickOnBounds(false);
                     }
                 }
-                for(int index = 0; index < boxNumber; index++) {
+                for (int index = 0; index < boxNumber; index++) {
                     cargoNameLabels[index].setText(dateTransactions_Taken.get(index).getItemName());
                     cargoAmountLabels[index].setText(dateTransactions_Taken.get(index).getRemoveUnit().toString());
                     staffNameLabels[index].setText(dateTransactions_Taken.get(index).getStaffName());
@@ -432,15 +431,15 @@ public class AppPage2Controller implements Initializable {
                 greenRestockLabel.setVisible(true);
                 greenRestockLabel.setPickOnBounds(true);
                 greenRestockLabel.setTranslateX(-500);
-                if(dateTransactions_Restock.size() < 4){
+                if (dateTransactions_Restock.size() < 4) {
                     boxNumber = dateTransactions_Restock.size();
-                    for(int hideRestock = 3; hideRestock > dateTransactions_Restock.size()-1; hideRestock--){
+                    for (int hideRestock = 3; hideRestock > dateTransactions_Restock.size() - 1; hideRestock--) {
                         cargoBoxPanes[hideRestock].setOpacity(0);
                         cargoBoxPanes[hideRestock].setVisible(false);
                         cargoBoxPanes[hideRestock].setPickOnBounds(false);
                     }
                 }
-                for(int index = 0; index < boxNumber; index++) {
+                for (int index = 0; index < boxNumber; index++) {
                     cargoNameLabels[index].setText(dateTransactions_Restock.get(index).getItemName());
                     cargoAmountLabels[index].setText(dateTransactions_Restock.get(index).getAddUnit().toString());
                     staffNameLabels[index].setText(dateTransactions_Restock.get(index).getStaffName());
@@ -451,9 +450,9 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     @SuppressWarnings("all")
-    private void onClickWarehouseButton(){
+    private void onClickWarehouseButton() {
         if (currentPage != stackPaneForWarehouse) {
-            if(currentPage == appPagePane){
+            if (currentPage == appPagePane) {
                 appPagePane.setPickOnBounds(false);
                 FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 1, 0);
                 FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 0, 1);
@@ -466,7 +465,7 @@ public class AppPage2Controller implements Initializable {
                 fadeTransition.play();
                 currentPage = stackPaneForWarehouse;
             }
-            if(currentPage == stackPane){
+            if (currentPage == stackPane) {
                 stackPane.setPickOnBounds(false);
 
                 FadeTransition fadeTransition = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);
@@ -496,6 +495,7 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onClickSearch() {
+        isSearchTableOut = true;
         searchOnBackgroundPerSec();
         searchTable.setOpacity(1);
         searchTable.setPickOnBounds(true);
@@ -510,7 +510,8 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onClickSearchBar() {
-        if(!isSearchTableMoving) {
+        if (!isSearchTableMoving && !isSearchTableOut) {
+            isSearchTableOut = true;
             isSearchTableMoving = true;
             searchOnBackgroundPerSec();
             searchTable.setOpacity(1);
@@ -546,8 +547,8 @@ public class AppPage2Controller implements Initializable {
         }
     }
 
-    private void setWarehousePane(){
-        try{
+    private void setWarehousePane() {
+        try {
             AnchorPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/warehousePage.fxml")));
             stackPaneForWarehouse.getChildren().add(pane);
         } catch (IOException e) {
@@ -577,7 +578,7 @@ public class AppPage2Controller implements Initializable {
     @SuppressWarnings("all")
     private void onEnterAppPage() {
         if (currentPage != appPagePane) {
-            if(currentPage == stackPane){
+            if (currentPage == stackPane) {
                 appPagePane.setPickOnBounds(true);
                 appPagePane.setVisible(true);
                 stackPane.setPickOnBounds(false);
@@ -591,7 +592,7 @@ public class AppPage2Controller implements Initializable {
                 fadeTransition1.play();
                 currentPage = appPagePane;
             }
-            if(currentPage == stackPaneForWarehouse){
+            if (currentPage == stackPaneForWarehouse) {
                 assert appPagePane != null;
                 appPagePane.setPickOnBounds(true);
                 appPagePane.setVisible(true);
@@ -645,29 +646,12 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onClickAppPagePane() {
-        if(!isSearchTableMoving) {
-            isSearchTableMoving = true;
-            timeline.stop();
-            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(500), searchTable);
-            scaleTransition.setFromY(1);
-            scaleTransition.setToY(0);
-            scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
-            scaleTransition.setOnFinished(event -> {
-                isSearchTableMoving = false;
-            });
-            scaleTransition.play();
-            TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), searchTable);
-            translateTransition.setFromY(0);
-            translateTransition.setToY(-100);
-            translateTransition = TranslateUtils.addEaseInOutTranslateInterpolator(translateTransition);
-            translateTransition.setOnFinished(event -> {
-                isSearchTableMoving = false;
-            });
-            translateTransition.play();
-            searchTable.setOpacity(0);
-            searchTable.setPickOnBounds(false);
-            searchTable.setVisible(false);
-        }
+        isSearchTableOut = false;
+        isSearchTableMoving = false;
+        timeline.stop();
+        searchTable.setOpacity(0);
+        searchTable.setPickOnBounds(false);
+        searchTable.setVisible(false);
     }
 
     @FXML
@@ -765,7 +749,7 @@ public class AppPage2Controller implements Initializable {
     @SuppressWarnings("all")
     private void onTransactionPage() {
         if (currentPage != stackPane) {
-            if(currentPage == appPagePane){
+            if (currentPage == appPagePane) {
                 appPagePane.setPickOnBounds(false);
                 stackPane.setPickOnBounds(true);
                 stackPane.setVisible(true);
@@ -778,7 +762,7 @@ public class AppPage2Controller implements Initializable {
                 fadeTransition.play();
                 currentPage = stackPane;
             }
-            if(currentPage == stackPaneForWarehouse){
+            if (currentPage == stackPaneForWarehouse) {
                 stackPaneForWarehouse.setPickOnBounds(false);
                 stackPane.setPickOnBounds(true);
                 stackPane.setVisible(true);
@@ -877,21 +861,21 @@ public class AppPage2Controller implements Initializable {
     }
 
     @FXML
-    private void onUpdateUsername(){
+    private void onUpdateUsername() {
         updateSettingDialog("Username");
         infoVBox.setVisible(true);
         passwordVBox.setVisible(false);
     }
 
     @FXML
-    private void onUpdateEmail(){
+    private void onUpdateEmail() {
         updateSettingDialog("Email");
         infoVBox.setVisible(true);
         passwordVBox.setVisible(false);
     }
 
     @FXML
-    private void onUpdatePassword(){
+    private void onUpdatePassword() {
         updateSettingDialog("Password");
         infoVBox.setVisible(false);
         passwordVBox.setVisible(true);
@@ -899,10 +883,11 @@ public class AppPage2Controller implements Initializable {
 
     /**
      * set the status of buttons and textfields pursuant to the property that is being updated
+     *
      * @param infoType
      */
-    private void updateSettingDialog(String infoType){
-        switch (infoType){
+    private void updateSettingDialog(String infoType) {
+        switch (infoType) {
             case "Username":
                 isUpdatingUsername = true;
                 isUpdatingEmail = false;
@@ -944,7 +929,7 @@ public class AppPage2Controller implements Initializable {
      * update any account info for current logged in user
      */
     @FXML
-    private void onConfirmUpdateInfo(){
+    private void onConfirmUpdateInfo() {
         User currentUser = DataUtils.currentUser;
         String currentUsername = currentUser.getUsername();
         String currentUserEmail = currentUser.getEmailAddress();
@@ -956,36 +941,36 @@ public class AppPage2Controller implements Initializable {
         String currentPassword = currentPasswordField.getText();
         //get new passwrod
         String newPassword = newPasswordField.getText();
-        if (isUpdatingUsername && !isUpdatingEmail && !isUpdatingPassword){
+        if (isUpdatingUsername && !isUpdatingEmail && !isUpdatingPassword) {
             // updating username
-            if (currentInfo.equals(currentUsername) && newInfo.length() > 1){
+            if (currentInfo.equals(currentUsername) && newInfo.length() > 1) {
                 // old username is matched with database and new username has length of at least 2
                 currentUser.setUsername(newInfo);
                 userService.update(currentUser);
                 notificationLabel.setText("Username updated");
-            }else{
+            } else {
                 notificationLabel.setText("Invalid old or new Username");
             }
-        }else if (!isUpdatingUsername && isUpdatingEmail && !isUpdatingPassword){
+        } else if (!isUpdatingUsername && isUpdatingEmail && !isUpdatingPassword) {
             // updating email
-            if (currentInfo.equals(currentUserEmail) && newInfo.length() > 5 && newInfo.contains("@") && newInfo.contains(".com")){
+            if (currentInfo.equals(currentUserEmail) && newInfo.length() > 5 && newInfo.contains("@") && newInfo.contains(".com")) {
                 // old email is matched with database and
                 // new email contains characters "@" and string ".com"
                 // and has length of at least 6
                 currentUser.setEmailAddress(newInfo);
                 userService.update(currentUser);
                 notificationLabel.setText("Email updated");
-            }else{
+            } else {
                 notificationLabel.setText("Invalid old or new Email");
             }
-        }else if (!isUpdatingUsername && !isUpdatingEmail && isUpdatingPassword){
+        } else if (!isUpdatingUsername && !isUpdatingEmail && isUpdatingPassword) {
             // updating password
-            if (currentPassword.equals(currentUserPassword) && newPassword.length() > 5){
+            if (currentPassword.equals(currentUserPassword) && newPassword.length() > 5) {
                 // old password is matched and new password has length of at least 6
                 currentUser.setPassword(newPassword);
                 userService.update(currentUser);
                 notificationLabel.setText("Password updated");
-            }else{
+            } else {
                 notificationLabel.setText("Invalid old or new Password");
             }
         }
