@@ -254,15 +254,8 @@ public class AppPage2Controller implements Initializable {
         RESTOCK
     }
 
-    /**
-     * These lists are for testing purpose only
-     */
-    private List<DateTransaction> dateTransactions = dateTransactionService.selectAll();
-    private List<DateTransaction> dateTransactions_Date = dateTransactionService.pageAskedDateDescend(1, dateTransactions.size());
-    private List<DateTransaction> dateTransactions_Taken = new ArrayList<DateTransaction>();
-    private List<DateTransaction> dateTransactions_Restock = new ArrayList<DateTransaction>();
-    /* testing ends*/
-
+    private List<DateTransaction> dateTransactions_Restock = dateTransactionService.pageAskedDateAddUnitDescend();
+    private List<DateTransaction> dateTransactions_Taken = dateTransactionService.pageAskedDateRemoveUnitDescend();
     private ButtonSelected buttonSelected = ButtonSelected.ALL;
 
     private boolean isSearchTableOut = false;
@@ -299,10 +292,8 @@ public class AppPage2Controller implements Initializable {
                 isSearchTableOut = false;
             }
         });
-        // load the menu VBox to drawer
         setDrawer();
         confirmUpdateInfo.setDisable(true);
-        createRestockAndTakenLists(); // Will be replaced by SQL statement
         initializeLabels();
         System.out.println(dateTransactions_Taken);
         System.out.println(dateTransactions_Restock);
@@ -331,31 +322,6 @@ public class AppPage2Controller implements Initializable {
         cargoBoxPanes[2] = cargoBox3Pane;
         cargoBoxPanes[3] = cargoBox4Pane;
     }
-
-    /**
-     * This method is for testing only
-     */
-    private void createRestockAndTakenLists() {
-        for (DateTransaction dateTransaction : dateTransactions_Date) {
-            if (dateTransaction.getAddUnit() == 0) {
-                if (i < 4) {
-                    dateTransactions_Taken.add(i, dateTransaction);
-                    i++;
-                }
-            } else if (dateTransaction.getRemoveUnit() == 0) {
-                if (j < 4) {
-                    dateTransactions_Restock.add(j, dateTransaction);
-                    j++;
-                }
-            }
-            if (i + j == 8) {
-                break;
-            }
-        }
-    }
-    /*
-       Test ends.
-     */
 
     private void fillCargoBoxesInformation(ButtonSelected buttonSelected) {
         int boxNumber = 4;
@@ -974,7 +940,5 @@ public class AppPage2Controller implements Initializable {
                 notificationLabel.setText("Invalid old or new Password");
             }
         }
-
     }
-
 }
