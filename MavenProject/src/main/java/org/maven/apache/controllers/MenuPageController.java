@@ -41,6 +41,7 @@ public class MenuPageController implements Initializable {
         Method onClickSettingsTwo = clazz.getDeclaredMethod("onClickSettingsTwo", MFXGenericDialog.class);
         onClickSettingsTwo.setAccessible(true);
         onClickSettingsTwo.invoke(clazz.getConstructor().newInstance(), DataUtils.publicSettingsDialog);
+        DataUtils.publicBlockPane.setVisible(true);
     }
 }
 

@@ -128,6 +128,9 @@ public class AppPage2Controller implements Initializable {
     private AnchorPane cargoBox4Pane;
 
     @FXML
+    private AnchorPane blockPane;
+
+    @FXML
     private AnchorPane[] cargoBoxPanes = new AnchorPane[4];//{cargoBox1Pane,cargoBox2Pane,cargoBox3Pane,cargoBox4Pane};
 
     @FXML
@@ -306,6 +309,8 @@ public class AppPage2Controller implements Initializable {
         System.out.println(dateTransactions_Taken.size());
         System.out.println(dateTransactions_Restock.size());
         fillCargoBoxesInformation(buttonSelected);
+        blockPane.setVisible(false);
+        DataUtils.publicBlockPane = blockPane;
     }
 
     private void initializeLabels() {
@@ -811,6 +816,7 @@ public class AppPage2Controller implements Initializable {
         currentInfoTextField.setFloatingText(" Current Account Info");
         newInfoTextField.setFloatingText(" New Account Info");
         notificationLabel.setText("");
+        blockPane.setVisible(false);
     }
 
     @FXML

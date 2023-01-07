@@ -9,6 +9,8 @@ public class DataUtils {
     public static User currentUser;
 
     public static AnchorPane publicDataPane;
+
+    public static AnchorPane publicBlockPane;
     public static MFXGenericDialog publicSettingsDialog;
 
     public static AnchorPane editCargoPane;
