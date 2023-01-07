@@ -86,6 +86,15 @@ public class TransactionPageController implements Initializable {
     private AnchorPane onRestockSelectPane;
 
     @FXML
+    private AnchorPane dataTransactionPage;
+
+    @FXML
+    private AnchorPane cargoPage;
+
+    @FXML
+    private AnchorPane editCargoPane;
+
+    @FXML
     private JFXButton allSelectButton;
 
     @FXML
@@ -110,12 +119,6 @@ public class TransactionPageController implements Initializable {
     private Label statusLabel1, statusLabel2, statusLabel3, statusLabel4;
 
     @FXML
-    private AnchorPane dataTransactionPage;
-
-    @FXML
-    private AnchorPane cargoPage;
-
-    @FXML
     private MFXPagination transactionPagination;
 
     @FXML
@@ -123,9 +126,6 @@ public class TransactionPageController implements Initializable {
 
     @FXML
     private ImageView sortByDate;
-
-    @FXML
-    private AnchorPane editCargoPane;
 
     private Label[] staffLabelArray = new Label[4];
 
@@ -141,7 +141,6 @@ public class TransactionPageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         editCargoPane.getChildren().add(DataUtils.editCargoPane);
         editCargoPane.setOpacity(0);
-        editCargoPane.setPickOnBounds(false);
         editCargoPane.setVisible(false);
         addButton.setCursor(Cursor.HAND);
         initializeLabels();

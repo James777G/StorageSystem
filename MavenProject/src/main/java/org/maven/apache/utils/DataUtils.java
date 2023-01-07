@@ -11,7 +11,10 @@ public class DataUtils {
     public static AnchorPane publicDataPane;
 
     public static AnchorPane publicBlockPane;
-    public static MFXGenericDialog publicSettingsDialog;
 
     public static AnchorPane editCargoPane;
+
+    public static MFXGenericDialog publicSettingsDialog;
+
+
 }
