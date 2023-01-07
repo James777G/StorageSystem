@@ -39,6 +39,11 @@
                   <Font name="Candara Bold" size="19.0" />
                </font>
             </Label>
+            <ImageView fx:id="crossImage" fitHeight="32.0" fitWidth="25.0" layoutX="367.0" layoutY="7.0" onMouseClicked="#onClickCross" onMouseEntered="#onEnterCross" onMouseExited="#onExitCross" onMousePressed="#onPressCross" onMouseReleased="#onReleaseCross" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-multiply-90.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <Separator layoutX="200.0" layoutY="60.0" prefWidth="400.0" AnchorPane.leftAnchor="200.0" />
