@@ -10,7 +10,9 @@ public class DataUtils {
 
     public static AnchorPane publicDataPane;
 
-    public static AnchorPane publicBlockPane;
+    public static AnchorPane publicSettingBlockPane;
+
+    public static AnchorPane publicTransactionBlockPane;
 
     public static AnchorPane editCargoPane;
 

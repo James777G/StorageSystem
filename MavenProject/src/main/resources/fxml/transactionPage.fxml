@@ -449,6 +449,7 @@
                </children></AnchorPane>
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="blockPane" layoutY="-60.0" opacity="0.75" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: grey;" />
       <AnchorPane fx:id="editCargoPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="350.0" prefWidth="600.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="130.0" />
    </children>
 </AnchorPane>

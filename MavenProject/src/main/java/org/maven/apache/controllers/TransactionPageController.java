@@ -95,6 +95,9 @@ public class TransactionPageController implements Initializable {
     private AnchorPane editCargoPane;
 
     @FXML
+    private AnchorPane blockPane;
+
+    @FXML
     private JFXButton allSelectButton;
 
     @FXML
@@ -149,6 +152,8 @@ public class TransactionPageController implements Initializable {
         dataTransactionPage.setPickOnBounds(false);
         dataTransactionPage.setOpacity(0);
         dataTransactionPage.setVisible(false);
+        blockPane.setVisible(false);
+        DataUtils.publicTransactionBlockPane = blockPane;
     }
 
     @FXML
@@ -181,6 +186,7 @@ public class TransactionPageController implements Initializable {
     @FXML
     private void onClickAddButton() {
         DataUtils.editCargoPane.setVisible(true);
+        blockPane.setVisible(true);
     }
 
     @FXML

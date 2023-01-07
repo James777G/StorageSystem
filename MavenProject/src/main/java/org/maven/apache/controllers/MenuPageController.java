@@ -16,15 +16,10 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MenuPageController implements Initializable {
+public class MenuPageController{
 
     @FXML
     private JFXButton signOffButton;
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
 
     @FXML
     private void onSignOff() throws IOException {
@@ -41,7 +36,7 @@ public class MenuPageController implements Initializable {
         Method onClickSettingsTwo = clazz.getDeclaredMethod("onClickSettingsTwo", MFXGenericDialog.class);
         onClickSettingsTwo.setAccessible(true);
         onClickSettingsTwo.invoke(clazz.getConstructor().newInstance(), DataUtils.publicSettingsDialog);
-        DataUtils.publicBlockPane.setVisible(true);
+        DataUtils.publicSettingBlockPane.setVisible(true);
     }
 }
 

@@ -15,6 +15,7 @@ public class EditCargoPageController {
     @FXML
     private void onClickCross(){
         DataUtils.editCargoPane.setVisible(false);
+        DataUtils.publicTransactionBlockPane.setVisible(false);
     }
 
     @FXML
