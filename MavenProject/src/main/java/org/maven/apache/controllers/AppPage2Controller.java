@@ -310,7 +310,7 @@ public class AppPage2Controller implements Initializable {
         System.out.println(dateTransactions_Restock.size());
         fillCargoBoxesInformation(buttonSelected);
         blockPane.setVisible(false);
-        DataUtils.publicBlockPane = blockPane;
+        DataUtils.publicSettingBlockPane = blockPane;
     }
 
     private void initializeLabels() {
