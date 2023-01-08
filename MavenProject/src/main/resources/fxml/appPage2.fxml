@@ -22,85 +22,6 @@
 <AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
    <children>
       <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: grey;" />
-
-      <MFXGenericDialog fx:id="settingsDialog" headerText="Account Info" onClose="#onCloseSettings" prefWidth="700.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="0.0">
-         <center>
-            <AnchorPane prefHeight="233.0" prefWidth="709.0" BorderPane.alignment="CENTER">
-               <children>
-                  <VBox fx:id="passwordVBox" layoutX="89.0" layoutY="45.0" prefHeight="135.0" prefWidth="478.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="60.0">
-                     <children>
-                        <MFXPasswordField fx:id="currentPasswordField" floatMode="BORDER" floatingText=" Current Password" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.5" prefWidth="478.0">
-                           <VBox.margin>
-                              <Insets top="15.0" />
-                           </VBox.margin>
-                        </MFXPasswordField>
-                        <MFXPasswordField fx:id="newPasswordField" floatMode="BORDER" floatingText=" New Password" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.5" prefWidth="478.0">
-                           <VBox.margin>
-                              <Insets top="15.0" />
-                           </VBox.margin>
-                        </MFXPasswordField>
-                     </children>
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="10.0" />
-                     </padding>
-                  </VBox>
-                  <VBox fx:id="infoVBox" layoutX="89.0" layoutY="45.0" pickOnBounds="false" prefHeight="135.0" prefWidth="478.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="60.0">
-                     <children>
-                        <MFXTextField fx:id="currentInfoTextField" floatMode="BORDER" floatingText=" Current Account Info" graphicTextGap="5.0" prefHeight="40.0" prefWidth="478.0">
-                           <VBox.margin>
-                              <Insets top="15.0" />
-                           </VBox.margin>
-                        </MFXTextField>
-                        <MFXTextField fx:id="newInfoTextField" floatMode="BORDER" floatingText=" New Account Info" graphicTextGap="5.0" prefHeight="40.0" prefWidth="478.0">
-                           <VBox.margin>
-                              <Insets top="15.0" />
-                           </VBox.margin>
-                        </MFXTextField>
-                     </children>
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="10.0" />
-                     </padding>
-                  </VBox>
-                  <Label fx:id="notificationLabel" layoutX="116.0" layoutY="179.0" opacity="0.0" prefHeight="17.0" prefWidth="460.0" text="The above change is valid" textAlignment="CENTER" textFill="#007235">
-                     <font>
-                        <Font name="Calibri" size="14.0" />
-                     </font>
-                  </Label>
-                  <HBox layoutY="14.0" prefHeight="30.0" prefWidth="277.0">
-                     <children>
-                        <JFXButton fx:id="updateUsernameButton" onAction="#onUpdateUsername" prefHeight="25.0" prefWidth="89.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: transparent;" text="Username" textAlignment="CENTER">
-                           <font>
-                              <Font name="Calibri" size="14.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton fx:id="updateEmailButton" onAction="#onUpdateEmail" prefHeight="25.0" prefWidth="82.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: transparent;" text="Email" textAlignment="CENTER">
-                           <font>
-                              <Font name="Calibri" size="14.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton fx:id="updatePasswordButton" onAction="#onUpdatePassword" prefHeight="25.0" prefWidth="89.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: transparent;" text="Password" textAlignment="CENTER">
-                           <font>
-                              <Font name="Calibri" size="14.0" />
-                           </font>
-                        </JFXButton>
-                     </children>
-                  </HBox>
-                  <Separator layoutX="7.0" layoutY="42.0" prefHeight="3.0" prefWidth="694.0" />
-                  <AnchorPane layoutX="7.0" layoutY="43.0" prefHeight="3.0" prefWidth="89.0" style="-fx-background-color: #223c40;" />
-                  <JFXButton fx:id="confirmUpdateInfo" layoutX="415.0" layoutY="212.0" onAction="#onConfirmUpdateInfo" prefHeight="25.0" prefWidth="89.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" text="Confirm" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font name="Calibri" size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="confirmUpdateInfo1" layoutX="187.0" layoutY="212.0" onAction="#onConfirmUpdateInfo" prefHeight="25.0" prefWidth="89.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" text="Validate" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font name="Calibri" size="14.0" />
-                     </font>
-                  </JFXButton>
-               </children>
-            </AnchorPane>
-         </center>
-      </MFXGenericDialog>
       <StackPane fx:id="stackPaneForWarehouse" layoutX="10.0" layoutY="10.0" prefHeight="640.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <StackPane fx:id="stackPane" prefHeight="640.0" prefWidth="1200.0" AnchorPane.topAnchor="60.0" />
       <AnchorPane fx:id="appPagePane" onMouseClicked="#onClickAppPagePane" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;">
@@ -495,5 +416,84 @@
             </AnchorPane>
          </children>
       </AnchorPane>
+
+      <MFXGenericDialog fx:id="settingsDialog" headerText="Account Info" onClose="#onCloseSettings" prefWidth="700.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <AnchorPane prefHeight="233.0" prefWidth="709.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox fx:id="passwordVBox" layoutX="89.0" layoutY="45.0" prefHeight="135.0" prefWidth="478.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="60.0">
+                     <children>
+                        <MFXPasswordField fx:id="currentPasswordField" floatMode="BORDER" floatingText=" Current Password" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.5" prefWidth="478.0">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </MFXPasswordField>
+                        <MFXPasswordField fx:id="newPasswordField" floatMode="BORDER" floatingText=" New Password" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.5" prefWidth="478.0">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </MFXPasswordField>
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="10.0" />
+                     </padding>
+                  </VBox>
+                  <VBox fx:id="infoVBox" layoutX="89.0" layoutY="45.0" pickOnBounds="false" prefHeight="135.0" prefWidth="478.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="60.0">
+                     <children>
+                        <MFXTextField fx:id="currentInfoTextField" floatMode="BORDER" floatingText=" Current Account Info" graphicTextGap="5.0" prefHeight="40.0" prefWidth="478.0">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </MFXTextField>
+                        <MFXTextField fx:id="newInfoTextField" floatMode="BORDER" floatingText=" New Account Info" graphicTextGap="5.0" prefHeight="40.0" prefWidth="478.0">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </MFXTextField>
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="10.0" />
+                     </padding>
+                  </VBox>
+                  <Label fx:id="notificationLabel" layoutX="116.0" layoutY="179.0" opacity="0.0" prefHeight="17.0" prefWidth="460.0" text="The above change is valid" textAlignment="CENTER" textFill="#007235">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Label>
+                  <HBox layoutY="14.0" prefHeight="30.0" prefWidth="277.0">
+                     <children>
+                        <JFXButton fx:id="updateUsernameButton" onAction="#onUpdateUsername" prefHeight="25.0" prefWidth="89.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: transparent;" text="Username" textAlignment="CENTER">
+                           <font>
+                              <Font name="Calibri" size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="updateEmailButton" onAction="#onUpdateEmail" prefHeight="25.0" prefWidth="82.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: transparent;" text="Email" textAlignment="CENTER">
+                           <font>
+                              <Font name="Calibri" size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="updatePasswordButton" onAction="#onUpdatePassword" prefHeight="25.0" prefWidth="89.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: transparent;" text="Password" textAlignment="CENTER">
+                           <font>
+                              <Font name="Calibri" size="14.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                  <Separator layoutX="7.0" layoutY="42.0" prefHeight="3.0" prefWidth="694.0" />
+                  <AnchorPane layoutX="7.0" layoutY="43.0" prefHeight="3.0" prefWidth="89.0" style="-fx-background-color: #223c40;" />
+                  <JFXButton fx:id="confirmUpdateInfo" layoutX="415.0" layoutY="212.0" onAction="#onConfirmUpdateInfo" prefHeight="25.0" prefWidth="89.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" text="Confirm" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="confirmUpdateInfo1" layoutX="187.0" layoutY="212.0" onAction="#onConfirmUpdateInfo" prefHeight="25.0" prefWidth="89.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" text="Validate" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </center>
+      </MFXGenericDialog>
    </children>
 </AnchorPane>
