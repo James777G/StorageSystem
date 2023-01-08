@@ -302,6 +302,7 @@ public class AppPage2Controller implements Initializable {
         fillCargoBoxesInformation(buttonSelected);
         blockPane.setVisible(false);
         DataUtils.publicSettingBlockPane = blockPane;
+        onUpdateUsername();
     }
 
     private void initializeLabels() {
@@ -756,15 +757,10 @@ public class AppPage2Controller implements Initializable {
         newInfoTextField.clear();
         currentPasswordField.clear();
         newPasswordField.clear();
-        updateUsernameButton.setDisable(false);
-        updateEmailButton.setDisable(false);
-        updatePasswordButton.setDisable(false);
         confirmUpdateInfo.setDisable(true);
         isUpdatingUsername = false;
         isUpdatingEmail = false;
         isUpdatingPassword = false;
-        currentInfoTextField.setFloatingText(" Current Account Info");
-        newInfoTextField.setFloatingText(" New Account Info");
         notificationLabel.setText("");
         blockPane.setVisible(false);
     }
@@ -829,6 +825,7 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void onUpdateUsername() {
         updateSettingDialog("Username");
+        settingsDialog.setHeaderText("Update your Username");
         infoVBox.setVisible(true);
         passwordVBox.setVisible(false);
     }
@@ -836,6 +833,7 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void onUpdateEmail() {
         updateSettingDialog("Email");
+        settingsDialog.setHeaderText("Update your Email");
         infoVBox.setVisible(true);
         passwordVBox.setVisible(false);
     }
@@ -843,6 +841,7 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void onUpdatePassword() {
         updateSettingDialog("Password");
+        settingsDialog.setHeaderText("Update your Password");
         infoVBox.setVisible(false);
         passwordVBox.setVisible(true);
     }
@@ -858,9 +857,6 @@ public class AppPage2Controller implements Initializable {
                 isUpdatingUsername = true;
                 isUpdatingEmail = false;
                 isUpdatingPassword = false;
-                updateUsernameButton.setDisable(true);
-                updateEmailButton.setDisable(false);
-                updatePasswordButton.setDisable(false);
                 currentInfoTextField.setFloatingText(" Current " + infoType);
                 newInfoTextField.setFloatingText(" New " + infoType);
                 break;
@@ -868,9 +864,6 @@ public class AppPage2Controller implements Initializable {
                 isUpdatingUsername = false;
                 isUpdatingEmail = true;
                 isUpdatingPassword = false;
-                updateUsernameButton.setDisable(false);
-                updateEmailButton.setDisable(true);
-                updatePasswordButton.setDisable(false);
                 currentInfoTextField.setFloatingText(" Current " + infoType);
                 newInfoTextField.setFloatingText(" New " + infoType);
                 break;
@@ -878,9 +871,6 @@ public class AppPage2Controller implements Initializable {
                 isUpdatingUsername = false;
                 isUpdatingEmail = false;
                 isUpdatingPassword = true;
-                updateUsernameButton.setDisable(false);
-                updateEmailButton.setDisable(false);
-                updatePasswordButton.setDisable(true);
                 break;
         }
         confirmUpdateInfo.setDisable(false);

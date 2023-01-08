@@ -417,7 +417,7 @@
          </children>
       </AnchorPane>
 
-      <MFXGenericDialog fx:id="settingsDialog" headerText="Account Info" onClose="#onCloseSettings" prefWidth="700.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="0.0">
+      <MFXGenericDialog fx:id="settingsDialog" headerText="Update your account Info" onClose="#onCloseSettings" prefWidth="700.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="0.0">
          <center>
             <AnchorPane prefHeight="233.0" prefWidth="709.0" BorderPane.alignment="CENTER">
                <children>
