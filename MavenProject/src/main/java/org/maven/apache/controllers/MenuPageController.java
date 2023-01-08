@@ -31,12 +31,11 @@ public class MenuPageController{
     }
 
     @FXML
-    public void onClickSettings() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public void onClickSettingsButton() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         Class<AppPage2Controller> clazz = AppPage2Controller.class;
         Method onClickSettingsTwo = clazz.getDeclaredMethod("onClickSettingsTwo", MFXGenericDialog.class);
         onClickSettingsTwo.setAccessible(true);
-        onClickSettingsTwo.invoke(clazz.getConstructor().newInstance(), DataUtils.publicSettingsDialog);
-        DataUtils.publicSettingBlockPane.setVisible(true);
+        onClickSettingsTwo.invoke(clazz, DataUtils.publicSettingsDialog);
     }
 }
 

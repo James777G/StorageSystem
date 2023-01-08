@@ -468,7 +468,7 @@ public class AppPage2Controller implements Initializable {
         searchTable.setVisible(true);
     }
 
-    private void onClickSettingsTwo(MFXGenericDialog genericDialog) {
+    private static void onClickSettingsTwo(MFXGenericDialog genericDialog) {
         genericDialog.setOpacity(1);
         genericDialog.setPickOnBounds(true);
         genericDialog.setVisible(true);
