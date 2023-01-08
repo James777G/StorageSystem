@@ -132,6 +132,9 @@ public class AppPage2Controller implements Initializable {
     private AnchorPane blockPane;
 
     @FXML
+    private AnchorPane transitionSettingLine;
+
+    @FXML
     private AnchorPane[] cargoBoxPanes = new AnchorPane[4];//{cargoBox1Pane,cargoBox2Pane,cargoBox3Pane,cargoBox4Pane};
 
     @FXML
@@ -825,25 +828,19 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void onUpdateUsername() {
         updateSettingDialog("Username");
-        settingsDialog.setHeaderText("Update your Username");
-        infoVBox.setVisible(true);
-        passwordVBox.setVisible(false);
+        setTransitionSettingLine();
     }
 
     @FXML
     private void onUpdateEmail() {
         updateSettingDialog("Email");
-        settingsDialog.setHeaderText("Update your Email");
-        infoVBox.setVisible(true);
-        passwordVBox.setVisible(false);
+        setTransitionSettingLine();
     }
 
     @FXML
     private void onUpdatePassword() {
         updateSettingDialog("Password");
-        settingsDialog.setHeaderText("Update your Password");
-        infoVBox.setVisible(false);
-        passwordVBox.setVisible(true);
+        setTransitionSettingLine();
     }
 
     /**
@@ -857,20 +854,29 @@ public class AppPage2Controller implements Initializable {
                 isUpdatingUsername = true;
                 isUpdatingEmail = false;
                 isUpdatingPassword = false;
+                infoVBox.setVisible(true);
+                passwordVBox.setVisible(false);
                 currentInfoTextField.setFloatingText(" Current " + infoType);
                 newInfoTextField.setFloatingText(" New " + infoType);
+                settingsDialog.setHeaderText("Update your Username");
                 break;
             case "Email":
                 isUpdatingUsername = false;
                 isUpdatingEmail = true;
                 isUpdatingPassword = false;
+                infoVBox.setVisible(true);
+                passwordVBox.setVisible(false);
                 currentInfoTextField.setFloatingText(" Current " + infoType);
                 newInfoTextField.setFloatingText(" New " + infoType);
+                settingsDialog.setHeaderText("Update your Email");
                 break;
             case "Password":
                 isUpdatingUsername = false;
                 isUpdatingEmail = false;
                 isUpdatingPassword = true;
+                infoVBox.setVisible(false);
+                passwordVBox.setVisible(true);
+                settingsDialog.setHeaderText("Update your Password");
                 break;
         }
         confirmUpdateInfo.setDisable(false);
@@ -879,6 +885,25 @@ public class AppPage2Controller implements Initializable {
         currentPasswordField.clear();
         newPasswordField.clear();
         notificationLabel.setText("");
+    }
+
+    /**
+     * shift the line under the buttons pursuant to the info that is being updating
+     */
+    private void setTransitionSettingLine(){
+        if (isUpdatingUsername && !isUpdatingEmail && !isUpdatingPassword){
+            TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionToX(transitionSettingLine, 500, 0);
+            translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+            translateTransition.play();
+        }else if (!isUpdatingUsername && isUpdatingEmail && !isUpdatingPassword){
+            TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionToX(transitionSettingLine, 500, 90);
+            translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+            translateTransition.play();
+        }else if (!isUpdatingUsername && !isUpdatingEmail && isUpdatingPassword){
+            TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionToX(transitionSettingLine, 500, 180);
+            translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+            translateTransition.play();
+        }
     }
 
     /**
