@@ -36,6 +36,7 @@ public class MenuPageController{
         Method onClickSettingsTwo = clazz.getDeclaredMethod("onClickSettingsTwo", MFXGenericDialog.class);
         onClickSettingsTwo.setAccessible(true);
         onClickSettingsTwo.invoke(clazz, DataUtils.publicSettingsDialog);
+        DataUtils.publicSettingBlockPane.setVisible(true);
     }
 }
 
