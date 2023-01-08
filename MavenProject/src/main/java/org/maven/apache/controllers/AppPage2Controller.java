@@ -31,7 +31,6 @@ import org.maven.apache.utils.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -495,9 +494,7 @@ public class AppPage2Controller implements Initializable {
                 isSearchTableMoving = false;
             });
             scaleTransition.play();
-            TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), searchTable);
-            translateTransition.setFromY(-100);
-            translateTransition.setToY(0);
+            TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(searchTable,500,-100,0);
             translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
             translateTransition.setOnFinished(event -> {
                 isSearchTableMoving = false;
@@ -703,14 +700,14 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void enterRefreshImage() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(refreshImage, 500, 1.2);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(refreshImage, 500, 1.2);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
     private void exitRefreshImage() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(refreshImage, 500, 1);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(refreshImage, 500, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }

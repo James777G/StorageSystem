@@ -38,28 +38,28 @@ public class EditCargoPageController {
 
     @FXML
     private void onEnterCross(){
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(crossImage, 500, 1.5);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 500, 1.5);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
     private void onExitCross(){
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(crossImage, 500, 1);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 500, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
     private void onPressCross(){
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(crossImage, 500, 1.3);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 500, 1.3);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
     private void onReleaseCross(){
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(crossImage, 500, 1.5);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 500, 1.5);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }

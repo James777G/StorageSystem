@@ -239,56 +239,56 @@ public class LogInPageController implements Initializable {
 
 	@FXML
 	private void onEnterExitButton() {
-		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton, 500, 1.2);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(exitButton, 500, 1.2);
 		scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
 		scaleTransition.play();
 	}
 
 	@FXML
 	private void onEnterExitButton2() {
-		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton2, 500, 1.2);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(exitButton2, 500, 1.2);
 		scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
 		scaleTransition.play();
 	}
 
 	@FXML
 	private void onLeaveExitButton2() {
-		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton2, 500, 1);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(exitButton2, 500, 1);
 		scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
 		scaleTransition.play();
 	}
 
 	@FXML
 	private void onPressExitButton2() {
-		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton2, 500, 0.8);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(exitButton2, 500, 0.8);
 		scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
 		scaleTransition.play();
 	}
 
 	@FXML
 	private void onReleaseExitButton2() {
-		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton2, 500, 1);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(exitButton2, 500, 1);
 		scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
 		scaleTransition.play();
 	}
 
 	@FXML
 	private void onLeaveExitButton() {
-		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton, 500, 1);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(exitButton, 500, 1);
 		scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
 		scaleTransition.play();
 	}
 
 	@FXML
 	private void onPressExitButton() {
-		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton, 500, 0.8);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(exitButton, 500, 0.8);
 		scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
 		scaleTransition.play();
 	}
 
 	@FXML
 	private void onReleaseExitButton() {
-		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(exitButton, 500, 1);
+		ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(exitButton, 500, 1);
 		scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
 		scaleTransition.play();
 	}

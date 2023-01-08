@@ -8,7 +8,6 @@ import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -160,7 +159,7 @@ public class TransactionPageController implements Initializable {
     private void onMoveToData() {
         if (!isMovingLineOnData && !isRunning) {
             isRunning = true;
-            TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionOnX(movingLinePane, 500, 105);
+            TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionByX(movingLinePane, 500, 105);
             translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
             translateTransition.setOnFinished(event -> {
                 isRunning = false;
@@ -193,7 +192,7 @@ public class TransactionPageController implements Initializable {
     private void onMoveToCargo() {
         if (isMovingLineOnData && !isRunning) {
             isRunning = true;
-            TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionOnX(movingLinePane, 500, -105);
+            TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionByX(movingLinePane, 500, -105);
             translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
             translateTransition.setOnFinished(event -> {
                 isRunning = false;
@@ -284,14 +283,14 @@ public class TransactionPageController implements Initializable {
 
     @FXML
     private void onEnterAddButton() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(addButton, 500, 1.1);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(addButton, 500, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
     private void onExitAddButton() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionBy(addButton, 500, 1);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(addButton, 500, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
