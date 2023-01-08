@@ -486,9 +486,7 @@ public class AppPage2Controller implements Initializable {
             searchTable.setOpacity(1);
             searchTable.setPickOnBounds(true);
             searchTable.setVisible(true);
-            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(500), searchTable);
-            scaleTransition.setFromY(0);
-            scaleTransition.setToY(1);
+            ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(searchTable,500,0,1);
             scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
             scaleTransition.setOnFinished(event -> {
                 isSearchTableMoving = false;
