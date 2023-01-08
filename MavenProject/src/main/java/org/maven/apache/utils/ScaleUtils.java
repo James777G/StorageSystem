@@ -14,13 +14,91 @@ public class ScaleUtils {
      *
      * @param node that undergoes to translate transition
      * @param duration of the transition
-     * @param size to scale to
+     * @param size to scale x,y to
      * @return the custom ScaleTransition instance
      */
-    public static ScaleTransition getScaleTransitionBy(Node node, int duration, double size){
+    public static ScaleTransition getScaleTransitionToXY(Node node, int duration, double size){
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(duration),node);
         scaleTransition.setToX(size);
         scaleTransition.setToY(size);
+        return scaleTransition;
+    }
+
+    /**
+     * This method generates a custom TranslateTransition instance to be used in a transition
+     *
+     * @param node that undergoes to translate transition
+     * @param duration of the transition
+     * @param fromSize to scale x,y from
+     * @param toSize to scale x,y to
+     * @return the custom ScaleTransition instance
+     */
+    public static ScaleTransition getScaleTransitionFromToXY(Node node, int duration, double fromSize, double toSize){
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(duration),node);
+        scaleTransition.setFromX(fromSize);
+        scaleTransition.setToX(toSize);
+        scaleTransition.setFromY(fromSize);
+        scaleTransition.setToY(toSize);
+        return scaleTransition;
+    }
+
+    /**
+     * This method generates a custom TranslateTransition instance to be used in a transition
+     *
+     * @param node that undergoes to translate transition
+     * @param duration of the transition
+     * @param size to scale x to
+     * @return the custom ScaleTransition instance
+     */
+    public static ScaleTransition getScaleTransitionToX(Node node, int duration, double size){
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(duration),node);
+        scaleTransition.setToX(size);
+        return scaleTransition;
+    }
+
+    /**
+     * This method generates a custom TranslateTransition instance to be used in a transition
+     *
+     * @param node that undergoes to translate transition
+     * @param duration of the transition
+     * @param fromSize to scale x from
+     * @param toSize to scale x to
+     * @return the custom ScaleTransition instance
+     */
+    public static ScaleTransition getScaleTransitionFromToX(Node node, int duration, double fromSize, double toSize){
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(duration),node);
+        scaleTransition.setFromX(fromSize);
+        scaleTransition.setToX(toSize);
+        return scaleTransition;
+    }
+
+    /**
+     * This method generates a custom TranslateTransition instance to be used in a transition
+     *
+     * @param node that undergoes to translate transition
+     * @param duration of the transition
+     * @param size to scale y to
+     * @return the custom ScaleTransition instance
+     */
+    public static ScaleTransition getScaleTransitionToY(Node node, int duration, double size){
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(duration),node);
+        scaleTransition.setToY(size);
+        return scaleTransition;
+    }
+
+    /**
+     * This method generates a custom TranslateTransition instance to be used in a transition
+     *
+     * @param node that undergoes to translate transition
+     * @param duration of the transition
+     * @param fromSize to scale y from
+     * @param toSize to scale y to
+     * @return the custom ScaleTransition instance
+     */
+    public static ScaleTransition getScaleTransitionFromToY(Node node, int duration, double fromSize, double toSize){
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(duration),node);
+        scaleTransition.setFromY(fromSize);
+        scaleTransition.setToY(toSize);
         return scaleTransition;
     }
 
