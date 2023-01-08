@@ -34,6 +34,23 @@ public class TranslateUtils {
     }
 
     /**
+     * This method generates a custom TranslateTransition instance to be used in moving a node to a
+     * specific X position
+     *
+     * @param node
+     * @param duration
+     * @param x
+     * @return
+     */
+    public static TranslateTransition getTranslateTransitionToX(Node node, int duration, double x) {
+        // Set translate animation duration and the node
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(duration),node);
+        translateTransition.setFromX(node.getTranslateX());
+        translateTransition.setToX(x);
+        return translateTransition;
+    }
+
+    /**
      * This method generates a custom TranslateTransition instance to be used in a transition
      *
      * @param node that undergoes to translate transition
