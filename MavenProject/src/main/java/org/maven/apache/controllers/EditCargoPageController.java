@@ -3,10 +3,14 @@ package org.maven.apache.controllers;
 import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.animation.ScaleTransition;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.jetbrains.annotations.NotNull;
@@ -16,6 +20,7 @@ import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.ScaleUtils;
 import org.maven.apache.dateTransaction.DateTransaction;
 
+import java.awt.event.KeyAdapter;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -42,7 +47,6 @@ public class EditCargoPageController implements Initializable {
     @FXML
     private MFXTextField newTakenRestockUnitTextField;
 
-
     @FXML
     private Label notificationLabel;
 
@@ -65,6 +69,8 @@ public class EditCargoPageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         onClickTakenSelectButton();
+        setInputValidation(newCurrentUnitTextField);
+        setInputValidation(newTakenRestockUnitTextField);
     }
 
     /**
@@ -74,7 +80,7 @@ public class EditCargoPageController implements Initializable {
     private void onPostNewTransaction(){
         // check validation
         if (!isValidated()){
-            notificationLabel.setText("Incorrent Information");
+            notificationLabel.setText("Empty fields");
         }else{
             newItemID = newTransactionService.selectAll().size() + 1;
             newItemName = newItemTextField.getText();
@@ -103,6 +109,23 @@ public class EditCargoPageController implements Initializable {
             return true;
         }
         return false;
+    }
+
+    /**
+     * force the text field to be numeric only
+     * @param textField
+     */
+    private void setInputValidation(MFXTextField textField){
+        textField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("[0-9]*")) {
+                    Platform.runLater(() -> {
+                        textField.setText(newValue.replaceAll("[^\\d]", ""));
+                    });
+                }
+            }
+        });
     }
 
     /**
