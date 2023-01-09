@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -105,18 +106,19 @@
          </graphic>
       </JFXButton>
       <MFXTextField fx:id="newItemTextField" floatMode="BORDER" floatingText=" Item Name" graphicTextGap="5.0" layoutX="220.0" layoutY="137.0" prefHeight="32.0" prefWidth="312.0" stylesheets="@../css/logInPage.css" />
-      <MFXTextField fx:id="newStaffTextField" floatMode="BORDER" floatingText=" Staff Name" graphicTextGap="5.0" layoutX="222.0" layoutY="189.0" prefHeight="38.0" prefWidth="312.0" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="222.0" AnchorPane.topAnchor="189.0" />
+      <MFXTextField fx:id="newStaffTextField" floatMode="BORDER" floatingText=" Staff Name" graphicTextGap="5.0" layoutX="222.0" layoutY="189.0" prefHeight="38.0" prefWidth="312.0" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="189.0" />
       <MFXTextField fx:id="newCurrentUnitTextField" floatMode="BORDER" floatingText="Current Quantity" layoutX="220.0" layoutY="242.0" prefHeight="38.0" prefWidth="134.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="242.0">
          <textFill>
             <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
          </textFill>
       </MFXTextField>
-      <MFXTextField fx:id="newTakenRestockUnitTextField" floatMode="BORDER" floatingText="Taken/Restock" graphicTextGap="5.0" layoutX="400.0" layoutY="242.0" prefHeight="38.0" prefWidth="134.0" stylesheets="@../css/logInPage.css">
+      <MFXTextField fx:id="newTakenRestockUnitTextField" floatMode="BORDER" floatingText="Taken/Restock Unit" graphicTextGap="5.0" layoutX="400.0" layoutY="242.0" prefHeight="38.0" prefWidth="134.0" stylesheets="@../css/logInPage.css">
          <textFill>
             <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
          </textFill>
       </MFXTextField>
-      <Label fx:id="notificationLabel" layoutX="277.0" layoutY="288.0" prefHeight="17.0" prefWidth="215.0" textAlignment="CENTER" textFill="RED" />
+      <Label fx:id="notificationLabel" layoutX="277.0" layoutY="288.0" prefHeight="17.0" prefWidth="200.0" textAlignment="CENTER" textFill="RED" />
+      <MFXDatePicker fx:id="datePicker" editable="false" layoutX="399.0" layoutY="86.0" prefHeight="38.0" prefWidth="134.0" />
    </children>
    <effect>
       <DropShadow blurType="ONE_PASS_BOX">
