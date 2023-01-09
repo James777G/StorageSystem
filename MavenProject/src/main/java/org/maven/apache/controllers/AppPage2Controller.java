@@ -217,6 +217,9 @@ public class AppPage2Controller implements Initializable {
     @FXML
     protected MFXGenericDialog settingsDialog;
 
+    @FXML
+    private MFXGenericDialog transactionDialog;
+
     //pass the user from login page
     private final User user = DataUtils.currentUser;
 
@@ -416,6 +419,11 @@ public class AppPage2Controller implements Initializable {
                 }
             }
         }
+    }
+
+    @FXML
+    private void onCloseTransactionDialog(){
+        transactionDialog.setVisible(false);
     }
 
     @FXML
