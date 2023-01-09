@@ -11,7 +11,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="350.0" prefWidth="600.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.EditCargoPageController">
+<AnchorPane prefHeight="350.0" prefWidth="600.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.EditCargoPageController">
    <children>
       <AnchorPane prefWidth="200.0" style="-fx-background-color: #223c40;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -94,23 +94,8 @@
             </Label>
          </graphic>
       </JFXButton>
-      <Label layoutX="223.0" layoutY="128.0" text="Item name" textFill="#223c40" AnchorPane.leftAnchor="223.0" AnchorPane.topAnchor="128.0">
-         <font>
-            <Font name="Candara" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="227.0" layoutY="215.0" text="Staff Name" textFill="#223c40" AnchorPane.leftAnchor="227.0" AnchorPane.topAnchor="215.0">
-         <font>
-            <Font name="Candara" size="15.0" />
-         </font>
-      </Label>
       <Separator layoutX="258.0" layoutY="313.0" prefWidth="300.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="50.0" />
-      <Label layoutX="420.0" layoutY="188.0" text="Quantity" textFill="#223c40" AnchorPane.leftAnchor="420.0" AnchorPane.topAnchor="188.0">
-         <font>
-            <Font name="Candara" size="15.0" />
-         </font>
-      </Label>
-      <JFXButton fx:id="takenSelectButton11" layoutX="519.0" layoutY="315.0" prefHeight="30.0" prefWidth="143.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="10.0">
+      <JFXButton layoutX="519.0" layoutY="315.0" onAction="#onPostNewTransaction" prefHeight="30.0" prefWidth="143.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="10.0">
          <graphic>
             <Label prefHeight="18.0" prefWidth="128.0" text="               Post" textFill="WHITE">
                <font>
@@ -119,43 +104,19 @@
             </Label>
          </graphic>
       </JFXButton>
-      <MFXTextField floatMode="DISABLED" layoutX="418.0" layoutY="208.0" prefHeight="32.0" prefWidth="110.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="418.0" AnchorPane.topAnchor="208.0">
+      <MFXTextField fx:id="newItemTextField" floatMode="BORDER" floatingText=" Item Name" graphicTextGap="5.0" layoutX="220.0" layoutY="137.0" prefHeight="32.0" prefWidth="312.0" stylesheets="@../css/logInPage.css" />
+      <MFXTextField fx:id="newStaffTextField" floatMode="BORDER" floatingText=" Staff Name" graphicTextGap="5.0" layoutX="222.0" layoutY="189.0" prefHeight="38.0" prefWidth="312.0" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="222.0" AnchorPane.topAnchor="189.0" />
+      <MFXTextField fx:id="newCurrentUnitTextField" floatMode="BORDER" floatingText="Current Quantity" layoutX="220.0" layoutY="242.0" prefHeight="38.0" prefWidth="134.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="242.0">
          <textFill>
             <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
          </textFill>
-         <font>
-            <Font name="Calibri Bold" size="15.0" />
-         </font>
       </MFXTextField>
-      <MFXTextField floatMode="DISABLED" layoutX="224.0" layoutY="231.0" prefHeight="32.0" prefWidth="152.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="224.0" AnchorPane.topAnchor="231.0">
+      <MFXTextField fx:id="newTakenRestockUnitTextField" floatMode="BORDER" floatingText="Taken/Restock" graphicTextGap="5.0" layoutX="400.0" layoutY="242.0" prefHeight="38.0" prefWidth="134.0" stylesheets="@../css/logInPage.css">
          <textFill>
             <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
          </textFill>
-         <font>
-            <Font name="Calibri Bold" size="15.0" />
-         </font>
       </MFXTextField>
-      <MFXTextField floatMode="DISABLED" layoutX="220.0" layoutY="146.0" prefHeight="32.0" prefWidth="312.0" styleClass="inputFields" stylesheets="@../css/logInPage.css">
-         <textFill>
-            <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
-         </textFill>
-         <font>
-            <Font name="Calibri Bold" size="15.0" />
-         </font>
-      </MFXTextField>
-      <MFXTextField floatMode="DISABLED" layoutX="418.0" layoutY="270.0" prefHeight="32.0" prefWidth="110.0" styleClass="inputFields" stylesheets="@../css/logInPage.css">
-         <textFill>
-            <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
-         </textFill>
-         <font>
-            <Font name="Calibri Bold" size="15.0" />
-         </font>
-      </MFXTextField>
-      <Label layoutX="420.0" layoutY="247.0" text="Quantity" textFill="#223c40">
-         <font>
-            <Font name="Candara" size="15.0" />
-         </font>
-      </Label>
+      <Label fx:id="notificationLabel" layoutX="277.0" layoutY="288.0" prefHeight="17.0" prefWidth="215.0" textAlignment="CENTER" textFill="RED" />
    </children>
    <effect>
       <DropShadow blurType="ONE_PASS_BOX">

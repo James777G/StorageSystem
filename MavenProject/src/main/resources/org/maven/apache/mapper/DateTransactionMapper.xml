@@ -9,7 +9,7 @@
 
     <insert id="addTransaction" useGeneratedKeys="true" keyProperty="ItemID">
         insert into DateTransactionTable(ItemName, StaffName,AddUnit,RemoveUnit,CurrentUnit,RecordTime,Purpose)
-        values (#{ItemName},#{StaffName},#{AddUnit},#{RemoveUnit},#{CurrentUnit},#{RecordTime},#{Purpose);
+        values (#{ItemName},#{StaffName},#{AddUnit},#{RemoveUnit},#{CurrentUnit},#{RecordTime},#{Purpose});
     </insert>
 
 
