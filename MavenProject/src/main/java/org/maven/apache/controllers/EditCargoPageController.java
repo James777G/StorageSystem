@@ -1,5 +1,6 @@
 package org.maven.apache.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
@@ -41,6 +42,10 @@ public class EditCargoPageController implements Initializable {
     @FXML
     private MFXTextField newTakenRestockUnitTextField;
 
+
+    @FXML
+    private Label notificationLabel;
+
     private String newItemName;
 
     private String newStaffName;
@@ -67,20 +72,37 @@ public class EditCargoPageController implements Initializable {
      */
     @FXML
     private void onPostNewTransaction(){
-        newItemID = newTransactionService.selectAll().size() + 1;
-        newItemName = newItemTextField.getText();
-        newStaffName = newStaffTextField.getText();
-        newTakenRestockUnitAmount = Integer.valueOf(newTakenRestockUnitTextField.getText());
-        newCurrentUnitAmount = Integer.valueOf(newCurrentUnitTextField.getText());
-        newTransaction = new DateTransaction();
-        if (isAddingTaken){
-            // adding taken cargo
-            addNewTransaction(newItemID, newItemName, newStaffName, newTakenRestockUnitAmount, 0, newCurrentUnitAmount, "1942", "**");
+        // check validation
+        if (!isValidated()){
+            notificationLabel.setText("Incorrent Information");
         }else{
-            // adding restock cargo
-            addNewTransaction(newItemID, newItemName, newStaffName, 0, newTakenRestockUnitAmount, newCurrentUnitAmount, "1942", "**");
+            newItemID = newTransactionService.selectAll().size() + 1;
+            newItemName = newItemTextField.getText();
+            newStaffName = newStaffTextField.getText();
+            newTakenRestockUnitAmount = Integer.valueOf(newTakenRestockUnitTextField.getText());
+            newCurrentUnitAmount = Integer.valueOf(newCurrentUnitTextField.getText());
+            newTransaction = new DateTransaction();
+            if (isAddingTaken){
+                // adding taken cargo
+                addNewTransaction(newItemID, newItemName, newStaffName, newTakenRestockUnitAmount, 0, newCurrentUnitAmount, "1942", "**");
+            }else{
+                // adding restock cargo
+                addNewTransaction(newItemID, newItemName, newStaffName, 0, newTakenRestockUnitAmount, newCurrentUnitAmount, "1942", "**");
+            }
+            newTransactionService.addTransaction(newTransaction);
+            notificationLabel.setText("Transaction added successfully");
         }
-        newTransactionService.addTransaction(newTransaction);
+    }
+
+    /**
+     * check if input information is good to go
+     * @return true or false
+     */
+    private boolean isValidated(){
+        if (!newItemTextField.getText().equals("") && !newStaffTextField.getText().equals("") && !newCurrentUnitTextField.getText().equals("") && !newTakenRestockUnitTextField.getText().equals("")){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -136,6 +158,7 @@ public class EditCargoPageController implements Initializable {
     private void onClickCross(){
         DataUtils.editCargoPane.setVisible(false);
         DataUtils.publicTransactionBlockPane.setVisible(false);
+        notificationLabel.setText("");
     }
 
     @FXML
