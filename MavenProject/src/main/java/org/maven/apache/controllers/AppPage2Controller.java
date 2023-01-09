@@ -269,6 +269,7 @@ public class AppPage2Controller implements Initializable {
         currentPage = appPagePane;
         DataUtils.publicSettingsDialog = settingsDialog;
         settingsDialog.setVisible(false);
+        searchTable.setVisible(false);
         usernameLabel.setText(user.getName());
         warehouseButton.setOpacity(0);
         staffButton.setOpacity(0);
