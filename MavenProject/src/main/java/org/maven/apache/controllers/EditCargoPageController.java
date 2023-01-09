@@ -33,6 +33,9 @@ public class EditCargoPageController implements Initializable {
     private ImageView crossImage;
 
     @FXML
+    private ImageView descriptionImage;
+
+    @FXML
     private AnchorPane onSelectRestockPane;
 
     @FXML
@@ -205,28 +208,28 @@ public class EditCargoPageController implements Initializable {
 
     @FXML
     private void onEnterCross() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 500, 1.5);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 300, 1.5);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
     private void onExitCross() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 500, 1);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 300, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
     private void onPressCross() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 500, 1.3);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 300, 1.1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
     private void onReleaseCross() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 500, 1.5);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 300, 1.5);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
@@ -241,6 +244,39 @@ public class EditCargoPageController implements Initializable {
         node.setOpacity(1);
         node.setVisible(true);
         node.setPickOnBounds(true);
+    }
+
+    @FXML
+    private void onClickDescription(){
+
+    }
+
+    @FXML
+    private void onEnterDescription(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(descriptionImage, 300, 1.3);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitDescription(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(descriptionImage, 300, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onPressDescription(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(descriptionImage, 300, 1.1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onReleaseDescription(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(descriptionImage, 300, 1.3);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
     }
 
 }
