@@ -208,30 +208,22 @@ public class EditCargoPageController implements Initializable {
 
     @FXML
     private void onEnterCross() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 300, 1.5);
-        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
+        setScaleTransition(crossImage, 300, 1.5);
     }
 
     @FXML
     private void onExitCross() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 300, 1);
-        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
+        setScaleTransition(crossImage, 300, 1);
     }
 
     @FXML
     private void onPressCross() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 300, 1.1);
-        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
+        setScaleTransition(crossImage, 300, 1.1);
     }
 
     @FXML
     private void onReleaseCross() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 300, 1.5);
-        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
+        setScaleTransition(crossImage, 300, 1.5);
     }
 
     private void disableNodes(@NotNull Node node) {
@@ -253,28 +245,33 @@ public class EditCargoPageController implements Initializable {
 
     @FXML
     private void onEnterDescription(){
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(descriptionImage, 300, 1.3);
-        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
+        setScaleTransition(descriptionImage, 300, 1.3);
     }
 
     @FXML
     private void onExitDescription(){
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(descriptionImage, 300, 1);
-        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
+        setScaleTransition(descriptionImage, 300, 1);
     }
 
     @FXML
     private void onPressDescription(){
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(descriptionImage, 300, 1.1);
-        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
+        setScaleTransition(descriptionImage, 300, 1.1);
     }
 
     @FXML
     private void onReleaseDescription(){
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(descriptionImage, 300, 1.3);
+        setScaleTransition(descriptionImage, 300, 1.3);
+    }
+
+    /**
+     * perform scale transition for a specific image view
+     *
+     * @param imageView image needs to be scaled
+     * @param duration time needed for transition to be done
+     * @param size transition scale size
+     */
+    private void setScaleTransition(ImageView imageView, int duration, double size){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(imageView, duration, size);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }

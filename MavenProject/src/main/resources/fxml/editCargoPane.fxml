@@ -107,7 +107,7 @@
       </JFXButton>
       <MFXTextField fx:id="newItemTextField" floatMode="BORDER" floatingText=" Item Name" graphicTextGap="5.0" layoutX="220.0" layoutY="137.0" prefHeight="38.0" prefWidth="359.0" stylesheets="@../css/logInPage.css" />
       <MFXTextField fx:id="newStaffTextField" floatMode="BORDER" floatingText=" Staff Name" graphicTextGap="5.0" layoutX="222.0" layoutY="189.0" prefHeight="38.0" prefWidth="359.0" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="189.0" />
-      <MFXTextField fx:id="newCurrentUnitTextField" floatMode="BORDER" floatingText="Current Quantity" layoutX="220.0" layoutY="242.0" prefHeight="38.0" prefWidth="127.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="242.0">
+      <MFXTextField fx:id="newCurrentUnitTextField" floatMode="BORDER" floatingText="Current Quantity" graphicTextGap="5.0" layoutX="220.0" layoutY="242.0" prefHeight="38.0" prefWidth="127.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="242.0">
          <textFill>
             <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
          </textFill>
