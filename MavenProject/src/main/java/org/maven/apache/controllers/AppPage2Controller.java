@@ -128,6 +128,21 @@ public class AppPage2Controller implements Initializable {
     private AnchorPane cargoBox4Pane;
 
     @FXML
+    private AnchorPane cargoBox1BackPane;
+
+    @FXML
+    private AnchorPane cargoBox2BackPane;
+
+    @FXML
+    private AnchorPane cargoBox3BackPane;
+
+    @FXML
+    private AnchorPane cargoBox4BackPane;
+
+    @FXML
+    private AnchorPane[] cargoBoxBackPanes = new AnchorPane[4];
+
+    @FXML
     private AnchorPane blockPane;
 
     @FXML
@@ -311,6 +326,18 @@ public class AppPage2Controller implements Initializable {
         onUpdateUsername();
     }
 
+    private void enableNode(Node node){
+        node.setOpacity(1);
+        node.setVisible(true);
+        node.setPickOnBounds(true);
+    }
+
+    private void disableNode(Node node){
+        node.setOpacity(0);
+        node.setVisible(false);
+        node.setPickOnBounds(false);
+    }
+
     private void initializeLabels() {
         cargoNameLabels[0] = cargoNameLabel01;
         cargoNameLabels[1] = cargoNameLabel02;
@@ -328,6 +355,10 @@ public class AppPage2Controller implements Initializable {
         cargoBoxPanes[1] = cargoBox2Pane;
         cargoBoxPanes[2] = cargoBox3Pane;
         cargoBoxPanes[3] = cargoBox4Pane;
+        cargoBoxBackPanes[0] = cargoBox1BackPane;
+        cargoBoxBackPanes[1] = cargoBox2BackPane;
+        cargoBoxBackPanes[2] = cargoBox3BackPane;
+        cargoBoxBackPanes[3] = cargoBox4BackPane;
     }
 
     private void fillCargoBoxesInformation(ButtonSelected buttonSelected) {
@@ -829,6 +860,53 @@ public class AppPage2Controller implements Initializable {
         fillCargoBoxesInformation(buttonSelected);
     }
 
+    @FXML
+    private void onEnterCargoBox1(){
+        ScaleTransition scaleTransition_enlarge = ScaleUtils.getScaleTransitionFromToXY(cargoBox1Pane,200,1,1.1);
+        scaleTransition_enlarge = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition_enlarge);
+        scaleTransition_enlarge.setOnFinished(closeFrontPane -> {
+            ScaleTransition scaleTransition_closeFront = ScaleUtils.getScaleTransitionFromToX(cargoBox1Pane,300,1.1,0);
+            scaleTransition_closeFront.setOnFinished(openBackPane -> {
+                cargoBox1BackPane.setScaleX(0);
+                enableNode(cargoBox1BackPane);
+                disableNode(cargoBox1Pane);
+                ScaleTransition scaleTransition_openBack = ScaleUtils.getScaleTransitionFromToX(cargoBox1BackPane,300,0,1.1);
+                scaleTransition_openBack.play();
+            });
+            scaleTransition_closeFront.play();
+        });
+        scaleTransition_enlarge.play();
+    }
+
+    @FXML
+    private void onExitCargoBox1(){
+        ScaleTransition scaleTransition_closeBack = ScaleUtils.getScaleTransitionFromToX(cargoBox1BackPane,300,1.1,0);
+        scaleTransition_closeBack.setOnFinished(closeBackPane -> {
+            disableNode(cargoBox1BackPane);
+            cargoBox1Pane.setScaleX(0);
+            enableNode(cargoBox1Pane);
+            ScaleTransition scaleTransition_openFront = ScaleUtils.getScaleTransitionFromToX(cargoBox1Pane,300, 0,1.1);
+            scaleTransition_openFront.setOnFinished( toOriginalSize -> {
+                ScaleTransition scaleTransition_ToOrigin = ScaleUtils.getScaleTransitionFromToXY(cargoBox1Pane,200,1.1,1);
+                scaleTransition_ToOrigin = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition_ToOrigin);
+                scaleTransition_ToOrigin.play();
+            });
+            scaleTransition_openFront.play();
+        });
+        scaleTransition_closeBack.play();
+//        ScaleTransition scaleTransition_enlarge = ScaleUtils.getScaleTransitionFromToXY(cargoBox1Pane,200,1,1.1);
+//        scaleTransition_enlarge.setOnFinished(closeFrontPane -> {
+//            ScaleTransition scaleTransition_closeFront = ScaleUtils.getScaleTransitionFromToX(cargoBox1Pane,500,1.1,0);
+//            scaleTransition_closeFront.setOnFinished(openBackPane -> {
+//                cargoBox1BackPane.setScaleX(0);
+//                enableNode(cargoBox1BackPane);
+//                ScaleTransition scaleTransition_openBack = ScaleUtils.getScaleTransitionFromToX(cargoBox1BackPane,500,0,1.1);
+//                scaleTransition_openBack.play();
+//            });
+//            scaleTransition_closeFront.play();
+//        });
+//        scaleTransition_enlarge.play();
+    }
     @FXML
     private void onUpdateUsername() {
         updateSettingDialog("Username");
