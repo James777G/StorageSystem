@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="350.0" prefWidth="600.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.EditCargoPageController">
+<AnchorPane prefHeight="350.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.EditCargoPageController">
    <children>
       <AnchorPane prefWidth="200.0" style="-fx-background-color: #223c40;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -32,7 +33,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="200.0" layoutY="-38.0" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="200.0" layoutY="-38.0" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: #eeeeee;" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="17.0" layoutY="24.0" text="Place order" textFill="#223c40" AnchorPane.topAnchor="19.0">
                <font>
@@ -104,19 +105,25 @@
             </Label>
          </graphic>
       </JFXButton>
-      <MFXTextField fx:id="newItemTextField" floatMode="BORDER" floatingText=" Item Name" graphicTextGap="5.0" layoutX="220.0" layoutY="137.0" prefHeight="32.0" prefWidth="312.0" stylesheets="@../css/logInPage.css" />
-      <MFXTextField fx:id="newStaffTextField" floatMode="BORDER" floatingText=" Staff Name" graphicTextGap="5.0" layoutX="222.0" layoutY="189.0" prefHeight="38.0" prefWidth="312.0" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="222.0" AnchorPane.topAnchor="189.0" />
-      <MFXTextField fx:id="newCurrentUnitTextField" floatMode="BORDER" floatingText="Current Quantity" layoutX="220.0" layoutY="242.0" prefHeight="38.0" prefWidth="134.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="242.0">
+      <MFXTextField fx:id="newItemTextField" floatMode="BORDER" floatingText=" Item Name" graphicTextGap="5.0" layoutX="220.0" layoutY="137.0" prefHeight="38.0" prefWidth="359.0" stylesheets="@../css/textField.css" />
+      <MFXTextField fx:id="newStaffTextField" floatMode="BORDER" floatingText=" Staff Name" graphicTextGap="5.0" layoutX="222.0" layoutY="189.0" prefHeight="38.0" prefWidth="359.0" stylesheets="@../css/textField.css" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="189.0" />
+      <MFXTextField fx:id="newCurrentUnitTextField" floatMode="BORDER" floatingText="Current Quantity" graphicTextGap="5.0" layoutX="220.0" layoutY="242.0" prefHeight="38.0" prefWidth="127.0" stylesheets="@../css/textField.css" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="242.0">
          <textFill>
             <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
          </textFill>
       </MFXTextField>
-      <MFXTextField fx:id="newTakenRestockUnitTextField" floatMode="BORDER" floatingText="Taken/Restock" graphicTextGap="5.0" layoutX="400.0" layoutY="242.0" prefHeight="38.0" prefWidth="134.0" stylesheets="@../css/logInPage.css">
+      <MFXTextField fx:id="newTakenRestockUnitTextField" floatMode="BORDER" floatingText="Taken/Restock Unit" graphicTextGap="5.0" layoutX="377.0" layoutY="242.0" prefHeight="38.0" prefWidth="127.0" stylesheets="@../css/textField.css">
          <textFill>
             <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
          </textFill>
       </MFXTextField>
-      <Label fx:id="notificationLabel" layoutX="277.0" layoutY="288.0" prefHeight="17.0" prefWidth="215.0" textAlignment="CENTER" textFill="RED" />
+      <Label fx:id="notificationLabel" layoutX="277.0" layoutY="288.0" prefHeight="17.0" prefWidth="200.0" textAlignment="CENTER" textFill="RED" />
+      <MFXDatePicker fx:id="datePicker" editable="false" layoutX="399.0" layoutY="86.0" prefHeight="38.0" prefWidth="180.0" />
+      <ImageView fx:id="descriptionImage" fitHeight="40.0" fitWidth="41.0" layoutX="530.0" layoutY="248.0" onMouseClicked="#onClickDescription" onMouseEntered="#onEnterDescription" onMouseExited="#onExitDescription" onMousePressed="#onPressDescription" onMouseReleased="#onReleaseDescription" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/icons8-change-64.png" />
+         </image>
+      </ImageView>
    </children>
    <effect>
       <DropShadow blurType="ONE_PASS_BOX">

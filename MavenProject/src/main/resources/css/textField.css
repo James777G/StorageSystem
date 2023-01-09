@@ -1,0 +1,23 @@
+.mfx-text-field {
+    -mfx-main: black;
+
+    -fx-background-color: white;
+    -fx-background-radius: 5;
+    -fx-border-color: lightgray;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+
+    -fx-font-family: "Open Sans Regular";
+}
+
+.mfx-text-field:focus-within {
+    -fx-background-insets: 2;
+    -fx-border-color: black;
+    -fx-border-width: 1.5;
+    -fx-border-insets: -0.5;
+}
+
+.mfx-text-field .text-field {
+    -fx-highlight-fill:  #eeeeee; /* Selected text highlight */
+    -fx-prompt-text-fill: -mfx-text-me; /* Prompt text color */
+}

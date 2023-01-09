@@ -444,12 +444,12 @@
                   </VBox>
                   <VBox fx:id="infoVBox" layoutX="89.0" layoutY="45.0" pickOnBounds="false" prefHeight="135.0" prefWidth="478.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="60.0">
                      <children>
-                        <MFXTextField fx:id="currentInfoTextField" floatMode="BORDER" floatingText=" Current Account Info" graphicTextGap="5.0" prefHeight="40.0" prefWidth="478.0">
+                        <MFXTextField fx:id="currentInfoTextField" floatMode="BORDER" floatingText=" Current Account Info" graphicTextGap="5.0" prefHeight="40.0" prefWidth="478.0" stylesheets="@../css/textField.css">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
                         </MFXTextField>
-                        <MFXTextField fx:id="newInfoTextField" floatMode="BORDER" floatingText=" New Account Info" graphicTextGap="5.0" prefHeight="40.0" prefWidth="478.0">
+                        <MFXTextField fx:id="newInfoTextField" floatMode="BORDER" floatingText=" New Account Info" graphicTextGap="5.0" prefHeight="40.0" prefWidth="478.0" stylesheets="@../css/textField.css">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>

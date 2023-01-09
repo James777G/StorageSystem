@@ -1,6 +1,7 @@
 package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
@@ -22,12 +23,17 @@ import org.maven.apache.dateTransaction.DateTransaction;
 
 import java.awt.event.KeyAdapter;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class EditCargoPageController implements Initializable {
 
     @FXML
     private ImageView crossImage;
+
+    @FXML
+    private ImageView descriptionImage;
 
     @FXML
     private AnchorPane onSelectRestockPane;
@@ -48,11 +54,16 @@ public class EditCargoPageController implements Initializable {
     private MFXTextField newTakenRestockUnitTextField;
 
     @FXML
+    private MFXDatePicker datePicker;
+
+    @FXML
     private Label notificationLabel;
 
     private String newItemName;
 
     private String newStaffName;
+
+    private String transactionDate;
 
     private int newCurrentUnitAmount;
 
@@ -77,23 +88,32 @@ public class EditCargoPageController implements Initializable {
      * add this new transaction record to the database
      */
     @FXML
-    private void onPostNewTransaction(){
+    private void onPostNewTransaction() {
         // check validation
-        if (!isValidated()){
+        if (!isValidated()) {
             notificationLabel.setText("Empty fields");
-        }else{
+        } else {
             newItemID = newTransactionService.selectAll().size() + 1;
             newItemName = newItemTextField.getText();
             newStaffName = newStaffTextField.getText();
             newTakenRestockUnitAmount = Integer.valueOf(newTakenRestockUnitTextField.getText());
             newCurrentUnitAmount = Integer.valueOf(newCurrentUnitTextField.getText());
-            newTransaction = new DateTransaction();
-            if (isAddingTaken){
-                // adding taken cargo
-                addNewTransaction(newItemID, newItemName, newStaffName, newTakenRestockUnitAmount, 0, newCurrentUnitAmount, "1942", "**");
+            if (datePicker.getText().equals("")){
+                // return current date and time
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+                LocalDateTime now = LocalDateTime.now();
+                transactionDate = dtf.format(now);
             }else{
+                // return chosen date from calendar
+                transactionDate = datePicker.getText();
+            }
+            newTransaction = new DateTransaction();
+            if (isAddingTaken) {
+                // adding taken cargo
+                addNewTransaction(newItemID, newItemName, newStaffName, newTakenRestockUnitAmount, 0, newCurrentUnitAmount, transactionDate, "**");
+            } else {
                 // adding restock cargo
-                addNewTransaction(newItemID, newItemName, newStaffName, 0, newTakenRestockUnitAmount, newCurrentUnitAmount, "1942", "**");
+                addNewTransaction(newItemID, newItemName, newStaffName, 0, newTakenRestockUnitAmount, newCurrentUnitAmount, transactionDate, "**");
             }
             newTransactionService.addTransaction(newTransaction);
             notificationLabel.setText("Transaction added successfully");
@@ -102,10 +122,11 @@ public class EditCargoPageController implements Initializable {
 
     /**
      * check if input information is good to go
+     *
      * @return true or false
      */
-    private boolean isValidated(){
-        if (!newItemTextField.getText().equals("") && !newStaffTextField.getText().equals("") && !newCurrentUnitTextField.getText().equals("") && !newTakenRestockUnitTextField.getText().equals("")){
+    private boolean isValidated() {
+        if (!newItemTextField.getText().equals("") && !newStaffTextField.getText().equals("") && !newCurrentUnitTextField.getText().equals("") && !newTakenRestockUnitTextField.getText().equals("")) {
             return true;
         }
         return false;
@@ -113,9 +134,10 @@ public class EditCargoPageController implements Initializable {
 
     /**
      * force the text field to be numeric only
+     *
      * @param textField
      */
-    private void setInputValidation(MFXTextField textField){
+    private void setInputValidation(MFXTextField textField) {
         textField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -131,16 +153,16 @@ public class EditCargoPageController implements Initializable {
     /**
      * pass field properties to the new transaction
      *
-     * @param itemID new item ID (incremented by 1 pursuant to the amount of current transactions)
-     * @param itemName new cargo name that is transferred
-     * @param staffName staff name who controls this transaction
-     * @param addUnit restock amount
-     * @param removeUnit taken amount
+     * @param itemID      new item ID (incremented by 1 pursuant to the amount of current transactions)
+     * @param itemName    new cargo name that is transferred
+     * @param staffName   staff name who controls this transaction
+     * @param addUnit     restock amount
+     * @param removeUnit  taken amount
      * @param currentUnit current amount
-     * @param recordTime time when this new transaction happens
-     * @param purpose ??
+     * @param recordTime  time when this new transaction happens
+     * @param purpose     ??
      */
-    private void addNewTransaction(int itemID, String itemName, String staffName, int addUnit, int removeUnit, int currentUnit, String recordTime, String purpose){
+    private void addNewTransaction(int itemID, String itemName, String staffName, int addUnit, int removeUnit, int currentUnit, String recordTime, String purpose) {
         newTransaction = new DateTransaction();
         newTransaction.setItemID(itemID);
         newTransaction.setItemName(itemName);
@@ -156,7 +178,7 @@ public class EditCargoPageController implements Initializable {
      * add new taken amount
      */
     @FXML
-    private void onClickTakenSelectButton(){
+    private void onClickTakenSelectButton() {
         enableNodes(onSelectTakenPane);
         disableNodes(onSelectRestockPane);
         newTakenRestockUnitTextField.setFloatingText("Taken Quantity");
@@ -167,7 +189,7 @@ public class EditCargoPageController implements Initializable {
      * add new restock amount
      */
     @FXML
-    private void onClickRestockSelectButton(){
+    private void onClickRestockSelectButton() {
         enableNodes(onSelectRestockPane);
         disableNodes(onSelectTakenPane);
         newTakenRestockUnitTextField.setFloatingText("Restock Quantity");
@@ -178,50 +200,80 @@ public class EditCargoPageController implements Initializable {
      * close the pane of adding new transaction
      */
     @FXML
-    private void onClickCross(){
+    private void onClickCross() {
         DataUtils.editCargoPane.setVisible(false);
         DataUtils.publicTransactionBlockPane.setVisible(false);
         notificationLabel.setText("");
     }
 
     @FXML
-    private void onEnterCross(){
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 500, 1.5);
-        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
+    private void onEnterCross() {
+        setScaleTransition(crossImage, 300, 1.5);
     }
 
     @FXML
-    private void onExitCross(){
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 500, 1);
-        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
+    private void onExitCross() {
+        setScaleTransition(crossImage, 300, 1);
     }
 
     @FXML
-    private void onPressCross(){
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 500, 1.3);
-        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
+    private void onPressCross() {
+        setScaleTransition(crossImage, 300, 1.1);
     }
 
     @FXML
-    private void onReleaseCross(){
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(crossImage, 500, 1.5);
-        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
+    private void onReleaseCross() {
+        setScaleTransition(crossImage, 300, 1.5);
     }
 
-    private void disableNodes(@NotNull Node node){
+    private void disableNodes(@NotNull Node node) {
         node.setOpacity(0);
         node.setVisible(false);
         node.setPickOnBounds(false);
     }
 
-    private void enableNodes(@NotNull Node node){
+    private void enableNodes(@NotNull Node node) {
         node.setOpacity(1);
         node.setVisible(true);
         node.setPickOnBounds(true);
+    }
+
+    @FXML
+    private void onClickDescription(){
+
+    }
+
+    @FXML
+    private void onEnterDescription(){
+        setScaleTransition(descriptionImage, 300, 1.3);
+    }
+
+    @FXML
+    private void onExitDescription(){
+        setScaleTransition(descriptionImage, 300, 1);
+    }
+
+    @FXML
+    private void onPressDescription(){
+        setScaleTransition(descriptionImage, 300, 1.1);
+    }
+
+    @FXML
+    private void onReleaseDescription(){
+        setScaleTransition(descriptionImage, 300, 1.3);
+    }
+
+    /**
+     * perform scale transition for a specific image view
+     *
+     * @param imageView image needs to be scaled
+     * @param duration time needed for transition to be done
+     * @param size transition scale size
+     */
+    private void setScaleTransition(ImageView imageView, int duration, double size){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(imageView, duration, size);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
     }
 
 }
