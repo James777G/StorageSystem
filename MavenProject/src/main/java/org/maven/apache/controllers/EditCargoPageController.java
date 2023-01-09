@@ -41,9 +41,6 @@ public class EditCargoPageController implements Initializable {
     @FXML
     private MFXTextField newTakenRestockUnitTextField;
 
-    @FXML
-    private Label takenRestockUnitLabel;
-
     private String newItemName;
 
     private String newStaffName;
@@ -83,16 +80,6 @@ public class EditCargoPageController implements Initializable {
             // adding restock cargo
             addNewTransaction(newItemID, newItemName, newStaffName, 0, newTakenRestockUnitAmount, newCurrentUnitAmount, "1942", "**");
         }
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println("Item ID: " + newTransaction.getItemID());
-        System.out.println("Item name: " + newTransaction.getItemName());
-        System.out.println("Staff name: " + newTransaction.getStaffName());
-        System.out.println("Add unit: " + newTransaction.getAddUnit());
-        System.out.println("Removed unit: " + newTransaction.getRemoveUnit());
-        System.out.println("Current uni: " + newTransaction.getCurrentUnit());
-        System.out.println("Record time: " + newTransaction.getRecordTime());
-        System.out.println("Purpose: " + newTransaction.getPurpose());
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++");
         newTransactionService.addTransaction(newTransaction);
     }
 
@@ -127,7 +114,7 @@ public class EditCargoPageController implements Initializable {
     private void onClickTakenSelectButton(){
         enableNodes(onSelectTakenPane);
         disableNodes(onSelectRestockPane);
-        takenRestockUnitLabel.setText("Taken Quantity");
+        newTakenRestockUnitTextField.setFloatingText("Taken Quantity");
         isAddingTaken = true;
     }
 
@@ -138,7 +125,7 @@ public class EditCargoPageController implements Initializable {
     private void onClickRestockSelectButton(){
         enableNodes(onSelectRestockPane);
         disableNodes(onSelectTakenPane);
-        takenRestockUnitLabel.setText("Restock Quantity");
+        newTakenRestockUnitTextField.setFloatingText("Restock Quantity");
         isAddingTaken = false;
     }
 
