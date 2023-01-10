@@ -106,19 +106,22 @@ public class TransactionPageController implements Initializable {
     private JFXButton restockSelectButton;
 
     @FXML
+    private Label statusLabel1, statusLabel2, statusLabel3, statusLabel4;
+
+    @FXML
+    private Label idLabel1, idLabel2, idLabel3, idLabel4;
+
+    @FXML
     private Label staffLabel1, staffLabel2, staffLabel3, staffLabel4;
 
     @FXML
-    private Label idLabel1, idLabel2, idLabel3, idLabel4; //order ID
+    private Label cargoLabel1, cargoLabel2, cargoLabel3, cargoLabel4;
 
     @FXML
     private Label amountLabel1, amountLabel2, amountLabel3, amountLabel4;
 
     @FXML
     private Label dateLabel1, dateLabel2, dateLabel3, dateLabel4;
-
-    @FXML
-    private Label statusLabel1, statusLabel2, statusLabel3, statusLabel4;
 
     @FXML
     private MFXPagination transactionPagination;
@@ -129,15 +132,17 @@ public class TransactionPageController implements Initializable {
     @FXML
     private ImageView sortByDate;
 
-    private Label[] staffLabelArray = new Label[4];
+    private Label[] statusLabelArray = new Label[4];
 
     private Label[] idLabelArray = new Label[4];
+
+    private Label[] staffLabelArray = new Label[4];
+
+    private Label[] cargoLabelArray = new Label[4];
 
     private Label[] amountLabelArray = new Label[4];
 
     private Label[] dateLabelArray = new Label[4];
-
-    private Label[] statusLabelArray = new Label[4];
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -299,16 +304,26 @@ public class TransactionPageController implements Initializable {
      * initialize the labels which can be stored in arrays
      */
     private void initializeLabels() {
-        // initialize staff labels
-        staffLabelArray[0] = staffLabel1;
-        staffLabelArray[1] = staffLabel2;
-        staffLabelArray[2] = staffLabel3;
-        staffLabelArray[3] = staffLabel4;
+        // initialize status labels
+        statusLabelArray[0] = statusLabel1;
+        statusLabelArray[1] = statusLabel2;
+        statusLabelArray[2] = statusLabel3;
+        statusLabelArray[3] = statusLabel4;
         // initialize transaction id labels
         idLabelArray[0] = idLabel1;
         idLabelArray[1] = idLabel2;
         idLabelArray[2] = idLabel3;
         idLabelArray[3] = idLabel4;
+        // initialize staff labels
+        staffLabelArray[0] = staffLabel1;
+        staffLabelArray[1] = staffLabel2;
+        staffLabelArray[2] = staffLabel3;
+        staffLabelArray[3] = staffLabel4;
+        // initailize cargo labels
+        cargoLabelArray[0] = cargoLabel1;
+        cargoLabelArray[1] = cargoLabel2;
+        cargoLabelArray[2] = cargoLabel3;
+        cargoLabelArray[3] = cargoLabel4;
         // initialize amount labels
         amountLabelArray[0] = amountLabel1;
         amountLabelArray[1] = amountLabel2;
@@ -319,11 +334,6 @@ public class TransactionPageController implements Initializable {
         dateLabelArray[1] = dateLabel2;
         dateLabelArray[2] = dateLabel3;
         dateLabelArray[3] = dateLabel4;
-        // initialize status labels
-        statusLabelArray[0] = statusLabel1;
-        statusLabelArray[1] = statusLabel2;
-        statusLabelArray[2] = statusLabel3;
-        statusLabelArray[3] = statusLabel4;
     }
 
     /**
@@ -385,8 +395,9 @@ public class TransactionPageController implements Initializable {
         Platform.runLater(() -> {
             // set non-empty labels
             for (int i = 0; i < sortedList.size(); i++) {
-                staffLabelArray[i].setText(sortedList.get(i).getStaffName());
                 idLabelArray[i].setText(String.valueOf(sortedList.get(i).getItemID()));
+                staffLabelArray[i].setText(sortedList.get(i).getStaffName());
+                cargoLabelArray[i].setText(sortedList.get(i).getItemName());
                 if (isAll && !isRestock && !isTaken){
                     amountLabelArray[i].setText(String.valueOf(sortedList.get(i).getCurrentUnit()));
                 }else if (!isAll && isRestock && !isTaken){
@@ -399,8 +410,9 @@ public class TransactionPageController implements Initializable {
             // set empty labels
             if (sortedList.size() != 4) {
                 for (int j = 3; j >= sortedList.size(); j--) {
-                    staffLabelArray[j].setText("");
                     idLabelArray[j].setText("");
+                    staffLabelArray[j].setText("");
+                    cargoLabelArray[j].setText("");
                     amountLabelArray[j].setText("");
                     dateLabelArray[j].setText("");
                 }
