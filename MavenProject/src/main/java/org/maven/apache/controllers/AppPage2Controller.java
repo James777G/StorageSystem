@@ -24,7 +24,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
@@ -281,6 +280,12 @@ public class AppPage2Controller implements Initializable {
     private boolean isUpdatingPassword = false;
 
     private boolean isSearchTableMoving = false;
+
+    private boolean isChangingSide = false;
+
+    private boolean changeToBack = false;
+
+    private boolean isChangingToFront = true;
 
     private final JFXButton[] buttonList = new JFXButton[5];
 
@@ -935,51 +940,57 @@ public class AppPage2Controller implements Initializable {
     }
 
     @FXML
-    private void onEnterCargoBox1() {
-        ScaleTransition scaleTransition_enlarge = ScaleUtils.getScaleTransitionFromToXY(cargoBox1Pane, 200, 1, 1.1);
-        scaleTransition_enlarge = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition_enlarge);
-        scaleTransition_enlarge.setOnFinished(closeFrontPane -> {
-            ScaleTransition scaleTransition_closeFront = ScaleUtils.getScaleTransitionFromToX(cargoBox1Pane, 300, 1.1, 0);
-            scaleTransition_closeFront.setOnFinished(openBackPane -> {
-                cargoBox1BackPane.setScaleX(0);
-                enableNode(cargoBox1BackPane);
-                disableNode(cargoBox1Pane);
-                ScaleTransition scaleTransition_openBack = ScaleUtils.getScaleTransitionFromToX(cargoBox1BackPane, 300, 0, 1.1);
-                scaleTransition_openBack.play();
-            });
-            scaleTransition_closeFront.play();
-        });
-        scaleTransition_enlarge.play();
+    private void onEnterCargoBox1(){
+        changeToBack = true;
+        if (!isChangingSide) {
+            isChangingSide = true;
+            if (cargoBox1Pane.isVisible()) {
+                ScaleTransition scaleTransition_closeFront = ScaleUtils.getScaleTransitionFromToX(cargoBox1Pane, 200, 1.0, 0.0);
+                scaleTransition_closeFront.setOnFinished(openBackPane -> {
+                    cargoBox1BackPane.setScaleX(0.0);
+                    enableNode(cargoBox1BackPane);
+                    disableNode(cargoBox1Pane);
+                    cargoBox1Pane.setScaleX(1.0);
+                    ScaleTransition scaleTransition_openBack = ScaleUtils.getScaleTransitionFromToX(cargoBox1BackPane, 200, 0.0, 1.0);
+                    scaleTransition_openBack.setOnFinished(event -> {
+                        isChangingSide = false;
+                        if(!changeToBack){
+                            onExitCargoBox1();
+                        }
+                    });
+                    scaleTransition_openBack.play();
+                });
+                scaleTransition_closeFront.play();
+            } else {
+                isChangingSide = false;
+            }
+        }
     }
 
     @FXML
-    private void onExitCargoBox1() {
-        ScaleTransition scaleTransition_closeBack = ScaleUtils.getScaleTransitionFromToX(cargoBox1BackPane, 300, 1.1, 0);
-        scaleTransition_closeBack.setOnFinished(closeBackPane -> {
-            disableNode(cargoBox1BackPane);
-            cargoBox1Pane.setScaleX(0);
-            enableNode(cargoBox1Pane);
-            ScaleTransition scaleTransition_openFront = ScaleUtils.getScaleTransitionFromToX(cargoBox1Pane, 300, 0, 1.1);
-            scaleTransition_openFront.setOnFinished(toOriginalSize -> {
-                ScaleTransition scaleTransition_ToOrigin = ScaleUtils.getScaleTransitionFromToXY(cargoBox1Pane, 200, 1.1, 1);
-                scaleTransition_ToOrigin = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition_ToOrigin);
-                scaleTransition_ToOrigin.play();
-            });
-            scaleTransition_openFront.play();
-        });
-        scaleTransition_closeBack.play();
-//        ScaleTransition scaleTransition_enlarge = ScaleUtils.getScaleTransitionFromToXY(cargoBox1Pane,200,1,1.1);
-//        scaleTransition_enlarge.setOnFinished(closeFrontPane -> {
-//            ScaleTransition scaleTransition_closeFront = ScaleUtils.getScaleTransitionFromToX(cargoBox1Pane,500,1.1,0);
-//            scaleTransition_closeFront.setOnFinished(openBackPane -> {
-//                cargoBox1BackPane.setScaleX(0);
-//                enableNode(cargoBox1BackPane);
-//                ScaleTransition scaleTransition_openBack = ScaleUtils.getScaleTransitionFromToX(cargoBox1BackPane,500,0,1.1);
-//                scaleTransition_openBack.play();
-//            });
-//            scaleTransition_closeFront.play();
-//        });
-//        scaleTransition_enlarge.play();
+    private void onExitCargoBox1(){
+        changeToBack = false;
+        if(!isChangingSide) {
+            isChangingSide = true;
+            if(cargoBox1BackPane.isVisible()) {
+                ScaleTransition scaleTransition_closeBack = ScaleUtils.getScaleTransitionFromToX(cargoBox1BackPane, 200, 1.0, 0.0);
+                scaleTransition_closeBack.setOnFinished(closeBackPane -> {
+                    cargoBox1Pane.setScaleX(0.0);
+                    enableNode(cargoBox1Pane);
+                    disableNode(cargoBox1BackPane);
+                    cargoBox1BackPane.setScaleX(1.0);
+                    ScaleTransition scaleTransition_openFront = ScaleUtils.getScaleTransitionFromToX(cargoBox1Pane, 200, 0.0, 1.0);
+                    scaleTransition_openFront.setOnFinished(event -> {
+                        isChangingSide = false;
+                        if(changeToBack) {
+                            onEnterCargoBox1();
+                        }
+                    });
+                    scaleTransition_openFront.play();
+                });
+                scaleTransition_closeBack.play();
+            } else{isChangingSide = false;}
+        }
     }
 
     @FXML
