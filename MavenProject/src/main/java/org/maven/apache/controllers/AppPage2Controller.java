@@ -1123,10 +1123,15 @@ public class AppPage2Controller implements Initializable {
 
     private void setTransactionTime(TextField textField, DateTransaction dateTransaction) {
         String recordTime = dateTransaction.getRecordTime();
-        System.out.println(recordTime);
-        String[] s = recordTime.trim().split(" ");
-        String[] split = s[1].split(":");
-        textField.setText(split[1] + " : " + split[2] + " : " + split[3]);
+        if(recordTime != null && recordTime != ""){
+            System.out.println(recordTime);
+            String[] s = recordTime.trim().split(" ");
+            String[] split = s[1].split(":");
+            textField.setText(split[1] + " : " + split[2] + " : " + split[3]);
+        } else{
+            textField.setText("Not Applicable");
+        }
+
     }
 
     private void setTransactionDialog(DateTransaction dateTransaction){
