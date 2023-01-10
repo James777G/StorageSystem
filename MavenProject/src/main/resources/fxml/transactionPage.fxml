@@ -398,6 +398,26 @@
                         </Label>
                      </children>
                   </AnchorPane>
+                  <ImageView fx:id="binImage1" fitHeight="25.0" fitWidth="25.0" layoutX="126.0" layoutY="156.0" onMouseClicked="#onClickBin1" onMouseEntered="#onEnterBin1" onMouseExited="#onExitBin1" onMousePressed="#onPressBin1" onMouseReleased="#onReleaseBin1" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-trash-can-48.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="binImage2" fitHeight="25.0" fitWidth="25.0" layoutX="126.0" layoutY="206.0" onMouseClicked="#onClickBin2" onMouseEntered="#onEnterBin2" onMouseExited="#onExitBin2" onMousePressed="#onPressBin2" onMouseReleased="#onReleaseBin2" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-trash-can-48.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="binImage3" fitHeight="25.0" fitWidth="25.0" layoutX="126.0" layoutY="256.0" onMouseClicked="#onClickBin3" onMouseEntered="#onEnterBin3" onMouseExited="#onExitBin3" onMousePressed="#onPressBin3" onMouseReleased="#onReleaseBin3" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-trash-can-48.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="binImage4" fitHeight="25.0" fitWidth="25.0" layoutX="126.0" layoutY="306.0" onMouseClicked="#onClickBin4" onMouseEntered="#onEnterBin4" onMouseExited="#onExitBin4" onMousePressed="#onPressBin4" onMouseReleased="#onPressBin4" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-trash-can-48.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <AnchorPane layoutY="200.0" prefHeight="60.0" prefWidth="1200.0" style="-fx-background-color: #dddddd;" AnchorPane.bottomAnchor="380.0">
@@ -495,7 +515,7 @@
                </children></AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" />
-      <AnchorPane fx:id="editCargoPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="350.0" prefWidth="600.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="130.0" />
+      <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" visible="false" />
+      <AnchorPane fx:id="editCargoPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="350.0" prefWidth="600.0" visible="false" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="130.0" />
    </children>
 </AnchorPane>

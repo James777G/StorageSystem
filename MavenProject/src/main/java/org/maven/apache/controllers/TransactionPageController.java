@@ -132,6 +132,9 @@ public class TransactionPageController implements Initializable {
     @FXML
     private ImageView sortByDate;
 
+    @FXML
+    private ImageView binImage1, binImage2, binImage3, binImage4;
+
     private Label[] statusLabelArray = new Label[4];
 
     private Label[] idLabelArray = new Label[4];
@@ -355,7 +358,7 @@ public class TransactionPageController implements Initializable {
     /**
      * set the sorting property
      */
-    private void setSortCondition(int currentPage){
+    private void setSortCondition(int currentPage) {
         switch (sortBy) {
             case ALL:
                 sortedList = dateTransactionService.pageAskedNOOrder(currentPage, 4);
@@ -398,11 +401,11 @@ public class TransactionPageController implements Initializable {
                 idLabelArray[i].setText(String.valueOf(sortedList.get(i).getItemID()));
                 staffLabelArray[i].setText(sortedList.get(i).getStaffName());
                 cargoLabelArray[i].setText(sortedList.get(i).getItemName());
-                if (isAll && !isRestock && !isTaken){
+                if (isAll && !isRestock && !isTaken) {
                     amountLabelArray[i].setText(String.valueOf(sortedList.get(i).getCurrentUnit()));
-                }else if (!isAll && isRestock && !isTaken){
+                } else if (!isAll && isRestock && !isTaken) {
                     amountLabelArray[i].setText(String.valueOf(sortedList.get(i).getAddUnit()));
-                }else if (!isAll && !isRestock && isTaken){
+                } else if (!isAll && !isRestock && isTaken) {
                     amountLabelArray[i].setText(String.valueOf(sortedList.get(i).getRemoveUnit()));
                 }
                 dateLabelArray[i].setText(sortedList.get(i).getRecordTime());
@@ -423,21 +426,21 @@ public class TransactionPageController implements Initializable {
     /**
      * set the status (current unit, restock unit, taken unit) labels
      */
-    private void setUnitStatus(){
-        if (isAll && !isRestock && !isTaken){
-            for (int i = 0; i < 4; i++){
+    private void setUnitStatus() {
+        if (isAll && !isRestock && !isTaken) {
+            for (int i = 0; i < 4; i++) {
                 statusLabelArray[i].setText(" Current Unit");
                 statusLabelArray[i].setStyle("-fx-background-color: grey; -fx-text-fill: white; -fx-background-radius: 5");
                 statusLabelArray[i].setPrefWidth(82);
             }
-        }else if (!isAll && isRestock && !isTaken){
-            for (int i = 0; i < 4; i++){
+        } else if (!isAll && isRestock && !isTaken) {
+            for (int i = 0; i < 4; i++) {
                 statusLabelArray[i].setText(" Restock");
                 statusLabelArray[i].setStyle("-fx-background-color: #ddeab1#c7ddb5; -fx-text-fill: #759751; -fx-background-radius: 5");
                 statusLabelArray[i].setPrefWidth(56);
             }
-        }else if (!isAll && !isRestock && isTaken){
-            for (int i = 0; i < 4; i++){
+        } else if (!isAll && !isRestock && isTaken) {
+            for (int i = 0; i < 4; i++) {
                 statusLabelArray[i].setText(" Taken");
                 statusLabelArray[i].setStyle("-fx-background-color: #feccc9; -fx-text-fill: #ff4137; -fx-background-radius: 5");
                 statusLabelArray[i].setPrefWidth(44);
@@ -461,7 +464,7 @@ public class TransactionPageController implements Initializable {
      */
     @FXML
     private void onClickAmount() {
-        if (isAll && !isRestock && !isTaken){
+        if (isAll && !isRestock && !isTaken) {
             // sort by all unit
             if (isAmountAscend) {
                 sortBy = SortBy.ALLASCEND;
@@ -472,24 +475,24 @@ public class TransactionPageController implements Initializable {
                 isAmountAscend = true;
                 onClickPagination();
             }
-        }else if (!isAll && isRestock && !isTaken){
+        } else if (!isAll && isRestock && !isTaken) {
             // sort by restock unit
-            if (isRestockAscend){
+            if (isRestockAscend) {
                 sortBy = SortBy.RESTOCKASCEND;
                 isRestockAscend = false;
                 onClickPagination();
-            }else{
+            } else {
                 sortBy = SortBy.RESTOCKDESCEND;
                 isRestockAscend = true;
                 onClickPagination();
             }
-        }else if (!isAll && !isRestock && isTaken){
+        } else if (!isAll && !isRestock && isTaken) {
             // sort by removed unit
             if (isTakenAscend) {
                 sortBy = SortBy.TAKENASCEND;
                 isTakenAscend = false;
                 onClickPagination();
-            }else{
+            } else {
                 sortBy = SortBy.TAKENDDESCEND;
                 isTakenAscend = true;
                 onClickPagination();
@@ -498,28 +501,16 @@ public class TransactionPageController implements Initializable {
     }
 
     @FXML
-    private void onEnterAmount() {
-        sortByAmount.setScaleX(2);
-        sortByAmount.setScaleY(2);
-    }
+    private void onEnterAmount() {setScaleTransition(sortByAmount, 100, 1.3);}
 
     @FXML
-    private void onExitAmount() {
-        sortByAmount.setScaleX(1);
-        sortByAmount.setScaleY(1);
-    }
+    private void onExitAmount() {setScaleTransition(sortByAmount, 100, 1);}
 
     @FXML
-    private void onPressedAmount() {
-        sortByAmount.setScaleX(1.5);
-        sortByAmount.setScaleY(1.5);
-    }
+    private void onPressedAmount() {setScaleTransition(sortByAmount, 100, 1.1);}
 
     @FXML
-    private void onReleaseAmount() {
-        sortByAmount.setScaleX(2);
-        sortByAmount.setScaleY(2);
-    }
+    private void onReleaseAmount() {setScaleTransition(sortByAmount, 100, 1.3);}
 
     /**
      * sort the list by date
@@ -538,27 +529,101 @@ public class TransactionPageController implements Initializable {
     }
 
     @FXML
-    private void onEnterDate() {
-        sortByDate.setScaleX(2);
-        sortByDate.setScaleY(2);
+    private void onEnterDate() {setScaleTransition(sortByDate, 100, 1.3);}
+
+    @FXML
+    private void onExitDate() {setScaleTransition(sortByDate, 100, 1);}
+
+    @FXML
+    private void onPressedDate() {setScaleTransition(sortByDate, 100, 1.1);}
+
+    @FXML
+    private void onReleaseDate() {setScaleTransition(sortByDate, 100, 1.3);}
+
+    /**
+     * delete the 1st transaction
+     */
+    @FXML
+    private void onClickBin1() {
+
+    }
+
+    /**
+     * delete the 2nd transaction
+     */
+    @FXML
+    private void onClickBin2() {
+
+    }
+
+    /**
+     * delete the 3rd transaction
+     */
+    @FXML
+    private void onClickBin3() {
+
+    }
+
+    /**
+     * delete the 4th transaction
+     */
+    @FXML
+    private void onClickBin4() {
+
     }
 
     @FXML
-    private void onExitDate() {
-        sortByDate.setScaleX(1);
-        sortByDate.setScaleY(1);
-    }
+    private void onEnterBin1() {setScaleTransition(binImage1, 100, 1.3);}
 
     @FXML
-    private void onPressedDate() {
-        sortByDate.setScaleX(1.5);
-        sortByDate.setScaleY(1.5);
-    }
+    private void onEnterBin2() {setScaleTransition(binImage2, 100, 1.3);}
 
     @FXML
-    private void onReleaseDate() {
-        sortByDate.setScaleX(2);
-        sortByDate.setScaleY(2);
+    private void onEnterBin3() {setScaleTransition(binImage3, 100, 1.3);}
+
+    @FXML
+    private void onEnterBin4() {setScaleTransition(binImage4, 100, 1.3);}
+
+    @FXML
+    private void onExitBin1() {setScaleTransition(binImage1, 100, 1);}
+
+    @FXML
+    private void onExitBin2() {setScaleTransition(binImage2, 100, 1);}
+
+    @FXML
+    private void onExitBin3() {setScaleTransition(binImage3, 100, 1);}
+
+    @FXML
+    private void onExitBin4() {setScaleTransition(binImage4, 100, 1);}
+
+    @FXML
+    private void onPressBin1() {setScaleTransition(binImage1, 100, 1.1);}
+
+    @FXML
+    private void onPressBin2() {setScaleTransition(binImage2, 100, 1.1);}
+
+    @FXML
+    private void onPressBin3() {setScaleTransition(binImage3, 100, 1.1);}
+
+    @FXML
+    private void onPressBin4() {setScaleTransition(binImage4, 100, 1.1);}
+
+    @FXML
+    private void onReleaseBin1() {setScaleTransition(binImage1, 100, 1.3);}
+
+    @FXML
+    private void onReleaseBin2() {setScaleTransition(binImage2, 100, 1.3);}
+
+    @FXML
+    private void onReleaseBin3() {setScaleTransition(binImage3, 100, 1.3);}
+
+    @FXML
+    private void onReleaseBin4() {setScaleTransition(binImage4, 100, 1.3);}
+
+    private void setScaleTransition(ImageView imageView, int duration, double size) {
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(imageView, duration, size);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
     }
 
 }
