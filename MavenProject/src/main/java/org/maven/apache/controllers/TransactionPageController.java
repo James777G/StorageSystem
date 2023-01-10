@@ -1,7 +1,9 @@
 package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPagination;
+import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
@@ -106,6 +108,9 @@ public class TransactionPageController implements Initializable {
     private JFXButton restockSelectButton;
 
     @FXML
+    private JFXButton confirmButton;
+
+    @FXML
     private Label statusLabel1, statusLabel2, statusLabel3, statusLabel4;
 
     @FXML
@@ -124,6 +129,27 @@ public class TransactionPageController implements Initializable {
     private Label dateLabel1, dateLabel2, dateLabel3, dateLabel4;
 
     @FXML
+    private Label confirmStatusLabel;
+
+    @FXML
+    private Label confirmIdLabel;
+
+    @FXML
+    private Label confirmStaffNameLabel;
+
+    @FXML
+    private Label confirmCargoNameLabel;
+
+    @FXML
+    private Label confirmCargoUnitLabel;
+
+    @FXML
+    private Label confirmDateLabel;
+
+    @FXML
+    private Label deletionNotificationLabel;
+
+    @FXML
     private MFXPagination transactionPagination;
 
     @FXML
@@ -134,6 +160,9 @@ public class TransactionPageController implements Initializable {
 
     @FXML
     private ImageView binImage1, binImage2, binImage3, binImage4;
+
+    @FXML
+    private MFXGenericDialog deletionConfirmationDialog;
 
     private Label[] statusLabelArray = new Label[4];
 
@@ -161,6 +190,7 @@ public class TransactionPageController implements Initializable {
         dataTransactionPage.setVisible(false);
         blockPane.setVisible(false);
         DataUtils.publicTransactionBlockPane = blockPane;
+        deletionConfirmationDialog.setVisible(false);
     }
 
     @FXML
@@ -540,12 +570,24 @@ public class TransactionPageController implements Initializable {
     @FXML
     private void onReleaseDate() {setScaleTransition(sortByDate, 100, 1.3);}
 
+    @FXML
+    private void onCloseDeletionConfirmation(){
+        deletionConfirmationDialog.setVisible(false);
+        blockPane.setVisible(false);
+        confirmButton.setDisable(false);
+        deletionNotificationLabel.setText("");
+    }
+
     /**
      * delete the 1st transaction
      */
     @FXML
     private void onClickBin1() {
-        dateTransactionService.deleteById(Integer.valueOf(idLabel1.getText()));
+        if (!idLabelArray[0].equals("")){
+            deletionConfirmationDialog.setVisible(true);
+            blockPane.setVisible(true);
+            setRemovalConfirmation(0);
+        }
     }
 
     /**
@@ -553,7 +595,11 @@ public class TransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin2() {
-        dateTransactionService.deleteById(Integer.valueOf(idLabel2.getText()));
+        if (!idLabelArray[1].equals("")){
+            deletionConfirmationDialog.setVisible(true);
+            blockPane.setVisible(true);
+            setRemovalConfirmation(1);
+        }
     }
 
     /**
@@ -561,7 +607,11 @@ public class TransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin3() {
-        dateTransactionService.deleteById(Integer.valueOf(idLabel3.getText()));
+        if (!idLabelArray[2].equals("")){
+            deletionConfirmationDialog.setVisible(true);
+            blockPane.setVisible(true);
+            setRemovalConfirmation(2);
+        }
     }
 
     /**
@@ -569,7 +619,35 @@ public class TransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin4() {
-        dateTransactionService.deleteById(Integer.valueOf(idLabel4.getText()));
+        if (!idLabelArray[3].equals("")){
+            deletionConfirmationDialog.setVisible(true);
+            blockPane.setVisible(true);
+            setRemovalConfirmation(3);
+        }
+    }
+
+    /**
+     * set confirmation details before performing deletion
+     *
+     * @param row which row of transition list needs to be removed
+     */
+    private void setRemovalConfirmation(int row){
+        confirmStatusLabel.setText("Transaction status: " + statusLabelArray[row].getText());
+        confirmIdLabel.setText("Transaction id: " + idLabelArray[row].getText());
+        confirmStaffNameLabel.setText("Staff name: " + staffLabelArray[row].getText());
+        confirmCargoNameLabel.setText("Cargo name: " + cargoLabelArray[row].getText());
+        confirmCargoUnitLabel.setText(statusLabelArray[row].getText() + ": " + amountLabelArray[row].getText());
+        confirmDateLabel.setText("Date of completion: " + dateLabelArray[row].getText());
+    }
+
+    /**
+     * user confirms to perform deletion
+     */
+    @FXML
+    private void onConfirmDeletion(){
+        dateTransactionService.deleteById(Integer.valueOf(idLabel1.getText()));
+        confirmButton.setDisable(true);
+        deletionNotificationLabel.setText("Removal completed");
     }
 
     @FXML
@@ -624,6 +702,18 @@ public class TransactionPageController implements Initializable {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(imageView, duration, size);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
+    }
+
+    /**
+     *  refresh current transition page
+     */
+    @FXML
+    private void onRefreshTransitionList(){
+        setPaginationPages();
+        setTransactionList(transactionPagination.getCurrentPage());
+        System.out.println("++++++++++++++++++++++++++++++++");
+        System.out.println("refreshed");
+        System.out.println("++++++++++++++++++++++++++++++++");
     }
 
 }
