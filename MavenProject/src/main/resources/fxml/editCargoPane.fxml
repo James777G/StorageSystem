@@ -3,12 +3,16 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
@@ -124,6 +128,18 @@
             <Image url="@../image/icons8-change-64.png" />
          </image>
       </ImageView>
+      <AnchorPane fx:id="descriptionBlockPane" opacity="0.75" prefHeight="376.0" prefWidth="600.0" style="-fx-background-color: grey;" />
+      <MFXGenericDialog fx:id="descriptionDialog" headerText="Transaction details" layoutX="24.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="316.0" prefWidth="525.0" showAlwaysOnTop="false" showClose="false" showMinimize="false" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <center>
+            <TextArea fx:id="descriptionTextArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="215.0" prefWidth="458.0" BorderPane.alignment="CENTER" />
+         </center>
+         <bottom>
+            <JFXButton onAction="#onSaveDescription" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-background-color: #223c40;" text="Save" textFill="WHITE" BorderPane.alignment="CENTER" />
+         </bottom>
+      </MFXGenericDialog>
    </children>
    <effect>
       <DropShadow blurType="ONE_PASS_BOX">

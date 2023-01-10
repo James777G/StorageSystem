@@ -3,6 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXPagination?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -10,6 +12,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
@@ -39,45 +43,51 @@
                <children>
                   <AnchorPane layoutX="153.0" layoutY="83.0" prefHeight="60.0" prefWidth="901.0" style="-fx-background-color: white;">
                      <children>
-                        <Label layoutX="45.0" layoutY="21.0" text="Order" textFill="#223c40" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="20.0">
+                        <Label layoutX="32.0" layoutY="20.0" text="Status" textFill="#223c40" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="20.0">
                            <font>
                               <Font name="Candara Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Separator layoutX="185.0" layoutY="45.0" prefWidth="100.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="185.0" />
-                        <Label layoutX="216.0" layoutY="20.0" text="Name" textFill="#223c40" AnchorPane.leftAnchor="216.0" AnchorPane.topAnchor="20.0">
+                        <Separator layoutX="116.0" layoutY="44.0" prefWidth="100.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="116.0" AnchorPane.topAnchor="44.0" />
+                        <Label layoutX="160.0" layoutY="23.0" text="Id" textFill="#223c40" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="20.0">
                            <font>
                               <Font name="Candara Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Separator layoutX="512.0" layoutY="42.0" prefWidth="100.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="515.0" />
-                        <Label layoutX="522.0" layoutY="17.0" text="Amount" textFill="#223c40" AnchorPane.leftAnchor="520.0" AnchorPane.topAnchor="20.0">
+                        <Separator layoutX="597.0" layoutY="45.0" prefWidth="100.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="597.0" AnchorPane.topAnchor="44.0" />
+                        <Label layoutX="607.0" layoutY="23.0" text="Amount" textFill="#223c40" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="607.0" AnchorPane.topAnchor="20.0">
                            <font>
                               <Font name="Candara Bold" size="15.0" />
                            </font>
                         </Label>
-                        <ImageView fx:id="sortByAmount" fitHeight="13.0" fitWidth="13.0" layoutX="592.0" layoutY="21.0" onMouseClicked="#onClickAmount" onMouseEntered="#onEnterAmount" onMouseExited="#onExitAmount" onMousePressed="#onPressedAmount" onMouseReleased="#onReleaseAmount" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="590.0" AnchorPane.topAnchor="24.0">
+                        <ImageView fx:id="sortByAmount" fitHeight="13.0" fitWidth="13.0" layoutX="671.0" layoutY="26.0" onMouseClicked="#onClickAmount" onMouseEntered="#onEnterAmount" onMouseExited="#onExitAmount" onMousePressed="#onPressedAmount" onMouseReleased="#onReleaseAmount" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="671.0" AnchorPane.topAnchor="24.0">
                            <image>
                               <Image url="@../image/icons8-sort-down-100.png" />
                            </image>
                         </ImageView>
-                        <Separator layoutX="351.0" layoutY="42.0" prefWidth="100.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="350.0" />
-                        <Label layoutX="380.0" layoutY="20.0" text="Order Id" textFill="#223c40" AnchorPane.leftAnchor="374.0" AnchorPane.topAnchor="20.0">
+                        <Separator layoutX="246.0" layoutY="43.0" prefWidth="100.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="246.0" AnchorPane.topAnchor="44.0" />
+                        <Label layoutX="261.0" layoutY="22.0" text="Staff name" textFill="#223c40" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="261.0" AnchorPane.topAnchor="20.0">
                            <font>
                               <Font name="Candara Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Label layoutX="650.0" layoutY="25.0" text="Date" textFill="#223c40" AnchorPane.leftAnchor="680.0" AnchorPane.topAnchor="20.0">
+                        <Label layoutX="753.0" layoutY="21.0" text="Date" textFill="#223c40" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="753.0" AnchorPane.topAnchor="20.0">
                            <font>
                               <Font name="Candara Bold" size="15.0" />
                            </font>
                         </Label>
-                        <Separator layoutX="706.0" layoutY="44.0" prefWidth="100.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="675.0" />
-                        <ImageView fx:id="sortByDate" fitHeight="13.0" fitWidth="13.0" layoutX="753.0" layoutY="24.0" onMouseClicked="#onClickDate" onMouseEntered="#onEnterDate" onMouseExited="#onExitDate" onMousePressed="#onPressedDate" onMouseReleased="#onReleaseDate" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="755.0" AnchorPane.topAnchor="24.0">
+                        <Separator layoutX="734.0" layoutY="44.0" prefWidth="100.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="734.0" AnchorPane.topAnchor="44.0" />
+                        <ImageView fx:id="sortByDate" fitHeight="13.0" fitWidth="13.0" layoutX="798.0" layoutY="25.0" onMouseClicked="#onClickDate" onMouseEntered="#onEnterDate" onMouseExited="#onExitDate" onMousePressed="#onPressedDate" onMouseReleased="#onReleaseDate" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="798.0" AnchorPane.topAnchor="24.0">
                            <image>
                               <Image url="@../image/icons8-sort-down-100.png" />
                            </image>
                         </ImageView>
+                        <Separator layoutX="413.0" layoutY="43.0" prefWidth="100.0" />
+                        <Label layoutX="424.0" layoutY="21.0" text="Cargo name" textFill="#223c40" AnchorPane.bottomAnchor="20.0" AnchorPane.topAnchor="20.0">
+                           <font>
+                              <Font name="Candara Bold" size="15.0" />
+                           </font>
+                        </Label>
                      </children>
                      <effect>
                         <DropShadow blurType="ONE_PASS_BOX">
@@ -166,6 +176,7 @@
                               </Label>
                            </graphic>
                         </JFXButton>
+                        <JFXButton layoutX="896.0" layoutY="38.0" onAction="#onRefreshTransitionList" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Refresh" textFill="WHITE" />
                      </children>
                      <effect>
                         <DropShadow blurType="ONE_PASS_BOX">
@@ -177,42 +188,52 @@
                   </AnchorPane>
                   <AnchorPane layoutX="153.0" layoutY="143.0" prefHeight="50.0" prefWidth="901.0">
                      <children>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="164.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="12.0">
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="252.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="252.0" AnchorPane.topAnchor="16.0">
                            <image>
                               <Image url="@../image/icons8-user-96.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="staffLabel1" layoutX="180.0" layoutY="14.0" text="Staff Name *****" textFill="#223c40" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="17.0">
+                        <Label fx:id="staffLabel1" layoutX="298.0" layoutY="20.0" text="Tony" textFill="#223c40" AnchorPane.leftAnchor="298.0" AnchorPane.topAnchor="20.0">
                            <font>
                               <Font name="Candara Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="idLabel1" layoutX="355.0" layoutY="14.0" text="12" textFill="#223c40" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="15.0">
+                        <Label fx:id="idLabel1" layoutX="137.0" layoutY="15.0" text="12" textFill="#223c40" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="746.0" AnchorPane.topAnchor="15.0">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="amountLabel1" layoutX="555.0" layoutY="16.0" text="9" textFill="#223c40" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="15.0">
+                        <Label fx:id="amountLabel1" layoutX="604.0" layoutY="15.0" prefHeight="20.0" prefWidth="46.0" text="9" textFill="#223c40" AnchorPane.leftAnchor="604.0" AnchorPane.rightAnchor="251.0" AnchorPane.topAnchor="15.0">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="410.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="13.0">
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="166.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="166.0" AnchorPane.topAnchor="13.0">
                            <image>
                               <Image url="@../image/icons8-cheque-52%20(1).png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="510.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="12.0">
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="658.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="660.0" AnchorPane.topAnchor="13.0">
                            <image>
                               <Image url="@../image/icons8-3d-boxes-48.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="dateLabel1" layoutX="683.0" layoutY="16.0" prefHeight="22.0" prefWidth="168.0" text="xxxx/xx/xx/xxxx" textFill="#223c40">
+                        <Label fx:id="dateLabel1" layoutX="719.0" layoutY="17.0" prefHeight="22.0" prefWidth="168.0" text="xxxx/xx/xx/xxxx" textFill="#223c40" AnchorPane.bottomAnchor="11.0" AnchorPane.topAnchor="17.0">
                            <font>
                               <Font name="Candara Bold" size="19.0" />
                            </font>
                         </Label>
-                        <Label fx:id="statusLabel1" layoutX="41.0" layoutY="16.0" prefHeight="20.0" prefWidth="82.0" style="-fx-background-color: grey; -fx-background-radius: 5;" text=" Current Unit" textFill="WHITE" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="15.0">
+                        <Label fx:id="statusLabel1" layoutX="14.0" layoutY="15.0" prefHeight="20.0" prefWidth="82.0" style="-fx-background-color: grey; -fx-background-radius: 5;" text=" Current Unit" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="15.0">
+                           <font>
+                              <Font name="Candara Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="420.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="420.0" AnchorPane.topAnchor="16.0">
+                           <image>
+                              <Image url="@../image/icons8-cargo-64.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="cargoLabel1" layoutX="462.0" layoutY="20.0" text="Cargo Name" textFill="#223c40" AnchorPane.leftAnchor="459.0">
                            <font>
                               <Font name="Candara Bold" size="14.0" />
                            </font>
@@ -222,42 +243,52 @@
                   <MFXPagination fx:id="transactionPagination" layoutX="559.0" layoutY="346.0" onMouseClicked="#onClickPagination" />
                   <AnchorPane layoutX="153.0" layoutY="193.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: white;">
                      <children>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="20.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="12.0">
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="255.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="252.0" AnchorPane.topAnchor="16.0">
                            <image>
                               <Image url="@../image/icons8-user-96.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="staffLabel2" layoutX="180.0" layoutY="14.0" text="Staff Name *****" textFill="#223c40" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="17.0">
+                        <Label fx:id="staffLabel2" layoutX="299.0" layoutY="20.0" text="Staff Name" textFill="#223c40" AnchorPane.topAnchor="20.0">
                            <font>
                               <Font name="Candara Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="idLabel2" layoutX="355.0" layoutY="14.0" text="34" textFill="#223c40" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="15.0">
+                        <Label fx:id="idLabel2" layoutX="138.0" layoutY="15.0" text="34" textFill="#223c40" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="745.0" AnchorPane.topAnchor="15.0">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="amountLabel2" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="15.0">
+                        <Label fx:id="amountLabel2" layoutX="603.0" layoutY="18.0" prefHeight="20.0" prefWidth="46.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="604.0" AnchorPane.rightAnchor="252.0" AnchorPane.topAnchor="18.0">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="410.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="13.0">
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="167.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="13.0">
                            <image>
                               <Image url="@../image/icons8-cheque-52%20(1).png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="510.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="12.0">
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="660.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="660.0" AnchorPane.topAnchor="12.0">
                            <image>
                               <Image url="@../image/icons8-3d-boxes-48.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="dateLabel2" layoutX="683.0" layoutY="16.0" prefHeight="22.0" prefWidth="168.0" text="xxxx/xx/xx/xxxx" textFill="#223c40">
+                        <Label fx:id="dateLabel2" layoutX="719.0" layoutY="14.0" prefHeight="22.0" prefWidth="168.0" text="xxxx/xx/xx/xxxx" textFill="#223c40" AnchorPane.bottomAnchor="11.0" AnchorPane.topAnchor="17.0">
                            <font>
                               <Font name="Candara Bold" size="19.0" />
                            </font>
                         </Label>
-                        <Label fx:id="statusLabel2" layoutX="40.0" layoutY="16.0" prefHeight="20.0" prefWidth="82.0" style="-fx-background-color: grey; -fx-background-radius: 5;" text=" Current Unit" textFill="WHITE" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="15.0">
+                        <Label fx:id="statusLabel2" layoutX="14.0" layoutY="15.0" prefHeight="20.0" prefWidth="82.0" style="-fx-background-color: grey; -fx-background-radius: 5;" text=" Current Unit" textFill="WHITE" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="15.0">
+                           <font>
+                              <Font name="Candara Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="420.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="420.0" AnchorPane.topAnchor="16.0">
+                           <image>
+                              <Image url="@../image/icons8-cargo-64.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="cargoLabel2" layoutX="459.0" layoutY="20.0" text="Cargo Name" textFill="#223c40" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="459.0" AnchorPane.topAnchor="20.0">
                            <font>
                               <Font name="Candara Bold" size="14.0" />
                            </font>
@@ -266,42 +297,52 @@
                   </AnchorPane>
                   <AnchorPane layoutX="153.0" layoutY="243.0" prefHeight="50.0" prefWidth="901.0">
                      <children>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="20.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="12.0">
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="261.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="252.0" AnchorPane.topAnchor="16.0">
                            <image>
                               <Image url="@../image/icons8-user-96.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="staffLabel3" layoutX="180.0" layoutY="14.0" text="Staff Name *****" textFill="#223c40" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="17.0">
+                        <Label fx:id="staffLabel3" layoutX="297.0" layoutY="18.0" text="Staff Name" textFill="#223c40" AnchorPane.leftAnchor="298.0" AnchorPane.topAnchor="18.0">
                            <font>
                               <Font name="Candara Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="idLabel3" layoutX="355.0" layoutY="14.0" text="56" textFill="#223c40" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="15.0">
+                        <Label fx:id="idLabel3" layoutX="138.0" layoutY="16.0" text="56" textFill="#223c40" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="745.0" AnchorPane.topAnchor="16.0">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="amountLabel3" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="15.0">
+                        <Label fx:id="amountLabel3" layoutX="604.0" layoutY="15.0" prefHeight="20.0" prefWidth="46.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="604.0" AnchorPane.rightAnchor="251.0" AnchorPane.topAnchor="15.0">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="410.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="13.0">
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="169.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="167.0" AnchorPane.topAnchor="13.0">
                            <image>
                               <Image url="@../image/icons8-cheque-52%20(1).png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="510.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="12.0">
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="662.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="660.0" AnchorPane.topAnchor="12.0">
                            <image>
                               <Image url="@../image/icons8-3d-boxes-48.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="dateLabel3" layoutX="683.0" layoutY="16.0" prefHeight="22.0" prefWidth="168.0" text="xxxx/xx/xx/xxxx" textFill="#223c40">
+                        <Label fx:id="dateLabel3" layoutX="719.0" layoutY="15.0" prefHeight="22.0" prefWidth="168.0" text="xxxx/xx/xx/xxxx" textFill="#223c40">
                            <font>
                               <Font name="Candara Bold" size="19.0" />
                            </font>
                         </Label>
-                        <Label fx:id="statusLabel3" layoutX="41.0" layoutY="15.0" prefHeight="20.0" prefWidth="82.0" style="-fx-background-color: grey; -fx-background-radius: 5;" text=" Current Unit" textFill="WHITE" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="15.0">
+                        <Label fx:id="statusLabel3" layoutX="14.0" layoutY="15.0" prefHeight="20.0" prefWidth="82.0" style="-fx-background-color: grey; -fx-background-radius: 5;" text=" Current Unit" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="15.0">
+                           <font>
+                              <Font name="Candara Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="426.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="420.0" AnchorPane.topAnchor="16.0">
+                           <image>
+                              <Image url="@../image/icons8-cargo-64.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="cargoLabel3" layoutX="480.0" layoutY="21.0" text="Cargo Name" textFill="#223c40" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="459.0" AnchorPane.topAnchor="20.0">
                            <font>
                               <Font name="Candara Bold" size="14.0" />
                            </font>
@@ -310,48 +351,78 @@
                   </AnchorPane>
                   <AnchorPane layoutX="153.0" layoutY="293.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: white;">
                      <children>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="20.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="12.0">
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="259.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="252.0" AnchorPane.topAnchor="16.0">
                            <image>
                               <Image url="@../image/icons8-user-96.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="staffLabel4" layoutX="180.0" layoutY="14.0" text="Staff Name *****" textFill="#223c40" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="17.0">
+                        <Label fx:id="staffLabel4" layoutX="296.0" layoutY="18.0" text="Staff Name" textFill="#223c40" AnchorPane.leftAnchor="298.0" AnchorPane.topAnchor="18.0">
                            <font>
                               <Font name="Candara Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="idLabel4" layoutX="355.0" layoutY="14.0" text="78" textFill="#223c40" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="15.0">
+                        <Label fx:id="idLabel4" layoutX="138.0" layoutY="15.0" text="78" textFill="#223c40" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="745.0" AnchorPane.topAnchor="15.0">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="amountLabel4" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="15.0">
+                        <Label fx:id="amountLabel4" layoutX="604.0" layoutY="16.0" prefHeight="20.0" prefWidth="46.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="604.0" AnchorPane.rightAnchor="251.0" AnchorPane.topAnchor="16.0">
                            <font>
                               <Font name="Arial Bold" size="16.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="410.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="13.0">
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="169.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="167.0" AnchorPane.topAnchor="13.0">
                            <image>
                               <Image url="@../image/icons8-cheque-52%20(1).png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="510.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="12.0">
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="510.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="660.0" AnchorPane.topAnchor="12.0">
                            <image>
                               <Image url="@../image/icons8-3d-boxes-48.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="dateLabel4" layoutX="683.0" layoutY="16.0" prefHeight="22.0" prefWidth="168.0" text="xxxx/xx/xx/xxxx" textFill="#223c40">
+                        <Label fx:id="dateLabel4" layoutX="719.0" layoutY="15.0" prefHeight="22.0" prefWidth="168.0" text="xxxx/xx/xx/xxxx" textFill="#223c40">
                            <font>
                               <Font name="Candara Bold" size="19.0" />
                            </font>
                         </Label>
-                        <Label fx:id="statusLabel4" layoutX="23.0" layoutY="19.0" prefHeight="20.0" prefWidth="82.0" style="-fx-background-color: grey; -fx-background-radius: 5;" text=" Current Unit" textFill="WHITE" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="15.0">
+                        <Label fx:id="statusLabel4" layoutX="14.0" layoutY="15.0" prefHeight="20.0" prefWidth="82.0" style="-fx-background-color: grey; -fx-background-radius: 5;" text=" Current Unit" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="15.0">
+                           <font>
+                              <Font name="Candara Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="420.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="420.0" AnchorPane.topAnchor="16.0">
+                           <image>
+                              <Image url="@../image/icons8-cargo-64.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="cargoLabel4" layoutX="465.0" layoutY="20.0" text="Cargo Name" textFill="#223c40" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="459.0" AnchorPane.topAnchor="20.0">
                            <font>
                               <Font name="Candara Bold" size="14.0" />
                            </font>
                         </Label>
                      </children>
                   </AnchorPane>
+                  <ImageView fx:id="binImage1" fitHeight="25.0" fitWidth="25.0" layoutX="126.0" layoutY="156.0" onMouseClicked="#onClickBin1" onMouseEntered="#onEnterBin1" onMouseExited="#onExitBin1" onMousePressed="#onPressBin1" onMouseReleased="#onReleaseBin1" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-trash-can-48.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="binImage2" fitHeight="25.0" fitWidth="25.0" layoutX="126.0" layoutY="206.0" onMouseClicked="#onClickBin2" onMouseEntered="#onEnterBin2" onMouseExited="#onExitBin2" onMousePressed="#onPressBin2" onMouseReleased="#onReleaseBin2" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-trash-can-48.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="binImage3" fitHeight="25.0" fitWidth="25.0" layoutX="126.0" layoutY="256.0" onMouseClicked="#onClickBin3" onMouseEntered="#onEnterBin3" onMouseExited="#onExitBin3" onMousePressed="#onPressBin3" onMouseReleased="#onReleaseBin3" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-trash-can-48.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="binImage4" fitHeight="25.0" fitWidth="25.0" layoutX="126.0" layoutY="306.0" onMouseClicked="#onClickBin4" onMouseEntered="#onEnterBin4" onMouseExited="#onExitBin4" onMousePressed="#onPressBin4" onMouseReleased="#onPressBin4" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-trash-can-48.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <AnchorPane layoutY="200.0" prefHeight="60.0" prefWidth="1200.0" style="-fx-background-color: #dddddd;" AnchorPane.bottomAnchor="380.0">
@@ -449,7 +520,53 @@
                </children></AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="blockPane" layoutY="-60.0" opacity="0.75" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: grey;" />
+      <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" />
+      <MFXGenericDialog fx:id="deletionConfirmationDialog" headerText="Removal Confirmation" onClose="#onCloseDeletionConfirmation" prefHeight="217.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="203.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="220.0">
+         <center>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="4.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="confirmStatusLabel" text="Transaction status: ***">
+                     <font>
+                        <Font name="Candara Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="confirmIdLabel" text="Transaction id: ***">
+                     <font>
+                        <Font name="Candara Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="confirmStaffNameLabel" text="Staff name: ***">
+                     <font>
+                        <Font name="Candara Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="confirmCargoNameLabel" text="Cargo name: ***">
+                     <font>
+                        <Font name="Candara Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="confirmCargoUnitLabel" text="Cargo unit: ***">
+                     <font>
+                        <Font name="Candara Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="confirmDateLabel" text="Date of completion: ***">
+                     <font>
+                        <Font name="Candara Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="deletionNotificationLabel" prefHeight="17.0" prefWidth="125.0" textAlignment="CENTER" textFill="RED">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+         </center>
+         <bottom>
+            <JFXButton fx:id="confirmButton" onAction="#onConfirmDeletion" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Confirm" textFill="WHITE" BorderPane.alignment="CENTER" />
+         </bottom>
+      </MFXGenericDialog>
       <AnchorPane fx:id="editCargoPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="350.0" prefWidth="600.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="130.0" />
    </children>
 </AnchorPane>

@@ -3,6 +3,7 @@ package org.maven.apache.controllers;
 import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -11,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -42,6 +44,9 @@ public class EditCargoPageController implements Initializable {
     private AnchorPane onSelectTakenPane;
 
     @FXML
+    private AnchorPane descriptionBlockPane;
+
+    @FXML
     private MFXTextField newItemTextField;
 
     @FXML
@@ -57,13 +62,21 @@ public class EditCargoPageController implements Initializable {
     private MFXDatePicker datePicker;
 
     @FXML
+    private MFXGenericDialog descriptionDialog;
+
+    @FXML
     private Label notificationLabel;
+
+    @FXML
+    private TextArea descriptionTextArea;
 
     private String newItemName;
 
     private String newStaffName;
 
     private String transactionDate;
+
+    private String transactionDescription = "";
 
     private int newCurrentUnitAmount;
 
@@ -82,6 +95,8 @@ public class EditCargoPageController implements Initializable {
         onClickTakenSelectButton();
         setInputValidation(newCurrentUnitTextField);
         setInputValidation(newTakenRestockUnitTextField);
+        descriptionDialog.setVisible(false);
+        descriptionBlockPane.setVisible(false);
     }
 
     /**
@@ -110,10 +125,10 @@ public class EditCargoPageController implements Initializable {
             newTransaction = new DateTransaction();
             if (isAddingTaken) {
                 // adding taken cargo
-                addNewTransaction(newItemID, newItemName, newStaffName, newTakenRestockUnitAmount, 0, newCurrentUnitAmount, transactionDate, "**");
+                addNewTransaction(newItemID, newItemName, newStaffName, newTakenRestockUnitAmount, 0, newCurrentUnitAmount, transactionDate, transactionDescription);
             } else {
                 // adding restock cargo
-                addNewTransaction(newItemID, newItemName, newStaffName, 0, newTakenRestockUnitAmount, newCurrentUnitAmount, transactionDate, "**");
+                addNewTransaction(newItemID, newItemName, newStaffName, 0, newTakenRestockUnitAmount, newCurrentUnitAmount, transactionDate, transactionDescription);
             }
             newTransactionService.addTransaction(newTransaction);
             notificationLabel.setText("Transaction added successfully");
@@ -238,9 +253,13 @@ public class EditCargoPageController implements Initializable {
         node.setPickOnBounds(true);
     }
 
+    /**
+     * show the page of adding new description
+     */
     @FXML
     private void onClickDescription(){
-
+        descriptionDialog.setVisible(true);
+        descriptionBlockPane.setVisible(true);
     }
 
     @FXML
@@ -274,6 +293,16 @@ public class EditCargoPageController implements Initializable {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(imageView, duration, size);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
+    }
+
+    /**
+     * parse description to the new transaction and close the pane
+     */
+    @FXML
+    private void onSaveDescription(){
+        transactionDescription = descriptionTextArea.getText();
+        descriptionDialog.setVisible(false);
+        descriptionBlockPane.setVisible(false);
     }
 
 }

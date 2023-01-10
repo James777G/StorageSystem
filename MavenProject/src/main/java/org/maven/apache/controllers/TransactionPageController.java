@@ -1,7 +1,9 @@
 package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPagination;
+import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
@@ -106,10 +108,19 @@ public class TransactionPageController implements Initializable {
     private JFXButton restockSelectButton;
 
     @FXML
+    private JFXButton confirmButton;
+
+    @FXML
+    private Label statusLabel1, statusLabel2, statusLabel3, statusLabel4;
+
+    @FXML
+    private Label idLabel1, idLabel2, idLabel3, idLabel4;
+
+    @FXML
     private Label staffLabel1, staffLabel2, staffLabel3, staffLabel4;
 
     @FXML
-    private Label idLabel1, idLabel2, idLabel3, idLabel4; //order ID
+    private Label cargoLabel1, cargoLabel2, cargoLabel3, cargoLabel4;
 
     @FXML
     private Label amountLabel1, amountLabel2, amountLabel3, amountLabel4;
@@ -118,7 +129,25 @@ public class TransactionPageController implements Initializable {
     private Label dateLabel1, dateLabel2, dateLabel3, dateLabel4;
 
     @FXML
-    private Label statusLabel1, statusLabel2, statusLabel3, statusLabel4;
+    private Label confirmStatusLabel;
+
+    @FXML
+    private Label confirmIdLabel;
+
+    @FXML
+    private Label confirmStaffNameLabel;
+
+    @FXML
+    private Label confirmCargoNameLabel;
+
+    @FXML
+    private Label confirmCargoUnitLabel;
+
+    @FXML
+    private Label confirmDateLabel;
+
+    @FXML
+    private Label deletionNotificationLabel;
 
     @FXML
     private MFXPagination transactionPagination;
@@ -129,15 +158,23 @@ public class TransactionPageController implements Initializable {
     @FXML
     private ImageView sortByDate;
 
-    private Label[] staffLabelArray = new Label[4];
+    @FXML
+    private ImageView binImage1, binImage2, binImage3, binImage4;
+
+    @FXML
+    private MFXGenericDialog deletionConfirmationDialog;
+
+    private Label[] statusLabelArray = new Label[4];
 
     private Label[] idLabelArray = new Label[4];
+
+    private Label[] staffLabelArray = new Label[4];
+
+    private Label[] cargoLabelArray = new Label[4];
 
     private Label[] amountLabelArray = new Label[4];
 
     private Label[] dateLabelArray = new Label[4];
-
-    private Label[] statusLabelArray = new Label[4];
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -153,6 +190,7 @@ public class TransactionPageController implements Initializable {
         dataTransactionPage.setVisible(false);
         blockPane.setVisible(false);
         DataUtils.publicTransactionBlockPane = blockPane;
+        deletionConfirmationDialog.setVisible(false);
     }
 
     @FXML
@@ -299,16 +337,26 @@ public class TransactionPageController implements Initializable {
      * initialize the labels which can be stored in arrays
      */
     private void initializeLabels() {
-        // initialize staff labels
-        staffLabelArray[0] = staffLabel1;
-        staffLabelArray[1] = staffLabel2;
-        staffLabelArray[2] = staffLabel3;
-        staffLabelArray[3] = staffLabel4;
+        // initialize status labels
+        statusLabelArray[0] = statusLabel1;
+        statusLabelArray[1] = statusLabel2;
+        statusLabelArray[2] = statusLabel3;
+        statusLabelArray[3] = statusLabel4;
         // initialize transaction id labels
         idLabelArray[0] = idLabel1;
         idLabelArray[1] = idLabel2;
         idLabelArray[2] = idLabel3;
         idLabelArray[3] = idLabel4;
+        // initialize staff labels
+        staffLabelArray[0] = staffLabel1;
+        staffLabelArray[1] = staffLabel2;
+        staffLabelArray[2] = staffLabel3;
+        staffLabelArray[3] = staffLabel4;
+        // initailize cargo labels
+        cargoLabelArray[0] = cargoLabel1;
+        cargoLabelArray[1] = cargoLabel2;
+        cargoLabelArray[2] = cargoLabel3;
+        cargoLabelArray[3] = cargoLabel4;
         // initialize amount labels
         amountLabelArray[0] = amountLabel1;
         amountLabelArray[1] = amountLabel2;
@@ -319,11 +367,6 @@ public class TransactionPageController implements Initializable {
         dateLabelArray[1] = dateLabel2;
         dateLabelArray[2] = dateLabel3;
         dateLabelArray[3] = dateLabel4;
-        // initialize status labels
-        statusLabelArray[0] = statusLabel1;
-        statusLabelArray[1] = statusLabel2;
-        statusLabelArray[2] = statusLabel3;
-        statusLabelArray[3] = statusLabel4;
     }
 
     /**
@@ -345,7 +388,7 @@ public class TransactionPageController implements Initializable {
     /**
      * set the sorting property
      */
-    private void setSortCondition(int currentPage){
+    private void setSortCondition(int currentPage) {
         switch (sortBy) {
             case ALL:
                 sortedList = dateTransactionService.pageAskedNOOrder(currentPage, 4);
@@ -385,13 +428,14 @@ public class TransactionPageController implements Initializable {
         Platform.runLater(() -> {
             // set non-empty labels
             for (int i = 0; i < sortedList.size(); i++) {
-                staffLabelArray[i].setText(sortedList.get(i).getStaffName());
                 idLabelArray[i].setText(String.valueOf(sortedList.get(i).getItemID()));
-                if (isAll && !isRestock && !isTaken){
+                staffLabelArray[i].setText(sortedList.get(i).getStaffName());
+                cargoLabelArray[i].setText(sortedList.get(i).getItemName());
+                if (isAll && !isRestock && !isTaken) {
                     amountLabelArray[i].setText(String.valueOf(sortedList.get(i).getCurrentUnit()));
-                }else if (!isAll && isRestock && !isTaken){
+                } else if (!isAll && isRestock && !isTaken) {
                     amountLabelArray[i].setText(String.valueOf(sortedList.get(i).getAddUnit()));
-                }else if (!isAll && !isRestock && isTaken){
+                } else if (!isAll && !isRestock && isTaken) {
                     amountLabelArray[i].setText(String.valueOf(sortedList.get(i).getRemoveUnit()));
                 }
                 dateLabelArray[i].setText(sortedList.get(i).getRecordTime());
@@ -399,8 +443,9 @@ public class TransactionPageController implements Initializable {
             // set empty labels
             if (sortedList.size() != 4) {
                 for (int j = 3; j >= sortedList.size(); j--) {
-                    staffLabelArray[j].setText("");
                     idLabelArray[j].setText("");
+                    staffLabelArray[j].setText("");
+                    cargoLabelArray[j].setText("");
                     amountLabelArray[j].setText("");
                     dateLabelArray[j].setText("");
                 }
@@ -411,21 +456,21 @@ public class TransactionPageController implements Initializable {
     /**
      * set the status (current unit, restock unit, taken unit) labels
      */
-    private void setUnitStatus(){
-        if (isAll && !isRestock && !isTaken){
-            for (int i = 0; i < 4; i++){
+    private void setUnitStatus() {
+        if (isAll && !isRestock && !isTaken) {
+            for (int i = 0; i < 4; i++) {
                 statusLabelArray[i].setText(" Current Unit");
                 statusLabelArray[i].setStyle("-fx-background-color: grey; -fx-text-fill: white; -fx-background-radius: 5");
                 statusLabelArray[i].setPrefWidth(82);
             }
-        }else if (!isAll && isRestock && !isTaken){
-            for (int i = 0; i < 4; i++){
+        } else if (!isAll && isRestock && !isTaken) {
+            for (int i = 0; i < 4; i++) {
                 statusLabelArray[i].setText(" Restock");
                 statusLabelArray[i].setStyle("-fx-background-color: #ddeab1#c7ddb5; -fx-text-fill: #759751; -fx-background-radius: 5");
                 statusLabelArray[i].setPrefWidth(56);
             }
-        }else if (!isAll && !isRestock && isTaken){
-            for (int i = 0; i < 4; i++){
+        } else if (!isAll && !isRestock && isTaken) {
+            for (int i = 0; i < 4; i++) {
                 statusLabelArray[i].setText(" Taken");
                 statusLabelArray[i].setStyle("-fx-background-color: #feccc9; -fx-text-fill: #ff4137; -fx-background-radius: 5");
                 statusLabelArray[i].setPrefWidth(44);
@@ -449,7 +494,7 @@ public class TransactionPageController implements Initializable {
      */
     @FXML
     private void onClickAmount() {
-        if (isAll && !isRestock && !isTaken){
+        if (isAll && !isRestock && !isTaken) {
             // sort by all unit
             if (isAmountAscend) {
                 sortBy = SortBy.ALLASCEND;
@@ -460,24 +505,24 @@ public class TransactionPageController implements Initializable {
                 isAmountAscend = true;
                 onClickPagination();
             }
-        }else if (!isAll && isRestock && !isTaken){
+        } else if (!isAll && isRestock && !isTaken) {
             // sort by restock unit
-            if (isRestockAscend){
+            if (isRestockAscend) {
                 sortBy = SortBy.RESTOCKASCEND;
                 isRestockAscend = false;
                 onClickPagination();
-            }else{
+            } else {
                 sortBy = SortBy.RESTOCKDESCEND;
                 isRestockAscend = true;
                 onClickPagination();
             }
-        }else if (!isAll && !isRestock && isTaken){
+        } else if (!isAll && !isRestock && isTaken) {
             // sort by removed unit
             if (isTakenAscend) {
                 sortBy = SortBy.TAKENASCEND;
                 isTakenAscend = false;
                 onClickPagination();
-            }else{
+            } else {
                 sortBy = SortBy.TAKENDDESCEND;
                 isTakenAscend = true;
                 onClickPagination();
@@ -486,28 +531,16 @@ public class TransactionPageController implements Initializable {
     }
 
     @FXML
-    private void onEnterAmount() {
-        sortByAmount.setScaleX(2);
-        sortByAmount.setScaleY(2);
-    }
+    private void onEnterAmount() {setScaleTransition(sortByAmount, 100, 1.3);}
 
     @FXML
-    private void onExitAmount() {
-        sortByAmount.setScaleX(1);
-        sortByAmount.setScaleY(1);
-    }
+    private void onExitAmount() {setScaleTransition(sortByAmount, 100, 1);}
 
     @FXML
-    private void onPressedAmount() {
-        sortByAmount.setScaleX(1.5);
-        sortByAmount.setScaleY(1.5);
-    }
+    private void onPressedAmount() {setScaleTransition(sortByAmount, 100, 1.1);}
 
     @FXML
-    private void onReleaseAmount() {
-        sortByAmount.setScaleX(2);
-        sortByAmount.setScaleY(2);
-    }
+    private void onReleaseAmount() {setScaleTransition(sortByAmount, 100, 1.3);}
 
     /**
      * sort the list by date
@@ -526,27 +559,158 @@ public class TransactionPageController implements Initializable {
     }
 
     @FXML
-    private void onEnterDate() {
-        sortByDate.setScaleX(2);
-        sortByDate.setScaleY(2);
+    private void onEnterDate() {setScaleTransition(sortByDate, 100, 1.3);}
+
+    @FXML
+    private void onExitDate() {setScaleTransition(sortByDate, 100, 1);}
+
+    @FXML
+    private void onPressedDate() {setScaleTransition(sortByDate, 100, 1.1);}
+
+    @FXML
+    private void onReleaseDate() {setScaleTransition(sortByDate, 100, 1.3);}
+
+    @FXML
+    private void onCloseDeletionConfirmation(){
+        deletionConfirmationDialog.setVisible(false);
+        blockPane.setVisible(false);
+        confirmButton.setDisable(false);
+        deletionNotificationLabel.setText("");
+    }
+
+    /**
+     * delete the 1st transaction
+     */
+    @FXML
+    private void onClickBin1() {
+        if (!idLabelArray[0].getText().equals("")){
+            deletionConfirmationDialog.setVisible(true);
+            blockPane.setVisible(true);
+            setRemovalConfirmation(0);
+        }
+    }
+
+    /**
+     * delete the 2nd transaction
+     */
+    @FXML
+    private void onClickBin2() {
+        if (!idLabelArray[1].getText().equals("")){
+            deletionConfirmationDialog.setVisible(true);
+            blockPane.setVisible(true);
+            setRemovalConfirmation(1);
+        }
+    }
+
+    /**
+     * delete the 3rd transaction
+     */
+    @FXML
+    private void onClickBin3() {
+        if (!idLabelArray[2].getText().equals("")){
+            deletionConfirmationDialog.setVisible(true);
+            blockPane.setVisible(true);
+            setRemovalConfirmation(2);
+        }
+    }
+
+    /**
+     * delete the 4th transaction
+     */
+    @FXML
+    private void onClickBin4() {
+        if (!idLabelArray[3].getText().equals("")){
+            deletionConfirmationDialog.setVisible(true);
+            blockPane.setVisible(true);
+            setRemovalConfirmation(3);
+        }
+    }
+
+    /**
+     * set confirmation details before performing deletion
+     *
+     * @param row which row of transition list needs to be removed
+     */
+    private void setRemovalConfirmation(int row){
+        confirmStatusLabel.setText("Transaction status: " + statusLabelArray[row].getText());
+        confirmIdLabel.setText("Transaction id: " + idLabelArray[row].getText());
+        confirmStaffNameLabel.setText("Staff name: " + staffLabelArray[row].getText());
+        confirmCargoNameLabel.setText("Cargo name: " + cargoLabelArray[row].getText());
+        confirmCargoUnitLabel.setText(statusLabelArray[row].getText() + ": " + amountLabelArray[row].getText());
+        confirmDateLabel.setText("Date of completion: " + dateLabelArray[row].getText());
+    }
+
+    /**
+     * user confirms to perform deletion
+     */
+    @FXML
+    private void onConfirmDeletion(){
+        dateTransactionService.deleteById(Integer.valueOf(idLabel1.getText()));
+        confirmButton.setDisable(true);
+        deletionNotificationLabel.setText("Removal completed");
     }
 
     @FXML
-    private void onExitDate() {
-        sortByDate.setScaleX(1);
-        sortByDate.setScaleY(1);
-    }
+    private void onEnterBin1() {setScaleTransition(binImage1, 100, 1.3);}
 
     @FXML
-    private void onPressedDate() {
-        sortByDate.setScaleX(1.5);
-        sortByDate.setScaleY(1.5);
-    }
+    private void onEnterBin2() {setScaleTransition(binImage2, 100, 1.3);}
 
     @FXML
-    private void onReleaseDate() {
-        sortByDate.setScaleX(2);
-        sortByDate.setScaleY(2);
+    private void onEnterBin3() {setScaleTransition(binImage3, 100, 1.3);}
+
+    @FXML
+    private void onEnterBin4() {setScaleTransition(binImage4, 100, 1.3);}
+
+    @FXML
+    private void onExitBin1() {setScaleTransition(binImage1, 100, 1);}
+
+    @FXML
+    private void onExitBin2() {setScaleTransition(binImage2, 100, 1);}
+
+    @FXML
+    private void onExitBin3() {setScaleTransition(binImage3, 100, 1);}
+
+    @FXML
+    private void onExitBin4() {setScaleTransition(binImage4, 100, 1);}
+
+    @FXML
+    private void onPressBin1() {setScaleTransition(binImage1, 100, 1.1);}
+
+    @FXML
+    private void onPressBin2() {setScaleTransition(binImage2, 100, 1.1);}
+
+    @FXML
+    private void onPressBin3() {setScaleTransition(binImage3, 100, 1.1);}
+
+    @FXML
+    private void onPressBin4() {setScaleTransition(binImage4, 100, 1.1);}
+
+    @FXML
+    private void onReleaseBin1() {setScaleTransition(binImage1, 100, 1.3);}
+
+    @FXML
+    private void onReleaseBin2() {setScaleTransition(binImage2, 100, 1.3);}
+
+    @FXML
+    private void onReleaseBin3() {setScaleTransition(binImage3, 100, 1.3);}
+
+    @FXML
+    private void onReleaseBin4() {setScaleTransition(binImage4, 100, 1.3);}
+
+    private void setScaleTransition(ImageView imageView, int duration, double size) {
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(imageView, duration, size);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    /**
+     *  refresh current transition page
+     */
+    @FXML
+    private void onRefreshTransitionList(){
+        setPaginationPages();
+        setTransactionList(transactionPagination.getCurrentPage());
     }
 
 }
