@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -43,6 +44,9 @@ public class EditCargoPageController implements Initializable {
     private AnchorPane onSelectTakenPane;
 
     @FXML
+    private AnchorPane descriptionBlockPane;
+
+    @FXML
     private MFXTextField newItemTextField;
 
     @FXML
@@ -62,6 +66,9 @@ public class EditCargoPageController implements Initializable {
 
     @FXML
     private Label notificationLabel;
+
+    @FXML
+    private TextArea descriptionTextArea;
 
     private String newItemName;
 
@@ -87,6 +94,7 @@ public class EditCargoPageController implements Initializable {
         setInputValidation(newCurrentUnitTextField);
         setInputValidation(newTakenRestockUnitTextField);
         descriptionDialog.setVisible(false);
+        descriptionBlockPane.setVisible(false);
     }
 
     /**
@@ -249,11 +257,13 @@ public class EditCargoPageController implements Initializable {
     @FXML
     private void onClickDescription(){
         descriptionDialog.setVisible(true);
+        descriptionBlockPane.setVisible(true);
     }
 
     @FXML
     private void onCloseDescriptionDialog(){
         descriptionDialog.setVisible(false);
+        descriptionBlockPane.setVisible(false);
     }
 
     @FXML
