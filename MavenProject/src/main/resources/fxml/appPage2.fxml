@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
    <children>
       <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: grey;" />
       <StackPane fx:id="stackPaneForWarehouse" layoutX="10.0" layoutY="10.0" prefHeight="640.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
@@ -58,7 +58,7 @@
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="cargoBox1Pane" layoutX="120.0" layoutY="496.0" onMouseEntered="#onEnterCargoBox1" prefHeight="80.0" prefWidth="180.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="500.0">
+            <AnchorPane fx:id="cargoBox1Pane" layoutX="120.0" layoutY="496.0" onMouseClicked="#onClickTransactionOne" onMouseEntered="#onEnterCargoBox1" prefHeight="80.0" prefWidth="180.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="500.0">
                <children>
                   <Label fx:id="cargoNameLabel01" layoutX="73.0" layoutY="14.0" prefHeight="17.0" prefWidth="107.0" text="qwer" textAlignment="CENTER" textFill="#23242a" underline="true" AnchorPane.leftAnchor="68.0" AnchorPane.topAnchor="10.0">
                      <font>
@@ -98,7 +98,7 @@
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="cargoBox2Pane" layoutX="424.0" layoutY="498.0" prefHeight="80.0" prefWidth="180.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="500.0">
+            <AnchorPane fx:id="cargoBox2Pane" layoutX="424.0" layoutY="498.0" onMouseClicked="#onClickTransactionTwo" prefHeight="80.0" prefWidth="180.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="500.0">
                <children>
                   <Label fx:id="cargoNameLabel02" layoutX="73.0" layoutY="14.0" prefHeight="17.0" prefWidth="101.0" text="wertty" textFill="#23242a" underline="true" AnchorPane.leftAnchor="68.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="10.0">
                      <font>
@@ -136,7 +136,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="cargoBox3Pane" layoutX="695.0" layoutY="502.0" prefHeight="80.0" prefWidth="180.0" AnchorPane.leftAnchor="620.0" AnchorPane.topAnchor="500.0">
+            <AnchorPane fx:id="cargoBox3Pane" layoutX="695.0" layoutY="502.0" onMouseClicked="#onClickTransactionThree" prefHeight="80.0" prefWidth="180.0" AnchorPane.leftAnchor="620.0" AnchorPane.topAnchor="500.0">
                <children>
                   <Label fx:id="cargoNameLabel03" layoutX="73.0" layoutY="14.0" prefHeight="17.0" prefWidth="107.0" text="qw" textFill="#23242a" underline="true" AnchorPane.leftAnchor="68.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="10.0">
                      <font>
@@ -171,7 +171,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="cargoBox4Pane" layoutX="897.0" layoutY="499.0" prefHeight="80.0" prefWidth="180.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="500.0">
+            <AnchorPane fx:id="cargoBox4Pane" layoutX="897.0" layoutY="499.0" onMouseClicked="#onClickTransactionFour" prefHeight="80.0" prefWidth="180.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="500.0">
                <children>
                   <Label fx:id="cargoNameLabel04" layoutX="73.0" layoutY="14.0" prefHeight="17.0" prefWidth="107.0" text="qwertyuoi" textFill="#23242a" underline="true" AnchorPane.leftAnchor="68.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="10.0">
                      <font>
@@ -317,7 +317,7 @@
                </image>
             </ImageView>
             <TextField fx:id="searchField" layoutX="301.0" layoutY="170.0" onMouseClicked="#onClickSearchBar" prefHeight="50.0" prefWidth="550.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #d7d7d7; -fx-border-radius: 8;" />
-            <AnchorPane fx:id="cargoBox1BackPane" layoutX="130.0" layoutY="570.0" onMouseExited="#onExitCargoBox1" opacity="0.0" pickOnBounds="false" prefHeight="80.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="500.0">
+            <AnchorPane fx:id="cargoBox1BackPane" layoutX="130.0" layoutY="570.0" onMouseClicked="#onClickTransactionOne" onMouseExited="#onExitCargoBox1" opacity="0.0" pickOnBounds="false" prefHeight="80.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="500.0">
                <children>
                   <Label fx:id="staffNameLabel011" layoutX="41.0" layoutY="43.0" minHeight="27.0" minWidth="175.0" prefHeight="27.0" prefWidth="157.0" text="Click for more information" textFill="#223c40" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="30.0">
                      <font>
@@ -326,7 +326,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="cargoBox2BackPane" layoutX="130.0" layoutY="570.0" opacity="0.0" pickOnBounds="false" prefHeight="80.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="500.0">
+            <AnchorPane fx:id="cargoBox2BackPane" layoutX="130.0" layoutY="570.0" onMouseClicked="#onClickTransactionTwo" opacity="0.0" pickOnBounds="false" prefHeight="80.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="500.0">
                <children>
                   <Label fx:id="staffNameLabel0111" layoutX="41.0" layoutY="43.0" minHeight="27.0" minWidth="175.0" prefHeight="27.0" prefWidth="157.0" text="Click for more information" textFill="#223c40" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="30.0">
                      <font>
@@ -335,7 +335,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="cargoBox3BackPane" layoutX="130.0" layoutY="570.0" opacity="0.0" pickOnBounds="false" prefHeight="80.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="620.0" AnchorPane.topAnchor="500.0">
+            <AnchorPane fx:id="cargoBox3BackPane" layoutX="130.0" layoutY="570.0" onMouseClicked="#onClickTransactionThree" opacity="0.0" pickOnBounds="false" prefHeight="80.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="620.0" AnchorPane.topAnchor="500.0">
                <children>
                   <Label fx:id="staffNameLabel0112" layoutX="41.0" layoutY="43.0" minHeight="27.0" minWidth="175.0" prefHeight="27.0" prefWidth="157.0" text="Click for more information" textFill="#223c40" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="30.0">
                      <font>
@@ -344,7 +344,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="cargoBox4BackPane" layoutX="130.0" layoutY="570.0" opacity="0.0" pickOnBounds="false" prefHeight="80.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="500.0">
+            <AnchorPane fx:id="cargoBox4BackPane" layoutX="130.0" layoutY="570.0" onMouseClicked="#onClickTransactionFour" opacity="0.0" pickOnBounds="false" prefHeight="80.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="500.0">
                <children>
                   <Label fx:id="staffNameLabel0113" layoutX="41.0" layoutY="43.0" minHeight="27.0" minWidth="175.0" prefHeight="27.0" prefWidth="157.0" text="Click for more information" textFill="#223c40" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="30.0">
                      <font>
@@ -555,12 +555,12 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <MFXCheckbox layoutX="265.0" layoutY="44.0" prefHeight="3.0" prefWidth="59.0" styleClass="checkBoxInAppPageForTaken" stylesheets="@../css/checkBox.css" text="Taken" textFill="#90e079">
+                  <MFXCheckbox fx:id="takenCheckBox" layoutX="265.0" layoutY="44.0" prefHeight="3.0" prefWidth="59.0" styleClass="checkBoxInAppPageForTaken" stylesheets="@../css/checkBox.css" text="Taken" textFill="#90e079">
                      <font>
                         <Font name="Calibri Bold" size="12.0" />
                      </font>
                   </MFXCheckbox>
-                  <MFXCheckbox layoutX="360.0" layoutY="43.0" styleClass="checkBoxInAppPageForRestock" stylesheets="@../css/checkBox.css" text="Restock" textFill="#e27a7a">
+                  <MFXCheckbox fx:id="restockCheckBox" layoutX="360.0" layoutY="43.0" styleClass="checkBoxInAppPageForRestock" stylesheets="@../css/checkBox.css" text="Restock" textFill="#e27a7a">
                      <font>
                         <Font name="Calibri Bold" size="12.0" />
                      </font>
@@ -581,17 +581,26 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <JFXButton layoutX="726.0" layoutY="157.0" style="-fx-background-color: #e2e2e2;" text="Bring To Notepad">
+                  <JFXButton layoutX="706.0" layoutY="146.0" style="-fx-background-color: #e2e2e2;" text="Bring To Notepad" AnchorPane.bottomAnchor="170.0">
                      <font>
-                        <Font name="Calibri Bold Italic" size="15.0" />
+                        <Font name="Ebrima Bold" size="14.0" />
                      </font>
                   </JFXButton>
                   <Separator layoutY="88.0" prefHeight="3.0" prefWidth="877.0" />
-                  <TextField layoutX="11.0" layoutY="40.0" prefHeight="25.0" prefWidth="210.0" />
-                  <TextField layoutX="511.0" layoutY="39.0" prefHeight="25.0" prefWidth="280.0" AnchorPane.leftAnchor="510.0" />
-                  <MFXDatePicker layoutX="7.0" layoutY="135.0" prefHeight="38.0" prefWidth="159.0" />
+                  <TextField fx:id="transactionNameInDetails" layoutX="11.0" layoutY="40.0" prefHeight="25.0" prefWidth="210.0">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font></TextField>
+                  <TextField fx:id="staffNameInDetails" layoutX="511.0" layoutY="39.0" prefHeight="25.0" prefWidth="280.0" AnchorPane.leftAnchor="510.0">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font></TextField>
+                  <MFXDatePicker fx:id="transactionDateInDetails" layoutX="7.0" layoutY="135.0" prefHeight="38.0" prefWidth="159.0">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font></MFXDatePicker>
                   <Separator layoutX="1.0" layoutY="187.0" prefHeight="13.0" prefWidth="876.0" />
-                  <Label layoutX="324.0" layoutY="108.0" prefHeight="17.0" prefWidth="159.0" text="Process time:">
+                  <Label layoutX="249.0" layoutY="108.0" prefHeight="17.0" prefWidth="159.0" text="Process time:" AnchorPane.bottomAnchor="227.66666666666666" AnchorPane.leftAnchor="260.0">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
@@ -599,7 +608,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <TextField layoutX="329.0" layoutY="141.0" text="01 : 00 : 34" AnchorPane.bottomAnchor="190.0" AnchorPane.leftAnchor="331.0">
+                  <TextField fx:id="transactionTimeInDetails" layoutX="273.0" layoutY="134.0" text="01 : 00 : 34" AnchorPane.bottomAnchor="193.33333333333334" AnchorPane.leftAnchor="270.0">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
@@ -612,7 +621,10 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <TextArea layoutX="9.0" layoutY="243.0" prefHeight="95.0" prefWidth="575.0" />
+                  <TextArea fx:id="purposeTextInDetails" layoutX="9.0" layoutY="243.0" prefHeight="95.0" prefWidth="575.0">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font></TextArea>
                   <JFXButton layoutX="788.0" layoutY="321.0" prefHeight="29.0" prefWidth="75.0" style="-fx-background-color: #bce6e4;" text="Apply" AnchorPane.bottomAnchor="4.0">
                      <font>
                         <Font name="Calibri Bold" size="16.0" />
@@ -623,6 +635,20 @@
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
                   </JFXButton>
+                  <Label layoutX="533.0" layoutY="109.0" prefHeight="17.0" prefWidth="159.0" text="Amount Processed:" AnchorPane.bottomAnchor="227.66666666666666">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="transactionAmountInDetails" layoutX="536.0" layoutY="135.0" prefHeight="27.0" prefWidth="101.0" text="01 : 00 : 34" AnchorPane.bottomAnchor="193.0" AnchorPane.leftAnchor="545.0">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="651.0" layoutY="209.0" text="Label" textFill="#eaffcf" />
                </children>
             </AnchorPane>
          </left>

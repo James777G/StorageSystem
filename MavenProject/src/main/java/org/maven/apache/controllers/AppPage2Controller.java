@@ -2,16 +2,21 @@ package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
+import io.github.palexdev.materialfx.controls.MFXCheckbox;
+import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -31,6 +36,8 @@ import org.maven.apache.utils.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -39,6 +46,15 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private ImageView refreshImage;
+
+    @FXML
+    private MFXDatePicker transactionDateInDetails;
+
+    @FXML
+    private TextArea purposeTextInDetails;
+
+    @FXML
+    private TextField transactionAmountInDetails;
 
     @FXML
     private ImageView extendArrow;
@@ -60,6 +76,12 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private JFXButton staffButton;
+
+    @FXML
+    private MFXCheckbox takenCheckBox;
+
+    @FXML
+    private MFXCheckbox restockCheckBox;
 
     @FXML
     private JFXButton transactionButton;
@@ -182,6 +204,9 @@ public class AppPage2Controller implements Initializable {
     private Label cargoAmountLabel02;
 
     @FXML
+    private TextField staffNameInDetails;
+
+    @FXML
     private Label cargoAmountLabel03;
 
     @FXML
@@ -207,6 +232,12 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private Label redTakenLabel;
+
+    @FXML
+    private TextField transactionTimeInDetails;
+
+    @FXML
+    private TextField transactionNameInDetails;
 
     @FXML
     private Label greenRestockLabel;
@@ -278,11 +309,14 @@ public class AppPage2Controller implements Initializable {
     private List<DateTransaction> dateTransactions_Taken = dateTransactionService.pageAskedDateRemoveUnitDescend();
     private ButtonSelected buttonSelected = ButtonSelected.ALL;
 
+    private DateTransaction[] dateTransactionListInAppPage = new DateTransaction[4];
+
     private boolean isSearchTableOut = false;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        transactionDialog.setVisible(false);
         searchField.deselect();
         currentPage = appPagePane;
         DataUtils.publicSettingsDialog = settingsDialog;
@@ -298,6 +332,27 @@ public class AppPage2Controller implements Initializable {
         stackPaneForWarehouse.setOpacity(0);
         stackPaneForWarehouse.setPickOnBounds(false);
         stackPaneForWarehouse.setVisible(false);
+        restockCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    takenCheckBox.setSelected(false);
+                } else{
+                    takenCheckBox.setSelected(true);
+                }
+            }
+        });
+
+        takenCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    restockCheckBox.setSelected(false);
+                }else{
+                    restockCheckBox.setSelected(true);
+                }
+            }
+        });
         setButtonList();
         setTransactionPane();
         setWarehousePane();
@@ -326,13 +381,13 @@ public class AppPage2Controller implements Initializable {
         onUpdateUsername();
     }
 
-    private void enableNode(Node node){
+    private void enableNode(Node node) {
         node.setOpacity(1);
         node.setVisible(true);
         node.setPickOnBounds(true);
     }
 
-    private void disableNode(Node node){
+    private void disableNode(Node node) {
         node.setOpacity(0);
         node.setVisible(false);
         node.setPickOnBounds(false);
@@ -364,41 +419,48 @@ public class AppPage2Controller implements Initializable {
     private void fillCargoBoxesInformation(ButtonSelected buttonSelected) {
         int boxNumber = 4;
         for (int index = 0; index < boxNumber; index++) {
-            cargoBoxPanes[index].setOpacity(1);
-            cargoBoxPanes[index].setVisible(true);
-            cargoBoxPanes[index].setPickOnBounds(true);
+            enableNode(cargoBoxPanes[index]);
+//            cargoBoxPanes[index].setOpacity(1);
+//            cargoBoxPanes[index].setVisible(true);
+//            cargoBoxPanes[index].setPickOnBounds(true);
         }
         switch (buttonSelected) {
             case ALL -> {
-                redTakenLabel.setOpacity(1);
-                redTakenLabel.setVisible(true);
-                redTakenLabel.setPickOnBounds(true);
-                greenRestockLabel.setOpacity(1);
-                greenRestockLabel.setVisible(true);
-                greenRestockLabel.setPickOnBounds(true);
+                enableNode(redTakenLabel);
+//                redTakenLabel.setOpacity(1);
+//                redTakenLabel.setVisible(true);
+//                redTakenLabel.setPickOnBounds(true);
+                enableNode(greenRestockLabel);
+//                greenRestockLabel.setOpacity(1);
+//                greenRestockLabel.setVisible(true);
+//                greenRestockLabel.setPickOnBounds(true);
                 greenRestockLabel.setTranslateX(0);
                 if (dateTransactions_Taken.size() < 2) {
                     takenBoxNumber = dateTransactions_Taken.size();
                     for (int hideAllTaken = 1; hideAllTaken >= dateTransactions_Taken.size(); hideAllTaken--) {
-                        cargoBoxPanes[hideAllTaken].setOpacity(0);
-                        cargoBoxPanes[hideAllTaken].setVisible(false);
-                        cargoBoxPanes[hideAllTaken].setPickOnBounds(false);
+                        disableNode(cargoBoxPanes[hideAllTaken]);
+//                        cargoBoxPanes[hideAllTaken].setOpacity(0);
+//                        cargoBoxPanes[hideAllTaken].setVisible(false);
+//                        cargoBoxPanes[hideAllTaken].setPickOnBounds(false);
                     }
                 }
                 if (dateTransactions_Restock.size() < 2) {
                     restockBoxNumber = dateTransactions_Restock.size();
                     for (int hideAllRestock = 3; hideAllRestock >= dateTransactions_Restock.size() + 2; hideAllRestock--) {
-                        cargoBoxPanes[hideAllRestock].setOpacity(0);
-                        cargoBoxPanes[hideAllRestock].setVisible(false);
-                        cargoBoxPanes[hideAllRestock].setPickOnBounds(false);
+                        disableNode(cargoBoxPanes[hideAllRestock]);
+//                        cargoBoxPanes[hideAllRestock].setOpacity(0);
+//                        cargoBoxPanes[hideAllRestock].setVisible(false);
+//                        cargoBoxPanes[hideAllRestock].setPickOnBounds(false);
                     }
                 }
                 for (int indexTaken = 0; indexTaken < takenBoxNumber; indexTaken++) {
+                    dateTransactionListInAppPage[indexTaken] = dateTransactions_Taken.get(indexTaken);
                     cargoNameLabels[indexTaken].setText(dateTransactions_Taken.get(indexTaken).getItemName());
                     cargoAmountLabels[indexTaken].setText(dateTransactions_Taken.get(indexTaken).getRemoveUnit().toString());
                     staffNameLabels[indexTaken].setText(dateTransactions_Taken.get(indexTaken).getStaffName());
                 }
                 for (int indexRestock = 0; indexRestock < restockBoxNumber; indexRestock++) {
+                    dateTransactionListInAppPage[indexRestock + 2] = dateTransactions_Restock.get(indexRestock);
                     cargoNameLabels[indexRestock + 2].setText(dateTransactions_Restock.get(indexRestock).getItemName());
                     cargoAmountLabels[indexRestock + 2].setText(dateTransactions_Restock.get(indexRestock).getAddUnit().toString());
                     staffNameLabels[indexRestock + 2].setText(dateTransactions_Restock.get(indexRestock).getStaffName());
@@ -406,21 +468,25 @@ public class AppPage2Controller implements Initializable {
 
             }
             case TAKEN -> {
-                redTakenLabel.setOpacity(1);
-                redTakenLabel.setVisible(true);
-                redTakenLabel.setPickOnBounds(true);
-                greenRestockLabel.setOpacity(0);
-                greenRestockLabel.setVisible(false);
-                greenRestockLabel.setPickOnBounds(false);
+                enableNode(redTakenLabel);
+//                redTakenLabel.setOpacity(1);
+//                redTakenLabel.setVisible(true);
+//                redTakenLabel.setPickOnBounds(true);
+                disableNode(greenRestockLabel);
+//                greenRestockLabel.setOpacity(0);
+//                greenRestockLabel.setVisible(false);
+//                greenRestockLabel.setPickOnBounds(false);
                 if (dateTransactions_Taken.size() < 4) {
                     boxNumber = dateTransactions_Taken.size();
                     for (int hideTaken = 3; hideTaken > dateTransactions_Taken.size() - 1; hideTaken--) {
-                        cargoBoxPanes[hideTaken].setOpacity(0);
-                        cargoBoxPanes[hideTaken].setVisible(false);
-                        cargoBoxPanes[hideTaken].setPickOnBounds(false);
+                        disableNode(cargoBoxPanes[hideTaken]);
+//                        cargoBoxPanes[hideTaken].setOpacity(0);
+//                        cargoBoxPanes[hideTaken].setVisible(false);
+//                        cargoBoxPanes[hideTaken].setPickOnBounds(false);
                     }
                 }
                 for (int index = 0; index < boxNumber; index++) {
+                    dateTransactionListInAppPage[index] = dateTransactions_Taken.get(index);
                     cargoNameLabels[index].setText(dateTransactions_Taken.get(index).getItemName());
                     cargoAmountLabels[index].setText(dateTransactions_Taken.get(index).getRemoveUnit().toString());
                     staffNameLabels[index].setText(dateTransactions_Taken.get(index).getStaffName());
@@ -428,22 +494,26 @@ public class AppPage2Controller implements Initializable {
 
             }
             case RESTOCK -> {
-                redTakenLabel.setOpacity(0);
-                redTakenLabel.setVisible(false);
-                redTakenLabel.setPickOnBounds(false);
-                greenRestockLabel.setOpacity(1);
-                greenRestockLabel.setVisible(true);
-                greenRestockLabel.setPickOnBounds(true);
+                disableNode(redTakenLabel);
+//                redTakenLabel.setOpacity(0);
+//                redTakenLabel.setVisible(false);
+//                redTakenLabel.setPickOnBounds(false);
+                enableNode(greenRestockLabel);
+//                greenRestockLabel.setOpacity(1);
+//                greenRestockLabel.setVisible(true);
+//                greenRestockLabel.setPickOnBounds(true);
                 greenRestockLabel.setTranslateX(-500);
                 if (dateTransactions_Restock.size() < 4) {
                     boxNumber = dateTransactions_Restock.size();
                     for (int hideRestock = 3; hideRestock > dateTransactions_Restock.size() - 1; hideRestock--) {
-                        cargoBoxPanes[hideRestock].setOpacity(0);
-                        cargoBoxPanes[hideRestock].setVisible(false);
-                        cargoBoxPanes[hideRestock].setPickOnBounds(false);
+                        disableNode(cargoBoxPanes[hideRestock]);
+//                        cargoBoxPanes[hideRestock].setOpacity(0);
+//                        cargoBoxPanes[hideRestock].setVisible(false);
+//                        cargoBoxPanes[hideRestock].setPickOnBounds(false);
                     }
                 }
                 for (int index = 0; index < boxNumber; index++) {
+                    dateTransactionListInAppPage[index] = dateTransactions_Restock.get(index);
                     cargoNameLabels[index].setText(dateTransactions_Restock.get(index).getItemName());
                     cargoAmountLabels[index].setText(dateTransactions_Restock.get(index).getAddUnit().toString());
                     staffNameLabels[index].setText(dateTransactions_Restock.get(index).getStaffName());
@@ -453,7 +523,7 @@ public class AppPage2Controller implements Initializable {
     }
 
     @FXML
-    private void onCloseTransactionDialog(){
+    private void onCloseTransactionDialog() {
         transactionDialog.setVisible(false);
     }
 
@@ -526,13 +596,13 @@ public class AppPage2Controller implements Initializable {
             searchTable.setOpacity(1);
             searchTable.setPickOnBounds(true);
             searchTable.setVisible(true);
-            ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(searchTable,500,0,1);
+            ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(searchTable, 500, 0, 1);
             scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
             scaleTransition.setOnFinished(event -> {
                 isSearchTableMoving = false;
             });
             scaleTransition.play();
-            TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(searchTable,500,-100,0);
+            TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(searchTable, 500, -100, 0);
             translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
             translateTransition.setOnFinished(event -> {
                 isSearchTableMoving = false;
@@ -861,16 +931,16 @@ public class AppPage2Controller implements Initializable {
     }
 
     @FXML
-    private void onEnterCargoBox1(){
-        ScaleTransition scaleTransition_enlarge = ScaleUtils.getScaleTransitionFromToXY(cargoBox1Pane,200,1,1.1);
+    private void onEnterCargoBox1() {
+        ScaleTransition scaleTransition_enlarge = ScaleUtils.getScaleTransitionFromToXY(cargoBox1Pane, 200, 1, 1.1);
         scaleTransition_enlarge = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition_enlarge);
         scaleTransition_enlarge.setOnFinished(closeFrontPane -> {
-            ScaleTransition scaleTransition_closeFront = ScaleUtils.getScaleTransitionFromToX(cargoBox1Pane,300,1.1,0);
+            ScaleTransition scaleTransition_closeFront = ScaleUtils.getScaleTransitionFromToX(cargoBox1Pane, 300, 1.1, 0);
             scaleTransition_closeFront.setOnFinished(openBackPane -> {
                 cargoBox1BackPane.setScaleX(0);
                 enableNode(cargoBox1BackPane);
                 disableNode(cargoBox1Pane);
-                ScaleTransition scaleTransition_openBack = ScaleUtils.getScaleTransitionFromToX(cargoBox1BackPane,300,0,1.1);
+                ScaleTransition scaleTransition_openBack = ScaleUtils.getScaleTransitionFromToX(cargoBox1BackPane, 300, 0, 1.1);
                 scaleTransition_openBack.play();
             });
             scaleTransition_closeFront.play();
@@ -879,15 +949,15 @@ public class AppPage2Controller implements Initializable {
     }
 
     @FXML
-    private void onExitCargoBox1(){
-        ScaleTransition scaleTransition_closeBack = ScaleUtils.getScaleTransitionFromToX(cargoBox1BackPane,300,1.1,0);
+    private void onExitCargoBox1() {
+        ScaleTransition scaleTransition_closeBack = ScaleUtils.getScaleTransitionFromToX(cargoBox1BackPane, 300, 1.1, 0);
         scaleTransition_closeBack.setOnFinished(closeBackPane -> {
             disableNode(cargoBox1BackPane);
             cargoBox1Pane.setScaleX(0);
             enableNode(cargoBox1Pane);
-            ScaleTransition scaleTransition_openFront = ScaleUtils.getScaleTransitionFromToX(cargoBox1Pane,300, 0,1.1);
-            scaleTransition_openFront.setOnFinished( toOriginalSize -> {
-                ScaleTransition scaleTransition_ToOrigin = ScaleUtils.getScaleTransitionFromToXY(cargoBox1Pane,200,1.1,1);
+            ScaleTransition scaleTransition_openFront = ScaleUtils.getScaleTransitionFromToX(cargoBox1Pane, 300, 0, 1.1);
+            scaleTransition_openFront.setOnFinished(toOriginalSize -> {
+                ScaleTransition scaleTransition_ToOrigin = ScaleUtils.getScaleTransitionFromToXY(cargoBox1Pane, 200, 1.1, 1);
                 scaleTransition_ToOrigin = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition_ToOrigin);
                 scaleTransition_ToOrigin.play();
             });
@@ -907,6 +977,7 @@ public class AppPage2Controller implements Initializable {
 //        });
 //        scaleTransition_enlarge.play();
     }
+
     @FXML
     private void onUpdateUsername() {
         updateSettingDialog("Username");
@@ -972,16 +1043,16 @@ public class AppPage2Controller implements Initializable {
     /**
      * shift the line under the buttons pursuant to the info that is being updating
      */
-    private void setTransitionSettingLine(){
-        if (isUpdatingUsername && !isUpdatingEmail && !isUpdatingPassword){
+    private void setTransitionSettingLine() {
+        if (isUpdatingUsername && !isUpdatingEmail && !isUpdatingPassword) {
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionToX(transitionSettingLine, 500, 0);
             translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
             translateTransition.play();
-        }else if (!isUpdatingUsername && isUpdatingEmail && !isUpdatingPassword){
+        } else if (!isUpdatingUsername && isUpdatingEmail && !isUpdatingPassword) {
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionToX(transitionSettingLine, 500, 90);
             translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
             translateTransition.play();
-        }else if (!isUpdatingUsername && !isUpdatingEmail && isUpdatingPassword){
+        } else if (!isUpdatingUsername && !isUpdatingEmail && isUpdatingPassword) {
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionToX(transitionSettingLine, 500, 180);
             translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
             translateTransition.play();
@@ -1038,4 +1109,64 @@ public class AppPage2Controller implements Initializable {
             }
         }
     }
+
+    private boolean isTransactionStatusTaken(DateTransaction dateTransaction) {
+        return dateTransaction.getRemoveUnit() != 0;
+    }
+
+    private void setTransactionDate(MFXDatePicker transactionDateInDetails, DateTransaction dateTransaction) {
+        String recordTime = dateTransaction.getRecordTime();
+        String[] s = recordTime.trim().split(" ");
+        String[] split = s[0].split("-");
+        transactionDateInDetails.setValue(LocalDate.of(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2])));
+    }
+
+    private void setTransactionTime(TextField textField, DateTransaction dateTransaction) {
+        String recordTime = dateTransaction.getRecordTime();
+        System.out.println(recordTime);
+        String[] s = recordTime.trim().split(" ");
+        String[] split = s[1].split(":");
+        textField.setText(split[1] + " : " + split[2] + " : " + split[3]);
+    }
+
+    private void setTransactionDialog(DateTransaction dateTransaction){
+        transactionNameInDetails.setText(dateTransaction.getItemName());
+        staffNameInDetails.setText(dateTransaction.getStaffName());
+        purposeTextInDetails.setText(dateTransaction.getPurpose());
+        if (isTransactionStatusTaken(dateTransaction)) {
+            restockCheckBox.setSelected(false);
+            takenCheckBox.setSelected(true);
+            transactionAmountInDetails.setText(dateTransaction.getRemoveUnit().toString());
+        } else {
+            takenCheckBox.setSelected(false);
+            restockCheckBox.setSelected(true);
+            transactionAmountInDetails.setText(dateTransaction.getAddUnit().toString());
+        }
+        setTransactionTime(transactionTimeInDetails, dateTransaction);
+        setTransactionDate(transactionDateInDetails, dateTransaction);
+        transactionDialog.setVisible(true);
+        transactionDialog.setOpacity(1);
+        transactionDialog.setPickOnBounds(true);
+    }
+
+    @FXML
+    private void onClickTransactionOne() {
+        setTransactionDialog(dateTransactionListInAppPage[0]);
+    }
+
+    @FXML
+    private void onClickTransactionTwo() {
+        setTransactionDialog(dateTransactionListInAppPage[1]);
+    }
+
+    @FXML
+    private void onClickTransactionThree() {
+        setTransactionDialog(dateTransactionListInAppPage[2]);
+    }
+
+    @FXML
+    private void onClickTransactionFour() {
+        setTransactionDialog(dateTransactionListInAppPage[3]);
+    }
+
 }
