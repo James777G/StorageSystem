@@ -583,7 +583,7 @@ public class TransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin1() {
-        if (!idLabelArray[0].equals("")){
+        if (!idLabelArray[0].getText().equals("")){
             deletionConfirmationDialog.setVisible(true);
             blockPane.setVisible(true);
             setRemovalConfirmation(0);
@@ -595,7 +595,7 @@ public class TransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin2() {
-        if (!idLabelArray[1].equals("")){
+        if (!idLabelArray[1].getText().equals("")){
             deletionConfirmationDialog.setVisible(true);
             blockPane.setVisible(true);
             setRemovalConfirmation(1);
@@ -607,7 +607,7 @@ public class TransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin3() {
-        if (!idLabelArray[2].equals("")){
+        if (!idLabelArray[2].getText().equals("")){
             deletionConfirmationDialog.setVisible(true);
             blockPane.setVisible(true);
             setRemovalConfirmation(2);
@@ -619,7 +619,7 @@ public class TransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin4() {
-        if (!idLabelArray[3].equals("")){
+        if (!idLabelArray[3].getText().equals("")){
             deletionConfirmationDialog.setVisible(true);
             blockPane.setVisible(true);
             setRemovalConfirmation(3);
@@ -711,9 +711,6 @@ public class TransactionPageController implements Initializable {
     private void onRefreshTransitionList(){
         setPaginationPages();
         setTransactionList(transactionPagination.getCurrentPage());
-        System.out.println("++++++++++++++++++++++++++++++++");
-        System.out.println("refreshed");
-        System.out.println("++++++++++++++++++++++++++++++++");
     }
 
 }
