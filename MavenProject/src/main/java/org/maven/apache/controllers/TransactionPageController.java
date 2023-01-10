@@ -545,7 +545,7 @@ public class TransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin1() {
-
+        dateTransactionService.deleteById(Integer.valueOf(idLabel1.getText()));
     }
 
     /**
@@ -553,7 +553,7 @@ public class TransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin2() {
-
+        dateTransactionService.deleteById(Integer.valueOf(idLabel2.getText()));
     }
 
     /**
@@ -561,7 +561,7 @@ public class TransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin3() {
-
+        dateTransactionService.deleteById(Integer.valueOf(idLabel3.getText()));
     }
 
     /**
@@ -569,7 +569,7 @@ public class TransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin4() {
-
+        dateTransactionService.deleteById(Integer.valueOf(idLabel4.getText()));
     }
 
     @FXML
