@@ -17,6 +17,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.effect.Bloom;
@@ -181,6 +182,9 @@ public class LogInPageController implements Initializable {
 
 	@FXML
 	private ProgressIndicator loadIndicator;
+
+	@FXML
+	private Button fastLoginButton;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -384,6 +388,9 @@ public class LogInPageController implements Initializable {
 		} else {
 			// if the user exists, check its verification (correct password)
 			if (currentUser.getPassword().equals(passwordField.getText())) {
+				/***********/
+				fastLoginButton.setDisable(true); //test only
+				/***********/
 				// show progress indicator and disable signing button
 				loginButton.setDisable(true);
 				loadIndicator.setVisible(true);

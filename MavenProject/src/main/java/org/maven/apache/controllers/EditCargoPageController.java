@@ -76,6 +76,8 @@ public class EditCargoPageController implements Initializable {
 
     private String transactionDate;
 
+    private String transactionDescription = "";
+
     private int newCurrentUnitAmount;
 
     private int newTakenRestockUnitAmount;
@@ -123,10 +125,10 @@ public class EditCargoPageController implements Initializable {
             newTransaction = new DateTransaction();
             if (isAddingTaken) {
                 // adding taken cargo
-                addNewTransaction(newItemID, newItemName, newStaffName, newTakenRestockUnitAmount, 0, newCurrentUnitAmount, transactionDate, "**");
+                addNewTransaction(newItemID, newItemName, newStaffName, newTakenRestockUnitAmount, 0, newCurrentUnitAmount, transactionDate, transactionDescription);
             } else {
                 // adding restock cargo
-                addNewTransaction(newItemID, newItemName, newStaffName, 0, newTakenRestockUnitAmount, newCurrentUnitAmount, transactionDate, "**");
+                addNewTransaction(newItemID, newItemName, newStaffName, 0, newTakenRestockUnitAmount, newCurrentUnitAmount, transactionDate, transactionDescription);
             }
             newTransactionService.addTransaction(newTransaction);
             notificationLabel.setText("Transaction added successfully");
@@ -261,12 +263,6 @@ public class EditCargoPageController implements Initializable {
     }
 
     @FXML
-    private void onCloseDescriptionDialog(){
-        descriptionDialog.setVisible(false);
-        descriptionBlockPane.setVisible(false);
-    }
-
-    @FXML
     private void onEnterDescription(){
         setScaleTransition(descriptionImage, 300, 1.3);
     }
@@ -297,6 +293,16 @@ public class EditCargoPageController implements Initializable {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(imageView, duration, size);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
+    }
+
+    /**
+     * parse description to the new transaction and close the pane
+     */
+    @FXML
+    private void onSaveDescription(){
+        transactionDescription = descriptionTextArea.getText();
+        descriptionDialog.setVisible(false);
+        descriptionBlockPane.setVisible(false);
     }
 
 }
