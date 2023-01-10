@@ -165,6 +165,11 @@ public class AppPage2Controller implements Initializable {
     private AnchorPane[] cargoBoxBackPanes = new AnchorPane[4];
 
     @FXML
+    private AnchorPane cargoBox1FunctionalityPane, cargoBox2FunctionalityPane, cargoBox3FunctionalityPane, cargoBox4FunctionalityPane;
+
+    private AnchorPane[] cargoBoxFunctionalityPanes = new AnchorPane[4];
+
+    @FXML
     private AnchorPane blockPane;
 
     @FXML
@@ -451,6 +456,10 @@ public class AppPage2Controller implements Initializable {
         changeToBack[1] = changeToBack_CargoBox2;
         changeToBack[2] = changeToBack_CargoBox3;
         changeToBack[3] = changeToBack_CargoBox4;
+        cargoBoxFunctionalityPanes[0] = cargoBox1FunctionalityPane;
+        cargoBoxFunctionalityPanes[1] = cargoBox2FunctionalityPane;
+        cargoBoxFunctionalityPanes[2] = cargoBox3FunctionalityPane;
+        cargoBoxFunctionalityPanes[3] = cargoBox4FunctionalityPane;
     }
 
     private void fillCargoBoxesInformation(ButtonSelected buttonSelected) {
@@ -476,6 +485,7 @@ public class AppPage2Controller implements Initializable {
                     takenBoxNumber = dateTransactions_Taken.size();
                     for (int hideAllTaken = 1; hideAllTaken >= dateTransactions_Taken.size(); hideAllTaken--) {
                         disableNode(cargoBoxPanes[hideAllTaken]);
+                        disableNode(cargoBoxFunctionalityPanes[hideAllTaken]);
 //                        cargoBoxPanes[hideAllTaken].setOpacity(0);
 //                        cargoBoxPanes[hideAllTaken].setVisible(false);
 //                        cargoBoxPanes[hideAllTaken].setPickOnBounds(false);
@@ -485,6 +495,7 @@ public class AppPage2Controller implements Initializable {
                     restockBoxNumber = dateTransactions_Restock.size();
                     for (int hideAllRestock = 3; hideAllRestock >= dateTransactions_Restock.size() + 2; hideAllRestock--) {
                         disableNode(cargoBoxPanes[hideAllRestock]);
+                        disableNode(cargoBoxFunctionalityPanes[hideAllRestock]);
 //                        cargoBoxPanes[hideAllRestock].setOpacity(0);
 //                        cargoBoxPanes[hideAllRestock].setVisible(false);
 //                        cargoBoxPanes[hideAllRestock].setPickOnBounds(false);
@@ -517,6 +528,7 @@ public class AppPage2Controller implements Initializable {
                     boxNumber = dateTransactions_Taken.size();
                     for (int hideTaken = 3; hideTaken > dateTransactions_Taken.size() - 1; hideTaken--) {
                         disableNode(cargoBoxPanes[hideTaken]);
+                        disableNode(cargoBoxFunctionalityPanes[hideTaken]);
 //                        cargoBoxPanes[hideTaken].setOpacity(0);
 //                        cargoBoxPanes[hideTaken].setVisible(false);
 //                        cargoBoxPanes[hideTaken].setPickOnBounds(false);
@@ -544,6 +556,7 @@ public class AppPage2Controller implements Initializable {
                     boxNumber = dateTransactions_Restock.size();
                     for (int hideRestock = 3; hideRestock > dateTransactions_Restock.size() - 1; hideRestock--) {
                         disableNode(cargoBoxPanes[hideRestock]);
+                        disableNode(cargoBoxFunctionalityPanes[hideRestock]);
 //                        cargoBoxPanes[hideRestock].setOpacity(0);
 //                        cargoBoxPanes[hideRestock].setVisible(false);
 //                        cargoBoxPanes[hideRestock].setPickOnBounds(false);
