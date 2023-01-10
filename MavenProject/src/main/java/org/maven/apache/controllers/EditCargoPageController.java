@@ -3,6 +3,7 @@ package org.maven.apache.controllers;
 import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -57,6 +58,9 @@ public class EditCargoPageController implements Initializable {
     private MFXDatePicker datePicker;
 
     @FXML
+    private MFXGenericDialog descriptionDialog;
+
+    @FXML
     private Label notificationLabel;
 
     private String newItemName;
@@ -82,6 +86,7 @@ public class EditCargoPageController implements Initializable {
         onClickTakenSelectButton();
         setInputValidation(newCurrentUnitTextField);
         setInputValidation(newTakenRestockUnitTextField);
+        descriptionDialog.setVisible(false);
     }
 
     /**
@@ -238,9 +243,17 @@ public class EditCargoPageController implements Initializable {
         node.setPickOnBounds(true);
     }
 
+    /**
+     * show the page of adding new description
+     */
     @FXML
     private void onClickDescription(){
+        descriptionDialog.setVisible(true);
+    }
 
+    @FXML
+    private void onCloseDescriptionDialog(){
+        descriptionDialog.setVisible(false);
     }
 
     @FXML

@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.effect.DropShadow?>
@@ -124,6 +125,7 @@
             <Image url="@../image/icons8-change-64.png" />
          </image>
       </ImageView>
+      <MFXGenericDialog fx:id="descriptionDialog" headerText="Transaction details" layoutX="119.0" layoutY="69.0" onClose="#onCloseDescriptionDialog" />
    </children>
    <effect>
       <DropShadow blurType="ONE_PASS_BOX">
