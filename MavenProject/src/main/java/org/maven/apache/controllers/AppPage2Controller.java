@@ -38,6 +38,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -299,6 +300,8 @@ public class AppPage2Controller implements Initializable {
 
     private int restockBoxNumber = 2;
 
+    private DateTransaction dateTransactionSelected;
+
     enum ButtonSelected {
         ALL,
         TAKEN,
@@ -524,6 +527,7 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onCloseTransactionDialog() {
+        dateTransactionSelected = null;
         transactionDialog.setVisible(false);
     }
 
@@ -1117,7 +1121,7 @@ public class AppPage2Controller implements Initializable {
     private void setTransactionDate(MFXDatePicker transactionDateInDetails, DateTransaction dateTransaction) {
         String recordTime = dateTransaction.getRecordTime();
         String[] s = recordTime.trim().split(" ");
-        String[] split = s[0].split("-");
+        String[] split = s[0].replaceAll("-", "/").replaceAll("年", "/").replaceAll("月", "/").split("/");
         transactionDateInDetails.setValue(LocalDate.of(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2])));
     }
 
@@ -1127,7 +1131,7 @@ public class AppPage2Controller implements Initializable {
             System.out.println(recordTime);
             String[] s = recordTime.trim().split(" ");
             String[] split = s[1].split(":");
-            textField.setText(split[1] + " : " + split[2] + " : " + split[3]);
+            textField.setText(split[0] + " : " + split[1] + " : " + split[2]);
         } else{
             textField.setText("Not Applicable");
         }
@@ -1156,22 +1160,38 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onClickTransactionOne() {
+        dateTransactionSelected = dateTransactionListInAppPage[0];
         setTransactionDialog(dateTransactionListInAppPage[0]);
     }
 
     @FXML
     private void onClickTransactionTwo() {
+        dateTransactionSelected = dateTransactionListInAppPage[1];
         setTransactionDialog(dateTransactionListInAppPage[1]);
     }
 
     @FXML
     private void onClickTransactionThree() {
+        dateTransactionSelected = dateTransactionListInAppPage[2];
         setTransactionDialog(dateTransactionListInAppPage[2]);
     }
 
     @FXML
     private void onClickTransactionFour() {
+        dateTransactionSelected = dateTransactionListInAppPage[3];
         setTransactionDialog(dateTransactionListInAppPage[3]);
+    }
+
+    @FXML
+    private void onClickApply(){
+//        dateTransactionSelected.setItemName(transactionNameInDetails.getText());
+//        dateTransactionSelected.setStaffName(staffNameInDetails.getText());
+//        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+//        LocalDate value = transactionDateInDetails.getValue();
+//        String format = value.format(dateTimeFormatter);
+//        if(restockCheckBox.isSelected()){
+//
+//        }
     }
 
 }

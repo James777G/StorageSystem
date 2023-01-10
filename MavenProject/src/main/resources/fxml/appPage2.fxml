@@ -455,7 +455,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: grey;" />
+      <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: grey;" AnchorPane.bottomAnchor="0.0" />
 
       <MFXGenericDialog fx:id="settingsDialog" headerText="Update your account Info" onClose="#onCloseSettings" opacity="0.0" prefWidth="700.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="175.0">
          <center>
@@ -581,9 +581,9 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <JFXButton layoutX="706.0" layoutY="146.0" style="-fx-background-color: #e2e2e2;" text="Bring To Notepad" AnchorPane.bottomAnchor="170.0">
+                  <JFXButton layoutX="719.0" layoutY="159.0" style="-fx-background-color: #e2e2e2;" text="Bring To Notepad" AnchorPane.bottomAnchor="170.0">
                      <font>
-                        <Font name="Ebrima Bold" size="14.0" />
+                        <Font name="Calibri Bold" size="16.0" />
                      </font>
                   </JFXButton>
                   <Separator layoutY="88.0" prefHeight="3.0" prefWidth="877.0" />
@@ -625,7 +625,7 @@
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font></TextArea>
-                  <JFXButton layoutX="788.0" layoutY="321.0" prefHeight="29.0" prefWidth="75.0" style="-fx-background-color: #bce6e4;" text="Apply" AnchorPane.bottomAnchor="4.0">
+                  <JFXButton layoutX="788.0" layoutY="321.0" onAction="#onClickApply" prefHeight="29.0" prefWidth="75.0" style="-fx-background-color: #bce6e4;" text="Apply" AnchorPane.bottomAnchor="4.0">
                      <font>
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
@@ -648,7 +648,6 @@
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="651.0" layoutY="209.0" text="Label" textFill="#eaffcf" />
                </children>
             </AnchorPane>
          </left>
