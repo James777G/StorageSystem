@@ -285,8 +285,6 @@ public class AppPage2Controller implements Initializable {
 
     private boolean changeToBack = false;
 
-    private boolean isChangingToFront = true;
-
     private final JFXButton[] buttonList = new JFXButton[5];
 
     private final Timeline timeline = new Timeline();
@@ -296,10 +294,6 @@ public class AppPage2Controller implements Initializable {
     private final DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
 
     private final UserService userService = MyLauncher.context.getBean("userService", UserService.class);
-
-    private int i = 0;
-
-    private int j = 0;
 
     private int takenBoxNumber = 2;
 
