@@ -604,4 +604,14 @@ public class LogInPageController implements Initializable {
 		return signUpPassword.getText();
 	}
 
+	/**
+	 * a shortcut for logging in as Piper (test only)
+	 */
+	@FXML
+	private void onFastLogin(){
+		userNameField.setText("Piper");
+		passwordField.setText("sir");
+		onSignInAction();
+	}
+
 }
