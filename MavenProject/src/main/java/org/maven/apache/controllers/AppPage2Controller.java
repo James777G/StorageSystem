@@ -165,6 +165,11 @@ public class AppPage2Controller implements Initializable {
     private AnchorPane[] cargoBoxBackPanes = new AnchorPane[4];
 
     @FXML
+    private AnchorPane cargoBox1FunctionalityPane, cargoBox2FunctionalityPane, cargoBox3FunctionalityPane, cargoBox4FunctionalityPane;
+
+    private AnchorPane[] cargoBoxFunctionalityPanes = new AnchorPane[4];
+
+    @FXML
     private AnchorPane blockPane;
 
     @FXML
@@ -281,11 +286,25 @@ public class AppPage2Controller implements Initializable {
 
     private boolean isSearchTableMoving = false;
 
-    private boolean isChangingSide = false;
+    private boolean isChangingSide_CargoBox1 = false;
 
-    private boolean changeToBack = false;
+    private boolean isChangingSide_CargoBox2 = false;
 
-    private boolean isChangingToFront = true;
+    private boolean isChangingSide_CargoBox3 = false;
+
+    private boolean isChangingSide_CargoBox4 = false;
+
+    private boolean[] isChangingSide = new boolean[4];
+
+    private boolean changeToBack_CargoBox1 = false;
+
+    private boolean changeToBack_CargoBox2 = false;
+
+    private boolean changeToBack_CargoBox3 = false;
+
+    private boolean changeToBack_CargoBox4 = false;
+
+    private boolean[] changeToBack = new boolean[4];
 
     private final JFXButton[] buttonList = new JFXButton[5];
 
@@ -296,10 +315,6 @@ public class AppPage2Controller implements Initializable {
     private final DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
 
     private final UserService userService = MyLauncher.context.getBean("userService", UserService.class);
-
-    private int i = 0;
-
-    private int j = 0;
 
     private int takenBoxNumber = 2;
 
@@ -313,9 +328,20 @@ public class AppPage2Controller implements Initializable {
         RESTOCK
     }
 
+    enum CargoBoxNumber{
+        ONE,
+        TWO,
+        THREE,
+        FOUR
+    }
+
     private List<DateTransaction> dateTransactions_Restock = dateTransactionService.pageAskedDateAddUnitDescend();
+
     private List<DateTransaction> dateTransactions_Taken = dateTransactionService.pageAskedDateRemoveUnitDescend();
+
     private ButtonSelected buttonSelected = ButtonSelected.ALL;
+
+    private CargoBoxNumber cargoBoxNumber ;
 
     private DateTransaction[] dateTransactionListInAppPage = new DateTransaction[4];
 
@@ -379,10 +405,6 @@ public class AppPage2Controller implements Initializable {
         setDrawer();
         confirmUpdateInfo.setDisable(true);
         initializeLabels();
-        System.out.println(dateTransactions_Taken);
-        System.out.println(dateTransactions_Restock);
-        System.out.println(dateTransactions_Taken.size());
-        System.out.println(dateTransactions_Restock.size());
         fillCargoBoxesInformation(buttonSelected);
         blockPane.setVisible(false);
         DataUtils.publicSettingBlockPane = blockPane;
@@ -422,43 +444,43 @@ public class AppPage2Controller implements Initializable {
         cargoBoxBackPanes[1] = cargoBox2BackPane;
         cargoBoxBackPanes[2] = cargoBox3BackPane;
         cargoBoxBackPanes[3] = cargoBox4BackPane;
+        isChangingSide[0] = isChangingSide_CargoBox1;
+        isChangingSide[1] = isChangingSide_CargoBox2;
+        isChangingSide[2] = isChangingSide_CargoBox3;
+        isChangingSide[3] = isChangingSide_CargoBox4;
+        changeToBack[0] = changeToBack_CargoBox1;
+        changeToBack[1] = changeToBack_CargoBox2;
+        changeToBack[2] = changeToBack_CargoBox3;
+        changeToBack[3] = changeToBack_CargoBox4;
+        cargoBoxFunctionalityPanes[0] = cargoBox1FunctionalityPane;
+        cargoBoxFunctionalityPanes[1] = cargoBox2FunctionalityPane;
+        cargoBoxFunctionalityPanes[2] = cargoBox3FunctionalityPane;
+        cargoBoxFunctionalityPanes[3] = cargoBox4FunctionalityPane;
     }
 
     private void fillCargoBoxesInformation(ButtonSelected buttonSelected) {
         int boxNumber = 4;
         for (int index = 0; index < boxNumber; index++) {
             enableNode(cargoBoxPanes[index]);
-//            cargoBoxPanes[index].setOpacity(1);
-//            cargoBoxPanes[index].setVisible(true);
-//            cargoBoxPanes[index].setPickOnBounds(true);
+            enableNode(cargoBoxFunctionalityPanes[index]);
         }
         switch (buttonSelected) {
             case ALL -> {
                 enableNode(redTakenLabel);
-//                redTakenLabel.setOpacity(1);
-//                redTakenLabel.setVisible(true);
-//                redTakenLabel.setPickOnBounds(true);
                 enableNode(greenRestockLabel);
-//                greenRestockLabel.setOpacity(1);
-//                greenRestockLabel.setVisible(true);
-//                greenRestockLabel.setPickOnBounds(true);
                 greenRestockLabel.setTranslateX(0);
                 if (dateTransactions_Taken.size() < 2) {
                     takenBoxNumber = dateTransactions_Taken.size();
                     for (int hideAllTaken = 1; hideAllTaken >= dateTransactions_Taken.size(); hideAllTaken--) {
                         disableNode(cargoBoxPanes[hideAllTaken]);
-//                        cargoBoxPanes[hideAllTaken].setOpacity(0);
-//                        cargoBoxPanes[hideAllTaken].setVisible(false);
-//                        cargoBoxPanes[hideAllTaken].setPickOnBounds(false);
+                        disableNode(cargoBoxFunctionalityPanes[hideAllTaken]);
                     }
                 }
                 if (dateTransactions_Restock.size() < 2) {
                     restockBoxNumber = dateTransactions_Restock.size();
                     for (int hideAllRestock = 3; hideAllRestock >= dateTransactions_Restock.size() + 2; hideAllRestock--) {
                         disableNode(cargoBoxPanes[hideAllRestock]);
-//                        cargoBoxPanes[hideAllRestock].setOpacity(0);
-//                        cargoBoxPanes[hideAllRestock].setVisible(false);
-//                        cargoBoxPanes[hideAllRestock].setPickOnBounds(false);
+                        disableNode(cargoBoxFunctionalityPanes[hideAllRestock]);
                     }
                 }
                 for (int indexTaken = 0; indexTaken < takenBoxNumber; indexTaken++) {
@@ -477,20 +499,12 @@ public class AppPage2Controller implements Initializable {
             }
             case TAKEN -> {
                 enableNode(redTakenLabel);
-//                redTakenLabel.setOpacity(1);
-//                redTakenLabel.setVisible(true);
-//                redTakenLabel.setPickOnBounds(true);
                 disableNode(greenRestockLabel);
-//                greenRestockLabel.setOpacity(0);
-//                greenRestockLabel.setVisible(false);
-//                greenRestockLabel.setPickOnBounds(false);
                 if (dateTransactions_Taken.size() < 4) {
                     boxNumber = dateTransactions_Taken.size();
                     for (int hideTaken = 3; hideTaken > dateTransactions_Taken.size() - 1; hideTaken--) {
                         disableNode(cargoBoxPanes[hideTaken]);
-//                        cargoBoxPanes[hideTaken].setOpacity(0);
-//                        cargoBoxPanes[hideTaken].setVisible(false);
-//                        cargoBoxPanes[hideTaken].setPickOnBounds(false);
+                        disableNode(cargoBoxFunctionalityPanes[hideTaken]);
                     }
                 }
                 for (int index = 0; index < boxNumber; index++) {
@@ -503,21 +517,13 @@ public class AppPage2Controller implements Initializable {
             }
             case RESTOCK -> {
                 disableNode(redTakenLabel);
-//                redTakenLabel.setOpacity(0);
-//                redTakenLabel.setVisible(false);
-//                redTakenLabel.setPickOnBounds(false);
                 enableNode(greenRestockLabel);
-//                greenRestockLabel.setOpacity(1);
-//                greenRestockLabel.setVisible(true);
-//                greenRestockLabel.setPickOnBounds(true);
                 greenRestockLabel.setTranslateX(-500);
                 if (dateTransactions_Restock.size() < 4) {
                     boxNumber = dateTransactions_Restock.size();
                     for (int hideRestock = 3; hideRestock > dateTransactions_Restock.size() - 1; hideRestock--) {
                         disableNode(cargoBoxPanes[hideRestock]);
-//                        cargoBoxPanes[hideRestock].setOpacity(0);
-//                        cargoBoxPanes[hideRestock].setVisible(false);
-//                        cargoBoxPanes[hideRestock].setPickOnBounds(false);
+                        disableNode(cargoBoxFunctionalityPanes[hideRestock]);
                     }
                 }
                 for (int index = 0; index < boxNumber; index++) {
@@ -527,6 +533,84 @@ public class AppPage2Controller implements Initializable {
                     staffNameLabels[index].setText(dateTransactions_Restock.get(index).getStaffName());
                 }
             }
+        }
+    }
+
+    private void enterCargoBoxAnimation(CargoBoxNumber cargoBoxNumber){
+        int index = 0;
+        switch (cargoBoxNumber){
+            case ONE -> {index = 0;}
+            case TWO -> {index = 1;}
+            case THREE -> {index = 2;}
+            case FOUR -> {index = 3;}
+        }
+        changeToBack[index] = true;
+        if (!isChangingSide[index]) {
+            isChangingSide[index] = true;
+            if (cargoBoxPanes[index].isVisible()) {
+                ScaleTransition scaleTransition_closeFront = ScaleUtils.getScaleTransitionFromToX(cargoBoxPanes[index], 200, 1.0, 0.0);
+                int finalIndex = index;
+                scaleTransition_closeFront.setOnFinished(openBackPane -> {
+                    cargoBoxBackPanes[finalIndex].setScaleX(0.0);
+                    enableNode(cargoBoxBackPanes[finalIndex]);
+                    disableNode(cargoBoxPanes[finalIndex]);
+                    cargoBoxPanes[finalIndex].setScaleX(1.0);
+                    ScaleTransition scaleTransition_openBack = ScaleUtils.getScaleTransitionFromToX(cargoBoxBackPanes[finalIndex], 200, 0.0, 1.0);
+                    scaleTransition_openBack.setOnFinished(event -> {
+                        isChangingSide[finalIndex] = false;
+                        if(!changeToBack[finalIndex]){
+                            switch (cargoBoxNumber){
+                                case ONE -> {onExitCargoBox1();}
+                                case TWO -> {onExitCargoBox2();}
+                                case THREE -> {onExitCargoBox3();}
+                                case FOUR -> {onExitCargoBox4();}
+                            }
+                        }
+                    });
+                    scaleTransition_openBack.play();
+                });
+                scaleTransition_closeFront.play();
+            } else {
+                isChangingSide[index] = false;
+            }
+        }
+    }
+
+    private void exitCargoBoxAnimation(CargoBoxNumber cargoBoxNumber){
+        int index = 0;
+        switch (cargoBoxNumber){
+            case ONE -> {index = 0;}
+            case TWO -> {index = 1;}
+            case THREE -> {index = 2;}
+            case FOUR -> {index = 3;}
+        }
+        changeToBack[index] = false;
+        if(!isChangingSide[index]) {
+            isChangingSide[index] = true;
+            if(cargoBoxBackPanes[index].isVisible()) {
+                ScaleTransition scaleTransition_closeBack = ScaleUtils.getScaleTransitionFromToX(cargoBoxBackPanes[index], 200, 1.0, 0.0);
+                int finalIndex = index;
+                scaleTransition_closeBack.setOnFinished(closeBackPane -> {
+                    cargoBoxPanes[finalIndex].setScaleX(0.0);
+                    enableNode(cargoBoxPanes[finalIndex]);
+                    disableNode(cargoBoxBackPanes[finalIndex]);
+                    cargoBoxBackPanes[finalIndex].setScaleX(1.0);
+                    ScaleTransition scaleTransition_openFront = ScaleUtils.getScaleTransitionFromToX(cargoBoxPanes[finalIndex], 200, 0.0, 1.0);
+                    scaleTransition_openFront.setOnFinished(event -> {
+                        isChangingSide[finalIndex] = false;
+                        if(changeToBack[finalIndex]) {
+                            switch (cargoBoxNumber){
+                                case ONE -> {onEnterCargoBox1();}
+                                case TWO -> {onEnterCargoBox2();}
+                                case THREE -> {onEnterCargoBox3();}
+                                case FOUR -> {onEnterCargoBox4();}
+                            }
+                        }
+                    });
+                    scaleTransition_openFront.play();
+                });
+                scaleTransition_closeBack.play();
+            } else{isChangingSide[index] = false;}
         }
     }
 
@@ -941,58 +1025,50 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onEnterCargoBox1(){
-        changeToBack = true;
-        if (!isChangingSide) {
-            isChangingSide = true;
-            if (cargoBox1Pane.isVisible()) {
-                ScaleTransition scaleTransition_closeFront = ScaleUtils.getScaleTransitionFromToX(cargoBox1Pane, 200, 1.0, 0.0);
-                scaleTransition_closeFront.setOnFinished(openBackPane -> {
-                    cargoBox1BackPane.setScaleX(0.0);
-                    enableNode(cargoBox1BackPane);
-                    disableNode(cargoBox1Pane);
-                    cargoBox1Pane.setScaleX(1.0);
-                    ScaleTransition scaleTransition_openBack = ScaleUtils.getScaleTransitionFromToX(cargoBox1BackPane, 200, 0.0, 1.0);
-                    scaleTransition_openBack.setOnFinished(event -> {
-                        isChangingSide = false;
-                        if(!changeToBack){
-                            onExitCargoBox1();
-                        }
-                    });
-                    scaleTransition_openBack.play();
-                });
-                scaleTransition_closeFront.play();
-            } else {
-                isChangingSide = false;
-            }
-        }
+        cargoBoxNumber = CargoBoxNumber.ONE;
+        enterCargoBoxAnimation(cargoBoxNumber);
+    }
+
+    @FXML
+    private void onEnterCargoBox2() {
+        cargoBoxNumber = CargoBoxNumber.TWO;
+        enterCargoBoxAnimation(cargoBoxNumber);
+    }
+
+    @FXML
+    private void onEnterCargoBox3() {
+        cargoBoxNumber = CargoBoxNumber.THREE;
+        enterCargoBoxAnimation(cargoBoxNumber);
+    }
+
+    @FXML
+    private void onEnterCargoBox4() {
+        cargoBoxNumber = CargoBoxNumber.FOUR;
+        enterCargoBoxAnimation(cargoBoxNumber);
     }
 
     @FXML
     private void onExitCargoBox1(){
-        changeToBack = false;
-        if(!isChangingSide) {
-            isChangingSide = true;
-            if(cargoBox1BackPane.isVisible()) {
-                ScaleTransition scaleTransition_closeBack = ScaleUtils.getScaleTransitionFromToX(cargoBox1BackPane, 200, 1.0, 0.0);
-                scaleTransition_closeBack.setOnFinished(closeBackPane -> {
-                    cargoBox1Pane.setScaleX(0.0);
-                    enableNode(cargoBox1Pane);
-                    disableNode(cargoBox1BackPane);
-                    cargoBox1BackPane.setScaleX(1.0);
-                    ScaleTransition scaleTransition_openFront = ScaleUtils.getScaleTransitionFromToX(cargoBox1Pane, 200, 0.0, 1.0);
-                    scaleTransition_openFront.setOnFinished(event -> {
-                        isChangingSide = false;
-                        if(changeToBack) {
-                            onEnterCargoBox1();
-                        }
-                    });
-                    scaleTransition_openFront.play();
-                });
-                scaleTransition_closeBack.play();
-            } else{isChangingSide = false;}
-        }
+        cargoBoxNumber = CargoBoxNumber.ONE;
+        exitCargoBoxAnimation(cargoBoxNumber);
     }
 
+    @FXML
+    private void onExitCargoBox2(){
+        cargoBoxNumber = CargoBoxNumber.TWO;
+        exitCargoBoxAnimation(cargoBoxNumber);}
+
+    @FXML
+    private void onExitCargoBox3(){
+        cargoBoxNumber = CargoBoxNumber.THREE;
+        exitCargoBoxAnimation(cargoBoxNumber);
+    }
+
+    @FXML
+    private void onExitCargoBox4(){
+        cargoBoxNumber = CargoBoxNumber.FOUR;
+        exitCargoBoxAnimation(cargoBoxNumber);
+    }
     @FXML
     private void onUpdateUsername() {
         updateSettingDialog("Username");
