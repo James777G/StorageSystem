@@ -325,6 +325,9 @@ public class AppPage2Controller implements Initializable {
 
     private DateTransaction dateTransactionSelected;
 
+    public AppPage2Controller() throws IOException {
+    }
+
     enum ButtonSelected {
         ALL,
         TAKEN,
@@ -352,18 +355,28 @@ public class AppPage2Controller implements Initializable {
 
     private boolean isMouseExitInformationPage = true;
 
+    private boolean isVBoxOpened = false ;
+
     /**
      * Test
      */
     private Timeline testTimeline = new Timeline(new KeyFrame(Duration.millis(0.1),e->{
         if(isMouseExitInformationPage){
-            if((VBoxDrawer.isOpened())||(VBoxDrawer.isOpening())) {
-                VBoxDrawer.close();
+//            if((VBoxDrawer.isOpened())||(VBoxDrawer.isOpening())) {
+            if(isVBoxOpened){
+//                VBoxDrawer.close();
+                closeMenuVBox();
             }
 
         }
         isMouseExitInformationPage = true;
     }));
+
+    @FXML
+    private VBox vbox;
+
+    @FXML
+    VBox drawerVBox = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/menuPage.fxml")));
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -742,9 +755,9 @@ public class AppPage2Controller implements Initializable {
     }
 
     private void setDrawer() {
-        try {
-            VBox vbox = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/menuPage.fxml")));
-            vbox.setOnMouseExited(event -> {
+//        try {
+//            VBox vbox = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/menuPage.fxml")));
+            drawerVBox.setOnMouseExited(event -> {
                 RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendArrow, 300, -90, 0);
                 rotate.setOnFinished(event1 -> isTriangleRotating = false);
                 if (!isTriangleRotating) {
@@ -754,15 +767,31 @@ public class AppPage2Controller implements Initializable {
                 testTimeline.play();
                 //VBoxDrawer.close();
             });
-            vbox.setOnMouseEntered(event -> {
+            drawerVBox.setOnMouseEntered(event -> {
                 isMouseExitInformationPage = false;
             });
-            VBoxDrawer.setSidePane(vbox);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+            vbox.getChildren().add(drawerVBox);
+//            vbox.setLayoutX(1030);
+//            vbox.setLayoutY(-140);
+//            vbox.toFront();
+
+//            VBoxDrawer.setSidePane(vbox);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
+    private void openMenuVBox(){
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionToY(vbox,300,200);
+        translateTransition.play();
+        isVBoxOpened = true;
+    }
+
+    private void closeMenuVBox(){
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionToY(vbox,300,0);
+        translateTransition.play();
+        isVBoxOpened = false;
+    }
     @FXML
     @SuppressWarnings("all")
     private void onEnterAppPage() {
@@ -816,7 +845,8 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void onClickExtend() {
         RotateTransition rotate;
-        if (VBoxDrawer.isOpened()) {
+//        if (VBoxDrawer.isOpened()) {
+        if (isVBoxOpened) {
             rotate = RotationUtils.getRotationTransitionFromTo(extendArrow, 300, -90, 0);
         } else {
             rotate = RotationUtils.getRotationTransitionFromTo(extendArrow, 300, 0, -90);
@@ -826,10 +856,13 @@ public class AppPage2Controller implements Initializable {
             isTriangleRotating = true;
             rotate.play();
         }
-        if (VBoxDrawer.isOpened()) {
-            VBoxDrawer.close();
+//        if (VBoxDrawer.isOpened()) {
+        if (isVBoxOpened) {
+//            VBoxDrawer.close();
+            closeMenuVBox();
         } else {
-            VBoxDrawer.open();
+//            VBoxDrawer.open();
+            openMenuVBox();
         }
     }
 
@@ -846,8 +879,10 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void onEnterExtend() {
         isMouseExitInformationPage = false;
-        if ((VBoxDrawer.isClosed()) ||(VBoxDrawer.isClosing())) {
-            VBoxDrawer.open();
+//        if ((VBoxDrawer.isClosed()) ||(VBoxDrawer.isClosing())) {
+        if(!isVBoxOpened){
+//            VBoxDrawer.open();
+            openMenuVBox();
             RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendArrow, 300, 0, -90);
             rotate.setOnFinished(event -> isTriangleRotating = false);
             if (!isTriangleRotating) {

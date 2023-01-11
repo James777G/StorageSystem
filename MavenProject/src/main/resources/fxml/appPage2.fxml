@@ -370,6 +370,7 @@
             <JFXDrawer fx:id="VBoxDrawer" defaultDrawerSize="300.0" direction="TOP" layoutY="58.0" maxHeight="200.0" maxWidth="170.0" minHeight="200.0" minWidth="170.0" prefHeight="200.0" prefWidth="170.0" AnchorPane.topAnchor="60.0" />
          </children>
       </AnchorPane>
+      <VBox fx:id="vbox" layoutX="1030.0" layoutY="-140.0" prefHeight="200.0" prefWidth="170.0" style="-fx-background-color: white;" />
       <AnchorPane prefHeight="60.0" prefWidth="1200.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="86.0" layoutY="14.0" prefHeight="15.0" prefWidth="68.0" text="Storage" textFill="#23242a" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="5.0">
