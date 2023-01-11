@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
    <children>
       <StackPane fx:id="stackPaneForWarehouse" layoutX="10.0" layoutY="10.0" prefHeight="640.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <StackPane fx:id="stackPane" prefHeight="640.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
@@ -319,39 +319,39 @@
 
             <AnchorPane fx:id="cargoBox1BackPane" layoutX="130.0" layoutY="570.0" opacity="0.0" pickOnBounds="false" prefHeight="80.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="500.0">
                <children>
-                  <Label fx:id="staffNameLabel011" layoutX="41.0" layoutY="43.0" minHeight="27.0" minWidth="175.0" prefHeight="27.0" prefWidth="157.0" text="Click for more information" textFill="#223c40" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="30.0">
+                  <Label fx:id="staffNameLabel011" alignment="CENTER" layoutX="41.0" layoutY="43.0" minHeight="27.0" minWidth="175.0" prefHeight="27.0" prefWidth="157.0" text="For More Information" textFill="#223c40" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="30.0">
                      <font>
-                        <Font name="Times New Roman Bold Italic" size="15.0" />
+                        <Font name="Calibri Bold" size="15.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="cargoBox2BackPane" layoutX="130.0" layoutY="570.0" opacity="0.0" pickOnBounds="false" prefHeight="80.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="500.0">
+            <AnchorPane fx:id="cargoBox2BackPane" layoutX="130.0" layoutY="570.0" opacity="0.0" pickOnBounds="false" prefHeight="80.0" prefWidth="180.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" visible="false" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="500.0">
 
                <children>
-                  <Label fx:id="staffNameLabel0111" layoutX="41.0" layoutY="43.0" minHeight="27.0" minWidth="175.0" prefHeight="27.0" prefWidth="157.0" text="Click for more information" textFill="#223c40" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="30.0">
+                  <Label fx:id="staffNameLabel0111" alignment="CENTER" layoutX="41.0" layoutY="43.0" minHeight="27.0" minWidth="175.0" prefHeight="27.0" prefWidth="157.0" text="For More Information" textFill="#223c40" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="30.0">
                      <font>
-                        <Font name="Times New Roman Bold Italic" size="15.0" />
+                        <Font name="Calibri Bold" size="15.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="cargoBox3BackPane" layoutX="130.0" layoutY="570.0" opacity="0.0" pickOnBounds="false" prefHeight="80.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="620.0" AnchorPane.topAnchor="500.0">
                <children>
-                  <Label fx:id="staffNameLabel0112" layoutX="41.0" layoutY="43.0" minHeight="27.0" minWidth="175.0" prefHeight="27.0" prefWidth="157.0" text="Click for more information" textFill="#223c40" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="30.0">
+                  <Label fx:id="staffNameLabel0112" alignment="CENTER" layoutX="41.0" layoutY="43.0" minHeight="27.0" minWidth="175.0" prefHeight="27.0" prefWidth="157.0" text="For More Information" textFill="#223c40" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="30.0">
                      <font>
-                        <Font name="Times New Roman Bold Italic" size="15.0" />
+                        <Font name="Calibri Bold" size="15.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
 
-            <AnchorPane fx:id="cargoBox4BackPane" layoutX="130.0" layoutY="570.0" opacity="0.0" pickOnBounds="false" prefHeight="80.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="500.0">
+            <AnchorPane fx:id="cargoBox4BackPane" layoutX="130.0" layoutY="570.0" opacity="0.0" pickOnBounds="false" prefHeight="80.0" prefWidth="180.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" visible="false" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="500.0">
 
                <children>
-                  <Label fx:id="staffNameLabel0113" layoutX="41.0" layoutY="43.0" minHeight="27.0" minWidth="175.0" prefHeight="27.0" prefWidth="157.0" text="Click for more information" textFill="#223c40" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="30.0">
+                  <Label fx:id="staffNameLabel0113" alignment="CENTER" layoutX="41.0" layoutY="43.0" minHeight="27.0" minWidth="175.0" prefHeight="27.0" prefWidth="157.0" text="For More Information" textFill="#223c40" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="30.0">
                      <font>
-                        <Font name="Times New Roman Bold Italic" size="15.0" />
+                        <Font name="Calibri Bold" size="15.0" />
                      </font>
                   </Label>
                </children>
@@ -562,12 +562,12 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <MFXCheckbox fx:id="takenCheckBox" layoutX="265.0" layoutY="44.0" prefHeight="3.0" prefWidth="59.0" styleClass="checkBoxInAppPageForTaken" stylesheets="@../css/checkBox.css" text="Taken" textFill="#90e079">
+                  <MFXCheckbox fx:id="takenCheckBox" layoutX="265.0" layoutY="44.0" prefHeight="3.0" prefWidth="59.0" styleClass="checkBoxInAppPageForTaken" stylesheets="@../css/checkBox.css" text="Taken" textFill="#e27a7a">
                      <font>
                         <Font name="Calibri Bold" size="12.0" />
                      </font>
                   </MFXCheckbox>
-                  <MFXCheckbox fx:id="restockCheckBox" layoutX="360.0" layoutY="43.0" styleClass="checkBoxInAppPageForRestock" stylesheets="@../css/checkBox.css" text="Restock" textFill="#e27a7a">
+                  <MFXCheckbox fx:id="restockCheckBox" layoutX="360.0" layoutY="43.0" styleClass="checkBoxInAppPageForRestock" stylesheets="@../css/checkBox.css" text="Restock" textFill="#90e079">
                      <font>
                         <Font name="Calibri Bold" size="12.0" />
                      </font>

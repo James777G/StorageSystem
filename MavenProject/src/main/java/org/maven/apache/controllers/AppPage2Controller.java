@@ -548,14 +548,14 @@ public class AppPage2Controller implements Initializable {
         if (!isChangingSide[index]) {
             isChangingSide[index] = true;
             if (cargoBoxPanes[index].isVisible()) {
-                ScaleTransition scaleTransition_closeFront = ScaleUtils.getScaleTransitionFromToX(cargoBoxPanes[index], 200, 1.0, 0.0);
+                ScaleTransition scaleTransition_closeFront = ScaleUtils.getScaleTransitionFromToX(cargoBoxPanes[index], 70, 1.0, 0.0);
                 int finalIndex = index;
                 scaleTransition_closeFront.setOnFinished(openBackPane -> {
                     cargoBoxBackPanes[finalIndex].setScaleX(0.0);
                     enableNode(cargoBoxBackPanes[finalIndex]);
                     disableNode(cargoBoxPanes[finalIndex]);
                     cargoBoxPanes[finalIndex].setScaleX(1.0);
-                    ScaleTransition scaleTransition_openBack = ScaleUtils.getScaleTransitionFromToX(cargoBoxBackPanes[finalIndex], 200, 0.0, 1.0);
+                    ScaleTransition scaleTransition_openBack = ScaleUtils.getScaleTransitionFromToX(cargoBoxBackPanes[finalIndex], 70, 0.0, 1.0);
                     scaleTransition_openBack.setOnFinished(event -> {
                         isChangingSide[finalIndex] = false;
                         if(!changeToBack[finalIndex]){
@@ -588,14 +588,14 @@ public class AppPage2Controller implements Initializable {
         if(!isChangingSide[index]) {
             isChangingSide[index] = true;
             if(cargoBoxBackPanes[index].isVisible()) {
-                ScaleTransition scaleTransition_closeBack = ScaleUtils.getScaleTransitionFromToX(cargoBoxBackPanes[index], 200, 1.0, 0.0);
+                ScaleTransition scaleTransition_closeBack = ScaleUtils.getScaleTransitionFromToX(cargoBoxBackPanes[index], 70, 1.0, 0.0);
                 int finalIndex = index;
                 scaleTransition_closeBack.setOnFinished(closeBackPane -> {
                     cargoBoxPanes[finalIndex].setScaleX(0.0);
                     enableNode(cargoBoxPanes[finalIndex]);
                     disableNode(cargoBoxBackPanes[finalIndex]);
                     cargoBoxBackPanes[finalIndex].setScaleX(1.0);
-                    ScaleTransition scaleTransition_openFront = ScaleUtils.getScaleTransitionFromToX(cargoBoxPanes[finalIndex], 200, 0.0, 1.0);
+                    ScaleTransition scaleTransition_openFront = ScaleUtils.getScaleTransitionFromToX(cargoBoxPanes[finalIndex], 70, 0.0, 1.0);
                     scaleTransition_openFront.setOnFinished(event -> {
                         isChangingSide[finalIndex] = false;
                         if(changeToBack[finalIndex]) {
