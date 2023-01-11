@@ -10,6 +10,8 @@ import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,6 +26,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
@@ -347,6 +350,20 @@ public class AppPage2Controller implements Initializable {
 
     private boolean isSearchTableOut = false;
 
+    private boolean isMouseExitInformationPage = true;
+
+    /**
+     * Test
+     */
+    private Timeline testTimeline = new Timeline(new KeyFrame(Duration.millis(0.1),e->{
+        if(isMouseExitInformationPage){
+            if((VBoxDrawer.isOpened())||(VBoxDrawer.isOpening())) {
+                VBoxDrawer.close();
+            }
+
+        }
+        isMouseExitInformationPage = true;
+    }));
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -734,7 +751,11 @@ public class AppPage2Controller implements Initializable {
                     isTriangleRotating = true;
                     rotate.play();
                 }
-                VBoxDrawer.close();
+                testTimeline.play();
+                //VBoxDrawer.close();
+            });
+            vbox.setOnMouseEntered(event -> {
+                isMouseExitInformationPage = false;
             });
             VBoxDrawer.setSidePane(vbox);
         } catch (IOException e) {
@@ -824,7 +845,8 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onEnterExtend() {
-        if (VBoxDrawer.isClosed()) {
+        isMouseExitInformationPage = false;
+        if ((VBoxDrawer.isClosed()) ||(VBoxDrawer.isClosing())) {
             VBoxDrawer.open();
             RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendArrow, 300, 0, -90);
             rotate.setOnFinished(event -> isTriangleRotating = false);
@@ -832,8 +854,14 @@ public class AppPage2Controller implements Initializable {
                 isTriangleRotating = true;
                 rotate.play();
             }
-
         }
+    }
+
+    @FXML
+    private void onExitExtend(){
+        isMouseExitInformationPage = true;
+        testTimeline.play();
+
     }
 
     /**
