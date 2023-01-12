@@ -3,12 +3,16 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXPagination?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
@@ -122,7 +126,7 @@
                   <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="checkOne" layoutX="666.0" layoutY="13.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+            <JFXButton fx:id="checkOne" layoutX="666.0" layoutY="13.0" onAction="#onClickCheckOne" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -168,7 +172,7 @@
                   <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="checkTwo" layoutX="668.0" layoutY="11.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+            <JFXButton fx:id="checkTwo" layoutX="668.0" layoutY="11.0" onAction="#onClickCheckTwo" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -214,7 +218,7 @@
                   <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="checkThree" layoutX="669.0" layoutY="8.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+            <JFXButton fx:id="checkThree" layoutX="669.0" layoutY="8.0" onAction="#onClickCheckThree" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -260,7 +264,7 @@
                   <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="checkFour" layoutX="669.0" layoutY="9.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+            <JFXButton fx:id="checkFour" layoutX="669.0" layoutY="9.0" onAction="#onClickCheckFour" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -306,7 +310,7 @@
                   <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="checkFive" layoutX="676.0" layoutY="19.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+            <JFXButton fx:id="checkFive" layoutX="676.0" layoutY="19.0" onAction="#onClickCheckFive" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -352,7 +356,7 @@
                   <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="checkSix" layoutX="683.0" layoutY="8.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+            <JFXButton fx:id="checkSix" layoutX="683.0" layoutY="8.0" onAction="#onClickCheckSix" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -398,7 +402,7 @@
                   <Image url="@../image/icons8-cardboard-box-100%20(2).png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="checkSeven" layoutX="660.0" layoutY="13.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+            <JFXButton fx:id="checkSeven" layoutX="660.0" layoutY="13.0" onAction="#onClickCheckSeven" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -413,5 +417,67 @@
          </children>
       </AnchorPane>
       <MFXPagination fx:id="pagination" layoutX="531.0" layoutY="600.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="555.0" />
+      <MFXGenericDialog fx:id="descriptionDialog" headerText="Item Details" onClose="#onCloseDescriptionDialog" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="150.0">
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" text="Item Name:">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="207.0" layoutY="14.0" text="Item Amount:">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="441.0" layoutY="14.0" text="Item ID:">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="itemNameInDetails" layoutX="14.0" layoutY="41.0" prefHeight="25.0" prefWidth="146.0" />
+                  <TextField fx:id="itemAmountInDetails" layoutX="207.0" layoutY="41.0" prefHeight="25.0" prefWidth="146.0" />
+                  <Separator layoutY="72.0" prefHeight="13.0" prefWidth="575.0" />
+                  <Label layoutX="14.0" layoutY="100.0" text="Item Description:">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="itemDescriptionInDetails" layoutX="15.0" layoutY="130.0" prefHeight="145.0" prefWidth="375.0" wrapText="true" />
+                  <JFXButton layoutX="441.0" layoutY="41.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="View Transaction" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold Italic" size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton layoutX="441.0" layoutY="96.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Bring To Notepad" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold Italic" size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton layoutX="403.0" layoutY="254.0" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #e9e9e9;" text="Okay">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton layoutX="487.0" layoutY="254.0" onAction="#onClickApply" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #223c40;" text="Apply" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <Label fx:id="itemIdInDetails" layoutX="501.0" layoutY="14.0">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="warnMessage" layoutX="402.0" layoutY="186.0" text="Your action was not successful,&#10;please check if your item name &#10;is unique and not empty." textFill="#a10000">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </center>
+      </MFXGenericDialog>
    </children>
 </AnchorPane>
