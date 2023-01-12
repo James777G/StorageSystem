@@ -368,6 +368,7 @@ public class AppPage2Controller implements Initializable {
     /**
      * Test
      */
+    private Timeline testTimeline = new Timeline();
 //    private Timeline testTimeline = new Timeline(new KeyFrame(Duration.millis(0.1),e->{
 //        if(isMouseExitInformationPage){
 ////            if((VBoxDrawer.isOpened())||(VBoxDrawer.isOpening())) {
@@ -811,9 +812,8 @@ public class AppPage2Controller implements Initializable {
 //        translateTransition_openMenu.setNode(vbox);
 //        translateTransition_openMenu.setDuration(Duration.millis((1 - vbox.getTranslateY()/200) * 1000));
 //        translateTransition_openMenu.setToY(200);
-        rotateTransition_openMenu = RotationUtils.getRotationTransitionFromTo(extendArrow, (1 - extendArrow.getRotate()/-90) * 1000, extendArrow.getRotate(), -90);
-        rotateTransition_openMenu.setOnFinished(event -> {System.out.println("Finish openingRotation: "+extendArrow.getRotate());});
-        translateTransition_openMenu = TranslateUtils.getTranslateTransitionToY(vbox,(1 - vbox.getTranslateY()/200) * 1000,200);
+        rotateTransition_openMenu = RotationUtils.getRotationTransitionFromTo(extendArrow, (1 - extendArrow.getRotate()/-90) * 300, extendArrow.getRotate(), -90);
+        translateTransition_openMenu = TranslateUtils.getTranslateTransitionToY(vbox,(1 - vbox.getTranslateY()/200) * 300,200);
         translateTransition_openMenu.setOnFinished(event -> {
             isVBoxOnOpenAnimation = false;
             System.out.println("Finish opening: "+vbox.getTranslateY());
@@ -839,9 +839,8 @@ public class AppPage2Controller implements Initializable {
 //        translateTransition_closeMenu.setNode(vbox);
 //        translateTransition_closeMenu.setDuration(Duration.millis((vbox.getTranslateY()/200) * 1000));
 //        translateTransition_closeMenu.setToY(0);
-        rotateTransition_closeMenu = RotationUtils.getRotationTransitionFromTo(extendArrow, (extendArrow.getRotate()/-90) * 1000, extendArrow.getRotate(), 0);
-        rotateTransition_closeMenu.setOnFinished(event -> {System.out.println("Finish closingRotation: "+extendArrow.getRotate());});
-        translateTransition_closeMenu = TranslateUtils.getTranslateTransitionToY(vbox,(vbox.getTranslateY()/200) * 1000,0);
+        rotateTransition_closeMenu = RotationUtils.getRotationTransitionFromTo(extendArrow, (extendArrow.getRotate()/-90) * 300, extendArrow.getRotate(), 0);
+        translateTransition_closeMenu = TranslateUtils.getTranslateTransitionToY(vbox,(vbox.getTranslateY()/200) * 300,0);
         translateTransition_closeMenu.setOnFinished(event -> {
             isVBoxOnCloseAnimation = false;
             //testTimeline.stop();
@@ -852,6 +851,7 @@ public class AppPage2Controller implements Initializable {
         translateTransition_openMenu.stop();
         translateTransition_closeMenu.play();
         isVBoxOpened = false;
+        testTimeline.stop();
     }
     @FXML
     @SuppressWarnings("all")
