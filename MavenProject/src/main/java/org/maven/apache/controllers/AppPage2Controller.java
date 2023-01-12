@@ -330,7 +330,7 @@ public class AppPage2Controller implements Initializable {
         RESTOCK
     }
 
-    enum CargoBoxNumber{
+    enum CargoBoxNumber {
         ONE,
         TWO,
         THREE,
@@ -343,7 +343,7 @@ public class AppPage2Controller implements Initializable {
 
     private ButtonSelected buttonSelected = ButtonSelected.ALL;
 
-    private CargoBoxNumber cargoBoxNumber ;
+    private CargoBoxNumber cargoBoxNumber;
 
     private DateTransaction[] dateTransactionListInAppPage = new DateTransaction[4];
 
@@ -351,9 +351,9 @@ public class AppPage2Controller implements Initializable {
 
     private boolean isMouseExitInformationPage = true;
 
-    private boolean isVBoxOpened = false ;
+    private boolean isVBoxOpened = false;
 
-    private boolean isVBoxOnOpenAnimation = false ;
+    private boolean isVBoxOnOpenAnimation = false;
 
     private boolean isVBoxOnCloseAnimation = false;
 
@@ -394,9 +394,9 @@ public class AppPage2Controller implements Initializable {
         restockCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(newValue){
+                if (newValue) {
                     takenCheckBox.setSelected(false);
-                } else{
+                } else {
                     takenCheckBox.setSelected(true);
                 }
             }
@@ -405,9 +405,9 @@ public class AppPage2Controller implements Initializable {
         takenCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(newValue){
+                if (newValue) {
                     restockCheckBox.setSelected(false);
-                }else{
+                } else {
                     restockCheckBox.setSelected(true);
                 }
             }
@@ -561,13 +561,21 @@ public class AppPage2Controller implements Initializable {
         }
     }
 
-    private void enterCargoBoxAnimation(CargoBoxNumber cargoBoxNumber){
+    private void enterCargoBoxAnimation(CargoBoxNumber cargoBoxNumber) {
         int index = 0;
-        switch (cargoBoxNumber){
-            case ONE -> {index = 0;}
-            case TWO -> {index = 1;}
-            case THREE -> {index = 2;}
-            case FOUR -> {index = 3;}
+        switch (cargoBoxNumber) {
+            case ONE -> {
+                index = 0;
+            }
+            case TWO -> {
+                index = 1;
+            }
+            case THREE -> {
+                index = 2;
+            }
+            case FOUR -> {
+                index = 3;
+            }
         }
         changeToBack[index] = true;
         if (!isChangingSide[index]) {
@@ -583,12 +591,20 @@ public class AppPage2Controller implements Initializable {
                     ScaleTransition scaleTransition_openBack = ScaleUtils.getScaleTransitionFromToX(cargoBoxBackPanes[finalIndex], 70, 0.0, 1.0);
                     scaleTransition_openBack.setOnFinished(event -> {
                         isChangingSide[finalIndex] = false;
-                        if(!changeToBack[finalIndex]){
-                            switch (cargoBoxNumber){
-                                case ONE -> {onExitCargoBox1();}
-                                case TWO -> {onExitCargoBox2();}
-                                case THREE -> {onExitCargoBox3();}
-                                case FOUR -> {onExitCargoBox4();}
+                        if (!changeToBack[finalIndex]) {
+                            switch (cargoBoxNumber) {
+                                case ONE -> {
+                                    onExitCargoBox1();
+                                }
+                                case TWO -> {
+                                    onExitCargoBox2();
+                                }
+                                case THREE -> {
+                                    onExitCargoBox3();
+                                }
+                                case FOUR -> {
+                                    onExitCargoBox4();
+                                }
                             }
                         }
                     });
@@ -601,18 +617,26 @@ public class AppPage2Controller implements Initializable {
         }
     }
 
-    private void exitCargoBoxAnimation(CargoBoxNumber cargoBoxNumber){
+    private void exitCargoBoxAnimation(CargoBoxNumber cargoBoxNumber) {
         int index = 0;
-        switch (cargoBoxNumber){
-            case ONE -> {index = 0;}
-            case TWO -> {index = 1;}
-            case THREE -> {index = 2;}
-            case FOUR -> {index = 3;}
+        switch (cargoBoxNumber) {
+            case ONE -> {
+                index = 0;
+            }
+            case TWO -> {
+                index = 1;
+            }
+            case THREE -> {
+                index = 2;
+            }
+            case FOUR -> {
+                index = 3;
+            }
         }
         changeToBack[index] = false;
-        if(!isChangingSide[index]) {
+        if (!isChangingSide[index]) {
             isChangingSide[index] = true;
-            if(cargoBoxBackPanes[index].isVisible()) {
+            if (cargoBoxBackPanes[index].isVisible()) {
                 ScaleTransition scaleTransition_closeBack = ScaleUtils.getScaleTransitionFromToX(cargoBoxBackPanes[index], 70, 1.0, 0.0);
                 int finalIndex = index;
                 scaleTransition_closeBack.setOnFinished(closeBackPane -> {
@@ -623,19 +647,29 @@ public class AppPage2Controller implements Initializable {
                     ScaleTransition scaleTransition_openFront = ScaleUtils.getScaleTransitionFromToX(cargoBoxPanes[finalIndex], 70, 0.0, 1.0);
                     scaleTransition_openFront.setOnFinished(event -> {
                         isChangingSide[finalIndex] = false;
-                        if(changeToBack[finalIndex]) {
-                            switch (cargoBoxNumber){
-                                case ONE -> {onEnterCargoBox1();}
-                                case TWO -> {onEnterCargoBox2();}
-                                case THREE -> {onEnterCargoBox3();}
-                                case FOUR -> {onEnterCargoBox4();}
+                        if (changeToBack[finalIndex]) {
+                            switch (cargoBoxNumber) {
+                                case ONE -> {
+                                    onEnterCargoBox1();
+                                }
+                                case TWO -> {
+                                    onEnterCargoBox2();
+                                }
+                                case THREE -> {
+                                    onEnterCargoBox3();
+                                }
+                                case FOUR -> {
+                                    onEnterCargoBox4();
+                                }
                             }
                         }
                     });
                     scaleTransition_openFront.play();
                 });
                 scaleTransition_closeBack.play();
-            } else{isChangingSide[index] = false;}
+            } else {
+                isChangingSide[index] = false;
+            }
         }
     }
 
@@ -750,27 +784,27 @@ public class AppPage2Controller implements Initializable {
     }
 
     private void setDrawer() {
-            drawerVBox.setOnMouseExited(event -> {
-                Timeline timeline_menuDelay= new Timeline(new KeyFrame(Duration.millis(0.1),e->{
-                    if(isMouseExitInformationPage){
-                        if((isVBoxOpened)||(isVBoxOnOpenAnimation)){
-                            closeMenuVBox();
-                        }
+        drawerVBox.setOnMouseExited(event -> {
+            Timeline timeline_menuDelay = new Timeline(new KeyFrame(Duration.millis(0.1), e -> {
+                if (isMouseExitInformationPage) {
+                    if ((isVBoxOpened) || (isVBoxOnOpenAnimation)) {
+                        closeMenuVBox();
                     }
-                    isMouseExitInformationPage = true;
-                }));
-                timeline_menuDelay.play();
-            });
-            drawerVBox.setOnMouseEntered(event -> {
-                isMouseExitInformationPage = false;
-            });
-            vbox.getChildren().add(drawerVBox);
+                }
+                isMouseExitInformationPage = true;
+            }));
+            timeline_menuDelay.play();
+        });
+        drawerVBox.setOnMouseEntered(event -> {
+            isMouseExitInformationPage = false;
+        });
+        vbox.getChildren().add(drawerVBox);
     }
 
-    private void openMenuVBox(){
+    private void openMenuVBox() {
         isVBoxOnOpenAnimation = true;
-        rotateTransition_openMenu = RotationUtils.getRotationTransitionTo(extendArrow, (1 - extendArrow.getRotate()/-90) * 300,-90);
-        translateTransition_openMenu = TranslateUtils.getTranslateTransitionToY(vbox,(1 - vbox.getTranslateY()/200) * 300,200);
+        rotateTransition_openMenu = RotationUtils.getRotationTransitionTo(extendArrow, (1 - extendArrow.getRotate() / -90) * 300, -90);
+        translateTransition_openMenu = TranslateUtils.getTranslateTransitionToY(vbox, (1 - vbox.getTranslateY() / 200) * 300, 200);
         translateTransition_openMenu.setOnFinished(event -> {
             isVBoxOnOpenAnimation = false;
         });
@@ -781,10 +815,10 @@ public class AppPage2Controller implements Initializable {
         isVBoxOpened = true;
     }
 
-    private void closeMenuVBox(){
+    private void closeMenuVBox() {
         isVBoxOnCloseAnimation = true;
-        rotateTransition_closeMenu = RotationUtils.getRotationTransitionTo(extendArrow, (extendArrow.getRotate()/-90) * 300,0);
-        translateTransition_closeMenu = TranslateUtils.getTranslateTransitionToY(vbox,(vbox.getTranslateY()/200) * 300,0);
+        rotateTransition_closeMenu = RotationUtils.getRotationTransitionTo(extendArrow, (extendArrow.getRotate() / -90) * 300, 0);
+        translateTransition_closeMenu = TranslateUtils.getTranslateTransitionToY(vbox, (vbox.getTranslateY() / 200) * 300, 0);
         translateTransition_closeMenu.setOnFinished(event -> {
             isVBoxOnCloseAnimation = false;
         });
@@ -795,6 +829,7 @@ public class AppPage2Controller implements Initializable {
         isVBoxOpened = false;
         timeline_menuDelay.stop();
     }
+
     @FXML
     @SuppressWarnings("all")
     private void onEnterAppPage() {
@@ -867,17 +902,17 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void onEnterExtend() {
         isMouseExitInformationPage = false;
-        if((!isVBoxOpened)||(isVBoxOnCloseAnimation)){
+        if ((!isVBoxOpened) || (isVBoxOnCloseAnimation)) {
             openMenuVBox();
         }
     }
 
     @FXML
-    private void onExitExtend(){
+    private void onExitExtend() {
         isMouseExitInformationPage = true;
-        Timeline timeline_menuDelay = new Timeline(new KeyFrame(Duration.millis(0.1),e->{
-            if(isMouseExitInformationPage){
-                if((isVBoxOpened)||(isVBoxOnOpenAnimation)){
+        Timeline timeline_menuDelay = new Timeline(new KeyFrame(Duration.millis(0.1), e -> {
+            if (isMouseExitInformationPage) {
+                if ((isVBoxOpened) || (isVBoxOnOpenAnimation)) {
                     closeMenuVBox();
                 }
             }
@@ -1075,7 +1110,7 @@ public class AppPage2Controller implements Initializable {
     }
 
     @FXML
-    private void onEnterCargoBox1(){
+    private void onEnterCargoBox1() {
         cargoBoxNumber = CargoBoxNumber.ONE;
         enterCargoBoxAnimation(cargoBoxNumber);
     }
@@ -1099,27 +1134,29 @@ public class AppPage2Controller implements Initializable {
     }
 
     @FXML
-    private void onExitCargoBox1(){
+    private void onExitCargoBox1() {
         cargoBoxNumber = CargoBoxNumber.ONE;
         exitCargoBoxAnimation(cargoBoxNumber);
     }
 
     @FXML
-    private void onExitCargoBox2(){
+    private void onExitCargoBox2() {
         cargoBoxNumber = CargoBoxNumber.TWO;
-        exitCargoBoxAnimation(cargoBoxNumber);}
+        exitCargoBoxAnimation(cargoBoxNumber);
+    }
 
     @FXML
-    private void onExitCargoBox3(){
+    private void onExitCargoBox3() {
         cargoBoxNumber = CargoBoxNumber.THREE;
         exitCargoBoxAnimation(cargoBoxNumber);
     }
 
     @FXML
-    private void onExitCargoBox4(){
+    private void onExitCargoBox4() {
         cargoBoxNumber = CargoBoxNumber.FOUR;
         exitCargoBoxAnimation(cargoBoxNumber);
     }
+
     @FXML
     private void onUpdateUsername() {
         updateSettingDialog("Username");
@@ -1265,18 +1302,18 @@ public class AppPage2Controller implements Initializable {
 
     private void setTransactionTime(TextField textField, DateTransaction dateTransaction) {
         String recordTime = dateTransaction.getRecordTime();
-        if(recordTime != null && recordTime != ""){
+        if (recordTime != null && recordTime != "") {
             System.out.println(recordTime);
             String[] s = recordTime.trim().split(" ");
             String[] split = s[1].split(":");
             textField.setText(split[0] + " : " + split[1] + " : " + split[2]);
-        } else{
+        } else {
             textField.setText("Not Applicable");
         }
 
     }
 
-    private void setTransactionDialog(DateTransaction dateTransaction){
+    private void setTransactionDialog(DateTransaction dateTransaction) {
         transactionNameInDetails.setText(dateTransaction.getItemName());
         staffNameInDetails.setText(dateTransaction.getStaffName());
         purposeTextInDetails.setText(dateTransaction.getPurpose());
@@ -1321,7 +1358,7 @@ public class AppPage2Controller implements Initializable {
     }
 
     @FXML
-    private void onClickApply(){
+    private void onClickApply() {
 //        dateTransactionSelected.setItemName(transactionNameInDetails.getText());
 //        dateTransactionSelected.setStaffName(staffNameInDetails.getText());
 //        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
