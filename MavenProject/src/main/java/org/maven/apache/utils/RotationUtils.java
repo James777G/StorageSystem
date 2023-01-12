@@ -31,7 +31,7 @@ public class RotationUtils {
      * @param by the angle of rotation
      * @return the custom RotateTransition instance
      */
-    public static RotateTransition getRotationTransitionBy(Node node, int duration, Direction direction, double by) {
+    public static RotateTransition getRotationTransitionBy(Node node, double duration, Direction direction, double by) {
         // Set rotating animation duration and the node
         RotateTransition rotate = new RotateTransition(Duration.millis(duration),node);
         if(direction==Direction.CLOCKWISE){
@@ -56,7 +56,7 @@ public class RotationUtils {
      * @param by the angle of rotation
      * @return the custom RotateTransition instance
      */
-    public static RotateTransition getRotationTransitionFromBy(Node node, int duration, double from, Direction direction,  double by) {
+    public static RotateTransition getRotationTransitionFromBy(Node node, double duration, double from, Direction direction,  double by) {
         // Set rotating animation duration and the node
         RotateTransition rotate = new RotateTransition(Duration.millis(duration),node);
         // Set the stating position and the angle of rotation
@@ -80,7 +80,7 @@ public class RotationUtils {
      * @param to final position
      * @return the custom RotateTransition instance
      */
-    public static RotateTransition getRotationTransitionFromTo(Node node, int duration, double from, double to) {
+    public static RotateTransition getRotationTransitionFromTo(Node node, double duration, double from, double to) {
         // Set rotating animation duration time and the node
         RotateTransition rotate = new RotateTransition(Duration.millis(duration),node);
         // Set starting and ending position of the rotation

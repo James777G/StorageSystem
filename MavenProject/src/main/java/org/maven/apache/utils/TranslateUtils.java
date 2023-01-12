@@ -24,7 +24,7 @@ public class TranslateUtils {
      * @param x of the distance to translate horizontally
      * @return the custom TranslateTransition instance
      */
-    public static TranslateTransition getTranslateTransitionByX(Node node, int duration, double x) {
+    public static TranslateTransition getTranslateTransitionByX(Node node, double duration, double x) {
         // Set translate animation duration and the node
         TranslateTransition translateTransition = new TranslateTransition(Duration.millis(duration),node);
         translateTransition.setByX(x);
@@ -40,7 +40,7 @@ public class TranslateUtils {
      * @param x of the horizontal position  translate to
      * @return the custom TranslateTransition instance
      */
-    public static TranslateTransition getTranslateTransitionToX(Node node, int duration, double x) {
+    public static TranslateTransition getTranslateTransitionToX(Node node, double duration, double x) {
         // Set translate animation duration and the node
         TranslateTransition translateTransition = new TranslateTransition(Duration.millis(duration),node);
         translateTransition.setToX(x);
@@ -57,7 +57,7 @@ public class TranslateUtils {
      * @param toX of the horizontal position translate to
      * @return the custom TranslateTransition instance
      */
-    public static TranslateTransition getTranslateTransitionFromToX(Node node, int duration, double fromX, double toX) {
+    public static TranslateTransition getTranslateTransitionFromToX(Node node, double duration, double fromX, double toX) {
         // Set translate animation duration and the node
         TranslateTransition translateTransition = new TranslateTransition(Duration.millis(duration),node);
         translateTransition.setFromX(fromX);
@@ -73,7 +73,7 @@ public class TranslateUtils {
      * @param y of the distance to translate vertically
      * @return the custom TranslateTransition instance
      */
-    public static TranslateTransition getTranslateTransitionByY(Node node, int duration, double y) {
+    public static TranslateTransition getTranslateTransitionByY(Node node, double duration, double y) {
         // Set translate animation duration and the node
         TranslateTransition translateTransition = new TranslateTransition(Duration.millis(duration),node);
         translateTransition.setByY(y);
@@ -89,7 +89,7 @@ public class TranslateUtils {
      * @param y of the vertical position  translate to
      * @return the custom TranslateTransition instance
      */
-    public static TranslateTransition getTranslateTransitionToY(Node node, int duration, double y) {
+    public static TranslateTransition getTranslateTransitionToY(Node node, double duration, double y) {
         // Set translate animation duration and the node
         TranslateTransition translateTransition = new TranslateTransition(Duration.millis(duration),node);
         translateTransition.setToY(y);
@@ -106,7 +106,7 @@ public class TranslateUtils {
      * @param toY of the vertical position translate to
      * @return the custom TranslateTransition instance
      */
-    public static TranslateTransition getTranslateTransitionFromToY(Node node, int duration, double fromY, double toY) {
+    public static TranslateTransition getTranslateTransitionFromToY(Node node, double duration, double fromY, double toY) {
         // Set translate animation duration and the node
         TranslateTransition translateTransition = new TranslateTransition(Duration.millis(duration),node);
         translateTransition.setFromY(fromY);
@@ -123,7 +123,7 @@ public class TranslateUtils {
      * @param y of the distance to translate vertically
      * @return the custom TranslateTransition instance
      */
-    public static TranslateTransition getTranslateTransitionByXY(Node node, int duration, double x ,double y) {
+    public static TranslateTransition getTranslateTransitionByXY(Node node, double duration, double x ,double y) {
         // Set translate animation duration and the node
         TranslateTransition translateTransition = new TranslateTransition(Duration.millis(duration),node);
         translateTransition.setByX(x);
@@ -140,7 +140,7 @@ public class TranslateUtils {
      * @param y of the vertical position  translate to
      * @return the custom TranslateTransition instance
      */
-    public static TranslateTransition getTranslateTransitionToXY(Node node, int duration, double x ,double y) {
+    public static TranslateTransition getTranslateTransitionToXY(Node node, double duration, double x ,double y) {
         // Set translate animation duration and the node
         TranslateTransition translateTransition = new TranslateTransition(Duration.millis(duration),node);
         translateTransition.setToX(x);
@@ -159,7 +159,7 @@ public class TranslateUtils {
      * @param toY of the vertical position  translate to
      * @return the custom TranslateTransition instance
      */
-    public static TranslateTransition getTranslateTransitionFromToXY(Node node, int duration, double fromX, double toX , double fromY, double toY) {
+    public static TranslateTransition getTranslateTransitionFromToXY(Node node, double duration, double fromX, double toX , double fromY, double toY) {
         // Set translate animation duration and the node,
         TranslateTransition translateTransition = new TranslateTransition(Duration.millis(duration),node);
         translateTransition.setFromX(fromX);

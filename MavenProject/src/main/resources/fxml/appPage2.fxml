@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
    <children>
       <StackPane fx:id="stackPaneForWarehouse" layoutX="10.0" layoutY="10.0" prefHeight="640.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <StackPane fx:id="stackPane" prefHeight="640.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
@@ -370,6 +370,7 @@
             <JFXDrawer fx:id="VBoxDrawer" defaultDrawerSize="300.0" direction="TOP" layoutY="58.0" maxHeight="200.0" maxWidth="170.0" minHeight="200.0" minWidth="170.0" prefHeight="200.0" prefWidth="170.0" AnchorPane.topAnchor="60.0" />
          </children>
       </AnchorPane>
+      <VBox fx:id="vbox" layoutX="1030.0" layoutY="-140.0" prefHeight="200.0" prefWidth="170.0" style="-fx-background-color: white;" />
       <AnchorPane prefHeight="60.0" prefWidth="1200.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="86.0" layoutY="14.0" prefHeight="15.0" prefWidth="68.0" text="Storage" textFill="#23242a" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="5.0">
@@ -433,7 +434,7 @@
             <JFXButton fx:id="transactionButton" layoutX="600.0" layoutY="10.0" onAction="#onTransactionPage" onMouseEntered="#enterTransactionButton" onMouseExited="#exitTransactionButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
             <JFXButton fx:id="staffButton" layoutX="780.0" layoutY="4.0" onMouseEntered="#enterStaffButton" onMouseExited="#exitStaffButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
             <JFXButton fx:id="messageButton" layoutX="899.0" layoutY="8.0" onMouseEntered="#enterMessageButton" onMouseExited="#exitMessageButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
-            <AnchorPane layoutX="1030.0" onMouseClicked="#onClickExtend" onMouseEntered="#onEnterExtend" prefHeight="60.0" prefWidth="170.0">
+            <AnchorPane layoutX="1030.0" onMouseClicked="#onClickExtend" onMouseEntered="#onEnterExtend" onMouseExited="#onExitExtend" prefHeight="60.0" prefWidth="170.0">
                <children>
                   <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="985.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <image>
