@@ -90,6 +90,22 @@ public class RotationUtils {
     }
 
     /**
+     * This method generates a custom RotateTransition instance to be used in a transition
+     *
+     * @param node that undergoes to rotate transition
+     * @param duration of the transition
+     * @param to final position
+     * @return the custom RotateTransition instance
+     */
+    public static RotateTransition getRotationTransitionTo(Node node, double duration, double to) {
+        // Set rotating animation duration time and the node
+        RotateTransition rotate = new RotateTransition(Duration.millis(duration),node);
+        // Set starting and ending position of the rotation
+        rotate.setToAngle(to);
+        return rotate;
+    }
+
+    /**
      * This method modifies a custom RotateTransition instance to be used in a transition
      *
      * @param rotateTransition to add Ease Out interpolator(Ease Out means translate from fast to slow)

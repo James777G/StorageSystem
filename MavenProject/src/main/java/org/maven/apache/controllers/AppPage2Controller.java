@@ -365,20 +365,7 @@ public class AppPage2Controller implements Initializable {
 
     private RotateTransition rotateTransition_closeMenu = new RotateTransition();
 
-    /**
-     * Test
-     */
-    private Timeline testTimeline = new Timeline();
-//    private Timeline testTimeline = new Timeline(new KeyFrame(Duration.millis(0.1),e->{
-//        if(isMouseExitInformationPage){
-////            if((VBoxDrawer.isOpened())||(VBoxDrawer.isOpening())) {
-//            if((isVBoxOpened)||(isVBoxOnOpenAnimation)){
-////                VBoxDrawer.close();
-//                closeMenuVBox();
-//            }
-//        }
-//        isMouseExitInformationPage = true;
-//    }));
+    private Timeline timeline_menuDelay = new Timeline();
 
     @FXML
     private VBox vbox;
@@ -763,60 +750,29 @@ public class AppPage2Controller implements Initializable {
     }
 
     private void setDrawer() {
-//        try {
-//            VBox vbox = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/menuPage.fxml")));
             drawerVBox.setOnMouseExited(event -> {
-//                RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendArrow, 300, -90, 0);
-//                rotate.setOnFinished(event1 -> isTriangleRotating = false);
-//                if (!isTriangleRotating) {
-//                    isTriangleRotating = true;
-//                    rotate.play();
-//                }
-                Timeline testTimeline = new Timeline(new KeyFrame(Duration.millis(0.1),e->{
+                Timeline timeline_menuDelay= new Timeline(new KeyFrame(Duration.millis(0.1),e->{
                     if(isMouseExitInformationPage){
-//            if((VBoxDrawer.isOpened())||(VBoxDrawer.isOpening())) {
                         if((isVBoxOpened)||(isVBoxOnOpenAnimation)){
-//                VBoxDrawer.close();
                             closeMenuVBox();
                         }
                     }
                     isMouseExitInformationPage = true;
                 }));
-                testTimeline.play();
-                //VBoxDrawer.close();
+                timeline_menuDelay.play();
             });
             drawerVBox.setOnMouseEntered(event -> {
                 isMouseExitInformationPage = false;
             });
             vbox.getChildren().add(drawerVBox);
-//            vbox.setLayoutX(1030);
-//            vbox.setLayoutY(-140);
-//            vbox.toFront();
-
-//            VBoxDrawer.setSidePane(vbox);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
     }
 
     private void openMenuVBox(){
         isVBoxOnOpenAnimation = true;
-        System.out.println("Start opening: "+vbox.getTranslateY());
-        System.out.println("Start openingRotation: "+extendArrow.getRotate());
-//        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(vbox,(1 - vbox.getTranslateY()/200) * 1000,vbox.getTranslateY(),200);
-//        translateTransition.setOnFinished(event -> {
-//            isVBoxOnOpenAnimation = false;
-//            System.out.println("Finish opening: "+vbox.getTranslateY());
-//        });
-//        translateTransition.play();
-//        translateTransition_openMenu.setNode(vbox);
-//        translateTransition_openMenu.setDuration(Duration.millis((1 - vbox.getTranslateY()/200) * 1000));
-//        translateTransition_openMenu.setToY(200);
-        rotateTransition_openMenu = RotationUtils.getRotationTransitionFromTo(extendArrow, (1 - extendArrow.getRotate()/-90) * 300, extendArrow.getRotate(), -90);
+        rotateTransition_openMenu = RotationUtils.getRotationTransitionTo(extendArrow, (1 - extendArrow.getRotate()/-90) * 300,-90);
         translateTransition_openMenu = TranslateUtils.getTranslateTransitionToY(vbox,(1 - vbox.getTranslateY()/200) * 300,200);
         translateTransition_openMenu.setOnFinished(event -> {
             isVBoxOnOpenAnimation = false;
-            System.out.println("Finish opening: "+vbox.getTranslateY());
         });
         rotateTransition_closeMenu.stop();
         rotateTransition_openMenu.play();
@@ -827,31 +783,17 @@ public class AppPage2Controller implements Initializable {
 
     private void closeMenuVBox(){
         isVBoxOnCloseAnimation = true;
-        System.out.println("Start closing: "+vbox.getTranslateY());
-        System.out.println("Start closingRotation: "+extendArrow.getRotate());
-//        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(vbox,(vbox.getTranslateY()/200) * 1000,vbox.getTranslateY(),0);
-//        translateTransition.setOnFinished(event -> {
-//            isVBoxOnCloseAnimation = false;
-//            //testTimeline.stop();
-//            System.out.println("Finish closing: "+vbox.getTranslateY());
-//        });
-//        translateTransition.play();
-//        translateTransition_closeMenu.setNode(vbox);
-//        translateTransition_closeMenu.setDuration(Duration.millis((vbox.getTranslateY()/200) * 1000));
-//        translateTransition_closeMenu.setToY(0);
-        rotateTransition_closeMenu = RotationUtils.getRotationTransitionFromTo(extendArrow, (extendArrow.getRotate()/-90) * 300, extendArrow.getRotate(), 0);
+        rotateTransition_closeMenu = RotationUtils.getRotationTransitionTo(extendArrow, (extendArrow.getRotate()/-90) * 300,0);
         translateTransition_closeMenu = TranslateUtils.getTranslateTransitionToY(vbox,(vbox.getTranslateY()/200) * 300,0);
         translateTransition_closeMenu.setOnFinished(event -> {
             isVBoxOnCloseAnimation = false;
-            //testTimeline.stop();
-            System.out.println("Finish closing: "+vbox.getTranslateY());
         });
         rotateTransition_openMenu.stop();
         rotateTransition_closeMenu.play();
         translateTransition_openMenu.stop();
         translateTransition_closeMenu.play();
         isVBoxOpened = false;
-        testTimeline.stop();
+        timeline_menuDelay.stop();
     }
     @FXML
     @SuppressWarnings("all")
@@ -905,26 +847,11 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onClickExtend() {
-//        RotateTransition rotate;
-////        if (VBoxDrawer.isOpened()) {
-//        if (isVBoxOpened) {
-//            rotate = RotationUtils.getRotationTransitionFromTo(extendArrow, 300, -90, 0);
-//        } else {
-//            rotate = RotationUtils.getRotationTransitionFromTo(extendArrow, 300, 0, -90);
+//        if ((isVBoxOpened)||(isVBoxOnOpenAnimation)) {
+//            closeMenuVBox();
+//        } else if ((!isVBoxOpened)||(isVBoxOnCloseAnimation)) {
+//            openMenuVBox();
 //        }
-//        rotate.setOnFinished(event -> isTriangleRotating = false);
-//        if (!isTriangleRotating) {
-//            isTriangleRotating = true;
-//            rotate.play();
-//        }
-//        if (VBoxDrawer.isOpened()) {
-        if (isVBoxOpened) {
-//            VBoxDrawer.close();
-            closeMenuVBox();
-        } else {
-//            VBoxDrawer.open();
-            openMenuVBox();
-        }
     }
 
     @FXML
@@ -940,33 +867,23 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void onEnterExtend() {
         isMouseExitInformationPage = false;
-//        if ((VBoxDrawer.isClosed()) ||(VBoxDrawer.isClosing())) {
         if((!isVBoxOpened)||(isVBoxOnCloseAnimation)){
-//            VBoxDrawer.open();
             openMenuVBox();
-//            RotateTransition rotate = RotationUtils.getRotationTransitionFromTo(extendArrow, 300, 0, -90);
-//            rotate.setOnFinished(event -> isTriangleRotating = false);
-//            if (!isTriangleRotating) {
-//                isTriangleRotating = true;
-//                rotate.play();
-//            }
         }
     }
 
     @FXML
     private void onExitExtend(){
         isMouseExitInformationPage = true;
-        Timeline testTimeline = new Timeline(new KeyFrame(Duration.millis(0.1),e->{
+        Timeline timeline_menuDelay = new Timeline(new KeyFrame(Duration.millis(0.1),e->{
             if(isMouseExitInformationPage){
-//            if((VBoxDrawer.isOpened())||(VBoxDrawer.isOpening())) {
                 if((isVBoxOpened)||(isVBoxOnOpenAnimation)){
-//                VBoxDrawer.close();
                     closeMenuVBox();
                 }
             }
             isMouseExitInformationPage = true;
         }));
-        testTimeline.play();
+        timeline_menuDelay.play();
 
     }
 
