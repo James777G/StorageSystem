@@ -3,7 +3,6 @@ package org.maven.apache.controllers;
 import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXPagination;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
-import io.github.palexdev.materialfx.controls.MFXSpinner;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -21,9 +20,15 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 
+/**
+ * Controller of the warehouse page
+ *
+ * <p>
+ *     Author: James Gong
+ *     Date: 1/13/2023
+ * </p>
+ */
 public class WarehouseController implements Initializable {
 
     private final ItemService itemService = MyLauncher.context.getBean("itemService", ItemService.class);
@@ -79,11 +84,25 @@ public class WarehouseController implements Initializable {
 
     private final Label[] amountList = new Label[7];
 
+    @SuppressWarnings("all")
     private final JFXButton[] buttonList = new JFXButton[7];
 
     private Item selectedItem;
 
-
+    /**
+     * 1. sets up the word limit for description input field inside the description dialog
+     * 2. Initialize the attributes of the data
+     * 3. bind listener of the pagination to retrieve current page property dynamically.
+     *
+     * <p>
+     * @param location
+     * The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     *
+     * @param resources
+     * The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         itemDescriptionInDetails.setTextFormatter(new TextFormatter<String>(change ->
@@ -106,6 +125,9 @@ public class WarehouseController implements Initializable {
         }));
     }
 
+    /**
+     * check button event in the warehouse item table
+     */
     @FXML
     private void onClickCheckOne() {
         if (itemList[0] != null) {
@@ -113,6 +135,9 @@ public class WarehouseController implements Initializable {
         }
     }
 
+    /**
+     * check button event in the warehouse item table
+     */
     @FXML
     private void onClickCheckTwo() {
         if (itemList[1] != null) {
@@ -120,6 +145,9 @@ public class WarehouseController implements Initializable {
         }
     }
 
+    /**
+     * check button event in the warehouse item table
+     */
     @FXML
     private void onClickCheckThree() {
         if (itemList[2] != null) {
@@ -127,6 +155,9 @@ public class WarehouseController implements Initializable {
         }
     }
 
+    /**
+     * check button event in the warehouse item table
+     */
     @FXML
     private void onClickCheckFour() {
         if (itemList[3] != null) {
@@ -134,6 +165,9 @@ public class WarehouseController implements Initializable {
         }
     }
 
+    /**
+     * check button event in the warehouse item table
+     */
     @FXML
     private void onClickCheckFive() {
         if (itemList[4] != null) {
@@ -141,6 +175,9 @@ public class WarehouseController implements Initializable {
         }
     }
 
+    /**
+     * check button event in the warehouse item table
+     */
     @FXML
     private void onClickCheckSix() {
         if (itemList[5] != null) {
@@ -148,6 +185,9 @@ public class WarehouseController implements Initializable {
         }
     }
 
+    /**
+     * check button event in the warehouse item table
+     */
     @FXML
     private void onClickCheckSeven() {
         if (itemList[6] != null) {
@@ -155,6 +195,9 @@ public class WarehouseController implements Initializable {
         }
     }
 
+    /**
+     * close description dialog event, and set the warning message visibility to false
+     */
     @FXML
     private void onCloseDescriptionDialog() {
         descriptionDialog.setVisible(false);
@@ -162,16 +205,29 @@ public class WarehouseController implements Initializable {
     }
 
     /**
-     * need improvements
+     * This method sets up the onClickApply event;
+     * <p>
+     * 1. Check if the data input has changed, if no changes detected,
+     * this method is terminated immediately.
+     * <p>
+     * 2. Check if the item name is left blank, if yes,
+     * display the warning message and terminate immediately.
+     * <p>
+     * 3. Check if the data can be updated in the database, if no,
+     * display the warning message; if yes, update the corresponding
+     * data, refresh the cached data and display the new data.
+     * <p>
+     * 4. This method is also responsible for setting the loading animation
+     * when performing SQL operations.
      */
     @FXML
     private void onClickApply() {
         warnMessage.setVisible(false);
         Item item = encapsulateItemData();
-        if(item.equals(selectedItem)){
+        if (item.equals(selectedItem)) {
             return;
         }
-        if(itemNameInDetails.getText().isEmpty()){
+        if (itemNameInDetails.getText().isEmpty()) {
             warnMessage.setVisible(true);
             return;
         }
@@ -180,7 +236,7 @@ public class WarehouseController implements Initializable {
                 applyButton.setVisible(false);
                 loadSpinner.setVisible(true);
             });
-            try{
+            try {
                 itemService.update(item);
                 generateCachedData();
                 int currentPage = pagination.getCurrentPage() - 1;
@@ -190,7 +246,7 @@ public class WarehouseController implements Initializable {
                     applyButton.setVisible(true);
                     loadSpinner.setVisible(false);
                 });
-            }catch(Exception e){
+            } catch (Exception e) {
                 Platform.runLater(() -> {
                     applyButton.setVisible(true);
                     loadSpinner.setVisible(false);
@@ -201,11 +257,20 @@ public class WarehouseController implements Initializable {
 
     }
 
+    /**
+     * On click okay event, should have the same functionality as on close event
+     */
     @FXML
-    private void onClickOkay(){
+    private void onClickOkay() {
         onCloseDescriptionDialog();
     }
 
+    /**
+     * this method encapsulate all the input and current values in the description dialog
+     * into an item object
+     *
+     * @return item object containing all the attributes
+     */
     private Item encapsulateItemData() {
         Item item = new Item();
         item.setItemID(Integer.parseInt(itemIdInDetails.getText()));
@@ -215,11 +280,23 @@ public class WarehouseController implements Initializable {
         return item;
     }
 
+    /**
+     * this method acts as an initializer of the item list and should only be used in
+     * initialize method
+     */
+    @Deprecated
+    @SuppressWarnings("all")
     private void initializeItemList() {
         List<Item> items = DataUtils.publicCachedWarehouseTableData.get(0);
         setItemList(items);
     }
 
+    /**
+     * this method sets the attributes of the description dialog when check button
+     * is clicked
+     *
+     * @param item the selected item
+     */
     private void setItemAttributes(Item item) {
         descriptionDialog.setVisible(true);
         itemNameInDetails.setText(item.getItemName());
@@ -291,6 +368,7 @@ public class WarehouseController implements Initializable {
 
     /**
      * format conversion
+     * deprecated and should not be used
      *
      * @param items calculated items (from cached data)
      */
@@ -303,6 +381,11 @@ public class WarehouseController implements Initializable {
         }
     }
 
+    /**
+     * This method sets the latest item list based on the latest cached data
+     *
+     * @param index page number to be displayed
+     */
     private void generateItemList(int index) {
         List<Item> items = DataUtils.publicCachedWarehouseTableData.get(index);
         setItemList(items);
