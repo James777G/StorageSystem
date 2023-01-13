@@ -1,11 +1,14 @@
 package org.maven.apache.item;
 
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
 @Component
+@EqualsAndHashCode
 public class Item implements Serializable {
 	private Integer ItemID;
 	private String ItemName;

@@ -2,6 +2,8 @@ package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXPagination;
+import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
+import io.github.palexdev.materialfx.controls.MFXSpinner;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -9,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.item.Item;
 import org.maven.apache.service.item.ItemService;
@@ -46,7 +49,7 @@ public class WarehouseController implements Initializable {
     private Label itemIdInDetails;
 
     @FXML
-    private TextField itemAmountInDetails;
+    private Label itemAmountInDetails;
 
     @FXML
     private TextArea itemDescriptionInDetails;
@@ -59,6 +62,12 @@ public class WarehouseController implements Initializable {
 
     @FXML
     private Label warnMessage;
+
+    @FXML
+    private JFXButton applyButton;
+
+    @FXML
+    private MFXProgressSpinner loadSpinner;
 
     private int pageSize;
 
@@ -77,6 +86,9 @@ public class WarehouseController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        itemDescriptionInDetails.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 100 ? change : null));
+        loadSpinner.setVisible(false);
         descriptionDialog.setVisible(false);
         warnMessage.setVisible(false);
         calculatePageSize();
@@ -154,27 +166,44 @@ public class WarehouseController implements Initializable {
      */
     @FXML
     private void onClickApply() {
-        try{
-            Item item = encapsulateItemData();
-            itemService.update(item);
-            generateCachedData();
-            int currentPage = pagination.getCurrentPage() - 1;
-            generateItemList(currentPage);
-            setTableContents();
-        }catch(Exception e){
-            warnMessage.setVisible(true);
+        warnMessage.setVisible(false);
+        Item item = encapsulateItemData();
+        if(item.equals(selectedItem)){
+            return;
         }
+        if(itemNameInDetails.getText().isEmpty()){
+            warnMessage.setVisible(true);
+            return;
+        }
+        executorService.execute(() -> {
+            Platform.runLater(() -> {
+                applyButton.setVisible(false);
+                loadSpinner.setVisible(true);
+            });
+            try{
+                itemService.update(item);
+                generateCachedData();
+                int currentPage = pagination.getCurrentPage() - 1;
+                generateItemList(currentPage);
+                Platform.runLater(this::setTableContents);
+                Platform.runLater(() -> {
+                    applyButton.setVisible(true);
+                    loadSpinner.setVisible(false);
+                });
+            }catch(Exception e){
+                Platform.runLater(() -> {
+                    applyButton.setVisible(true);
+                    loadSpinner.setVisible(false);
+                });
+                warnMessage.setVisible(true);
+            }
+        });
+
     }
 
-    private boolean isItemNameAlreadyExisted() {
-        for (int i = 0; i < DataUtils.publicCachedWarehouseTableData.size(); i++) {
-            for (int j = 0; j < DataUtils.publicCachedWarehouseTableData.get(i).size(); j++) {
-                if (DataUtils.publicCachedWarehouseTableData.get(i).get(j).getItemName().equals(itemNameInDetails.getText())) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    @FXML
+    private void onClickOkay(){
+        onCloseDescriptionDialog();
     }
 
     private Item encapsulateItemData() {
