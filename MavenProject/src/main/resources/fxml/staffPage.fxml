@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXPagination?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.WarehouseController">
+   <children>
+      <MFXGenericDialog fx:id="descriptionDialog" headerText="Item Details" layoutX="492.0" onClose="#onCloseDescriptionDialog" opacity="0.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="150.0">
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" text="Item Name:">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="207.0" layoutY="14.0" text="Item Amount:">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="441.0" layoutY="14.0" text="Item ID:">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="itemNameInDetails" layoutX="14.0" layoutY="41.0" prefHeight="25.0" prefWidth="146.0" />
+                  <Separator layoutY="72.0" prefHeight="13.0" prefWidth="575.0" />
+                  <Label layoutX="14.0" layoutY="100.0" text="Item Description:">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="itemDescriptionInDetails" layoutX="15.0" layoutY="130.0" prefHeight="145.0" prefWidth="375.0" wrapText="true" />
+                  <JFXButton layoutX="207.0" layoutY="41.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="View Transaction" textFill="WHITE" AnchorPane.bottomAnchor="227.66666666666666">
+                     <font>
+                        <Font name="Calibri Bold Italic" size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton layoutX="441.0" layoutY="41.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Bring To Notepad" textFill="WHITE" AnchorPane.bottomAnchor="227.66666666666666">
+                     <font>
+                        <Font name="Calibri Bold Italic" size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton layoutX="403.0" layoutY="254.0" onAction="#onClickOkay" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #e9e9e9;" text="Okay">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="applyButton" layoutX="487.0" layoutY="254.0" onAction="#onClickApply" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #223c40;" text="Apply" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <Label fx:id="itemIdInDetails" layoutX="501.0" layoutY="14.0">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="warnMessage" layoutX="402.0" layoutY="186.0" text="Your action was not successful,&#10;please check if your item name &#10;is unique and not empty." textFill="#a10000">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="itemAmountInDetails" layoutX="302.0" layoutY="14.0" text="0">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <MFXProgressSpinner fx:id="loadSpinner" layoutX="512.0" layoutY="258.0" prefHeight="18.0" prefWidth="25.0" />
+               </children>
+            </AnchorPane>
+         </center>
+      </MFXGenericDialog>
+      <MFXTextField floatMode="DISABLED" layoutX="287.0" layoutY="75.0" prefHeight="50.0" prefWidth="550.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="40.0">
+         <textFill>
+            <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
+         </textFill>
+         <font>
+            <Font name="Calibri Bold" size="15.0" />
+         </font>
+      </MFXTextField>
+      <JFXButton contentDisplay="CENTER" layoutX="850.0" layoutY="40.0" prefHeight="50.0" prefWidth="50.0" styleClass="searchButton" stylesheets="@../css/appPage.css" textFill="#223c40">
+         <graphic>
+            <ImageView fx:id="searchImage1" fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-search-64.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <AnchorPane layoutY="131.0" prefHeight="50.0" style="-fx-background-color: #223c40;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+         <children>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="118.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="5.0">
+               <image>
+                  <Image url="@../image/icons8-name-64.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="172.0" layoutY="5.0" prefHeight="40.0" prefWidth="146.0" text="Staff" textFill="WHITE" AnchorPane.topAnchor="5.0">
+               <font>
+                  <Font name="Candara Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="192.0" layoutY="180.0" prefHeight="60.0" prefWidth="900.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="150.0">
+         <children>
+            <Label layoutX="59.0" layoutY="20.0" text="Staff" textFill="#223c40" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+            </Label>
+            <Separator layoutX="185.0" layoutY="45.0" prefWidth="100.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="185.0" />
+            <Label layoutX="201.0" layoutY="21.0" text="Staff name" textFill="#223c40" AnchorPane.leftAnchor="201.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+            </Label>
+            <Separator layoutX="512.0" layoutY="42.0" prefWidth="100.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="515.0" />
+            <Label layoutX="522.0" layoutY="17.0" text="Status" textFill="#223c40" AnchorPane.leftAnchor="520.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="592.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="590.0" AnchorPane.topAnchor="24.0">
+               <image>
+                  <Image url="@../image/icons8-sort-down-100.png" />
+               </image>
+            </ImageView>
+            <Separator layoutX="351.0" layoutY="42.0" prefWidth="100.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="350.0" />
+            <Label layoutX="377.0" layoutY="20.0" text="Staff ID" textFill="#223c40" AnchorPane.leftAnchor="377.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="697.0" layoutY="20.0" text="Edit Info" textFill="#223c40" AnchorPane.leftAnchor="697.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+            </Label>
+            <Separator layoutX="706.0" layoutY="44.0" prefWidth="100.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="675.0" />
+         </children>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX">
+               <color>
+                  <Color red="0.8117647171020508" green="0.8117647171020508" blue="0.8117647171020508" />
+               </color>
+            </DropShadow>
+         </effect>
+      </AnchorPane>
+      <AnchorPane layoutX="150.0" layoutY="240.0" prefHeight="50.0" prefWidth="901.0">
+         <children>
+            <Label fx:id="itemNameOne" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+               <font>
+                  <Font name="Candara Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="itemIdOne" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="Candara Bold" size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="itemAmountOne" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="Candara Bold" size="19.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="410.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="13.0">
+               <image>
+                  <Image url="@../image/icons8-cheque-52%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="510.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="12.0">
+               <image>
+                  <Image url="@../image/icons8-checked-identification-documents-64%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
+               <image>
+                  <Image url="@../image/icons8-account-96.png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="checkOne" layoutX="666.0" layoutY="13.0" onAction="#onClickCheckOne" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-search-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="150.0" layoutY="290.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <Label fx:id="itemNameTwo" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+               <font>
+                  <Font name="Candara Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="itemIdTwo" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="Candara Bold" size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="itemAmountTwo" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="Candara Bold" size="19.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="410.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="13.0">
+               <image>
+                  <Image url="@../image/icons8-cheque-52%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="510.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="12.0">
+               <image>
+                  <Image url="@../image/icons8-checked-identification-documents-64%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
+               <image>
+                  <Image url="@../image/icons8-account-96.png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="checkTwo" layoutX="668.0" layoutY="11.0" onAction="#onClickCheckTwo" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-search-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="150.0" layoutY="340.0" prefHeight="50.0" prefWidth="901.0">
+         <children>
+            <Label fx:id="itemNameThree" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+               <font>
+                  <Font name="Candara Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="itemIdThree" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="Candara Bold" size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="itemAmountThree" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="Candara Bold" size="19.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="410.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="13.0">
+               <image>
+                  <Image url="@../image/icons8-cheque-52%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="510.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="12.0">
+               <image>
+                  <Image url="@../image/icons8-checked-identification-documents-64%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
+               <image>
+                  <Image url="@../image/icons8-account-96.png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="checkThree" layoutX="669.0" layoutY="8.0" onAction="#onClickCheckThree" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-search-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="150.0" layoutY="390.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <Label fx:id="itemNameFour" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+               <font>
+                  <Font name="Candara Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="itemIdFour" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="Candara Bold" size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="itemAmountFour" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="Candara Bold" size="19.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="410.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="13.0">
+               <image>
+                  <Image url="@../image/icons8-cheque-52%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="510.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="12.0">
+               <image>
+                  <Image url="@../image/icons8-checked-identification-documents-64%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
+               <image>
+                  <Image url="@../image/icons8-account-96.png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="checkFour" layoutX="669.0" layoutY="9.0" onAction="#onClickCheckFour" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-search-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="150.0" layoutY="440.0" prefHeight="50.0" prefWidth="901.0">
+         <children>
+            <Label fx:id="itemNameFive" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+               <font>
+                  <Font name="Candara Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="itemIdFive" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="Candara Bold" size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="itemAmountFive" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="Candara Bold" size="19.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="410.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="13.0">
+               <image>
+                  <Image url="@../image/icons8-cheque-52%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="510.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="12.0">
+               <image>
+                  <Image url="@../image/icons8-checked-identification-documents-64%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
+               <image>
+                  <Image url="@../image/icons8-account-96.png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="checkFive" layoutX="676.0" layoutY="19.0" onAction="#onClickCheckFive" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-search-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="150.0" layoutY="490.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <Label fx:id="itemNameSix" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+               <font>
+                  <Font name="Candara Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="itemIdSix" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="Candara Bold" size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="itemAmountSix" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="Candara Bold" size="19.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="410.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="13.0">
+               <image>
+                  <Image url="@../image/icons8-cheque-52%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="510.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="12.0">
+               <image>
+                  <Image url="@../image/icons8-checked-identification-documents-64%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
+               <image>
+                  <Image url="@../image/icons8-account-96.png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="checkSix" layoutX="683.0" layoutY="8.0" onAction="#onClickCheckSix" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-search-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="150.0" layoutY="540.0" prefHeight="50.0" prefWidth="901.0">
+         <children>
+            <Label fx:id="itemNameSeven" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+               <font>
+                  <Font name="Candara Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="itemIdSeven" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="Candara Bold" size="19.0" />
+               </font>
+            </Label>
+            <Label fx:id="itemAmountSeven" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="Candara Bold" size="19.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="410.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="13.0">
+               <image>
+                  <Image url="@../image/icons8-cheque-52%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="510.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="12.0">
+               <image>
+                  <Image url="@../image/icons8-checked-identification-documents-64%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
+               <image>
+                  <Image url="@../image/icons8-account-96.png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="checkSeven" layoutX="660.0" layoutY="13.0" onAction="#onClickCheckSeven" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-search-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <MFXPagination fx:id="pagination" layoutX="531.0" layoutY="600.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="555.0" />
+   </children>
+</AnchorPane>

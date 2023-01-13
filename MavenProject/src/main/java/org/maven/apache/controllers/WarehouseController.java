@@ -438,6 +438,7 @@ public class WarehouseController implements Initializable {
      * 2. The loading of this cached data is slow, thus this process must be delegated to loading animation
      * 3. The cached data generated must be cleared and regenerated everytime when there is a change to the data
      * 4. The cached data is stored as a global variable in DataUtils class.
+     * 5. This method is deliberately left public, so as it can be accessed by other controllers.
      */
     public void generateCachedData() {
         calculatePageSize();
