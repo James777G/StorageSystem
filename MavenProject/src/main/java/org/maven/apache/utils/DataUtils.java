@@ -24,5 +24,4 @@ public class DataUtils {
 
     public static List<List<Item>> publicCachedWarehouseTableData = new ArrayList<>();
 
-
 }
