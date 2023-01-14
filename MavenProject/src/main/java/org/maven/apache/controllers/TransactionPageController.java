@@ -3,6 +3,7 @@ package org.maven.apache.controllers;
 import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPagination;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
@@ -23,7 +24,9 @@ import org.maven.apache.utils.TransitionUtils;
 import org.maven.apache.utils.TranslateUtils;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 
@@ -111,6 +114,9 @@ public class TransactionPageController implements Initializable {
     private JFXButton confirmButton;
 
     @FXML
+    private JFXButton searchButton;
+
+    @FXML
     private Label statusLabel1, statusLabel2, statusLabel3, statusLabel4;
 
     @FXML
@@ -163,6 +169,9 @@ public class TransactionPageController implements Initializable {
 
     @FXML
     private MFXGenericDialog deletionConfirmationDialog;
+
+    @FXML
+    private MFXTextField transactionSearchTextField;
 
     private Label[] statusLabelArray = new Label[4];
 
@@ -711,6 +720,57 @@ public class TransactionPageController implements Initializable {
     private void onRefreshTransitionList(){
         setPaginationPages();
         setTransactionList(transactionPagination.getCurrentPage());
+    }
+
+    @FXML
+    private void onClickSearchButton(){
+//        String textToSearch = transactionSearchTextField.getText().trim();
+//        List<DateTransaction> list= dateTransactionService.selectAll();
+//        searchOnTextField(list,textToSearch);
+    }
+
+    /**
+     * This method is used to search the specified names in the text field and return a list of dateTransactions
+     * to update the table
+     *
+     * @param paramList
+     * @param textToSearch
+     */
+    private List<DateTransaction> searchOnTextField(List<DateTransaction> paramList,String textToSearch){
+        List<DateTransaction> returnList = new ArrayList<DateTransaction>();
+        int index_returnlist = 0;
+        if (textToSearch == null){return returnList;}
+        String firstSearchText = null,secondSearchText = null;
+        for(int i = 0; i < textToSearch.length(); i++){
+            if(textToSearch.charAt(i) != '&') {
+                firstSearchText = firstSearchText + textToSearch.charAt(i);
+            }else{
+                secondSearchText = secondSearchText + textToSearch.charAt(i);
+            }
+        }
+        for(int i = 0; i < paramList.size(); i++){
+            if ((Objects.equals(firstSearchText, paramList.get(i).getItemName()))||(Objects.equals(firstSearchText, paramList.get(i).getStaffName()))){
+                returnList.add(index_returnlist,paramList.get(i));
+                index_returnlist++;
+            }
+
+
+        }
+
+        if(secondSearchText != null){
+            for(int i = 0; i < returnList.size(); i++) {
+                if ((Objects.equals(secondSearchText, paramList.get(i).getItemName())) || (Objects.equals(secondSearchText, paramList.get(i).getStaffName()))) {
+                    returnList.add(index_returnlist, paramList.get(i));
+                    index_returnlist++;
+                }
+            }
+        }
+
+
+        return returnList;
+
+
+
     }
 
 }
