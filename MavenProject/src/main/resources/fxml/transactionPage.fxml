@@ -40,7 +40,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <AnchorPane fx:id="cargoPage" layoutX="-3.0" layoutY="257.0">
+            <AnchorPane fx:id="cargoPage" layoutX="-3.0" layoutY="257.0" style="-fx-background-color: 333333;">
                <children>
                   <AnchorPane layoutX="153.0" layoutY="83.0" prefHeight="60.0" prefWidth="901.0" style="-fx-background-color: white;">
                      <children>
@@ -426,7 +426,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutY="200.0" prefHeight="60.0" prefWidth="1200.0" style="-fx-background-color: #dddddd;" AnchorPane.bottomAnchor="380.0">
+            <AnchorPane layoutY="200.0" prefHeight="60.0" prefWidth="1200.0" style="-fx-background-color: #cfd8dc;" AnchorPane.bottomAnchor="380.0">
                <children>
                   <AnchorPane fx:id="movingLinePane" layoutX="65.0" layoutY="54.0" prefHeight="2.0" prefWidth="105.0" style="-fx-background-color: #0DaD8D;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="80.0" />
                   <AnchorPane fx:id="dataPane" layoutX="185.0" layoutY="13.0" onMouseClicked="#onMoveToData" prefHeight="40.0" prefWidth="105.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="20.0">
@@ -459,9 +459,9 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane layoutY="120.0" prefHeight="80.0" prefWidth="1200.0" style="-fx-background-color: #bbbbbb;" AnchorPane.bottomAnchor="440.0" AnchorPane.leftAnchor="0.0">
+            <AnchorPane layoutY="120.0" prefHeight="80.0" prefWidth="1200.0" style="-fx-background-color: #223c40;" AnchorPane.bottomAnchor="440.0" AnchorPane.leftAnchor="0.0">
                <children>
-                  <Label layoutX="451.0" layoutY="14.0" prefHeight="40.0" prefWidth="300.0" text="CARGO NAME ******" textFill="#223c40" AnchorPane.leftAnchor="451.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="10.0">
+                  <Label layoutX="451.0" layoutY="14.0" prefHeight="40.0" prefWidth="300.0" text="CARGO NAME ******" textFill="WHITE" AnchorPane.leftAnchor="451.0" AnchorPane.rightAnchor="450.0" AnchorPane.topAnchor="10.0">
                      <font>
                         <Font name="Candara Bold" size="24.0" />
                      </font>
@@ -471,12 +471,12 @@
                         <Font name="Candara Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="1061.0" layoutY="39.0" text="#0000" textFill="#223c40" AnchorPane.topAnchor="39.0">
+                  <Label layoutX="1061.0" layoutY="39.0" text="#0000" textFill="WHITE" AnchorPane.topAnchor="39.0">
                      <font>
                         <Font name="Candara Bold" size="19.0" />
                      </font>
                   </Label>
-                  <Label layoutX="1054.0" layoutY="19.0" text="Product ID" textFill="#223c40" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="20.0">
+                  <Label layoutX="1054.0" layoutY="19.0" text="Product ID" textFill="WHITE" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="20.0">
                      <font>
                         <Font name="Candara Bold" size="15.0" />
                      </font>
