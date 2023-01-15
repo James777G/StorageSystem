@@ -35,7 +35,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <JFXButton fx:id="signOffButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onClickSettingsButton" prefHeight="40.0" prefWidth="170.0" styleClass="JFXButton" stylesheets="@../css/appPage2.css" text="                Settings" textFill="#223c40">
+      <JFXButton fx:id="signOffButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onClickSettingsButton" prefHeight="40.0" prefWidth="170.0" styleClass="JFXButton" stylesheets="@../css/appPage2.css" text="                Settings" textFill="#37a592">
          <font>
             <Font name="Candara Bold" size="15.0" />
          </font>
@@ -45,7 +45,7 @@
          <graphic>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/icons8-settings-384%20(1).png" />
+                  <Image url="@../image/icons8-settings-192.png" />
                </image>
             </ImageView>
          </graphic>

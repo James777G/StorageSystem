@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="commit">
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/editMessagePage.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-multiply-90 (1).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-open-envelope-64.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-open-envelope-96.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-star-filled-48.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/image/icons8-star-filled-96.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/messagePage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/messagePage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/staffPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/staffPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/transactionPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/transactionPage.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
