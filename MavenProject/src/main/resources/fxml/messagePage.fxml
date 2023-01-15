@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXPagination?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: eeeeee;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.MessagePage">
+   <children>
+      <AnchorPane prefHeight="50.0" prefWidth="1200.0" style="-fx-background-color: #223c40;">
+         <children>
+            <Label layoutX="76.0" prefHeight="40.0" text="MESSAGE" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="5.0">
+               <font>
+                  <Font name="Candara Bold" size="24.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="123.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="5.0">
+               <image>
+                  <Image url="@../image/icons8-mail-96.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="50.0" prefHeight="40.0" prefWidth="1200.0" style="-fx-background-color: #cfd8dc;">
+         <children>
+            <AnchorPane fx:id="movingLinePane" layoutX="31.0" layoutY="39.0" prefHeight="2.0" prefWidth="120.0" style="-fx-background-color: #0DaD8D;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" />
+            <AnchorPane fx:id="cargoPane" layoutX="120.0" onMouseClicked="#onMoveToCargo" prefHeight="40.0" prefWidth="120.0" AnchorPane.leftAnchor="120.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="68.0" text="Message" textFill="#223c40" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="0.0">
+                     <font>
+                        <Font name="Candara Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0">
+                     <image>
+                        <Image url="@../image/icons8-envelope-96.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="cargoPane1" layoutX="240.0" onMouseClicked="#onMoveToCargo" prefHeight="40.0" prefWidth="120.0" AnchorPane.bottomAnchor="0.0">
+               <children>
+                  <Label prefHeight="18.0" text="starred" textFill="#223c40" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="6.0">
+                     <font>
+                        <Font name="Candara Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0">
+                     <image>
+                        <Image url="@../image/icons8-star-filled-96.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children></AnchorPane>
+      <AnchorPane layoutX="121.0" layoutY="90.0" prefHeight="100.0" prefWidth="960.0" style="-fx-background-color: #eceff1;" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
+               <image>
+                  <Image url="@../image/icons8-account-96%20(2).png" />
+               </image>
+            </ImageView>
+            <Label layoutX="102.0" layoutY="24.0" prefHeight="18.0" text="Staff Name" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+            </Label>
+            <Separator layoutX="82.0" layoutY="49.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
+            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Last Edit" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Candara Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="159.0" layoutY="57.0" prefHeight="18.0" text="00" textFill="#223c40" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Candara" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="175.0" layoutY="55.0" prefHeight="18.0" text="Days ago" textFill="#223c40" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Candara" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="390.0" layoutY="21.0" prefHeight="18.0" text="Staff Name:" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font name="Candara" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="390.0" layoutY="46.0" prefHeight="18.0" prefWidth="486.0" text="carrgo number should be 300接下来是废话，看他能打多少字，打到后面会有省略号...." textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="45.0">
+               <font>
+                  <Font name="Candara" size="13.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="908.0" layoutY="37.0" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ec0000; -fx-border-width: 0.5; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="34.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                     <image>
+                        <Image url="@../image/icons8-multiply-90%20(1).png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="871.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.topAnchor="35.0">
+               <image>
+                  <Image url="@../image/icons8-star-filled-96.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="120.0" layoutY="176.0" prefHeight="100.0" prefWidth="960.0" style="-fx-background-color: #ffffff;" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="200.0">
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
+               <image>
+                  <Image url="@../image/icons8-account-96%20(2).png" />
+               </image>
+            </ImageView>
+            <Label layoutX="102.0" layoutY="24.0" prefHeight="18.0" text="Staff Name" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+            </Label>
+            <Separator layoutX="82.0" layoutY="49.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
+            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Last Edit" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Candara Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="159.0" layoutY="57.0" prefHeight="18.0" text="00" textFill="#223c40" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Candara" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="175.0" layoutY="55.0" prefHeight="18.0" text="Days ago" textFill="#223c40" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Candara" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="390.0" layoutY="21.0" prefHeight="18.0" text="Staff Name:" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font name="Candara" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="390.0" layoutY="46.0" prefHeight="18.0" prefWidth="486.0" text="carrgo number should be 300接下来是废话，看他能打多少字，打到后面会有省略号...." textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="45.0">
+               <font>
+                  <Font name="Candara" size="13.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="908.0" layoutY="37.0" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="34.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                     <image>
+                        <Image url="@../image/icons8-multiply-90%20(1).png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="871.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.topAnchor="35.0">
+               <image>
+                  <Image url="@../image/icons8-star-filled-96.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="129.0" layoutY="280.0" prefHeight="100.0" prefWidth="960.0" style="-fx-background-color: ffffff;" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="300.0">
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
+               <image>
+                  <Image url="@../image/icons8-account-96%20(2).png" />
+               </image>
+            </ImageView>
+            <Label layoutX="102.0" layoutY="24.0" prefHeight="18.0" text="Staff Name" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+            </Label>
+            <Separator layoutX="82.0" layoutY="49.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
+            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Last Edit" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Candara Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="159.0" layoutY="57.0" prefHeight="18.0" text="00" textFill="#223c40" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Candara" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="175.0" layoutY="55.0" prefHeight="18.0" text="Days ago" textFill="#223c40" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Candara" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="390.0" layoutY="21.0" prefHeight="18.0" text="Staff Name:" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font name="Candara" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="390.0" layoutY="46.0" prefHeight="18.0" prefWidth="486.0" text="carrgo number should be 300接下来是废话，看他能打多少字，打到后面会有省略号...." textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="45.0">
+               <font>
+                  <Font name="Candara" size="13.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="908.0" layoutY="37.0" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                     <image>
+                        <Image url="@../image/icons8-multiply-90%20(1).png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="871.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.topAnchor="35.0">
+               <image>
+                  <Image url="@../image/icons8-star-filled-96.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="137.0" layoutY="380.0" prefHeight="100.0" prefWidth="960.0" style="-fx-background-color: ffffff;" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="400.0">
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
+               <image>
+                  <Image url="@../image/icons8-account-96%20(2).png" />
+               </image>
+            </ImageView>
+            <Label layoutX="102.0" layoutY="24.0" prefHeight="18.0" text="Staff Name" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+            </Label>
+            <Separator layoutX="82.0" layoutY="49.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
+            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Last Edit" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Candara Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="159.0" layoutY="57.0" prefHeight="18.0" text="00" textFill="#223c40" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Candara" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="175.0" layoutY="55.0" prefHeight="18.0" text="Days ago" textFill="#223c40" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Candara" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="390.0" layoutY="21.0" prefHeight="18.0" text="Staff Name:" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font name="Candara" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="390.0" layoutY="46.0" prefHeight="18.0" prefWidth="486.0" text="carrgo number should be 300接下来是废话，看他能打多少字，打到后面会有省略号...." textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="45.0">
+               <font>
+                  <Font name="Candara" size="13.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="908.0" layoutY="37.0" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                     <image>
+                        <Image url="@../image/icons8-multiply-90%20(1).png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="871.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.topAnchor="35.0">
+               <image>
+                  <Image url="@../image/icons8-star-filled-96.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="127.0" layoutY="480.0" prefHeight="100.0" prefWidth="960.0" style="-fx-background-color: ffffff;" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="500.0">
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
+               <image>
+                  <Image url="@../image/icons8-account-96%20(2).png" />
+               </image>
+            </ImageView>
+            <Label layoutX="102.0" layoutY="24.0" prefHeight="18.0" text="Staff Name" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+            </Label>
+            <Separator layoutX="82.0" layoutY="49.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
+            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Last Edit" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Candara Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="159.0" layoutY="57.0" prefHeight="18.0" text="00" textFill="#223c40" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Candara" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="175.0" layoutY="55.0" prefHeight="18.0" text="Days ago" textFill="#223c40" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Candara" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="390.0" layoutY="21.0" prefHeight="18.0" text="Staff Name:" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font name="Candara" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="390.0" layoutY="46.0" prefHeight="18.0" prefWidth="486.0" text="carrgo number should be 300接下来是废话，看他能打多少字，打到后面会有省略号...." textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="45.0">
+               <font>
+                  <Font name="Candara" size="13.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="908.0" layoutY="37.0" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                     <image>
+                        <Image url="@../image/icons8-multiply-90%20(1).png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="871.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.topAnchor="35.0">
+               <image>
+                  <Image url="@../image/icons8-star-filled-96.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <MFXPagination fx:id="transactionPagination" layoutX="536.0" layoutY="594.0" onMouseClicked="#onClickPagination" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" />
+   </children>
+</AnchorPane>

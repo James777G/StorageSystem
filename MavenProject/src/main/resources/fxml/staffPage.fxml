@@ -17,6 +17,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.StaffController">
    <children>
       <MFXTextField floatMode="DISABLED" layoutX="287.0" layoutY="75.0" prefHeight="50.0" prefWidth="550.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="40.0">
@@ -124,7 +125,7 @@
             </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
                <image>
-                  <Image url="@../image/icons8-account-96.png" />
+                  <Image url="@../image/icons8-account-96%20(2).png" />
                </image>
             </ImageView>
             <JFXButton fx:id="checkOne" layoutX="666.0" layoutY="13.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
@@ -170,7 +171,7 @@
             </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
                <image>
-                  <Image url="@../image/icons8-account-96.png" />
+                  <Image url="@../image/icons8-account-96%20(2).png" />
                </image>
             </ImageView>
             <JFXButton fx:id="checkTwo" layoutX="668.0" layoutY="11.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
@@ -216,7 +217,7 @@
             </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
                <image>
-                  <Image url="@../image/icons8-account-96.png" />
+                  <Image url="@../image/icons8-account-96%20(2).png" />
                </image>
             </ImageView>
             <JFXButton fx:id="checkThree" layoutX="669.0" layoutY="8.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
@@ -262,7 +263,7 @@
             </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
                <image>
-                  <Image url="@../image/icons8-account-96.png" />
+                  <Image url="@../image/icons8-account-96%20(2).png" />
                </image>
             </ImageView>
             <JFXButton fx:id="checkFour" layoutX="669.0" layoutY="9.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
@@ -308,7 +309,7 @@
             </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
                <image>
-                  <Image url="@../image/icons8-account-96.png" />
+                  <Image url="@../image/icons8-account-96%20(2).png" />
                </image>
             </ImageView>
             <JFXButton fx:id="checkFive" layoutX="676.0" layoutY="19.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
@@ -354,7 +355,7 @@
             </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
                <image>
-                  <Image url="@../image/icons8-account-96.png" />
+                  <Image url="@../image/icons8-account-96%20(2).png" />
                </image>
             </ImageView>
             <JFXButton fx:id="checkSix" layoutX="683.0" layoutY="8.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
@@ -400,7 +401,7 @@
             </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
                <image>
-                  <Image url="@../image/icons8-account-96.png" />
+                  <Image url="@../image/icons8-account-96%20(2).png" />
                </image>
             </ImageView>
             <JFXButton fx:id="checkSeven" layoutX="660.0" layoutY="13.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
