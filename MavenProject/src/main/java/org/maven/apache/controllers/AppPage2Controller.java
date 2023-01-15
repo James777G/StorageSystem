@@ -2,7 +2,6 @@ package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
-import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -75,12 +74,6 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private JFXButton staffButton;
-
-    @FXML
-    private MFXCheckbox takenCheckBox;
-
-    @FXML
-    private MFXCheckbox restockCheckBox;
 
     @FXML
     private JFXButton transactionButton;
@@ -394,27 +387,9 @@ public class AppPage2Controller implements Initializable {
         stackPaneForWarehouse.setOpacity(0);
 //        stackPaneForWarehouse.setPickOnBounds(false);
         stackPaneForWarehouse.setVisible(false);
-        restockCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (newValue) {
-                    takenCheckBox.setSelected(false);
-                } else {
-                    takenCheckBox.setSelected(true);
-                }
-            }
-        });
 
-        takenCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (newValue) {
-                    restockCheckBox.setSelected(false);
-                } else {
-                    restockCheckBox.setSelected(true);
-                }
-            }
-        });
+
+
         setButtonList();
         setTransactionPane();
         setWarehousePane();
@@ -1424,12 +1399,10 @@ public class AppPage2Controller implements Initializable {
         staffNameInDetails.setText(dateTransaction.getStaffName());
         purposeTextInDetails.setText(dateTransaction.getPurpose());
         if (isTransactionStatusTaken(dateTransaction)) {
-            restockCheckBox.setSelected(false);
-            takenCheckBox.setSelected(true);
+
             transactionAmountInDetails.setText(dateTransaction.getRemoveUnit().toString());
         } else {
-            takenCheckBox.setSelected(false);
-            restockCheckBox.setSelected(true);
+
             transactionAmountInDetails.setText(dateTransaction.getAddUnit().toString());
         }
         setTransactionTime(transactionTimeInDetails, dateTransaction);
