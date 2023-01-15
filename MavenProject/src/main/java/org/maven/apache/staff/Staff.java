@@ -5,14 +5,9 @@ import lombok.Data;
 @Data
 public class Staff {
 
-    enum Status{
-        ACTIVE,
-        INACTIVE
-    }
     private int staffID;
 
-    private Status status;
-
+    private String status;
 
     private String staffName;
 

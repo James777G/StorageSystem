@@ -373,6 +373,9 @@ public class AppPage2Controller implements Initializable {
     @FXML
     VBox drawerVBox = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/menuPage.fxml")));
 
+    @FXML
+    private StackPane staffPane;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         transactionDialog.setVisible(false);
@@ -389,7 +392,7 @@ public class AppPage2Controller implements Initializable {
         searchTable.setPickOnBounds(false);
         searchTable.setOpacity(0);
         stackPaneForWarehouse.setOpacity(0);
-        stackPaneForWarehouse.setPickOnBounds(false);
+//        stackPaneForWarehouse.setPickOnBounds(false);
         stackPaneForWarehouse.setVisible(false);
         restockCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
@@ -415,7 +418,11 @@ public class AppPage2Controller implements Initializable {
         setButtonList();
         setTransactionPane();
         setWarehousePane();
-        stackPane.setPickOnBounds(false);
+        setStaffPane();
+        staffPane.setOpacity(0);
+//        staffPane.setPickOnBounds(false);
+        staffPane.setVisible(false);
+//        stackPane.setPickOnBounds(false);
         stackPane.setOpacity(0);
         stackPane.setVisible(false);
         // initialize search per sec when search field is chosen
@@ -684,27 +691,41 @@ public class AppPage2Controller implements Initializable {
     private void onClickWarehouseButton() {
         if (currentPage != stackPaneForWarehouse) {
             if (currentPage == appPagePane) {
-                appPagePane.setPickOnBounds(false);
+//                appPagePane.setPickOnBounds(false);
                 FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 1, 0);
                 FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 0, 1);
                 fadeTransition.setOnFinished(event -> {
                     fadeTransition1.play();
                     appPagePane.setVisible(false);
-                    stackPaneForWarehouse.setPickOnBounds(true);
+//                    stackPaneForWarehouse.setPickOnBounds(true);
                     stackPaneForWarehouse.setVisible(true);
                 });
                 fadeTransition.play();
                 currentPage = stackPaneForWarehouse;
             }
             if (currentPage == stackPane) {
-                stackPane.setPickOnBounds(false);
+//                stackPane.setPickOnBounds(false);
 
                 FadeTransition fadeTransition = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);
                 FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 0, 1);
                 fadeTransition.setOnFinished(event -> {
                     fadeTransition1.play();
                     stackPane.setVisible(false);
-                    stackPaneForWarehouse.setPickOnBounds(true);
+//                    stackPaneForWarehouse.setPickOnBounds(true);
+                    stackPaneForWarehouse.setVisible(true);
+                });
+                fadeTransition.play();
+                currentPage = stackPaneForWarehouse;
+            }
+            if (currentPage == staffPane) {
+//                staffPane.setPickOnBounds(false);
+
+                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(staffPane, 300, 1, 0);
+                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 0, 1);
+                fadeTransition.setOnFinished(event -> {
+                    fadeTransition1.play();
+                    staffPane.setVisible(false);
+//                    stackPaneForWarehouse.setPickOnBounds(true);
                     stackPaneForWarehouse.setVisible(true);
                 });
                 fadeTransition.play();
@@ -715,7 +736,54 @@ public class AppPage2Controller implements Initializable {
     }
 
     @FXML
-    private void onClickStuff() throws IOException {
+    private void onClickStaff(){
+        if(currentPage != staffPane){
+            if (currentPage == appPagePane) {
+//                appPagePane.setPickOnBounds(false);
+                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 1, 0);
+                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(staffPane, 300, 0, 1);
+                fadeTransition.setOnFinished(event -> {
+                    fadeTransition1.play();
+                    appPagePane.setVisible(false);
+//                    staffPane.setPickOnBounds(true);
+                    staffPane.setVisible(true);
+                });
+                fadeTransition.play();
+                currentPage = staffPane;
+            }
+            if (currentPage == stackPane) {
+//                stackPane.setPickOnBounds(false);
+                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);
+                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(staffPane, 300, 0, 1);
+                fadeTransition.setOnFinished(event -> {
+                    fadeTransition1.play();
+                    stackPane.setVisible(false);
+//                    staffPane.setPickOnBounds(true);
+                    staffPane.setVisible(true);
+                });
+                fadeTransition.play();
+                currentPage = staffPane;
+            }
+            if (currentPage == stackPaneForWarehouse) {
+                assert staffPane != null;
+//                staffPane.setPickOnBounds(true);
+                staffPane.setVisible(true);
+//                stackPaneForWarehouse.setPickOnBounds(false);
+
+                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(staffPane, 300, 0, 1);
+                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 1, 0);
+                fadeTransition1.setOnFinished(event -> {
+                    fadeTransition.play();
+                    stackPaneForWarehouse.setVisible(false);
+                });
+                fadeTransition1.play();
+                currentPage = staffPane;
+            }
+        }
+    }
+
+    @FXML
+    private void onClickExcel() throws IOException {
         FileChooser fc = new FileChooser();
         Stage stage = new Stage();
         File imageToClassify = fc.showSaveDialog(stage);
@@ -783,6 +851,15 @@ public class AppPage2Controller implements Initializable {
         }
     }
 
+    private void setStaffPane() {
+        try {
+            AnchorPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/staffPage.fxml")));
+            staffPane.getChildren().add(pane);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void setDrawer() {
         drawerVBox.setOnMouseExited(event -> {
             Timeline timeline_menuDelay = new Timeline(new KeyFrame(Duration.millis(0.1), e -> {
@@ -835,9 +912,9 @@ public class AppPage2Controller implements Initializable {
     private void onEnterAppPage() {
         if (currentPage != appPagePane) {
             if (currentPage == stackPane) {
-                appPagePane.setPickOnBounds(true);
+//                appPagePane.setPickOnBounds(true);
                 appPagePane.setVisible(true);
-                stackPane.setPickOnBounds(false);
+//                stackPane.setPickOnBounds(false);
 
                 FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 0, 1);
                 FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);
@@ -850,15 +927,30 @@ public class AppPage2Controller implements Initializable {
             }
             if (currentPage == stackPaneForWarehouse) {
                 assert appPagePane != null;
-                appPagePane.setPickOnBounds(true);
+//                appPagePane.setPickOnBounds(true);
                 appPagePane.setVisible(true);
-                stackPaneForWarehouse.setPickOnBounds(false);
+//                stackPaneForWarehouse.setPickOnBounds(false);
 
                 FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 0, 1);
                 FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 1, 0);
                 fadeTransition1.setOnFinished(event -> {
                     fadeTransition.play();
                     stackPaneForWarehouse.setVisible(false);
+                });
+                fadeTransition1.play();
+                currentPage = appPagePane;
+            }
+            if (currentPage == staffPane) {
+                assert appPagePane != null;
+//                appPagePane.setPickOnBounds(true);
+                appPagePane.setVisible(true);
+//                staffPane.setPickOnBounds(false);
+
+                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 0, 1);
+                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(staffPane, 300, 1, 0);
+                fadeTransition1.setOnFinished(event -> {
+                    fadeTransition.play();
+                    staffPane.setVisible(false);
                 });
                 fadeTransition1.play();
                 currentPage = appPagePane;
@@ -1004,8 +1096,8 @@ public class AppPage2Controller implements Initializable {
     private void onTransactionPage() {
         if (currentPage != stackPane) {
             if (currentPage == appPagePane) {
-                appPagePane.setPickOnBounds(false);
-                stackPane.setPickOnBounds(true);
+//                appPagePane.setPickOnBounds(false);
+//                stackPane.setPickOnBounds(true);
                 stackPane.setVisible(true);
                 FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 1, 0);
                 FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPane, 300, 0, 1);
@@ -1017,14 +1109,28 @@ public class AppPage2Controller implements Initializable {
                 currentPage = stackPane;
             }
             if (currentPage == stackPaneForWarehouse) {
-                stackPaneForWarehouse.setPickOnBounds(false);
-                stackPane.setPickOnBounds(true);
+//                stackPaneForWarehouse.setPickOnBounds(false);
+//                stackPane.setPickOnBounds(true);
                 stackPane.setVisible(true);
                 FadeTransition fadeTransition = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 1, 0);
                 FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPane, 300, 0, 1);
                 fadeTransition.setOnFinished(event -> {
                     fadeTransition1.play();
                     stackPaneForWarehouse.setVisible(false);
+                });
+                fadeTransition.play();
+                currentPage = stackPane;
+            }
+            if (currentPage == staffPane) {
+
+//                staffPane.setPickOnBounds(false);
+//                stackPane.setPickOnBounds(true);
+                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(staffPane, 300, 1, 0);
+                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPane, 300, 0, 1);
+                fadeTransition.setOnFinished(event -> {
+                    fadeTransition1.play();
+                    stackPane.setVisible(true);
+                    staffPane.setVisible(false);
                 });
                 fadeTransition.play();
                 currentPage = stackPane;
