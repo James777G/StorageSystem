@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.MessagePage">
+   <children>
+      <AnchorPane prefHeight="50.0" prefWidth="1200.0" style="-fx-background-color: #223c40;">
+         <children>
+            <Label layoutX="76.0" prefHeight="40.0" text="MESSAGE" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="5.0">
+               <font>
+                  <Font name="Candara Bold" size="24.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="123.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="5.0">
+               <image>
+                  <Image url="@../image/icons8-mail-96.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="50.0" prefHeight="58.0" prefWidth="1200.0" />
+   </children>
+</AnchorPane>

@@ -19,6 +19,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.TransactionPageController">
    <children>
+      <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" />
       <AnchorPane layoutX="20.0" layoutY="20.0" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <AnchorPane fx:id="dataTransactionPage" prefHeight="380.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
@@ -520,7 +521,6 @@
                </children></AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" />
       <MFXGenericDialog fx:id="deletionConfirmationDialog" headerText="Removal Confirmation" onClose="#onCloseDeletionConfirmation" prefHeight="217.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="203.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="220.0">
          <center>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="4.0" BorderPane.alignment="CENTER">

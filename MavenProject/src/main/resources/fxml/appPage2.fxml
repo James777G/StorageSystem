@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
-<?import io.github.palexdev.materialfx.controls.MFXCheckbox?>
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
 <?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
@@ -22,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
    <children>
       <StackPane fx:id="stackPaneForWarehouse" layoutX="10.0" layoutY="10.0" prefHeight="640.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <StackPane fx:id="stackPane" prefHeight="640.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
@@ -563,16 +562,6 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <MFXCheckbox fx:id="takenCheckBox" layoutX="265.0" layoutY="44.0" prefHeight="3.0" prefWidth="59.0" styleClass="checkBoxInAppPageForTaken" stylesheets="@../css/checkBox.css" text="Taken" textFill="#e27a7a">
-                     <font>
-                        <Font name="Calibri Bold" size="12.0" />
-                     </font>
-                  </MFXCheckbox>
-                  <MFXCheckbox fx:id="restockCheckBox" layoutX="360.0" layoutY="43.0" styleClass="checkBoxInAppPageForRestock" stylesheets="@../css/checkBox.css" text="Restock" textFill="#90e079">
-                     <font>
-                        <Font name="Calibri Bold" size="12.0" />
-                     </font>
-                  </MFXCheckbox>
                   <Label layoutX="499.0" layoutY="13.0" text="Staff In Charge:">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
@@ -598,15 +587,18 @@
                   <TextField fx:id="transactionNameInDetails" layoutX="11.0" layoutY="40.0" prefHeight="25.0" prefWidth="210.0">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
-                     </font></TextField>
+                     </font>
+                  </TextField>
                   <TextField fx:id="staffNameInDetails" layoutX="511.0" layoutY="39.0" prefHeight="25.0" prefWidth="280.0" AnchorPane.leftAnchor="510.0">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
-                     </font></TextField>
+                     </font>
+                  </TextField>
                   <MFXDatePicker fx:id="transactionDateInDetails" layoutX="7.0" layoutY="135.0" prefHeight="38.0" prefWidth="159.0">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
-                     </font></MFXDatePicker>
+                     </font>
+                  </MFXDatePicker>
                   <Separator layoutX="1.0" layoutY="187.0" prefHeight="13.0" prefWidth="876.0" />
                   <Label layoutX="249.0" layoutY="108.0" prefHeight="17.0" prefWidth="159.0" text="Process time:" AnchorPane.bottomAnchor="227.66666666666666" AnchorPane.leftAnchor="260.0">
                      <font>
@@ -632,13 +624,14 @@
                   <TextArea fx:id="purposeTextInDetails" layoutX="9.0" layoutY="243.0" prefHeight="95.0" prefWidth="575.0">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
-                     </font></TextArea>
-                  <JFXButton layoutX="788.0" layoutY="321.0" onAction="#onClickApply" prefHeight="29.0" prefWidth="75.0" style="-fx-background-color: #bce6e4;" text="Apply" AnchorPane.bottomAnchor="4.0">
+                     </font>
+                  </TextArea>
+                  <JFXButton layoutX="788.0" layoutY="321.0" onAction="#onClickApply" prefHeight="29.0" prefWidth="75.0" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Apply" textFill="WHITE" AnchorPane.bottomAnchor="4.0">
                      <font>
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="702.0" layoutY="324.0" prefHeight="29.0" prefWidth="75.0" style="-fx-background-color: #e2e2e2;" text="Okay" AnchorPane.bottomAnchor="4.0">
+                  <JFXButton layoutX="702.0" layoutY="324.0" prefHeight="29.0" prefWidth="75.0" style="-fx-background-color: #e2e2e2; -fx-background-radius: 5; -fx-border-radius: 5;" text="Okay" AnchorPane.bottomAnchor="4.0">
                      <font>
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
@@ -656,6 +649,38 @@
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </TextField>
+                  <JFXButton fx:id="statusTakenButton1" layoutX="269.0" layoutY="39.0" onAction="#onClickTaken" prefHeight="30.0" prefWidth="75.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00">
+                     <graphic>
+                        <Label pickOnBounds="false" text="  Taken" textFill="WHITE">
+                           <font>
+                              <Font name="Candara Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <AnchorPane pickOnBounds="false" prefHeight="9.0" prefWidth="9.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
+                                 <children>
+                                    <AnchorPane fx:id="takenStatusPane1" layoutX="2.0" layoutY="7.0" pickOnBounds="false" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" visible="false" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Label>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="statusRestockButton1" layoutX="344.0" layoutY="39.0" onAction="#onClickRestock" prefHeight="30.0" prefWidth="90.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="345.0">
+                     <graphic>
+                        <Label pickOnBounds="false" text="  Restock" textFill="WHITE">
+                           <font>
+                              <Font name="Candara Bold" size="15.0" />
+                           </font>
+                           <graphic>
+                              <AnchorPane pickOnBounds="false" prefHeight="9.0" prefWidth="9.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
+                                 <children>
+                                    <AnchorPane fx:id="restockStatusPane1" layoutX="1.0" layoutY="4.0" pickOnBounds="false" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" visible="false" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                 </children>
+                              </AnchorPane>
+                           </graphic>
+                        </Label>
+                     </graphic>
+                  </JFXButton>
                </children>
             </AnchorPane>
          </left>
