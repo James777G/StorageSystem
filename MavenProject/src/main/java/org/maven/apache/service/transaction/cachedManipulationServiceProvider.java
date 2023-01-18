@@ -26,7 +26,7 @@ public class cachedManipulationServiceProvider implements cachedManipulationServ
     }
 
     @Override
-    public List<Transaction> getDateDescendingOrder(List<Transaction> unsortedList) {
+    public List<Transaction> getReversedList(List<Transaction> unsortedList) {
         for(int i=0; i < unsortedList.size() / 2;i++){
             Transaction tempTransaction = unsortedList.get(i);
             unsortedList.set(i,unsortedList.get(unsortedList.size() - 1 - i));
