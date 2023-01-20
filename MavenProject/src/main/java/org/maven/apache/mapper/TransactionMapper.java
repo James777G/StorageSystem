@@ -2,9 +2,10 @@ package org.maven.apache.mapper;
 
 import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.transaction.Transaction;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public interface TransactionMapper {
     /**
      * This method adds a new transaction to the database.
