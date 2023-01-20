@@ -11,21 +11,6 @@ public class cachedTransactionServiceProvider implements cachedTransactionServic
     private TransactionMapper transactionMapper;
     private cachedManipulationService cachedManipulationService;
 
-//    private List<List<Transaction>> amountAsc4 = new ArrayList<>();
-//
-//    private List<List<Transaction>> amountDesc4 = new ArrayList<>();
-//
-//    private List<List<Transaction>> amountAsc7 = new ArrayList<>();
-//
-//    private List<List<Transaction>> amountDesc7 = new ArrayList<>();
-//
-//    private List<List<Transaction>> DateAsc4 = new ArrayList<>();
-//
-//    private List<List<Transaction>> DateDesc4 = new ArrayList<>();
-//
-//    private List<List<Transaction>> DateAsc7 = new ArrayList<>();
-//
-//    private List<List<Transaction>> DateDesc7 = new ArrayList<>();
 
     public TransactionMapper getTransactionMapper() {
         return transactionMapper;
