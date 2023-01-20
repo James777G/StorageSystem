@@ -26,8 +26,8 @@
       </AnchorPane>
       <AnchorPane layoutY="50.0" prefHeight="40.0" prefWidth="1200.0" style="-fx-background-color: #cfd8dc;">
          <children>
-            <AnchorPane layoutX="31.0" layoutY="39.0" prefHeight="2.0" prefWidth="120.0" style="-fx-background-color: #0DaD8D;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" />
-            <AnchorPane layoutX="120.0" prefHeight="40.0" prefWidth="120.0" AnchorPane.leftAnchor="120.0">
+            <AnchorPane fx:id="movingLinePane" layoutX="31.0" layoutY="39.0" prefHeight="2.0" prefWidth="120.0" style="-fx-background-color: #0DaD8D;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" />
+            <AnchorPane fx:id="onMoveToMessagePane" layoutX="120.0" onMouseClicked="#onClickMessage" prefHeight="40.0" prefWidth="120.0" AnchorPane.leftAnchor="120.0">
                <children>
                   <Label prefHeight="18.0" prefWidth="68.0" text="Message" textFill="#223c40" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="0.0">
                      <font>
@@ -41,7 +41,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="240.0" prefHeight="40.0" prefWidth="120.0" AnchorPane.bottomAnchor="0.0">
+            <AnchorPane fx:id="onMoveToStarredPane" layoutX="240.0" onMouseClicked="#onClickStarred" prefHeight="40.0" prefWidth="120.0" AnchorPane.bottomAnchor="0.0">
                <children>
                   <Label prefHeight="18.0" text="starred" textFill="#223c40" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="6.0">
                      <font>
