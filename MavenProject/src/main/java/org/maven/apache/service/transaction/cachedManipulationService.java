@@ -12,7 +12,7 @@ public interface cachedManipulationService {
      * @param unsortedList the list to be sorted
      * @return List sorted by unit in descending order
      */
-    List<Transaction> getUnitDescendingOrder (List<Transaction> unsortedList);
+  List<Transaction> getUnitDescendingOrder (List<Transaction> unsortedList);
 
     /**
      * This method is used to return a list sorted by Unit in Ascending Order
