@@ -20,6 +20,8 @@ public class DataUtils {
 
     public static AnchorPane editCargoPane;
 
+    public static AnchorPane editMessagePane;
+
     public static MFXGenericDialog publicSettingsDialog;
 
     public static List<List<Item>> publicCachedWarehouseTableData = new ArrayList<>();
