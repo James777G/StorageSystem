@@ -6,8 +6,8 @@
 <!-- 名称空间-->
 <mapper namespace="org.maven.apache.mapper.TransactionMapper">
     <insert id="addNewTransaction" useGeneratedKeys="true" keyProperty="ID">
-        insert into TransactionTable(ItemName, StaffName,Unit,CurrentUnit,TransactionTime,Purpose)
-        values (#{ItemName},#{StaffName},#{Unit},#{TransactionTime},#{Purpose});
+        insert into TransactionTable(ItemName, StaffName,Status,Unit,TransactionTime,Purpose)
+        values (#{ItemName},#{StaffName},#{Status},#{Unit},#{TransactionTime},#{Purpose});
     </insert>
     <delete id="deleteTransactionById">
         delete from TransactionTable where ID = #{id};
@@ -18,13 +18,15 @@
     </select>
     <select id="orderByDateAsc" resultType="org.maven.apache.transaction.Transaction">
         select * from TransactionTable
-        order by str_to_date(TransactionTime, '%Y-%m-%d :%H:%i:%s') asc;
+        order by str_to_date(TransactionTime, '%Y-%m-%d') asc;
     </select>
+
+
+
     <update id="IdGapInside">
         SET @auto_id = 0;
         update TransactionTable
         <set>
-
             ID = (@auto_id := @auto_id + 1)
         </set>
         where 1=1;

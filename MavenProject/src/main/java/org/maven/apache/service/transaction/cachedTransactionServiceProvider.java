@@ -2,14 +2,16 @@ package org.maven.apache.service.transaction;
 
 import org.maven.apache.mapper.TransactionMapper;
 import org.maven.apache.transaction.Transaction;
-import org.maven.apache.utils.TransactionCashedUtils;
+import org.maven.apache.utils.TransactionCachedUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-
+@Service
+@Transactional
 public class cachedTransactionServiceProvider implements cachedTransactionService {
     private TransactionMapper transactionMapper;
-    private cachedManipulationService cachedManipulationService;
+    private cachedManipulationServiceProvider cachedManipulationService =new cachedManipulationServiceProvider();
 
 
     public TransactionMapper getTransactionMapper() {
@@ -30,26 +32,26 @@ public class cachedTransactionServiceProvider implements cachedTransactionServic
      */
     @Override
     public void updateAllCachedTransactionData() {
-    List<Transaction> allTransaction =  transactionMapper.selectAll();
-    List<Transaction> dateTransactionASC = transactionMapper.orderByDateAsc();
-    ////
-    List<List<Transaction>> amountAsc4=  cachedManipulationService.getPagedCacheList(cachedManipulationService.getUnitAscendingOrder(allTransaction),4);
-    List<List<Transaction>> amountAsc7=cachedManipulationService.getPagedCacheList(cachedManipulationService.getUnitAscendingOrder(allTransaction),7);
-    List<List<Transaction>> amountDesc4 =cachedManipulationService.getPagedCacheList(cachedManipulationService.getUnitDescendingOrder(allTransaction),4);
-    List<List<Transaction>> amountDesc7=cachedManipulationService.getPagedCacheList(cachedManipulationService.getUnitDescendingOrder(allTransaction),7);
-    List<List<Transaction>> DateAsc4=   cachedManipulationService.getPagedCacheList(dateTransactionASC,4);
-    List<List<Transaction>> DateAsc7=  cachedManipulationService.getPagedCacheList(dateTransactionASC,7);
-    List<List<Transaction>> DateDesc4=  cachedManipulationService.getPagedCacheList(cachedManipulationService.getDateDescendingOrder(dateTransactionASC),4);
-    List<List<Transaction>> DateDesc7= cachedManipulationService.getPagedCacheList(cachedManipulationService.getDateDescendingOrder(dateTransactionASC),7);
+        List<Transaction> allTransaction = transactionMapper.selectAll();
+        List<Transaction> dateTransactionASC = transactionMapper.orderByDateAsc();
+        ////
+        List<List<Transaction>> amountAsc4 = cachedManipulationService.getPagedCacheList(cachedManipulationService.getUnitAscendingOrder(allTransaction), 4);
+        List<List<Transaction>> amountAsc7 = cachedManipulationService.getPagedCacheList(cachedManipulationService.getUnitAscendingOrder(allTransaction), 7);
+        List<List<Transaction>> amountDesc4 = cachedManipulationService.getPagedCacheList(cachedManipulationService.getUnitDescendingOrder(allTransaction), 4);
+        List<List<Transaction>> amountDesc7 = cachedManipulationService.getPagedCacheList(cachedManipulationService.getUnitDescendingOrder(allTransaction), 7);
+        List<List<Transaction>> DateAsc4 = cachedManipulationService.getPagedCacheList(dateTransactionASC, 4);
+        List<List<Transaction>> DateAsc7 = cachedManipulationService.getPagedCacheList(dateTransactionASC, 7);
+        List<List<Transaction>> DateDesc4 = cachedManipulationService.getPagedCacheList(cachedManipulationService.getDateDescendingOrder(dateTransactionASC), 4);
+        List<List<Transaction>> DateDesc7 = cachedManipulationService.getPagedCacheList(cachedManipulationService.getDateDescendingOrder(dateTransactionASC), 7);
 
-    TransactionCashedUtils.putLists(TransactionCashedUtils.listType.AMOUNT_ASC_4,amountAsc4);
-    TransactionCashedUtils.putLists(TransactionCashedUtils.listType.AMOUNT_ASC_7,amountAsc7);
-    TransactionCashedUtils.putLists(TransactionCashedUtils.listType.AMOUNT_DESC_4,amountDesc4);
-    TransactionCashedUtils.putLists(TransactionCashedUtils.listType.AMOUNT_DESC_7,amountDesc7);
-    TransactionCashedUtils.putLists(TransactionCashedUtils.listType.DATE_ASC_4,DateAsc4);
-    TransactionCashedUtils.putLists(TransactionCashedUtils.listType.DATE_ASC_7,DateAsc7);
-    TransactionCashedUtils.putLists(TransactionCashedUtils.listType.DATE_DESC_4,DateDesc4);
-    TransactionCashedUtils.putLists(TransactionCashedUtils.listType.DATE_DESC_7,DateDesc7);
+        TransactionCachedUtils.putLists(TransactionCachedUtils.listType.AMOUNT_ASC_4, amountAsc4);
+        TransactionCachedUtils.putLists(TransactionCachedUtils.listType.AMOUNT_ASC_7, amountAsc7);
+        TransactionCachedUtils.putLists(TransactionCachedUtils.listType.AMOUNT_DESC_4, amountDesc4);
+        TransactionCachedUtils.putLists(TransactionCachedUtils.listType.AMOUNT_DESC_7, amountDesc7);
+        TransactionCachedUtils.putLists(TransactionCachedUtils.listType.DATE_ASC_4, DateAsc4);
+        TransactionCachedUtils.putLists(TransactionCachedUtils.listType.DATE_ASC_7, DateAsc7);
+        TransactionCachedUtils.putLists(TransactionCachedUtils.listType.DATE_DESC_4, DateDesc4);
+        TransactionCachedUtils.putLists(TransactionCachedUtils.listType.DATE_DESC_7, DateDesc7);
     }
 
 
@@ -105,6 +107,13 @@ public class cachedTransactionServiceProvider implements cachedTransactionServic
         updateAllCachedTransactionData();
     }
 
+    /**
+     * this method should be use after using delete by id
+     */
+    @Override
+    public void IdGapInside() {
+        transactionMapper.IdGapInside();
+    }
 
 
 }

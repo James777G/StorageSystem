@@ -52,4 +52,9 @@ public interface cachedTransactionService {
      * @param transaction encapsulated transaction object to be updated with desired attributes
      */
     void updateTransaction(Transaction transaction);
+
+    /**
+     * this method should be use after using delete by id
+     */
+    void IdGapInside();
 }

@@ -40,7 +40,7 @@ public class TransactionConfiguration {
 	}
 
 	@Bean
-	public cachedTransactionServiceProvider TransactionService(TransactionMapper transactionMapper){
+	public cachedTransactionServiceProvider cachedTransactionService(TransactionMapper transactionMapper){
 		cachedTransactionServiceProvider cachedTransactionServiceProvider = new cachedTransactionServiceProvider();
 		cachedTransactionServiceProvider.setTransactionMapper(transactionMapper);
 		return cachedTransactionServiceProvider;
