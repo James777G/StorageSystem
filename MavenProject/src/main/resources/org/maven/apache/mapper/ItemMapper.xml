@@ -38,8 +38,8 @@
 
     <insert id="add" useGeneratedKeys="true" keyProperty="ItemID">
 
-        insert into ItemTable(ItemName, unit)
-        values (#{itemName},#{unit});
+        insert into ItemTable(ItemName, Unit, Description)
+        values (#{ItemName},#{Unit}, #{Description});
 
     </insert>
 

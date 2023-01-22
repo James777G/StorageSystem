@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: eeeeee;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.MessagePageController">
    <children>
       <AnchorPane prefHeight="50.0" prefWidth="1200.0" style="-fx-background-color: #223c40;">
@@ -69,17 +70,12 @@
                </font>
             </Label>
             <Separator layoutX="82.0" layoutY="49.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
-            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Last Edit" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
+            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Category" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
                <font>
                   <Font name="Candara Bold" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="159.0" layoutY="57.0" prefHeight="18.0" text="00" textFill="#223c40" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="55.0">
-               <font>
-                  <Font name="Candara" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="175.0" layoutY="55.0" prefHeight="18.0" text="Days ago" textFill="#223c40" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="55.0">
+            <Label layoutX="162.0" layoutY="55.0" prefHeight="18.0" text="Item" textFill="#223c40" AnchorPane.leftAnchor="162.0" AnchorPane.topAnchor="55.0">
                <font>
                   <Font name="Candara" size="13.0" />
                </font>
@@ -123,7 +119,7 @@
                </font>
             </Label>
             <Separator layoutX="82.0" layoutY="49.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
-            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Last Edit" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
+            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Category" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
                <font>
                   <Font name="Candara Bold" size="13.0" />
                </font>
@@ -177,7 +173,7 @@
                </font>
             </Label>
             <Separator layoutX="82.0" layoutY="49.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
-            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Last Edit" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
+            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Category" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
                <font>
                   <Font name="Candara Bold" size="13.0" />
                </font>
@@ -231,7 +227,7 @@
                </font>
             </Label>
             <Separator layoutX="82.0" layoutY="49.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
-            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Last Edit" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
+            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Category" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
                <font>
                   <Font name="Candara Bold" size="13.0" />
                </font>
@@ -285,7 +281,7 @@
                </font>
             </Label>
             <Separator layoutX="82.0" layoutY="49.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
-            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Last Edit" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
+            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Category" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
                <font>
                   <Font name="Candara Bold" size="13.0" />
                </font>

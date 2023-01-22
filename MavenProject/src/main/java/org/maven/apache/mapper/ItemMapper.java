@@ -58,9 +58,6 @@ public interface ItemMapper {
 	int update(Item item);
 
 
-	
-	
-	
 	/**
 	 * 根据 ID 来进行删除
 	 */
