@@ -10,12 +10,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.item.Item;
 import org.maven.apache.mapper.ItemMapper;
+import org.maven.apache.mapper.StaffMapper;
 import org.maven.apache.mapper.UserMapper;
 import org.maven.apache.mybatis.MyBatisOperator;
 import org.maven.apache.search.FuzzySearch;
 import org.maven.apache.service.user.UserService;
 import org.maven.apache.service.verificationCode.VerificationCodeService;
 import org.maven.apache.spring.SpringConfiguration;
+import org.maven.apache.staff.Staff;
 import org.maven.apache.user.User;
 import org.maven.apache.verificationCode.VerificationCode;
 import org.springframework.context.ApplicationContext;
@@ -142,6 +144,15 @@ public class MyBatisTester2 {
 		System.out.println(code1);
 		List<VerificationCode> verificationCodes = verificationCodeService.selectAll();
 		System.out.println(verificationCodes);
+	}
+
+	@Test
+	public void test1213(){
+		ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+		StaffMapper staffMapper = context.getBean("staffMapper", StaffMapper.class);
+		List<Staff> staff = staffMapper.selectAll();
+		System.out.println(staff);
+
 	}
 
 
