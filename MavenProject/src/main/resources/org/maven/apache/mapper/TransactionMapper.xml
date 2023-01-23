@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 这个文件的文件路径不要动-->
+<!-- 名称空间-->
+<mapper namespace="org.maven.apache.mapper.TransactionMapper">
+    <insert id="addNewTransaction" useGeneratedKeys="true" keyProperty="ID">
+        insert into TransactionTable(ItemName, StaffName,Status,Unit,TransactionTime,Purpose)
+        values (#{ItemName},#{StaffName},#{Status},#{Unit},#{TransactionTime},#{Purpose});
+    </insert>
+    <delete id="deleteTransactionById">
+        delete from TransactionTable where ID = #{id};
+    </delete>
+    <select id="selectAll" resultType="org.maven.apache.transaction.Transaction">
+        select*
+        from TransactionTable;
+    </select>
+    <select id="orderByDateAsc" resultType="org.maven.apache.transaction.Transaction">
+        select * from TransactionTable
+        order by str_to_date(TransactionTime, '%Y-%m-%d') asc;
+    </select>
+
+
+
+    <update id="IdGapInside">
+        SET @auto_id = 0;
+        update TransactionTable
+        <set>
+            ID = (@auto_id := @auto_id + 1)
+        </set>
+        where 1=1;
+        ALTER TABLE TransactionTable AUTO_INCREMENT = 1;
+    </update>
+    <update id="updateTransaction">
+        update TransactionTable
+        <set>
+            <if test="ItemName != null and ItemName !=''">
+                ItemName = #{ItemName},
+            </if>
+            <if test="StaffName != null and StaffName !=''">
+                StaffName = #{StaffName},
+            </if>
+            <if test ="Status =Taken or Status = Restock">
+                Status = #{Status}
+            </if>
+            <if test="unit != null abd unit>=0">
+                unit = #{unit},
+            </if>
+            <if test="TransactionTime != null and TransactionTime != ''">
+                TransactionTime = #{TransactionTime}
+            </if>
+            <if test="Purpose != null and Purpose != ''">
+                Purpose = #{Purpose}
+            </if>
+        </set>
+        where ID = #{ID}
+
+    </update>
+
+</mapper>

@@ -1,20 +1,12 @@
-package org.maven.apache.service.transaction;
+package org.maven.apache.mapper;
 
+import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.transaction.Transaction;
+import org.springframework.stereotype.Component;
 
-public interface cachedTransactionService {
-
-    /**
-     * This method updates all the cached transaction data currently stored
-     * <p>
-     *     1. This method is highly time-consuming, thus should be delegated to loading animation.
-     *     2. This method should be called whenever there is a change to database, thus should be
-     *     included in add, delete and update methods.
-     * </p>
-     */
-    void updateAllCachedTransactionData();
-
-
+import java.util.List;
+@Component
+public interface TransactionMapper {
     /**
      * This method adds a new transaction to the database.
      * <p>
@@ -54,7 +46,16 @@ public interface cachedTransactionService {
     void updateTransaction(Transaction transaction);
 
     /**
-     * this method should be use after using delete by id
+     * if id is not continuous use this to fix
      */
     void IdGapInside();
+
+    /**
+     * would get all the information in the table
+     *
+     * @return
+     */
+    List<Transaction> selectAll();
+
+    List<Transaction> orderByDateAsc();
 }
