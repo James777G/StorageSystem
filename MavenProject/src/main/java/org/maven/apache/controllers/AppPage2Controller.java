@@ -65,6 +65,8 @@ public class AppPage2Controller implements Initializable {
     private VBox infoVBox;
 
     @FXML
+    private JFXButton appPageButton;
+    @FXML
     private JFXButton warehouseButton;
 
     @FXML
@@ -441,6 +443,32 @@ public class AppPage2Controller implements Initializable {
         node.setPickOnBounds(false);
     }
 
+    private void disableAllChangingPaneActions(){
+//        disableNode(appPageButton);
+//        disableNode(warehouseButton);
+//        disableNode(transactionButton);
+//        disableNode(staffButton);
+//        disableNode(messageButton);
+        appPageButton.setDisable(true);
+        warehouseButton.setDisable(true);
+        transactionButton.setDisable(true);
+        staffButton.setDisable(true);
+        messageButton.setDisable(true);
+    }
+
+    private void enableAllChangingPaneActions(){
+//        enableNode(appPageButton);
+//        enableNode(warehouseButton);
+//        enableNode(transactionButton);
+//        enableNode(staffButton);
+//        enableNode(messageButton);
+        appPageButton.setDisable(false);
+        warehouseButton.setDisable(false);
+        transactionButton.setDisable(false);
+        staffButton.setDisable(false);
+        messageButton.setDisable(false);
+    }
+
     private void initializeLabels() {
         cargoNameLabels[0] = cargoNameLabel01;
         cargoNameLabels[1] = cargoNameLabel02;
@@ -478,9 +506,11 @@ public class AppPage2Controller implements Initializable {
 
     @SuppressWarnings("all")
     private void changePaneAnimation(CurrentPaneStatus currentPaneStatus, Node paneToDisplay){
+        disableAllChangingPaneActions();
         FadeTransition fadeTransition = TransitionUtils.getFadeTransition(paneToDisplay, 300, 0, 1);
         fadeTransition.setOnFinished(event -> {
             enableNode(paneToDisplay);
+            enableAllChangingPaneActions();
         });
         FadeTransition fadeTransition1 = new FadeTransition();
         switch (currentPaneStatus){
@@ -706,6 +736,7 @@ public class AppPage2Controller implements Initializable {
         if (currentPaneStatus != CurrentPaneStatus.WAREHOUSE){
             changePaneAnimation(currentPaneStatus,stackPaneForWarehouse);
             currentPaneStatus = CurrentPaneStatus.WAREHOUSE;
+            warehouseButton.setDisable(false);
         }
 //        if (currentPage != stackPaneForWarehouse) {
 //            if (currentPage == appPagePane) {
@@ -758,6 +789,7 @@ public class AppPage2Controller implements Initializable {
         if(currentPaneStatus != CurrentPaneStatus.STAFF){
             changePaneAnimation(currentPaneStatus,staffPane);
             currentPaneStatus = CurrentPaneStatus.STAFF;
+            staffButton.setDisable(false);
         }
 //        if(currentPage != staffPane){
 //            if (currentPage == appPagePane) {
@@ -948,6 +980,7 @@ public class AppPage2Controller implements Initializable {
         if (currentPaneStatus != CurrentPaneStatus.HOMEPAGE){
             changePaneAnimation(currentPaneStatus,appPagePane);
             currentPaneStatus = CurrentPaneStatus.HOMEPAGE;
+            appPageButton.setDisable(true);
         }
 ////        if (currentPaneStatus != CurrentPaneStatus.HOMEPAGE){
 ////            appPagePane.setVisible(true);
@@ -1006,6 +1039,7 @@ public class AppPage2Controller implements Initializable {
         if (currentPaneStatus != CurrentPaneStatus.MESSAGE){
             changePaneAnimation(currentPaneStatus,messagePane);
             currentPaneStatus = CurrentPaneStatus.MESSAGE;
+            messageButton.setDisable(false);
         }
     }
     private void setButtonList() {
@@ -1146,6 +1180,7 @@ public class AppPage2Controller implements Initializable {
         if (currentPaneStatus != CurrentPaneStatus.TRANSACTION){
             changePaneAnimation(currentPaneStatus,stackPane);
             currentPaneStatus = CurrentPaneStatus.TRANSACTION;
+            transactionButton.setDisable(false);
         }
 //        if (currentPage != stackPane) {
 //            if (currentPage == appPagePane) {

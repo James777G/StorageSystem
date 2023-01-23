@@ -387,7 +387,7 @@
                </font>
             </Label>
             <AnchorPane layoutX="-67.0" layoutY="-67.0" prefHeight="60.0" prefWidth="5.0" style="-fx-background-color: #167980;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="25.0" layoutY="15.0" onMouseClicked="#onEnterAppPage" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="25.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/icons8-warehouse-100.png" />
                </image>
@@ -433,6 +433,7 @@
                   <Font name="Candara Bold" size="12.0" />
                </font>
             </Label>
+            <JFXButton fx:id="appPageButton" layoutX="25.0" layoutY="15.0" onAction="#onEnterAppPage" prefHeight="30.0" prefWidth="30.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" />
             <JFXButton fx:id="warehouseButton" layoutX="443.0" layoutY="9.0" onAction="#onClickWarehouseButton" onMouseEntered="#enterWarehouseButton" onMouseExited="#exitWarehouseButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
             <JFXButton fx:id="transactionButton" layoutX="600.0" layoutY="10.0" onAction="#onTransactionPage" onMouseEntered="#enterTransactionButton" onMouseExited="#exitTransactionButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
             <JFXButton fx:id="staffButton" layoutX="780.0" layoutY="4.0" onAction="#onClickStaff" onMouseEntered="#enterStaffButton" onMouseExited="#exitStaffButton" prefHeight="49.0" prefWidth="114.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.topAnchor="5.0" />
