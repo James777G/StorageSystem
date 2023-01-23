@@ -8,7 +8,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: eeeeee;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.MessagePage">
+
+<AnchorPane prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: eeeeee;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.MessagePageController">
    <children>
       <AnchorPane prefHeight="50.0" prefWidth="1200.0" style="-fx-background-color: #223c40;">
          <children>
@@ -27,7 +28,7 @@
       <AnchorPane layoutY="50.0" prefHeight="40.0" prefWidth="1200.0" style="-fx-background-color: #cfd8dc;">
          <children>
             <AnchorPane fx:id="movingLinePane" layoutX="31.0" layoutY="39.0" prefHeight="2.0" prefWidth="120.0" style="-fx-background-color: #0DaD8D;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" />
-            <AnchorPane fx:id="cargoPane" layoutX="120.0" onMouseClicked="#onMoveToCargo" prefHeight="40.0" prefWidth="120.0" AnchorPane.leftAnchor="120.0">
+            <AnchorPane fx:id="onMoveToMessagePane" layoutX="120.0" onMouseClicked="#onClickMessage" prefHeight="40.0" prefWidth="120.0" AnchorPane.leftAnchor="120.0">
                <children>
                   <Label prefHeight="18.0" prefWidth="68.0" text="Message" textFill="#223c40" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="0.0">
                      <font>
@@ -41,7 +42,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="cargoPane1" layoutX="240.0" onMouseClicked="#onMoveToCargo" prefHeight="40.0" prefWidth="120.0" AnchorPane.bottomAnchor="0.0">
+            <AnchorPane fx:id="onMoveToStarredPane" layoutX="240.0" onMouseClicked="#onClickStarred" prefHeight="40.0" prefWidth="120.0" AnchorPane.bottomAnchor="0.0">
                <children>
                   <Label prefHeight="18.0" text="starred" textFill="#223c40" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="6.0">
                      <font>
@@ -56,7 +57,7 @@
                </children>
             </AnchorPane>
          </children></AnchorPane>
-      <AnchorPane layoutX="121.0" layoutY="90.0" prefHeight="100.0" prefWidth="960.0" style="-fx-background-color: #eceff1;" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="100.0">
+      <AnchorPane fx:id="notePadPane1" layoutX="121.0" layoutY="90.0" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="100.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
                <image>
@@ -69,17 +70,12 @@
                </font>
             </Label>
             <Separator layoutX="82.0" layoutY="49.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
-            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Last Edit" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
+            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Category" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
                <font>
                   <Font name="Candara Bold" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="159.0" layoutY="57.0" prefHeight="18.0" text="00" textFill="#223c40" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="55.0">
-               <font>
-                  <Font name="Candara" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="175.0" layoutY="55.0" prefHeight="18.0" text="Days ago" textFill="#223c40" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="55.0">
+            <Label layoutX="162.0" layoutY="55.0" prefHeight="18.0" text="Item" textFill="#223c40" AnchorPane.leftAnchor="162.0" AnchorPane.topAnchor="55.0">
                <font>
                   <Font name="Candara" size="13.0" />
                </font>
@@ -110,7 +106,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="120.0" layoutY="176.0" prefHeight="100.0" prefWidth="960.0" style="-fx-background-color: #ffffff;" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="200.0">
+      <AnchorPane fx:id="notePadPane2" layoutX="120.0" layoutY="176.0" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="200.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
                <image>
@@ -123,7 +119,7 @@
                </font>
             </Label>
             <Separator layoutX="82.0" layoutY="49.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
-            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Last Edit" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
+            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Category" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
                <font>
                   <Font name="Candara Bold" size="13.0" />
                </font>
@@ -164,7 +160,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="129.0" layoutY="280.0" prefHeight="100.0" prefWidth="960.0" style="-fx-background-color: ffffff;" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="300.0">
+      <AnchorPane fx:id="notePadPane3" layoutX="129.0" layoutY="280.0" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="300.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
                <image>
@@ -177,7 +173,7 @@
                </font>
             </Label>
             <Separator layoutX="82.0" layoutY="49.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
-            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Last Edit" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
+            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Category" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
                <font>
                   <Font name="Candara Bold" size="13.0" />
                </font>
@@ -218,7 +214,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="137.0" layoutY="380.0" prefHeight="100.0" prefWidth="960.0" style="-fx-background-color: ffffff;" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="400.0">
+      <AnchorPane fx:id="notePadPane4" layoutX="137.0" layoutY="380.0" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="400.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
                <image>
@@ -231,7 +227,7 @@
                </font>
             </Label>
             <Separator layoutX="82.0" layoutY="49.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
-            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Last Edit" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
+            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Category" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
                <font>
                   <Font name="Candara Bold" size="13.0" />
                </font>
@@ -272,7 +268,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="127.0" layoutY="480.0" prefHeight="100.0" prefWidth="960.0" style="-fx-background-color: ffffff;" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="500.0">
+      <AnchorPane fx:id="notePadPane5" layoutX="127.0" layoutY="480.0" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="500.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
                <image>
@@ -285,7 +281,7 @@
                </font>
             </Label>
             <Separator layoutX="82.0" layoutY="49.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
-            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Last Edit" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
+            <Label layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Category" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
                <font>
                   <Font name="Candara Bold" size="13.0" />
                </font>
@@ -326,6 +322,6 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <MFXPagination fx:id="transactionPagination" layoutX="536.0" layoutY="594.0" onMouseClicked="#onClickPagination" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" />
+      <MFXPagination layoutX="536.0" layoutY="594.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" />
    </children>
 </AnchorPane>

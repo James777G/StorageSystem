@@ -7,6 +7,8 @@ import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.*;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -34,6 +36,7 @@ import org.maven.apache.utils.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;

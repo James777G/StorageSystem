@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: eeeeee;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.EditMessagePane">
+<AnchorPane prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: eeeeee;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.EditMessagePageController">
    <children>
       <AnchorPane prefHeight="50.0" prefWidth="1200.0" style="-fx-background-color: #223c40;">
          <children>
@@ -27,7 +26,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="121.0" layoutY="90.0" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: #eceff1;" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="100.0">
+      <AnchorPane layoutX="121.0" layoutY="90.0" prefHeight="100.0" prefWidth="300.0" styleClass="AnchorPane" stylesheets="@../css/editMessagePage.css" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="100.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
                <image>
@@ -58,8 +57,8 @@
             <AnchorPane layoutX="274.0" layoutY="10.0" prefHeight="90.0" prefWidth="3.0" style="-fx-background-color: #0DaD8D;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
-      <MFXPagination fx:id="transactionPagination" layoutX="536.0" layoutY="594.0" onMouseClicked="#onClickPagination" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" />
-      <AnchorPane layoutX="123.0" layoutY="190.0" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: ffffff;" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="200.0">
+      <MFXPagination layoutX="536.0" layoutY="594.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" />
+      <AnchorPane layoutX="123.0" layoutY="190.0" prefHeight="100.0" prefWidth="300.0" styleClass="AnchorPane" stylesheets="@../css/editMessagePage.css" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="200.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
                <image>
@@ -89,7 +88,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="120.0" layoutY="290.0" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: ffffff;" AnchorPane.topAnchor="300.0">
+      <AnchorPane layoutX="120.0" layoutY="290.0" prefHeight="100.0" prefWidth="300.0" styleClass="AnchorPane" stylesheets="@../css/editMessagePage.css" AnchorPane.topAnchor="300.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
                <image>
@@ -119,7 +118,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="120.0" layoutY="390.0" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: ffffff;" AnchorPane.topAnchor="400.0">
+      <AnchorPane layoutX="120.0" layoutY="390.0" prefHeight="100.0" prefWidth="300.0" styleClass="AnchorPane" stylesheets="@../css/editMessagePage.css" AnchorPane.topAnchor="400.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
                <image>
@@ -149,7 +148,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="120.0" layoutY="490.0" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: ffffff;" AnchorPane.topAnchor="500.0">
+      <AnchorPane layoutX="120.0" layoutY="490.0" prefHeight="100.0" prefWidth="300.0" styleClass="AnchorPane" stylesheets="@../css/editMessagePage.css" AnchorPane.topAnchor="500.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
                <image>
@@ -194,7 +193,7 @@
                         <Font name="Candara Bold" size="15.0" />
                      </font>
                   </Label>
-                  <JFXButton layoutX="581.0" layoutY="14.0" onAction="#onRefreshTransitionList" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Details" textFill="WHITE" AnchorPane.topAnchor="14.0">
+                  <JFXButton layoutX="581.0" layoutY="14.0" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Details" textFill="WHITE" AnchorPane.topAnchor="14.0">
                      <font>
                         <Font name="Candara Bold" size="12.0" />
                      </font>
@@ -241,12 +240,12 @@
             </AnchorPane>
             <AnchorPane layoutY="424.0" prefHeight="70.0" prefWidth="650.0" style="-fx-background-color: ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                <children>
-                  <TextArea fx:id="purposeTextInDetails" layoutX="14.0" layoutY="6.0" prefHeight="95.0" prefWidth="575.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                  <TextArea layoutX="14.0" layoutY="6.0" prefHeight="95.0" prefWidth="575.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </TextArea>
-                  <JFXButton layoutX="592.0" layoutY="16.0" onAction="#onRefreshTransitionList" prefHeight="50.0" prefWidth="55.0" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Send" textFill="WHITE" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0">
+                  <JFXButton layoutX="592.0" layoutY="16.0" prefHeight="50.0" prefWidth="55.0" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Send" textFill="WHITE" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0">
                      <font>
                         <Font name="Candara Bold" size="14.0" />
                      </font>
@@ -258,7 +257,7 @@
       <AnchorPane layoutY="50.0" prefHeight="40.0" prefWidth="1200.0" style="-fx-background-color: #cfd8dc;">
          <children>
             <AnchorPane fx:id="movingLinePane" layoutX="31.0" layoutY="39.0" prefHeight="2.0" prefWidth="120.0" style="-fx-background-color: #0DaD8D;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" />
-            <AnchorPane fx:id="cargoPane" layoutX="120.0" onMouseClicked="#onMoveToCargo" prefHeight="40.0" prefWidth="120.0" AnchorPane.leftAnchor="120.0">
+            <AnchorPane layoutX="120.0" prefHeight="40.0" prefWidth="120.0" AnchorPane.leftAnchor="120.0">
                <children>
                   <Label prefHeight="18.0" prefWidth="68.0" text="Message" textFill="#223c40" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="0.0">
                      <font>
@@ -272,7 +271,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="cargoPane1" layoutX="240.0" onMouseClicked="#onMoveToCargo" prefHeight="40.0" prefWidth="120.0" AnchorPane.bottomAnchor="0.0">
+            <AnchorPane layoutX="240.0" prefHeight="40.0" prefWidth="120.0" AnchorPane.bottomAnchor="0.0">
                <children>
                   <Label prefHeight="18.0" text="starred" textFill="#223c40" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="6.0">
                      <font>

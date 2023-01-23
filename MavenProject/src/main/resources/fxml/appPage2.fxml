@@ -35,6 +35,7 @@
                   <Font name="Candara Bold" size="20.0" />
                </font>
             </Label>
+
             <Label layoutX="451.0" layoutY="320.0" text="Status" textFill="#223c40" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="320.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />

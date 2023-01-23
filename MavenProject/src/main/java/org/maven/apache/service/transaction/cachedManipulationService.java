@@ -23,12 +23,12 @@ public interface cachedManipulationService {
     List<Transaction> getUnitAscendingOrder(List<Transaction> unsortedList);
 
     /**
-     * This method is used to return a list sorted by date in descending order
+     * This method is used to return a list that reverse the index
      *
      * @param unsortedList the list to be sorted
-     * @return  List sorted by date in descending order
+     * @return  List has been reversed the index order
      */
-    List<Transaction> getDateDescendingOrder(List<Transaction> unsortedList);
+    List<Transaction> getReversedList(List<Transaction> unsortedList);
 
     /**
      * This method is used to return a paged cached list

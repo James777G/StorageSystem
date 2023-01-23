@@ -1,0 +1,7 @@
+.AnchorPane{
+    -fx-background-color: "white";
+}
+
+.AnchorPane:hover{
+    -fx-background-color: #eceff1;
+}
