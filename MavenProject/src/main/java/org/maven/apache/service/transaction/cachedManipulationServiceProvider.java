@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionDataManipulationServiceProvider implements TransactionDataManipulationService {
+public class cachedManipulationServiceProvider implements cachedManipulationService {
 
     @Override
     @SuppressWarnings("all")
