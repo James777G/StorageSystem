@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
-import org.apache.commons.collections.bag.SynchronizedSortedBag;
+import org.maven.apache.transaction.Transaction;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.item.Item;
@@ -13,8 +13,10 @@ import org.maven.apache.mapper.UserMapper;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
 import org.maven.apache.service.item.ItemService;
 import org.maven.apache.service.mail.MailService;
+import org.maven.apache.service.transaction.cachedTransactionService;
 import org.maven.apache.service.user.UserService;
 import org.maven.apache.user.User;
+import org.maven.apache.utils.TransactionCachedUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.annotations.Test;
@@ -157,15 +159,17 @@ public class MyTest {
 		ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
 		DateTransactionService dateTransactionservice = context.getBean("dateTransactionService",
 				DateTransactionService.class);
-		List<DateTransaction> dateTransaction = dateTransactionservice.pageAskedDateDescend(1,4);
+		dateTransactionservice.IdGapInside();
+	//	List<DateTransaction> dateTransaction = dateTransactionservice.pageAskedDateDescend(1,4);
+
 		// List<DateTransaction> allDare = dateTransactionservice.selectAll();
 		// System.out.println("jingdfe"+allDare.size());
 		// System.out.println("shumu"+dateTransaction.size());
-		for (DateTransaction dare : dateTransaction) {
-			System.out.println(dare.getItemID() + " Name: " + dare.getItemName() + " AddUnit: " + dare.getAddUnit()
-					+ " removeUnit: " + dare.getAddUnit() + " CurrentUnit" + dare.getCurrentUnit() + " Time"
-					+ dare.getRecordTime());
-		}
+//		for (DateTransaction dare : dateTransaction) {
+//			System.out.println(dare.getItemID() + " Name: " + dare.getItemName() + " AddUnit: " + dare.getAddUnit()
+//					+ " removeUnit: " + dare.getAddUnit() + " CurrentUnit" + dare.getCurrentUnit() + " Time"
+//					+ dare.getRecordTime());
+//		}
 	}
 
 	@Test
@@ -177,6 +181,35 @@ public class MyTest {
 		System.out.println(itemList);
 	}
 
+	@Test
+	public  void test12(){
+		ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+		cachedTransactionService cachedTransactionService = context.getBean("cachedTransactionService",cachedTransactionService.class);
+//		Transaction transaction = new Transaction();
+//		transaction.setItemName("wood");
+//		transaction.setStaffName("Tom");
+//		transaction.setStatus("Restock");
+//		transaction.setUnit(50);
+//		transaction.setTransactionTime("2022-12-01");
+//		cachedTransactionService.addNewTransaction(transaction);
+//		Transaction transaction1=new Transaction();
+//		transaction1.setItemName("Fan");
+//		transaction1.setStaffName("Smith");
+//		transaction1.setStatus("Restock");
+//		transaction1.setUnit(100);
+//		transaction1.setTransactionTime("2022-12-03");
+//		cachedTransactionService.addNewTransaction(transaction1);
+//		cachedTransactionService.IdGapInside();
+		cachedTransactionService.updateAllCachedTransactionData();
+		List<List<Transaction>> list=TransactionCachedUtils.getLists(TransactionCachedUtils.listType.AMOUNT_ASC_4);
+		for(List<Transaction> first:list){
+			for(Transaction transaction:first){
+				System.out.println("TYGH" + transaction.getItemName()+transaction.getUnit());
+			}
+		}
+
+
+	}
 
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
