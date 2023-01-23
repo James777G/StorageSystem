@@ -19,6 +19,9 @@
         </set>
         where staffID = #{staffID};
     </update>
+    <delete id="deleteById">
+        delete from StaffTable where staffID = #{id};
+    </delete>
 
     <select id="selectById" parameterType="int" resultType="org.maven.apache.staff.Staff">
         select * from StaffTable where StaffID = #{id};

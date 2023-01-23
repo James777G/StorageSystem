@@ -1,55 +1,56 @@
-package org.maven.apache.service.transaction;
+package org.maven.apache.service.staff;
 
-import org.maven.apache.transaction.Transaction;
 
-public interface cachedTransactionService {
+import org.maven.apache.staff.Staff;
+
+public interface CachedStaffService {
 
     /**
-     * This method updates all the cached transaction data currently stored
+     * This method updates all the cached staff data currently stored
      * <p>
      *     1. This method is highly time-consuming, thus should be delegated to loading animation.
      *     2. This method should be called whenever there is a change to database, thus should be
      *     included in add, delete and update methods.
      * </p>
      */
-    void updateAllCachedTransactionData();
+    void updateAllCachedStaffData();
 
 
     /**
-     * This method adds a new transaction to the database.
+     * This method adds a new staff to the database.
      * <p>
-     *     1. This method will call updateAllCachedTransactionData to retrieve the latest data after
+     *     1. This method will call updateAllCachedStaffData to retrieve the latest data after
      *     the insertion of data is completed.
      *     2. This method is highly time-consuming, thus should be delegated to loading animation.
      *     3. This method might throw exceptions thus should be surrounded by try/catch for further
      *     operations (Some fields are left blank accidentally).
      * </p>
-     * @param transaction encapsulated transaction to be added
+     * @param staff encapsulated staff to be added
      */
-    void addNewTransaction(Transaction transaction);
+    void addNewStaff(Staff staff);
 
 
     /**
-     * This method deletes an existing transaction from the database.
+     * This method deletes an existing staff from the database.
      * <p>
-     *     1. This method will call updateAllCachedTransactionData to retrieve the latest data after
+     *     1. This method will call updateAllCachedStaffData to retrieve the latest data after
      *     the insertion of data is completed.
      *     2. This method is highly time-consuming, thus should be delegated to loading animation.
      * </p>
-     * @param id Transaction ID which is unique
+     * @param id Staff ID which is unique
      */
-    void deleteTransactionById(int id);
+    void deleteStaffById(int id);
 
     /**
-     * This method updates an existing transaction in the database.
+     * This method updates an existing staff in the database.
      * <p>
-     *     1. This method will call updateAllCachedTransactionData to retrieve the latest data after
+     *     1. This method will call updateAllCachedStaffData to retrieve the latest data after
      *     the insertion of data is completed.
      *     2. This method is highly time-consuming, thus should be delegated to loading animation.
      *     3. This method might throw exceptions thus should be surrounded by try/catch for further
      *     operations. (Some fields are left blank accidentally)
      * </p>
-     * @param transaction encapsulated transaction object to be updated with desired attributes
+     * @param staff encapsulated staff object to be updated with desired attributes
      */
-    void updateTransaction(Transaction transaction);
+    void updateTransaction(Staff staff);
 }
