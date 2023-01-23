@@ -17,5 +17,7 @@ public interface StaffMapper {
 
     void updateStaff(Staff staff);
 
-    void add(Item item);
+    void add(Staff staff);
+
+    void deleteById(int id);
 }

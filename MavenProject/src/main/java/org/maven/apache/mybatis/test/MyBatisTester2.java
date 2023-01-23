@@ -14,11 +14,13 @@ import org.maven.apache.mapper.StaffMapper;
 import org.maven.apache.mapper.UserMapper;
 import org.maven.apache.mybatis.MyBatisOperator;
 import org.maven.apache.search.FuzzySearch;
+import org.maven.apache.service.staff.CachedStaffService;
 import org.maven.apache.service.user.UserService;
 import org.maven.apache.service.verificationCode.VerificationCodeService;
 import org.maven.apache.spring.SpringConfiguration;
 import org.maven.apache.staff.Staff;
 import org.maven.apache.user.User;
+import org.maven.apache.utils.DataUtils;
 import org.maven.apache.verificationCode.VerificationCode;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -152,8 +154,38 @@ public class MyBatisTester2 {
 		StaffMapper staffMapper = context.getBean("staffMapper", StaffMapper.class);
 		List<Staff> staff = staffMapper.selectAll();
 		System.out.println(staff);
+		Staff staffA = new Staff();
+		staffA.setStaffName("BJamess");
+		staffA.setStatus("INACTIVE");
+		staffA.setOtherInfo("NO other info");
+		staffMapper.add(staffA);
+		List<Staff> staffB = staffMapper.selectAll();
+		System.out.println(staffB);
+		staffA.setStaffName("James");
+		staffMapper.updateStaff(staffA);
+		System.out.println(staffMapper.selectAll());
+		System.out.println(staffMapper.selectByStatus("ACTIVE"));
+		System.out.println(staffMapper.selectByStatus("INACTIVE"));
+		System.out.println(staffMapper.selectById(1));
+		staffMapper.deleteById(1);
 
 	}
+
+	@Test
+	public void testZ(){
+		List<Staff> listOne = DataUtils.publicCachedStaffData;
+		List<Staff> listTwo = DataUtils.publicCachedActiveStaffData;
+		List<Staff> listThree = DataUtils.publicCachedInactiveStaffData;
+		ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+		CachedStaffService staffService = context.getBean("staffService", CachedStaffService.class);
+		staffService.updateAllCachedStaffData();
+		System.out.println(DataUtils.publicCachedStaffData);
+		System.out.println(DataUtils.publicCachedActiveStaffData);
+		System.out.println(DataUtils.publicCachedInactiveStaffData);
+		staffService.deleteStaffById(2);
+		System.out.println(DataUtils.publicCachedStaffData);
+	}
+
 
 
 }
