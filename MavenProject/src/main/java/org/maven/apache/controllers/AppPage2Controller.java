@@ -7,10 +7,6 @@ import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.*;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -36,7 +32,6 @@ import org.maven.apache.utils.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -69,6 +64,8 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private VBox infoVBox;
 
+    @FXML
+    private JFXButton appPageButton;
     @FXML
     private JFXButton warehouseButton;
 
@@ -333,6 +330,15 @@ public class AppPage2Controller implements Initializable {
         FOUR
     }
 
+    enum CurrentPaneStatus {
+        HOMEPAGE,
+        WAREHOUSE,
+        TRANSACTION,
+        STAFF,
+        MESSAGE
+    }
+
+    CurrentPaneStatus currentPaneStatus = CurrentPaneStatus.HOMEPAGE;
     private List<DateTransaction> dateTransactions_Restock = dateTransactionService.pageAskedDateAddUnitDescend();
 
     private List<DateTransaction> dateTransactions_Taken = dateTransactionService.pageAskedDateRemoveUnitDescend();
@@ -372,6 +378,9 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private StackPane staffPane;
 
+    @FXML
+    private StackPane messagePane;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         transactionDialog.setVisible(false);
@@ -397,6 +406,7 @@ public class AppPage2Controller implements Initializable {
         setTransactionPane();
         setWarehousePane();
         setStaffPane();
+        setMessagePane();
         staffPane.setOpacity(0);
 //        staffPane.setPickOnBounds(false);
         staffPane.setVisible(false);
@@ -431,6 +441,32 @@ public class AppPage2Controller implements Initializable {
         node.setOpacity(0);
         node.setVisible(false);
         node.setPickOnBounds(false);
+    }
+
+    private void disableAllChangingPaneActions(){
+//        disableNode(appPageButton);
+//        disableNode(warehouseButton);
+//        disableNode(transactionButton);
+//        disableNode(staffButton);
+//        disableNode(messageButton);
+        appPageButton.setDisable(true);
+        warehouseButton.setDisable(true);
+        transactionButton.setDisable(true);
+        staffButton.setDisable(true);
+        messageButton.setDisable(true);
+    }
+
+    private void enableAllChangingPaneActions(){
+//        enableNode(appPageButton);
+//        enableNode(warehouseButton);
+//        enableNode(transactionButton);
+//        enableNode(staffButton);
+//        enableNode(messageButton);
+        appPageButton.setDisable(false);
+        warehouseButton.setDisable(false);
+        transactionButton.setDisable(false);
+        staffButton.setDisable(false);
+        messageButton.setDisable(false);
     }
 
     private void initializeLabels() {
@@ -468,6 +504,36 @@ public class AppPage2Controller implements Initializable {
         cargoBoxFunctionalityPanes[3] = cargoBox4FunctionalityPane;
     }
 
+    @SuppressWarnings("all")
+    private void changePaneAnimation(CurrentPaneStatus currentPaneStatus, Node paneToDisplay){
+        disableAllChangingPaneActions();
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(paneToDisplay, 300, 0, 1);
+        fadeTransition.setOnFinished(event -> {
+            enableNode(paneToDisplay);
+            enableAllChangingPaneActions();
+        });
+        FadeTransition fadeTransition1 = new FadeTransition();
+        switch (currentPaneStatus){
+            case HOMEPAGE -> {fadeTransition1 = TransitionUtils.getFadeTransition(appPagePane, 300, 1, 0);}
+            case WAREHOUSE -> {fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 1, 0);}
+            case TRANSACTION -> {fadeTransition1 = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);}
+            case STAFF -> {fadeTransition1 = TransitionUtils.getFadeTransition(staffPane, 300, 1, 0);}
+            case MESSAGE -> {fadeTransition1 = TransitionUtils.getFadeTransition(messagePane, 300, 1, 0);}
+        }
+        //FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);
+        fadeTransition1.setOnFinished(event -> {
+            switch(currentPaneStatus){
+                case HOMEPAGE -> {disableNode(appPagePane);}
+                case WAREHOUSE -> {disableNode(stackPaneForWarehouse);}
+                case TRANSACTION -> {disableNode(stackPane);}
+                case STAFF -> {disableNode(staffPane);}
+                case MESSAGE -> {disableNode(messagePane);}
+            }
+            fadeTransition.play();
+            paneToDisplay.setVisible(true);
+        });
+        fadeTransition1.play();
+    }
     private void fillCargoBoxesInformation(ButtonSelected buttonSelected) {
         int boxNumber = 4;
         for (int index = 0; index < boxNumber; index++) {
@@ -667,97 +733,107 @@ public class AppPage2Controller implements Initializable {
     @FXML
     @SuppressWarnings("all")
     private void onClickWarehouseButton() {
-        if (currentPage != stackPaneForWarehouse) {
-            if (currentPage == appPagePane) {
-//                appPagePane.setPickOnBounds(false);
-                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 1, 0);
-                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 0, 1);
-                fadeTransition.setOnFinished(event -> {
-                    fadeTransition1.play();
-                    appPagePane.setVisible(false);
-//                    stackPaneForWarehouse.setPickOnBounds(true);
-                    stackPaneForWarehouse.setVisible(true);
-                });
-                fadeTransition.play();
-                currentPage = stackPaneForWarehouse;
-            }
-            if (currentPage == stackPane) {
-//                stackPane.setPickOnBounds(false);
-
-                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);
-                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 0, 1);
-                fadeTransition.setOnFinished(event -> {
-                    fadeTransition1.play();
-                    stackPane.setVisible(false);
-//                    stackPaneForWarehouse.setPickOnBounds(true);
-                    stackPaneForWarehouse.setVisible(true);
-                });
-                fadeTransition.play();
-                currentPage = stackPaneForWarehouse;
-            }
-            if (currentPage == staffPane) {
-//                staffPane.setPickOnBounds(false);
-
-                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(staffPane, 300, 1, 0);
-                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 0, 1);
-                fadeTransition.setOnFinished(event -> {
-                    fadeTransition1.play();
-                    staffPane.setVisible(false);
-//                    stackPaneForWarehouse.setPickOnBounds(true);
-                    stackPaneForWarehouse.setVisible(true);
-                });
-                fadeTransition.play();
-                currentPage = stackPaneForWarehouse;
-            }
+        if (currentPaneStatus != CurrentPaneStatus.WAREHOUSE){
+            changePaneAnimation(currentPaneStatus,stackPaneForWarehouse);
+            currentPaneStatus = CurrentPaneStatus.WAREHOUSE;
+            warehouseButton.setDisable(false);
         }
+//        if (currentPage != stackPaneForWarehouse) {
+//            if (currentPage == appPagePane) {
+////                appPagePane.setPickOnBounds(false);
+//                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 1, 0);
+//                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 0, 1);
+//                fadeTransition.setOnFinished(event -> {
+//                    fadeTransition1.play();
+//                    appPagePane.setVisible(false);
+////                    stackPaneForWarehouse.setPickOnBounds(true);
+//                    stackPaneForWarehouse.setVisible(true);
+//                });
+//                fadeTransition.play();
+//                currentPage = stackPaneForWarehouse;
+//            }
+//            if (currentPage == stackPane) {
+////                stackPane.setPickOnBounds(false);
+//
+//                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);
+//                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 0, 1);
+//                fadeTransition.setOnFinished(event -> {
+//                    fadeTransition1.play();
+//                    stackPane.setVisible(false);
+////                    stackPaneForWarehouse.setPickOnBounds(true);
+//                    stackPaneForWarehouse.setVisible(true);
+//                });
+//                fadeTransition.play();
+//                currentPage = stackPaneForWarehouse;
+//            }
+//            if (currentPage == staffPane) {
+////                staffPane.setPickOnBounds(false);
+//
+//                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(staffPane, 300, 1, 0);
+//                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 0, 1);
+//                fadeTransition.setOnFinished(event -> {
+//                    fadeTransition1.play();
+//                    staffPane.setVisible(false);
+////                    stackPaneForWarehouse.setPickOnBounds(true);
+//                    stackPaneForWarehouse.setVisible(true);
+//                });
+//                fadeTransition.play();
+//                currentPage = stackPaneForWarehouse;
+//            }
+//        }
 
     }
 
     @FXML
     private void onClickStaff(){
-        if(currentPage != staffPane){
-            if (currentPage == appPagePane) {
-//                appPagePane.setPickOnBounds(false);
-                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 1, 0);
-                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(staffPane, 300, 0, 1);
-                fadeTransition.setOnFinished(event -> {
-                    fadeTransition1.play();
-                    appPagePane.setVisible(false);
-//                    staffPane.setPickOnBounds(true);
-                    staffPane.setVisible(true);
-                });
-                fadeTransition.play();
-                currentPage = staffPane;
-            }
-            if (currentPage == stackPane) {
-//                stackPane.setPickOnBounds(false);
-                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);
-                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(staffPane, 300, 0, 1);
-                fadeTransition.setOnFinished(event -> {
-                    fadeTransition1.play();
-                    stackPane.setVisible(false);
-//                    staffPane.setPickOnBounds(true);
-                    staffPane.setVisible(true);
-                });
-                fadeTransition.play();
-                currentPage = staffPane;
-            }
-            if (currentPage == stackPaneForWarehouse) {
-                assert staffPane != null;
-//                staffPane.setPickOnBounds(true);
-                staffPane.setVisible(true);
-//                stackPaneForWarehouse.setPickOnBounds(false);
-
-                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(staffPane, 300, 0, 1);
-                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 1, 0);
-                fadeTransition1.setOnFinished(event -> {
-                    fadeTransition.play();
-                    stackPaneForWarehouse.setVisible(false);
-                });
-                fadeTransition1.play();
-                currentPage = staffPane;
-            }
+        if(currentPaneStatus != CurrentPaneStatus.STAFF){
+            changePaneAnimation(currentPaneStatus,staffPane);
+            currentPaneStatus = CurrentPaneStatus.STAFF;
+            staffButton.setDisable(false);
         }
+//        if(currentPage != staffPane){
+//            if (currentPage == appPagePane) {
+////                appPagePane.setPickOnBounds(false);
+//                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 1, 0);
+//                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(staffPane, 300, 0, 1);
+//                fadeTransition.setOnFinished(event -> {
+//                    fadeTransition1.play();
+//                    appPagePane.setVisible(false);
+////                    staffPane.setPickOnBounds(true);
+//                    staffPane.setVisible(true);
+//                });
+//                fadeTransition.play();
+//                currentPage = staffPane;
+//            }
+//            if (currentPage == stackPane) {
+////                stackPane.setPickOnBounds(false);
+//                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);
+//                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(staffPane, 300, 0, 1);
+//                fadeTransition.setOnFinished(event -> {
+//                    fadeTransition1.play();
+//                    stackPane.setVisible(false);
+////                    staffPane.setPickOnBounds(true);
+//                    staffPane.setVisible(true);
+//                });
+//                fadeTransition.play();
+//                currentPage = staffPane;
+//            }
+//            if (currentPage == stackPaneForWarehouse) {
+//                assert staffPane != null;
+////                staffPane.setPickOnBounds(true);
+//                staffPane.setVisible(true);
+////                stackPaneForWarehouse.setPickOnBounds(false);
+//
+//                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(staffPane, 300, 0, 1);
+//                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 1, 0);
+//                fadeTransition1.setOnFinished(event -> {
+//                    fadeTransition.play();
+//                    stackPaneForWarehouse.setVisible(false);
+//                });
+//                fadeTransition1.play();
+//                currentPage = staffPane;
+//            }
+//        }
     }
 
     @FXML
@@ -818,6 +894,7 @@ public class AppPage2Controller implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        disableNode(stackPane);
     }
 
     private void setWarehousePane() {
@@ -827,6 +904,7 @@ public class AppPage2Controller implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        disableNode(stackPaneForWarehouse);
     }
 
     private void setStaffPane() {
@@ -836,6 +914,17 @@ public class AppPage2Controller implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        disableNode(staffPane);
+    }
+
+    private void setMessagePane() {
+        try {
+            AnchorPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/messagePage.fxml")));
+            messagePane.getChildren().add(pane);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        disableNode(messagePane);
     }
 
     private void setDrawer() {
@@ -888,55 +977,71 @@ public class AppPage2Controller implements Initializable {
     @FXML
     @SuppressWarnings("all")
     private void onEnterAppPage() {
-        if (currentPage != appPagePane) {
-            if (currentPage == stackPane) {
-//                appPagePane.setPickOnBounds(true);
-                appPagePane.setVisible(true);
-//                stackPane.setPickOnBounds(false);
-
-                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 0, 1);
-                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);
-                fadeTransition1.setOnFinished(event -> {
-                    fadeTransition.play();
-                    stackPane.setVisible(false);
-                });
-                fadeTransition1.play();
-                currentPage = appPagePane;
-            }
-            if (currentPage == stackPaneForWarehouse) {
-                assert appPagePane != null;
-//                appPagePane.setPickOnBounds(true);
-                appPagePane.setVisible(true);
-//                stackPaneForWarehouse.setPickOnBounds(false);
-
-                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 0, 1);
-                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 1, 0);
-                fadeTransition1.setOnFinished(event -> {
-                    fadeTransition.play();
-                    stackPaneForWarehouse.setVisible(false);
-                });
-                fadeTransition1.play();
-                currentPage = appPagePane;
-            }
-            if (currentPage == staffPane) {
-                assert appPagePane != null;
-//                appPagePane.setPickOnBounds(true);
-                appPagePane.setVisible(true);
-//                staffPane.setPickOnBounds(false);
-
-                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 0, 1);
-                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(staffPane, 300, 1, 0);
-                fadeTransition1.setOnFinished(event -> {
-                    fadeTransition.play();
-                    staffPane.setVisible(false);
-                });
-                fadeTransition1.play();
-                currentPage = appPagePane;
-            }
-
+        if (currentPaneStatus != CurrentPaneStatus.HOMEPAGE){
+            changePaneAnimation(currentPaneStatus,appPagePane);
+            currentPaneStatus = CurrentPaneStatus.HOMEPAGE;
+            appPageButton.setDisable(true);
         }
+////        if (currentPaneStatus != CurrentPaneStatus.HOMEPAGE){
+////            appPagePane.setVisible(true);
+////        }
+//        if (currentPage != appPagePane) {
+//            if (currentPage == stackPane) {
+////                appPagePane.setPickOnBounds(true);
+//                appPagePane.setVisible(true);
+////                stackPane.setPickOnBounds(false);
+//
+//                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 0, 1);
+//                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);
+//                fadeTransition1.setOnFinished(event -> {
+//                    fadeTransition.play();
+//                    stackPane.setVisible(false);
+//                });
+//                fadeTransition1.play();
+//                currentPage = appPagePane;
+//            }
+//            if (currentPage == stackPaneForWarehouse) {
+//                assert appPagePane != null;
+////                appPagePane.setPickOnBounds(true);
+//                appPagePane.setVisible(true);
+////                stackPaneForWarehouse.setPickOnBounds(false);
+//
+//                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 0, 1);
+//                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 1, 0);
+//                fadeTransition1.setOnFinished(event -> {
+//                    fadeTransition.play();
+//                    stackPaneForWarehouse.setVisible(false);
+//                });
+//                fadeTransition1.play();
+//                currentPage = appPagePane;
+//            }
+//            if (currentPage == staffPane) {
+//                assert appPagePane != null;
+////                appPagePane.setPickOnBounds(true);
+//                appPagePane.setVisible(true);
+////                staffPane.setPickOnBounds(false);
+//
+//                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 0, 1);
+//                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(staffPane, 300, 1, 0);
+//                fadeTransition1.setOnFinished(event -> {
+//                    fadeTransition.play();
+//                    staffPane.setVisible(false);
+//                });
+//                fadeTransition1.play();
+//                currentPage = appPagePane;
+//            }
+//
+//        }
     }
 
+    @FXML
+    private void onClickMessage(){
+        if (currentPaneStatus != CurrentPaneStatus.MESSAGE){
+            changePaneAnimation(currentPaneStatus,messagePane);
+            currentPaneStatus = CurrentPaneStatus.MESSAGE;
+            messageButton.setDisable(false);
+        }
+    }
     private void setButtonList() {
         buttonOne.setAlignment(Pos.CENTER_LEFT);
         buttonTwo.setAlignment(Pos.CENTER_LEFT);
@@ -1072,48 +1177,53 @@ public class AppPage2Controller implements Initializable {
     @FXML
     @SuppressWarnings("all")
     private void onTransactionPage() {
-        if (currentPage != stackPane) {
-            if (currentPage == appPagePane) {
-//                appPagePane.setPickOnBounds(false);
-//                stackPane.setPickOnBounds(true);
-                stackPane.setVisible(true);
-                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 1, 0);
-                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPane, 300, 0, 1);
-                fadeTransition.setOnFinished(event -> {
-                    fadeTransition1.play();
-                    appPagePane.setVisible(false);
-                });
-                fadeTransition.play();
-                currentPage = stackPane;
-            }
-            if (currentPage == stackPaneForWarehouse) {
-//                stackPaneForWarehouse.setPickOnBounds(false);
-//                stackPane.setPickOnBounds(true);
-                stackPane.setVisible(true);
-                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 1, 0);
-                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPane, 300, 0, 1);
-                fadeTransition.setOnFinished(event -> {
-                    fadeTransition1.play();
-                    stackPaneForWarehouse.setVisible(false);
-                });
-                fadeTransition.play();
-                currentPage = stackPane;
-            }
-            if (currentPage == staffPane) {
-
-//                staffPane.setPickOnBounds(false);
-//                stackPane.setPickOnBounds(true);
-                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(staffPane, 300, 1, 0);
-                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPane, 300, 0, 1);
-                fadeTransition.setOnFinished(event -> {
-                    fadeTransition1.play();
-                    stackPane.setVisible(true);
-                    staffPane.setVisible(false);
-                });
-                fadeTransition.play();
-                currentPage = stackPane;
-            }
+        if (currentPaneStatus != CurrentPaneStatus.TRANSACTION){
+            changePaneAnimation(currentPaneStatus,stackPane);
+            currentPaneStatus = CurrentPaneStatus.TRANSACTION;
+            transactionButton.setDisable(false);
         }
+//        if (currentPage != stackPane) {
+//            if (currentPage == appPagePane) {
+////                appPagePane.setPickOnBounds(false);
+////                stackPane.setPickOnBounds(true);
+//                stackPane.setVisible(true);
+//                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 1, 0);
+//                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPane, 300, 0, 1);
+//                fadeTransition.setOnFinished(event -> {
+//                    fadeTransition1.play();
+//                    appPagePane.setVisible(false);
+//                });
+//                fadeTransition.play();
+//                currentPage = stackPane;
+//            }
+//            if (currentPage == stackPaneForWarehouse) {
+////                stackPaneForWarehouse.setPickOnBounds(false);
+////                stackPane.setPickOnBounds(true);
+//                stackPane.setVisible(true);
+//                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 1, 0);
+//                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPane, 300, 0, 1);
+//                fadeTransition.setOnFinished(event -> {
+//                    fadeTransition1.play();
+//                    stackPaneForWarehouse.setVisible(false);
+//                });
+//                fadeTransition.play();
+//                currentPage = stackPane;
+//            }
+//            if (currentPage == staffPane) {
+//
+////                staffPane.setPickOnBounds(false);
+////                stackPane.setPickOnBounds(true);
+//                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(staffPane, 300, 1, 0);
+//                FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPane, 300, 0, 1);
+//                fadeTransition.setOnFinished(event -> {
+//                    fadeTransition1.play();
+//                    stackPane.setVisible(true);
+//                    staffPane.setVisible(false);
+//                });
+//                fadeTransition.play();
+//                currentPage = stackPane;
+//            }
+//        }
     }
 
     /**
