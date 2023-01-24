@@ -1,0 +1,8 @@
+@import "colors.css";
+
+.JFXButton{
+    -fx-text-fill: -appPage-theme;
+}
+.JFXButton:hover{
+    -fx-text-fill: -appPage-hover-theme;
+}
