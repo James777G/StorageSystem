@@ -5,7 +5,7 @@ import javax.sql.DataSource;
 import org.maven.apache.mapper.*;
 import org.maven.apache.service.DateTransaction.DateTransactionServiceProvider;
 import org.maven.apache.service.item.ItemServiceProvider;
-import org.maven.apache.service.transaction.cachedTransactionServiceProvider;
+import org.maven.apache.service.transaction.CachedTransactionServiceProvider;
 import org.maven.apache.service.user.UserServiceProvider;
 import org.maven.apache.service.verificationCode.VerificationCodeServiceProvider;
 import org.springframework.context.annotation.Bean;
@@ -39,12 +39,6 @@ public class TransactionConfiguration {
 		return dateTransactionService;
 	}
 
-	@Bean
-	public cachedTransactionServiceProvider cachedTransactionService(TransactionMapper transactionMapper){
-		cachedTransactionServiceProvider cachedTransactionServiceProvider = new cachedTransactionServiceProvider();
-		cachedTransactionServiceProvider.setTransactionMapper(transactionMapper);
-		return cachedTransactionServiceProvider;
-	}
 
 	@Bean
 	public VerificationCodeServiceProvider verificationCodeService(VerificationCodeMapper verificationCodeMapper){

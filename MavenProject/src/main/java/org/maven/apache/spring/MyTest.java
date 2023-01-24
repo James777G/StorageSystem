@@ -1,6 +1,5 @@
 package org.maven.apache.spring;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
@@ -13,7 +12,7 @@ import org.maven.apache.mapper.UserMapper;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
 import org.maven.apache.service.item.ItemService;
 import org.maven.apache.service.mail.MailService;
-import org.maven.apache.service.transaction.cachedTransactionService;
+import org.maven.apache.service.transaction.CachedTransactionService;
 import org.maven.apache.service.user.UserService;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.TransactionCachedUtils;
@@ -184,7 +183,7 @@ public class MyTest {
 	@Test
 	public  void test12(){
 		ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
-		cachedTransactionService cachedTransactionService = context.getBean("cachedTransactionService",cachedTransactionService.class);
+		CachedTransactionService cachedTransactionService = context.getBean("cachedTransactionService", CachedTransactionService.class);
 //		Transaction transaction = new Transaction();
 //		transaction.setItemName("wood");
 //		transaction.setStaffName("Tom");

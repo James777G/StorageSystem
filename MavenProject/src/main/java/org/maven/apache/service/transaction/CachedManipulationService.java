@@ -4,7 +4,7 @@ import org.maven.apache.transaction.Transaction;
 
 import java.util.List;
 
-public interface cachedManipulationService {
+public interface CachedManipulationService {
 
     /**
      * This method is used to return a list sorted by Unit in Descending Order

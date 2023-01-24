@@ -31,10 +31,5 @@ public class DataUtils {
 
     public static List<List<Item>> publicCachedWarehouseTableData = new ArrayList<>();
 
-    public static List<Staff> publicCachedStaffData = new ArrayList<>();
-
-    public static List<Staff> publicCachedActiveStaffData = new ArrayList<>();
-
-    public static List<Staff> publicCachedInactiveStaffData = new ArrayList<>();
 
 }

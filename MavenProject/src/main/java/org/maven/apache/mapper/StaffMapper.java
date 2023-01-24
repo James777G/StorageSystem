@@ -1,5 +1,6 @@
 package org.maven.apache.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.maven.apache.item.Item;
 import org.maven.apache.staff.Staff;

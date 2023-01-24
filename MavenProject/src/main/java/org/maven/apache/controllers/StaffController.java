@@ -6,10 +6,15 @@ import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import org.maven.apache.MyLauncher;
+import org.maven.apache.service.staff.CachedStaffService;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class StaffController implements Initializable {
+
+    private final CachedStaffService staffService = MyLauncher.context.getBean("staffService", CachedStaffService.class);
 
     @FXML
     private Label staffNameOne, staffNameTwo, staffNameThree, staffNameFour, staffNameFive, staffNameSix, staffNameSeven;
@@ -37,6 +42,7 @@ public class StaffController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        staffService.updateAllCachedStaffData();
         loadSpinner.setVisible(false);
         initializeNameList();
         initializeIdList();
