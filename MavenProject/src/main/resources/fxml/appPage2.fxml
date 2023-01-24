@@ -393,7 +393,7 @@
                </image>
             </ImageView>
             <Separator layoutX="728.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="50.0" prefWidth="15.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="10.0" />
-            <JFXButton fx:id="appPageButton" layoutX="25.0" layoutY="15.0" onAction="#onEnterAppPage" prefHeight="30.0" prefWidth="30.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" />
+            <JFXButton fx:id="appPageButton" layoutX="25.0" layoutY="15.0" onAction="#onClickAppPageButton" onMouseEntered="#onEnterHome" onMouseExited="#onExitHome" prefHeight="30.0" prefWidth="30.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" />
             <JFXButton fx:id="warehouseButton" layoutX="443.0" layoutY="9.0" onAction="#onClickWarehouseButton" onMouseEntered="#enterWarehouseButton" onMouseExited="#exitWarehouseButton" prefHeight="49.0" prefWidth="120.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="445.0" AnchorPane.topAnchor="5.0">
                <graphic>
                   <Label fx:id="warehouseLabel" graphicTextGap="11.0" prefHeight="40.0" prefWidth="100.0" text="Warehouse" textFill="#223c40">
@@ -409,7 +409,7 @@
                      </graphic>
                   </Label>
                </graphic></JFXButton>
-            <JFXButton fx:id="transactionButton" layoutX="600.0" layoutY="10.0" onAction="#onTransactionPage" onMouseEntered="#enterTransactionButton" onMouseExited="#exitTransactionButton" prefHeight="49.0" prefWidth="120.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="595.0" AnchorPane.topAnchor="5.0">
+            <JFXButton fx:id="transactionButton" layoutX="600.0" layoutY="10.0" onAction="#onClickTransaction" onMouseEntered="#enterTransactionButton" onMouseExited="#exitTransactionButton" prefHeight="49.0" prefWidth="120.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="595.0" AnchorPane.topAnchor="5.0">
                <graphic>
                   <Label fx:id="transactionLabel" graphicTextGap="10.0" prefHeight="40.0" prefWidth="104.0" text="Transaction" textFill="#223c40">
                      <font>

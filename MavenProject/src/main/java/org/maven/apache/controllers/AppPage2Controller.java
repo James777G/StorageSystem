@@ -548,7 +548,7 @@ public class AppPage2Controller implements Initializable {
             }
             case MESSAGE-> {
                 messageLabel.setTextFill(appPageHoverTheme);
-                warehouseImageView.setImage(onMessagePageEnvelopeImage);
+                messageImageView.setImage(onMessagePageEnvelopeImage);
             }
         }
     }
@@ -570,7 +570,7 @@ public class AppPage2Controller implements Initializable {
             }
             case MESSAGE-> {
                 messageLabel.setTextFill(appPageTheme);
-                warehouseImageView.setImage(offMessagePageEnvelopeImage);
+                messageImageView.setImage(offMessagePageEnvelopeImage);
             }
         }
     }
@@ -895,7 +895,9 @@ public class AppPage2Controller implements Initializable {
     private void onClickStaff(){
         if(currentPaneStatus != CurrentPaneStatus.STAFF){
             changePaneAnimation(currentPaneStatus,staffPane);
+            changeButtonColorOff(currentPaneStatus);
             currentPaneStatus = CurrentPaneStatus.STAFF;
+            changeButtonColorOn(currentPaneStatus);
         }
 //        if(currentPage != staffPane){
 //            if (currentPage == appPagePane) {
@@ -1082,10 +1084,12 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     @SuppressWarnings("all")
-    private void onEnterAppPage() {
+    private void onClickAppPageButton() {
         if (currentPaneStatus != CurrentPaneStatus.HOMEPAGE){
             changePaneAnimation(currentPaneStatus,appPagePane);
+            changeButtonColorOff(currentPaneStatus);
             currentPaneStatus = CurrentPaneStatus.HOMEPAGE;
+            changeButtonColorOn(currentPaneStatus);
         }
 ////        if (currentPaneStatus != CurrentPaneStatus.HOMEPAGE){
 ////            appPagePane.setVisible(true);
@@ -1143,7 +1147,9 @@ public class AppPage2Controller implements Initializable {
     private void onClickMessage(){
         if (currentPaneStatus != CurrentPaneStatus.MESSAGE){
             changePaneAnimation(currentPaneStatus,messagePane);
+            changeButtonColorOff(currentPaneStatus);
             currentPaneStatus = CurrentPaneStatus.MESSAGE;
+            changeButtonColorOn(currentPaneStatus);
         }
     }
     private void setButtonList() {
@@ -1212,13 +1218,26 @@ public class AppPage2Controller implements Initializable {
         timeline.playFromStart();
     }
 
+
+    @FXML
+    private void onEnterHome(){
+        if(currentPaneStatus != CurrentPaneStatus.HOMEPAGE) {
+            changeButtonColorOn(CurrentPaneStatus.HOMEPAGE);
+        }
+    }
+
+    @FXML
+    private void onExitHome(){
+        if(currentPaneStatus != CurrentPaneStatus.HOMEPAGE) {
+            changeButtonColorOff(CurrentPaneStatus.HOMEPAGE);
+        }
+    }
+
     @FXML
     private void enterWarehouseButton() {
 //        warehouseButton.setOpacity(1);
         if(currentPaneStatus != CurrentPaneStatus.WAREHOUSE) {
             changeButtonColorOn(CurrentPaneStatus.WAREHOUSE);
-//            warehouseLabel.setTextFill(appPageHoverTheme);
-//            warehouseImageView.setImage(onWarehousePageCardBoardImage);
         }
     }
 
@@ -1233,31 +1252,49 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void enterStaffButton() {
 //        staffButton.setOpacity(1);
+        if(currentPaneStatus != CurrentPaneStatus.STAFF) {
+            changeButtonColorOn(CurrentPaneStatus.STAFF);
+        }
     }
 
     @FXML
     private void exitStaffButton() {
 //        staffButton.setOpacity(0);
+        if(currentPaneStatus != CurrentPaneStatus.STAFF) {
+            changeButtonColorOff(CurrentPaneStatus.STAFF);
+        }
     }
 
     @FXML
     private void enterTransactionButton() {
 //        transactionButton.setOpacity(1);
+        if(currentPaneStatus != CurrentPaneStatus.TRANSACTION) {
+            changeButtonColorOn(CurrentPaneStatus.TRANSACTION);
+        }
     }
 
     @FXML
     private void exitTransactionButton() {
 //        transactionButton.setOpacity(0);
+        if(currentPaneStatus != CurrentPaneStatus.TRANSACTION) {
+            changeButtonColorOff(CurrentPaneStatus.TRANSACTION);
+        }
     }
 
     @FXML
     private void enterMessageButton() {
 //        messageButton.setOpacity(1);
+        if(currentPaneStatus != CurrentPaneStatus.MESSAGE) {
+            changeButtonColorOn(CurrentPaneStatus.MESSAGE);
+        }
     }
 
     @FXML
     private void exitMessageButton() {
 //        messageButton.setOpacity(0);
+        if(currentPaneStatus != CurrentPaneStatus.MESSAGE) {
+            changeButtonColorOff(CurrentPaneStatus.MESSAGE);
+        }
     }
 
     @FXML
@@ -1288,10 +1325,12 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     @SuppressWarnings("all")
-    private void onTransactionPage() {
+    private void onClickTransaction() {
         if (currentPaneStatus != CurrentPaneStatus.TRANSACTION){
             changePaneAnimation(currentPaneStatus,stackPane);
+            changeButtonColorOff(currentPaneStatus);
             currentPaneStatus = CurrentPaneStatus.TRANSACTION;
+            changeButtonColorOn(currentPaneStatus);
         }
 //        if (currentPage != stackPane) {
 //            if (currentPage == appPagePane) {
