@@ -35,7 +35,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <JFXButton fx:id="signOffButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onClickSettingsButton" prefHeight="40.0" prefWidth="170.0" styleClass="JFXButton" stylesheets="@../css/appPage2.css" text="                Settings" textFill="#37a592">
+      <JFXButton fx:id="settingButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onClickSettingsButton" onMouseEntered="#onEnterSetting" onMouseExited="#onExitSetting" prefHeight="40.0" prefWidth="170.0" styleClass="JFXButton" stylesheets="@../css/menuPage.css" text="                Settings" textFill="#37a592">
          <font>
             <Font name="Candara Bold" size="15.0" />
          </font>
@@ -43,14 +43,14 @@
             <Insets right="10.0" />
          </padding>
          <graphic>
-            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="settingImageView" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/icons8-settings-192.png" />
                </image>
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton fx:id="signOffButton1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onSignOff" prefHeight="40.0" prefWidth="170.0" styleClass="JFXButton" stylesheets="@../css/appPage2.css" text="                 Log out" textFill="#223c40">
+      <JFXButton fx:id="signOffButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onSignOff" onMouseEntered="#onEnterLogOut" onMouseExited="#onExitLogOut" prefHeight="40.0" prefWidth="170.0" styleClass="JFXButton" stylesheets="@../css/menuPage.css" text="                 Log out" textFill="#223c40">
          <font>
             <Font name="Candara Bold" size="15.0" />
          </font>
@@ -58,7 +58,7 @@
             <Insets right="10.0" />
          </padding>
          <graphic>
-            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="logOutImageView" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/icons8-logout-64.png" />
                </image>
