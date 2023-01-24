@@ -15,10 +15,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -39,6 +41,51 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AppPage2Controller implements Initializable {
+
+    @FXML
+    private final Image onAppPageHomeImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-warehouse-100.png")));
+
+    @FXML
+    private final Image offAppPageHomeImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-warehouse-100 (1).png")));
+
+    @FXML
+    private final Image onWarehousePageCardBoardImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-cardboard-box-100 (3).png")));
+
+    @FXML
+    private final Image offWarehousePageCardBoardImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-cardboard-box-100 (2).png")));
+
+    @FXML
+    private final Image onTransactionPageArrowUpDownImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-up-down-arrow-96 (2).png")));
+
+    @FXML
+    private final Image offTransactionPageArrowUpDownImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-up-down-arrow-96 (1).png")));
+
+    @FXML
+    private final Image onStaffPageUserImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-account-96 (1).png")));
+
+    @FXML
+    private final Image offStaffPageUserImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-account-96 (2).png")));
+
+    @FXML
+    private final Image onMessagePageEnvelopeImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-envelope-96 (1).png")));
+
+    @FXML
+    private final Image offMessagePageEnvelopeImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-envelope-96.png")));
+
+    @FXML
+    private ImageView appPageImageView;
+
+    @FXML
+    private ImageView warehouseImageView;
+
+    @FXML
+    private ImageView transactionImageView;
+
+    @FXML
+    private ImageView staffImageView;
+
+    @FXML
+    private ImageView messageImageView;
 
     @FXML
     private ImageView refreshImage;
@@ -177,6 +224,18 @@ public class AppPage2Controller implements Initializable {
     private StackPane stackPaneForWarehouse;
 
     @FXML
+    private Label warehouseLabel;
+
+    @FXML
+    private Label transactionLabel;
+
+    @FXML
+    private Label staffLabel;
+
+    @FXML
+    private Label messageLabel;
+
+    @FXML
     private Label usernameLabel;
 
     @FXML
@@ -262,6 +321,10 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private MFXGenericDialog transactionDialog;
+
+    private final Paint appPageHoverTheme = Paint.valueOf("#37a592");
+
+    private final Paint appPageTheme = Paint.valueOf("#223c40");
 
     //pass the user from login page
     private final User user = DataUtils.currentUser;
@@ -390,17 +453,15 @@ public class AppPage2Controller implements Initializable {
         settingsDialog.setVisible(false);
         searchTable.setVisible(false);
         usernameLabel.setText(user.getName());
-        warehouseButton.setOpacity(0);
-        staffButton.setOpacity(0);
-        transactionButton.setOpacity(0);
-        messageButton.setOpacity(0);
+//        warehouseButton.setOpacity(0);
+//        staffButton.setOpacity(0);
+//        transactionButton.setOpacity(0);
+//        messageButton.setOpacity(0);
         searchTable.setPickOnBounds(false);
         searchTable.setOpacity(0);
         stackPaneForWarehouse.setOpacity(0);
 //        stackPaneForWarehouse.setPickOnBounds(false);
         stackPaneForWarehouse.setVisible(false);
-
-
 
         setButtonList();
         setTransactionPane();
@@ -469,6 +530,51 @@ public class AppPage2Controller implements Initializable {
         messageButton.setDisable(false);
     }
 
+    @SuppressWarnings("all")
+    private void changeButtonColorOn(CurrentPaneStatus currentPaneStatus){
+        switch(currentPaneStatus){
+            case HOMEPAGE -> {appPageImageView.setImage(onAppPageHomeImage);}
+            case WAREHOUSE -> {
+                warehouseLabel.setTextFill(appPageHoverTheme);
+                warehouseImageView.setImage(onWarehousePageCardBoardImage);
+            }
+            case TRANSACTION -> {
+                transactionLabel.setTextFill(appPageHoverTheme);
+                transactionImageView.setImage(onTransactionPageArrowUpDownImage);
+            }
+            case STAFF -> {
+                staffLabel.setTextFill(appPageHoverTheme);
+                staffImageView.setImage(onStaffPageUserImage);
+            }
+            case MESSAGE-> {
+                messageLabel.setTextFill(appPageHoverTheme);
+                warehouseImageView.setImage(onMessagePageEnvelopeImage);
+            }
+        }
+    }
+
+    private void changeButtonColorOff(CurrentPaneStatus currentPaneStatus){
+        switch(currentPaneStatus){
+            case HOMEPAGE -> {appPageImageView.setImage(offAppPageHomeImage);}
+            case WAREHOUSE -> {
+                warehouseLabel.setTextFill(appPageTheme);
+                warehouseImageView.setImage(offWarehousePageCardBoardImage);
+            }
+            case TRANSACTION -> {
+                transactionLabel.setTextFill(appPageTheme);
+                transactionImageView.setImage(offTransactionPageArrowUpDownImage);
+            }
+            case STAFF -> {
+                staffLabel.setTextFill(appPageTheme);
+                staffImageView.setImage(offStaffPageUserImage);
+            }
+            case MESSAGE-> {
+                messageLabel.setTextFill(appPageTheme);
+                warehouseImageView.setImage(offMessagePageEnvelopeImage);
+            }
+        }
+    }
+
     private void initializeLabels() {
         cargoNameLabels[0] = cargoNameLabel01;
         cargoNameLabels[1] = cargoNameLabel02;
@@ -506,11 +612,11 @@ public class AppPage2Controller implements Initializable {
 
     @SuppressWarnings("all")
     private void changePaneAnimation(CurrentPaneStatus currentPaneStatus, Node paneToDisplay){
-        disableAllChangingPaneActions();
+//        disableAllChangingPaneActions();
         FadeTransition fadeTransition = TransitionUtils.getFadeTransition(paneToDisplay, 300, 0, 1);
         fadeTransition.setOnFinished(event -> {
             enableNode(paneToDisplay);
-            enableAllChangingPaneActions();
+//            enableAllChangingPaneActions();
         });
         FadeTransition fadeTransition1 = new FadeTransition();
         switch (currentPaneStatus){
@@ -735,8 +841,9 @@ public class AppPage2Controller implements Initializable {
     private void onClickWarehouseButton() {
         if (currentPaneStatus != CurrentPaneStatus.WAREHOUSE){
             changePaneAnimation(currentPaneStatus,stackPaneForWarehouse);
+            changeButtonColorOff(currentPaneStatus);
             currentPaneStatus = CurrentPaneStatus.WAREHOUSE;
-            warehouseButton.setDisable(false);
+            changeButtonColorOn(currentPaneStatus);
         }
 //        if (currentPage != stackPaneForWarehouse) {
 //            if (currentPage == appPagePane) {
@@ -789,7 +896,6 @@ public class AppPage2Controller implements Initializable {
         if(currentPaneStatus != CurrentPaneStatus.STAFF){
             changePaneAnimation(currentPaneStatus,staffPane);
             currentPaneStatus = CurrentPaneStatus.STAFF;
-            staffButton.setDisable(false);
         }
 //        if(currentPage != staffPane){
 //            if (currentPage == appPagePane) {
@@ -980,7 +1086,6 @@ public class AppPage2Controller implements Initializable {
         if (currentPaneStatus != CurrentPaneStatus.HOMEPAGE){
             changePaneAnimation(currentPaneStatus,appPagePane);
             currentPaneStatus = CurrentPaneStatus.HOMEPAGE;
-            appPageButton.setDisable(true);
         }
 ////        if (currentPaneStatus != CurrentPaneStatus.HOMEPAGE){
 ////            appPagePane.setVisible(true);
@@ -1039,7 +1144,6 @@ public class AppPage2Controller implements Initializable {
         if (currentPaneStatus != CurrentPaneStatus.MESSAGE){
             changePaneAnimation(currentPaneStatus,messagePane);
             currentPaneStatus = CurrentPaneStatus.MESSAGE;
-            messageButton.setDisable(false);
         }
     }
     private void setButtonList() {
@@ -1110,42 +1214,50 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void enterWarehouseButton() {
-        warehouseButton.setOpacity(1);
+//        warehouseButton.setOpacity(1);
+        if(currentPaneStatus != CurrentPaneStatus.WAREHOUSE) {
+            changeButtonColorOn(CurrentPaneStatus.WAREHOUSE);
+//            warehouseLabel.setTextFill(appPageHoverTheme);
+//            warehouseImageView.setImage(onWarehousePageCardBoardImage);
+        }
     }
 
     @FXML
     private void exitWarehouseButton() {
-        warehouseButton.setOpacity(0);
+//        warehouseButton.setOpacity(0);
+        if(currentPaneStatus != CurrentPaneStatus.WAREHOUSE) {
+            changeButtonColorOff(CurrentPaneStatus.WAREHOUSE);
+        }
     }
 
     @FXML
     private void enterStaffButton() {
-        staffButton.setOpacity(1);
+//        staffButton.setOpacity(1);
     }
 
     @FXML
     private void exitStaffButton() {
-        staffButton.setOpacity(0);
+//        staffButton.setOpacity(0);
     }
 
     @FXML
     private void enterTransactionButton() {
-        transactionButton.setOpacity(1);
+//        transactionButton.setOpacity(1);
     }
 
     @FXML
     private void exitTransactionButton() {
-        transactionButton.setOpacity(0);
+//        transactionButton.setOpacity(0);
     }
 
     @FXML
     private void enterMessageButton() {
-        messageButton.setOpacity(1);
+//        messageButton.setOpacity(1);
     }
 
     @FXML
     private void exitMessageButton() {
-        messageButton.setOpacity(0);
+//        messageButton.setOpacity(0);
     }
 
     @FXML
@@ -1180,7 +1292,6 @@ public class AppPage2Controller implements Initializable {
         if (currentPaneStatus != CurrentPaneStatus.TRANSACTION){
             changePaneAnimation(currentPaneStatus,stackPane);
             currentPaneStatus = CurrentPaneStatus.TRANSACTION;
-            transactionButton.setDisable(false);
         }
 //        if (currentPage != stackPane) {
 //            if (currentPage == appPagePane) {
