@@ -1,17 +1,28 @@
 package org.maven.apache.service.transaction;
 
+import jakarta.annotation.Resource;
+import lombok.Data;
 import org.maven.apache.mapper.TransactionMapper;
 import org.maven.apache.transaction.Transaction;
 import org.maven.apache.utils.TransactionCachedUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
-@Transactional
-public class cachedTransactionServiceProvider implements cachedTransactionService {
+@Data
+public class CachedTransactionServiceProvider implements CachedTransactionService {
+
+    @Autowired
+    @SuppressWarnings("all")
     private TransactionMapper transactionMapper;
-    private cachedManipulationServiceProvider cachedManipulationService =new cachedManipulationServiceProvider();
+
+    @Resource
+    @Qualifier("cachedManipulationService")
+    private CachedManipulationService cachedManipulationService;
 
 
     public TransactionMapper getTransactionMapper() {
@@ -31,6 +42,7 @@ public class cachedTransactionServiceProvider implements cachedTransactionServic
      * </p>
      */
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public void updateAllCachedTransactionData() {
         List<Transaction> allTransaction = transactionMapper.selectAll();
         List<Transaction> dateTransactionASC = transactionMapper.orderByDateAsc();
@@ -68,6 +80,7 @@ public class cachedTransactionServiceProvider implements cachedTransactionServic
      * @param transaction encapsulated transaction to be added
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void addNewTransaction(Transaction transaction) {
         transactionMapper.addNewTransaction(transaction);
         updateAllCachedTransactionData();
@@ -84,6 +97,7 @@ public class cachedTransactionServiceProvider implements cachedTransactionServic
      * @param id Transaction ID which is unique
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void deleteTransactionById(int id) {
         transactionMapper.deleteTransactionById(id);
         updateAllCachedTransactionData();
@@ -102,6 +116,7 @@ public class cachedTransactionServiceProvider implements cachedTransactionServic
      * @param transaction encapsulated transaction object to be updated with desired attributes
      */
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public void updateTransaction(Transaction transaction) {
         transactionMapper.updateTransaction(transaction);
         updateAllCachedTransactionData();

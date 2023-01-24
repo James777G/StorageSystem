@@ -4,8 +4,14 @@ import jakarta.annotation.Resource;
 import lombok.Data;
 import org.maven.apache.staff.Staff;
 import org.maven.apache.utils.DataUtils;
+import org.maven.apache.utils.StaffCachedUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service("staffService")
 @Data
@@ -20,27 +26,33 @@ public class ControllerOrientedCachedStaffHandler implements CachedStaffService{
     private StaffDataManipulationService staffDataManipulationService;
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public void updateAllCachedStaffData() {
-        DataUtils.publicCachedStaffData = staffDAOService.selectAll();
-        DataUtils.publicCachedActiveStaffData = staffDataManipulationService
-                .sortByActiveStatus(DataUtils.publicCachedStaffData);
-        DataUtils.publicCachedInactiveStaffData = staffDataManipulationService
-                .sortByInactiveStatus(DataUtils.publicCachedStaffData);
+        List<Staff> staffList = staffDAOService.selectAll();
+        StaffCachedUtils.putLists(StaffCachedUtils.listType.ALL, staffDataManipulationService
+                .getPagedCacheList(staffList, 7));
+        StaffCachedUtils.putLists(StaffCachedUtils.listType.ACTIVE, staffDataManipulationService
+                .getPagedCacheActiveList(staffList, 7));
+        StaffCachedUtils.putLists(StaffCachedUtils.listType.INACTIVE, staffDataManipulationService
+                .getPagedCacheInactiveList(staffList, 7));
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void addNewStaff(Staff staff) {
         staffDAOService.add(staff);
         updateAllCachedStaffData();
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void deleteStaffById(int id) {
         staffDAOService.deleteById(id);
         updateAllCachedStaffData();
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public void updateTransaction(Staff staff) {
         staffDAOService.updateStaff(staff);
         updateAllCachedStaffData();

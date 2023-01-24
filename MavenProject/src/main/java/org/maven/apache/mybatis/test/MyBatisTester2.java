@@ -21,6 +21,7 @@ import org.maven.apache.spring.SpringConfiguration;
 import org.maven.apache.staff.Staff;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.DataUtils;
+import org.maven.apache.utils.StaffCachedUtils;
 import org.maven.apache.verificationCode.VerificationCode;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -173,17 +174,22 @@ public class MyBatisTester2 {
 
 	@Test
 	public void testZ(){
-		List<Staff> listOne = DataUtils.publicCachedStaffData;
-		List<Staff> listTwo = DataUtils.publicCachedActiveStaffData;
-		List<Staff> listThree = DataUtils.publicCachedInactiveStaffData;
-		ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
-		CachedStaffService staffService = context.getBean("staffService", CachedStaffService.class);
+		CachedStaffService staffService = MyLauncher.context.getBean("staffService", CachedStaffService.class);
 		staffService.updateAllCachedStaffData();
-		System.out.println(DataUtils.publicCachedStaffData);
-		System.out.println(DataUtils.publicCachedActiveStaffData);
-		System.out.println(DataUtils.publicCachedInactiveStaffData);
-		staffService.deleteStaffById(2);
-		System.out.println(DataUtils.publicCachedStaffData);
+		System.out.println(StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL));
+		System.out.println(StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE));
+		System.out.println(StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE));
+		Staff staff = new Staff();
+		staff.setStatus("ACTIVE");
+		staff.setStaffName("Peter");
+		staff.setOtherInfo("I AM GOD");
+		staffService.addNewStaff(staff);
+		System.out.println(StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL));
+		System.out.println(StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE));
+		staff.setOtherInfo("I AM NOT GOD");
+		staffService.updateTransaction(staff);
+		System.out.println(StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE));
+
 	}
 
 

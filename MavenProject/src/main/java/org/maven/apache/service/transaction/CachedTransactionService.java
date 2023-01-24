@@ -2,7 +2,7 @@ package org.maven.apache.service.transaction;
 
 import org.maven.apache.transaction.Transaction;
 
-public interface cachedTransactionService {
+public interface CachedTransactionService {
 
     /**
      * This method updates all the cached transaction data currently stored
