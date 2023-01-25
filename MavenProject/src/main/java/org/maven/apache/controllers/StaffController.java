@@ -1,6 +1,7 @@
 package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import io.github.palexdev.materialfx.controls.MFXPagination;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.fxml.FXML;
@@ -8,11 +9,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.service.staff.CachedStaffService;
+import org.maven.apache.staff.Staff;
+import org.maven.apache.utils.StaffCachedUtils;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class StaffController implements Initializable {
+
+    private enum Status{
+        ACTIVE, ALL, INACTIVE
+    }
 
     private final CachedStaffService staffService = MyLauncher.context.getBean("staffService", CachedStaffService.class);
 
@@ -34,20 +42,99 @@ public class StaffController implements Initializable {
     @FXML
     private MFXProgressSpinner loadSpinner;
 
+    @FXML
+    private MFXPagination pagination;
+
     private final Label[] nameList = new Label[7];
     private final Label[] idList = new Label[7];
     private final Label[] statusList = new Label[7];
     private final JFXButton[] buttonList = new JFXButton[7];
+
+    private List<Staff> currentStaffList;
+
+    private List<Staff> currentActiveStaffList;
+
+    private List<Staff> currentInactiveStaffList;
+
+    private Status status = Status.ALL;
+
+    private Staff selectedStaff;
+
+    private int pageNumber;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         staffService.updateAllCachedStaffData();
         loadSpinner.setVisible(false);
+        getStaffList(pagination.getCurrentPage());
+        calculatePageNumber();
+        pagination.setMaxPage(pageNumber);
+        pagination.currentPageProperty().addListener((observable, oldValue, newValue) -> {
+            getStaffList(newValue);
+            assignStaffValue();
+        });
         initializeNameList();
         initializeIdList();
         initializeStatusList();
         initializeButtonList();
+        assignStaffValue();
+    }
+
+    /**
+     * This method updates the latest page number, thus should be executed every time when
+     * there is an update in data or change in status
+     */
+    private void calculatePageNumber(){
+        if(status == Status.ALL){
+            pageNumber = StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL).size();
+        } else if(status == Status.INACTIVE){
+            pageNumber = StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE).size();
+        } else {
+            pageNumber = StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).size();
+        }
+    }
+
+    private void getStaffList(Number newValue){
+        if(newValue.intValue() - 1 < StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL).size()){
+            currentStaffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL).get(newValue.intValue() - 1);
+        }
+        if(newValue.intValue() - 1 < StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).size()){
+            currentActiveStaffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).get(newValue.intValue() - 1);
+        }
+        if(newValue.intValue() - 1 < StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE).size()){
+            currentInactiveStaffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE).get(newValue.intValue() - 1);
+        }
+
+    }
+
+    /**
+     * This method assigns the values based on the current selected status, and this must be called
+     * everytime when there is a change in status
+     */
+    private void assignStaffValue(){
+        if(Status.ALL == status){
+            setTextWithCurrentList(currentStaffList);
+        } else if(Status.ACTIVE == status){
+            setTextWithCurrentList(currentActiveStaffList);
+        } else{
+            setTextWithCurrentList(currentInactiveStaffList);
+        }
+    }
+
+    private void setTextWithCurrentList(List<Staff> currentStaffList){
+        for(int i = 0; i < currentStaffList.size(); i++){
+            buttonList[i].setDisable(false);
+            nameList[i].setText(currentStaffList.get(i).getStaffName());
+            idList[i].setText(Integer.valueOf(currentStaffList.get(i).getStaffID()).toString());
+            statusList[i].setText(currentStaffList.get(i).getStatus());
+        }
+        for(int j = currentStaffList.size(); j < nameList.length; j++){
+            nameList[j].setText("N/A");
+            idList[j].setText("N/A");
+            statusList[j].setText("N/A");
+            buttonList[j].setDisable(true);
+        }
     }
 
     private void initializeNameList(){
@@ -88,6 +175,58 @@ public class StaffController implements Initializable {
         buttonList[4] = editFive;
         buttonList[5] = editSix;
         buttonList[6] = editSeven;
+    }
+    private List<Staff> getCurrentList(){
+        List<Staff> currentList = null;
+        if(Status.ALL.equals(status)){
+            currentList = currentStaffList;
+        } else if(Status.ACTIVE.equals(status)){
+            currentList = currentActiveStaffList;
+        } else{
+            currentList = currentInactiveStaffList;
+        }
+        return currentList;
+    }
+    @FXML
+    private void onClickEditOne(){
+        List<Staff> currentList = getCurrentList();
+        selectedStaff = currentList.get(0);
+    }
+
+    @FXML
+    private void onClickEditTwo(){
+        List<Staff> currentList = getCurrentList();
+        selectedStaff = currentList.get(1);
+    }
+
+    @FXML
+    private void onClickEditThree(){
+        List<Staff> currentList = getCurrentList();
+        selectedStaff = currentList.get(2);
+    }
+
+    @FXML
+    private void onClickEditFour(){
+        List<Staff> currentList = getCurrentList();
+        selectedStaff = currentList.get(3);
+    }
+
+    @FXML
+    private void onClickEditFive(){
+        List<Staff> currentList = getCurrentList();
+        selectedStaff = currentList.get(4);
+    }
+
+    @FXML
+    private void onClickEditSix(){
+        List<Staff> currentList = getCurrentList();
+        selectedStaff = currentList.get(5);
+    }
+
+    @FXML
+    private void onClickEditSeven(){
+        List<Staff> currentList = getCurrentList();
+        selectedStaff = currentList.get(6);
     }
 
     @FXML
