@@ -164,17 +164,17 @@
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="240.0" prefHeight="50.0" prefWidth="901.0">
          <children>
-            <Label fx:id="staffNameOne" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+            <Label fx:id="staffNameOne" alignment="CENTER" contentDisplay="CENTER" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
-                  <Font name="Candara Bold" size="14.0" />
+                  <Font name="Candara Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="staffIdOne" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+            <Label fx:id="staffIdOne" alignment="CENTER" contentDisplay="CENTER" layoutX="369.0" layoutY="15.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="369.0" AnchorPane.rightAnchor="491.6666666666667" AnchorPane.topAnchor="15.0">
                <font>
                   <Font name="Candara Bold" size="19.0" />
                </font>
             </Label>
-            <Label fx:id="staffStatusOne" alignment="CENTER" contentDisplay="CENTER" layoutX="519.0" layoutY="17.0" text="INACTIVE" textFill="#223c40" AnchorPane.leftAnchor="513.0" AnchorPane.topAnchor="18.0">
+            <Label fx:id="staffStatusOne" alignment="CENTER" contentDisplay="CENTER" layoutX="529.0" layoutY="17.0" text="INACTIVE" textFill="#223c40" AnchorPane.leftAnchor="524.0" AnchorPane.topAnchor="17.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />
                </font>
@@ -184,17 +184,12 @@
                   <Image url="@../image/icons8-cheque-52%20(1).png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="510.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="12.0">
-               <image>
-                  <Image url="@../image/icons8-checked-identification-documents-64%20(1).png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
                <image>
                   <Image url="@../image/icons8-account-96%20(2).png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="editOne" layoutX="666.0" layoutY="13.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+            <JFXButton fx:id="editOne" layoutX="666.0" layoutY="13.0" onAction="#onClickEditOne" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -210,17 +205,17 @@
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="290.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
          <children>
-            <Label fx:id="staffNameTwo" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+            <Label fx:id="staffNameTwo" alignment="CENTER" contentDisplay="CENTER" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
-                  <Font name="Candara Bold" size="14.0" />
+                  <Font name="Candara Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="staffIdTwo" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+            <Label fx:id="staffIdTwo" alignment="CENTER" contentDisplay="CENTER" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="369.0" AnchorPane.rightAnchor="491.6666666666667" AnchorPane.topAnchor="14.0">
                <font>
                   <Font name="Candara Bold" size="19.0" />
                </font>
             </Label>
-            <Label fx:id="staffStatusTwo" alignment="CENTER" contentDisplay="CENTER" layoutX="519.0" layoutY="17.0" text="ACTIVE" textFill="#223c40" AnchorPane.topAnchor="17.0">
+            <Label fx:id="staffStatusTwo" alignment="CENTER" contentDisplay="CENTER" layoutX="524.0" layoutY="17.0" prefHeight="18.0" prefWidth="61.0" text="ACTIVE" textFill="#223c40" AnchorPane.leftAnchor="524.0" AnchorPane.topAnchor="17.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />
                </font>
@@ -230,17 +225,12 @@
                   <Image url="@../image/icons8-cheque-52%20(1).png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="510.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="12.0">
-               <image>
-                  <Image url="@../image/icons8-checked-identification-documents-64%20(1).png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
                <image>
                   <Image url="@../image/icons8-account-96%20(2).png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="editTwo" layoutX="668.0" layoutY="11.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+            <JFXButton fx:id="editTwo" layoutX="668.0" layoutY="11.0" onAction="#onClickEditTwo" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -256,17 +246,17 @@
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="340.0" prefHeight="50.0" prefWidth="901.0">
          <children>
-            <Label fx:id="staffNameThree" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+            <Label fx:id="staffNameThree" alignment="CENTER" contentDisplay="CENTER" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
-                  <Font name="Candara Bold" size="14.0" />
+                  <Font name="Candara Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="staffIdThree" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+            <Label fx:id="staffIdThree" alignment="CENTER" contentDisplay="CENTER" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="369.0" AnchorPane.rightAnchor="491.6666666666667" AnchorPane.topAnchor="14.0">
                <font>
                   <Font name="Candara Bold" size="19.0" />
                </font>
             </Label>
-            <Label fx:id="staffStatusThree" alignment="CENTER" contentDisplay="CENTER" layoutX="519.0" layoutY="17.0" text="ACTIVE" textFill="#223c40" AnchorPane.topAnchor="17.0">
+            <Label fx:id="staffStatusThree" alignment="CENTER" contentDisplay="CENTER" layoutX="523.0" layoutY="17.0" prefHeight="18.0" prefWidth="61.0" text="ACTIVE" textFill="#223c40" AnchorPane.leftAnchor="524.0" AnchorPane.topAnchor="17.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />
                </font>
@@ -276,17 +266,12 @@
                   <Image url="@../image/icons8-cheque-52%20(1).png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="510.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="12.0">
-               <image>
-                  <Image url="@../image/icons8-checked-identification-documents-64%20(1).png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
                <image>
                   <Image url="@../image/icons8-account-96%20(2).png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="editThree" layoutX="669.0" layoutY="8.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+            <JFXButton fx:id="editThree" layoutX="669.0" layoutY="8.0" onAction="#onClickEditThree" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -302,17 +287,17 @@
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="390.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
          <children>
-            <Label fx:id="staffNameFour" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+            <Label fx:id="staffNameFour" alignment="CENTER" contentDisplay="CENTER" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
-                  <Font name="Candara Bold" size="14.0" />
+                  <Font name="Candara Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="staffIdFour" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+            <Label fx:id="staffIdFour" alignment="CENTER" contentDisplay="CENTER" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="369.0" AnchorPane.rightAnchor="491.6666666666667" AnchorPane.topAnchor="14.0">
                <font>
                   <Font name="Candara Bold" size="19.0" />
                </font>
             </Label>
-            <Label fx:id="staffStatusFour" alignment="CENTER" contentDisplay="CENTER" layoutX="518.0" layoutY="17.0" text="ACTIVE" textFill="#223c40" AnchorPane.topAnchor="17.0">
+            <Label fx:id="staffStatusFour" alignment="CENTER" contentDisplay="CENTER" layoutX="523.0" layoutY="17.0" prefHeight="18.0" prefWidth="61.0" text="ACTIVE" textFill="#223c40" AnchorPane.leftAnchor="524.0" AnchorPane.topAnchor="17.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />
                </font>
@@ -322,17 +307,12 @@
                   <Image url="@../image/icons8-cheque-52%20(1).png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="510.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="12.0">
-               <image>
-                  <Image url="@../image/icons8-checked-identification-documents-64%20(1).png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
                <image>
                   <Image url="@../image/icons8-account-96%20(2).png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="editFour" layoutX="669.0" layoutY="9.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+            <JFXButton fx:id="editFour" layoutX="669.0" layoutY="9.0" onAction="#onClickEditFour" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -348,17 +328,17 @@
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="440.0" prefHeight="50.0" prefWidth="901.0">
          <children>
-            <Label fx:id="staffNameFive" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+            <Label fx:id="staffNameFive" alignment="CENTER" contentDisplay="CENTER" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
-                  <Font name="Candara Bold" size="14.0" />
+                  <Font name="Candara Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="staffIdFive" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+            <Label fx:id="staffIdFive" alignment="CENTER" contentDisplay="CENTER" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="369.0" AnchorPane.rightAnchor="491.6666666666667" AnchorPane.topAnchor="14.0">
                <font>
                   <Font name="Candara Bold" size="19.0" />
                </font>
             </Label>
-            <Label fx:id="staffStatusFive" alignment="CENTER" contentDisplay="CENTER" layoutX="519.0" layoutY="17.0" text="ACTIVE" textFill="#223c40" AnchorPane.topAnchor="17.0">
+            <Label fx:id="staffStatusFive" alignment="CENTER" contentDisplay="CENTER" layoutX="523.0" layoutY="17.0" prefHeight="18.0" prefWidth="61.0" text="ACTIVE" textFill="#223c40" AnchorPane.leftAnchor="524.0" AnchorPane.topAnchor="17.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />
                </font>
@@ -368,17 +348,12 @@
                   <Image url="@../image/icons8-cheque-52%20(1).png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="510.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="12.0">
-               <image>
-                  <Image url="@../image/icons8-checked-identification-documents-64%20(1).png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
                <image>
                   <Image url="@../image/icons8-account-96%20(2).png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="editFive" layoutX="676.0" layoutY="19.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+            <JFXButton fx:id="editFive" layoutX="676.0" layoutY="19.0" onAction="#onClickEditFive" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -394,17 +369,17 @@
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="490.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
          <children>
-            <Label fx:id="staffNameSix" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+            <Label fx:id="staffNameSix" alignment="CENTER" contentDisplay="CENTER" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
-                  <Font name="Candara Bold" size="14.0" />
+                  <Font name="Candara Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="staffIdSix" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+            <Label fx:id="staffIdSix" alignment="CENTER" contentDisplay="CENTER" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="369.0" AnchorPane.rightAnchor="491.6666666666667" AnchorPane.topAnchor="14.0">
                <font>
                   <Font name="Candara Bold" size="19.0" />
                </font>
             </Label>
-            <Label fx:id="staffStatusSix" alignment="CENTER" contentDisplay="CENTER" layoutX="519.0" layoutY="17.0" text="ACTIVE" textFill="#223c40" AnchorPane.topAnchor="17.0">
+            <Label fx:id="staffStatusSix" alignment="CENTER" contentDisplay="CENTER" layoutX="523.0" layoutY="17.0" prefHeight="18.0" prefWidth="61.0" text="ACTIVE" textFill="#223c40" AnchorPane.leftAnchor="524.0" AnchorPane.topAnchor="17.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />
                </font>
@@ -414,17 +389,12 @@
                   <Image url="@../image/icons8-cheque-52%20(1).png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="510.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="12.0">
-               <image>
-                  <Image url="@../image/icons8-checked-identification-documents-64%20(1).png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
                <image>
                   <Image url="@../image/icons8-account-96%20(2).png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="editSix" layoutX="683.0" layoutY="8.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+            <JFXButton fx:id="editSix" layoutX="683.0" layoutY="8.0" onAction="#onClickEditSix" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -440,17 +410,17 @@
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="540.0" prefHeight="50.0" prefWidth="901.0">
          <children>
-            <Label fx:id="staffNameSeven" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+            <Label fx:id="staffNameSeven" alignment="CENTER" contentDisplay="CENTER" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
-                  <Font name="Candara Bold" size="14.0" />
+                  <Font name="Candara Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="staffIdSeven" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="14.0">
+            <Label fx:id="staffIdSeven" alignment="CENTER" contentDisplay="CENTER" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="369.0" AnchorPane.rightAnchor="491.6666666666667" AnchorPane.topAnchor="14.0">
                <font>
                   <Font name="Candara Bold" size="19.0" />
                </font>
             </Label>
-            <Label fx:id="staffStatusSeven" alignment="CENTER" contentDisplay="CENTER" layoutX="521.0" layoutY="17.0" text="ACTIVE" textFill="#223c40" AnchorPane.topAnchor="18.0">
+            <Label fx:id="staffStatusSeven" alignment="CENTER" contentDisplay="CENTER" layoutX="523.0" layoutY="17.0" prefHeight="18.0" prefWidth="61.0" text="ACTIVE" textFill="#223c40" AnchorPane.leftAnchor="524.0" AnchorPane.topAnchor="18.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />
                </font>
@@ -460,17 +430,12 @@
                   <Image url="@../image/icons8-cheque-52%20(1).png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="510.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="12.0">
-               <image>
-                  <Image url="@../image/icons8-checked-identification-documents-64%20(1).png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="57.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="10.0">
                <image>
                   <Image url="@../image/icons8-account-96%20(2).png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="editSeven" layoutX="660.0" layoutY="13.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
+            <JFXButton fx:id="editSeven" layoutX="660.0" layoutY="13.0" onAction="#onClickEditSeven" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Edit" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="666.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -484,6 +449,6 @@
             </JFXButton>
          </children>
       </AnchorPane>
-      <MFXPagination fx:id="pagination" layoutX="531.0" layoutY="600.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="555.0" />
+      <MFXPagination fx:id="pagination" layoutX="531.0" layoutY="600.0" AnchorPane.bottomAnchor="8.0" />
    </children>
 </AnchorPane>
