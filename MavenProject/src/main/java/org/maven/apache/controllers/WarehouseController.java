@@ -107,6 +107,8 @@ public class WarehouseController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         itemDescriptionInDetails.setTextFormatter(new TextFormatter<String>(change ->
                 change.getControlNewText().length() <= 100 ? change : null));
+        itemNameInDetails.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 50 ? change : null));
         loadSpinner.setVisible(false);
         descriptionDialog.setVisible(false);
         warnMessage.setVisible(false);

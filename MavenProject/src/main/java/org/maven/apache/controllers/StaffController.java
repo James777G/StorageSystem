@@ -3,10 +3,14 @@ package org.maven.apache.controllers;
 import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXPagination;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
+import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.service.staff.CachedStaffService;
 import org.maven.apache.staff.Staff;
@@ -45,6 +49,18 @@ public class StaffController implements Initializable {
     @FXML
     private MFXPagination pagination;
 
+    @FXML
+    private TextField staffNameInDetails;
+
+    @FXML
+    private MFXToggleButton staffStatusInDetails;
+
+    @FXML
+    private Label staffIdInDetails;
+
+    @FXML
+    private TextArea staffDescriptionInDetails;
+
     private final Label[] nameList = new Label[7];
     private final Label[] idList = new Label[7];
     private final Label[] statusList = new Label[7];
@@ -62,10 +78,25 @@ public class StaffController implements Initializable {
 
     private int pageNumber;
 
-
+    /**
+     * Please check if text formatter has been applied
+     *
+     * @param location
+     * The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     *
+     * @param resources
+     * The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        staffDescriptionInDetails.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 100 ? change : null));
+        staffNameInDetails.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 50 ? change : null));
         staffService.updateAllCachedStaffData();
+        descriptionDialog.setVisible(false);
         loadSpinner.setVisible(false);
         getStaffList(pagination.getCurrentPage());
         calculatePageNumber();
@@ -187,46 +218,67 @@ public class StaffController implements Initializable {
         }
         return currentList;
     }
+
+    private void assignStaffDetails(){
+        staffNameInDetails.setText(selectedStaff.getStaffName());
+        staffIdInDetails.setText(Integer.valueOf(selectedStaff.getStaffID()).toString());
+        staffStatusInDetails.setSelected("ACTIVE".equals(selectedStaff.getStatus()));
+        staffDescriptionInDetails.setText(selectedStaff.getOtherInfo());
+    }
     @FXML
     private void onClickEditOne(){
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(0);
+        descriptionDialog.setVisible(true);
+        assignStaffDetails();
     }
 
     @FXML
     private void onClickEditTwo(){
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(1);
+        descriptionDialog.setVisible(true);
+        assignStaffDetails();
     }
 
     @FXML
     private void onClickEditThree(){
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(2);
+        descriptionDialog.setVisible(true);
+        assignStaffDetails();
     }
 
     @FXML
     private void onClickEditFour(){
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(3);
+        descriptionDialog.setVisible(true);
+        assignStaffDetails();
     }
 
     @FXML
     private void onClickEditFive(){
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(4);
+        descriptionDialog.setVisible(true);
+        assignStaffDetails();
     }
 
     @FXML
     private void onClickEditSix(){
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(5);
+        descriptionDialog.setVisible(true);
+        assignStaffDetails();
     }
 
     @FXML
     private void onClickEditSeven(){
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(6);
+        descriptionDialog.setVisible(true);
+        assignStaffDetails();
     }
 
     @FXML
