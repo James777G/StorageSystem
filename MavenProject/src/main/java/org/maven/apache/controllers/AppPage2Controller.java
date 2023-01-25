@@ -218,6 +218,21 @@ public class AppPage2Controller implements Initializable {
     private AnchorPane[] cargoBoxPanes = new AnchorPane[4];//{cargoBox1Pane,cargoBox2Pane,cargoBox3Pane,cargoBox4Pane};
 
     @FXML
+    private AnchorPane homeButtonBlockPane;
+
+    @FXML
+    private AnchorPane warehouseButtonBlockPane;
+
+    @FXML
+    private AnchorPane transactionButtonBlockPane;
+
+    @FXML
+    private AnchorPane staffButtonBlockPane;
+
+    @FXML
+    private AnchorPane messageButtonBlockPane;
+
+    @FXML
     private StackPane stackPane;
 
     @FXML
@@ -504,32 +519,6 @@ public class AppPage2Controller implements Initializable {
         node.setPickOnBounds(false);
     }
 
-    private void disableAllChangingPaneActions(){
-//        disableNode(appPageButton);
-//        disableNode(warehouseButton);
-//        disableNode(transactionButton);
-//        disableNode(staffButton);
-//        disableNode(messageButton);
-        appPageButton.setDisable(true);
-        warehouseButton.setDisable(true);
-        transactionButton.setDisable(true);
-        staffButton.setDisable(true);
-        messageButton.setDisable(true);
-    }
-
-    private void enableAllChangingPaneActions(){
-//        enableNode(appPageButton);
-//        enableNode(warehouseButton);
-//        enableNode(transactionButton);
-//        enableNode(staffButton);
-//        enableNode(messageButton);
-        appPageButton.setDisable(false);
-        warehouseButton.setDisable(false);
-        transactionButton.setDisable(false);
-        staffButton.setDisable(false);
-        messageButton.setDisable(false);
-    }
-
     @SuppressWarnings("all")
     private void changeButtonColorOn(CurrentPaneStatus currentPaneStatus){
         switch(currentPaneStatus){
@@ -575,6 +564,22 @@ public class AppPage2Controller implements Initializable {
         }
     }
 
+    private void blockAllSwitchPaneButton(){
+        homeButtonBlockPane.toFront();
+        warehouseButtonBlockPane.toFront();
+        transactionButtonBlockPane.toFront();
+        staffButtonBlockPane.toFront();
+        messageButtonBlockPane.toFront();
+    }
+
+    private void enableAllSwitchPaneButton(){
+        homeButtonBlockPane.toBack();
+        warehouseButtonBlockPane.toBack();
+        transactionButtonBlockPane.toBack();
+        staffButtonBlockPane.toBack();
+        messageButtonBlockPane.toBack();
+    }
+
     private void initializeLabels() {
         cargoNameLabels[0] = cargoNameLabel01;
         cargoNameLabels[1] = cargoNameLabel02;
@@ -611,12 +616,35 @@ public class AppPage2Controller implements Initializable {
     }
 
     @SuppressWarnings("all")
-    private void changePaneAnimation(CurrentPaneStatus currentPaneStatus, Node paneToDisplay){
+    private void changePaneAnimation(CurrentPaneStatus currentPaneStatus, CurrentPaneStatus switchedPaneStatus){
 //        disableAllChangingPaneActions();
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(paneToDisplay, 300, 0, 1);
+        blockAllSwitchPaneButton();
+        FadeTransition fadeTransition = new FadeTransition();
+        switch (switchedPaneStatus){
+            case HOMEPAGE -> {fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 0, 1);}
+            case WAREHOUSE -> {fadeTransition= TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 0, 1);}
+            case TRANSACTION -> {fadeTransition = TransitionUtils.getFadeTransition(stackPane, 300, 0, 1);}
+            case STAFF -> {fadeTransition= TransitionUtils.getFadeTransition(staffPane, 300, 0, 1);}
+            case MESSAGE -> {fadeTransition= TransitionUtils.getFadeTransition(messagePane, 300, 0, 1);}
+        }
+//        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(paneToDisplay, 300, 0, 1);
         fadeTransition.setOnFinished(event -> {
-            enableNode(paneToDisplay);
-//            enableAllChangingPaneActions();
+            switch(switchedPaneStatus){
+                case HOMEPAGE -> {enableNode(appPagePane);}
+                case WAREHOUSE -> {enableNode(stackPaneForWarehouse);}
+                case TRANSACTION -> {enableNode(stackPane);}
+                case STAFF -> {enableNode(staffPane);}
+                case MESSAGE -> {enableNode(messagePane);}
+            }
+//            enableNode(paneToDisplay);
+            enableAllSwitchPaneButton();
+            switch(switchedPaneStatus){
+                case HOMEPAGE -> {homeButtonBlockPane.toFront();}
+                case WAREHOUSE -> {warehouseButtonBlockPane.toFront();}
+                case TRANSACTION -> {transactionButtonBlockPane.toFront();}
+                case STAFF -> {staffButtonBlockPane.toFront();}
+                case MESSAGE -> {messageButtonBlockPane.toFront();}
+            }
         });
         FadeTransition fadeTransition1 = new FadeTransition();
         switch (currentPaneStatus){
@@ -627,6 +655,7 @@ public class AppPage2Controller implements Initializable {
             case MESSAGE -> {fadeTransition1 = TransitionUtils.getFadeTransition(messagePane, 300, 1, 0);}
         }
         //FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);
+        FadeTransition finalFadeTransition = fadeTransition;
         fadeTransition1.setOnFinished(event -> {
             switch(currentPaneStatus){
                 case HOMEPAGE -> {disableNode(appPagePane);}
@@ -635,8 +664,14 @@ public class AppPage2Controller implements Initializable {
                 case STAFF -> {disableNode(staffPane);}
                 case MESSAGE -> {disableNode(messagePane);}
             }
-            fadeTransition.play();
-            paneToDisplay.setVisible(true);
+            switch(switchedPaneStatus){
+                case HOMEPAGE -> {appPagePane.setVisible(true);}
+                case WAREHOUSE -> {stackPaneForWarehouse.setVisible(true);}
+                case TRANSACTION -> {stackPane.setVisible(true);}
+                case STAFF -> {staffPane.setVisible(true);}
+                case MESSAGE -> {messagePane.setVisible(true);}
+            }
+            finalFadeTransition.play();
         });
         fadeTransition1.play();
     }
@@ -840,7 +875,7 @@ public class AppPage2Controller implements Initializable {
     @SuppressWarnings("all")
     private void onClickWarehouseButton() {
         if (currentPaneStatus != CurrentPaneStatus.WAREHOUSE){
-            changePaneAnimation(currentPaneStatus,stackPaneForWarehouse);
+            changePaneAnimation(currentPaneStatus,CurrentPaneStatus.WAREHOUSE);
             changeButtonColorOff(currentPaneStatus);
             currentPaneStatus = CurrentPaneStatus.WAREHOUSE;
             changeButtonColorOn(currentPaneStatus);
@@ -894,7 +929,7 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void onClickStaff(){
         if(currentPaneStatus != CurrentPaneStatus.STAFF){
-            changePaneAnimation(currentPaneStatus,staffPane);
+            changePaneAnimation(currentPaneStatus,CurrentPaneStatus.STAFF);
             changeButtonColorOff(currentPaneStatus);
             currentPaneStatus = CurrentPaneStatus.STAFF;
             changeButtonColorOn(currentPaneStatus);
@@ -1086,7 +1121,7 @@ public class AppPage2Controller implements Initializable {
     @SuppressWarnings("all")
     private void onClickAppPageButton() {
         if (currentPaneStatus != CurrentPaneStatus.HOMEPAGE){
-            changePaneAnimation(currentPaneStatus,appPagePane);
+            changePaneAnimation(currentPaneStatus,CurrentPaneStatus.HOMEPAGE);
             changeButtonColorOff(currentPaneStatus);
             currentPaneStatus = CurrentPaneStatus.HOMEPAGE;
             changeButtonColorOn(currentPaneStatus);
@@ -1146,7 +1181,7 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void onClickMessage(){
         if (currentPaneStatus != CurrentPaneStatus.MESSAGE){
-            changePaneAnimation(currentPaneStatus,messagePane);
+            changePaneAnimation(currentPaneStatus,CurrentPaneStatus.MESSAGE);
             changeButtonColorOff(currentPaneStatus);
             currentPaneStatus = CurrentPaneStatus.MESSAGE;
             changeButtonColorOn(currentPaneStatus);
@@ -1221,14 +1256,14 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onEnterHome(){
-        if(currentPaneStatus != CurrentPaneStatus.HOMEPAGE) {
+        if(currentPaneStatus != CurrentPaneStatus.HOMEPAGE){
             changeButtonColorOn(CurrentPaneStatus.HOMEPAGE);
         }
     }
 
     @FXML
     private void onExitHome(){
-        if(currentPaneStatus != CurrentPaneStatus.HOMEPAGE) {
+        if(currentPaneStatus != CurrentPaneStatus.HOMEPAGE){
             changeButtonColorOff(CurrentPaneStatus.HOMEPAGE);
         }
     }
@@ -1244,7 +1279,7 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void exitWarehouseButton() {
 //        warehouseButton.setOpacity(0);
-        if(currentPaneStatus != CurrentPaneStatus.WAREHOUSE) {
+        if(currentPaneStatus != CurrentPaneStatus.WAREHOUSE){
             changeButtonColorOff(CurrentPaneStatus.WAREHOUSE);
         }
     }
@@ -1276,7 +1311,7 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void exitTransactionButton() {
 //        transactionButton.setOpacity(0);
-        if(currentPaneStatus != CurrentPaneStatus.TRANSACTION) {
+        if(currentPaneStatus != CurrentPaneStatus.TRANSACTION){
             changeButtonColorOff(CurrentPaneStatus.TRANSACTION);
         }
     }
@@ -1327,7 +1362,7 @@ public class AppPage2Controller implements Initializable {
     @SuppressWarnings("all")
     private void onClickTransaction() {
         if (currentPaneStatus != CurrentPaneStatus.TRANSACTION){
-            changePaneAnimation(currentPaneStatus,stackPane);
+            changePaneAnimation(currentPaneStatus,CurrentPaneStatus.TRANSACTION);
             changeButtonColorOff(currentPaneStatus);
             currentPaneStatus = CurrentPaneStatus.TRANSACTION;
             changeButtonColorOn(currentPaneStatus);
