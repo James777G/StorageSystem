@@ -5,26 +5,33 @@ import io.github.palexdev.materialfx.controls.MFXPagination;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
+import javafx.animation.ScaleTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.layout.AnchorPane;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.service.staff.CachedStaffService;
 import org.maven.apache.staff.Staff;
+import org.maven.apache.utils.ScaleUtils;
 import org.maven.apache.utils.StaffCachedUtils;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
 
 public class StaffController implements Initializable {
 
     private enum Status{
         ACTIVE, ALL, INACTIVE
     }
+
+    private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
 
     private final CachedStaffService staffService = MyLauncher.context.getBean("staffService", CachedStaffService.class);
 
@@ -60,6 +67,12 @@ public class StaffController implements Initializable {
 
     @FXML
     private TextArea staffDescriptionInDetails;
+
+    @FXML
+    private AnchorPane addButton;
+
+    @FXML
+    private JFXButton applyButton;
 
     private final Label[] nameList = new Label[7];
     private final Label[] idList = new Label[7];
@@ -285,5 +298,54 @@ public class StaffController implements Initializable {
     private void onCloseDescription(){
         descriptionDialog.setVisible(false);
         loadSpinner.setVisible(false);
+    }
+
+    @FXML
+    private void onClickAddButton(){
+
+    }
+
+    @FXML
+    private void onEnterAddButton(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(addButton, 500, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitAddButton(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(addButton, 500, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onClickOkay(){
+        onCloseDescription();
+    }
+
+    @FXML
+    private void onClickApply(){
+        applyButton.setVisible(false);
+        loadSpinner.setVisible(true);
+        executorService.execute(() -> {
+            Staff staff = encapsulateCurrentStaffData();
+            staffService.updateTransaction(staff);
+            getStaffList(pagination.getCurrentPage());
+            Platform.runLater(() -> {
+                assignStaffValue();
+                loadSpinner.setVisible(false);
+                applyButton.setVisible(true);
+            });
+        });
+    }
+
+    private Staff encapsulateCurrentStaffData(){
+        Staff staff = new Staff();
+        staff.setStaffName(staffNameInDetails.getText());
+        staff.setStaffID(Integer.parseInt(staffIdInDetails.getText()));
+        staff.setOtherInfo(staffDescriptionInDetails.getText());
+        staff.setStatus(staffStatusInDetails.isSelected() ? "ACTIVE" : "INACTIVE");
+        return staff;
     }
 }
