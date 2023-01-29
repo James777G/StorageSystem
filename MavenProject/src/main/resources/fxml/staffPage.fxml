@@ -6,6 +6,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
@@ -98,7 +99,7 @@
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="240.0" prefHeight="50.0" prefWidth="901.0">
          <children>
-            <Label fx:id="staffNameOne" alignment="CENTER" contentDisplay="CENTER" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+            <Label fx:id="staffNameOne" alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="17.0" prefHeight="18.0" prefWidth="146.0" textFill="#223c40" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="17.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />
                </font>
@@ -139,7 +140,7 @@
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="290.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
          <children>
-            <Label fx:id="staffNameTwo" alignment="CENTER" contentDisplay="CENTER" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+            <Label fx:id="staffNameTwo" alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="17.0" prefHeight="18.0" prefWidth="146.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="17.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />
                </font>
@@ -180,7 +181,7 @@
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="340.0" prefHeight="50.0" prefWidth="901.0">
          <children>
-            <Label fx:id="staffNameThree" alignment="CENTER" contentDisplay="CENTER" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+            <Label fx:id="staffNameThree" alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="17.0" prefHeight="18.0" prefWidth="146.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="17.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />
                </font>
@@ -221,7 +222,7 @@
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="390.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
          <children>
-            <Label fx:id="staffNameFour" alignment="CENTER" contentDisplay="CENTER" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+            <Label fx:id="staffNameFour" alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="17.0" prefHeight="18.0" prefWidth="146.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="17.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />
                </font>
@@ -262,7 +263,7 @@
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="440.0" prefHeight="50.0" prefWidth="901.0">
          <children>
-            <Label fx:id="staffNameFive" alignment="CENTER" contentDisplay="CENTER" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+            <Label fx:id="staffNameFive" alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="17.0" prefHeight="18.0" prefWidth="146.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="17.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />
                </font>
@@ -303,7 +304,7 @@
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="490.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
          <children>
-            <Label fx:id="staffNameSix" alignment="CENTER" contentDisplay="CENTER" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+            <Label fx:id="staffNameSix" alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="17.0" prefHeight="18.0" prefWidth="146.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="17.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />
                </font>
@@ -344,7 +345,7 @@
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="540.0" prefHeight="50.0" prefWidth="901.0">
          <children>
-            <Label fx:id="staffNameSeven" alignment="CENTER" contentDisplay="CENTER" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
+            <Label fx:id="staffNameSeven" alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="17.0" prefHeight="18.0" prefWidth="146.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="17.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />
                </font>
@@ -384,6 +385,34 @@
          </children>
       </AnchorPane>
       <MFXPagination fx:id="pagination" layoutX="531.0" layoutY="600.0" AnchorPane.bottomAnchor="8.0" />
+      <AnchorPane layoutX="1108.0" layoutY="534.0" prefHeight="80.0" prefWidth="60.0" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="20.0">
+         <children>
+            <AnchorPane fx:id="addButton" layoutX="4.0" layoutY="8.0" onMouseClicked="#onClickAddButton" onMouseEntered="#onEnterAddButton" onMouseExited="#onExitAddButton" pickOnBounds="false" prefHeight="60.0" prefWidth="60.0" styleClass="addPane" stylesheets="@../css/transactionPage.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX">
+                     <color>
+                        <Color red="0.6196078658103943" green="0.6196078658103943" blue="0.6196078658103943" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="10.0" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-add-new-96.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="59.0" prefHeight="18.0" prefWidth="41.0" text="STAFF" textFill="#b33d18" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="9.0">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
       <MFXGenericDialog fx:id="descriptionDialog" headerText="Item Details" layoutX="492.0" onClose="#onCloseDescription" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="150.0">
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -421,12 +450,12 @@
                         <Font name="Calibri Bold Italic" size="13.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="403.0" layoutY="254.0" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #e9e9e9;" text="Okay">
+                  <JFXButton layoutX="403.0" layoutY="254.0" onAction="#onClickOkay" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #e9e9e9;" text="Okay">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="applyButton" layoutX="487.0" layoutY="254.0" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #223c40;" text="Apply" textFill="WHITE">
+                  <JFXButton fx:id="applyButton" layoutX="487.0" layoutY="254.0" onAction="#onClickApply" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #223c40;" text="Apply" textFill="WHITE">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
