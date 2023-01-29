@@ -15,6 +15,7 @@ import java.util.List;
 
 @Service("staffService")
 @Data
+@Transactional
 public class ControllerOrientedCachedStaffHandler implements CachedStaffService{
 
     @Resource
