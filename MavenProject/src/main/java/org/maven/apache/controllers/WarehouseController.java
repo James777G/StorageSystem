@@ -12,6 +12,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import org.maven.apache.MyLauncher;
+import org.maven.apache.exception.EmptyValueException;
 import org.maven.apache.item.Item;
 import org.maven.apache.service.item.ItemService;
 import org.maven.apache.utils.DataUtils;
@@ -225,21 +226,24 @@ public class WarehouseController implements Initializable {
     @FXML
     private void onClickApply() {
         warnMessage.setVisible(false);
-        Item item = encapsulateItemData();
-        if (item.equals(selectedItem)) {
-            return;
-        }
-        if (itemNameInDetails.getText().isEmpty()) {
+        Item item = null;
+        try {
+            item = encapsulateItemData();
+        } catch (EmptyValueException e) {
             warnMessage.setVisible(true);
             return;
         }
+        if (item.equals(selectedItem)) {
+            return;
+        }
+        Item finalItem = item;
         executorService.execute(() -> {
             Platform.runLater(() -> {
                 applyButton.setVisible(false);
                 loadSpinner.setVisible(true);
             });
             try {
-                itemService.update(item);
+                itemService.update(finalItem);
                 generateCachedData();
                 int currentPage = pagination.getCurrentPage() - 1;
                 generateItemList(currentPage);
@@ -273,10 +277,16 @@ public class WarehouseController implements Initializable {
      *
      * @return item object containing all the attributes
      */
-    private Item encapsulateItemData() {
+    private Item encapsulateItemData() throws EmptyValueException {
         Item item = new Item();
         item.setItemID(Integer.parseInt(itemIdInDetails.getText()));
+        if(itemNameInDetails.getText().isEmpty()){
+            throw new EmptyValueException("empty item name detected");
+        }
         item.setItemName(itemNameInDetails.getText());
+        if(itemAmountInDetails.getText().isEmpty()){
+            throw new EmptyValueException("empty item amount detected");
+        }
         item.setUnit(Integer.parseInt(itemAmountInDetails.getText()));
         item.setDescription(itemDescriptionInDetails.getText());
         return item;

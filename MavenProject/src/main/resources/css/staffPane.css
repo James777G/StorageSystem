@@ -1,0 +1,15 @@
+.lineStyleInputField{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #acacac transparent;
+    -fx-padding: 0 0 0 0px;
+}
+.lineStyleInputField:focused{
+    -fx-border-color: transparent transparent #223c40 transparent;
+}
+
+.lineStyleTextArea{
+    -fx-border-color: #acacac;
+}
+.lineStyleTextArea:focused{
+    -fx-border-color: #223c40;
+}
