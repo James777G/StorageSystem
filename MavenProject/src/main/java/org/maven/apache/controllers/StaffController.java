@@ -559,6 +559,13 @@ public class StaffController implements Initializable {
 
     }
 
+    /**
+     * This method is responsible for encapsulating all the displayed data in the addition pane
+     * {@link #addStaffPane}, and provide the encapsulated object to {@link #staffService}
+     *
+     * @return a Staff object containing all the information for update action.
+     * @throws EmptyValueException some not-null values are left empty
+     */
     private Staff encapsulateStaffDataInAdd() throws EmptyValueException {
         Staff staff = new Staff();
         if (staffNameInAdd.getText().isEmpty()){
