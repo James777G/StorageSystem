@@ -39,4 +39,20 @@ public interface CachedManipulationService {
      *         in the other list(represents the paged cache list - the index of the list is pageNumber - 1)
      */
     List<List<Transaction>> getPagedCacheList(List<Transaction> cachedList,int pageSize);
+
+  /**
+   * This method is used to return a list consist of restock transactions only from an all transaction list
+   *
+   * @param allList a list contains both restock and taken transactions
+   * @return a list contains restock transactions only
+   */
+  List<Transaction> getRestockList(List<Transaction> allList);
+
+  /**
+   * This method is used to return a list consist of taken transactions only from an all transaction list
+   *
+   * @param allList a list contains both restock and taken transactions
+   * @return a list contains taken transactions only
+   */
+  List<Transaction> getTakenList(List<Transaction> allList);
 }

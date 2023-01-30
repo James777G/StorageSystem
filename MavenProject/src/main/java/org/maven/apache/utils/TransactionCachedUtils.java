@@ -11,6 +11,8 @@ import java.util.Map;
 
 public class TransactionCachedUtils {
     public enum listType {
+        RESTOCK_Amount_ASC_4,RESTOCK_Amount_DESC_4,RESTOCK_DATE_ASC_4,RESTOCK_DATE_DESC_4,
+        TAKEN_Amount_ASC_4,TAKEN_Amount_DESC_4,TAKEN_DATE_ASC_4,TAKEN_DATE_DESC_4,
         AMOUNT_ASC_4, AMOUNT_DESC_4, AMOUNT_ASC_7, AMOUNT_DESC_7,
         DATE_ASC_4, DATE_DESC_4, DATE_ASC_7, DATE_DESC_7
     }

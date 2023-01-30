@@ -1,10 +1,15 @@
 package org.maven.apache.service.transaction;
 
+import org.maven.apache.mapper.TransactionMapper;
 import org.maven.apache.transaction.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.function.Consumer;
 
 @Service("cachedManipulationService")
 public class CachedManipulationServiceProvider implements CachedManipulationService {
@@ -56,5 +61,25 @@ public class CachedManipulationServiceProvider implements CachedManipulationServ
         return pagedCachedList;
     }
 
+    @Override
+    public List<Transaction> getRestockList(List<Transaction> allList) {
+        List<Transaction> restockList = new ArrayList<>();
+        allList
+                .forEach(transaction -> {
+                    if(Objects.equals(transaction.getStatus(), "RESTOCK")) { restockList.add(transaction);} ;
+                });
+        return restockList;
+    }
+
+    @Override
+    public List<Transaction> getTakenList(List<Transaction> allList) {
+        List<Transaction> takenList = new ArrayList<>();
+        allList
+                .forEach(transaction -> {
+                    if(Objects.equals(transaction.getStatus(), "TAKEN")) { takenList.add(transaction);} ;
+                });
+        return takenList;
+    }
+    
 
 }
