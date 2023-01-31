@@ -303,6 +303,21 @@ public class WarehouseController implements Initializable {
         setItemList(items);
     }
 
+    @FXML
+    private void onClickAddButton(){
+
+    }
+
+    @FXML
+    private void onEnterAddButton(){
+
+    }
+
+    @FXML
+    private void onExitAddButton(){
+
+    }
+
     /**
      * this method sets the attributes of the description dialog when check button
      * is clicked

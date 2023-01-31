@@ -5,6 +5,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
@@ -485,5 +486,33 @@
             </AnchorPane>
          </center>
       </MFXGenericDialog>
+      <AnchorPane layoutX="1075.0" layoutY="511.0" prefHeight="80.0" prefWidth="60.0" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="20.0">
+         <children>
+            <AnchorPane fx:id="addButton" layoutX="4.0" layoutY="8.0" onMouseClicked="#onClickAddButton" onMouseEntered="#onEnterAddButton" onMouseExited="#onExitAddButton" pickOnBounds="false" prefHeight="60.0" prefWidth="60.0" styleClass="addPane" stylesheets="@../css/transactionPage.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX">
+                     <color>
+                        <Color red="0.6196078658103943" green="0.6196078658103943" blue="0.6196078658103943" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="10.0" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-add-new-96.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="59.0" prefHeight="18.0" prefWidth="41.0" text="STAFF" textFill="#b33d18" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="9.0">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

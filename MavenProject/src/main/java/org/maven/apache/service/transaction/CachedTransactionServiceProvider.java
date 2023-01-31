@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-@Service
+@Service("cachedTransactionService")
 @Data
 public class CachedTransactionServiceProvider implements CachedTransactionService {
 
