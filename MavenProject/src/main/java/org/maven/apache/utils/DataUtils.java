@@ -29,7 +29,7 @@ public class DataUtils {
 
     public static MFXGenericDialog publicSettingsDialog;
 
-    public static List<List<Item>> publicCachedWarehouseTableData = new ArrayList<>();
+//    public static List<List<Item>> publicCachedWarehouseTableData = new ArrayList<>();
 
 
 }

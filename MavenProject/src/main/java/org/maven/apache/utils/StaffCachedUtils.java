@@ -13,7 +13,7 @@ public class StaffCachedUtils {
         ALL, ACTIVE, INACTIVE
     }
 
-    private static Map<listType, List<List<Staff>>> staffMap = new HashMap<listType, List<List<Staff>>>();
+    private static final Map<listType, List<List<Staff>>> staffMap = new HashMap<listType, List<List<Staff>>>();
 
     public static void putLists(listType type, List<List<Staff>> lists) {
         staffMap.put(type, lists);

@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXPagination;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
+import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,28 +12,26 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.layout.AnchorPane;
+import lombok.extern.slf4j.Slf4j;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.exception.EmptyValueException;
 import org.maven.apache.item.Item;
+import org.maven.apache.service.item.CachedItemService;
 import org.maven.apache.service.item.ItemService;
+import org.maven.apache.utils.CargoCachedUtils;
 import org.maven.apache.utils.DataUtils;
+import org.maven.apache.utils.ScaleUtils;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 
-/**
- * Controller of the warehouse page
- *
- * <p>
- *     Author: James Gong
- *     Date: 1/13/2023
- * </p>
- */
+
 public class WarehouseController implements Initializable {
 
-    private final ItemService itemService = MyLauncher.context.getBean("itemService", ItemService.class);
+    private final CachedItemService cachedItemService = MyLauncher.context.getBean("cachedItemService", CachedItemService.class);
 
     private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
 
@@ -75,6 +74,12 @@ public class WarehouseController implements Initializable {
     @FXML
     private MFXProgressSpinner loadSpinner;
 
+    @FXML
+    private AnchorPane addButton;
+
+    @FXML
+    private AnchorPane addItemPane;
+
     private int pageSize;
 
     private Item[] itemList = new Item[7];
@@ -106,6 +111,7 @@ public class WarehouseController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        cachedItemService.updateAllCachedItemData();
         itemDescriptionInDetails.setTextFormatter(new TextFormatter<String>(change ->
                 change.getControlNewText().length() <= 100 ? change : null));
         itemNameInDetails.setTextFormatter(new TextFormatter<String>(change ->
@@ -243,7 +249,7 @@ public class WarehouseController implements Initializable {
                 loadSpinner.setVisible(true);
             });
             try {
-                itemService.update(finalItem);
+                cachedItemService.updateItem(finalItem);
                 generateCachedData();
                 int currentPage = pagination.getCurrentPage() - 1;
                 generateItemList(currentPage);
@@ -292,6 +298,16 @@ public class WarehouseController implements Initializable {
         return item;
     }
 
+    @FXML
+    private void onClickApplyInAdd(){
+
+    }
+
+    @FXML
+    private void onClickOkayInAdd(){
+        addItemPane.setVisible(false);
+    }
+
     /**
      * this method acts as an initializer of the item list and should only be used in
      * initialize method
@@ -299,7 +315,7 @@ public class WarehouseController implements Initializable {
     @Deprecated
     @SuppressWarnings("all")
     private void initializeItemList() {
-        List<Item> items = DataUtils.publicCachedWarehouseTableData.get(0);
+        List<Item> items = CargoCachedUtils.getLists(CargoCachedUtils.listType.All).get(0);
         setItemList(items);
     }
 
@@ -308,14 +324,26 @@ public class WarehouseController implements Initializable {
 
     }
 
+    /**
+     * This method is responsible for half of the hovering animation for {@link #addButton}
+     * when mouse is entered.
+     */
     @FXML
     private void onEnterAddButton(){
-
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(addButton, 500, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
     }
 
+    /**
+     * This method is responsible for half of the hovering animation for {@link #addButton}
+     * when mouse is exited.
+     */
     @FXML
     private void onExitAddButton(){
-
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(addButton, 500, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
     }
 
     /**
@@ -389,8 +417,7 @@ public class WarehouseController implements Initializable {
      * Return the maximum number of pages of the current data
      */
     private void calculatePageSize() {
-        List<Item> items = itemService.selectAll();
-        pageSize = (items.size() / 7) + 1;
+        pageSize = CargoCachedUtils.getLists(CargoCachedUtils.listType.All).size();
     }
 
     /**
@@ -414,7 +441,7 @@ public class WarehouseController implements Initializable {
      * @param index page number to be displayed
      */
     private void generateItemList(int index) {
-        List<Item> items = DataUtils.publicCachedWarehouseTableData.get(index);
+        List<Item> items = CargoCachedUtils.getLists(CargoCachedUtils.listType.All).get(index);
         setItemList(items);
     }
 
@@ -469,10 +496,6 @@ public class WarehouseController implements Initializable {
      */
     public void generateCachedData() {
         calculatePageSize();
-        DataUtils.publicCachedWarehouseTableData.clear();
-        for (int i = 1; i <= pageSize; i++) {
-            List<Item> items = itemService.pageAskedNOOrder(i, 7);
-            DataUtils.publicCachedWarehouseTableData.add(items);
-        }
+        cachedItemService.updateAllCachedItemData();
     }
 }
