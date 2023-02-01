@@ -25,7 +25,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.maven.apache.MyLauncher;
-import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.exception.Warning;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
 import org.maven.apache.service.excel.ExcelConverterService;
@@ -34,14 +33,10 @@ import org.maven.apache.service.user.UserService;
 import org.maven.apache.transaction.Transaction;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.*;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -406,7 +401,7 @@ public class AppPage2Controller implements Initializable {
 
     private int restockBoxNumber = 2;
 
-    private Transaction dateTransactionSelected;
+    private Transaction transaction;
 
     public AppPage2Controller() throws IOException {
     }
@@ -888,7 +883,7 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onCloseTransactionDialog() {
-        dateTransactionSelected = null;
+        transaction = null;
         transactionDialog.setVisible(false);
     }
 
@@ -1704,8 +1699,8 @@ public class AppPage2Controller implements Initializable {
     @SuppressWarnings("all")
     private void setTransactionId(Label label , Transaction transaction){
         String string = Integer.valueOf(transaction.getID()).toString();
-        int zeroFill = 6 - string.length();
-        if (string.length() < 6){
+        int zeroFill = 4 - string.length();
+        if (string.length() < 4){
             for (int i = 0 ; i < zeroFill ; i++){
                 string = "0" + string;
             }
@@ -1749,32 +1744,32 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onClickTransactionOne() {
-        dateTransactionSelected = dateTransactionListInAppPage[0];
+        transaction = dateTransactionListInAppPage[0];
         setTransactionDialog(dateTransactionListInAppPage[0]);
     }
 
     @FXML
     private void onClickTransactionTwo() {
-        dateTransactionSelected = dateTransactionListInAppPage[1];
+        transaction = dateTransactionListInAppPage[1];
         setTransactionDialog(dateTransactionListInAppPage[1]);
     }
 
     @FXML
     private void onClickTransactionThree() {
-        dateTransactionSelected = dateTransactionListInAppPage[2];
+        transaction = dateTransactionListInAppPage[2];
         setTransactionDialog(dateTransactionListInAppPage[2]);
     }
 
     @FXML
     private void onClickTransactionFour() {
-        dateTransactionSelected = dateTransactionListInAppPage[3];
+        transaction = dateTransactionListInAppPage[3];
         setTransactionDialog(dateTransactionListInAppPage[3]);
     }
 
     @FXML
     private void onClickApply() {
-//        dateTransactionSelected.setItemName(transactionNameInDetails.getText());
-//        dateTransactionSelected.setStaffName(staffNameInDetails.getText());
+//        transaction.setItemName(transactionNameInDetails.getText());
+//        transaction.setStaffName(staffNameInDetails.getText());
 //        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 //        LocalDate value = transactionDateInDetails.getValue();
 //        String format = value.format(dateTimeFormatter);
