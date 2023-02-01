@@ -13,14 +13,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.AnchorPane;
-import lombok.extern.slf4j.Slf4j;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.exception.EmptyValueException;
+import org.maven.apache.exception.Warning;
 import org.maven.apache.item.Item;
 import org.maven.apache.service.item.CachedItemService;
-import org.maven.apache.service.item.ItemService;
 import org.maven.apache.utils.CargoCachedUtils;
-import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.ScaleUtils;
 
 import java.net.URL;
@@ -80,9 +78,27 @@ public class WarehouseController implements Initializable {
     @FXML
     private AnchorPane addItemPane;
 
+    @FXML
+    private MFXProgressSpinner loadSpinnerInAdd;
+
+    @FXML
+    private TextField itemAmountInAdd;
+
+    @FXML
+    private TextField itemNameInAdd;
+
+    @FXML
+    private TextArea itemDescriptionInAdd;
+
+    @FXML
+    private Label warnMessageInAdd;
+
+    @FXML
+    private JFXButton applyButtonInAdd;
+
     private int pageSize;
 
-    private Item[] itemList = new Item[7];
+    private List<Item> itemList;
 
     private final Label[] nameList = new Label[7];
 
@@ -90,10 +106,11 @@ public class WarehouseController implements Initializable {
 
     private final Label[] amountList = new Label[7];
 
-    @SuppressWarnings("all")
+
     private final JFXButton[] buttonList = new JFXButton[7];
 
     private Item selectedItem;
+
 
     /**
      * 1. sets up the word limit for description input field inside the description dialog
@@ -128,6 +145,9 @@ public class WarehouseController implements Initializable {
         pagination.setMaxPage(pageSize);
         initializeItemList();
         setTableContents();
+        loadSpinnerInAdd.setVisible(false);
+        addItemPane.setVisible(false);
+        warnMessageInAdd.setVisible(false);
         pagination.currentPageProperty().addListener((observable, oldValue, newValue) -> executorService.execute(() -> {
             generateItemList(newValue.intValue() - 1);
             Platform.runLater(WarehouseController.this::setTableContents);
@@ -139,9 +159,7 @@ public class WarehouseController implements Initializable {
      */
     @FXML
     private void onClickCheckOne() {
-        if (itemList[0] != null) {
-            setItemAttributes(itemList[0]);
-        }
+        setItemAttributes(itemList.get(0));
     }
 
     /**
@@ -149,8 +167,8 @@ public class WarehouseController implements Initializable {
      */
     @FXML
     private void onClickCheckTwo() {
-        if (itemList[1] != null) {
-            setItemAttributes(itemList[1]);
+        if (itemList.get(1) != null) {
+            setItemAttributes(itemList.get(1));
         }
     }
 
@@ -159,8 +177,8 @@ public class WarehouseController implements Initializable {
      */
     @FXML
     private void onClickCheckThree() {
-        if (itemList[2] != null) {
-            setItemAttributes(itemList[2]);
+        if (itemList.get(2) != null) {
+            setItemAttributes(itemList.get(2));
         }
     }
 
@@ -169,8 +187,8 @@ public class WarehouseController implements Initializable {
      */
     @FXML
     private void onClickCheckFour() {
-        if (itemList[3] != null) {
-            setItemAttributes(itemList[3]);
+        if (itemList.get(3) != null) {
+            setItemAttributes(itemList.get(3));
         }
     }
 
@@ -179,8 +197,8 @@ public class WarehouseController implements Initializable {
      */
     @FXML
     private void onClickCheckFive() {
-        if (itemList[4] != null) {
-            setItemAttributes(itemList[4]);
+        if (itemList.get(4) != null) {
+            setItemAttributes(itemList.get(4));
         }
     }
 
@@ -189,8 +207,8 @@ public class WarehouseController implements Initializable {
      */
     @FXML
     private void onClickCheckSix() {
-        if (itemList[5] != null) {
-            setItemAttributes(itemList[5]);
+        if (itemList.get(5) != null) {
+            setItemAttributes(itemList.get(5));
         }
     }
 
@@ -199,8 +217,8 @@ public class WarehouseController implements Initializable {
      */
     @FXML
     private void onClickCheckSeven() {
-        if (itemList[6] != null) {
-            setItemAttributes(itemList[6]);
+        if (itemList.get(6) != null) {
+            setItemAttributes(itemList.get(6));
         }
     }
 
@@ -232,7 +250,7 @@ public class WarehouseController implements Initializable {
     @FXML
     private void onClickApply() {
         warnMessage.setVisible(false);
-        Item item = null;
+        Item item;
         try {
             item = encapsulateItemData();
         } catch (EmptyValueException e) {
@@ -299,13 +317,54 @@ public class WarehouseController implements Initializable {
     }
 
     @FXML
-    private void onClickApplyInAdd(){
+    @Warning(Warning.WarningType.DEBUG)
+    private void onClickApplyInAdd() {
+        Item item;
+        try {
+            item = encapsulateCurrentItemInAdd();
+        } catch (Exception e) {
+            warnMessageInAdd.setVisible(true);
+            return;
+        }
+        applyButtonInAdd.setVisible(false);
+        loadSpinnerInAdd.setVisible(true);
+        executorService.execute(() -> {
+            try {
+                cachedItemService.addNewItem(item);
+                generateItemList(pagination.getCurrentPage() - 1);
+                Platform.runLater(() -> {
+                    calculatePageSize();
+                    setTableContents();
+                    warnMessageInAdd.setVisible(false);
+                });
+            } catch(Exception e){
+                warnMessageInAdd.setVisible(true);
+            } finally {
+                loadSpinnerInAdd.setVisible(false);
+                applyButtonInAdd.setVisible(true);
+            }
+        });
 
+
+    }
+
+    private Item encapsulateCurrentItemInAdd() throws EmptyValueException {
+        Item item = new Item();
+        if(itemNameInAdd.getText().isBlank() || itemAmountInAdd.getText().isBlank()){
+            throw new EmptyValueException("Input Value for item name/amount is empty or blank");
+        } else {
+            item.setItemName(itemNameInAdd.getText());
+            item.setUnit(Integer.parseInt(itemAmountInAdd.getText()));
+            item.setDescription(itemDescriptionInAdd.getText());
+        }
+        return item;
     }
 
     @FXML
     private void onClickOkayInAdd(){
         addItemPane.setVisible(false);
+        warnMessageInAdd.setVisible(false);
+        loadSpinnerInAdd.setVisible(false);
     }
 
     /**
@@ -315,13 +374,12 @@ public class WarehouseController implements Initializable {
     @Deprecated
     @SuppressWarnings("all")
     private void initializeItemList() {
-        List<Item> items = CargoCachedUtils.getLists(CargoCachedUtils.listType.All).get(0);
-        setItemList(items);
+        itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.All).get(0);
     }
 
     @FXML
     private void onClickAddButton(){
-
+        addItemPane.setVisible(true);
     }
 
     /**
@@ -418,22 +476,9 @@ public class WarehouseController implements Initializable {
      */
     private void calculatePageSize() {
         pageSize = CargoCachedUtils.getLists(CargoCachedUtils.listType.All).size();
+        pagination.setMaxPage(pageSize);
     }
 
-    /**
-     * format conversion
-     * deprecated and should not be used
-     *
-     * @param items calculated items (from cached data)
-     */
-    @Deprecated
-    @SuppressWarnings("all")
-    private void setItemList(List<Item> items) {
-        itemList = new Item[7];
-        for (int i = 0; i < items.size(); i++) {
-            itemList[i] = items.get(i);
-        }
-    }
 
     /**
      * This method sets the latest item list based on the latest cached data
@@ -441,8 +486,7 @@ public class WarehouseController implements Initializable {
      * @param index page number to be displayed
      */
     private void generateItemList(int index) {
-        List<Item> items = CargoCachedUtils.getLists(CargoCachedUtils.listType.All).get(index);
-        setItemList(items);
+        itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.All).get(index);
     }
 
     /**
@@ -452,16 +496,27 @@ public class WarehouseController implements Initializable {
         setNameContent();
         setIdContent();
         setAmountContent();
+        setButtonContent();
+    }
+
+    private void setButtonContent(){
+        for(int j = 0; j < itemList.size(); j++){
+            buttonList[j].setDisable(false);
+        }
+        for(int i = itemList.size(); i < buttonList.length; i++){
+            buttonList[i].setDisable(true);
+        }
     }
 
     /**
      * update name content in the table
      */
     private void setNameContent() {
-        for (int i = 0; i < nameList.length; i++) {
-            if (itemList[i] != null) {
-                nameList[i].setText(itemList[i].getItemName());
-            }
+        for(int i = 0; i < itemList.size(); i++){
+            nameList[i].setText(itemList.get(i).getItemName());
+        }
+        for(int j = itemList.size(); j < nameList.length; j++){
+            nameList[j].setText("N/A");
         }
     }
 
@@ -469,10 +524,11 @@ public class WarehouseController implements Initializable {
      * update id content in the table
      */
     private void setIdContent() {
-        for (int i = 0; i < idList.length; i++) {
-            if (itemList[i] != null) {
-                idList[i].setText(itemList[i].getItemID().toString());
-            }
+        for (int i = 0; i < itemList.size(); i++) {
+            idList[i].setText(itemList.get(i).getItemID().toString());
+        }
+        for(int j = itemList.size(); j < idList.length; j++){
+            idList[j].setText("N/A");
         }
     }
 
@@ -480,10 +536,11 @@ public class WarehouseController implements Initializable {
      * update amount content in the table
      */
     private void setAmountContent() {
-        for (int i = 0; i < amountList.length; i++) {
-            if (itemList[i] != null) {
-                amountList[i].setText(itemList[i].getUnit().toString());
-            }
+        for (int i = 0; i < itemList.size(); i++) {
+            amountList[i].setText(itemList.get(i).getUnit().toString());
+        }
+        for(int j = itemList.size(); j < amountList.length; j++){
+            amountList[j].setText("N/A");
         }
     }
 
