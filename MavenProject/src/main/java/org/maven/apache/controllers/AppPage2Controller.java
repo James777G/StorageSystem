@@ -1799,7 +1799,7 @@ public class AppPage2Controller implements Initializable {
 //        encapsulatedTransaction.setItemName(transactionNameInDetails.getText().trim());
         generateEncapsulatedTransaction();
         if (!Objects.equals(encapsulatedTransaction,transaction)){
-            cachedTransactionService.updateTransaction(transaction);
+            cachedTransactionService.updateTransaction(encapsulatedTransaction);
         }
     }
 
