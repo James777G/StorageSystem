@@ -28,14 +28,21 @@ import org.maven.apache.MyLauncher;
 import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
 import org.maven.apache.service.excel.ExcelConverterService;
+import org.maven.apache.service.transaction.CachedTransactionService;
 import org.maven.apache.service.user.UserService;
+import org.maven.apache.transaction.Transaction;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.*;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -233,6 +240,12 @@ public class AppPage2Controller implements Initializable {
     private AnchorPane messageButtonBlockPane;
 
     @FXML
+    private  AnchorPane transactionDialogTakenActionPane;
+
+    @FXML
+    private  AnchorPane transactionDialogRestockActionPane;
+
+    @FXML
     private StackPane stackPane;
 
     @FXML
@@ -304,8 +317,6 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private Label redTakenLabel;
 
-    @FXML
-    private TextField transactionTimeInDetails;
 
     @FXML
     private TextField transactionNameInDetails;
@@ -382,6 +393,8 @@ public class AppPage2Controller implements Initializable {
 
     private Node currentPage;
 
+    private final CachedTransactionService cachedTransactionService = MyLauncher.context.getBean("cachedTransactionService",CachedTransactionService.class);
+
     private final DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
 
     private final UserService userService = MyLauncher.context.getBean("userService", UserService.class);
@@ -390,7 +403,7 @@ public class AppPage2Controller implements Initializable {
 
     private int restockBoxNumber = 2;
 
-    private DateTransaction dateTransactionSelected;
+    private Transaction dateTransactionSelected;
 
     public AppPage2Controller() throws IOException {
     }
@@ -417,15 +430,17 @@ public class AppPage2Controller implements Initializable {
     }
 
     CurrentPaneStatus currentPaneStatus = CurrentPaneStatus.HOMEPAGE;
-    private List<DateTransaction> dateTransactions_Restock = dateTransactionService.pageAskedDateAddUnitDescend();
+    //private List<DateTransaction> dateTransactions_Restock = dateTransactionService.pageAskedDateAddUnitDescend();
+    private List<Transaction> dateTransactions_Restock;// = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
 
-    private List<DateTransaction> dateTransactions_Taken = dateTransactionService.pageAskedDateRemoveUnitDescend();
+    //private List<DateTransaction> dateTransactions_Taken = dateTransactionService.pageAskedDateRemoveUnitDescend();
+    private List<Transaction> dateTransactions_Taken; //= TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
 
     private ButtonSelected buttonSelected = ButtonSelected.ALL;
 
     private CargoBoxNumber cargoBoxNumber;
 
-    private DateTransaction[] dateTransactionListInAppPage = new DateTransaction[4];
+    private Transaction[] dateTransactionListInAppPage = new Transaction[4];
 
     private boolean isSearchTableOut = false;
 
@@ -461,6 +476,9 @@ public class AppPage2Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        cachedTransactionService.updateAllCachedTransactionData();
+        dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
+        dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
         transactionDialog.setVisible(false);
         searchField.deselect();
         currentPage = appPagePane;
@@ -703,13 +721,13 @@ public class AppPage2Controller implements Initializable {
                 for (int indexTaken = 0; indexTaken < takenBoxNumber; indexTaken++) {
                     dateTransactionListInAppPage[indexTaken] = dateTransactions_Taken.get(indexTaken);
                     cargoNameLabels[indexTaken].setText(dateTransactions_Taken.get(indexTaken).getItemName());
-                    cargoAmountLabels[indexTaken].setText(dateTransactions_Taken.get(indexTaken).getRemoveUnit().toString());
+                    cargoAmountLabels[indexTaken].setText(String.valueOf(dateTransactions_Taken.get(indexTaken).getUnit()));
                     staffNameLabels[indexTaken].setText(dateTransactions_Taken.get(indexTaken).getStaffName());
                 }
                 for (int indexRestock = 0; indexRestock < restockBoxNumber; indexRestock++) {
                     dateTransactionListInAppPage[indexRestock + 2] = dateTransactions_Restock.get(indexRestock);
                     cargoNameLabels[indexRestock + 2].setText(dateTransactions_Restock.get(indexRestock).getItemName());
-                    cargoAmountLabels[indexRestock + 2].setText(dateTransactions_Restock.get(indexRestock).getAddUnit().toString());
+                    cargoAmountLabels[indexRestock + 2].setText(String.valueOf(dateTransactions_Restock.get(indexRestock).getUnit()));
                     staffNameLabels[indexRestock + 2].setText(dateTransactions_Restock.get(indexRestock).getStaffName());
                 }
 
@@ -727,7 +745,7 @@ public class AppPage2Controller implements Initializable {
                 for (int index = 0; index < boxNumber; index++) {
                     dateTransactionListInAppPage[index] = dateTransactions_Taken.get(index);
                     cargoNameLabels[index].setText(dateTransactions_Taken.get(index).getItemName());
-                    cargoAmountLabels[index].setText(dateTransactions_Taken.get(index).getRemoveUnit().toString());
+                    cargoAmountLabels[index].setText(String.valueOf(dateTransactions_Taken.get(index).getUnit()));
                     staffNameLabels[index].setText(dateTransactions_Taken.get(index).getStaffName());
                 }
 
@@ -746,7 +764,7 @@ public class AppPage2Controller implements Initializable {
                 for (int index = 0; index < boxNumber; index++) {
                     dateTransactionListInAppPage[index] = dateTransactions_Restock.get(index);
                     cargoNameLabels[index].setText(dateTransactions_Restock.get(index).getItemName());
-                    cargoAmountLabels[index].setText(dateTransactions_Restock.get(index).getAddUnit().toString());
+                    cargoAmountLabels[index].setText(String.valueOf(dateTransactions_Restock.get(index).getUnit()));
                     staffNameLabels[index].setText(dateTransactions_Restock.get(index).getStaffName());
                 }
             }
@@ -1668,43 +1686,45 @@ public class AppPage2Controller implements Initializable {
         }
     }
 
-    private boolean isTransactionStatusTaken(DateTransaction dateTransaction) {
-        return dateTransaction.getRemoveUnit() != 0;
+    private boolean isTransactionStatusTaken(Transaction transaction) {
+        return Objects.equals(transaction.getStatus(), "TAKEN");
     }
+//    LocalDate currentDate = transactionDateInDetails.getCurrentDate();
+//    String format = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-    private void setTransactionDate(MFXDatePicker transactionDateInDetails, DateTransaction dateTransaction) {
-        String recordTime = dateTransaction.getRecordTime();
-        String[] s = recordTime.trim().split(" ");
-        String[] split = s[0].replaceAll("-", "/").replaceAll("年", "/").replaceAll("月", "/").split("/");
+    private void setTransactionDate(MFXDatePicker transactionDateInDetails, Transaction transaction) {
+        String recordTime = transaction.getTransactionTime();
+        String[] split = recordTime.trim().replaceAll("-", "/").replaceAll("年", "/").replaceAll("月", "/").split("/");
         transactionDateInDetails.setValue(LocalDate.of(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2])));
     }
 
-    private void setTransactionTime(TextField textField, DateTransaction dateTransaction) {
-        String recordTime = dateTransaction.getRecordTime();
-        if (recordTime != null && recordTime != "") {
-            System.out.println(recordTime);
-            String[] s = recordTime.trim().split(" ");
-            String[] split = s[1].split(":");
-            textField.setText(split[0] + " : " + split[1] + " : " + split[2]);
-        } else {
-            textField.setText("Not Applicable");
+//    private void setTransactionTime(TextField textField, Transaction transaction) {
+//        String recordTime = transaction.getTransactionTime();
+//        if (recordTime != null && recordTime != "") {
+//            System.out.println(recordTime);
+//            String[] s = recordTime.trim().split(" ");
+//            String[] split = s[1].split(":");
+//            textField.setText(split[0] + " : " + split[1] + " : " + split[2]);
+//        } else {
+//            textField.setText("Not Applicable");
+//        }
+//
+//    }
+
+    private void setTransactionDialog(Transaction transaction) {
+        transactionNameInDetails.setText(transaction.getItemName());
+        staffNameInDetails.setText(transaction.getStaffName());
+        purposeTextInDetails.setText(transaction.getPurpose());
+        if (isTransactionStatusTaken(transaction)) {
+            transactionDialogTakenActionPane.setVisible(true);
+            transactionDialogRestockActionPane.setVisible(false);
         }
-
-    }
-
-    private void setTransactionDialog(DateTransaction dateTransaction) {
-        transactionNameInDetails.setText(dateTransaction.getItemName());
-        staffNameInDetails.setText(dateTransaction.getStaffName());
-        purposeTextInDetails.setText(dateTransaction.getPurpose());
-        if (isTransactionStatusTaken(dateTransaction)) {
-
-            transactionAmountInDetails.setText(dateTransaction.getRemoveUnit().toString());
-        } else {
-
-            transactionAmountInDetails.setText(dateTransaction.getAddUnit().toString());
+        else {
+            transactionDialogTakenActionPane.setVisible(false);
+            transactionDialogRestockActionPane.setVisible(true);
         }
-        setTransactionTime(transactionTimeInDetails, dateTransaction);
-        setTransactionDate(transactionDateInDetails, dateTransaction);
+        transactionAmountInDetails.setText(String.valueOf(transaction.getUnit()));
+        setTransactionDate(transactionDateInDetails, transaction);
         transactionDialog.setVisible(true);
         transactionDialog.setOpacity(1);
         transactionDialog.setPickOnBounds(true);
