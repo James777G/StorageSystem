@@ -6,12 +6,6 @@ import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.binding.Binding;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.IntegerBinding;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -19,21 +13,17 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.AnchorPane;
-import lombok.extern.slf4j.Slf4j;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.exception.EmptyValueException;
 import org.maven.apache.exception.Warning;
 import org.maven.apache.item.Item;
 import org.maven.apache.service.item.CachedItemService;
-import org.maven.apache.service.item.ItemService;
 import org.maven.apache.utils.CargoCachedUtils;
-import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.ScaleUtils;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 
 
@@ -260,7 +250,7 @@ public class WarehouseController implements Initializable {
     @FXML
     private void onClickApply() {
         warnMessage.setVisible(false);
-        Item item = null;
+        Item item;
         try {
             item = encapsulateItemData();
         } catch (EmptyValueException e) {
