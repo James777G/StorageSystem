@@ -385,6 +385,8 @@ public class AppPage2Controller implements Initializable {
 
     private boolean[] changeToBack = new boolean[4];
 
+    private boolean isEncapsulatedTransactionStatusTaken;
+
     private final JFXButton[] buttonList = new JFXButton[5];
 
     private final Timeline timeline = new Timeline();
@@ -402,6 +404,8 @@ public class AppPage2Controller implements Initializable {
     private int restockBoxNumber = 2;
 
     private Transaction transaction;
+
+    private Transaction encapsulatedTransaction = new Transaction();
 
     public AppPage2Controller() throws IOException {
     }
@@ -1647,7 +1651,7 @@ public class AppPage2Controller implements Initializable {
         String newInfo = newInfoTextField.getText();
         // get current password
         String currentPassword = currentPasswordField.getText();
-        //get new passwrod
+        //get new password
         String newPassword = newPasswordField.getText();
         if (isUpdatingUsername && !isUpdatingEmail && !isUpdatingPassword) {
             // updating username
@@ -1724,14 +1728,17 @@ public class AppPage2Controller implements Initializable {
 
     private void setTransactionDialog(Transaction transaction) {
         setTransactionId(transactionIdLabel,transaction);
+        encapsulatedTransaction.setID(transaction.getID());
         transactionNameInDetails.setText(transaction.getItemName());
         staffNameInDetails.setText(transaction.getStaffName());
         purposeTextInDetails.setText(transaction.getPurpose());
         if (isTransactionStatusTaken(transaction)) {
+            isEncapsulatedTransactionStatusTaken = true;
             transactionDialogTakenActionPane.setVisible(true);
             transactionDialogRestockActionPane.setVisible(false);
         }
         else {
+            isEncapsulatedTransactionStatusTaken = false;
             transactionDialogTakenActionPane.setVisible(false);
             transactionDialogRestockActionPane.setVisible(true);
         }
@@ -1766,6 +1773,7 @@ public class AppPage2Controller implements Initializable {
         setTransactionDialog(dateTransactionListInAppPage[3]);
     }
 
+    @Warning(Warning.WarningType.DEBUG)
     @FXML
     private void onClickApply() {
 //        transaction.setItemName(transactionNameInDetails.getText());
@@ -1776,6 +1784,38 @@ public class AppPage2Controller implements Initializable {
 //        if(restockCheckBox.isSelected()){
 //
 //        }
+
+//        if (isEncapsulatedTransactionStatusTaken) {
+//            encapsulatedTransaction.setStatus("TAKEN");
+//        }else{
+//            encapsulatedTransaction.setStatus("RESTOCK");
+//        }
+//        encapsulatedTransaction.setUnit(Integer.parseInt(transactionAmountInDetails.getText()));
+//        LocalDate currentDate = transactionDateInDetails.getCurrentDate();
+//        String format = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+//        encapsulatedTransaction.setTransactionTime(format);
+//        encapsulatedTransaction.setPurpose(purposeTextInDetails.getText());
+//        encapsulatedTransaction.setStaffName(staffNameInDetails.getText().trim());
+//        encapsulatedTransaction.setItemName(transactionNameInDetails.getText().trim());
+        generateEncapsulatedTransaction();
+        if (!Objects.equals(encapsulatedTransaction,transaction)){
+            cachedTransactionService.updateTransaction(transaction);
+        }
+    }
+
+    private void generateEncapsulatedTransaction(){
+        encapsulatedTransaction.setUnit(Integer.parseInt(transactionAmountInDetails.getText()));
+        LocalDate currentDate = transactionDateInDetails.getCurrentDate();
+        String format = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        encapsulatedTransaction.setTransactionTime(format);
+        encapsulatedTransaction.setPurpose(purposeTextInDetails.getText());
+        encapsulatedTransaction.setStaffName(staffNameInDetails.getText().trim());
+        encapsulatedTransaction.setItemName(transactionNameInDetails.getText().trim());
+        if (isEncapsulatedTransactionStatusTaken) {
+            encapsulatedTransaction.setStatus("TAKEN");
+        }else{
+            encapsulatedTransaction.setStatus("RESTOCK");
+        }
     }
 
 }
