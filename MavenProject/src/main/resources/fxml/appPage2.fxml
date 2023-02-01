@@ -631,19 +631,6 @@
                      </font>
                   </MFXDatePicker>
                   <Separator layoutX="1.0" layoutY="187.0" prefHeight="13.0" prefWidth="876.0" />
-                  <Label layoutX="249.0" layoutY="108.0" prefHeight="17.0" prefWidth="159.0" text="Process time:" AnchorPane.bottomAnchor="227.66666666666666" AnchorPane.leftAnchor="260.0">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </Label>
-                  <TextField fx:id="transactionTimeInDetails" layoutX="273.0" layoutY="134.0" text="01 : 00 : 34" AnchorPane.bottomAnchor="193.33333333333334" AnchorPane.leftAnchor="270.0">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                  </TextField>
                   <Label layoutX="-2.0" layoutY="217.0" prefHeight="17.0" prefWidth="209.0" text="Transaction Details (Purposes)" AnchorPane.leftAnchor="0.0">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
@@ -689,7 +676,7 @@
                            <graphic>
                               <AnchorPane pickOnBounds="false" prefHeight="9.0" prefWidth="9.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
                                  <children>
-                                    <AnchorPane fx:id="takenStatusPane1" layoutX="2.0" layoutY="7.0" pickOnBounds="false" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" visible="false" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                    <AnchorPane fx:id="transactionDialogTakenActionPane" layoutX="2.0" layoutY="7.0" pickOnBounds="false" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" visible="false" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
                                  </children>
                               </AnchorPane>
                            </graphic>
@@ -705,7 +692,7 @@
                            <graphic>
                               <AnchorPane pickOnBounds="false" prefHeight="9.0" prefWidth="9.0" style="-fx-background-color: white; -fx-background-radius: 1000;">
                                  <children>
-                                    <AnchorPane fx:id="restockStatusPane1" layoutX="1.0" layoutY="4.0" pickOnBounds="false" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" visible="false" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
+                                    <AnchorPane fx:id="transactionDialogRestockActionPane" layoutX="1.0" layoutY="4.0" pickOnBounds="false" prefHeight="3.0" prefWidth="3.0" style="-fx-background-color: #223c40; -fx-background-radius: 1000; -fx-border-radius: 1000;" visible="false" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="3.0" />
                                  </children>
                               </AnchorPane>
                            </graphic>

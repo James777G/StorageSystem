@@ -46,7 +46,17 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
     public void updateAllCachedTransactionData() {
         List<Transaction> allTransaction = transactionMapper.selectAll();
         List<Transaction> dateTransactionASC = transactionMapper.orderByDateAsc();
-        ////
+        ////Restock
+        List<List<Transaction>> amountAsc4_Restock = cachedManipulationService.getPagedCacheList(cachedManipulationService.getRestockList(cachedManipulationService.getUnitAscendingOrder(allTransaction)), 4);
+        List<List<Transaction>> amountDesc4_Restock = cachedManipulationService.getPagedCacheList(cachedManipulationService.getRestockList(cachedManipulationService.getUnitDescendingOrder(allTransaction)), 4);
+        List<List<Transaction>> dateAsc4_Restock = cachedManipulationService.getPagedCacheList(cachedManipulationService.getRestockList(dateTransactionASC),4);
+        List<List<Transaction>> dateDesc4_Restock = cachedManipulationService.getPagedCacheList(cachedManipulationService.getRestockList(cachedManipulationService.getReversedList(dateTransactionASC)),4);
+        ////Taken
+        List<List<Transaction>> amountAsc4_Taken = cachedManipulationService.getPagedCacheList(cachedManipulationService.getTakenList(cachedManipulationService.getUnitAscendingOrder(allTransaction)), 4);
+        List<List<Transaction>> amountDesc4_Taken= cachedManipulationService.getPagedCacheList(cachedManipulationService.getTakenList(cachedManipulationService.getUnitDescendingOrder(allTransaction)), 4);
+        List<List<Transaction>> dateAsc4_Taken = cachedManipulationService.getPagedCacheList(cachedManipulationService.getTakenList(dateTransactionASC),4);
+        List<List<Transaction>> dateDesc4_Taken = cachedManipulationService.getPagedCacheList(cachedManipulationService.getTakenList(cachedManipulationService.getReversedList(dateTransactionASC)),4);
+        ////All
         List<List<Transaction>> amountAsc4 = cachedManipulationService.getPagedCacheList(cachedManipulationService.getUnitAscendingOrder(allTransaction), 4);
         List<List<Transaction>> amountAsc7 = cachedManipulationService.getPagedCacheList(cachedManipulationService.getUnitAscendingOrder(allTransaction), 7);
         List<List<Transaction>> amountDesc4 = cachedManipulationService.getPagedCacheList(cachedManipulationService.getUnitDescendingOrder(allTransaction), 4);
@@ -56,6 +66,17 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
         List<List<Transaction>> DateDesc4 = cachedManipulationService.getPagedCacheList(cachedManipulationService.getReversedList(dateTransactionASC), 4);
         List<List<Transaction>> DateDesc7 = cachedManipulationService.getPagedCacheList(cachedManipulationService.getReversedList(dateTransactionASC), 7);
 
+        ////Restock
+        TransactionCachedUtils.putLists(TransactionCachedUtils.listType.RESTOCK_AMOUNT_ASC_4,amountAsc4_Restock);
+        TransactionCachedUtils.putLists(TransactionCachedUtils.listType.RESTOCK_AMOUNT_DESC_4,amountDesc4_Restock);
+        TransactionCachedUtils.putLists(TransactionCachedUtils.listType.RESTOCK_DATE_ASC_4,dateAsc4_Restock);
+        TransactionCachedUtils.putLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4,dateDesc4_Restock);
+        ////Taken
+        TransactionCachedUtils.putLists(TransactionCachedUtils.listType.TAKEN_AMOUNT_ASC_4,amountAsc4_Taken);
+        TransactionCachedUtils.putLists(TransactionCachedUtils.listType.TAKEN_AMOUNT_DESC_4,amountDesc4_Taken);
+        TransactionCachedUtils.putLists(TransactionCachedUtils.listType.TAKEN_DATE_ASC_4,dateAsc4_Taken);
+        TransactionCachedUtils.putLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4,dateDesc4_Taken);
+        ////All
         TransactionCachedUtils.putLists(TransactionCachedUtils.listType.AMOUNT_ASC_4, amountAsc4);
         TransactionCachedUtils.putLists(TransactionCachedUtils.listType.AMOUNT_ASC_7, amountAsc7);
         TransactionCachedUtils.putLists(TransactionCachedUtils.listType.AMOUNT_DESC_4, amountDesc4);
