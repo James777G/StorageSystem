@@ -17,6 +17,7 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.AnchorPane;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.exception.EmptyValueException;
+import org.maven.apache.exception.Warning;
 import org.maven.apache.service.staff.CachedStaffService;
 import org.maven.apache.staff.Staff;
 import org.maven.apache.utils.ScaleUtils;
@@ -473,7 +474,6 @@ public class StaffController implements Initializable {
      */
     @FXML
     private void onClickApply() {
-
         applyButton.setVisible(false);
         loadSpinner.setVisible(true);
         executorService.execute(() -> {
@@ -481,7 +481,7 @@ public class StaffController implements Initializable {
             try {
                 staff = encapsulateCurrentStaffData();
                 if(selectedStaff.equals(staff)) return;
-                staffService.updateTransaction(staff);
+                staffService.updateStaff(staff);
                 getStaffList(pagination.getCurrentPage());
                 Platform.runLater(this::run);
             } catch (EmptyValueException e) {

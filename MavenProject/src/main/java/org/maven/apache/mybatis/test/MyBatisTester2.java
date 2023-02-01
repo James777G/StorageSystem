@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 import ai.djl.Application;
+import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.item.Item;
@@ -23,6 +25,8 @@ import org.maven.apache.user.User;
 import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.StaffCachedUtils;
 import org.maven.apache.verificationCode.VerificationCode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.annotations.Test;
@@ -187,11 +191,7 @@ public class MyBatisTester2 {
 		System.out.println(StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL));
 		System.out.println(StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE));
 		staff.setOtherInfo("I AM NOT GOD");
-		staffService.updateTransaction(staff);
+		staffService.updateStaff(staff);
 		System.out.println(StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE));
-
 	}
-
-
-
 }
