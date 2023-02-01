@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.dateTransaction.DateTransaction;
+import org.maven.apache.exception.Warning;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
 import org.maven.apache.service.excel.ExcelConverterService;
 import org.maven.apache.service.transaction.CachedTransactionService;
@@ -317,12 +318,14 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private Label redTakenLabel;
 
+    @FXML
+    private Label greenRestockLabel;
+
+    @FXML
+    private Label transactionIdLabel;
 
     @FXML
     private TextField transactionNameInDetails;
-
-    @FXML
-    private Label greenRestockLabel;
 
     @FXML
     private Label notificationLabel;
@@ -1698,20 +1701,34 @@ public class AppPage2Controller implements Initializable {
         transactionDateInDetails.setValue(LocalDate.of(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2])));
     }
 
-//    private void setTransactionTime(TextField textField, Transaction transaction) {
-//        String recordTime = transaction.getTransactionTime();
-//        if (recordTime != null && recordTime != "") {
-//            System.out.println(recordTime);
-//            String[] s = recordTime.trim().split(" ");
-//            String[] split = s[1].split(":");
-//            textField.setText(split[0] + " : " + split[1] + " : " + split[2]);
-//        } else {
-//            textField.setText("Not Applicable");
-//        }
-//
-//    }
+    @SuppressWarnings("all")
+    private void setTransactionId(Label label , Transaction transaction){
+        String string = Integer.valueOf(transaction.getID()).toString();
+        int zeroFill = 6 - string.length();
+        if (string.length() < 6){
+            for (int i = 0 ; i < zeroFill ; i++){
+                string = "0" + string;
+            }
+        }
+        label.setText(string);
+    }
+
+    @Warning(Warning.WarningType.DELETE_IN_FUTURE)
+    private void setTransactionTime(TextField textField, Transaction transaction) {
+        String recordTime = transaction.getTransactionTime();
+        if (recordTime != null && recordTime != "") {
+            System.out.println(recordTime);
+            String[] s = recordTime.trim().split(" ");
+            String[] split = s[1].split(":");
+            textField.setText(split[0] + " : " + split[1] + " : " + split[2]);
+        } else {
+            textField.setText("Not Applicable");
+        }
+
+    }
 
     private void setTransactionDialog(Transaction transaction) {
+        setTransactionId(transactionIdLabel,transaction);
         transactionNameInDetails.setText(transaction.getItemName());
         staffNameInDetails.setText(transaction.getStaffName());
         purposeTextInDetails.setText(transaction.getPurpose());
