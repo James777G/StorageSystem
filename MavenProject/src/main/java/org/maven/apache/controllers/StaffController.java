@@ -523,6 +523,9 @@ public class StaffController implements Initializable {
     private void onClickOkayInAdd() {
         addStaffPane.setVisible(false);
         warnMessageInAdd.setVisible(false);
+        staffNameInAdd.setText("");
+        staffDescriptionInAdd.setText("");
+        staffStatusInAdd.setSelected(true);
     }
 
     /**
@@ -545,11 +548,13 @@ public class StaffController implements Initializable {
                 staff = encapsulateStaffDataInAdd();
                 staffService.addNewStaff(staff);
                 getStaffList(pagination.getCurrentPage());
+                calculatePageNumber();
                 Platform.runLater(() -> warnMessageInAdd.setVisible(false));
             } catch (EmptyValueException e) {
                 warnMessageInAdd.setVisible(true);
             }finally {
                 Platform.runLater(() -> {
+                    pagination.setMaxPage(pageNumber);
                     assignStaffValue();
                     loadSpinnerInAdd.setVisible(false);
                     applyButtonInAdd.setVisible(true);
