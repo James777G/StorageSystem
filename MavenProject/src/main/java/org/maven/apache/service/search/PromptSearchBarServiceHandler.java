@@ -23,6 +23,12 @@ public class PromptSearchBarServiceHandler<R> implements SearchBarService<R>{
     @Resource
     private AbstractPromptingSearchAdapter<Staff> staffPromptingSearchAdapter;
 
+    @Resource
+    private AbstractSearchServiceAdapter<Item, R> itemSearchServiceHandlerAdapter;
+
+    @Resource
+    private AbstractSearchServiceAdapter<Staff, R> staffSearchServiceHandlerAdapter;
+
 
     /**
      * This method is responsible for setting the results to the given buttonList based on the inputText
@@ -41,9 +47,9 @@ public class PromptSearchBarServiceHandler<R> implements SearchBarService<R>{
     @Override
     public void setSearchPrompts(List<R> sourceList, List<JFXButton> buttonList, String inputText, ResultType resultType) {
         if(resultType == ResultType.CARGO){
-            cargoPromptingSearchAdapter.invoke(convertToListOfItem(sourceList), buttonList, inputText);
+            cargoPromptingSearchAdapter.invoke(itemSearchServiceHandlerAdapter.doConvert(sourceList), buttonList, inputText);
         } else if (resultType == ResultType.STAFF) {
-            staffPromptingSearchAdapter.invoke(convertToListOfStaff(sourceList), buttonList, inputText);
+            staffPromptingSearchAdapter.invoke(staffSearchServiceHandlerAdapter.doConvert(sourceList), buttonList, inputText);
         }
     }
 
@@ -70,18 +76,6 @@ public class PromptSearchBarServiceHandler<R> implements SearchBarService<R>{
         }
     }
 
-
-    private List<Item> convertToListOfItem(List<R> sourceList){
-        List<Item> itemList = new ArrayList<>();
-        sourceList.forEach(r -> itemList.add((Item) r));
-        return itemList;
-    }
-
-    private List<Staff> convertToListOfStaff(List<R> sourceList){
-        List<Staff> staffList = new ArrayList<>();
-        sourceList.forEach(r -> staffList.add((Staff) r));
-        return staffList;
-    }
 
 
 }

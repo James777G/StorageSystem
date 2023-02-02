@@ -1,11 +1,9 @@
 package org.maven.apache.service.search;
 
-import com.jfoenix.controls.JFXButton;
 import org.maven.apache.exception.Warning;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public abstract class SearchFilteringResultListHandler implements SearchFilteringService{
 
