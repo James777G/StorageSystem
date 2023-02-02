@@ -2,6 +2,8 @@ package org.maven.apache.service.search;
 
 import com.jfoenix.controls.JFXButton;
 import jakarta.annotation.Resource;
+import org.maven.apache.item.Item;
+import org.maven.apache.staff.Staff;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,10 +16,10 @@ public class PromptSearchBarServiceHandler implements SearchBarService{
     }
 
     @Resource
-    private AbstractPromptingSearchAdapter cargoPromptingBarServiceHandler;
+    private AbstractPromptingSearchAdapter<Item> cargoPromptingBarServiceHandler;
 
     @Resource
-    private AbstractPromptingSearchAdapter staffPromptingSearchAdapter;
+    private AbstractPromptingSearchAdapter<Staff> staffPromptingSearchAdapter;
 
 
     /**
@@ -36,6 +38,11 @@ public class PromptSearchBarServiceHandler implements SearchBarService{
      */
     @Override
     public void setSearchPrompts(List<String> sourceList, List<JFXButton> buttonList, String inputText, ResultType resultType) {
+
+    }
+
+    @Override
+    public void setSearchPrompts(List<JFXButton> buttonList, String inputText, ResultType resultType) {
 
     }
 

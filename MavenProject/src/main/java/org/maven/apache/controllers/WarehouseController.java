@@ -429,7 +429,7 @@ public class WarehouseController implements Initializable {
     @Deprecated
     @SuppressWarnings("all")
     private void initializeItemList() {
-        itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.All).get(0);
+        itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(0);
     }
 
     @FXML
@@ -530,7 +530,7 @@ public class WarehouseController implements Initializable {
      * Return the maximum number of pages of the current data
      */
     private void calculatePageSize() {
-        pageSize = CargoCachedUtils.getLists(CargoCachedUtils.listType.All).size();
+        pageSize = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).size();
         pagination.setMaxPage(pageSize);
     }
 
@@ -541,7 +541,7 @@ public class WarehouseController implements Initializable {
      * @param index page number to be displayed
      */
     private void generateItemList(int index) {
-        itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.All).get(index);
+        itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(index);
     }
 
     /**
