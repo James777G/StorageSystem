@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface SearchService {
 
-
     /**
      * This method is responsible for setting the contents in the prompt search bar, as
      * well as the visibility of them.
@@ -21,5 +20,4 @@ public interface SearchService {
             buttonList.get(j).setVisible(false);
         }
     }
-
 }

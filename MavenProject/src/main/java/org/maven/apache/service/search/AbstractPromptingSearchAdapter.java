@@ -8,5 +8,7 @@ public sealed abstract class AbstractPromptingSearchAdapter<R> implements Search
 
     public abstract List<String> doConvert(List<R> sourceList);
 
-    public abstract void invoke(List<String> sourceList, List<JFXButton> buttonList, String inputText);
+    public abstract void invoke(List<R> sourceList, List<JFXButton> buttonList, String inputText);
+
+    public abstract void invoke(List<JFXButton> buttonList, String inputText);
 }

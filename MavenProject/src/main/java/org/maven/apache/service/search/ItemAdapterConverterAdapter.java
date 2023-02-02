@@ -6,12 +6,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 @Service
 public class ItemAdapterConverterAdapter implements SearchAdapterService<Item> {
 
-    private static final CargoCachedUtils.listType DEFAULT_SOURCE_TYPE = CargoCachedUtils.listType.ALL;
+    private static CargoCachedUtils.listType DEFAULT_SOURCE_TYPE = CargoCachedUtils.listType.ALL;
+
+    private void customizeListType(CargoCachedUtils.listType listType){
+        DEFAULT_SOURCE_TYPE = listType;
+    }
 
     @Override
     public List<String> doConvert(List<Item> sourceList) {
@@ -20,7 +23,7 @@ public class ItemAdapterConverterAdapter implements SearchAdapterService<Item> {
 
     @Override
     public List<String> doConvert() {
-        List<List<Item>> lists = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL);
+        List<List<Item>> lists = CargoCachedUtils.getLists(DEFAULT_SOURCE_TYPE);
         List<String> resultList = new ArrayList<>();
         lists.forEach(items -> items.forEach(item -> resultList.add(item.getItemName())));
         return resultList;
