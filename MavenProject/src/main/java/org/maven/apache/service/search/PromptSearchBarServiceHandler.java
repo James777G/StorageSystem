@@ -13,7 +13,7 @@ import java.util.List;
 @Service("searchBarService")
 public class PromptSearchBarServiceHandler<R> implements SearchBarService<R>{
 
-    enum ResultType {
+    public enum ResultType {
         CARGO, STAFF
     }
 
