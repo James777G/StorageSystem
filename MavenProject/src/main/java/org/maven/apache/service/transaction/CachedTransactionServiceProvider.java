@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.function.Consumer;
+
 @Service("cachedTransactionService")
 @Data
 public class CachedTransactionServiceProvider implements CachedTransactionService {
@@ -51,11 +53,27 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
         List<List<Transaction>> amountDesc4_Restock = cachedManipulationService.getPagedCacheList(cachedManipulationService.getRestockList(cachedManipulationService.getUnitDescendingOrder(allTransaction)), 4);
         List<List<Transaction>> dateAsc4_Restock = cachedManipulationService.getPagedCacheList(cachedManipulationService.getRestockList(dateTransactionASC),4);
         List<List<Transaction>> dateDesc4_Restock = cachedManipulationService.getPagedCacheList(cachedManipulationService.getRestockList(cachedManipulationService.getReversedList(dateTransactionASC)),4);
+        System.out.println("amountAsc4_Restock:");
+        amountAsc4_Restock.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getUnit())));
+        System.out.println("amountDesc4_Restock:");
+        amountDesc4_Restock.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getUnit())));
+        System.out.println("dateAsc4_Restock:");
+        dateAsc4_Restock.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getTransactionTime())));
+        System.out.println("dateDesc4_Restock:");
+        dateDesc4_Restock.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getTransactionTime())));
         ////Taken
         List<List<Transaction>> amountAsc4_Taken = cachedManipulationService.getPagedCacheList(cachedManipulationService.getTakenList(cachedManipulationService.getUnitAscendingOrder(allTransaction)), 4);
         List<List<Transaction>> amountDesc4_Taken= cachedManipulationService.getPagedCacheList(cachedManipulationService.getTakenList(cachedManipulationService.getUnitDescendingOrder(allTransaction)), 4);
         List<List<Transaction>> dateAsc4_Taken = cachedManipulationService.getPagedCacheList(cachedManipulationService.getTakenList(dateTransactionASC),4);
         List<List<Transaction>> dateDesc4_Taken = cachedManipulationService.getPagedCacheList(cachedManipulationService.getTakenList(cachedManipulationService.getReversedList(dateTransactionASC)),4);
+        System.out.println("amountAsc4_Taken:");
+        amountAsc4_Taken.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getUnit())));
+        System.out.println("amountDesc4_Taken:");
+        amountDesc4_Taken.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getUnit())));
+        System.out.println("dateAsc4_Taken :");
+        dateAsc4_Taken .forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getTransactionTime())));
+        System.out.println("dateDesc4_Taken:");
+        dateDesc4_Taken.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getTransactionTime())));
         ////All
         List<List<Transaction>> amountAsc4 = cachedManipulationService.getPagedCacheList(cachedManipulationService.getUnitAscendingOrder(allTransaction), 4);
         List<List<Transaction>> amountAsc7 = cachedManipulationService.getPagedCacheList(cachedManipulationService.getUnitAscendingOrder(allTransaction), 7);
