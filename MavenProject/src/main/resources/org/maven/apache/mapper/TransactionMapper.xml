@@ -35,27 +35,14 @@
     <update id="updateTransaction">
         update TransactionTable
         <set>
-            <if test="ItemName != null and ItemName !=''">
                 ItemName = #{ItemName},
-            </if>
-            <if test="StaffName != null and StaffName !=''">
                 StaffName = #{StaffName},
-            </if>
-            <if test ="Status =Taken or Status = Restock">
-                Status = #{Status}
-            </if>
-            <if test="unit != null abd unit>=0">
-                unit = #{unit},
-            </if>
-            <if test="TransactionTime != null and TransactionTime != ''">
-                TransactionTime = #{TransactionTime}
-            </if>
-            <if test="Purpose != null and Purpose != ''">
+                Status = #{Status},
+                Unit = #{Unit},
+                TransactionTime = #{TransactionTime},
                 Purpose = #{Purpose}
-            </if>
         </set>
-        where ID = #{ID}
-
+        where ID = #{ID};
     </update>
 
 </mapper>

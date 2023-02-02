@@ -31,13 +31,11 @@ public class CachedManipulationServiceProvider implements CachedManipulationServ
 
     @Override
     public List<Transaction> getReversedList(List<Transaction> unsortedList) {
-
-        for (int i = 0; i < unsortedList.size() / 2; i++) {
-            Transaction tempTransaction = unsortedList.get(i);
-            unsortedList.set(i, unsortedList.get(unsortedList.size() - 1 - i));
-            unsortedList.set(unsortedList.size() - 1 - i, tempTransaction);
+        List<Transaction> reversedList = new ArrayList<Transaction>();
+        for(int i = 0; i < unsortedList.size(); i++){
+            reversedList.add(unsortedList.get(unsortedList.size()-1 - i));
         }
-        return unsortedList;
+            return reversedList;
     }
 
     @Override
@@ -114,7 +112,8 @@ public class CachedManipulationServiceProvider implements CachedManipulationServ
         transactionList.add(6,transaction6);
         //transactionList = getUnitDescendingOrder(transactionList);
         transactionList = getUnitDescendingOrder(transactionList);
-        transactionList = getTakenList(transactionList);
+        transactionList = getReversedList(transactionList);
+//        transactionList = getTakenList(transactionList);
         for (Transaction transaction7 : transactionList) {
             System.out.println(transaction7.getStatus() + ": " + transaction7.getUnit());
         }

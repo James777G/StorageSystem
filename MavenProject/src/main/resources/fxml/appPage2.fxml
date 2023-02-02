@@ -577,7 +577,12 @@
          <left>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label layoutY="14.0" text="Item Name:">
+                  <Label layoutX="562.0" layoutY="14.0" text="Item Name:">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="245.0" layoutY="14.0" text="Action:">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
@@ -585,21 +590,10 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label layoutX="254.0" layoutY="14.0" text="Action:">
+                  <Label layoutX="252.0" layoutY="110.0" text="Staff In Charge:">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </Label>
-                  <Label layoutX="499.0" layoutY="13.0" text="Staff In Charge:">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
                   </Label>
                   <Label layoutX="-2.0" layoutY="110.0" prefHeight="17.0" prefWidth="159.0" text="Process date:">
                      <font>
@@ -615,12 +609,12 @@
                      </font>
                   </JFXButton>
                   <Separator layoutY="88.0" prefHeight="3.0" prefWidth="877.0" />
-                  <TextField fx:id="transactionNameInDetails" layoutX="11.0" layoutY="40.0" prefHeight="25.0" prefWidth="210.0">
+                  <TextField fx:id="transactionNameInDetails" layoutX="562.0" layoutY="41.0" prefHeight="25.0" prefWidth="210.0">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="staffNameInDetails" layoutX="511.0" layoutY="39.0" prefHeight="25.0" prefWidth="280.0" AnchorPane.leftAnchor="510.0">
+                  <TextField fx:id="staffNameInDetails" layoutX="252.0" layoutY="140.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="252.0">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
@@ -654,20 +648,17 @@
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
                   </JFXButton>
-                  <Label layoutX="533.0" layoutY="109.0" prefHeight="17.0" prefWidth="159.0" text="Amount Processed:" AnchorPane.bottomAnchor="227.66666666666666">
+                  <Label layoutX="562.0" layoutY="110.0" prefHeight="17.0" prefWidth="159.0" text="Amount Processed:" AnchorPane.bottomAnchor="226.66666666666669">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
                   </Label>
-                  <TextField fx:id="transactionAmountInDetails" layoutX="536.0" layoutY="135.0" prefHeight="27.0" prefWidth="101.0" text="01 : 00 : 34" AnchorPane.bottomAnchor="193.0" AnchorPane.leftAnchor="545.0">
+                  <TextField fx:id="transactionAmountInDetails" layoutX="562.0" layoutY="140.0" prefHeight="27.0" prefWidth="101.0" text="01 : 00 : 34" AnchorPane.bottomAnchor="186.66666666666666" AnchorPane.leftAnchor="562.0">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </TextField>
-                  <JFXButton fx:id="statusTakenButton1" layoutX="269.0" layoutY="39.0" prefHeight="30.0" prefWidth="75.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00">
+                  <JFXButton fx:id="statusTakenButton1" layoutX="252.0" layoutY="39.0" onAction="#onClickDialogTakenButton" prefHeight="30.0" prefWidth="75.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="252.0">
                      <graphic>
                         <Label pickOnBounds="false" text="  Taken" textFill="WHITE">
                            <font>
@@ -683,7 +674,7 @@
                         </Label>
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="statusRestockButton1" layoutX="344.0" layoutY="39.0" prefHeight="30.0" prefWidth="90.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="345.0">
+                  <JFXButton fx:id="statusRestockButton1" layoutX="327.0" layoutY="39.0" onAction="#onClickDialogRestockButton" prefHeight="30.0" prefWidth="90.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="328.0">
                      <graphic>
                         <Label pickOnBounds="false" text="  Restock" textFill="WHITE">
                            <font>
@@ -699,6 +690,16 @@
                         </Label>
                      </graphic>
                   </JFXButton>
+                  <Label fx:id="transactionIdLabel" layoutX="14.0" layoutY="45.0" text="123456">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="14.0" text="Transaction ID:">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </left>
