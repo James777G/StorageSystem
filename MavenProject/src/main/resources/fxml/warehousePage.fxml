@@ -141,6 +141,11 @@
                   </ImageView>
                </graphic>
             </JFXButton>
+            <ImageView fx:id="deleteOne" fitHeight="40.0" fitWidth="28.0" layoutX="847.0" layoutY="11.0" onMouseClicked="#onClickDeleteOne" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="13.666666666666664" AnchorPane.leftAnchor="835.0" AnchorPane.rightAnchor="26.33333333333337" AnchorPane.topAnchor="11.0">
+               <image>
+                  <Image url="@../image/icons8-delete-document-64.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="290.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
@@ -187,6 +192,11 @@
                   </ImageView>
                </graphic>
             </JFXButton>
+            <ImageView fx:id="deleteTwo" fitHeight="40.0" fitWidth="28.0" onMouseClicked="#onClickDeleteTwo" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="835.0" AnchorPane.topAnchor="11.0">
+               <image>
+                  <Image url="@../image/icons8-delete-document-64.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="340.0" prefHeight="50.0" prefWidth="901.0">
@@ -233,6 +243,11 @@
                   </ImageView>
                </graphic>
             </JFXButton>
+            <ImageView fx:id="deleteThree" fitHeight="40.0" fitWidth="28.0" onMouseClicked="#onClickDeleteThree" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="835.0" AnchorPane.topAnchor="11.0">
+               <image>
+                  <Image url="@../image/icons8-delete-document-64.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="390.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
@@ -279,6 +294,11 @@
                   </ImageView>
                </graphic>
             </JFXButton>
+            <ImageView fx:id="deleteFour" fitHeight="40.0" fitWidth="28.0" onMouseClicked="#onClickDeleteFour" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="835.0" AnchorPane.topAnchor="11.0">
+               <image>
+                  <Image url="@../image/icons8-delete-document-64.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="440.0" prefHeight="50.0" prefWidth="901.0">
@@ -325,6 +345,11 @@
                   </ImageView>
                </graphic>
             </JFXButton>
+            <ImageView fx:id="deleteFive" fitHeight="40.0" fitWidth="28.0" onMouseClicked="#onClickDeleteFive" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="835.0" AnchorPane.topAnchor="11.0">
+               <image>
+                  <Image url="@../image/icons8-delete-document-64.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="490.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
@@ -371,6 +396,11 @@
                   </ImageView>
                </graphic>
             </JFXButton>
+            <ImageView fx:id="deleteSix" fitHeight="40.0" fitWidth="28.0" onMouseClicked="#onClickDeleteSix" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="835.0" AnchorPane.topAnchor="11.0">
+               <image>
+                  <Image url="@../image/icons8-delete-document-64.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="540.0" prefHeight="50.0" prefWidth="901.0">
@@ -417,10 +447,15 @@
                   </ImageView>
                </graphic>
             </JFXButton>
+            <ImageView fx:id="deleteSeven" fitHeight="40.0" fitWidth="28.0" onMouseClicked="#onClickDeleteSeven" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="835.0" AnchorPane.topAnchor="11.0">
+               <image>
+                  <Image url="@../image/icons8-delete-document-64.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
-      <MFXPagination fx:id="pagination" layoutX="531.0" layoutY="600.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="555.0" />
-      <MFXGenericDialog fx:id="descriptionDialog" headerText="Item Details" onClose="#onCloseDescriptionDialog" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="150.0">
+      <MFXPagination fx:id="pagination" layoutX="531.0" layoutY="600.0" AnchorPane.bottomAnchor="8.0" />
+      <MFXGenericDialog fx:id="descriptionDialog" headerText="Item Details" onClose="#onCloseDescriptionDialog" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="150.0">
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
@@ -515,7 +550,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="addItemPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
+      <AnchorPane fx:id="addItemPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 10;" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
          <children>
             <Label layoutX="421.0" layoutY="156.0" opacity="0.4" prefHeight="128.0" prefWidth="320.0" rotate="-38.7" text="CARGO" textFill="#9de4ed59">
                <font>
@@ -598,6 +633,31 @@
                   </TextField>
                </children>
             </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="deleteItemPane" layoutX="339.0" layoutY="-60.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 15;" AnchorPane.bottomAnchor="275.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="275.0">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Continue?" AnchorPane.leftAnchor="15.0">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+            </Label>
+            <Separator layoutX="7.0" layoutY="38.0" prefHeight="8.0" prefWidth="488.0" />
+            <Label layoutX="36.0" layoutY="48.0" text="You Are About To Delete An Item" textFill="#db5b5b" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="33.0" fitWidth="30.0" layoutX="459.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-checkmark-yes-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="28.0" fitWidth="25.0" layoutX="461.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-multiply-90.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>

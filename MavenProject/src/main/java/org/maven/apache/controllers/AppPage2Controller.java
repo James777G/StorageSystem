@@ -7,6 +7,8 @@ import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,6 +30,8 @@ import org.maven.apache.MyLauncher;
 import org.maven.apache.exception.Warning;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
 import org.maven.apache.service.excel.ExcelConverterService;
+import org.maven.apache.service.search.PromptSearchBarServiceHandler;
+import org.maven.apache.service.search.SearchBarService;
 import org.maven.apache.service.transaction.CachedTransactionService;
 import org.maven.apache.service.user.UserService;
 import org.maven.apache.transaction.Transaction;
@@ -41,6 +45,7 @@ import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -388,9 +393,11 @@ public class AppPage2Controller implements Initializable {
 
     private boolean[] changeToBack = new boolean[4];
 
+
+    private final List<JFXButton> buttonList = new ArrayList<>();
+
     private boolean isEncapsulatedTransactionStatusTaken;
 
-    private final JFXButton[] buttonList = new JFXButton[5];
 
     private final Timeline timeline = new Timeline();
 
@@ -465,6 +472,7 @@ public class AppPage2Controller implements Initializable {
 
     private Timeline timeline_menuDelay = new Timeline();
 
+    private final SearchBarService searchBarService = MyLauncher.context.getBean("searchBarService", SearchBarService.class);
     @FXML
     private VBox vbox;
 
@@ -513,10 +521,17 @@ public class AppPage2Controller implements Initializable {
         // initialize search per sec when search field is chosen
         searchField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
-                searchOnBackgroundPerSec();
+//                searchOnBackgroundPerSec();
             } else {
                 timeline.stop();
                 isSearchTableOut = false;
+            }
+        });
+
+        searchField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                searchBarService.setSearchPrompts(buttonList, newValue, PromptSearchBarServiceHandler.ResultType.CARGO);
             }
         });
         setDrawer();
@@ -1015,7 +1030,7 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void onClickSearch() {
         isSearchTableOut = true;
-        searchOnBackgroundPerSec();
+//        searchOnBackgroundPerSec();
         searchTable.setOpacity(1);
         searchTable.setPickOnBounds(true);
         searchTable.setVisible(true);
@@ -1032,7 +1047,7 @@ public class AppPage2Controller implements Initializable {
         if (!isSearchTableMoving && !isSearchTableOut) {
             isSearchTableOut = true;
             isSearchTableMoving = true;
-            searchOnBackgroundPerSec();
+//            searchOnBackgroundPerSec();
             searchTable.setOpacity(1);
             searchTable.setPickOnBounds(true);
             searchTable.setVisible(true);
@@ -1216,11 +1231,11 @@ public class AppPage2Controller implements Initializable {
         buttonThree.setAlignment(Pos.CENTER_LEFT);
         buttonFour.setAlignment(Pos.CENTER_LEFT);
         buttonFive.setAlignment(Pos.CENTER_LEFT);
-        buttonList[0] = buttonOne;
-        buttonList[1] = buttonTwo;
-        buttonList[2] = buttonThree;
-        buttonList[3] = buttonFour;
-        buttonList[4] = buttonFive;
+        buttonList.add(buttonOne);
+        buttonList.add(buttonTwo);
+        buttonList.add(buttonThree);
+        buttonList.add(buttonFour);
+        buttonList.add(buttonFive);
     }
 
     @FXML
@@ -1265,16 +1280,16 @@ public class AppPage2Controller implements Initializable {
 
     }
 
-    /**
-     * perform fuzzy search and show the list of relevant cargos in background per
-     * sec
-     */
-    private void searchOnBackgroundPerSec() {
-        KeyFrame keyFrame = ThreadUtils.generateSearchKeyFrame(buttonList, searchField);
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.getKeyFrames().add(keyFrame);
-        timeline.playFromStart();
-    }
+//    /**
+//     * perform fuzzy search and show the list of relevant cargos in background per
+//     * sec
+//     */
+//    private void searchOnBackgroundPerSec() {
+//        KeyFrame keyFrame = ThreadUtils.generateSearchKeyFrame(buttonList, searchField);
+//        timeline.setCycleCount(Timeline.INDEFINITE);
+//        timeline.getKeyFrames().add(keyFrame);
+//        timeline.playFromStart();
+//    }
 
 
     @FXML

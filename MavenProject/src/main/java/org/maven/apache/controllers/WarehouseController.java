@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.exception.EmptyValueException;
@@ -44,6 +45,9 @@ public class WarehouseController implements Initializable {
 
     @FXML
     private JFXButton checkOne, checkTwo, checkThree, checkFour, checkFive, checkSix, checkSeven;
+
+    @FXML
+    private ImageView deleteOne, deleteTwo, deleteThree, deleteFour, deleteFive, deleteSix, deleteSeven;
 
     @FXML
     private TextField itemNameInDetails;
@@ -96,6 +100,9 @@ public class WarehouseController implements Initializable {
     @FXML
     private JFXButton applyButtonInAdd;
 
+    @FXML
+    private AnchorPane deleteItemPane;
+
     private int pageSize;
 
     private List<Item> itemList;
@@ -106,6 +113,7 @@ public class WarehouseController implements Initializable {
 
     private final Label[] amountList = new Label[7];
 
+    private final ImageView[] deleteList = new ImageView[7];
 
     private final JFXButton[] buttonList = new JFXButton[7];
 
@@ -141,6 +149,7 @@ public class WarehouseController implements Initializable {
         initializeIdList();
         initializeAmountList();
         initializeButtonList();
+        initializeDeleteList();
         generateCachedData();
         pagination.setMaxPage(pageSize);
         initializeItemList();
@@ -152,6 +161,52 @@ public class WarehouseController implements Initializable {
             generateItemList(newValue.intValue() - 1);
             Platform.runLater(WarehouseController.this::setTableContents);
         }));
+    }
+
+    private void initializeDeleteList(){
+        deleteList[0] = deleteOne;
+        deleteList[1] = deleteTwo;
+        deleteList[2] = deleteThree;
+        deleteList[3] = deleteFour;
+        deleteList[4] = deleteFive;
+        deleteList[5] = deleteSix;
+        deleteList[6] = deleteSeven;
+    }
+
+    @FXML
+    private void onClickDeleteOne(){
+        Integer itemID = itemList.get(0).getItemID();
+        cachedItemService.deleteItemById(itemID);
+    }
+
+    @FXML
+    private void onClickDeleteTwo(){
+
+    }
+
+    @FXML
+    private void onClickDeleteThree(){
+
+    }
+
+    @FXML
+    private void onClickDeleteFour(){
+
+    }
+
+    @FXML
+    private void onClickDeleteFive(){
+
+    }
+
+    @FXML
+    private void onClickDeleteSix(){
+
+    }
+
+    @FXML
+    private void onClickDeleteSeven(){
+
     }
 
     /**
@@ -253,7 +308,7 @@ public class WarehouseController implements Initializable {
         Item item;
         try {
             item = encapsulateItemData();
-        } catch (EmptyValueException e) {
+        } catch (Exception e) {
             warnMessage.setVisible(true);
             return;
         }
@@ -374,7 +429,7 @@ public class WarehouseController implements Initializable {
     @Deprecated
     @SuppressWarnings("all")
     private void initializeItemList() {
-        itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.All).get(0);
+        itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(0);
     }
 
     @FXML
@@ -475,7 +530,7 @@ public class WarehouseController implements Initializable {
      * Return the maximum number of pages of the current data
      */
     private void calculatePageSize() {
-        pageSize = CargoCachedUtils.getLists(CargoCachedUtils.listType.All).size();
+        pageSize = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).size();
         pagination.setMaxPage(pageSize);
     }
 
@@ -486,7 +541,7 @@ public class WarehouseController implements Initializable {
      * @param index page number to be displayed
      */
     private void generateItemList(int index) {
-        itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.All).get(index);
+        itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(index);
     }
 
     /**
@@ -497,6 +552,16 @@ public class WarehouseController implements Initializable {
         setIdContent();
         setAmountContent();
         setButtonContent();
+        setDeleteContent();
+    }
+
+    private void setDeleteContent(){
+        for(int i = 0 ; i < itemList.size(); i++){
+            deleteList[i].setVisible(true);
+        }
+        for(int j = itemList.size(); j < deleteList.length; j++){
+            deleteList[j].setVisible(false);
+        }
     }
 
     private void setButtonContent(){

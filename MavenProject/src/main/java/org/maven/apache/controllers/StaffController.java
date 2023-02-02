@@ -483,9 +483,8 @@ public class StaffController implements Initializable {
                 staffService.updateStaff(staff);
                 getStaffList(pagination.getCurrentPage());
                 Platform.runLater(this::run);
-            } catch (EmptyValueException e) {
+            } catch (Exception e) {
                 warnMessageInDetails.setVisible(true);
-                throw new RuntimeException(e);
             }finally {
                 Platform.runLater(() -> {
                     assignStaffValue();
@@ -505,7 +504,7 @@ public class StaffController implements Initializable {
      */
     private Staff encapsulateCurrentStaffData() throws EmptyValueException {
         Staff staff = new Staff();
-        if (staffNameInDetails.getText().isEmpty()){
+        if (staffNameInDetails.getText().isBlank()){
             throw new EmptyValueException("Empty input values in staff name section");
         }
         staff.setStaffName(staffNameInDetails.getText());
@@ -549,7 +548,7 @@ public class StaffController implements Initializable {
                 getStaffList(pagination.getCurrentPage());
                 calculatePageNumber();
                 Platform.runLater(() -> warnMessageInAdd.setVisible(false));
-            } catch (EmptyValueException e) {
+            } catch (Exception e) {
                 warnMessageInAdd.setVisible(true);
             }finally {
                 Platform.runLater(() -> {
@@ -572,7 +571,7 @@ public class StaffController implements Initializable {
      */
     private Staff encapsulateStaffDataInAdd() throws EmptyValueException {
         Staff staff = new Staff();
-        if (staffNameInAdd.getText().isEmpty()){
+        if (staffNameInAdd.getText().isBlank()){
             throw new EmptyValueException("User did not input a name when it is required");
         }
         staff.setStaffName(staffNameInAdd.getText());

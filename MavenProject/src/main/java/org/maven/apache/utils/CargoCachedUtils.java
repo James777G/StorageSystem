@@ -10,7 +10,7 @@ import java.util.Map;
 public class CargoCachedUtils {
 
     public enum listType{
-        All
+        ALL
     }
 
     private static final Map<listType, List<List<Item>>> itemMap = new HashMap<>();

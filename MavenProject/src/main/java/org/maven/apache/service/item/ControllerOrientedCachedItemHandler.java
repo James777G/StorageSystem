@@ -15,7 +15,7 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService{
 
     @Override
     public void updateAllCachedItemData() {
-        CargoCachedUtils.putLists(CargoCachedUtils.listType.All,
+        CargoCachedUtils.putLists(CargoCachedUtils.listType.ALL,
                 itemDataManipulationService.getPagedCacheList(itemService.selectAll(), 7));
     }
 

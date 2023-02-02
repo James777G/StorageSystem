@@ -6,7 +6,7 @@
 .resultPane{
     -fx-background-radius: 5 5 10 10;
     -fx-border-radius: 5 5 10 10;
-    -fx-background-color: white;
+    -fx-background-color: transparent;
 }
 .allCheckBox{
     -mfx-main: -darkGrey-theme;
@@ -19,7 +19,31 @@
     -mfx-main:   #ddeab1;
     -mfx-secondary: #759751;
 }
-.resultButton:hover{
+.middleResultButton{
+    -fx-background-color: white;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-border-color: transparent;
+}
+.middleResultButton:hover{
+    -fx-background-color: #d9d9d9;
+}
+.topResultButton{
+    -fx-border-radius: 5 5 0 0;
+    -fx-background-radius: 5 5 0 0;
+    -fx-border-color: transparent;
+    -fx-background-color: white;
+}
+.topResultButton:hover{
+    -fx-background-color: #d9d9d9;
+}
+.botResultButton{
+    -fx-border-radius: 0 0 5 5;
+    -fx-background-radius: 0 0 5 5;
+    -fx-border-color: transparent;
+    -fx-background-color: white;
+}
+.botResultButton:hover{
     -fx-background-color: #d9d9d9;
 }
 
