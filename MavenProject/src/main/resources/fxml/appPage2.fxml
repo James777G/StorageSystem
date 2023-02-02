@@ -658,7 +658,7 @@
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </TextField>
-                  <JFXButton fx:id="statusTakenButton1" layoutX="252.0" layoutY="39.0" prefHeight="30.0" prefWidth="75.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="252.0">
+                  <JFXButton fx:id="statusTakenButton1" layoutX="252.0" layoutY="39.0" onAction="#onClickDialogTakenButton" prefHeight="30.0" prefWidth="75.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="252.0">
                      <graphic>
                         <Label pickOnBounds="false" text="  Taken" textFill="WHITE">
                            <font>
@@ -674,7 +674,7 @@
                         </Label>
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="statusRestockButton1" layoutX="327.0" layoutY="39.0" prefHeight="30.0" prefWidth="90.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="328.0">
+                  <JFXButton fx:id="statusRestockButton1" layoutX="327.0" layoutY="39.0" onAction="#onClickDialogRestockButton" prefHeight="30.0" prefWidth="90.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="328.0">
                      <graphic>
                         <Label pickOnBounds="false" text="  Restock" textFill="WHITE">
                            <font>

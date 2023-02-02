@@ -37,9 +37,12 @@ import org.maven.apache.utils.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -94,7 +97,7 @@ public class AppPage2Controller implements Initializable {
     private ImageView refreshImage;
 
     @FXML
-    private MFXDatePicker transactionDateInDetails;
+    private MFXDatePicker transactionDateInDetails = new MFXDatePicker(Locale.ENGLISH);
 
     @FXML
     private TextArea purposeTextInDetails;
@@ -432,11 +435,9 @@ public class AppPage2Controller implements Initializable {
     }
 
     CurrentPaneStatus currentPaneStatus = CurrentPaneStatus.HOMEPAGE;
-    //private List<DateTransaction> dateTransactions_Restock = dateTransactionService.pageAskedDateAddUnitDescend();
-    private List<Transaction> dateTransactions_Restock;// = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
+    private List<Transaction> dateTransactions_Restock;
 
-    //private List<DateTransaction> dateTransactions_Taken = dateTransactionService.pageAskedDateRemoveUnitDescend();
-    private List<Transaction> dateTransactions_Taken; //= TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
+    private List<Transaction> dateTransactions_Taken;
 
     private ButtonSelected buttonSelected = ButtonSelected.ALL;
 
@@ -697,6 +698,8 @@ public class AppPage2Controller implements Initializable {
     }
     private void fillCargoBoxesInformation(ButtonSelected buttonSelected) {
         int boxNumber = 4;
+        takenBoxNumber = 2;
+        restockBoxNumber = 2;
         for (int index = 0; index < boxNumber; index++) {
             enableNode(cargoBoxPanes[index]);
             enableNode(cargoBoxFunctionalityPanes[index]);
@@ -1698,6 +1701,7 @@ public class AppPage2Controller implements Initializable {
         String recordTime = transaction.getTransactionTime();
         String[] split = recordTime.trim().replaceAll("-", "/").replaceAll("年", "/").replaceAll("月", "/").split("/");
         transactionDateInDetails.setValue(LocalDate.of(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2])));
+        transactionDateInDetails.setStartingYearMonth(YearMonth.of(Integer.parseInt(split[0]), Integer.parseInt(split[1])));
     }
 
     @SuppressWarnings("all")
@@ -1773,6 +1777,24 @@ public class AppPage2Controller implements Initializable {
         setTransactionDialog(dateTransactionListInAppPage[3]);
     }
 
+    @FXML
+    private void onClickDialogTakenButton(){
+        if (!isEncapsulatedTransactionStatusTaken) {
+            transactionDialogRestockActionPane.setVisible(false);
+            transactionDialogTakenActionPane.setVisible(true);
+            isEncapsulatedTransactionStatusTaken = true;
+        }
+    }
+
+    @FXML
+    private void onClickDialogRestockButton(){
+        if (isEncapsulatedTransactionStatusTaken) {
+            transactionDialogRestockActionPane.setVisible(true);
+            transactionDialogTakenActionPane.setVisible(false);
+            isEncapsulatedTransactionStatusTaken = false;
+        }
+    }
+
     @Warning(Warning.WarningType.DEBUG)
     @FXML
     private void onClickApply() {
@@ -1784,28 +1806,18 @@ public class AppPage2Controller implements Initializable {
 //        if(restockCheckBox.isSelected()){
 //
 //        }
-
-//        if (isEncapsulatedTransactionStatusTaken) {
-//            encapsulatedTransaction.setStatus("TAKEN");
-//        }else{
-//            encapsulatedTransaction.setStatus("RESTOCK");
-//        }
-//        encapsulatedTransaction.setUnit(Integer.parseInt(transactionAmountInDetails.getText()));
-//        LocalDate currentDate = transactionDateInDetails.getCurrentDate();
-//        String format = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-//        encapsulatedTransaction.setTransactionTime(format);
-//        encapsulatedTransaction.setPurpose(purposeTextInDetails.getText());
-//        encapsulatedTransaction.setStaffName(staffNameInDetails.getText().trim());
-//        encapsulatedTransaction.setItemName(transactionNameInDetails.getText().trim());
         generateEncapsulatedTransaction();
         if (!Objects.equals(encapsulatedTransaction,transaction)){
             cachedTransactionService.updateTransaction(encapsulatedTransaction);
+            dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
+            dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
+            fillCargoBoxesInformation(buttonSelected);
         }
     }
 
     private void generateEncapsulatedTransaction(){
         encapsulatedTransaction.setUnit(Integer.parseInt(transactionAmountInDetails.getText()));
-        LocalDate currentDate = transactionDateInDetails.getCurrentDate();
+        LocalDate currentDate = transactionDateInDetails.getValue();
         String format = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         encapsulatedTransaction.setTransactionTime(format);
         encapsulatedTransaction.setPurpose(purposeTextInDetails.getText());
