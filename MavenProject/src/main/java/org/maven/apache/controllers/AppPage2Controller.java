@@ -521,10 +521,9 @@ public class AppPage2Controller implements Initializable {
         // initialize search per sec when search field is chosen
 //        searchField.focusedProperty().addListener((observable, oldValue, newValue) -> {
 //            if (newValue) {
-////                searchOnBackgroundPerSec();
+//                searchTable.setVisible(true);
 //            } else {
-//                timeline.stop();
-//                isSearchTableOut = false;
+//                searchTable.setVisible(false);
 //            }
 //        });
 
@@ -541,6 +540,36 @@ public class AppPage2Controller implements Initializable {
         blockPane.setVisible(false);
         DataUtils.publicSettingBlockPane = blockPane;
         onUpdateUsername();
+    }
+
+    @FXML
+    private void onClickSearchButtonOne(){
+        searchTable.setVisible(true);
+        searchField.setText(buttonOne.getText());
+    }
+
+    @FXML
+    private void onClickSearchButtonTwo(){
+        searchTable.setVisible(true);
+        searchField.setText(buttonTwo.getText());
+    }
+
+    @FXML
+    private void onClickSearchButtonThree(){
+        searchTable.setVisible(true);
+        searchField.setText(buttonThree.getText());
+    }
+
+    @FXML
+    private void onClickSearchButtonFour(){
+        searchTable.setVisible(true);
+        searchField.setText(buttonFour.getText());
+    }
+
+    @FXML
+    private void onClickSearchButtonFive(){
+        searchTable.setVisible(true);
+        searchField.setText(buttonFive.getText());
     }
 
     private void enableNode(Node node) {
