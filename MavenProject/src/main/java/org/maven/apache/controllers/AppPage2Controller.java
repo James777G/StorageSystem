@@ -501,8 +501,8 @@ public class AppPage2Controller implements Initializable {
 //        staffButton.setOpacity(0);
 //        transactionButton.setOpacity(0);
 //        messageButton.setOpacity(0);
-        searchTable.setPickOnBounds(false);
-        searchTable.setOpacity(0);
+//        searchTable.setPickOnBounds(false);
+        searchTable.setOpacity(1);
         stackPaneForWarehouse.setOpacity(0);
 //        stackPaneForWarehouse.setPickOnBounds(false);
         stackPaneForWarehouse.setVisible(false);
@@ -519,14 +519,14 @@ public class AppPage2Controller implements Initializable {
         stackPane.setOpacity(0);
         stackPane.setVisible(false);
         // initialize search per sec when search field is chosen
-        searchField.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-//                searchOnBackgroundPerSec();
-            } else {
-                timeline.stop();
-                isSearchTableOut = false;
-            }
-        });
+//        searchField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+//            if (newValue) {
+////                searchOnBackgroundPerSec();
+//            } else {
+//                timeline.stop();
+//                isSearchTableOut = false;
+//            }
+//        });
 
         searchField.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -1044,26 +1044,28 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onClickSearchBar() {
-        if (!isSearchTableMoving && !isSearchTableOut) {
-            isSearchTableOut = true;
-            isSearchTableMoving = true;
-//            searchOnBackgroundPerSec();
-            searchTable.setOpacity(1);
-            searchTable.setPickOnBounds(true);
-            searchTable.setVisible(true);
-            ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(searchTable, 500, 0, 1);
-            scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
-            scaleTransition.setOnFinished(event -> {
-                isSearchTableMoving = false;
-            });
-            scaleTransition.play();
-            TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(searchTable, 500, -100, 0);
-            translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
-            translateTransition.setOnFinished(event -> {
-                isSearchTableMoving = false;
-            });
-            translateTransition.play();
-        }
+        searchBarService.setSearchPrompts(buttonList, searchField.getText(), PromptSearchBarServiceHandler.ResultType.CARGO);
+        searchTable.setVisible(true);
+//        if (!isSearchTableMoving && !isSearchTableOut) {
+//            isSearchTableOut = true;
+//            isSearchTableMoving = true;
+////            searchOnBackgroundPerSec();
+//            searchTable.setOpacity(1);
+//            searchTable.setPickOnBounds(true);
+//            searchTable.setVisible(true);
+//            ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(searchTable, 500, 0, 1);
+//            scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+//            scaleTransition.setOnFinished(event -> {
+//                isSearchTableMoving = false;
+//            });
+//            scaleTransition.play();
+//            TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(searchTable, 500, -100, 0);
+//            translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+//            translateTransition.setOnFinished(event -> {
+//                isSearchTableMoving = false;
+//            });
+//            translateTransition.play();
+//        }
     }
 
     private void setTransactionPane() {
@@ -1249,11 +1251,10 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onClickAppPagePane() {
-        isSearchTableOut = false;
-        isSearchTableMoving = false;
-        timeline.stop();
-        searchTable.setOpacity(0);
-        searchTable.setPickOnBounds(false);
+//        isSearchTableOut = false;
+//        isSearchTableMoving = false;
+//        timeline.stop();
+//        searchTable.setPickOnBounds(false);
         searchTable.setVisible(false);
     }
 
