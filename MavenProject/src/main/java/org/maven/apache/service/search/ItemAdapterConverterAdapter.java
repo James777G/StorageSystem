@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ItemAdapterConverterAdapter implements SearchAdapterService<Item> {
+public final class ItemAdapterConverterAdapter implements SearchAdapterService<Item> {
 
     private static CargoCachedUtils.listType DEFAULT_SOURCE_TYPE = CargoCachedUtils.listType.ALL;
 

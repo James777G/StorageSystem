@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class StaffAdapterConverterAdapter implements SearchAdapterService<Staff>{
+public final class StaffAdapterConverterAdapter implements SearchAdapterService<Staff>{
 
     private static StaffCachedUtils.listType DEFAULT_SOURCE_TYPE = StaffCachedUtils.listType.ALL;
 
