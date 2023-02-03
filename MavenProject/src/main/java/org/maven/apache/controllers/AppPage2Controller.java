@@ -173,9 +173,6 @@ public class AppPage2Controller implements Initializable {
     private JFXButton confirmUpdateInfo;
 
     @FXML
-    private JFXDrawer VBoxDrawer;
-
-    @FXML
     private AnchorPane appPagePane;
 
     @FXML
