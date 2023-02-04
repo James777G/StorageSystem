@@ -1,19 +1,20 @@
 package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import io.github.palexdev.materialfx.beans.properties.functional.SupplierProperty;
 import io.github.palexdev.materialfx.controls.MFXPagination;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import lombok.extern.slf4j.Slf4j;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.exception.EmptyValueException;
 import org.maven.apache.exception.Warning;
@@ -23,11 +24,13 @@ import org.maven.apache.utils.CargoCachedUtils;
 import org.maven.apache.utils.ScaleUtils;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
+import java.util.function.Supplier;
 
-
+@Slf4j
 public class WarehouseController implements Initializable {
 
     private final CachedItemService cachedItemService = MyLauncher.context.getBean("cachedItemService", CachedItemService.class);
@@ -61,8 +64,7 @@ public class WarehouseController implements Initializable {
     @FXML
     private TextArea itemDescriptionInDetails;
 
-    @FXML
-    private MFXPagination pagination;
+
 
     @FXML
     private MFXGenericDialog descriptionDialog;
@@ -103,6 +105,9 @@ public class WarehouseController implements Initializable {
     @FXML
     private AnchorPane deleteItemPane;
 
+    @FXML
+    private Pagination newPagination;
+
     private int pageSize;
 
     private List<Item> itemList;
@@ -119,6 +124,7 @@ public class WarehouseController implements Initializable {
 
     private Item selectedItem;
 
+    private Integer selectedItemID;
 
     /**
      * 1. sets up the word limit for description input field inside the description dialog
@@ -137,6 +143,8 @@ public class WarehouseController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cachedItemService.updateAllCachedItemData();
+        System.out.println("oididididididididididididididididididididididididididididididididididididididididf");
+        System.out.println(CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL));
         itemDescriptionInDetails.setTextFormatter(new TextFormatter<String>(change ->
                 change.getControlNewText().length() <= 100 ? change : null));
         itemNameInDetails.setTextFormatter(new TextFormatter<String>(change ->
@@ -151,14 +159,15 @@ public class WarehouseController implements Initializable {
         initializeButtonList();
         initializeDeleteList();
         generateCachedData();
-        pagination.setMaxPage(pageSize);
+        newPagination.setMaxPageIndicatorCount(8);
         initializeItemList();
         setTableContents();
+        deleteItemPane.setVisible(false);
         loadSpinnerInAdd.setVisible(false);
         addItemPane.setVisible(false);
         warnMessageInAdd.setVisible(false);
-        pagination.currentPageProperty().addListener((observable, oldValue, newValue) -> executorService.execute(() -> {
-            generateItemList(newValue.intValue() - 1);
+        newPagination.currentPageIndexProperty().addListener((observable, oldValue, newValue) -> executorService.execute(() -> {
+            generateItemList(newValue.intValue());
             Platform.runLater(WarehouseController.this::setTableContents);
         }));
     }
@@ -175,38 +184,44 @@ public class WarehouseController implements Initializable {
 
     @FXML
     private void onClickDeleteOne(){
-        Integer itemID = itemList.get(0).getItemID();
-        cachedItemService.deleteItemById(itemID);
+        selectedItemID = itemList.get(0).getItemID();
+        deleteItemPane.setVisible(true);
     }
 
     @FXML
     private void onClickDeleteTwo(){
-
+        selectedItemID = itemList.get(1).getItemID();
+        deleteItemPane.setVisible(true);
     }
 
     @FXML
     private void onClickDeleteThree(){
-
+        selectedItemID = itemList.get(2).getItemID();
+        deleteItemPane.setVisible(true);
     }
 
     @FXML
     private void onClickDeleteFour(){
-
+        selectedItemID = itemList.get(3).getItemID();
+        deleteItemPane.setVisible(true);
     }
 
     @FXML
     private void onClickDeleteFive(){
-
+        selectedItemID = itemList.get(4).getItemID();
+        deleteItemPane.setVisible(true);
     }
 
     @FXML
     private void onClickDeleteSix(){
-
+        selectedItemID = itemList.get(5).getItemID();
+        deleteItemPane.setVisible(true);
     }
 
     @FXML
     private void onClickDeleteSeven(){
-
+        selectedItemID = itemList.get(6).getItemID();
+        deleteItemPane.setVisible(true);
     }
 
     /**
@@ -324,7 +339,7 @@ public class WarehouseController implements Initializable {
             try {
                 cachedItemService.updateItem(finalItem);
                 generateCachedData();
-                int currentPage = pagination.getCurrentPage() - 1;
+                int currentPage = newPagination.getCurrentPageIndex();
                 generateItemList(currentPage);
                 Platform.runLater(this::setTableContents);
                 Platform.runLater(() -> {
@@ -386,7 +401,7 @@ public class WarehouseController implements Initializable {
         executorService.execute(() -> {
             try {
                 cachedItemService.addNewItem(item);
-                generateItemList(pagination.getCurrentPage() - 1);
+                generateItemList(newPagination.getCurrentPageIndex());
                 Platform.runLater(() -> {
                     calculatePageSize();
                     setTableContents();
@@ -531,7 +546,8 @@ public class WarehouseController implements Initializable {
      */
     private void calculatePageSize() {
         pageSize = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).size();
-        pagination.setMaxPage(pageSize);
+        System.out.println(pageSize);
+        newPagination.setPageCount(pageSize);
     }
 
 
