@@ -152,6 +152,8 @@ public class NewTransactionPageController implements Initializable {
 
     private boolean isTaken = false;
 
+    private boolean isDateAscend = false;
+
     private int currentPage;
 
     @Override
@@ -296,7 +298,15 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickDate() {
-
+        if (isDateAscend) {
+            sortBy = SortBy.DATEDESCEND;
+            isDateAscend = false;
+        } else {
+            sortBy = SortBy.DATEASCEND;
+            isDateAscend = true;
+        }
+        setSortCondition();
+        onClickPagination();
     }
 
     /**
