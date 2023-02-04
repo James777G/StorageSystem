@@ -27,7 +27,7 @@ import java.util.concurrent.ExecutorService;
 public class NewTransactionPageController implements Initializable {
 
     enum SortBy {
-        ALL, DATEASCEND, DATEDESCEND, RESTOCKASCEND, RESTOCKDESCEND, TAKENASCEND, TAKENDDESCEND
+        DATEASCEND, DATEDESCEND, RESTOCKASCEND, RESTOCKDESCEND, TAKENASCEND, TAKENDDESCEND
     }
 
     enum ButtonSelected {
@@ -142,13 +142,17 @@ public class NewTransactionPageController implements Initializable {
 
     private List<List<Transaction>> sortedList;
 
-    private SortBy sortBy = SortBy.ALL;
+    private List<Transaction> currentPageList;
+
+    private SortBy sortBy = SortBy.DATEDESCEND;
 
     private boolean isAll = true;
 
     private boolean isRestock = false;
 
     private boolean isTaken = false;
+
+    private int currentPage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -160,6 +164,8 @@ public class NewTransactionPageController implements Initializable {
         DataUtils.publicTransactionBlockPane = blockPane;
         deletionConfirmationDialog.setVisible(false);
         setPaginationPages(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_ASC_7));
+        setSortCondition();
+        onClickPagination();
     }
 
     /**
@@ -204,59 +210,41 @@ public class NewTransactionPageController implements Initializable {
      * set how many pages do we need in total
      */
     private void setPaginationPages(List<List<Transaction>> list) {
-        int numOfPages;
-        if ((list.size() % 7) != 0) {
-            // if the list does not contain exact number of pages
-            numOfPages = (list.size() / 7) + 1;
-        } else {
-            // if the list contains exact number of pages
-            numOfPages = list.size() / 7;
-        }
-        transactionPagination.setMaxPage(numOfPages);
+        transactionPagination.setMaxPage(list.size());
     }
 
 
     /**
-     * show the content of transaction list from current page when the pagination is clicked
+     * set the content of transaction list from current page when the pagination is clicked
      */
     @FXML
     private void onClickPagination() {
-        int currentPage = transactionPagination.getCurrentPage();
-        setTransactionList(currentPage);
-        setUnitStatus();
-    }
-
-    /**
-     * set the transaction list by a specific property
-     */
-    private void setTransactionList(int currentPage) {
-        setSortCondition();
+        currentPage = transactionPagination.getCurrentPage();
+        currentPageList = sortedList.get(currentPage - 1);
         // set non-empty labels
-        for (int i = 0; i < sortedList.size(); i++) {
-            cargoLabelArray[i].setText(sortedList.get(currentPage).get(i).getItemName());
-            idLabelArray[i].setText(String.valueOf(sortedList.get(currentPage).get(i).getID()));
-            amountLabelArray[i].setText(String.valueOf(sortedList.get(currentPage).get(i).getUnit()));
-            dateLabelArray[i].setText(sortedList.get(currentPage).get(i).getTransactionTime());
+        for (int i = 0; i < currentPageList.size(); i++) {
+            cargoLabelArray[i].setText(currentPageList.get(i).getItemName());
+            idLabelArray[i].setText(String.valueOf(currentPageList.get(i).getID()));
+            amountLabelArray[i].setText(String.valueOf(currentPageList.get(i).getUnit()));
+            dateLabelArray[i].setText(currentPageList.get(i).getTransactionTime());
         }
         // set empty labels
-        if (sortedList.size() != 7) {
-            for (int j = 6; j >= sortedList.size(); j--) {
+        if (currentPageList.size() != 7) {
+            for (int j = 6; j >= currentPageList.size(); j--) {
                 cargoLabelArray[j].setText("");
                 idLabelArray[j].setText("");
                 amountLabelArray[j].setText("");
                 dateLabelArray[j].setText("");
             }
         }
+        //setUnitStatus();
     }
 
     /**
-     * set the sorting property
+     * get the transaction list by setting a sorting property
      */
     private void setSortCondition() {
         switch (sortBy) {
-            case ALL:
-                sortedList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_ASC_7);
-                break;
             case DATEASCEND:
                 sortedList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_ASC_7);
                 break;
