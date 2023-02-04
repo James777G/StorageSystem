@@ -19,10 +19,9 @@ import org.maven.apache.MyLauncher;
 import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.exception.Warning;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
-import org.maven.apache.utils.DataUtils;
-import org.maven.apache.utils.ScaleUtils;
-import org.maven.apache.utils.TransitionUtils;
-import org.maven.apache.utils.TranslateUtils;
+import org.maven.apache.service.transaction.CachedTransactionService;
+import org.maven.apache.transaction.Transaction;
+import org.maven.apache.utils.*;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -68,6 +67,10 @@ public class TransactionPageController implements Initializable {
     private final DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
 
     private List<DateTransaction> sortedList;
+
+    private final CachedTransactionService cachedTransactionService = MyLauncher.context.getBean("cachedTransactionService", CachedTransactionService.class);
+
+    private List<List<Transaction>> dateAscendList, dateDescendList, amountAscendList, amountDescendList;
 
     @FXML
     private AnchorPane movingLinePane;
@@ -188,6 +191,12 @@ public class TransactionPageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        cachedTransactionService.updateAllCachedTransactionData();
+        dateAscendList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_ASC_7);
+        dateDescendList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_DESC_7);
+        amountAscendList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.AMOUNT_ASC_7);
+        amountDescendList= TransactionCachedUtils.getLists(TransactionCachedUtils.listType.AMOUNT_DESC_7);
+
         editCargoPane.getChildren().add(DataUtils.editCargoPane);
         DataUtils.editCargoPane.setVisible(false);
         initializeLabels();
