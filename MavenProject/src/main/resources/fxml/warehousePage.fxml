@@ -647,16 +647,17 @@
                   <Font name="Calibri Bold" size="15.0" />
                </font>
             </Label>
-            <ImageView fitHeight="33.0" fitWidth="30.0" layoutX="459.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="doContinueButton" fitHeight="33.0" fitWidth="30.0" layoutX="459.0" layoutY="49.0" onMouseClicked="#doContinue" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/icons8-checkmark-yes-64.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="28.0" fitWidth="25.0" layoutX="461.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="doNotContinueButton" fitHeight="28.0" fitWidth="25.0" layoutX="461.0" layoutY="11.0" onMouseClicked="#doNotContinue" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/icons8-multiply-90.png" />
                </image>
             </ImageView>
+            <MFXProgressSpinner fx:id="loadSpinnerOnDeletePane" layoutX="461.0" layoutY="52.0" prefHeight="23.0" prefWidth="25.0" />
          </children>
       </AnchorPane>
       <BorderPane layoutX="221.0" layoutY="590.0" prefHeight="51.0" prefWidth="761.0">

@@ -65,7 +65,6 @@ public class WarehouseController implements Initializable {
     private TextArea itemDescriptionInDetails;
 
 
-
     @FXML
     private MFXGenericDialog descriptionDialog;
 
@@ -108,6 +107,15 @@ public class WarehouseController implements Initializable {
     @FXML
     private Pagination newPagination;
 
+    @FXML
+    private ImageView doNotContinueButton;
+
+    @FXML
+    private ImageView doContinueButton;
+
+    @FXML
+    private MFXProgressSpinner loadSpinnerOnDeletePane;
+
     private int pageSize;
 
     private List<Item> itemList;
@@ -132,13 +140,11 @@ public class WarehouseController implements Initializable {
      * 3. bind listener of the pagination to retrieve current page property dynamically.
      *
      * <p>
-     * @param location
-     * The location used to resolve relative paths for the root object, or
-     * {@code null} if the location is not known.
      *
-     * @param resources
-     * The resources used to localize the root object, or {@code null} if
-     * the root object was not localized.
+     * @param location  The location used to resolve relative paths for the root object, or
+     *                  {@code null} if the location is not known.
+     * @param resources The resources used to localize the root object, or {@code null} if
+     *                  the root object was not localized.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -166,13 +172,14 @@ public class WarehouseController implements Initializable {
         loadSpinnerInAdd.setVisible(false);
         addItemPane.setVisible(false);
         warnMessageInAdd.setVisible(false);
+        loadSpinnerOnDeletePane.setVisible(false);
         newPagination.currentPageIndexProperty().addListener((observable, oldValue, newValue) -> executorService.execute(() -> {
             generateItemList(newValue.intValue());
             Platform.runLater(WarehouseController.this::setTableContents);
         }));
     }
 
-    private void initializeDeleteList(){
+    private void initializeDeleteList() {
         deleteList[0] = deleteOne;
         deleteList[1] = deleteTwo;
         deleteList[2] = deleteThree;
@@ -183,43 +190,43 @@ public class WarehouseController implements Initializable {
     }
 
     @FXML
-    private void onClickDeleteOne(){
+    private void onClickDeleteOne() {
         selectedItemID = itemList.get(0).getItemID();
         deleteItemPane.setVisible(true);
     }
 
     @FXML
-    private void onClickDeleteTwo(){
+    private void onClickDeleteTwo() {
         selectedItemID = itemList.get(1).getItemID();
         deleteItemPane.setVisible(true);
     }
 
     @FXML
-    private void onClickDeleteThree(){
+    private void onClickDeleteThree() {
         selectedItemID = itemList.get(2).getItemID();
         deleteItemPane.setVisible(true);
     }
 
     @FXML
-    private void onClickDeleteFour(){
+    private void onClickDeleteFour() {
         selectedItemID = itemList.get(3).getItemID();
         deleteItemPane.setVisible(true);
     }
 
     @FXML
-    private void onClickDeleteFive(){
+    private void onClickDeleteFive() {
         selectedItemID = itemList.get(4).getItemID();
         deleteItemPane.setVisible(true);
     }
 
     @FXML
-    private void onClickDeleteSix(){
+    private void onClickDeleteSix() {
         selectedItemID = itemList.get(5).getItemID();
         deleteItemPane.setVisible(true);
     }
 
     @FXML
-    private void onClickDeleteSeven(){
+    private void onClickDeleteSeven() {
         selectedItemID = itemList.get(6).getItemID();
         deleteItemPane.setVisible(true);
     }
@@ -250,6 +257,28 @@ public class WarehouseController implements Initializable {
         if (itemList.get(2) != null) {
             setItemAttributes(itemList.get(2));
         }
+    }
+
+    @FXML
+    private void doNotContinue() {
+        deleteItemPane.setVisible(false);
+    }
+
+    @FXML
+    private void doContinue() {
+        loadSpinnerOnDeletePane.setVisible(true);
+        doContinueButton.setVisible(false);
+        executorService.execute(() -> {
+            cachedItemService.deleteItemById(selectedItemID);
+            Platform.runLater(this::generateCachedData);
+            generateItemList(newPagination.getCurrentPageIndex());
+            Platform.runLater(this::setTableContents);
+            Platform.runLater(() -> {
+                loadSpinnerOnDeletePane.setVisible(false);
+                doContinueButton.setVisible(true);
+                deleteItemPane.setVisible(false);
+            });
+        });
     }
 
     /**
@@ -338,10 +367,12 @@ public class WarehouseController implements Initializable {
             });
             try {
                 cachedItemService.updateItem(finalItem);
-                generateCachedData();
-                int currentPage = newPagination.getCurrentPageIndex();
-                generateItemList(currentPage);
-                Platform.runLater(this::setTableContents);
+                Platform.runLater(() -> {
+                    generateCachedData();
+                    int currentPage = newPagination.getCurrentPageIndex();
+                    generateItemList(currentPage);
+                    setTableContents();
+                });
                 Platform.runLater(() -> {
                     applyButton.setVisible(true);
                     loadSpinner.setVisible(false);
@@ -374,11 +405,11 @@ public class WarehouseController implements Initializable {
     private Item encapsulateItemData() throws EmptyValueException {
         Item item = new Item();
         item.setItemID(Integer.parseInt(itemIdInDetails.getText()));
-        if(itemNameInDetails.getText().isEmpty()){
+        if (itemNameInDetails.getText().isEmpty()) {
             throw new EmptyValueException("empty item name detected");
         }
         item.setItemName(itemNameInDetails.getText());
-        if(itemAmountInDetails.getText().isEmpty()){
+        if (itemAmountInDetails.getText().isEmpty()) {
             throw new EmptyValueException("empty item amount detected");
         }
         item.setUnit(Integer.parseInt(itemAmountInDetails.getText()));
@@ -401,13 +432,13 @@ public class WarehouseController implements Initializable {
         executorService.execute(() -> {
             try {
                 cachedItemService.addNewItem(item);
-                generateItemList(newPagination.getCurrentPageIndex());
                 Platform.runLater(() -> {
+                    generateItemList(newPagination.getCurrentPageIndex());
                     calculatePageSize();
                     setTableContents();
                     warnMessageInAdd.setVisible(false);
                 });
-            } catch(Exception e){
+            } catch (Exception e) {
                 warnMessageInAdd.setVisible(true);
             } finally {
                 loadSpinnerInAdd.setVisible(false);
@@ -420,7 +451,7 @@ public class WarehouseController implements Initializable {
 
     private Item encapsulateCurrentItemInAdd() throws EmptyValueException {
         Item item = new Item();
-        if(itemNameInAdd.getText().isBlank() || itemAmountInAdd.getText().isBlank()){
+        if (itemNameInAdd.getText().isBlank() || itemAmountInAdd.getText().isBlank()) {
             throw new EmptyValueException("Input Value for item name/amount is empty or blank");
         } else {
             item.setItemName(itemNameInAdd.getText());
@@ -431,7 +462,7 @@ public class WarehouseController implements Initializable {
     }
 
     @FXML
-    private void onClickOkayInAdd(){
+    private void onClickOkayInAdd() {
         addItemPane.setVisible(false);
         warnMessageInAdd.setVisible(false);
         loadSpinnerInAdd.setVisible(false);
@@ -448,7 +479,7 @@ public class WarehouseController implements Initializable {
     }
 
     @FXML
-    private void onClickAddButton(){
+    private void onClickAddButton() {
         addItemPane.setVisible(true);
     }
 
@@ -457,7 +488,7 @@ public class WarehouseController implements Initializable {
      * when mouse is entered.
      */
     @FXML
-    private void onEnterAddButton(){
+    private void onEnterAddButton() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(addButton, 500, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
@@ -468,7 +499,7 @@ public class WarehouseController implements Initializable {
      * when mouse is exited.
      */
     @FXML
-    private void onExitAddButton(){
+    private void onExitAddButton() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(addButton, 500, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
@@ -557,7 +588,11 @@ public class WarehouseController implements Initializable {
      * @param index page number to be displayed
      */
     private void generateItemList(int index) {
-        itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(index);
+        try{
+            itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(index);
+        } catch (Exception e){
+            itemList = new ArrayList<>();
+        }
     }
 
     /**
@@ -571,20 +606,20 @@ public class WarehouseController implements Initializable {
         setDeleteContent();
     }
 
-    private void setDeleteContent(){
-        for(int i = 0 ; i < itemList.size(); i++){
+    private void setDeleteContent() {
+        for (int i = 0; i < itemList.size(); i++) {
             deleteList[i].setVisible(true);
         }
-        for(int j = itemList.size(); j < deleteList.length; j++){
+        for (int j = itemList.size(); j < deleteList.length; j++) {
             deleteList[j].setVisible(false);
         }
     }
 
-    private void setButtonContent(){
-        for(int j = 0; j < itemList.size(); j++){
+    private void setButtonContent() {
+        for (int j = 0; j < itemList.size(); j++) {
             buttonList[j].setDisable(false);
         }
-        for(int i = itemList.size(); i < buttonList.length; i++){
+        for (int i = itemList.size(); i < buttonList.length; i++) {
             buttonList[i].setDisable(true);
         }
     }
@@ -593,10 +628,10 @@ public class WarehouseController implements Initializable {
      * update name content in the table
      */
     private void setNameContent() {
-        for(int i = 0; i < itemList.size(); i++){
+        for (int i = 0; i < itemList.size(); i++) {
             nameList[i].setText(itemList.get(i).getItemName());
         }
-        for(int j = itemList.size(); j < nameList.length; j++){
+        for (int j = itemList.size(); j < nameList.length; j++) {
             nameList[j].setText("N/A");
         }
     }
@@ -608,7 +643,7 @@ public class WarehouseController implements Initializable {
         for (int i = 0; i < itemList.size(); i++) {
             idList[i].setText(itemList.get(i).getItemID().toString());
         }
-        for(int j = itemList.size(); j < idList.length; j++){
+        for (int j = itemList.size(); j < idList.length; j++) {
             idList[j].setText("N/A");
         }
     }
@@ -620,7 +655,7 @@ public class WarehouseController implements Initializable {
         for (int i = 0; i < itemList.size(); i++) {
             amountList[i].setText(itemList.get(i).getUnit().toString());
         }
-        for(int j = itemList.size(); j < amountList.length; j++){
+        for (int j = itemList.size(); j < amountList.length; j++) {
             amountList[j].setText("N/A");
         }
     }
