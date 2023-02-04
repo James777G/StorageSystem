@@ -5,16 +5,19 @@ import io.github.palexdev.materialfx.controls.MFXPagination;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.ScaleTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.maven.apache.MyLauncher;
+import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.service.transaction.CachedTransactionService;
 import org.maven.apache.transaction.Transaction;
 import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.ScaleUtils;
+import org.maven.apache.utils.TransactionCachedUtils;
 
 import java.net.URL;
 import java.util.List;
@@ -22,6 +25,14 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 
 public class NewTransactionPageController implements Initializable {
+
+    enum SortBy {
+        ALL, DATEASCEND, DATEDESCEND, RESTOCKASCEND, RESTOCKDESCEND, TAKENASCEND, TAKENDDESCEND
+    }
+
+    enum ButtonSelected {
+        ALL, TAKEN, RESTOCK
+    }
 
     @FXML
     private AnchorPane movingLinePane;
@@ -69,16 +80,10 @@ public class NewTransactionPageController implements Initializable {
     private JFXButton searchButton;
 
     @FXML
-    private Label statusLabel1, statusLabel2, statusLabel3, statusLabel4, statusLabel5, statusLabel6, statusLabel7;
+    private Label cargoLabel1, cargoLabel2, cargoLabel3, cargoLabel4, cargoLabel5, cargoLabel6, cargoLabel7;
 
     @FXML
     private Label idLabel1, idLabel2, idLabel3, idLabel4, idLabel5, idLabel6, idLabel7;
-
-    @FXML
-    private Label staffLabel1, staffLabel2, staffLabel3, staffLabel4, staffLabel5, staffLabel6, staffLabel7;
-
-    @FXML
-    private Label cargoLabel1, cargoLabel2, cargoLabel3, cargoLabel4, cargoLabel5, cargoLabel6, cargoLabel7;
 
     @FXML
     private Label amountLabel1, amountLabel2, amountLabel3, amountLabel4, amountLabel5, amountLabel6, amountLabel7;
@@ -125,13 +130,9 @@ public class NewTransactionPageController implements Initializable {
     @FXML
     private MFXTextField transactionSearchTextField;
 
-    private Label[] statusLabelArray = new Label[7];
+    private Label[] cargoLabelArray = new Label[7];
 
     private Label[] idLabelArray = new Label[7];
-
-    private Label[] staffLabelArray = new Label[7];
-
-    private Label[] cargoLabelArray = new Label[7];
 
     private Label[] amountLabelArray = new Label[7];
 
@@ -139,7 +140,15 @@ public class NewTransactionPageController implements Initializable {
 
     private final CachedTransactionService cachedTransactionService = MyLauncher.context.getBean("cachedTransactionService", CachedTransactionService.class);
 
-    private List<List<Transaction>> dateAscendList, dateDescendList, amountAscendList, amountDescendList;
+    private List<List<Transaction>> sortedList;
+
+    private SortBy sortBy = SortBy.ALL;
+
+    private boolean isAll = true;
+
+    private boolean isRestock = false;
+
+    private boolean isTaken = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -150,36 +159,13 @@ public class NewTransactionPageController implements Initializable {
         blockPane.setVisible(false);
         DataUtils.publicTransactionBlockPane = blockPane;
         deletionConfirmationDialog.setVisible(false);
+        setPaginationPages(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_ASC_7));
     }
 
     /**
      * initialize the labels which can be stored in arrays
      */
     private void initializeLabels() {
-        // initialize status labels
-        statusLabelArray[0] = statusLabel1;
-        statusLabelArray[1] = statusLabel2;
-        statusLabelArray[2] = statusLabel3;
-        statusLabelArray[3] = statusLabel4;
-        statusLabelArray[4] = statusLabel5;
-        statusLabelArray[5] = statusLabel6;
-        statusLabelArray[6] = statusLabel7;
-        // initialize transaction id labels
-        idLabelArray[0] = idLabel1;
-        idLabelArray[1] = idLabel2;
-        idLabelArray[2] = idLabel3;
-        idLabelArray[3] = idLabel4;
-        idLabelArray[4] = idLabel5;
-        idLabelArray[5] = idLabel6;
-        idLabelArray[6] = idLabel7;
-        // initialize staff labels
-        staffLabelArray[0] = staffLabel1;
-        staffLabelArray[1] = staffLabel2;
-        staffLabelArray[2] = staffLabel3;
-        staffLabelArray[3] = staffLabel4;
-        staffLabelArray[4] = staffLabel5;
-        staffLabelArray[5] = staffLabel6;
-        staffLabelArray[6] = staffLabel7;
         // initailize cargo labels
         cargoLabelArray[0] = cargoLabel1;
         cargoLabelArray[1] = cargoLabel2;
@@ -188,6 +174,14 @@ public class NewTransactionPageController implements Initializable {
         cargoLabelArray[4] = cargoLabel5;
         cargoLabelArray[5] = cargoLabel6;
         cargoLabelArray[6] = cargoLabel7;
+        // initialize transaction id labels
+        idLabelArray[0] = idLabel1;
+        idLabelArray[1] = idLabel2;
+        idLabelArray[2] = idLabel3;
+        idLabelArray[3] = idLabel4;
+        idLabelArray[4] = idLabel5;
+        idLabelArray[5] = idLabel6;
+        idLabelArray[6] = idLabel7;
         // initialize amount labels
         amountLabelArray[0] = amountLabel1;
         amountLabelArray[1] = amountLabel2;
@@ -207,6 +201,109 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
+     * set how many pages do we need in total
+     */
+    private void setPaginationPages(List<List<Transaction>> list) {
+        int numOfPages;
+        if ((list.size() % 7) != 0) {
+            // if the list does not contain exact number of pages
+            numOfPages = (list.size() / 7) + 1;
+        } else {
+            // if the list contains exact number of pages
+            numOfPages = list.size() / 7;
+        }
+        transactionPagination.setMaxPage(numOfPages);
+    }
+
+
+    /**
+     * show the content of transaction list from current page when the pagination is clicked
+     */
+    @FXML
+    private void onClickPagination() {
+        int currentPage = transactionPagination.getCurrentPage();
+        setTransactionList(currentPage);
+        setUnitStatus();
+    }
+
+    /**
+     * set the transaction list by a specific property
+     */
+    private void setTransactionList(int currentPage) {
+        setSortCondition();
+        // set non-empty labels
+        for (int i = 0; i < sortedList.size(); i++) {
+            cargoLabelArray[i].setText(sortedList.get(currentPage).get(i).getItemName());
+            idLabelArray[i].setText(String.valueOf(sortedList.get(currentPage).get(i).getID()));
+            amountLabelArray[i].setText(String.valueOf(sortedList.get(currentPage).get(i).getUnit()));
+            dateLabelArray[i].setText(sortedList.get(currentPage).get(i).getTransactionTime());
+        }
+        // set empty labels
+        if (sortedList.size() != 7) {
+            for (int j = 6; j >= sortedList.size(); j--) {
+                cargoLabelArray[j].setText("");
+                idLabelArray[j].setText("");
+                amountLabelArray[j].setText("");
+                dateLabelArray[j].setText("");
+            }
+        }
+    }
+
+    /**
+     * set the sorting property
+     */
+    private void setSortCondition() {
+        switch (sortBy) {
+            case ALL:
+                sortedList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_ASC_7);
+                break;
+            case DATEASCEND:
+                sortedList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_ASC_7);
+                break;
+            case DATEDESCEND:
+                sortedList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_DESC_7);
+                break;
+//            case RESTOCKASCEND:
+//                sortedList = dateTransactionService.pageAskedAddUnitAscend(currentPage, 4);
+//                break;
+//            case RESTOCKDESCEND:
+//                sortedList = dateTransactionService.pageAskedAddUnitDescend(currentPage, 4);
+//                break;
+//            case TAKENASCEND:
+//                sortedList = dateTransactionService.pageAskedRemoveUnitAscend(currentPage, 4);
+//                break;
+//            case TAKENDDESCEND:
+//                sortedList = dateTransactionService.pageAskedRemoveUnitDescend(currentPage, 4);
+//                break;
+        }
+    }
+
+    /**
+     * set the status (current unit, restock unit, taken unit) labels
+     */
+    private void setUnitStatus() {
+//        if (isAll && !isRestock && !isTaken) {
+//            for (int i = 0; i < 7; i++) {
+//                statusLabelArray[i].setText(" Current Unit");
+//                statusLabelArray[i].setStyle("-fx-background-color: grey; -fx-text-fill: white; -fx-background-radius: 5");
+//                statusLabelArray[i].setPrefWidth(82);
+//            }
+//        } else if (!isAll && isRestock && !isTaken) {
+//            for (int i = 0; i < 7; i++) {
+//                statusLabelArray[i].setText(" Restock");
+//                statusLabelArray[i].setStyle("-fx-background-color: #ddeab1#c7ddb5; -fx-text-fill: #759751; -fx-background-radius: 5");
+//                statusLabelArray[i].setPrefWidth(56);
+//            }
+//        } else if (!isAll && !isRestock && isTaken) {
+//            for (int i = 0; i < 7; i++) {
+//                statusLabelArray[i].setText(" Taken");
+//                statusLabelArray[i].setStyle("-fx-background-color: #feccc9; -fx-text-fill: #ff4137; -fx-background-radius: 5");
+//                statusLabelArray[i].setPrefWidth(44);
+//            }
+//        }
+    }
+
+    /**
      * sort the list by date
      */
     @FXML
@@ -222,16 +319,7 @@ public class NewTransactionPageController implements Initializable {
 
     }
 
-    /**
-     * show the content of transaction list from current page when the pagination is clicked
-     */
-    @FXML
-    private void onClickPagination() {
-//        int currentPage = transactionPagination.getCurrentPage();
-//        ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
-//        threadPoolExecutor.execute(() -> setTransactionList(currentPage));
-//        setUnitStatus();
-    }
+
 
 
 
@@ -388,12 +476,12 @@ public class NewTransactionPageController implements Initializable {
      * @param row which row of transition list needs to be removed
      */
     private void setRemovalConfirmation(int row){
-        confirmStatusLabel.setText("Transaction status: " + statusLabelArray[row].getText());
-        confirmIdLabel.setText("Transaction id: " + idLabelArray[row].getText());
-        confirmStaffNameLabel.setText("Staff name: " + staffLabelArray[row].getText());
-        confirmCargoNameLabel.setText("Cargo name: " + cargoLabelArray[row].getText());
-        confirmCargoUnitLabel.setText(statusLabelArray[row].getText() + ": " + amountLabelArray[row].getText());
-        confirmDateLabel.setText("Date of completion: " + dateLabelArray[row].getText());
+//        confirmStatusLabel.setText("Transaction status: " + statusLabelArray[row].getText());
+//        confirmIdLabel.setText("Transaction id: " + idLabelArray[row].getText());
+//        confirmStaffNameLabel.setText("Staff name: " + staffLabelArray[row].getText());
+//        confirmCargoNameLabel.setText("Cargo name: " + cargoLabelArray[row].getText());
+//        confirmCargoUnitLabel.setText(statusLabelArray[row].getText() + ": " + amountLabelArray[row].getText());
+//        confirmDateLabel.setText("Date of completion: " + dateLabelArray[row].getText());
     }
 
     /**
