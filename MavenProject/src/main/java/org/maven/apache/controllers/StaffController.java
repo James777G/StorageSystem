@@ -8,6 +8,8 @@ import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -118,6 +120,9 @@ public class StaffController implements Initializable {
     @FXML
     private MFXProgressSpinner loadSpinnerOnDeletePane;
 
+    @FXML
+    private MFXCheckbox statusButton;
+
     private final Label[] nameList = new Label[7];
     private final Label[] idList = new Label[7];
     private final Label[] statusList = new Label[7];
@@ -132,7 +137,7 @@ public class StaffController implements Initializable {
     private List<Staff> currentInactiveStaffList;
 
 
-    private final Status status = Status.ALL;
+    private Status status = Status.ALL;
 
     private Integer selectedStaffId;
 
@@ -176,6 +181,20 @@ public class StaffController implements Initializable {
         warnMessageInDetails.setVisible(false);
         deleteItemPane.setVisible(false);
         loadSpinnerOnDeletePane.setVisible(false);
+        statusButton.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    status = Status.ACTIVE;
+                    calculatePageNumber();
+                    assignStaffValue();
+                } else {
+                    status = Status.ALL;
+                    calculatePageNumber();
+                    assignStaffValue();
+                }
+            }
+        });
     }
 
     /**
@@ -190,6 +209,7 @@ public class StaffController implements Initializable {
         } else {
             pageNumber = StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).size();
         }
+        pagination.setPageCount(pageNumber);
     }
 
     /**
