@@ -65,6 +65,9 @@ public class NewTransactionPageController implements Initializable {
     private AnchorPane blockPane;
 
     @FXML
+    private AnchorPane transactionPane1, transactionPane2, transactionPane3, transactionPane4, transactionPane5, transactionPane6, transactionPane7;
+
+    @FXML
     private JFXButton allSelectButton;
 
     @FXML
@@ -90,6 +93,9 @@ public class NewTransactionPageController implements Initializable {
 
     @FXML
     private Label dateLabel1, dateLabel2, dateLabel3, dateLabel4, dateLabel5, dateLabel6, dateLabel7;
+
+    @FXML
+    private Label statusLabel1, statusLabel2, statusLabel3, statusLabel4, statusLabel5, statusLabel6, statusLabel7;
 
     @FXML
     private Label confirmStatusLabel;
@@ -138,6 +144,10 @@ public class NewTransactionPageController implements Initializable {
 
     private Label[] dateLabelArray = new Label[7];
 
+    private Label[] statusLabelArray = new Label[7];
+
+    private AnchorPane[] transactionPaneArray = new AnchorPane[7];
+
     private final CachedTransactionService cachedTransactionService = MyLauncher.context.getBean("cachedTransactionService", CachedTransactionService.class);
 
     private List<List<Transaction>> sortedList;
@@ -145,6 +155,8 @@ public class NewTransactionPageController implements Initializable {
     private List<Transaction> currentPageList;
 
     private SortBy sortBy = SortBy.DATEDESCEND;
+
+    private ButtonSelected buttonSelected = ButtonSelected.ALL;
 
     private boolean isAll = true;
 
@@ -206,6 +218,22 @@ public class NewTransactionPageController implements Initializable {
         dateLabelArray[4] = dateLabel5;
         dateLabelArray[5] = dateLabel6;
         dateLabelArray[6] = dateLabel7;
+        // initialize status labels
+        statusLabelArray[0] = statusLabel1;
+        statusLabelArray[1] = statusLabel2;
+        statusLabelArray[2] = statusLabel3;
+        statusLabelArray[3] = statusLabel4;
+        statusLabelArray[4] = statusLabel5;
+        statusLabelArray[5] = statusLabel6;
+        statusLabelArray[6] = statusLabel7;
+        // initialize transaction anchor pane
+        transactionPaneArray[0] = transactionPane1;
+        transactionPaneArray[1] = transactionPane2;
+        transactionPaneArray[2] = transactionPane3;
+        transactionPaneArray[3] = transactionPane4;
+        transactionPaneArray[4] = transactionPane5;
+        transactionPaneArray[5] = transactionPane6;
+        transactionPaneArray[6] = transactionPane7;
     }
 
     /**
@@ -229,17 +257,47 @@ public class NewTransactionPageController implements Initializable {
             idLabelArray[i].setText(String.valueOf(currentPageList.get(i).getID()));
             amountLabelArray[i].setText(String.valueOf(currentPageList.get(i).getUnit()));
             dateLabelArray[i].setText(currentPageList.get(i).getTransactionTime());
+            transactionPaneArray[i].setVisible(true);
         }
         // set empty labels
         if (currentPageList.size() != 7) {
             for (int j = 6; j >= currentPageList.size(); j--) {
-                cargoLabelArray[j].setText("");
-                idLabelArray[j].setText("");
-                amountLabelArray[j].setText("");
-                dateLabelArray[j].setText("");
+                transactionPaneArray[j].setVisible(false);
             }
         }
-        //setUnitStatus();
+        setUnitStatus();
+    }
+
+    /**
+     * set the cargo status (restock unit, taken unit) labels
+     */
+    private void setUnitStatus() {
+        if (isAll && !isRestock && !isTaken) {
+            for (int i = 0; i < currentPageList.size(); i++){
+                if (currentPageList.get(i).getStatus().equals("RESTOCK")){
+                    statusLabelArray[i].setText(" Restock");
+                    statusLabelArray[i].setStyle("-fx-background-color: #ddeab1#c7ddb5; -fx-text-fill: #759751; -fx-background-radius: 5");
+                    statusLabelArray[i].setPrefWidth(56);
+                }else{
+                    statusLabelArray[i].setText(" Taken");
+                    statusLabelArray[i].setStyle("-fx-background-color: #feccc9; -fx-text-fill: #ff4137; -fx-background-radius: 5");
+                    statusLabelArray[i].setPrefWidth(44);
+                }
+            }
+
+//        } else if (!isAll && isRestock && !isTaken) {
+//            for (int i = 0; i < 7; i++) {
+//                statusLabelArray[i].setText(" Restock");
+//                statusLabelArray[i].setStyle("-fx-background-color: #ddeab1#c7ddb5; -fx-text-fill: #759751; -fx-background-radius: 5");
+//                statusLabelArray[i].setPrefWidth(56);
+//            }
+//        } else if (!isAll && !isRestock && isTaken) {
+//            for (int i = 0; i < 7; i++) {
+//                statusLabelArray[i].setText(" Taken");
+//                statusLabelArray[i].setStyle("-fx-background-color: #feccc9; -fx-text-fill: #ff4137; -fx-background-radius: 5");
+//                statusLabelArray[i].setPrefWidth(44);
+//            }
+        }
     }
 
     /**
@@ -269,31 +327,6 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
-     * set the status (current unit, restock unit, taken unit) labels
-     */
-    private void setUnitStatus() {
-//        if (isAll && !isRestock && !isTaken) {
-//            for (int i = 0; i < 7; i++) {
-//                statusLabelArray[i].setText(" Current Unit");
-//                statusLabelArray[i].setStyle("-fx-background-color: grey; -fx-text-fill: white; -fx-background-radius: 5");
-//                statusLabelArray[i].setPrefWidth(82);
-//            }
-//        } else if (!isAll && isRestock && !isTaken) {
-//            for (int i = 0; i < 7; i++) {
-//                statusLabelArray[i].setText(" Restock");
-//                statusLabelArray[i].setStyle("-fx-background-color: #ddeab1#c7ddb5; -fx-text-fill: #759751; -fx-background-radius: 5");
-//                statusLabelArray[i].setPrefWidth(56);
-//            }
-//        } else if (!isAll && !isRestock && isTaken) {
-//            for (int i = 0; i < 7; i++) {
-//                statusLabelArray[i].setText(" Taken");
-//                statusLabelArray[i].setStyle("-fx-background-color: #feccc9; -fx-text-fill: #ff4137; -fx-background-radius: 5");
-//                statusLabelArray[i].setPrefWidth(44);
-//            }
-//        }
-    }
-
-    /**
      * sort the list by date
      */
     @FXML
@@ -315,6 +348,72 @@ public class NewTransactionPageController implements Initializable {
     @FXML
     private void onClickAmount() {
 
+    }
+
+    @FXML
+    private void onClickAllSelectButton() {
+        switch (buttonSelected) {
+            case ALL:
+                break;
+            case TAKEN:
+                onTakenSelectPane.setVisible(false);
+                onAllSelectPane.setVisible(true);
+                buttonSelected = ButtonSelected.ALL;
+                break;
+            case RESTOCK:
+                onRestockSelectPane.setVisible(false);
+                onAllSelectPane.setVisible(true);
+                buttonSelected = ButtonSelected.ALL;
+                break;
+        }
+        isAll = true;
+        isRestock = false;
+        isTaken = false;
+        onClickPagination();
+    }
+
+    @FXML
+    private void onClickTakenSelectButton() {
+        switch (buttonSelected) {
+            case ALL:
+                onAllSelectPane.setVisible(false);
+                onTakenSelectPane.setVisible(true);
+                buttonSelected = ButtonSelected.TAKEN;
+                break;
+            case TAKEN:
+                break;
+            case RESTOCK:
+                onRestockSelectPane.setVisible(false);
+                onTakenSelectPane.setVisible(true);
+                buttonSelected = ButtonSelected.TAKEN;
+                break;
+        }
+        isAll = false;
+        isRestock = false;
+        isTaken = true;
+        onClickPagination();
+    }
+
+    @FXML
+    private void onClickRestockSelectButton() {
+        switch (buttonSelected) {
+            case ALL:
+                onAllSelectPane.setVisible(false);
+                onRestockSelectPane.setVisible(true);
+                buttonSelected = ButtonSelected.RESTOCK;
+                break;
+            case TAKEN:
+                onTakenSelectPane.setVisible(false);
+                onRestockSelectPane.setVisible(true);
+                buttonSelected = ButtonSelected.RESTOCK;
+                break;
+            case RESTOCK:
+                break;
+        }
+        isAll = false;
+        isRestock = true;
+        isTaken = false;
+        onClickPagination();
     }
 
 
