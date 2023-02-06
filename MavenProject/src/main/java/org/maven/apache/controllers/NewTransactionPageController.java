@@ -27,7 +27,8 @@ import java.util.concurrent.ExecutorService;
 public class NewTransactionPageController implements Initializable {
 
     enum SortBy {
-        ALLDATEASCEND, ALLDATEDESCEND, RESTOCKDATEASCEND, RESTOCKDATEDESCEND, TAKENDATEASCEND, TAKENDATEDESCEND
+        ALLDATEASCEND, ALLDATEDESCEND, RESTOCKDATEASCEND, RESTOCKDATEDESCEND, TAKENDATEASCEND, TAKENDATEDESCEND, ALLAMOUNTASCEND, ALLAMOUNTDESCEND,
+        RESTOCKAMOUNTASCEND,RESTOCKAMOUNTDESCEND, TAKENAMOUNTASCEND, TAKENAMOUNTDESCEND
     }
 
     enum ButtonSelected {
@@ -166,6 +167,8 @@ public class NewTransactionPageController implements Initializable {
 
     private boolean isDateAscend = false;
 
+    private boolean isAmountAscend = false;
+
     private int currentPage;
 
     @Override
@@ -299,7 +302,7 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
-     * get the transaction list by setting a sorting property
+     * get a particular transaction list by setting a sorting property
      */
     private void setSortCondition() {
         switch (sortBy) {
@@ -320,6 +323,24 @@ public class NewTransactionPageController implements Initializable {
                 break;
             case TAKENDATEDESCEND:
                 sortedList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_7);
+                break;
+            case ALLAMOUNTASCEND:
+                sortedList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.AMOUNT_ASC_7);
+                break;
+            case ALLAMOUNTDESCEND:
+                sortedList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.AMOUNT_DESC_7);
+                break;
+            case RESTOCKAMOUNTASCEND:
+                sortedList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_AMOUNT_ASC_7);
+                break;
+            case RESTOCKAMOUNTDESCEND:
+                sortedList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_AMOUNT_DESC_7);
+                break;
+            case TAKENAMOUNTASCEND:
+                sortedList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_AMOUNT_ASC_7);
+                break;
+            case TAKENAMOUNTDESCEND:
+                sortedList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_AMOUNT_DESC_7);
                 break;
         }
     }
@@ -452,7 +473,32 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickAmount() {
-
+        if (isAll && !isRestock && !isTaken){
+            if (isAmountAscend){
+                sortBy = SortBy.ALLAMOUNTDESCEND;
+                isAmountAscend = false;
+            } else {
+                sortBy = SortBy.ALLAMOUNTASCEND;
+                isAmountAscend = true;
+            }
+        } else if (!isAll && isRestock && !isTaken){
+            if (isAmountAscend){
+                sortBy = SortBy.RESTOCKAMOUNTDESCEND;
+                isAmountAscend = false;
+            } else {
+                sortBy = SortBy.RESTOCKAMOUNTASCEND;
+                isAmountAscend = true;
+            }
+        } else if (!isAll && !isRestock && isTaken){
+            if (isAmountAscend){
+                sortBy = SortBy.TAKENAMOUNTDESCEND;
+                isAmountAscend = false;
+            } else {
+                sortBy = SortBy.TAKENAMOUNTASCEND;
+                isAmountAscend = true;
+            }
+        }
+        refreshPage();
     }
 
     /**
