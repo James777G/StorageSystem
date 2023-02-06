@@ -27,7 +27,7 @@ import java.util.concurrent.ExecutorService;
 public class NewTransactionPageController implements Initializable {
 
     enum SortBy {
-        DATEASCEND, DATEDESCEND, RESTOCKASCEND, RESTOCKDESCEND, TAKENASCEND, TAKENDDESCEND
+        ALLDATEASCEND, ALLDATEDESCEND, RESTOCKDATEASCEND, RESTOCKDATEDESCEND, TAKENDATEASCEND, TAKENDATEDESCEND
     }
 
     enum ButtonSelected {
@@ -154,7 +154,7 @@ public class NewTransactionPageController implements Initializable {
 
     private List<Transaction> currentPageList;
 
-    private SortBy sortBy = SortBy.DATEDESCEND;
+    private SortBy sortBy = SortBy.ALLDATEDESCEND;
 
     private ButtonSelected buttonSelected = ButtonSelected.ALL;
 
@@ -178,8 +178,7 @@ public class NewTransactionPageController implements Initializable {
         DataUtils.publicTransactionBlockPane = blockPane;
         deletionConfirmationDialog.setVisible(false);
         setPaginationPages(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_ASC_7));
-        setSortCondition();
-        onClickPagination();
+        refreshPage();
     }
 
     /**
@@ -284,19 +283,18 @@ public class NewTransactionPageController implements Initializable {
                     statusLabelArray[i].setPrefWidth(44);
                 }
             }
-
-//        } else if (!isAll && isRestock && !isTaken) {
-//            for (int i = 0; i < 7; i++) {
-//                statusLabelArray[i].setText(" Restock");
-//                statusLabelArray[i].setStyle("-fx-background-color: #ddeab1#c7ddb5; -fx-text-fill: #759751; -fx-background-radius: 5");
-//                statusLabelArray[i].setPrefWidth(56);
-//            }
-//        } else if (!isAll && !isRestock && isTaken) {
-//            for (int i = 0; i < 7; i++) {
-//                statusLabelArray[i].setText(" Taken");
-//                statusLabelArray[i].setStyle("-fx-background-color: #feccc9; -fx-text-fill: #ff4137; -fx-background-radius: 5");
-//                statusLabelArray[i].setPrefWidth(44);
-//            }
+        } else if (!isAll && isRestock && !isTaken) {
+            for (int i = 0; i < currentPageList.size(); i++){
+                statusLabelArray[i].setText(" Restock");
+                statusLabelArray[i].setStyle("-fx-background-color: #ddeab1#c7ddb5; -fx-text-fill: #759751; -fx-background-radius: 5");
+                statusLabelArray[i].setPrefWidth(56);
+            }
+        } else if (!isAll && !isRestock && isTaken) {
+            for (int i = 0; i < currentPageList.size(); i++){
+                statusLabelArray[i].setText(" Taken");
+                statusLabelArray[i].setStyle("-fx-background-color: #feccc9; -fx-text-fill: #ff4137; -fx-background-radius: 5");
+                statusLabelArray[i].setPrefWidth(44);
+            }
         }
     }
 
@@ -305,51 +303,30 @@ public class NewTransactionPageController implements Initializable {
      */
     private void setSortCondition() {
         switch (sortBy) {
-            case DATEASCEND:
+            case ALLDATEASCEND:
                 sortedList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_ASC_7);
                 break;
-            case DATEDESCEND:
+            case ALLDATEDESCEND:
                 sortedList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_DESC_7);
                 break;
-//            case RESTOCKASCEND:
-//                sortedList = dateTransactionService.pageAskedAddUnitAscend(currentPage, 4);
-//                break;
-//            case RESTOCKDESCEND:
-//                sortedList = dateTransactionService.pageAskedAddUnitDescend(currentPage, 4);
-//                break;
-//            case TAKENASCEND:
-//                sortedList = dateTransactionService.pageAskedRemoveUnitAscend(currentPage, 4);
-//                break;
-//            case TAKENDDESCEND:
-//                sortedList = dateTransactionService.pageAskedRemoveUnitDescend(currentPage, 4);
-//                break;
+            case RESTOCKDATEASCEND:
+                sortedList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_ASC_7);
+                break;
+            case RESTOCKDATEDESCEND:
+                sortedList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_7);
+                break;
+            case TAKENDATEASCEND:
+                sortedList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_ASC_7);
+                break;
+            case TAKENDATEDESCEND:
+                sortedList = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_7);
+                break;
         }
     }
 
     /**
-     * sort the list by date
+     * Clicked all button and returns an ascend list ordered by date including both status
      */
-    @FXML
-    private void onClickDate() {
-        if (isDateAscend) {
-            sortBy = SortBy.DATEDESCEND;
-            isDateAscend = false;
-        } else {
-            sortBy = SortBy.DATEASCEND;
-            isDateAscend = true;
-        }
-        setSortCondition();
-        onClickPagination();
-    }
-
-    /**
-     * sort the list by amount (all unit, restock unit, taken unit)
-     */
-    @FXML
-    private void onClickAmount() {
-
-    }
-
     @FXML
     private void onClickAllSelectButton() {
         switch (buttonSelected) {
@@ -369,31 +346,17 @@ public class NewTransactionPageController implements Initializable {
         isAll = true;
         isRestock = false;
         isTaken = false;
-        onClickPagination();
-    }
-
-    @FXML
-    private void onClickTakenSelectButton() {
-        switch (buttonSelected) {
-            case ALL:
-                onAllSelectPane.setVisible(false);
-                onTakenSelectPane.setVisible(true);
-                buttonSelected = ButtonSelected.TAKEN;
-                break;
-            case TAKEN:
-                break;
-            case RESTOCK:
-                onRestockSelectPane.setVisible(false);
-                onTakenSelectPane.setVisible(true);
-                buttonSelected = ButtonSelected.TAKEN;
-                break;
+        if (isDateAscend){
+            sortBy = SortBy.ALLDATEASCEND;
+        }else{
+            sortBy = SortBy.ALLDATEDESCEND;
         }
-        isAll = false;
-        isRestock = false;
-        isTaken = true;
-        onClickPagination();
+        refreshPage();
     }
 
+    /**
+     * Clicked all button and returns an ascend list ordered by date including restock status only
+     */
     @FXML
     private void onClickRestockSelectButton() {
         switch (buttonSelected) {
@@ -413,12 +376,92 @@ public class NewTransactionPageController implements Initializable {
         isAll = false;
         isRestock = true;
         isTaken = false;
-        onClickPagination();
+        if (isDateAscend){
+            sortBy = SortBy.RESTOCKDATEASCEND;
+        }else{
+            sortBy = SortBy.RESTOCKDATEDESCEND;
+        }
+        refreshPage();
     }
 
+    /**
+     * Clicked all button and returns an ascend list ordered by date including taken status only
+     */
+    @FXML
+    private void onClickTakenSelectButton() {
+        switch (buttonSelected) {
+            case ALL:
+                onAllSelectPane.setVisible(false);
+                onTakenSelectPane.setVisible(true);
+                buttonSelected = ButtonSelected.TAKEN;
+                break;
+            case TAKEN:
+                break;
+            case RESTOCK:
+                onRestockSelectPane.setVisible(false);
+                onTakenSelectPane.setVisible(true);
+                buttonSelected = ButtonSelected.TAKEN;
+                break;
+        }
+        isAll = false;
+        isRestock = false;
+        isTaken = true;
+        if (isDateAscend){
+            sortBy = SortBy.TAKENDATEASCEND;
+        }else{
+            sortBy = SortBy.TAKENDATEDESCEND;
+        }
+        refreshPage();
+    }
 
+    /**
+     * sort the list by date
+     */
+    @FXML
+    private void onClickDate() {
+        if (isAll && !isRestock && !isTaken){
+            if (isDateAscend) {
+                sortBy = SortBy.ALLDATEDESCEND;
+                isDateAscend = false;
+            } else {
+                sortBy = SortBy.ALLDATEASCEND;
+                isDateAscend = true;
+            }
+        }else if (!isAll && isRestock && !isTaken){
+            if (isDateAscend) {
+                sortBy = SortBy.RESTOCKDATEDESCEND;
+                isDateAscend = false;
+            } else {
+                sortBy = SortBy.RESTOCKDATEASCEND;
+                isDateAscend = true;
+            }
+        }else if (!isAll && !isRestock && isTaken){
+            if (isDateAscend) {
+                sortBy = SortBy.TAKENDATEDESCEND;
+                isDateAscend = false;
+            } else {
+                sortBy = SortBy.TAKENDATEASCEND;
+                isDateAscend = true;
+            }
+        }
+        refreshPage();
+    }
 
+    /**
+     * sort the list by amount (all unit, restock unit, taken unit)
+     */
+    @FXML
+    private void onClickAmount() {
 
+    }
+
+    /**
+     * reload the content of current page
+     */
+    private void refreshPage(){
+        setSortCondition();
+        onClickPagination();
+    }
 
 
 
