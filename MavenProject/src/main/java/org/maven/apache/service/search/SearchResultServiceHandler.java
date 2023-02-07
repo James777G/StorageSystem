@@ -34,6 +34,11 @@ public class SearchResultServiceHandler<R> implements SearchResultService<R>{
 
 
     @Override
+    public List<List<R>> getPagedResultList(List<List<R>> sourceList, String inputText, ResultType resultType) throws UnsupportedPojoException {
+        return getPagedList(getResultList(sourceList, inputText, resultType), 7);
+    }
+
+    @Override
     public List<R> getResultList(List<List<R>> sourceList, String inputText, ResultType resultType) throws UnsupportedPojoException {
         if(sourceList.size() > 0){
             if(isItem(sourceList)){
@@ -50,6 +55,26 @@ public class SearchResultServiceHandler<R> implements SearchResultService<R>{
         } else {
             return new ArrayList<>();
         }
+    }
+
+    private List<List<R>> getPagedList(List<R> resultList, int pageSize) {
+        List<List<R>> pagedCachedList = new ArrayList<>();
+        int pageNumber = resultList.size() / pageSize;
+        for (int i = 0; i < pageNumber; i++) {
+            List<R> rList = new ArrayList<R>(4);
+            for (int j = 0; j < pageSize; j++) {
+                rList.add(resultList.get((i * pageSize) + j));
+            }
+            pagedCachedList.add(i, rList);
+        }
+        if (resultList.size() % pageSize != 0) {
+            List<R> rList = new ArrayList<R>();
+            for (int i = 0; i < resultList.size() % pageSize; i++) {
+                rList.add(i, resultList.get(resultList.size() - resultList.size() % pageSize + i));
+            }
+            pagedCachedList.add(rList);
+        }
+        return pagedCachedList;
     }
 
     private boolean isItem(List<List<R>> sourceList){
