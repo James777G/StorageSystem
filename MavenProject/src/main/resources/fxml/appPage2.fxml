@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
    <children>
       <StackPane fx:id="staffPane" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
       <StackPane fx:id="stackPaneForWarehouse" layoutX="10.0" layoutY="10.0" prefHeight="640.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
@@ -525,6 +525,11 @@
                   </AnchorPane>
                </left>
             </MFXGenericDialog>
+            <Label layoutX="994.0" layoutY="375.0" text="( filename.xls )">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
          <padding>
             <Insets top="60.0" />
@@ -655,7 +660,7 @@
             </JFXButton>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: grey;" AnchorPane.bottomAnchor="0.0" />
+      <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: grey;" visible="false" AnchorPane.bottomAnchor="0.0" />
 
       <MFXGenericDialog fx:id="settingsDialog" headerText="Update your account Info" onClose="#onCloseSettings" opacity="0.0" prefWidth="700.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="175.0">
          <center>

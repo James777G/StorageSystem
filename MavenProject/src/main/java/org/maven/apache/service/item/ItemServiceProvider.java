@@ -9,12 +9,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
-@Component
+@Component("itemService")
 @Transactional
 public class ItemServiceProvider implements ItemService{
 
+    @Resource
     private ItemMapper itemMapper;
 
     public ItemMapper getItemMapper() {
