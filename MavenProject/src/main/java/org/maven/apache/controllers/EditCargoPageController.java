@@ -28,8 +28,10 @@ import org.maven.apache.utils.TransactionCachedUtils;
 
 import java.awt.event.KeyAdapter;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class EditCargoPageController implements Initializable {
@@ -59,7 +61,7 @@ public class EditCargoPageController implements Initializable {
     private MFXTextField newUnitTextField;
 
     @FXML
-    private MFXDatePicker datePicker;
+    private MFXDatePicker datePicker = new MFXDatePicker(Locale.ENGLISH);
 
     @FXML
     private MFXGenericDialog descriptionDialog;
@@ -132,12 +134,12 @@ public class EditCargoPageController implements Initializable {
             newUnitAmount = Integer.valueOf(newUnitTextField.getText());
             if (datePicker.getText().equals("")){
                 // return current date and time
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDateTime now = LocalDateTime.now();
-                transactionDate = dtf.format(now);
+                LocalDate dateTime = LocalDate.now();
+                transactionDate = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             }else{
                 // return chosen date from calendar
-                transactionDate = datePicker.getText();
+                LocalDate dateTime = datePicker.getValue();
+                transactionDate = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             }
             newTransaction = new Transaction();
             if (isStatusTaken) {
