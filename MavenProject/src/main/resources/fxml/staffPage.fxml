@@ -444,6 +444,11 @@
             </Label>
          </children>
       </AnchorPane>
+      <BorderPane layoutX="152.0" layoutY="589.0" prefHeight="53.0" prefWidth="900.0">
+         <center>
+            <Pagination fx:id="pagination" maxPageIndicatorCount="8" pageCount="50" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
       <MFXGenericDialog fx:id="descriptionDialog" headerText="Item Details" layoutX="492.0" onClose="#onCloseDescription" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="150.0">
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -516,6 +521,7 @@
             </AnchorPane>
          </center>
       </MFXGenericDialog>
+      <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" />
       <AnchorPane fx:id="addStaffPane" layoutX="79.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 10;" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
          <children>
             <Label layoutX="454.0" layoutY="148.0" opacity="0.4" prefWidth="289.0" rotate="-38.7" text="STAFF" textFill="#9de4ed59">
@@ -613,10 +619,5 @@
             <MFXProgressSpinner fx:id="loadSpinnerOnDeletePane" layoutX="461.0" layoutY="52.0" prefHeight="23.0" prefWidth="25.0" visible="false" />
          </children>
       </AnchorPane>
-      <BorderPane layoutX="152.0" layoutY="589.0" prefHeight="53.0" prefWidth="900.0">
-         <center>
-            <Pagination fx:id="pagination" maxPageIndicatorCount="8" pageCount="50" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" BorderPane.alignment="CENTER" />
-         </center>
-      </BorderPane>
    </children>
 </AnchorPane>

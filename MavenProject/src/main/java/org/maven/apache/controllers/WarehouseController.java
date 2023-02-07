@@ -59,7 +59,6 @@ public class WarehouseController implements Initializable {
     @FXML
     private TextArea itemDescriptionInDetails;
 
-
     @FXML
     private MFXGenericDialog descriptionDialog;
 
@@ -77,6 +76,9 @@ public class WarehouseController implements Initializable {
 
     @FXML
     private AnchorPane addItemPane;
+
+    @FXML
+    private AnchorPane blockPane;
 
     @FXML
     private MFXProgressSpinner loadSpinnerInAdd;
@@ -144,8 +146,6 @@ public class WarehouseController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cachedItemService.updateAllCachedItemData();
-        System.out.println("oididididididididididididididididididididididididididididididididididididididididf");
-        System.out.println(CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL));
         itemDescriptionInDetails.setTextFormatter(new TextFormatter<String>(change ->
                 change.getControlNewText().length() <= 100 ? change : null));
         itemNameInDetails.setTextFormatter(new TextFormatter<String>(change ->
@@ -172,6 +172,7 @@ public class WarehouseController implements Initializable {
             generateItemList(newValue.intValue());
             Platform.runLater(WarehouseController.this::setTableContents);
         }));
+        blockPane.setVisible(false);
     }
 
     private void initializeDeleteList() {
@@ -186,44 +187,46 @@ public class WarehouseController implements Initializable {
 
     @FXML
     private void onClickDeleteOne() {
-        selectedItemID = itemList.get(0).getItemID();
-        deleteItemPane.setVisible(true);
+        setDeletionPanes(0);
     }
 
     @FXML
     private void onClickDeleteTwo() {
-        selectedItemID = itemList.get(1).getItemID();
-        deleteItemPane.setVisible(true);
+        setDeletionPanes(1);
     }
 
     @FXML
     private void onClickDeleteThree() {
-        selectedItemID = itemList.get(2).getItemID();
-        deleteItemPane.setVisible(true);
+        setDeletionPanes(2);
     }
 
     @FXML
     private void onClickDeleteFour() {
-        selectedItemID = itemList.get(3).getItemID();
-        deleteItemPane.setVisible(true);
+        setDeletionPanes(3);
     }
 
     @FXML
     private void onClickDeleteFive() {
-        selectedItemID = itemList.get(4).getItemID();
-        deleteItemPane.setVisible(true);
+        setDeletionPanes(4);
     }
 
     @FXML
     private void onClickDeleteSix() {
-        selectedItemID = itemList.get(5).getItemID();
-        deleteItemPane.setVisible(true);
+        setDeletionPanes(5);
     }
 
     @FXML
     private void onClickDeleteSeven() {
-        selectedItemID = itemList.get(6).getItemID();
+        setDeletionPanes(6);
+    }
+
+    /**
+     * This methods invokes the existence of block pane and the deletion notification
+     */
+    private void setDeletionPanes(int row) {
+        selectedItemID = itemList.get(row).getItemID();
         deleteItemPane.setVisible(true);
+        blockPane.setVisible(true);
     }
 
     /**
@@ -245,126 +248,126 @@ public class WarehouseController implements Initializable {
     }
 
     @FXML
-    private void onEnterTick(){
+    private void onEnterTick() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(doContinueButton, 250, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onExitTick(){
+    private void onExitTick() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(doContinueButton, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onEnterCross(){
+    private void onEnterCross() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(doNotContinueButton, 250, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onExitCross(){
+    private void onExitCross() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(doNotContinueButton, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onEnterDeleteOne(){
+    private void onEnterDeleteOne() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteOne, 250, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onExitDeleteOne(){
+    private void onExitDeleteOne() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteOne, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onEnterDeleteTwo(){
+    private void onEnterDeleteTwo() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteTwo, 250, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onExitDeleteTwo(){
+    private void onExitDeleteTwo() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteTwo, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onEnterDeleteThree(){
+    private void onEnterDeleteThree() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteThree, 250, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onExitDeleteThree(){
+    private void onExitDeleteThree() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteThree, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onEnterDeleteFour(){
+    private void onEnterDeleteFour() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteFour, 250, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onExitDeleteFour(){
+    private void onExitDeleteFour() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteFour, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onEnterDeleteFive(){
+    private void onEnterDeleteFive() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteFive, 250, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onExitDeleteFive(){
+    private void onExitDeleteFive() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteFive, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onEnterDeleteSix(){
+    private void onEnterDeleteSix() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteSix, 250, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onExitDeleteSix(){
+    private void onExitDeleteSix() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteSix, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onEnterDeleteSeven(){
+    private void onEnterDeleteSeven() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteSeven, 250, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onExitDeleteSeven(){
+    private void onExitDeleteSeven() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteSeven, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
@@ -383,6 +386,7 @@ public class WarehouseController implements Initializable {
     @FXML
     private void doNotContinue() {
         deleteItemPane.setVisible(false);
+        blockPane.setVisible(false);
     }
 
     @FXML
@@ -398,6 +402,7 @@ public class WarehouseController implements Initializable {
                 loadSpinnerOnDeletePane.setVisible(false);
                 doContinueButton.setVisible(true);
                 deleteItemPane.setVisible(false);
+                blockPane.setVisible(false);
             });
         });
     }
@@ -588,6 +593,7 @@ public class WarehouseController implements Initializable {
         addItemPane.setVisible(false);
         warnMessageInAdd.setVisible(false);
         loadSpinnerInAdd.setVisible(false);
+        blockPane.setVisible(false);
     }
 
     /**
@@ -603,6 +609,7 @@ public class WarehouseController implements Initializable {
     @FXML
     private void onClickAddButton() {
         addItemPane.setVisible(true);
+        blockPane.setVisible(true);
     }
 
     /**
@@ -710,9 +717,9 @@ public class WarehouseController implements Initializable {
      * @param index page number to be displayed
      */
     private void generateItemList(int index) {
-        try{
+        try {
             itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(index);
-        } catch (Exception e){
+        } catch (Exception e) {
             itemList = new ArrayList<>();
         }
     }
