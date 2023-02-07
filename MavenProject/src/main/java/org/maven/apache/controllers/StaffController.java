@@ -3,12 +3,11 @@ package org.maven.apache.controllers;
 import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -36,6 +35,9 @@ public class StaffController implements Initializable {
     private enum Status {
         ACTIVE, ALL, INACTIVE
     }
+
+    @SuppressWarnings("all")
+    private final SearchResultService<Staff> searchResultService = MyLauncher.context.getBean("searchResultService", SearchResultService.class);
 
     private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
 
@@ -76,6 +78,9 @@ public class StaffController implements Initializable {
 
     @FXML
     private Label staffIdInDetails;
+
+    @FXML
+    private MFXTextField searchBar;
 
     @FXML
     private TextArea staffDescriptionInDetails;
@@ -162,7 +167,11 @@ public class StaffController implements Initializable {
         descriptionDialog.setVisible(false);
         loadSpinner.setVisible(false);
         getStaffList(pagination.getCurrentPageIndex());
-        calculatePageNumber();
+        try {
+            calculatePageNumber();
+        } catch (UnsupportedPojoException e) {
+            throw new RuntimeException(e);
+        }
         pagination.setPageCount(pageNumber);
         pagination.currentPageIndexProperty().addListener((observable, oldValue, newValue) -> {
             getStaffList(newValue);
@@ -180,19 +189,18 @@ public class StaffController implements Initializable {
         warnMessageInDetails.setVisible(false);
         deleteItemPane.setVisible(false);
         loadSpinnerOnDeletePane.setVisible(false);
-        statusButton.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if (newValue) {
-                    status = Status.ACTIVE;
-                    calculatePageNumber();
-                    assignStaffValue();
-                } else {
-                    status = Status.ALL;
-                    calculatePageNumber();
-                    assignStaffValue();
-                }
+        statusButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                status = Status.ACTIVE;
+            } else {
+                status = Status.ALL;
             }
+            try {
+                calculatePageNumber();
+            } catch (UnsupportedPojoException e) {
+                throw new RuntimeException(e);
+            }
+            assignStaffValue();
         });
     }
 
@@ -200,15 +208,47 @@ public class StaffController implements Initializable {
      * This method updates the latest page number, thus should be executed every time when
      * there is an update in data or change in status
      */
-    private void calculatePageNumber() {
+    private void calculatePageNumber() throws UnsupportedPojoException {
         if (status == Status.ALL) {
-            pageNumber = StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL).size();
+            if (!searchBar.getText().isBlank()) {
+                pageNumber = searchResultService
+                        .getPagedResultList(StaffCachedUtils
+                                        .getLists(StaffCachedUtils.listType.ALL),
+                                searchBar.getText(),
+                                SearchResultServiceHandler.ResultType.STAFF)
+                        .size();
+            } else {
+                pageNumber = StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL).size();
+            }
         } else if (status == Status.INACTIVE) {
-            pageNumber = StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE).size();
+            if (!searchBar.getText().isBlank()) {
+                pageNumber = searchResultService
+                        .getPagedResultList(StaffCachedUtils
+                                        .getLists(StaffCachedUtils.listType.INACTIVE),
+                                searchBar.getText(),
+                                SearchResultServiceHandler.ResultType.STAFF)
+                        .size();
+            } else {
+                pageNumber = StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE).size();
+            }
         } else {
-            pageNumber = StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).size();
+            if (!searchBar.getText().isBlank()) {
+                pageNumber = searchResultService
+                        .getPagedResultList(StaffCachedUtils
+                                        .getLists(StaffCachedUtils.listType.ACTIVE),
+                                searchBar.getText(),
+                                SearchResultServiceHandler.ResultType.STAFF)
+                        .size();
+            } else {
+                pageNumber = StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).size();
+            }
         }
-        pagination.setPageCount(pageNumber);
+        if (pageNumber != 0){
+            pagination.setPageCount(pageNumber);
+        } else {
+            pagination.setPageCount(1);
+        }
+
     }
 
     /**
@@ -219,25 +259,43 @@ public class StaffController implements Initializable {
      */
     private void getStaffList(Number newValue) {
         try {
-            if (newValue.intValue() < StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL).size()) {
+            if (newValue.intValue() < StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL).size() && searchBar.getText().isBlank()) {
                 currentStaffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL).get(newValue.intValue());
+            } else if (!searchBar.getText().isBlank()) {
+                currentStaffList = searchResultService
+                        .getPagedResultList(StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL),
+                                searchBar.getText(),
+                                SearchResultServiceHandler.ResultType.STAFF)
+                        .get(newValue.intValue());
             }
         } catch (Exception e) {
             currentStaffList = new ArrayList<>();
         }
         try {
-            if (newValue.intValue() < StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).size()) {
+            if (newValue.intValue() < StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).size() && searchBar.getText().isBlank()) {
                 currentActiveStaffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).get(newValue.intValue());
+            } else if (!searchBar.getText().isBlank()) {
+                currentActiveStaffList = searchResultService
+                        .getPagedResultList(StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE),
+                                searchBar.getText(),
+                                SearchResultServiceHandler.ResultType.STAFF)
+                        .get(newValue.intValue());
             }
         } catch (Exception e) {
-            currentStaffList = new ArrayList<>();
+            currentActiveStaffList = new ArrayList<>();
         }
         try {
-            if (newValue.intValue() < StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE).size()) {
+            if (newValue.intValue() < StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE).size() && searchBar.getText().isBlank()) {
                 currentInactiveStaffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE).get(newValue.intValue());
+            } else if (!searchBar.getText().isBlank()) {
+                currentInactiveStaffList = searchResultService
+                        .getPagedResultList(StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE),
+                                searchBar.getText(),
+                                SearchResultServiceHandler.ResultType.STAFF)
+                        .get(newValue.intValue());
             }
         } catch (Exception e) {
-            currentStaffList = new ArrayList<>();
+            currentInactiveStaffList = new ArrayList<>();
         }
 
     }
@@ -378,6 +436,13 @@ public class StaffController implements Initializable {
     }
 
     @FXML
+    private void onClickSearch() throws UnsupportedPojoException {
+        getStaffList(pagination.getCurrentPageIndex());
+        assignStaffValue();
+        calculatePageNumber();
+    }
+
+    @FXML
     private void doNotContinue() {
         deleteItemPane.setVisible(false);
     }
@@ -388,7 +453,11 @@ public class StaffController implements Initializable {
         doContinueButton.setVisible(false);
         executorService.execute(() -> {
             staffService.deleteStaffById(selectedStaffId);
-            calculatePageNumber();
+            try {
+                calculatePageNumber();
+            } catch (UnsupportedPojoException e) {
+                throw new RuntimeException(e);
+            }
             Platform.runLater(() -> pagination.setPageCount(pageNumber));
             getStaffList(pagination.getCurrentPageIndex());
             Platform.runLater(this::assignStaffValue);
@@ -821,7 +890,13 @@ public class StaffController implements Initializable {
                 staff = encapsulateStaffDataInAdd();
                 staffService.addNewStaff(staff);
                 getStaffList(pagination.getCurrentPageIndex());
-                calculatePageNumber();
+                Platform.runLater(() -> {
+                    try {
+                        calculatePageNumber();
+                    } catch (UnsupportedPojoException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
                 Platform.runLater(() -> warnMessageInAdd.setVisible(false));
             } catch (Exception e) {
                 warnMessageInAdd.setVisible(true);
