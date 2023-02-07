@@ -482,6 +482,26 @@ public class AppPage2Controller implements Initializable {
 
     private TranslateTransition translateTransition_closeMenu = new TranslateTransition();
 
+    private  TranslateTransition translateTransition_openCargoBox1 = new TranslateTransition();
+
+    private  TranslateTransition translateTransition_openCargoBox2 = new TranslateTransition();
+
+    private  TranslateTransition translateTransition_openCargoBox3 = new TranslateTransition();
+
+    private  TranslateTransition translateTransition_openCargoBox4 = new TranslateTransition();
+
+    private  TranslateTransition translateTransition_closeCargoBox1 = new TranslateTransition();
+
+    private  TranslateTransition translateTransition_closeCargoBox2 = new TranslateTransition();
+
+    private  TranslateTransition translateTransition_closeCargoBox3 = new TranslateTransition();
+
+    private  TranslateTransition translateTransition_closeCargoBox4 = new TranslateTransition();
+
+    private TranslateTransition[] translateTransition_openCargoBox = new TranslateTransition[4];
+
+    private TranslateTransition[] translateTransition_closeCargoBox = new TranslateTransition[4];
+
     private RotateTransition rotateTransition_openMenu = new RotateTransition();
 
     private RotateTransition rotateTransition_closeMenu = new RotateTransition();
@@ -661,6 +681,7 @@ public class AppPage2Controller implements Initializable {
         messageButtonBlockPane.toBack();
     }
 
+    @SuppressWarnings("all")
     private void initializeLabels() {
         cargoNameLabels[0] = cargoNameLabel01;
         cargoNameLabels[1] = cargoNameLabel02;
@@ -694,6 +715,14 @@ public class AppPage2Controller implements Initializable {
         cargoBoxFunctionalityPanes[1] = cargoBox2FunctionalityPane;
         cargoBoxFunctionalityPanes[2] = cargoBox3FunctionalityPane;
         cargoBoxFunctionalityPanes[3] = cargoBox4FunctionalityPane;
+        translateTransition_openCargoBox[0] = translateTransition_openCargoBox1;
+        translateTransition_openCargoBox[1] = translateTransition_openCargoBox2;
+        translateTransition_openCargoBox[2] = translateTransition_openCargoBox3;
+        translateTransition_openCargoBox[3] = translateTransition_openCargoBox4;
+        translateTransition_closeCargoBox[0] = translateTransition_closeCargoBox1;
+        translateTransition_closeCargoBox[1] = translateTransition_closeCargoBox2;
+        translateTransition_closeCargoBox[2] = translateTransition_closeCargoBox3;
+        translateTransition_closeCargoBox[3] = translateTransition_closeCargoBox4;
     }
 
     @SuppressWarnings("all")
@@ -851,44 +880,48 @@ public class AppPage2Controller implements Initializable {
                 index = 3;
             }
         }
-        changeToBack[index] = true;
-        if (!isChangingSide[index]) {
-            isChangingSide[index] = true;
-            if (cargoBoxPanes[index].isVisible()) {
-                ScaleTransition scaleTransition_closeFront = ScaleUtils.getScaleTransitionFromToX(cargoBoxPanes[index], 70, 1.0, 0.0);
-                int finalIndex = index;
-                scaleTransition_closeFront.setOnFinished(openBackPane -> {
-                    cargoBoxBackPanes[finalIndex].setScaleX(0.0);
-                    enableNode(cargoBoxBackPanes[finalIndex]);
-                    disableNode(cargoBoxPanes[finalIndex]);
-                    cargoBoxPanes[finalIndex].setScaleX(1.0);
-                    ScaleTransition scaleTransition_openBack = ScaleUtils.getScaleTransitionFromToX(cargoBoxBackPanes[finalIndex], 70, 0.0, 1.0);
-                    scaleTransition_openBack.setOnFinished(event -> {
-                        isChangingSide[finalIndex] = false;
-                        if (!changeToBack[finalIndex]) {
-                            switch (cargoBoxNumber) {
-                                case ONE -> {
-                                    onExitCargoBox1();
-                                }
-                                case TWO -> {
-                                    onExitCargoBox2();
-                                }
-                                case THREE -> {
-                                    onExitCargoBox3();
-                                }
-                                case FOUR -> {
-                                    onExitCargoBox4();
-                                }
-                            }
-                        }
-                    });
-                    scaleTransition_openBack.play();
-                });
-                scaleTransition_closeFront.play();
-            } else {
-                isChangingSide[index] = false;
-            }
-        }
+        translateTransition_closeCargoBox[index].stop();
+        cargoBoxFunctionalityPanes[index].setDisable(false);
+        translateTransition_openCargoBox[index] = TranslateUtils.getTranslateTransitionFromToY(cargoBoxPanes[index],5 * (20-cargoBoxPanes[index].getTranslateY()),cargoBoxPanes[index].getTranslateY(),20);
+        translateTransition_openCargoBox[index].play();
+//        changeToBack[index] = true;
+//        if (!isChangingSide[index]) {
+//            isChangingSide[index] = true;
+//            if (cargoBoxPanes[index].isVisible()) {
+//                ScaleTransition scaleTransition_closeFront = ScaleUtils.getScaleTransitionFromToX(cargoBoxPanes[index], 70, 1.0, 0.0);
+//                int finalIndex = index;
+//                scaleTransition_closeFront.setOnFinished(openBackPane -> {
+//                    cargoBoxBackPanes[finalIndex].setScaleX(0.0);
+//                    enableNode(cargoBoxBackPanes[finalIndex]);
+//                    disableNode(cargoBoxPanes[finalIndex]);
+//                    cargoBoxPanes[finalIndex].setScaleX(1.0);
+//                    ScaleTransition scaleTransition_openBack = ScaleUtils.getScaleTransitionFromToX(cargoBoxBackPanes[finalIndex], 70, 0.0, 1.0);
+//                    scaleTransition_openBack.setOnFinished(event -> {
+//                        isChangingSide[finalIndex] = false;
+//                        if (!changeToBack[finalIndex]) {
+//                            switch (cargoBoxNumber) {
+//                                case ONE -> {
+//                                    onExitCargoBox1();
+//                                }
+//                                case TWO -> {
+//                                    onExitCargoBox2();
+//                                }
+//                                case THREE -> {
+//                                    onExitCargoBox3();
+//                                }
+//                                case FOUR -> {
+//                                    onExitCargoBox4();
+//                                }
+//                            }
+//                        }
+//                    });
+//                    scaleTransition_openBack.play();
+//                });
+//                scaleTransition_closeFront.play();
+//            } else {
+//                isChangingSide[index] = false;
+//            }
+//        }
     }
 
     private void exitCargoBoxAnimation(CargoBoxNumber cargoBoxNumber) {
@@ -907,44 +940,49 @@ public class AppPage2Controller implements Initializable {
                 index = 3;
             }
         }
-        changeToBack[index] = false;
-        if (!isChangingSide[index]) {
-            isChangingSide[index] = true;
-            if (cargoBoxBackPanes[index].isVisible()) {
-                ScaleTransition scaleTransition_closeBack = ScaleUtils.getScaleTransitionFromToX(cargoBoxBackPanes[index], 70, 1.0, 0.0);
-                int finalIndex = index;
-                scaleTransition_closeBack.setOnFinished(closeBackPane -> {
-                    cargoBoxPanes[finalIndex].setScaleX(0.0);
-                    enableNode(cargoBoxPanes[finalIndex]);
-                    disableNode(cargoBoxBackPanes[finalIndex]);
-                    cargoBoxBackPanes[finalIndex].setScaleX(1.0);
-                    ScaleTransition scaleTransition_openFront = ScaleUtils.getScaleTransitionFromToX(cargoBoxPanes[finalIndex], 70, 0.0, 1.0);
-                    scaleTransition_openFront.setOnFinished(event -> {
-                        isChangingSide[finalIndex] = false;
-                        if (changeToBack[finalIndex]) {
-                            switch (cargoBoxNumber) {
-                                case ONE -> {
-                                    onEnterCargoBox1();
-                                }
-                                case TWO -> {
-                                    onEnterCargoBox2();
-                                }
-                                case THREE -> {
-                                    onEnterCargoBox3();
-                                }
-                                case FOUR -> {
-                                    onEnterCargoBox4();
-                                }
-                            }
-                        }
-                    });
-                    scaleTransition_openFront.play();
-                });
-                scaleTransition_closeBack.play();
-            } else {
-                isChangingSide[index] = false;
-            }
-        }
+        translateTransition_openCargoBox[index].stop();
+        translateTransition_closeCargoBox[index] = TranslateUtils.getTranslateTransitionFromToY(cargoBoxPanes[index],5 * cargoBoxPanes[index].getTranslateY(),cargoBoxPanes[index].getTranslateY(),0);
+        int finalIndex = index;
+        translateTransition_closeCargoBox[index].setOnFinished(event -> {cargoBoxFunctionalityPanes[finalIndex].setDisable(true);});
+        translateTransition_closeCargoBox[index].play();
+//        changeToBack[index] = false;
+//        if (!isChangingSide[index]) {
+//            isChangingSide[index] = true;
+//            if (cargoBoxBackPanes[index].isVisible()) {
+//                ScaleTransition scaleTransition_closeBack = ScaleUtils.getScaleTransitionFromToX(cargoBoxBackPanes[index], 70, 1.0, 0.0);
+//                int finalIndex = index;
+//                scaleTransition_closeBack.setOnFinished(closeBackPane -> {
+//                    cargoBoxPanes[finalIndex].setScaleX(0.0);
+//                    enableNode(cargoBoxPanes[finalIndex]);
+//                    disableNode(cargoBoxBackPanes[finalIndex]);
+//                    cargoBoxBackPanes[finalIndex].setScaleX(1.0);
+//                    ScaleTransition scaleTransition_openFront = ScaleUtils.getScaleTransitionFromToX(cargoBoxPanes[finalIndex], 70, 0.0, 1.0);
+//                    scaleTransition_openFront.setOnFinished(event -> {
+//                        isChangingSide[finalIndex] = false;
+//                        if (changeToBack[finalIndex]) {
+//                            switch (cargoBoxNumber) {
+//                                case ONE -> {
+//                                    onEnterCargoBox1();
+//                                }
+//                                case TWO -> {
+//                                    onEnterCargoBox2();
+//                                }
+//                                case THREE -> {
+//                                    onEnterCargoBox3();
+//                                }
+//                                case FOUR -> {
+//                                    onEnterCargoBox4();
+//                                }
+//                            }
+//                        }
+//                    });
+//                    scaleTransition_openFront.play();
+//                });
+//                scaleTransition_closeBack.play();
+//            } else {
+//                isChangingSide[index] = false;
+//            }
+//        }
     }
 
     @FXML
