@@ -667,7 +667,7 @@
                         <Font name="Candara Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="deletionNotificationLabel" prefHeight="17.0" prefWidth="125.0" textAlignment="CENTER" textFill="RED">
+                  <Label fx:id="deletionNotificationLabel" prefHeight="17.0" prefWidth="165.0" textAlignment="CENTER" textFill="RED">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>

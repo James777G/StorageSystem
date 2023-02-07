@@ -9,6 +9,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -17,6 +18,7 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.jetbrains.annotations.NotNull;
+import org.maven.apache.App;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
 import org.maven.apache.service.transaction.CachedTransactionService;
@@ -87,8 +89,6 @@ public class EditCargoPageController implements Initializable {
     private int numOfTransaction;
 
     private boolean isStatusTaken = false;
-
-   // private final DateTransactionService newTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
 
     private final CachedTransactionService newCachedTransactionService = MyLauncher.context.getBean("cachedTransactionService", CachedTransactionService.class);
 
