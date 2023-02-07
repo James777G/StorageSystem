@@ -362,7 +362,7 @@
             <AnchorPane fx:id="cargoBox2FunctionalityPane" layoutX="130.0" layoutY="570.0" onMouseClicked="#onClickTransactionTwo" onMouseEntered="#onEnterCargoBox2" onMouseExited="#onExitCargoBox2" prefHeight="80.0" prefWidth="180.0" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="500.0" />
             <AnchorPane fx:id="cargoBox3FunctionalityPane" layoutX="140.0" layoutY="580.0" onMouseClicked="#onClickTransactionThree" onMouseEntered="#onEnterCargoBox3" onMouseExited="#onExitCargoBox3" prefHeight="80.0" prefWidth="180.0" AnchorPane.leftAnchor="620.0" AnchorPane.topAnchor="500.0" />
             <AnchorPane fx:id="cargoBox4FunctionalityPane" layoutX="130.0" layoutY="570.0" onMouseClicked="#onClickTransactionFour" onMouseEntered="#onEnterCargoBox4" onMouseExited="#onExitCargoBox4" prefHeight="80.0" prefWidth="180.0" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="500.0" />
-            <MFXGenericDialog fx:id="transactionDialog" headerText="Transaction Details" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseTransactionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
+            <MFXGenericDialog fx:id="transactionDialog" headerText="Transaction Details" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseTransactionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
                <left>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
@@ -499,6 +499,25 @@
                   </AnchorPane>
                </left>
             </MFXGenericDialog>
+            <AnchorPane fx:id="searchSwitchingBlockPane" layoutX="256.0" layoutY="180.0" prefHeight="30.0" prefWidth="30.0" />
+            <AnchorPane fx:id="staffSearchPane" layoutX="256.0" layoutY="180.0" onMouseClicked="#onClickStaffSearch" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #223c40; -fx-border-radius: 5; -fx-background-radius: 5;">
+               <children>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="2.5" layoutY="2.5" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-account-48.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="cargoSearchPane" layoutX="256.0" layoutY="180.0" onMouseClicked="#onClickCargoSearch" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #223c40; -fx-border-radius: 5; -fx-background-radius: 5;" visible="false">
+               <children>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="2.5" layoutY="2.5" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-cardboard-box-50.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
          </children>
          <padding>
             <Insets top="60.0" />
@@ -571,7 +590,8 @@
                         </ImageView>
                      </graphic>
                   </Label>
-               </graphic></JFXButton>
+               </graphic>
+            </JFXButton>
             <JFXButton fx:id="transactionButton" layoutX="600.0" layoutY="10.0" onAction="#onClickTransaction" onMouseEntered="#enterTransactionButton" onMouseExited="#exitTransactionButton" prefHeight="50.0" prefWidth="120.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="595.0" AnchorPane.topAnchor="5.0">
                <graphic>
                   <Label fx:id="transactionLabel" graphicTextGap="10.0" prefHeight="40.0" prefWidth="104.0" text="Transaction" textFill="#223c40">
@@ -586,7 +606,8 @@
                         </ImageView>
                      </graphic>
                   </Label>
-               </graphic></JFXButton>
+               </graphic>
+            </JFXButton>
             <JFXButton fx:id="staffButton" layoutX="780.0" layoutY="4.0" onAction="#onClickStaff" onMouseEntered="#enterStaffButton" onMouseExited="#exitStaffButton" prefHeight="50.0" prefWidth="110.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="780.0" AnchorPane.topAnchor="5.0">
                <graphic>
                   <Label fx:id="staffLabel" graphicTextGap="15.0" prefHeight="40.0" prefWidth="80.0" text="Staff" textFill="#223c40">
@@ -604,7 +625,8 @@
                </graphic>
                <padding>
                   <Insets left="10.0" />
-               </padding></JFXButton>
+               </padding>
+            </JFXButton>
             <JFXButton fx:id="messageButton" layoutX="899.0" layoutY="8.0" onAction="#onClickMessage" onMouseEntered="#enterMessageButton" onMouseExited="#exitMessageButton" prefHeight="50.0" prefWidth="110.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="900.0" AnchorPane.topAnchor="5.0">
                <graphic>
                   <Label fx:id="messageLabel" graphicTextGap="15.0" prefHeight="40.0" prefWidth="100.0" text="Message" textFill="#223c40">
@@ -622,7 +644,8 @@
                </graphic>
                <padding>
                   <Insets left="5.0" />
-               </padding></JFXButton>
+               </padding>
+            </JFXButton>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: grey;" AnchorPane.bottomAnchor="0.0" />
