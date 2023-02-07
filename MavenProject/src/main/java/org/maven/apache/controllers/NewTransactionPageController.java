@@ -669,9 +669,9 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onConfirmDeletion() {
-        cachedTransactionService.deleteTransactionById(Integer.valueOf(confirmIdLabel.getText()));
+        cachedTransactionService.deleteTransactionById(Integer.parseInt(confirmIdLabel.getText().split(":")[1].strip()));
         confirmButton.setDisable(true);
-        deletionNotificationLabel.setText("Removal complished");
+        deletionNotificationLabel.setText("Removal accomplished");
     }
 
     @FXML
