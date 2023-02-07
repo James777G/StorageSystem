@@ -555,7 +555,7 @@
          </center>
       </BorderPane>
       <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" />
-      <AnchorPane fx:id="addItemPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 10;" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
+      <AnchorPane fx:id="addItemPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
          <children>
             <Label layoutX="421.0" layoutY="156.0" opacity="0.4" prefHeight="128.0" prefWidth="320.0" rotate="-38.7" text="CARGO" textFill="#9de4ed59">
                <font>

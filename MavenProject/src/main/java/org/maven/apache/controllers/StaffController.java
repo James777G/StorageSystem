@@ -92,6 +92,9 @@ public class StaffController implements Initializable {
     private AnchorPane addButton;
 
     @FXML
+    private AnchorPane blockPane;
+
+    @FXML
     private JFXButton applyButton;
 
     @FXML
@@ -186,11 +189,11 @@ public class StaffController implements Initializable {
         initializeButtonList();
         initializeDeleteList();
         assignStaffValue();
-        addStaffPane.setVisible(false);
         loadSpinnerInAdd.setVisible(false);
         warnMessageInAdd.setVisible(false);
         warnMessageInDetails.setVisible(false);
         deleteItemPane.setVisible(false);
+        addStaffPane.setVisible(false);
         loadSpinnerOnDeletePane.setVisible(false);
         statusButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
@@ -205,6 +208,7 @@ public class StaffController implements Initializable {
             }
             assignStaffValue();
         });
+        blockPane.setVisible(false);
     }
 
     /**
@@ -246,7 +250,7 @@ public class StaffController implements Initializable {
                 pageNumber = StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).size();
             }
         }
-        if (pageNumber != 0){
+        if (pageNumber != 0) {
             pagination.setPageCount(pageNumber);
         } else {
             pagination.setPageCount(1);
@@ -448,6 +452,7 @@ public class StaffController implements Initializable {
     @FXML
     private void doNotContinue() {
         deleteItemPane.setVisible(false);
+        blockPane.setVisible(false);
     }
 
     @FXML
@@ -470,6 +475,7 @@ public class StaffController implements Initializable {
                 deleteItemPane.setVisible(false);
             });
         });
+        blockPane.setVisible(false);
     }
 
     @FXML
@@ -600,58 +606,48 @@ public class StaffController implements Initializable {
 
     @FXML
     private void onClickDeleteOne() {
-        List<Staff> currentList = getCurrentList();
-        Staff staff = currentList.get(0);
-        selectedStaffId = staff.getStaffID();
-        deleteItemPane.setVisible(true);
+        setDeletionPanes(0);
     }
 
     @FXML
     private void onClickDeleteTwo() {
-        List<Staff> currentList = getCurrentList();
-        Staff staff = currentList.get(1);
-        selectedStaffId = staff.getStaffID();
-        deleteItemPane.setVisible(true);
+        setDeletionPanes(1);
     }
 
     @FXML
     private void onClickDeleteThree() {
-        List<Staff> currentList = getCurrentList();
-        Staff staff = currentList.get(2);
-        selectedStaffId = staff.getStaffID();
-        deleteItemPane.setVisible(true);
+        setDeletionPanes(2);
     }
 
     @FXML
     private void onClickDeleteFour() {
-        List<Staff> currentList = getCurrentList();
-        Staff staff = currentList.get(3);
-        selectedStaffId = staff.getStaffID();
-        deleteItemPane.setVisible(true);
+        setDeletionPanes(3);
     }
 
     @FXML
     private void onClickDeleteFive() {
-        List<Staff> currentList = getCurrentList();
-        Staff staff = currentList.get(4);
-        selectedStaffId = staff.getStaffID();
-        deleteItemPane.setVisible(true);
+        setDeletionPanes(4);
     }
 
     @FXML
     private void onClickDeleteSix() {
-        List<Staff> currentList = getCurrentList();
-        Staff staff = currentList.get(5);
-        selectedStaffId = staff.getStaffID();
-        deleteItemPane.setVisible(true);
+        setDeletionPanes(5);
     }
 
     @FXML
     private void onClickDeleteSeven() {
+        setDeletionPanes(6);
+    }
+
+    /**
+     * This method invokes the existence of block pane and the deletion notification
+     */
+    private void setDeletionPanes(int row) {
         List<Staff> currentList = getCurrentList();
-        Staff staff = currentList.get(6);
+        Staff staff = currentList.get(row);
         selectedStaffId = staff.getStaffID();
         deleteItemPane.setVisible(true);
+        blockPane.setVisible(true);
     }
 
     /**
@@ -776,6 +772,7 @@ public class StaffController implements Initializable {
     private void onClickAddButton() {
         addStaffPane.setVisible(true);
         staffStatusInAdd.setSelected(true);
+        blockPane.setVisible(true);
     }
 
     /**
@@ -871,6 +868,7 @@ public class StaffController implements Initializable {
         staffNameInAdd.setText("");
         staffDescriptionInAdd.setText("");
         staffStatusInAdd.setSelected(true);
+        blockPane.setVisible(false);
     }
 
     /**

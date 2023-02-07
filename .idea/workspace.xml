@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="implemented initial content successfully">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/NewTransactionPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/NewTransactionPageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/StaffController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/StaffController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/WarehouseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/WarehouseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/staffPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/staffPage.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/warehousePage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/warehousePage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -218,7 +218,7 @@
       <workItem from="1675737987610" duration="2986000" />
       <workItem from="1675745155364" duration="110000" />
       <workItem from="1675745362317" duration="53000" />
-      <workItem from="1675747190091" duration="757000" />
+      <workItem from="1675747190091" duration="1493000" />
     </task>
     <task id="LOCAL-00001" summary="the only tew sql list is two the left list is based on these two list">
       <created>1674189362992</created>

@@ -591,7 +591,7 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin1() {
-        setDeletionDetails(0);
+        setDeletionPanes(0);
     }
 
     /**
@@ -599,7 +599,7 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin2() {
-        setDeletionDetails(1);
+        setDeletionPanes(1);
     }
 
     /**
@@ -607,7 +607,7 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin3() {
-        setDeletionDetails(2);
+        setDeletionPanes(2);
     }
 
     /**
@@ -615,7 +615,7 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin4() {
-        setDeletionDetails(3);
+        setDeletionPanes(3);
     }
 
     /**
@@ -623,7 +623,7 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin5() {
-        setDeletionDetails(4);
+        setDeletionPanes(4);
     }
 
     /**
@@ -631,7 +631,7 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin6() {
-        setDeletionDetails(5);
+        setDeletionPanes(5);
     }
 
     /**
@@ -639,10 +639,10 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin7() {
-        setDeletionDetails(6);
+        setDeletionPanes(6);
     }
 
-    private void setDeletionDetails(int row) {
+    private void setDeletionPanes(int row) {
         deletionConfirmationDialog.setVisible(true);
         blockPane.setVisible(true);
         setRemovalConfirmation(row);
