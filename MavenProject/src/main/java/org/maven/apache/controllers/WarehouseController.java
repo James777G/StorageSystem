@@ -2,6 +2,7 @@ package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
@@ -13,9 +14,12 @@ import javafx.scene.layout.AnchorPane;
 import lombok.extern.slf4j.Slf4j;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.exception.EmptyValueException;
+import org.maven.apache.exception.UnsupportedPojoException;
 import org.maven.apache.exception.Warning;
 import org.maven.apache.item.Item;
 import org.maven.apache.service.item.CachedItemService;
+import org.maven.apache.service.search.SearchResultService;
+import org.maven.apache.service.search.SearchResultServiceHandler;
 import org.maven.apache.utils.CargoCachedUtils;
 import org.maven.apache.utils.ScaleUtils;
 
@@ -27,6 +31,8 @@ import java.util.concurrent.ExecutorService;
 
 @Slf4j
 public class WarehouseController implements Initializable {
+
+    private final SearchResultService<Item> searchResultService = MyLauncher.context.getBean("searchResultService", SearchResultService.class);
 
     private final CachedItemService cachedItemService = MyLauncher.context.getBean("cachedItemService", CachedItemService.class);
 
@@ -113,6 +119,9 @@ public class WarehouseController implements Initializable {
     @FXML
     private ImageView doNotContinueButton;
 
+    @FXML
+    private MFXTextField searchBar;
+
     private int pageSize;
 
     private List<Item> itemList;
@@ -153,13 +162,21 @@ public class WarehouseController implements Initializable {
         loadSpinner.setVisible(false);
         descriptionDialog.setVisible(false);
         warnMessage.setVisible(false);
-        calculatePageSize();
+        try {
+            calculatePageSize();
+        } catch (UnsupportedPojoException e) {
+            throw new RuntimeException(e);
+        }
         initializeNameList();
         initializeIdList();
         initializeAmountList();
         initializeButtonList();
         initializeDeleteList();
-        generateCachedData();
+        try {
+            generateCachedData();
+        } catch (UnsupportedPojoException e) {
+            throw new RuntimeException(e);
+        }
         newPagination.setMaxPageIndicatorCount(8);
         initializeItemList();
         setTableContents();
@@ -259,6 +276,13 @@ public class WarehouseController implements Initializable {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(doContinueButton, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
+    }
+
+    @FXML
+    private void onClickSearch() throws UnsupportedPojoException {
+        generateItemList(newPagination.getCurrentPageIndex());
+        setTableContents();
+        calculatePageSize();
     }
 
     @FXML
@@ -395,7 +419,13 @@ public class WarehouseController implements Initializable {
         doContinueButton.setVisible(false);
         executorService.execute(() -> {
             cachedItemService.deleteItemById(selectedItemID);
-            Platform.runLater(this::generateCachedData);
+            Platform.runLater(() -> {
+                try {
+                    generateCachedData();
+                } catch (UnsupportedPojoException e) {
+                    throw new RuntimeException(e);
+                }
+            });
             generateItemList(newPagination.getCurrentPageIndex());
             Platform.runLater(this::setTableContents);
             Platform.runLater(() -> {
@@ -494,7 +524,11 @@ public class WarehouseController implements Initializable {
             try {
                 cachedItemService.updateItem(finalItem);
                 Platform.runLater(() -> {
-                    generateCachedData();
+                    try {
+                        generateCachedData();
+                    } catch (UnsupportedPojoException e) {
+                        throw new RuntimeException(e);
+                    }
                     int currentPage = newPagination.getCurrentPageIndex();
                     generateItemList(currentPage);
                     setTableContents();
@@ -557,11 +591,15 @@ public class WarehouseController implements Initializable {
         loadSpinnerInAdd.setVisible(true);
         executorService.execute(() -> {
             try {
-                warnMessageInAdd.setVisible(true);
+//                warnMessageInAdd.setVisible(true);
                 cachedItemService.addNewItem(item);
                 Platform.runLater(() -> {
                     generateItemList(newPagination.getCurrentPageIndex());
-                    calculatePageSize();
+                    try {
+                        calculatePageSize();
+                    } catch (UnsupportedPojoException e) {
+                        throw new RuntimeException(e);
+                    }
                     setTableContents();
                     warnMessageInAdd.setVisible(false);
                 });
@@ -704,10 +742,25 @@ public class WarehouseController implements Initializable {
     /**
      * Return the maximum number of pages of the current data
      */
-    private void calculatePageSize() {
-        pageSize = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).size();
-        System.out.println(pageSize);
-        newPagination.setPageCount(pageSize);
+    private void calculatePageSize() throws UnsupportedPojoException {
+        try{
+            if(searchBar.getText().isBlank()){
+                pageSize = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).size();
+            } else {
+                pageSize = searchResultService.getPagedResultList(CargoCachedUtils
+                                .getLists(CargoCachedUtils.listType.ALL),
+                        searchBar.getText(),
+                        SearchResultServiceHandler.ResultType.CARGO).size();
+            }
+        } catch(Exception e){
+            pageSize = 0;
+        }
+        if(pageSize != 0){
+            newPagination.setPageCount(pageSize);
+        } else{
+            newPagination.setPageCount(1);
+        }
+
     }
 
 
@@ -718,7 +771,14 @@ public class WarehouseController implements Initializable {
      */
     private void generateItemList(int index) {
         try {
-            itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(index);
+            if(!searchBar.getText().isBlank()){
+                itemList = searchResultService.getPagedResultList(CargoCachedUtils
+                                .getLists(CargoCachedUtils.listType.ALL),
+                        searchBar.getText(),
+                        SearchResultServiceHandler.ResultType.CARGO).get(index);
+            } else {
+                itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(index);
+            }
         } catch (Exception e) {
             itemList = new ArrayList<>();
         }
@@ -796,7 +856,7 @@ public class WarehouseController implements Initializable {
      * 4. The cached data is stored as a global variable in DataUtils class.
      * 5. This method is deliberately left public, so as it can be accessed by other controllers.
      */
-    public void generateCachedData() {
+    public void generateCachedData() throws UnsupportedPojoException {
         calculatePageSize();
         cachedItemService.updateAllCachedItemData();
     }
