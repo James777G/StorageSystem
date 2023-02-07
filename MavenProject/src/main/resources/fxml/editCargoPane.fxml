@@ -111,12 +111,7 @@
       </JFXButton>
       <MFXTextField fx:id="newItemTextField" floatMode="BORDER" floatingText=" Item Name" graphicTextGap="5.0" layoutX="220.0" layoutY="137.0" prefHeight="38.0" prefWidth="359.0" stylesheets="@../css/textField.css" />
       <MFXTextField fx:id="newStaffTextField" floatMode="BORDER" floatingText=" Staff Name" graphicTextGap="5.0" layoutX="222.0" layoutY="189.0" prefHeight="38.0" prefWidth="359.0" stylesheets="@../css/textField.css" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="189.0" />
-      <MFXTextField fx:id="newCurrentUnitTextField" floatMode="BORDER" floatingText="Current Quantity" graphicTextGap="5.0" layoutX="220.0" layoutY="242.0" prefHeight="38.0" prefWidth="127.0" stylesheets="@../css/textField.css" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="242.0">
-         <textFill>
-            <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
-         </textFill>
-      </MFXTextField>
-      <MFXTextField fx:id="newTakenRestockUnitTextField" floatMode="BORDER" floatingText="Taken/Restock Unit" graphicTextGap="5.0" layoutX="377.0" layoutY="242.0" prefHeight="38.0" prefWidth="127.0" stylesheets="@../css/textField.css">
+      <MFXTextField fx:id="newUnitTextField" floatMode="BORDER" floatingText="Taken/Restock Unit" graphicTextGap="5.0" layoutX="220.0" layoutY="242.0" prefHeight="38.0" prefWidth="284.0" stylesheets="@../css/textField.css">
          <textFill>
             <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
          </textFill>
@@ -128,8 +123,8 @@
             <Image url="@../image/icons8-change-64.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="descriptionBlockPane" opacity="0.75" prefHeight="376.0" prefWidth="600.0" style="-fx-background-color: grey;" />
-      <MFXGenericDialog fx:id="descriptionDialog" headerText="Transaction details" layoutX="24.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="316.0" prefWidth="525.0" showAlwaysOnTop="false" showClose="false" showMinimize="false" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+      <AnchorPane fx:id="descriptionBlockPane" opacity="0.75" prefHeight="376.0" prefWidth="600.0" style="-fx-background-color: grey;" visible="false" />
+      <MFXGenericDialog fx:id="descriptionDialog" headerText="Description" layoutX="24.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="316.0" prefWidth="525.0" showAlwaysOnTop="false" showClose="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>

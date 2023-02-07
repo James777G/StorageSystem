@@ -19,9 +19,12 @@ import javafx.scene.layout.AnchorPane;
 import org.jetbrains.annotations.NotNull;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
+import org.maven.apache.service.transaction.CachedTransactionService;
+import org.maven.apache.transaction.Transaction;
 import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.ScaleUtils;
 import org.maven.apache.dateTransaction.DateTransaction;
+import org.maven.apache.utils.TransactionCachedUtils;
 
 import java.awt.event.KeyAdapter;
 import java.net.URL;
@@ -53,10 +56,7 @@ public class EditCargoPageController implements Initializable {
     private MFXTextField newStaffTextField;
 
     @FXML
-    private MFXTextField newCurrentUnitTextField;
-
-    @FXML
-    private MFXTextField newTakenRestockUnitTextField;
+    private MFXTextField newUnitTextField;
 
     @FXML
     private MFXDatePicker datePicker;
@@ -78,26 +78,44 @@ public class EditCargoPageController implements Initializable {
 
     private String transactionDescription = "";
 
-    private int newCurrentUnitAmount;
+    private int newUnitAmount;
 
-    private int newTakenRestockUnitAmount;
+    private int newTransactionID;
 
-    private int newItemID;
+    private int numOfTransaction;
 
-    private boolean isAddingTaken = false;
+    private boolean isStatusTaken = false;
 
-    private final DateTransactionService newTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
+   // private final DateTransactionService newTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
 
-    private DateTransaction newTransaction;
+    private final CachedTransactionService newCachedTransactionService = MyLauncher.context.getBean("cachedTransactionService", CachedTransactionService.class);
+
+    private Transaction newTransaction;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        newCachedTransactionService.updateAllCachedTransactionData();
         onClickTakenSelectButton();
-        setInputValidation(newCurrentUnitTextField);
-        setInputValidation(newTakenRestockUnitTextField);
+        setInputValidation(newUnitTextField);
         descriptionDialog.setVisible(false);
         descriptionBlockPane.setVisible(false);
     }
+
+    /**
+     * get the total amount of transaction to increment id
+     *
+     * @return amount of transaction
+     */
+    private int getNumOfTransaction(){
+        int count = 0;
+        for (int i = 0; i < TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_DESC_7).size(); i++){
+            for (int j = 0; j < TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_DESC_7).get(i).size(); j++){
+                count++;
+            }
+        }
+        return count;
+    }
+
 
     /**
      * add this new transaction record to the database
@@ -108,29 +126,28 @@ public class EditCargoPageController implements Initializable {
         if (!isValidated()) {
             notificationLabel.setText("Empty fields");
         } else {
-            newItemID = newTransactionService.selectAll().size() + 1;
+            newTransactionID = getNumOfTransaction() + 1;
             newItemName = newItemTextField.getText();
             newStaffName = newStaffTextField.getText();
-            newTakenRestockUnitAmount = Integer.valueOf(newTakenRestockUnitTextField.getText());
-            newCurrentUnitAmount = Integer.valueOf(newCurrentUnitTextField.getText());
+            newUnitAmount = Integer.valueOf(newUnitTextField.getText());
             if (datePicker.getText().equals("")){
                 // return current date and time
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDateTime now = LocalDateTime.now();
                 transactionDate = dtf.format(now);
             }else{
                 // return chosen date from calendar
                 transactionDate = datePicker.getText();
             }
-            newTransaction = new DateTransaction();
-            if (isAddingTaken) {
+            newTransaction = new Transaction();
+            if (isStatusTaken) {
                 // adding taken cargo
-                addNewTransaction(newItemID, newItemName, newStaffName, newTakenRestockUnitAmount, 0, newCurrentUnitAmount, transactionDate, transactionDescription);
+                addNewTransaction("TAKEN", newTransactionID, newItemName, newStaffName, newUnitAmount, transactionDate, transactionDescription);
             } else {
                 // adding restock cargo
-                addNewTransaction(newItemID, newItemName, newStaffName, 0, newTakenRestockUnitAmount, newCurrentUnitAmount, transactionDate, transactionDescription);
+                addNewTransaction("RESTOCK", newTransactionID, newItemName, newStaffName, newUnitAmount, transactionDate, transactionDescription);
             }
-            newTransactionService.addTransaction(newTransaction);
+            newCachedTransactionService.addNewTransaction(newTransaction);
             notificationLabel.setText("Transaction added successfully");
         }
     }
@@ -141,7 +158,7 @@ public class EditCargoPageController implements Initializable {
      * @return true or false
      */
     private boolean isValidated() {
-        if (!newItemTextField.getText().equals("") && !newStaffTextField.getText().equals("") && !newCurrentUnitTextField.getText().equals("") && !newTakenRestockUnitTextField.getText().equals("")) {
+        if (!newItemTextField.getText().equals("") && !newStaffTextField.getText().equals("") && !newUnitTextField.getText().equals("")) {
             return true;
         }
         return false;
@@ -168,24 +185,20 @@ public class EditCargoPageController implements Initializable {
     /**
      * pass field properties to the new transaction
      *
-     * @param itemID      new item ID (incremented by 1 pursuant to the amount of current transactions)
+     * @param TransactionID      new transaction ID (incremented by 1 pursuant to the amount of current transactions)
      * @param itemName    new cargo name that is transferred
      * @param staffName   staff name who controls this transaction
-     * @param addUnit     restock amount
-     * @param removeUnit  taken amount
-     * @param currentUnit current amount
-     * @param recordTime  time when this new transaction happens
-     * @param purpose     ??
+     * @param unit     restock/taken amount
+     * @param date  date of making this new transaction
+     * @param purpose     transaction details
      */
-    private void addNewTransaction(int itemID, String itemName, String staffName, int addUnit, int removeUnit, int currentUnit, String recordTime, String purpose) {
-        newTransaction = new DateTransaction();
-        newTransaction.setItemID(itemID);
+    private void addNewTransaction(String status, int TransactionID, String itemName, String staffName, int unit, String date, String purpose) {
+        newTransaction.setStatus(status);
+        newTransaction.setID(TransactionID);
         newTransaction.setItemName(itemName);
         newTransaction.setStaffName(staffName);
-        newTransaction.setAddUnit(addUnit);
-        newTransaction.setRemoveUnit(removeUnit);
-        newTransaction.setCurrentUnit(currentUnit);
-        newTransaction.setRecordTime(recordTime);
+        newTransaction.setUnit(unit);
+        newTransaction.setTransactionTime(date);
         newTransaction.setPurpose(purpose);
     }
 
@@ -196,8 +209,8 @@ public class EditCargoPageController implements Initializable {
     private void onClickTakenSelectButton() {
         enableNodes(onSelectTakenPane);
         disableNodes(onSelectRestockPane);
-        newTakenRestockUnitTextField.setFloatingText("Taken Quantity");
-        isAddingTaken = true;
+        newUnitTextField.setFloatingText("Taken Quantity");
+        isStatusTaken = true;
     }
 
     /**
@@ -207,8 +220,8 @@ public class EditCargoPageController implements Initializable {
     private void onClickRestockSelectButton() {
         enableNodes(onSelectRestockPane);
         disableNodes(onSelectTakenPane);
-        newTakenRestockUnitTextField.setFloatingText("Restock Quantity");
-        isAddingTaken = false;
+        newUnitTextField.setFloatingText("Restock Quantity");
+        isStatusTaken = false;
     }
 
     /**
