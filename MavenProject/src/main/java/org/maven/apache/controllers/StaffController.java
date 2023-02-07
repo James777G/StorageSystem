@@ -2,14 +2,12 @@ package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXCheckbox;
-import io.github.palexdev.materialfx.controls.MFXPagination;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -40,6 +38,9 @@ public class StaffController implements Initializable {
     private enum Status {
         ACTIVE, ALL, INACTIVE
     }
+
+    @SuppressWarnings("all")
+    private final SearchResultService<Staff> searchResultService = MyLauncher.context.getBean("searchResultService", SearchResultService.class);
 
     private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
 
@@ -80,6 +81,9 @@ public class StaffController implements Initializable {
 
     @FXML
     private Label staffIdInDetails;
+
+    @FXML
+    private MFXTextField searchBar;
 
     @FXML
     private TextArea staffDescriptionInDetails;
@@ -166,7 +170,11 @@ public class StaffController implements Initializable {
         descriptionDialog.setVisible(false);
         loadSpinner.setVisible(false);
         getStaffList(pagination.getCurrentPageIndex());
-        calculatePageNumber();
+        try {
+            calculatePageNumber();
+        } catch (UnsupportedPojoException e) {
+            throw new RuntimeException(e);
+        }
         pagination.setPageCount(pageNumber);
         pagination.currentPageIndexProperty().addListener((observable, oldValue, newValue) -> {
             getStaffList(newValue);
@@ -184,19 +192,18 @@ public class StaffController implements Initializable {
         warnMessageInDetails.setVisible(false);
         deleteItemPane.setVisible(false);
         loadSpinnerOnDeletePane.setVisible(false);
-        statusButton.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                if(newValue){
-                    status = Status.ACTIVE;
-                    calculatePageNumber();
-                    assignStaffValue();
-                } else {
-                    status = Status.ALL;
-                    calculatePageNumber();
-                    assignStaffValue();
-                }
+        statusButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                status = Status.ACTIVE;
+            } else {
+                status = Status.ALL;
             }
+            try {
+                calculatePageNumber();
+            } catch (UnsupportedPojoException e) {
+                throw new RuntimeException(e);
+            }
+            assignStaffValue();
         });
     }
 
@@ -204,43 +211,94 @@ public class StaffController implements Initializable {
      * This method updates the latest page number, thus should be executed every time when
      * there is an update in data or change in status
      */
-    private void calculatePageNumber() {
+    private void calculatePageNumber() throws UnsupportedPojoException {
         if (status == Status.ALL) {
-            pageNumber = StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL).size();
+            if (!searchBar.getText().isBlank()) {
+                pageNumber = searchResultService
+                        .getPagedResultList(StaffCachedUtils
+                                        .getLists(StaffCachedUtils.listType.ALL),
+                                searchBar.getText(),
+                                SearchResultServiceHandler.ResultType.STAFF)
+                        .size();
+            } else {
+                pageNumber = StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL).size();
+            }
         } else if (status == Status.INACTIVE) {
-            pageNumber = StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE).size();
+            if (!searchBar.getText().isBlank()) {
+                pageNumber = searchResultService
+                        .getPagedResultList(StaffCachedUtils
+                                        .getLists(StaffCachedUtils.listType.INACTIVE),
+                                searchBar.getText(),
+                                SearchResultServiceHandler.ResultType.STAFF)
+                        .size();
+            } else {
+                pageNumber = StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE).size();
+            }
         } else {
-            pageNumber = StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).size();
+            if (!searchBar.getText().isBlank()) {
+                pageNumber = searchResultService
+                        .getPagedResultList(StaffCachedUtils
+                                        .getLists(StaffCachedUtils.listType.ACTIVE),
+                                searchBar.getText(),
+                                SearchResultServiceHandler.ResultType.STAFF)
+                        .size();
+            } else {
+                pageNumber = StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).size();
+            }
         }
-        pagination.setPageCount(pageNumber);
+        if (pageNumber != 0){
+            pagination.setPageCount(pageNumber);
+        } else {
+            pagination.setPageCount(1);
+        }
+
     }
 
     /**
      * This method extracts the data from cache and store them as local variables, thus
      * this method should be executed every time when there is a change in the cache.
+     *
      * @param newValue newValue stands for the current page number.
      */
     private void getStaffList(Number newValue) {
-        try{
-            if (newValue.intValue() < StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL).size()) {
+        try {
+            if (newValue.intValue() < StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL).size() && searchBar.getText().isBlank()) {
                 currentStaffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL).get(newValue.intValue());
+            } else if (!searchBar.getText().isBlank()) {
+                currentStaffList = searchResultService
+                        .getPagedResultList(StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL),
+                                searchBar.getText(),
+                                SearchResultServiceHandler.ResultType.STAFF)
+                        .get(newValue.intValue());
             }
-        } catch(Exception e){
-            currentStaffList= new ArrayList<>();
+        } catch (Exception e) {
+            currentStaffList = new ArrayList<>();
         }
-        try{
-            if (newValue.intValue() < StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).size()) {
+        try {
+            if (newValue.intValue() < StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).size() && searchBar.getText().isBlank()) {
                 currentActiveStaffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).get(newValue.intValue());
+            } else if (!searchBar.getText().isBlank()) {
+                currentActiveStaffList = searchResultService
+                        .getPagedResultList(StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE),
+                                searchBar.getText(),
+                                SearchResultServiceHandler.ResultType.STAFF)
+                        .get(newValue.intValue());
             }
-        }catch (Exception e){
-            currentStaffList= new ArrayList<>();
+        } catch (Exception e) {
+            currentActiveStaffList = new ArrayList<>();
         }
-        try{
-            if (newValue.intValue() < StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE).size()) {
+        try {
+            if (newValue.intValue() < StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE).size() && searchBar.getText().isBlank()) {
                 currentInactiveStaffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE).get(newValue.intValue());
+            } else if (!searchBar.getText().isBlank()) {
+                currentInactiveStaffList = searchResultService
+                        .getPagedResultList(StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE),
+                                searchBar.getText(),
+                                SearchResultServiceHandler.ResultType.STAFF)
+                        .get(newValue.intValue());
             }
-        } catch (Exception e){
-            currentStaffList= new ArrayList<>();
+        } catch (Exception e) {
+            currentInactiveStaffList = new ArrayList<>();
         }
 
     }
@@ -262,6 +320,7 @@ public class StaffController implements Initializable {
     /**
      * This method is responsible for setting data to the table and display to the users.
      * however, this method should not be used directly, please use {@link #assignStaffValue()};
+     *
      * @param currentStaffList the list chosen to display the data
      */
     @Deprecated
@@ -288,8 +347,8 @@ public class StaffController implements Initializable {
      * on the names can be done easily.
      *
      * <p>
-     *     This method is only used in {@link #initialize(URL, ResourceBundle)}, and should not
-     *     be used in anywhere else
+     * This method is only used in {@link #initialize(URL, ResourceBundle)}, and should not
+     * be used in anywhere else
      * </p>
      */
     @Deprecated
@@ -309,8 +368,8 @@ public class StaffController implements Initializable {
      * on the ids can be done easily.
      *
      * <p>
-     *     This method is only used in {@link #initialize(URL, ResourceBundle)}, and should not
-     *     be used in anywhere else
+     * This method is only used in {@link #initialize(URL, ResourceBundle)}, and should not
+     * be used in anywhere else
      * </p>
      */
     @Deprecated
@@ -330,8 +389,8 @@ public class StaffController implements Initializable {
      * on the status can be done easily.
      *
      * <p>
-     *     This method is only used in {@link #initialize(URL, ResourceBundle)}, and should not
-     *     be used in anywhere else
+     * This method is only used in {@link #initialize(URL, ResourceBundle)}, and should not
+     * be used in anywhere else
      * </p>
      */
     @Deprecated
@@ -351,8 +410,8 @@ public class StaffController implements Initializable {
      * on the buttons can be done easily.
      *
      * <p>
-     *     This method is only used in {@link #initialize(URL, ResourceBundle)}, and should not
-     *     be used in anywhere else
+     * This method is only used in {@link #initialize(URL, ResourceBundle)}, and should not
+     * be used in anywhere else
      * </p>
      */
     @Deprecated
@@ -369,7 +428,7 @@ public class StaffController implements Initializable {
 
     @Deprecated
     @SuppressWarnings("all")
-    private void initializeDeleteList(){
+    private void initializeDeleteList() {
         deleteList[0] = deleteOne;
         deleteList[1] = deleteTwo;
         deleteList[2] = deleteThree;
@@ -377,6 +436,13 @@ public class StaffController implements Initializable {
         deleteList[4] = deleteFive;
         deleteList[5] = deleteSix;
         deleteList[6] = deleteSeven;
+    }
+
+    @FXML
+    private void onClickSearch() throws UnsupportedPojoException {
+        getStaffList(pagination.getCurrentPageIndex());
+        assignStaffValue();
+        calculatePageNumber();
     }
 
     @FXML
@@ -390,7 +456,11 @@ public class StaffController implements Initializable {
         doContinueButton.setVisible(false);
         executorService.execute(() -> {
             staffService.deleteStaffById(selectedStaffId);
-            calculatePageNumber();
+            try {
+                calculatePageNumber();
+            } catch (UnsupportedPojoException e) {
+                throw new RuntimeException(e);
+            }
             Platform.runLater(() -> pagination.setPageCount(pageNumber));
             getStaffList(pagination.getCurrentPageIndex());
             Platform.runLater(this::assignStaffValue);
@@ -403,126 +473,126 @@ public class StaffController implements Initializable {
     }
 
     @FXML
-    private void onEnterTick(){
+    private void onEnterTick() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(doContinueButton, 250, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onExitTick(){
+    private void onExitTick() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(doContinueButton, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onEnterCross(){
+    private void onEnterCross() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(doNotContinueButton, 250, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onExitCross(){
+    private void onExitCross() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(doNotContinueButton, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onEnterDeleteOne(){
+    private void onEnterDeleteOne() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteOne, 250, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onExitDeleteOne(){
+    private void onExitDeleteOne() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteOne, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onEnterDeleteTwo(){
+    private void onEnterDeleteTwo() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteTwo, 250, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onExitDeleteTwo(){
+    private void onExitDeleteTwo() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteTwo, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onEnterDeleteThree(){
+    private void onEnterDeleteThree() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteThree, 250, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onExitDeleteThree(){
+    private void onExitDeleteThree() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteThree, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onEnterDeleteFour(){
+    private void onEnterDeleteFour() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteFour, 250, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onExitDeleteFour(){
+    private void onExitDeleteFour() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteFour, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onEnterDeleteFive(){
+    private void onEnterDeleteFive() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteFive, 250, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onExitDeleteFive(){
+    private void onExitDeleteFive() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteFive, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onEnterDeleteSix(){
+    private void onEnterDeleteSix() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteSix, 250, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onExitDeleteSix(){
+    private void onExitDeleteSix() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteSix, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onEnterDeleteSeven(){
+    private void onEnterDeleteSeven() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteSeven, 250, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
     @FXML
-    private void onExitDeleteSeven(){
+    private void onExitDeleteSeven() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteSeven, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
@@ -586,6 +656,7 @@ public class StaffController implements Initializable {
 
     /**
      * This method justifies which list is to be used under the current selected status.
+     *
      * @return the list to be used and displayed.
      */
     private List<Staff> getCurrentList() {
@@ -740,11 +811,11 @@ public class StaffController implements Initializable {
     /**
      * This method is responsible for the updating of the current staff data
      * <p>
-     *     1. This method is highly time consuming, thus should be executed inside the thread pool
-     *     2. This method handles the exceptions that come with encapsulation of the data
-     *        {@link #encapsulateCurrentStaffData()}
-     *     3. This method controls the loading animation {@link #loadSpinner} and the error message
-     *        {@link #warnMessageInDetails}
+     * 1. This method is highly time consuming, thus should be executed inside the thread pool
+     * 2. This method handles the exceptions that come with encapsulation of the data
+     * {@link #encapsulateCurrentStaffData()}
+     * 3. This method controls the loading animation {@link #loadSpinner} and the error message
+     * {@link #warnMessageInDetails}
      * </p>
      */
     @FXML
@@ -755,13 +826,13 @@ public class StaffController implements Initializable {
             Staff staff;
             try {
                 staff = encapsulateCurrentStaffData();
-                if(selectedStaff.equals(staff)) return;
+                if (selectedStaff.equals(staff)) return;
                 staffService.updateStaff(staff);
                 getStaffList(pagination.getCurrentPageIndex());
                 Platform.runLater(this::run);
             } catch (Exception e) {
                 warnMessageInDetails.setVisible(true);
-            }finally {
+            } finally {
                 Platform.runLater(() -> {
                     assignStaffValue();
                     loadSpinner.setVisible(false);
@@ -780,7 +851,7 @@ public class StaffController implements Initializable {
      */
     private Staff encapsulateCurrentStaffData() throws EmptyValueException {
         Staff staff = new Staff();
-        if (staffNameInDetails.getText().isBlank()){
+        if (staffNameInDetails.getText().isBlank()) {
             throw new EmptyValueException("Empty input values in staff name section");
         }
         staff.setStaffName(staffNameInDetails.getText());
@@ -805,11 +876,11 @@ public class StaffController implements Initializable {
     /**
      * This method is responsible for the addition of the current staff data
      * <p>
-     *     1. This method is highly time consuming, thus should be executed inside the thread pool
-     *     2. This method handles the exceptions that come with encapsulation of the data
-     *        {@link #encapsulateStaffDataInAdd()}
-     *     3. This method controls the loading animation {@link #loadSpinnerInAdd} and the error message
-     *        {@link #warnMessageInAdd}
+     * 1. This method is highly time consuming, thus should be executed inside the thread pool
+     * 2. This method handles the exceptions that come with encapsulation of the data
+     * {@link #encapsulateStaffDataInAdd()}
+     * 3. This method controls the loading animation {@link #loadSpinnerInAdd} and the error message
+     * {@link #warnMessageInAdd}
      * </p>
      */
     @FXML
@@ -822,11 +893,17 @@ public class StaffController implements Initializable {
                 staff = encapsulateStaffDataInAdd();
                 staffService.addNewStaff(staff);
                 getStaffList(pagination.getCurrentPageIndex());
-                calculatePageNumber();
+                Platform.runLater(() -> {
+                    try {
+                        calculatePageNumber();
+                    } catch (UnsupportedPojoException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
                 Platform.runLater(() -> warnMessageInAdd.setVisible(false));
             } catch (Exception e) {
                 warnMessageInAdd.setVisible(true);
-            }finally {
+            } finally {
                 Platform.runLater(() -> {
                     pagination.setPageCount(pageNumber);
                     assignStaffValue();
@@ -847,7 +924,7 @@ public class StaffController implements Initializable {
      */
     private Staff encapsulateStaffDataInAdd() throws EmptyValueException {
         Staff staff = new Staff();
-        if (staffNameInAdd.getText().isBlank()){
+        if (staffNameInAdd.getText().isBlank()) {
             throw new EmptyValueException("User did not input a name when it is required");
         }
         staff.setStaffName(staffNameInAdd.getText());
