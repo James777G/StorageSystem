@@ -9,6 +9,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -17,6 +18,7 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.jetbrains.annotations.NotNull;
+import org.maven.apache.App;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
 import org.maven.apache.service.transaction.CachedTransactionService;
@@ -28,8 +30,10 @@ import org.maven.apache.utils.TransactionCachedUtils;
 
 import java.awt.event.KeyAdapter;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class EditCargoPageController implements Initializable {
@@ -59,7 +63,7 @@ public class EditCargoPageController implements Initializable {
     private MFXTextField newUnitTextField;
 
     @FXML
-    private MFXDatePicker datePicker;
+    private MFXDatePicker datePicker = new MFXDatePicker(Locale.ENGLISH);
 
     @FXML
     private MFXGenericDialog descriptionDialog;
@@ -85,8 +89,6 @@ public class EditCargoPageController implements Initializable {
     private int numOfTransaction;
 
     private boolean isStatusTaken = false;
-
-   // private final DateTransactionService newTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
 
     private final CachedTransactionService newCachedTransactionService = MyLauncher.context.getBean("cachedTransactionService", CachedTransactionService.class);
 
@@ -132,12 +134,12 @@ public class EditCargoPageController implements Initializable {
             newUnitAmount = Integer.valueOf(newUnitTextField.getText());
             if (datePicker.getText().equals("")){
                 // return current date and time
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDateTime now = LocalDateTime.now();
-                transactionDate = dtf.format(now);
+                LocalDate dateTime = LocalDate.now();
+                transactionDate = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             }else{
                 // return chosen date from calendar
-                transactionDate = datePicker.getText();
+                LocalDate dateTime = datePicker.getValue();
+                transactionDate = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             }
             newTransaction = new Transaction();
             if (isStatusTaken) {
