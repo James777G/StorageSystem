@@ -2,12 +2,12 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXCheckbox?>
-<?import io.github.palexdev.materialfx.controls.MFXPagination?>
 <?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -141,7 +141,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <ImageView fx:id="deleteOne" fitHeight="40.0" fitWidth="28.0" layoutX="847.0" layoutY="11.0" onMouseClicked="#onClickDeleteOne" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="13.666666666666664" AnchorPane.leftAnchor="835.0" AnchorPane.rightAnchor="26.33333333333337" AnchorPane.topAnchor="11.0">
+            <ImageView fx:id="deleteOne" fitHeight="40.0" fitWidth="28.0" layoutX="847.0" layoutY="11.0" onMouseClicked="#onClickDeleteOne" onMouseEntered="#onEnterDeleteOne" onMouseExited="#onExitDeleteOne" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="13.666666666666664" AnchorPane.leftAnchor="835.0" AnchorPane.rightAnchor="26.33333333333337" AnchorPane.topAnchor="11.0">
                <image>
                   <Image url="@../image/icons8-delete-document-64.png" />
                </image>
@@ -192,7 +192,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <ImageView fx:id="deleteTwo" fitHeight="40.0" fitWidth="28.0" onMouseClicked="#onClickDeleteTwo" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="835.0" AnchorPane.topAnchor="11.0">
+            <ImageView fx:id="deleteTwo" fitHeight="40.0" fitWidth="28.0" onMouseClicked="#onClickDeleteTwo" onMouseEntered="#onEnterDeleteTwo" onMouseExited="#onExitDeleteTwo" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="835.0" AnchorPane.topAnchor="11.0">
                <image>
                   <Image url="@../image/icons8-delete-document-64.png" />
                </image>
@@ -243,7 +243,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <ImageView fx:id="deleteThree" fitHeight="40.0" fitWidth="28.0" onMouseClicked="#onClickDeleteThree" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="835.0" AnchorPane.topAnchor="11.0">
+            <ImageView fx:id="deleteThree" fitHeight="40.0" fitWidth="28.0" onMouseClicked="#onClickDeleteThree" onMouseEntered="#onEnterDeleteThree" onMouseExited="#onExitDeleteThree" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="835.0" AnchorPane.topAnchor="11.0">
                <image>
                   <Image url="@../image/icons8-delete-document-64.png" />
                </image>
@@ -294,7 +294,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <ImageView fx:id="deleteFour" fitHeight="40.0" fitWidth="28.0" onMouseClicked="#onClickDeleteFour" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="835.0" AnchorPane.topAnchor="11.0">
+            <ImageView fx:id="deleteFour" fitHeight="40.0" fitWidth="28.0" onMouseClicked="#onClickDeleteFour" onMouseEntered="#onEnterDeleteFour" onMouseExited="#onExitDeleteFour" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="835.0" AnchorPane.topAnchor="11.0">
                <image>
                   <Image url="@../image/icons8-delete-document-64.png" />
                </image>
@@ -345,7 +345,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <ImageView fx:id="deleteFive" fitHeight="40.0" fitWidth="28.0" onMouseClicked="#onClickDeleteFive" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="835.0" AnchorPane.topAnchor="11.0">
+            <ImageView fx:id="deleteFive" fitHeight="40.0" fitWidth="28.0" onMouseClicked="#onClickDeleteFive" onMouseEntered="#onEnterDeleteFive" onMouseExited="#onExitDeleteFive" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="835.0" AnchorPane.topAnchor="11.0">
                <image>
                   <Image url="@../image/icons8-delete-document-64.png" />
                </image>
@@ -396,7 +396,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <ImageView fx:id="deleteSix" fitHeight="40.0" fitWidth="28.0" onMouseClicked="#onClickDeleteSix" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="835.0" AnchorPane.topAnchor="11.0">
+            <ImageView fx:id="deleteSix" fitHeight="40.0" fitWidth="28.0" onMouseClicked="#onClickDeleteSix" onMouseEntered="#onEnterDeleteSix" onMouseExited="#onExitDeleteSix" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="835.0" AnchorPane.topAnchor="11.0">
                <image>
                   <Image url="@../image/icons8-delete-document-64.png" />
                </image>
@@ -447,14 +447,13 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <ImageView fx:id="deleteSeven" fitHeight="40.0" fitWidth="28.0" onMouseClicked="#onClickDeleteSeven" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="835.0" AnchorPane.topAnchor="11.0">
+            <ImageView fx:id="deleteSeven" fitHeight="40.0" fitWidth="28.0" onMouseClicked="#onClickDeleteSeven" onMouseEntered="#onEnterDeleteSeven" onMouseExited="#onExitDeleteSeven" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="835.0" AnchorPane.topAnchor="11.0">
                <image>
                   <Image url="@../image/icons8-delete-document-64.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <MFXPagination fx:id="pagination" layoutX="531.0" layoutY="600.0" AnchorPane.bottomAnchor="8.0" />
       <MFXGenericDialog fx:id="descriptionDialog" headerText="Item Details" onClose="#onCloseDescriptionDialog" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="150.0">
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -635,7 +634,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="deleteItemPane" layoutX="339.0" layoutY="-60.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 15;" AnchorPane.bottomAnchor="275.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="275.0">
+      <AnchorPane fx:id="deleteItemPane" layoutX="351.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f6f6f6; -fx-background-radius: 15;" AnchorPane.bottomAnchor="460.0" AnchorPane.leftAnchor="351.0" AnchorPane.rightAnchor="349.0" AnchorPane.topAnchor="90.0">
          <children>
             <Label layoutX="14.0" layoutY="14.0" text="Continue?" AnchorPane.leftAnchor="15.0">
                <font>
@@ -648,17 +647,23 @@
                   <Font name="Calibri Bold" size="15.0" />
                </font>
             </Label>
-            <ImageView fitHeight="33.0" fitWidth="30.0" layoutX="459.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="doContinueButton" fitHeight="33.0" fitWidth="30.0" layoutX="459.0" layoutY="49.0" onMouseClicked="#doContinue" onMouseEntered="#onEnterTick" onMouseExited="#onExitTick" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/icons8-checkmark-yes-64.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="28.0" fitWidth="25.0" layoutX="461.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="doNotContinueButton" fitHeight="28.0" fitWidth="25.0" layoutX="461.0" layoutY="11.0" onMouseClicked="#doNotContinue" onMouseEntered="#onEnterCross" onMouseExited="#onExitCross" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/icons8-multiply-90.png" />
                </image>
             </ImageView>
+            <MFXProgressSpinner fx:id="loadSpinnerOnDeletePane" layoutX="461.0" layoutY="52.0" prefHeight="23.0" prefWidth="25.0" visible="false" />
          </children>
       </AnchorPane>
+      <BorderPane layoutX="221.0" layoutY="590.0" prefHeight="51.0" prefWidth="761.0">
+         <center>
+            <Pagination fx:id="newPagination" maxPageIndicatorCount="8" pageCount="50" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>
