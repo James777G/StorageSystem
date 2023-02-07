@@ -8,12 +8,12 @@ import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.exception.EmptyValueException;
@@ -23,6 +23,7 @@ import org.maven.apache.utils.ScaleUtils;
 import org.maven.apache.utils.StaffCachedUtils;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
@@ -54,13 +55,16 @@ public class StaffController implements Initializable {
     private JFXButton editOne, editTwo, editThree, editFour, editFive, editSix, editSeven;
 
     @FXML
+    private ImageView deleteOne, deleteTwo, deleteThree, deleteFour, deleteFive, deleteSix, deleteSeven;
+
+    @FXML
     private MFXGenericDialog descriptionDialog;
 
     @FXML
     private MFXProgressSpinner loadSpinner;
 
     @FXML
-    private MFXPagination pagination;
+    private Pagination pagination;
 
     @FXML
     private TextField staffNameInDetails;
@@ -104,10 +108,27 @@ public class StaffController implements Initializable {
     @FXML
     private Label warnMessageInDetails;
 
+    @FXML
+    private AnchorPane deleteItemPane;
+
+    @FXML
+    private ImageView doNotContinueButton;
+
+    @FXML
+    private ImageView doContinueButton;
+
+    @FXML
+    private MFXProgressSpinner loadSpinnerOnDeletePane;
+
+    @FXML
+    private MFXCheckbox statusButton;
+
     private final Label[] nameList = new Label[7];
     private final Label[] idList = new Label[7];
     private final Label[] statusList = new Label[7];
     private final JFXButton[] buttonList = new JFXButton[7];
+
+    private final ImageView[] deleteList = new ImageView[7];
 
     private List<Staff> currentStaffList;
 
@@ -115,7 +136,10 @@ public class StaffController implements Initializable {
 
     private List<Staff> currentInactiveStaffList;
 
-    private final Status status = Status.ALL;
+
+    private Status status = Status.ALL;
+
+    private Integer selectedStaffId;
 
     private Staff selectedStaff;
 
@@ -138,10 +162,10 @@ public class StaffController implements Initializable {
         staffService.updateAllCachedStaffData();
         descriptionDialog.setVisible(false);
         loadSpinner.setVisible(false);
-        getStaffList(pagination.getCurrentPage());
+        getStaffList(pagination.getCurrentPageIndex());
         calculatePageNumber();
-        pagination.setMaxPage(pageNumber);
-        pagination.currentPageProperty().addListener((observable, oldValue, newValue) -> {
+        pagination.setPageCount(pageNumber);
+        pagination.currentPageIndexProperty().addListener((observable, oldValue, newValue) -> {
             getStaffList(newValue);
             assignStaffValue();
         });
@@ -149,11 +173,28 @@ public class StaffController implements Initializable {
         initializeIdList();
         initializeStatusList();
         initializeButtonList();
+        initializeDeleteList();
         assignStaffValue();
         addStaffPane.setVisible(false);
         loadSpinnerInAdd.setVisible(false);
         warnMessageInAdd.setVisible(false);
         warnMessageInDetails.setVisible(false);
+        deleteItemPane.setVisible(false);
+        loadSpinnerOnDeletePane.setVisible(false);
+        statusButton.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(newValue){
+                    status = Status.ACTIVE;
+                    calculatePageNumber();
+                    assignStaffValue();
+                } else {
+                    status = Status.ALL;
+                    calculatePageNumber();
+                    assignStaffValue();
+                }
+            }
+        });
     }
 
     /**
@@ -168,6 +209,7 @@ public class StaffController implements Initializable {
         } else {
             pageNumber = StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).size();
         }
+        pagination.setPageCount(pageNumber);
     }
 
     /**
@@ -176,14 +218,26 @@ public class StaffController implements Initializable {
      * @param newValue newValue stands for the current page number.
      */
     private void getStaffList(Number newValue) {
-        if (newValue.intValue() - 1 < StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL).size()) {
-            currentStaffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL).get(newValue.intValue() - 1);
+        try{
+            if (newValue.intValue() < StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL).size()) {
+                currentStaffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL).get(newValue.intValue());
+            }
+        } catch(Exception e){
+            currentStaffList= new ArrayList<>();
         }
-        if (newValue.intValue() - 1 < StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).size()) {
-            currentActiveStaffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).get(newValue.intValue() - 1);
+        try{
+            if (newValue.intValue() < StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).size()) {
+                currentActiveStaffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE).get(newValue.intValue());
+            }
+        }catch (Exception e){
+            currentStaffList= new ArrayList<>();
         }
-        if (newValue.intValue() - 1 < StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE).size()) {
-            currentInactiveStaffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE).get(newValue.intValue() - 1);
+        try{
+            if (newValue.intValue() < StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE).size()) {
+                currentInactiveStaffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE).get(newValue.intValue());
+            }
+        } catch (Exception e){
+            currentStaffList= new ArrayList<>();
         }
 
     }
@@ -215,12 +269,14 @@ public class StaffController implements Initializable {
             nameList[i].setText(currentStaffList.get(i).getStaffName());
             idList[i].setText(Integer.valueOf(currentStaffList.get(i).getStaffID()).toString());
             statusList[i].setText(currentStaffList.get(i).getStatus());
+            deleteList[i].setVisible(true);
         }
         for (int j = currentStaffList.size(); j < nameList.length; j++) {
             nameList[j].setText("N/A");
             idList[j].setText("N/A");
             statusList[j].setText("N/A");
             buttonList[j].setDisable(true);
+            deleteList[j].setVisible(false);
         }
     }
 
@@ -306,6 +362,223 @@ public class StaffController implements Initializable {
         buttonList[4] = editFive;
         buttonList[5] = editSix;
         buttonList[6] = editSeven;
+    }
+
+    @Deprecated
+    @SuppressWarnings("all")
+    private void initializeDeleteList(){
+        deleteList[0] = deleteOne;
+        deleteList[1] = deleteTwo;
+        deleteList[2] = deleteThree;
+        deleteList[3] = deleteFour;
+        deleteList[4] = deleteFive;
+        deleteList[5] = deleteSix;
+        deleteList[6] = deleteSeven;
+    }
+
+    @FXML
+    private void doNotContinue() {
+        deleteItemPane.setVisible(false);
+    }
+
+    @FXML
+    private void doContinue() {
+        loadSpinnerOnDeletePane.setVisible(true);
+        doContinueButton.setVisible(false);
+        executorService.execute(() -> {
+            staffService.deleteStaffById(selectedStaffId);
+            calculatePageNumber();
+            Platform.runLater(() -> pagination.setPageCount(pageNumber));
+            getStaffList(pagination.getCurrentPageIndex());
+            Platform.runLater(this::assignStaffValue);
+            Platform.runLater(() -> {
+                loadSpinnerOnDeletePane.setVisible(false);
+                doContinueButton.setVisible(true);
+                deleteItemPane.setVisible(false);
+            });
+        });
+    }
+
+    @FXML
+    private void onEnterTick(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(doContinueButton, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitTick(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(doContinueButton, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onEnterCross(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(doNotContinueButton, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitCross(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(doNotContinueButton, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onEnterDeleteOne(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteOne, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitDeleteOne(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteOne, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onEnterDeleteTwo(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteTwo, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitDeleteTwo(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteTwo, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onEnterDeleteThree(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteThree, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitDeleteThree(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteThree, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onEnterDeleteFour(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteFour, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitDeleteFour(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteFour, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onEnterDeleteFive(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteFive, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitDeleteFive(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteFive, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onEnterDeleteSix(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteSix, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitDeleteSix(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteSix, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onEnterDeleteSeven(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteSeven, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitDeleteSeven(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteSeven, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onClickDeleteOne() {
+        List<Staff> currentList = getCurrentList();
+        Staff staff = currentList.get(0);
+        selectedStaffId = staff.getStaffID();
+        deleteItemPane.setVisible(true);
+    }
+
+    @FXML
+    private void onClickDeleteTwo() {
+        List<Staff> currentList = getCurrentList();
+        Staff staff = currentList.get(1);
+        selectedStaffId = staff.getStaffID();
+        deleteItemPane.setVisible(true);
+    }
+
+    @FXML
+    private void onClickDeleteThree() {
+        List<Staff> currentList = getCurrentList();
+        Staff staff = currentList.get(2);
+        selectedStaffId = staff.getStaffID();
+        deleteItemPane.setVisible(true);
+    }
+
+    @FXML
+    private void onClickDeleteFour() {
+        List<Staff> currentList = getCurrentList();
+        Staff staff = currentList.get(3);
+        selectedStaffId = staff.getStaffID();
+        deleteItemPane.setVisible(true);
+    }
+
+    @FXML
+    private void onClickDeleteFive() {
+        List<Staff> currentList = getCurrentList();
+        Staff staff = currentList.get(4);
+        selectedStaffId = staff.getStaffID();
+        deleteItemPane.setVisible(true);
+    }
+
+    @FXML
+    private void onClickDeleteSix() {
+        List<Staff> currentList = getCurrentList();
+        Staff staff = currentList.get(5);
+        selectedStaffId = staff.getStaffID();
+        deleteItemPane.setVisible(true);
+    }
+
+    @FXML
+    private void onClickDeleteSeven() {
+        List<Staff> currentList = getCurrentList();
+        Staff staff = currentList.get(6);
+        selectedStaffId = staff.getStaffID();
+        deleteItemPane.setVisible(true);
     }
 
     /**
@@ -481,7 +754,7 @@ public class StaffController implements Initializable {
                 staff = encapsulateCurrentStaffData();
                 if(selectedStaff.equals(staff)) return;
                 staffService.updateStaff(staff);
-                getStaffList(pagination.getCurrentPage());
+                getStaffList(pagination.getCurrentPageIndex());
                 Platform.runLater(this::run);
             } catch (Exception e) {
                 warnMessageInDetails.setVisible(true);
@@ -545,14 +818,14 @@ public class StaffController implements Initializable {
             try {
                 staff = encapsulateStaffDataInAdd();
                 staffService.addNewStaff(staff);
-                getStaffList(pagination.getCurrentPage());
+                getStaffList(pagination.getCurrentPageIndex());
                 calculatePageNumber();
                 Platform.runLater(() -> warnMessageInAdd.setVisible(false));
             } catch (Exception e) {
                 warnMessageInAdd.setVisible(true);
             }finally {
                 Platform.runLater(() -> {
-                    pagination.setMaxPage(pageNumber);
+                    pagination.setPageCount(pageNumber);
                     assignStaffValue();
                     loadSpinnerInAdd.setVisible(false);
                     applyButtonInAdd.setVisible(true);
