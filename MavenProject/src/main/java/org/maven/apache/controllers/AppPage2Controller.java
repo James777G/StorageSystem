@@ -1,7 +1,6 @@
 package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDrawer;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
@@ -44,16 +43,10 @@ import org.maven.apache.utils.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.ResourceBundle;
-import java.util.concurrent.ExecutorService;
+import java.util.*;
 
 public class AppPage2Controller implements Initializable {
 
@@ -1110,9 +1103,9 @@ public class AppPage2Controller implements Initializable {
 
     private void setTransactionPane() {
         try {
-            DataUtils.publicDataPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/transactionPage_data.fxml")));
+            //DataUtils.publicDataPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/transactionPage_data.fxml")));
             DataUtils.editCargoPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/editCargoPane.fxml")));
-            AnchorPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/transactionPage.fxml")));
+            AnchorPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/newTransactionPage.fxml")));
             stackPane.getChildren().add(pane);
         } catch (IOException e) {
             throw new RuntimeException(e);
