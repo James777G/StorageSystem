@@ -654,7 +654,7 @@
          </center>
       </MFXGenericDialog>
       <AnchorPane fx:id="blockPane" layoutX="-4.0" layoutY="-9.0" opacity="0.75" prefHeight="649.0" prefWidth="1207.0" style="-fx-background-color: grey;" />
-      <AnchorPane fx:id="addItemPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
+      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
          <children>
             <Label layoutX="421.0" layoutY="156.0" opacity="0.4" prefHeight="128.0" prefWidth="320.0" rotate="-38.7" text="TRANS" textFill="#9de4ed59">
                <font>
@@ -673,7 +673,7 @@
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutY="15.0" prefHeight="28.0" prefWidth="162.0" styleClass="lineStyleInputField" stylesheets="@../css/staffPane.css">
+                  <TextField fx:id="newItemTextField" layoutY="15.0" prefHeight="28.0" prefWidth="162.0" styleClass="lineStyleInputField" stylesheets="@../css/staffPane.css">
                      <font>
                         <Font name="Calibri" size="12.0" />
                      </font>
@@ -687,7 +687,7 @@
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutY="15.0" prefHeight="28.0" prefWidth="162.0" styleClass="lineStyleInputField" stylesheets="@../css/staffPane.css">
+                  <TextField fx:id="newStaffTextField" layoutY="15.0" prefHeight="28.0" prefWidth="162.0" styleClass="lineStyleInputField" stylesheets="@../css/staffPane.css">
                      <font>
                         <Font name="Calibri" size="12.0" />
                      </font>
@@ -699,7 +699,7 @@
                   <Font name="Calibri Bold" size="14.0" />
                </font>
             </Label>
-            <TextArea layoutX="14.0" layoutY="189.0" prefHeight="129.0" prefWidth="366.0" styleClass="lineStyleTextArea" stylesheets="@../css/staffPane.css" />
+            <TextArea fx:id="descriptionTextArea" layoutX="14.0" layoutY="189.0" prefHeight="129.0" prefWidth="366.0" styleClass="lineStyleTextArea" stylesheets="@../css/staffPane.css" />
             <JFXButton fx:id="applyButtonInAdd" layoutX="599.0" layoutY="291.0" onAction="#onClickApplyInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #223c40;" text="Apply" textFill="WHITE">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
@@ -739,14 +739,14 @@
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField layoutY="15.0" prefHeight="28.0" prefWidth="162.0" styleClass="lineStyleInputField" stylesheets="@../css/staffPane.css">
+                  <TextField fx:id="newUnitTextField" layoutY="15.0" prefHeight="28.0" prefWidth="162.0" styleClass="lineStyleInputField" stylesheets="@../css/staffPane.css">
                      <font>
                         <Font name="Calibri" size="12.0" />
                      </font>
                   </TextField>
                </children>
             </AnchorPane>
-            <MFXDatePicker fx:id="datePicker" editable="false" layoutX="204.0" layoutY="140.0" prefHeight="38.0" prefWidth="180.0" />
+            <MFXDatePicker fx:id="datePicker" editable="false" layoutX="204.0" layoutY="132.0" prefHeight="38.0" prefWidth="180.0" />
          </children>
       </AnchorPane>
       <MFXGenericDialog fx:id="deletionConfirmationDialog" headerText="Removal Confirmation" layoutX="10.0" layoutY="10.0" onClose="#onCloseDeletionConfirmation" prefHeight="217.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="203.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="220.0">

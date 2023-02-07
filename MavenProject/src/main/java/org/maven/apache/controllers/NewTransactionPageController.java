@@ -1,9 +1,14 @@
 package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -72,6 +77,9 @@ public class NewTransactionPageController implements Initializable {
     private AnchorPane searchSwitchingBlockPane;
 
     @FXML
+    private AnchorPane addTransactionPane;
+
+    @FXML
     private AnchorPane transactionPane1, transactionPane2, transactionPane3, transactionPane4, transactionPane5, transactionPane6, transactionPane7;
 
     @FXML
@@ -88,6 +96,9 @@ public class NewTransactionPageController implements Initializable {
 
     @FXML
     private JFXButton searchButton;
+
+    @FXML
+    private JFXButton applyButtonInAdd;
 
     @FXML
     private Label cargoLabel1, cargoLabel2, cargoLabel3, cargoLabel4, cargoLabel5, cargoLabel6, cargoLabel7;
@@ -147,7 +158,22 @@ public class NewTransactionPageController implements Initializable {
     private TextField staffField;
 
     @FXML
+    private TextField newItemTextField;
+
+    @FXML
+    private TextField newUnitTextField;
+
+    @FXML
+    private TextField newStaffTextField;
+
+    @FXML
+    private TextArea descriptionTextArea;
+
+    @FXML
     private TextArea descriptionField;
+
+    @FXML
+    private MFXProgressSpinner loadSpinnerInAdd;
 
     private Label[] cargoLabelArray = new Label[7];
 
@@ -191,12 +217,14 @@ public class NewTransactionPageController implements Initializable {
         DataUtils.publicTransactionBlockPane = blockPane;
         deletionConfirmationDialog.setVisible(false);
         descriptionDialog.setVisible(false);
+        addTransactionPane.setVisible(false);
         setPaginationPages(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_ASC_7));
         refreshPage();
         // perform the action of loading current page content when pagination is clicked
         transactionPagination.currentPageIndexProperty().addListener((observable, oldValue, newValue) -> {
             updatePagination(newValue);
         });
+        setInputValidation(newUnitTextField);
     }
 
     /**
@@ -524,9 +552,22 @@ public class NewTransactionPageController implements Initializable {
         setPaginationPages(sortedList);
     }
 
+    /**
+     * show the pane of adding new transaction
+     */
     @FXML
     private void onClickAddButton() {
+        addTransactionPane.setVisible(true);
         blockPane.setVisible(true);
+    }
+
+    /**
+     * close the pane of adding new transaction
+     */
+    @FXML
+    private void onClickOkayInAdd(){
+        addTransactionPane.setVisible(false);
+        blockPane.setVisible(false);
     }
 
     @FXML
@@ -541,6 +582,14 @@ public class NewTransactionPageController implements Initializable {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(addButton, 500, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
+    }
+
+    /**
+     * saves the properties of the added new transaction
+     */
+    @FXML
+    private void onClickApplyInAdd(){
+
     }
 
     @FXML
@@ -874,6 +923,57 @@ public class NewTransactionPageController implements Initializable {
     private void onCloseDescriptionDialog() {
         descriptionDialog.setVisible(false);
     }
+
+    /**
+     * force the text field to be numeric only
+     *
+     * @param textField
+     */
+    private void setInputValidation(TextField textField) {
+        textField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("[0-9]*")) {
+                    Platform.runLater(() -> {
+                        textField.setText(newValue.replaceAll("[^\\d]", ""));
+                    });
+                }
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @FXML
     private void onClickStaffSearch(){
