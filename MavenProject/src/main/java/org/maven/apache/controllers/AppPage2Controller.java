@@ -1992,5 +1992,4 @@ public class AppPage2Controller implements Initializable {
         scaleTransition.play();
         scaleTransition1.play();
     }
-
 }

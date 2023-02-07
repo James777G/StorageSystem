@@ -4,6 +4,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
 <?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -706,12 +707,12 @@
                </font>
             </JFXButton>
             <Separator layoutX="1.0" layoutY="44.0" prefHeight="5.0" prefWidth="697.0" />
-            <Label layoutX="497.0" layoutY="170.0" prefHeight="17.0" prefWidth="197.0" text="Transaction-ID is auto-generated">
+            <Label layoutX="501.0" layoutY="192.0" prefHeight="17.0" prefWidth="197.0" text="Transaction-ID is auto-generated">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
                </font>
             </Label>
-            <ImageView fitHeight="28.0" fitWidth="32.0" layoutX="462.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="28.0" fitWidth="32.0" layoutX="469.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/icons8-information-64.png" />
                </image>
@@ -747,6 +748,12 @@
                </children>
             </AnchorPane>
             <MFXDatePicker fx:id="datePicker" editable="false" layoutX="204.0" layoutY="132.0" prefHeight="38.0" prefWidth="180.0" />
+            <Label fx:id="notificationLabel" layoutX="451.0" layoutY="170.0" prefHeight="17.0" prefWidth="200.0" textAlignment="CENTER" textFill="RED" />
+            <MFXToggleButton fx:id="statusToggleButton" contentDisposition="RIGHT" layoutX="451.0" layoutY="131.0" onAction="#onToggle" text="Restock">
+               <font>
+                  <Font name="Calibri Bold" size="17.0" />
+               </font>
+            </MFXToggleButton>
          </children>
       </AnchorPane>
       <MFXGenericDialog fx:id="deletionConfirmationDialog" headerText="Removal Confirmation" layoutX="10.0" layoutY="10.0" onClose="#onCloseDeletionConfirmation" prefHeight="217.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="203.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="220.0">

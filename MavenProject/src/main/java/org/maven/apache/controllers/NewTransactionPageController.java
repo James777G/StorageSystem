@@ -1,8 +1,9 @@
 package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
-import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
@@ -26,7 +27,10 @@ import org.maven.apache.utils.TransactionCachedUtils;
 import org.maven.apache.utils.TranslateUtils;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class NewTransactionPageController implements Initializable {
@@ -137,6 +141,9 @@ public class NewTransactionPageController implements Initializable {
     private Label deletionNotificationLabel;
 
     @FXML
+    private Label notificationLabel;
+
+    @FXML
     private Pagination transactionPagination;
 
     @FXML
@@ -175,6 +182,12 @@ public class NewTransactionPageController implements Initializable {
     @FXML
     private MFXProgressSpinner loadSpinnerInAdd;
 
+    @FXML
+    private MFXDatePicker datePicker = new MFXDatePicker(Locale.ENGLISH);
+
+    @FXML
+    private MFXToggleButton statusToggleButton;
+
     private Label[] cargoLabelArray = new Label[7];
 
     private Label[] idLabelArray = new Label[7];
@@ -208,6 +221,22 @@ public class NewTransactionPageController implements Initializable {
     private boolean isAmountAscend = false;
 
     private int currentPage;
+
+    private int newUnitAmount;
+
+    private int newTransactionID;
+
+    private int numOfTransaction;
+
+    private String newItemName;
+
+    private String newStaffName;
+
+    private String transactionDate;
+
+    private String transactionDescription = "";
+
+    private Transaction newTransaction;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -561,15 +590,6 @@ public class NewTransactionPageController implements Initializable {
         blockPane.setVisible(true);
     }
 
-    /**
-     * close the pane of adding new transaction
-     */
-    @FXML
-    private void onClickOkayInAdd(){
-        addTransactionPane.setVisible(false);
-        blockPane.setVisible(false);
-    }
-
     @FXML
     private void onEnterAddButton() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(addButton, 500, 1.1);
@@ -582,14 +602,6 @@ public class NewTransactionPageController implements Initializable {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(addButton, 500, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
-    }
-
-    /**
-     * saves the properties of the added new transaction
-     */
-    @FXML
-    private void onClickApplyInAdd(){
-
     }
 
     @FXML
@@ -925,6 +937,90 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
+     * close the pane of adding new transaction
+     */
+    @FXML
+    private void onClickOkayInAdd() {
+        addTransactionPane.setVisible(false);
+        blockPane.setVisible(false);
+    }
+
+    /**
+     * saves the properties of the added new transaction
+     */
+    @FXML
+    private void onClickApplyInAdd() {
+        if (!isValidated()) {
+            notificationLabel.setText("Empty fields");
+        } else {
+            newTransactionID = getNumOfTransaction() + 1;
+            newItemName = newItemTextField.getText();
+            newStaffName = newStaffTextField.getText();
+            newUnitAmount = Integer.valueOf(newUnitTextField.getText());
+            if (datePicker.getText().equals("")) {
+                // return current date and time
+                LocalDate dateTime = LocalDate.now();
+                transactionDate = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            } else {
+                // return chosen date from calendar
+                LocalDate dateTime = datePicker.getValue();
+                transactionDate = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            }
+            newTransaction = new Transaction();
+            if (statusToggleButton.isSelected()) {
+                // adding taken cargo
+                addNewTransaction("TAKEN", newTransactionID, newItemName, newStaffName, newUnitAmount, transactionDate, transactionDescription);
+            } else {
+                // adding restock cargo
+                addNewTransaction("RESTOCK", newTransactionID, newItemName, newStaffName, newUnitAmount, transactionDate, transactionDescription);
+            }
+            cachedTransactionService.addNewTransaction(newTransaction);
+            notificationLabel.setText("Transaction added successfully");
+        }
+    }
+
+    /**
+     * set current transaction status
+     */
+    @FXML
+    private void onToggle(){
+        if (statusToggleButton.isSelected()){
+            // convert status from RESTOCK to TAKEN
+            statusToggleButton.setText("TAKEN");
+        }else{
+            // convert status from TAKEN to RESTOCK
+            statusToggleButton.setText("RESTOCK");
+        }
+    }
+
+    /**
+     * get the total amount of transaction to increment id
+     *
+     * @return amount of transaction
+     */
+    private int getNumOfTransaction() {
+        int count = 0;
+        for (int i = 0; i < TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_DESC_7).size(); i++) {
+            for (int j = 0; j < TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_DESC_7).get(i).size(); j++) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * check if input information is good to go
+     *
+     * @return true or false
+     */
+    private boolean isValidated() {
+        if (!newItemTextField.getText().equals("") && !newStaffTextField.getText().equals("") && !newUnitTextField.getText().equals("")) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * force the text field to be numeric only
      *
      * @param textField
@@ -942,51 +1038,38 @@ public class NewTransactionPageController implements Initializable {
         });
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * pass field properties to the new transaction
+     *
+     * @param TransactionID new transaction ID (incremented by 1 pursuant to the amount of current transactions)
+     * @param itemName      new cargo name that is transferred
+     * @param staffName     staff name who controls this transaction
+     * @param unit          restock/taken amount
+     * @param date          date of making this new transaction
+     * @param purpose       transaction details
+     */
+    private void addNewTransaction(String status, int TransactionID, String itemName, String staffName, int unit, String date, String purpose) {
+        newTransaction.setStatus(status);
+        newTransaction.setID(TransactionID);
+        newTransaction.setItemName(itemName);
+        newTransaction.setStaffName(staffName);
+        newTransaction.setUnit(unit);
+        newTransaction.setTransactionTime(date);
+        newTransaction.setPurpose(purpose);
+    }
 
     @FXML
-    private void onClickStaffSearch(){
+    private void onClickStaffSearch() {
         searchSwitchingBlockPane.toFront();
         cargoSearchPane.setVisible(true);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane,300,0,-15);
-        TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane,300,15,0);
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane,300,1,0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, 0, -15);
+        TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane, 300, 15, 0);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane, 300, 1, 0);
         scaleTransition.setOnFinished(event -> {
             searchSwitchingBlockPane.toBack();
             staffSearchPane.setVisible(false);
         });
-        ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane,300,0,1);
+        ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane, 300, 0, 1);
         translateTransition.play();
         translateTransition1.play();
         scaleTransition.play();
@@ -994,13 +1077,13 @@ public class NewTransactionPageController implements Initializable {
     }
 
     @FXML
-    private void onClickCargoSearch(){
+    private void onClickCargoSearch() {
         searchSwitchingBlockPane.toFront();
         staffSearchPane.setVisible(true);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane,300,-15,0);
-        TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane,300,0,15);
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane,300,0,1);
-        ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane,300,1,0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, -15, 0);
+        TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane, 300, 0, 15);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane, 300, 0, 1);
+        ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane, 300, 1, 0);
         scaleTransition1.setOnFinished(event -> {
             searchSwitchingBlockPane.toBack();
             cargoSearchPane.setVisible(false);
@@ -1010,5 +1093,4 @@ public class NewTransactionPageController implements Initializable {
         scaleTransition.play();
         scaleTransition1.play();
     }
-
 }
