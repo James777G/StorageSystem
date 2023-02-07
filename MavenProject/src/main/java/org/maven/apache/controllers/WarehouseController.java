@@ -1,14 +1,10 @@
 package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import io.github.palexdev.materialfx.beans.properties.functional.SupplierProperty;
-import io.github.palexdev.materialfx.controls.MFXPagination;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -28,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
-import java.util.function.Supplier;
 
 @Slf4j
 public class WarehouseController implements Initializable {

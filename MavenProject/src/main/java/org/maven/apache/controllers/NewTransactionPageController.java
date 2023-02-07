@@ -2,10 +2,8 @@ package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXPagination;
-import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.ScaleTransition;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -14,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.maven.apache.MyLauncher;
-import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.service.transaction.CachedTransactionService;
 import org.maven.apache.transaction.Transaction;
 import org.maven.apache.utils.DataUtils;
@@ -24,7 +21,6 @@ import org.maven.apache.utils.TransactionCachedUtils;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.ExecutorService;
 
 public class NewTransactionPageController implements Initializable {
 
