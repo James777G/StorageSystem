@@ -4,9 +4,11 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -27,6 +29,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.maven.apache.MyLauncher;
+import org.maven.apache.exception.EmptyValueException;
 import org.maven.apache.exception.Warning;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
 import org.maven.apache.service.excel.ExcelConverterService;
@@ -50,6 +53,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
 
 public class AppPage2Controller implements Initializable {
 
@@ -171,6 +175,9 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private JFXButton confirmUpdateInfo;
+
+    @FXML
+    private JFXButton cargoDialogApplyButton;
 
     @FXML
     private AnchorPane appPagePane;
@@ -325,6 +332,9 @@ public class AppPage2Controller implements Initializable {
     private Label transactionIdLabel;
 
     @FXML
+    private Label warnMessageInAdd;
+
+    @FXML
     private TextField transactionNameInDetails;
 
     @FXML
@@ -350,6 +360,9 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private MFXGenericDialog transactionDialog;
+
+    @FXML
+    private MFXProgressSpinner loadSpinnerInAdd;
 
     private final Paint appPageHoverTheme = Paint.valueOf("#37a592");
 
@@ -399,6 +412,8 @@ public class AppPage2Controller implements Initializable {
     private final Timeline timeline = new Timeline();
 
     private Node currentPage;
+
+    private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
 
     private final CachedTransactionService cachedTransactionService = MyLauncher.context.getBean("cachedTransactionService",CachedTransactionService.class);
 
@@ -679,18 +694,17 @@ public class AppPage2Controller implements Initializable {
 
     @SuppressWarnings("all")
     private void changePaneAnimation(CurrentPaneStatus currentPaneStatus, CurrentPaneStatus switchedPaneStatus){
-//        disableAllChangingPaneActions();
         blockAllSwitchPaneButton();
-        FadeTransition fadeTransition = new FadeTransition();
+        FadeTransition openingPaneFadeTransition = new FadeTransition();
         switch (switchedPaneStatus){
-            case HOMEPAGE -> {fadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 0, 1);}
-            case WAREHOUSE -> {fadeTransition= TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 0, 1);}
-            case TRANSACTION -> {fadeTransition = TransitionUtils.getFadeTransition(stackPane, 300, 0, 1);}
-            case STAFF -> {fadeTransition= TransitionUtils.getFadeTransition(staffPane, 300, 0, 1);}
-            case MESSAGE -> {fadeTransition= TransitionUtils.getFadeTransition(messagePane, 300, 0, 1);}
+            case HOMEPAGE -> {openingPaneFadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 0, 1);}
+            case WAREHOUSE -> {openingPaneFadeTransition= TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 0, 1);}
+            case TRANSACTION -> {openingPaneFadeTransition = TransitionUtils.getFadeTransition(stackPane, 300, 0, 1);}
+            case STAFF -> {openingPaneFadeTransition= TransitionUtils.getFadeTransition(staffPane, 300, 0, 1);}
+            case MESSAGE -> {openingPaneFadeTransition= TransitionUtils.getFadeTransition(messagePane, 300, 0, 1);}
         }
-//        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(paneToDisplay, 300, 0, 1);
-        fadeTransition.setOnFinished(event -> {
+//        FadeTransition openingPaneFadeTransition = TransitionUtils.getFadeTransition(paneToDisplay, 300, 0, 1);
+        openingPaneFadeTransition.setOnFinished(event -> {
             switch(switchedPaneStatus){
                 case HOMEPAGE -> {enableNode(appPagePane);}
                 case WAREHOUSE -> {enableNode(stackPaneForWarehouse);}
@@ -708,17 +722,17 @@ public class AppPage2Controller implements Initializable {
                 case MESSAGE -> {messageButtonBlockPane.toFront();}
             }
         });
-        FadeTransition fadeTransition1 = new FadeTransition();
+        FadeTransition closingPaneFadeTransition = new FadeTransition();
         switch (currentPaneStatus){
-            case HOMEPAGE -> {fadeTransition1 = TransitionUtils.getFadeTransition(appPagePane, 300, 1, 0);}
-            case WAREHOUSE -> {fadeTransition1 = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 1, 0);}
-            case TRANSACTION -> {fadeTransition1 = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);}
-            case STAFF -> {fadeTransition1 = TransitionUtils.getFadeTransition(staffPane, 300, 1, 0);}
-            case MESSAGE -> {fadeTransition1 = TransitionUtils.getFadeTransition(messagePane, 300, 1, 0);}
+            case HOMEPAGE -> {closingPaneFadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 1, 0);}
+            case WAREHOUSE -> {closingPaneFadeTransition = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 1, 0);}
+            case TRANSACTION -> {closingPaneFadeTransition = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);}
+            case STAFF -> {closingPaneFadeTransition = TransitionUtils.getFadeTransition(staffPane, 300, 1, 0);}
+            case MESSAGE -> {closingPaneFadeTransition = TransitionUtils.getFadeTransition(messagePane, 300, 1, 0);}
         }
-        //FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);
-        FadeTransition finalFadeTransition = fadeTransition;
-        fadeTransition1.setOnFinished(event -> {
+        //FadeTransition closingPaneFadeTransition = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);
+        FadeTransition finalFadeTransition = openingPaneFadeTransition;
+        closingPaneFadeTransition.setOnFinished(event -> {
             switch(currentPaneStatus){
                 case HOMEPAGE -> {disableNode(appPagePane);}
                 case WAREHOUSE -> {disableNode(stackPaneForWarehouse);}
@@ -735,7 +749,7 @@ public class AppPage2Controller implements Initializable {
             }
             finalFadeTransition.play();
         });
-        fadeTransition1.play();
+        closingPaneFadeTransition.play();
     }
     private void fillCargoBoxesInformation(ButtonSelected buttonSelected) {
         int boxNumber = 4;
@@ -1837,6 +1851,11 @@ public class AppPage2Controller implements Initializable {
         }
     }
 
+    /**
+     * !!!!!! WARNING !!!!!!
+     * Check the catch ignore section for error message:
+     *      1. Duplicate transaction
+     */
     @Warning(Warning.WarningType.DEBUG)
     @FXML
     private void onClickApply() {
@@ -1848,23 +1867,46 @@ public class AppPage2Controller implements Initializable {
 //        if(restockCheckBox.isSelected()){
 //
 //        }
-        generateEncapsulatedTransaction();
-        if (!Objects.equals(encapsulatedTransaction,transaction)){
-            cachedTransactionService.updateTransaction(encapsulatedTransaction);
-            dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
-            dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
-            fillCargoBoxesInformation(buttonSelected);
+        try {
+            generateEncapsulatedTransaction();
         }
+        catch (Exception exception){
+            warnMessageInAdd.setVisible(true);
+            return;
+        }
+        if (Objects.equals(encapsulatedTransaction,transaction)){return;}
+        cargoDialogApplyButton.setVisible(false);
+        loadSpinnerInAdd.setVisible(true);
+            executorService.execute(() ->{
+                try {
+                    cachedTransactionService.updateTransaction(encapsulatedTransaction);
+                }
+                catch (Exception ignored){}
+                finally {
+                    Platform.runLater(()->{
+                        dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
+                        dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
+                        fillCargoBoxesInformation(buttonSelected);
+                        cargoDialogApplyButton.setVisible(true);
+                        loadSpinnerInAdd.setVisible(false);
+                        warnMessageInAdd.setVisible(false);
+                    });
+                }
+            });
     }
 
-    private void generateEncapsulatedTransaction(){
+    private void generateEncapsulatedTransaction() throws EmptyValueException {
         encapsulatedTransaction.setUnit(Integer.parseInt(transactionAmountInDetails.getText()));
         LocalDate currentDate = transactionDateInDetails.getValue();
         String format = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         encapsulatedTransaction.setTransactionTime(format);
         encapsulatedTransaction.setPurpose(purposeTextInDetails.getText());
-        encapsulatedTransaction.setStaffName(staffNameInDetails.getText().trim());
-        encapsulatedTransaction.setItemName(transactionNameInDetails.getText().trim());
+        if ((staffNameInDetails.getText().isBlank()) || (transactionNameInDetails.getText().isBlank())){
+            throw new EmptyValueException("Input Value for item/staff name is empty or blank");
+        }else {
+            encapsulatedTransaction.setStaffName(staffNameInDetails.getText().trim());
+            encapsulatedTransaction.setItemName(transactionNameInDetails.getText().trim());
+        }
         if (isEncapsulatedTransactionStatusTaken) {
             encapsulatedTransaction.setStatus("TAKEN");
         }else{
