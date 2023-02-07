@@ -557,6 +557,7 @@ public class WarehouseController implements Initializable {
         loadSpinnerInAdd.setVisible(true);
         executorService.execute(() -> {
             try {
+                warnMessageInAdd.setVisible(true);
                 cachedItemService.addNewItem(item);
                 Platform.runLater(() -> {
                     generateItemList(newPagination.getCurrentPageIndex());
