@@ -2,8 +2,12 @@ package org.maven.apache.service.transaction;
 
 import jakarta.annotation.Resource;
 import lombok.Data;
+import org.maven.apache.exception.Warning;
+import org.maven.apache.item.Item;
 import org.maven.apache.mapper.TransactionMapper;
+import org.maven.apache.service.item.ControllerOrientedCachedItemHandler;
 import org.maven.apache.transaction.Transaction;
+import org.maven.apache.utils.CargoCachedUtils;
 import org.maven.apache.utils.TransactionCachedUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,6 +16,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 @Service("cachedTransactionService")
@@ -26,6 +31,9 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
     @Qualifier("cachedManipulationService")
     private CachedManipulationService cachedManipulationService;
 
+    @Resource
+    @Qualifier("cachedItemService")
+    private ControllerOrientedCachedItemHandler cachedItemService;
 
     public TransactionMapper getTransactionMapper() {
         return transactionMapper;
@@ -134,13 +142,26 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
      *
      * @param transaction encapsulated transaction to be added
      */
+    @Warning(Warning.WarningType.DEBUG)
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public void addNewTransaction(Transaction transaction) {
         transactionMapper.addNewTransaction(transaction);
+        final Item[] item = {new Item()};
+        CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL)
+                .forEach(items -> items.forEach(item1 -> {
+            if (Objects.equals(item1.getItemName(), transaction.getItemName())){
+                item[0] = item1;
+            }
+        }));
+        if (Objects.equals(transaction.getStatus(), "TAKEN")) {
+            item[0].setUnit(item[0].getUnit() - transaction.getUnit());
+        } else if (Objects.equals(transaction.getStatus(), "RESTOCK")) {
+            item[0].setUnit(item[0].getUnit() + transaction.getUnit());
+        }
+        cachedItemService.updateItem(item[0]);
         updateAllCachedTransactionData();
     }
-
     /**
      * This method deletes an existing transaction from the database.
      * <p>
@@ -151,10 +172,30 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
      *
      * @param id Transaction ID which is unique
      */
+    @Warning(Warning.WarningType.DEBUG)
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public void deleteTransactionById(int id) {
         transactionMapper.deleteTransactionById(id);
+        final Item[] item = {new Item()};
+        final Transaction[] transaction = {new Transaction()};
+        TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_ASC_7).forEach(transactions -> transactions.forEach(transaction1 -> {
+            if (transaction1.getID() == id){
+                transaction[0] = transaction1;
+            }
+        }));
+        CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL)
+                .forEach(items -> items.forEach(item1 -> {
+                    if (Objects.equals(item1.getItemName(), transaction[0].getItemName())){
+                        item[0] = item1;
+                    }
+                }));
+        if (Objects.equals(transaction[0].getStatus(), "TAKEN")) {
+            item[0].setUnit(item[0].getUnit() + transaction[0].getUnit());
+        } else if (Objects.equals(transaction[0].getStatus(), "RESTOCK")) {
+            item[0].setUnit(item[0].getUnit() - transaction[0].getUnit());
+        }
+        cachedItemService.updateItem(item[0]);
         updateAllCachedTransactionData();
     }
 
@@ -173,7 +214,31 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public void updateTransaction(Transaction transaction) {
+        final Item[] item = {new Item()};
+        CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL)
+                .forEach(items -> items.forEach(item1 -> {
+                    if (Objects.equals(item1.getItemName(), transaction.getItemName())){
+                        item[0] = item1;
+                    }
+                }));
+        final Transaction[] transaction_old = {new Transaction()};
+        TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_ASC_7).forEach(transactions -> transactions.forEach(transaction1 -> {
+            if (transaction1.getID() == transaction.getID()){
+                transaction_old[0] = transaction1;
+            }
+        }));
+        if (Objects.equals(transaction_old[0].getStatus(), "TAKEN")) {
+            item[0].setUnit(item[0].getUnit() + transaction_old[0].getUnit());
+        } else if (Objects.equals(transaction_old[0].getStatus(), "RESTOCK")) {
+            item[0].setUnit(item[0].getUnit() - transaction_old[0].getUnit());
+        }
         transactionMapper.updateTransaction(transaction);
+        if (Objects.equals(transaction.getStatus(), "TAKEN")) {
+            item[0].setUnit(item[0].getUnit() - transaction.getUnit());
+        } else if (Objects.equals(transaction.getStatus(), "RESTOCK")) {
+            item[0].setUnit(item[0].getUnit() + transaction.getUnit());
+        }
+        cachedItemService.updateItem(item[0]);
         updateAllCachedTransactionData();
     }
 
