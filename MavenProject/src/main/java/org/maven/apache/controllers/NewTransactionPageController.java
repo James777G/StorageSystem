@@ -3,6 +3,7 @@ package org.maven.apache.controllers;
 import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -17,6 +18,7 @@ import org.maven.apache.transaction.Transaction;
 import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.ScaleUtils;
 import org.maven.apache.utils.TransactionCachedUtils;
+import org.maven.apache.utils.TranslateUtils;
 
 import java.net.URL;
 import java.util.List;
@@ -62,6 +64,15 @@ public class NewTransactionPageController implements Initializable {
 
     @FXML
     private AnchorPane blockPane;
+
+    @FXML
+    private AnchorPane staffSearchPane;
+
+    @FXML
+    private AnchorPane cargoSearchPane;
+
+    @FXML
+    private AnchorPane searchSwitchingBlockPane;
 
     @FXML
     private AnchorPane transactionPane1, transactionPane2, transactionPane3, transactionPane4, transactionPane5, transactionPane6, transactionPane7;
@@ -868,6 +879,42 @@ public class NewTransactionPageController implements Initializable {
     @FXML
     private void onCloseDescriptionDialog() {
         descriptionDialog.setVisible(false);
+    }
+
+    @FXML
+    private void onClickStaffSearch(){
+        searchSwitchingBlockPane.toFront();
+        cargoSearchPane.setVisible(true);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane,300,0,-15);
+        TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane,300,15,0);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane,300,1,0);
+        scaleTransition.setOnFinished(event -> {
+            searchSwitchingBlockPane.toBack();
+            staffSearchPane.setVisible(false);
+        });
+        ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane,300,0,1);
+        translateTransition.play();
+        translateTransition1.play();
+        scaleTransition.play();
+        scaleTransition1.play();
+    }
+
+    @FXML
+    private void onClickCargoSearch(){
+        searchSwitchingBlockPane.toFront();
+        staffSearchPane.setVisible(true);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane,300,-15,0);
+        TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane,300,0,15);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane,300,0,1);
+        ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane,300,1,0);
+        scaleTransition1.setOnFinished(event -> {
+            searchSwitchingBlockPane.toBack();
+            cargoSearchPane.setVisible(false);
+        });
+        translateTransition.play();
+        translateTransition1.play();
+        scaleTransition.play();
+        scaleTransition1.play();
     }
 
 }
