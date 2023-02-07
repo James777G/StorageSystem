@@ -60,9 +60,6 @@ public class NewTransactionPageController implements Initializable {
     private AnchorPane cargoPage;
 
     @FXML
-    private AnchorPane editCargoPane;
-
-    @FXML
     private AnchorPane blockPane;
 
     @FXML
@@ -189,8 +186,6 @@ public class NewTransactionPageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cachedTransactionService.updateAllCachedTransactionData();
-        editCargoPane.getChildren().add(DataUtils.editCargoPane);
-        DataUtils.editCargoPane.setVisible(false);
         initializeLabels();
         blockPane.setVisible(false);
         DataUtils.publicTransactionBlockPane = blockPane;
@@ -531,7 +526,6 @@ public class NewTransactionPageController implements Initializable {
 
     @FXML
     private void onClickAddButton() {
-        DataUtils.editCargoPane.setVisible(true);
         blockPane.setVisible(true);
     }
 
