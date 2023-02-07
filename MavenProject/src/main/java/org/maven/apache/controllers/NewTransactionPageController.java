@@ -1,12 +1,12 @@
 package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import io.github.palexdev.materialfx.controls.MFXPagination;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -118,7 +118,7 @@ public class NewTransactionPageController implements Initializable {
     private Label deletionNotificationLabel;
 
     @FXML
-    private MFXPagination transactionPagination;
+    private Pagination transactionPagination;
 
     @FXML
     private ImageView sortByAmount;
@@ -187,6 +187,10 @@ public class NewTransactionPageController implements Initializable {
         descriptionDialog.setVisible(false);
         setPaginationPages(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_ASC_7));
         refreshPage();
+        // perform the action of loading current page content when pagination is clicked
+        transactionPagination.currentPageIndexProperty().addListener((observable, oldValue, newValue) -> {
+            updatePagination(newValue);
+        });
     }
 
     /**
@@ -247,17 +251,15 @@ public class NewTransactionPageController implements Initializable {
      * set how many pages do we need in total
      */
     private void setPaginationPages(List<List<Transaction>> list) {
-        transactionPagination.setMaxPage(list.size());
+        transactionPagination.setPageCount(list.size());
     }
 
 
     /**
      * set the content of transaction list from current page when the pagination is clicked
      */
-    @FXML
-    private void onClickPagination() {
-        currentPage = transactionPagination.getCurrentPage();
-        currentPageList = sortedList.get(currentPage - 1);
+    private void updatePagination(Number currentPage) {
+        currentPageList = sortedList.get(currentPage.intValue());
         // set non-empty labels
         for (int i = 0; i < currentPageList.size(); i++) {
             cargoLabelArray[i].setText(currentPageList.get(i).getItemName());
@@ -351,7 +353,7 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
-     * Clicked all button and returns an ascend list ordered by date including both status
+     * Clicked the button labeled with "ALL" and returns an ascend list ordered by date including both status
      */
     @FXML
     private void onClickAllSelectButton() {
@@ -378,10 +380,11 @@ public class NewTransactionPageController implements Initializable {
             sortBy = SortBy.ALLDATEDESCEND;
         }
         refreshPage();
+
     }
 
     /**
-     * Clicked all button and returns an ascend list ordered by date including restock status only
+     * Clicked the button labeled with "RESTOCK" and returns an ascend list ordered by date including restock status only
      */
     @FXML
     private void onClickRestockSelectButton() {
@@ -411,7 +414,7 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
-     * Clicked all button and returns an ascend list ordered by date including taken status only
+     * Clicked the button labeled with "TAKEN" and returns an ascend list ordered by date including taken status only
      */
     @FXML
     private void onClickTakenSelectButton() {
@@ -511,7 +514,8 @@ public class NewTransactionPageController implements Initializable {
      */
     private void refreshPage() {
         setSortCondition();
-        onClickPagination();
+        updatePagination(0);
+        setPaginationPages(sortedList);
     }
 
     @FXML
