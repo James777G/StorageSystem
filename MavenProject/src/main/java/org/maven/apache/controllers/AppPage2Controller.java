@@ -55,7 +55,7 @@ public class AppPage2Controller implements Initializable {
     private final Image onAppPageHomeImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-warehouse-100.png")));
 
     @FXML
-    private final Image offAppPageHomeImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-warehouse-100 (1).png")));
+    private final Image offAppPageHomeImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-warehouse-50.png")));
 
     @FXML
     private final Image onWarehousePageCardBoardImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-cardboard-box-100 (3).png")));
@@ -246,6 +246,16 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private  AnchorPane transactionDialogRestockActionPane;
+
+    @FXML
+    private AnchorPane cargoSearchPane;
+
+    @FXML
+    private AnchorPane staffSearchPane;
+
+    @FXML
+    private AnchorPane searchSwitchingBlockPane;
+
 
     @FXML
     private StackPane stackPane;
@@ -1906,6 +1916,43 @@ public class AppPage2Controller implements Initializable {
         }else{
             encapsulatedTransaction.setStatus("RESTOCK");
         }
+    }
+
+    @FXML
+    private void  onClickStaffSearch(){
+        searchSwitchingBlockPane.toFront();
+        cargoSearchPane.setVisible(true);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane,300,0,-15);
+        TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane,300,15,0);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane,300,1,0);
+        scaleTransition.setOnFinished(event -> {
+            searchSwitchingBlockPane.toBack();
+            staffSearchPane.setVisible(false);
+        });
+        ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane,300,0,1);
+        translateTransition.play();
+        translateTransition1.play();
+        scaleTransition.play();
+        scaleTransition1.play();
+
+    }
+
+    @FXML
+    private void onClickCargoSearch(){
+        searchSwitchingBlockPane.toFront();
+        staffSearchPane.setVisible(true);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane,300,-15,0);
+        TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane,300,0,15);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane,300,0,1);
+        ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane,300,1,0);
+        scaleTransition1.setOnFinished(event -> {
+            searchSwitchingBlockPane.toBack();
+            cargoSearchPane.setVisible(false);
+        });
+        translateTransition.play();
+        translateTransition1.play();
+        scaleTransition.play();
+        scaleTransition1.play();
     }
 
 }
