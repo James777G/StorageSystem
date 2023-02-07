@@ -12,3 +12,7 @@
 .addPane:hover{
     -fx-background-color: #cc461b;
 }
+.inputTransformableField{
+    -mfx-main: -darkGrey-theme;
+    -fx-padding: 0 0 0 50;
+}
