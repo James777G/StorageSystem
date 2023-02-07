@@ -594,7 +594,7 @@
          <center>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="4.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="confirmStatusLabel" text="Transaction status: ***">
+                  <Label fx:id="confirmStatusLabel" text="Status: ***">
                      <font>
                         <Font name="Candara Bold" size="14.0" />
                      </font>
@@ -604,7 +604,7 @@
                         <Font name="Candara Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="confirmStaffNameLabel" text="Staff name: ***">
+                  <Label fx:id="confirmStaffNameLabel" text="Staff issued: ***">
                      <font>
                         <Font name="Candara Bold" size="14.0" />
                      </font>

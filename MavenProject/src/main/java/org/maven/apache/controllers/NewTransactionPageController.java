@@ -509,17 +509,6 @@ public class NewTransactionPageController implements Initializable {
         onClickPagination();
     }
 
-
-
-
-
-
-
-
-
-
-
-
     @FXML
     private void onClickAddButton() {
         DataUtils.editCargoPane.setVisible(true);
@@ -662,12 +651,12 @@ public class NewTransactionPageController implements Initializable {
      * @param row which row of transition list needs to be removed
      */
     private void setRemovalConfirmation(int row){
-//        confirmStatusLabel.setText("Transaction status: " + statusLabelArray[row].getText());
-//        confirmIdLabel.setText("Transaction id: " + idLabelArray[row].getText());
-//        confirmStaffNameLabel.setText("Staff name: " + staffLabelArray[row].getText());
-//        confirmCargoNameLabel.setText("Cargo name: " + cargoLabelArray[row].getText());
-//        confirmCargoUnitLabel.setText(statusLabelArray[row].getText() + ": " + amountLabelArray[row].getText());
-//        confirmDateLabel.setText("Date of completion: " + dateLabelArray[row].getText());
+        confirmStatusLabel.setText("Status: " + currentPageList.get(row).getStatus());
+        confirmIdLabel.setText("Transaction ID: " + String.valueOf(currentPageList.get(row).getID()));
+        confirmStaffNameLabel.setText("Staff issued: " + currentPageList.get(row).getStaffName());
+        confirmCargoNameLabel.setText("Cargo: " + currentPageList.get(row).getItemName());
+        confirmCargoUnitLabel.setText("Cargo unit: " + String.valueOf(currentPageList.get(row).getUnit()));
+        confirmDateLabel.setText("Transaction date: " + currentPageList.get(row).getTransactionTime());
     }
 
     /**
@@ -675,9 +664,9 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onConfirmDeletion(){
-//        cachedTransactionService.deleteTransactionById();
-//        confirmButton.setDisable(true);
-//        deletionNotificationLabel.setText("Removal completed");
+        cachedTransactionService.deleteTransactionById(Integer.valueOf(confirmIdLabel.getText()));
+        confirmButton.setDisable(true);
+        deletionNotificationLabel.setText("Removal complished");
     }
 
     @FXML
@@ -769,6 +758,5 @@ public class NewTransactionPageController implements Initializable {
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
-
 
 }
