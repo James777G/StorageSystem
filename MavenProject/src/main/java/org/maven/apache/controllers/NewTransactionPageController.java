@@ -9,6 +9,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.maven.apache.MyLauncher;
@@ -135,7 +137,13 @@ public class NewTransactionPageController implements Initializable {
     private MFXGenericDialog deletionConfirmationDialog;
 
     @FXML
-    private MFXTextField transactionSearchTextField;
+    private MFXGenericDialog descriptionDialog;
+
+    @FXML
+    private TextField staffField;
+
+    @FXML
+    private TextArea descriptionField;
 
     private Label[] cargoLabelArray = new Label[7];
 
@@ -180,6 +188,7 @@ public class NewTransactionPageController implements Initializable {
         blockPane.setVisible(false);
         DataUtils.publicTransactionBlockPane = blockPane;
         deletionConfirmationDialog.setVisible(false);
+        descriptionDialog.setVisible(false);
         setPaginationPages(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_ASC_7));
         refreshPage();
     }
@@ -762,6 +771,60 @@ public class NewTransactionPageController implements Initializable {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(imageView, duration, size);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
+    }
+
+    @FXML
+    private void onCheckDetails1() {
+        descriptionDialog.setVisible(true);
+        staffField.setText(currentPageList.get(0).getStaffName());
+        descriptionField.setText(currentPageList.get(0).getPurpose());
+    }
+
+    @FXML
+    private void onCheckDetails2() {
+        descriptionDialog.setVisible(true);
+        staffField.setText(currentPageList.get(1).getStaffName());
+        descriptionField.setText(currentPageList.get(1).getPurpose());
+    }
+
+    @FXML
+    private void onCheckDetails3() {
+        descriptionDialog.setVisible(true);
+        staffField.setText(currentPageList.get(2).getStaffName());
+        descriptionField.setText(currentPageList.get(2).getPurpose());
+    }
+
+    @FXML
+    private void onCheckDetails4() {
+        descriptionDialog.setVisible(true);
+        staffField.setText(currentPageList.get(3).getStaffName());
+        descriptionField.setText(currentPageList.get(3).getPurpose());
+    }
+
+    @FXML
+    private void onCheckDetails5() {
+        descriptionDialog.setVisible(true);
+        staffField.setText(currentPageList.get(4).getStaffName());
+        descriptionField.setText(currentPageList.get(4).getPurpose());
+    }
+
+    @FXML
+    private void onCheckDetails6() {
+        descriptionDialog.setVisible(true);
+        staffField.setText(currentPageList.get(5).getStaffName());
+        descriptionField.setText(currentPageList.get(5).getPurpose());
+    }
+
+    @FXML
+    private void onCheckDetails7() {
+        descriptionDialog.setVisible(true);
+        staffField.setText(currentPageList.get(6).getStaffName());
+        descriptionField.setText(currentPageList.get(6).getPurpose());
+    }
+
+    @FXML
+    private void onCloseDescriptionDialog(){
+        descriptionDialog.setVisible(false);
     }
 
 }

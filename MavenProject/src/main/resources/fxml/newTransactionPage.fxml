@@ -8,6 +8,8 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -134,7 +136,7 @@
                   <Image url="@../image/icons8-3d-boxes-48.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="819.0" layoutY="10.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="819.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="10.0">
+            <JFXButton layoutX="819.0" layoutY="10.0" onAction="#onCheckDetails1" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="819.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -190,7 +192,7 @@
                   <Image url="@../image/icons8-3d-boxes-48.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="820.0" layoutY="9.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="820.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="9.0">
+            <JFXButton layoutX="820.0" layoutY="9.0" onAction="#onCheckDetails2" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="820.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="9.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -246,7 +248,7 @@
                   <Image url="@../image/icons8-3d-boxes-48.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="820.0" layoutY="8.0" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="820.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="10.0">
+            <JFXButton layoutX="820.0" layoutY="8.0" onAction="#onCheckDetails3" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="820.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -302,7 +304,7 @@
                   <Image url="@../image/icons8-3d-boxes-48.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="820.0" layoutY="9.0" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="820.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="10.0">
+            <JFXButton layoutX="820.0" layoutY="9.0" onAction="#onCheckDetails4" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="820.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -358,7 +360,7 @@
                   <Image url="@../image/icons8-3d-boxes-48.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="820.0" layoutY="19.0" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="820.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="10.0">
+            <JFXButton layoutX="820.0" layoutY="19.0" onAction="#onCheckDetails5" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="820.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -414,7 +416,7 @@
                   <Image url="@../image/icons8-3d-boxes-48.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="820.0" layoutY="8.0" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="820.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="10.0">
+            <JFXButton layoutX="820.0" layoutY="8.0" onAction="#onCheckDetails6" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="820.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -470,7 +472,7 @@
                   <Image url="@../image/icons8-3d-boxes-48.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="819.0" layoutY="13.0" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="819.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="10.0">
+            <JFXButton layoutX="819.0" layoutY="13.0" onAction="#onCheckDetails7" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Check" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="819.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -589,7 +591,48 @@
          </graphic>
       </JFXButton>
       <JFXButton layoutX="1040.0" layoutY="93.0" onAction="#onRefreshTransitionList" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Refresh" textFill="WHITE" />
-      <AnchorPane fx:id="blockPane" layoutX="-4.0" layoutY="-9.0" opacity="0.75" prefHeight="649.0" prefWidth="1207.0" style="-fx-background-color: grey;" visible="false" />
+      <MFXGenericDialog fx:id="descriptionDialog" headerText="Transaction Details" layoutX="301.0" onClose="#onCloseDescriptionDialog" showAlwaysOnTop="false" showMinimize="false" AnchorPane.topAnchor="150.0">
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" text="Issued Staff:">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="441.0" layoutY="14.0">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="staffField" editable="false" layoutX="14.0" layoutY="41.0" prefHeight="25.0" prefWidth="146.0" />
+                  <Separator layoutY="72.0" prefHeight="13.0" prefWidth="575.0" />
+                  <Label layoutX="14.0" layoutY="100.0" text="Transaction Description:">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="descriptionField" editable="false" layoutX="15.0" layoutY="130.0" prefHeight="145.0" prefWidth="544.0" wrapText="true" />
+                  <JFXButton layoutX="207.0" layoutY="39.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="View Transaction" textFill="WHITE" AnchorPane.bottomAnchor="215.0">
+                     <font>
+                        <Font name="Calibri Bold Italic" size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton layoutX="441.0" layoutY="39.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Bring To Notepad" textFill="WHITE" AnchorPane.bottomAnchor="215.0">
+                     <font>
+                        <Font name="Calibri Bold Italic" size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <Label fx:id="itemIdInDetails" layoutX="501.0" layoutY="14.0">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </center>
+      </MFXGenericDialog>
+      <AnchorPane fx:id="blockPane" layoutX="-4.0" layoutY="-9.0" opacity="0.75" prefHeight="649.0" prefWidth="1207.0" style="-fx-background-color: grey;" />
       <AnchorPane fx:id="editCargoPane" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="350.0" prefWidth="600.0" AnchorPane.bottomAnchor="160.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="130.0" />
       <MFXGenericDialog fx:id="deletionConfirmationDialog" headerText="Removal Confirmation" layoutX="10.0" layoutY="10.0" onClose="#onCloseDeletionConfirmation" prefHeight="217.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="203.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="220.0">
          <center>
