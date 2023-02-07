@@ -636,5 +636,6 @@
             <JFXButton fx:id="confirmButton" onAction="#onConfirmDeletion" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Confirm" textFill="WHITE" BorderPane.alignment="CENTER" />
          </bottom>
       </MFXGenericDialog>
+      <JFXButton layoutX="1040.0" layoutY="93.0" onAction="#onRefreshTransitionList" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Refresh" textFill="WHITE" />
    </children>
 </AnchorPane>
