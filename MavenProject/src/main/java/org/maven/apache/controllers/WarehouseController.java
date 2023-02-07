@@ -79,6 +79,9 @@ public class WarehouseController implements Initializable {
     private AnchorPane addItemPane;
 
     @FXML
+    private AnchorPane blockPane;
+
+    @FXML
     private MFXProgressSpinner loadSpinnerInAdd;
 
     @FXML
@@ -172,6 +175,7 @@ public class WarehouseController implements Initializable {
             generateItemList(newValue.intValue());
             Platform.runLater(WarehouseController.this::setTableContents);
         }));
+        blockPane.setVisible(false);
     }
 
     private void initializeDeleteList() {
@@ -186,44 +190,46 @@ public class WarehouseController implements Initializable {
 
     @FXML
     private void onClickDeleteOne() {
-        selectedItemID = itemList.get(0).getItemID();
-        deleteItemPane.setVisible(true);
+        setDeletionPanes(0);
     }
 
     @FXML
     private void onClickDeleteTwo() {
-        selectedItemID = itemList.get(1).getItemID();
-        deleteItemPane.setVisible(true);
+        setDeletionPanes(1);
     }
 
     @FXML
     private void onClickDeleteThree() {
-        selectedItemID = itemList.get(2).getItemID();
-        deleteItemPane.setVisible(true);
+        setDeletionPanes(2);
     }
 
     @FXML
     private void onClickDeleteFour() {
-        selectedItemID = itemList.get(3).getItemID();
-        deleteItemPane.setVisible(true);
+        setDeletionPanes(3);
     }
 
     @FXML
     private void onClickDeleteFive() {
-        selectedItemID = itemList.get(4).getItemID();
-        deleteItemPane.setVisible(true);
+        setDeletionPanes(4);
     }
 
     @FXML
     private void onClickDeleteSix() {
-        selectedItemID = itemList.get(5).getItemID();
-        deleteItemPane.setVisible(true);
+        setDeletionPanes(5);
     }
 
     @FXML
     private void onClickDeleteSeven() {
-        selectedItemID = itemList.get(6).getItemID();
+        setDeletionPanes(6);
+    }
+
+    /**
+     * This methods invokes the existence of block pane and the deletion notification
+     */
+    private void setDeletionPanes(int row){
+        selectedItemID = itemList.get(row).getItemID();
         deleteItemPane.setVisible(true);
+        blockPane.setVisible(true);
     }
 
     /**
@@ -383,6 +389,7 @@ public class WarehouseController implements Initializable {
     @FXML
     private void doNotContinue() {
         deleteItemPane.setVisible(false);
+        blockPane.setVisible(false);
     }
 
     @FXML
@@ -398,6 +405,7 @@ public class WarehouseController implements Initializable {
                 loadSpinnerOnDeletePane.setVisible(false);
                 doContinueButton.setVisible(true);
                 deleteItemPane.setVisible(false);
+                blockPane.setVisible(false);
             });
         });
     }
@@ -588,6 +596,7 @@ public class WarehouseController implements Initializable {
         addItemPane.setVisible(false);
         warnMessageInAdd.setVisible(false);
         loadSpinnerInAdd.setVisible(false);
+        blockPane.setVisible(false);
     }
 
     /**
@@ -603,6 +612,7 @@ public class WarehouseController implements Initializable {
     @FXML
     private void onClickAddButton() {
         addItemPane.setVisible(true);
+        blockPane.setVisible(true);
     }
 
     /**

@@ -643,11 +643,9 @@ public class NewTransactionPageController implements Initializable {
     }
 
     private void setDeletionDetails(int row) {
-        if (!idLabelArray[row].getText().equals("")) {
-            deletionConfirmationDialog.setVisible(true);
-            blockPane.setVisible(true);
-            setRemovalConfirmation(row);
-        }
+        deletionConfirmationDialog.setVisible(true);
+        blockPane.setVisible(true);
+        setRemovalConfirmation(row);
     }
 
     /**
