@@ -30,7 +30,7 @@ public class NewTransactionPageController implements Initializable {
 
     enum SortBy {
         ALLDATEASCEND, ALLDATEDESCEND, RESTOCKDATEASCEND, RESTOCKDATEDESCEND, TAKENDATEASCEND, TAKENDATEDESCEND, ALLAMOUNTASCEND, ALLAMOUNTDESCEND,
-        RESTOCKAMOUNTASCEND,RESTOCKAMOUNTDESCEND, TAKENAMOUNTASCEND, TAKENAMOUNTDESCEND
+        RESTOCKAMOUNTASCEND, RESTOCKAMOUNTDESCEND, TAKENAMOUNTASCEND, TAKENAMOUNTDESCEND
     }
 
     enum ButtonSelected {
@@ -284,25 +284,25 @@ public class NewTransactionPageController implements Initializable {
      */
     private void setUnitStatus() {
         if (isAll && !isRestock && !isTaken) {
-            for (int i = 0; i < currentPageList.size(); i++){
-                if (currentPageList.get(i).getStatus().equals("RESTOCK")){
+            for (int i = 0; i < currentPageList.size(); i++) {
+                if (currentPageList.get(i).getStatus().equals("RESTOCK")) {
                     statusLabelArray[i].setText(" Restock");
                     statusLabelArray[i].setStyle("-fx-background-color: #ddeab1#c7ddb5; -fx-text-fill: #759751; -fx-background-radius: 5");
                     statusLabelArray[i].setPrefWidth(56);
-                }else{
+                } else {
                     statusLabelArray[i].setText(" Taken");
                     statusLabelArray[i].setStyle("-fx-background-color: #feccc9; -fx-text-fill: #ff4137; -fx-background-radius: 5");
                     statusLabelArray[i].setPrefWidth(44);
                 }
             }
         } else if (!isAll && isRestock && !isTaken) {
-            for (int i = 0; i < currentPageList.size(); i++){
+            for (int i = 0; i < currentPageList.size(); i++) {
                 statusLabelArray[i].setText(" Restock");
                 statusLabelArray[i].setStyle("-fx-background-color: #ddeab1#c7ddb5; -fx-text-fill: #759751; -fx-background-radius: 5");
                 statusLabelArray[i].setPrefWidth(56);
             }
         } else if (!isAll && !isRestock && isTaken) {
-            for (int i = 0; i < currentPageList.size(); i++){
+            for (int i = 0; i < currentPageList.size(); i++) {
                 statusLabelArray[i].setText(" Taken");
                 statusLabelArray[i].setStyle("-fx-background-color: #feccc9; -fx-text-fill: #ff4137; -fx-background-radius: 5");
                 statusLabelArray[i].setPrefWidth(44);
@@ -376,9 +376,9 @@ public class NewTransactionPageController implements Initializable {
         isAll = true;
         isRestock = false;
         isTaken = false;
-        if (isDateAscend){
+        if (isDateAscend) {
             sortBy = SortBy.ALLDATEASCEND;
-        }else{
+        } else {
             sortBy = SortBy.ALLDATEDESCEND;
         }
         refreshPage();
@@ -406,9 +406,9 @@ public class NewTransactionPageController implements Initializable {
         isAll = false;
         isRestock = true;
         isTaken = false;
-        if (isDateAscend){
+        if (isDateAscend) {
             sortBy = SortBy.RESTOCKDATEASCEND;
-        }else{
+        } else {
             sortBy = SortBy.RESTOCKDATEDESCEND;
         }
         refreshPage();
@@ -436,9 +436,9 @@ public class NewTransactionPageController implements Initializable {
         isAll = false;
         isRestock = false;
         isTaken = true;
-        if (isDateAscend){
+        if (isDateAscend) {
             sortBy = SortBy.TAKENDATEASCEND;
-        }else{
+        } else {
             sortBy = SortBy.TAKENDATEDESCEND;
         }
         refreshPage();
@@ -449,7 +449,7 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickDate() {
-        if (isAll && !isRestock && !isTaken){
+        if (isAll && !isRestock && !isTaken) {
             if (isDateAscend) {
                 sortBy = SortBy.ALLDATEDESCEND;
                 isDateAscend = false;
@@ -457,7 +457,7 @@ public class NewTransactionPageController implements Initializable {
                 sortBy = SortBy.ALLDATEASCEND;
                 isDateAscend = true;
             }
-        }else if (!isAll && isRestock && !isTaken){
+        } else if (!isAll && isRestock && !isTaken) {
             if (isDateAscend) {
                 sortBy = SortBy.RESTOCKDATEDESCEND;
                 isDateAscend = false;
@@ -465,7 +465,7 @@ public class NewTransactionPageController implements Initializable {
                 sortBy = SortBy.RESTOCKDATEASCEND;
                 isDateAscend = true;
             }
-        }else if (!isAll && !isRestock && isTaken){
+        } else if (!isAll && !isRestock && isTaken) {
             if (isDateAscend) {
                 sortBy = SortBy.TAKENDATEDESCEND;
                 isDateAscend = false;
@@ -482,24 +482,24 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickAmount() {
-        if (isAll && !isRestock && !isTaken){
-            if (isAmountAscend){
+        if (isAll && !isRestock && !isTaken) {
+            if (isAmountAscend) {
                 sortBy = SortBy.ALLAMOUNTDESCEND;
                 isAmountAscend = false;
             } else {
                 sortBy = SortBy.ALLAMOUNTASCEND;
                 isAmountAscend = true;
             }
-        } else if (!isAll && isRestock && !isTaken){
-            if (isAmountAscend){
+        } else if (!isAll && isRestock && !isTaken) {
+            if (isAmountAscend) {
                 sortBy = SortBy.RESTOCKAMOUNTDESCEND;
                 isAmountAscend = false;
             } else {
                 sortBy = SortBy.RESTOCKAMOUNTASCEND;
                 isAmountAscend = true;
             }
-        } else if (!isAll && !isRestock && isTaken){
-            if (isAmountAscend){
+        } else if (!isAll && !isRestock && isTaken) {
+            if (isAmountAscend) {
                 sortBy = SortBy.TAKENAMOUNTDESCEND;
                 isAmountAscend = false;
             } else {
@@ -513,7 +513,7 @@ public class NewTransactionPageController implements Initializable {
     /**
      * reload the content of current page
      */
-    private void refreshPage(){
+    private void refreshPage() {
         setSortCondition();
         onClickPagination();
     }
@@ -539,31 +539,47 @@ public class NewTransactionPageController implements Initializable {
     }
 
     @FXML
-    private void onEnterAmount() {setScaleTransition(sortByAmount, 100, 1.3);}
+    private void onEnterAmount() {
+        setScaleTransition(sortByAmount, 100, 1.3);
+    }
 
     @FXML
-    private void onExitAmount() {setScaleTransition(sortByAmount, 100, 1);}
+    private void onExitAmount() {
+        setScaleTransition(sortByAmount, 100, 1);
+    }
 
     @FXML
-    private void onPressedAmount() {setScaleTransition(sortByAmount, 100, 1.1);}
+    private void onPressedAmount() {
+        setScaleTransition(sortByAmount, 100, 1.1);
+    }
 
     @FXML
-    private void onReleaseAmount() {setScaleTransition(sortByAmount, 100, 1.3);}
+    private void onReleaseAmount() {
+        setScaleTransition(sortByAmount, 100, 1.3);
+    }
 
     @FXML
-    private void onEnterDate() {setScaleTransition(sortByDate, 100, 1.3);}
+    private void onEnterDate() {
+        setScaleTransition(sortByDate, 100, 1.3);
+    }
 
     @FXML
-    private void onExitDate() {setScaleTransition(sortByDate, 100, 1);}
+    private void onExitDate() {
+        setScaleTransition(sortByDate, 100, 1);
+    }
 
     @FXML
-    private void onPressedDate() {setScaleTransition(sortByDate, 100, 1.1);}
+    private void onPressedDate() {
+        setScaleTransition(sortByDate, 100, 1.1);
+    }
 
     @FXML
-    private void onReleaseDate() {setScaleTransition(sortByDate, 100, 1.3);}
+    private void onReleaseDate() {
+        setScaleTransition(sortByDate, 100, 1.3);
+    }
 
     @FXML
-    private void onCloseDeletionConfirmation(){
+    private void onCloseDeletionConfirmation() {
         deletionConfirmationDialog.setVisible(false);
         blockPane.setVisible(false);
         confirmButton.setDisable(false);
@@ -575,11 +591,7 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin1() {
-        if (!idLabelArray[0].getText().equals("")){
-            deletionConfirmationDialog.setVisible(true);
-            blockPane.setVisible(true);
-            setRemovalConfirmation(0);
-        }
+        setDeletionDetails(0);
     }
 
     /**
@@ -587,11 +599,7 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin2() {
-        if (!idLabelArray[1].getText().equals("")){
-            deletionConfirmationDialog.setVisible(true);
-            blockPane.setVisible(true);
-            setRemovalConfirmation(1);
-        }
+        setDeletionDetails(1);
     }
 
     /**
@@ -599,11 +607,7 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin3() {
-        if (!idLabelArray[2].getText().equals("")){
-            deletionConfirmationDialog.setVisible(true);
-            blockPane.setVisible(true);
-            setRemovalConfirmation(2);
-        }
+        setDeletionDetails(2);
     }
 
     /**
@@ -611,11 +615,7 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin4() {
-        if (!idLabelArray[3].getText().equals("")){
-            deletionConfirmationDialog.setVisible(true);
-            blockPane.setVisible(true);
-            setRemovalConfirmation(3);
-        }
+        setDeletionDetails(3);
     }
 
     /**
@@ -623,11 +623,7 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin5() {
-        if (!idLabelArray[4].getText().equals("")){
-            deletionConfirmationDialog.setVisible(true);
-            blockPane.setVisible(true);
-            setRemovalConfirmation(4);
-        }
+        setDeletionDetails(4);
     }
 
     /**
@@ -635,11 +631,7 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin6() {
-        if (!idLabelArray[5].getText().equals("")){
-            deletionConfirmationDialog.setVisible(true);
-            blockPane.setVisible(true);
-            setRemovalConfirmation(5);
-        }
+        setDeletionDetails(5);
     }
 
     /**
@@ -647,10 +639,14 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickBin7() {
-        if (!idLabelArray[6].getText().equals("")){
+        setDeletionDetails(6);
+    }
+
+    private void setDeletionDetails(int row) {
+        if (!idLabelArray[row].getText().equals("")) {
             deletionConfirmationDialog.setVisible(true);
             blockPane.setVisible(true);
-            setRemovalConfirmation(6);
+            setRemovalConfirmation(row);
         }
     }
 
@@ -659,7 +655,7 @@ public class NewTransactionPageController implements Initializable {
      *
      * @param row which row of transition list needs to be removed
      */
-    private void setRemovalConfirmation(int row){
+    private void setRemovalConfirmation(int row) {
         confirmStatusLabel.setText("Status: " + currentPageList.get(row).getStatus());
         confirmIdLabel.setText("Transaction ID: " + String.valueOf(currentPageList.get(row).getID()));
         confirmStaffNameLabel.setText("Staff issued: " + currentPageList.get(row).getStaffName());
@@ -672,100 +668,156 @@ public class NewTransactionPageController implements Initializable {
      * user confirms to perform deletion
      */
     @FXML
-    private void onConfirmDeletion(){
+    private void onConfirmDeletion() {
         cachedTransactionService.deleteTransactionById(Integer.valueOf(confirmIdLabel.getText()));
         confirmButton.setDisable(true);
         deletionNotificationLabel.setText("Removal complished");
     }
 
     @FXML
-    private void onRefreshTransitionList(){
+    private void onRefreshTransitionList() {
         refreshPage();
     }
 
     @FXML
-    private void onEnterBin1() {setScaleTransition(binImage1, 100, 1.3);}
+    private void onEnterBin1() {
+        setScaleTransition(binImage1, 100, 1.3);
+    }
 
     @FXML
-    private void onEnterBin2() {setScaleTransition(binImage2, 100, 1.3);}
+    private void onEnterBin2() {
+        setScaleTransition(binImage2, 100, 1.3);
+    }
 
     @FXML
-    private void onEnterBin3() {setScaleTransition(binImage3, 100, 1.3);}
+    private void onEnterBin3() {
+        setScaleTransition(binImage3, 100, 1.3);
+    }
 
     @FXML
-    private void onEnterBin4() {setScaleTransition(binImage4, 100, 1.3);}
+    private void onEnterBin4() {
+        setScaleTransition(binImage4, 100, 1.3);
+    }
 
     @FXML
-    private void onEnterBin5() {setScaleTransition(binImage5, 100, 1.3);}
+    private void onEnterBin5() {
+        setScaleTransition(binImage5, 100, 1.3);
+    }
 
     @FXML
-    private void onEnterBin6() {setScaleTransition(binImage6, 100, 1.3);}
+    private void onEnterBin6() {
+        setScaleTransition(binImage6, 100, 1.3);
+    }
 
     @FXML
-    private void onEnterBin7() {setScaleTransition(binImage7, 100, 1.3);}
+    private void onEnterBin7() {
+        setScaleTransition(binImage7, 100, 1.3);
+    }
 
     @FXML
-    private void onExitBin1() {setScaleTransition(binImage1, 100, 1);}
+    private void onExitBin1() {
+        setScaleTransition(binImage1, 100, 1);
+    }
 
     @FXML
-    private void onExitBin2() {setScaleTransition(binImage2, 100, 1);}
+    private void onExitBin2() {
+        setScaleTransition(binImage2, 100, 1);
+    }
 
     @FXML
-    private void onExitBin3() {setScaleTransition(binImage3, 100, 1);}
+    private void onExitBin3() {
+        setScaleTransition(binImage3, 100, 1);
+    }
 
     @FXML
-    private void onExitBin4() {setScaleTransition(binImage4, 100, 1);}
+    private void onExitBin4() {
+        setScaleTransition(binImage4, 100, 1);
+    }
 
     @FXML
-    private void onExitBin5() {setScaleTransition(binImage5, 100, 1);}
+    private void onExitBin5() {
+        setScaleTransition(binImage5, 100, 1);
+    }
 
     @FXML
-    private void onExitBin6() {setScaleTransition(binImage6, 100, 1);}
+    private void onExitBin6() {
+        setScaleTransition(binImage6, 100, 1);
+    }
 
     @FXML
-    private void onExitBin7() {setScaleTransition(binImage7, 100, 1);}
+    private void onExitBin7() {
+        setScaleTransition(binImage7, 100, 1);
+    }
 
     @FXML
-    private void onPressBin1() {setScaleTransition(binImage1, 100, 1.1);}
+    private void onPressBin1() {
+        setScaleTransition(binImage1, 100, 1.1);
+    }
 
     @FXML
-    private void onPressBin2() {setScaleTransition(binImage2, 100, 1.1);}
+    private void onPressBin2() {
+        setScaleTransition(binImage2, 100, 1.1);
+    }
 
     @FXML
-    private void onPressBin3() {setScaleTransition(binImage3, 100, 1.1);}
+    private void onPressBin3() {
+        setScaleTransition(binImage3, 100, 1.1);
+    }
 
     @FXML
-    private void onPressBin4() {setScaleTransition(binImage4, 100, 1.1);}
+    private void onPressBin4() {
+        setScaleTransition(binImage4, 100, 1.1);
+    }
 
     @FXML
-    private void onPressBin5() {setScaleTransition(binImage5, 100, 1.1);}
+    private void onPressBin5() {
+        setScaleTransition(binImage5, 100, 1.1);
+    }
 
     @FXML
-    private void onPressBin6() {setScaleTransition(binImage6, 100, 1.1);}
+    private void onPressBin6() {
+        setScaleTransition(binImage6, 100, 1.1);
+    }
 
     @FXML
-    private void onPressBin7() {setScaleTransition(binImage7, 100, 1.1);}
+    private void onPressBin7() {
+        setScaleTransition(binImage7, 100, 1.1);
+    }
 
     @FXML
-    private void onReleaseBin1() {setScaleTransition(binImage1, 100, 1.3);}
+    private void onReleaseBin1() {
+        setScaleTransition(binImage1, 100, 1.3);
+    }
 
     @FXML
-    private void onReleaseBin2() {setScaleTransition(binImage2, 100, 1.3);}
+    private void onReleaseBin2() {
+        setScaleTransition(binImage2, 100, 1.3);
+    }
 
     @FXML
-    private void onReleaseBin3() {setScaleTransition(binImage3, 100, 1.3);}
+    private void onReleaseBin3() {
+        setScaleTransition(binImage3, 100, 1.3);
+    }
 
     @FXML
-    private void onReleaseBin4() {setScaleTransition(binImage4, 100, 1.3);}
+    private void onReleaseBin4() {
+        setScaleTransition(binImage4, 100, 1.3);
+    }
 
     @FXML
-    private void onReleaseBin5() {setScaleTransition(binImage5, 100, 1.3);}
+    private void onReleaseBin5() {
+        setScaleTransition(binImage5, 100, 1.3);
+    }
 
     @FXML
-    private void onReleaseBin6() {setScaleTransition(binImage6, 100, 1.3);}
+    private void onReleaseBin6() {
+        setScaleTransition(binImage6, 100, 1.3);
+    }
 
     @FXML
-    private void onReleaseBin7() {setScaleTransition(binImage7, 100, 1.3);}
+    private void onReleaseBin7() {
+        setScaleTransition(binImage7, 100, 1.3);
+    }
 
     private void setScaleTransition(ImageView imageView, int duration, double size) {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(imageView, duration, size);
@@ -775,55 +827,47 @@ public class NewTransactionPageController implements Initializable {
 
     @FXML
     private void onCheckDetails1() {
-        descriptionDialog.setVisible(true);
-        staffField.setText(currentPageList.get(0).getStaffName());
-        descriptionField.setText(currentPageList.get(0).getPurpose());
+        setTransactionDetails(0);
     }
 
     @FXML
     private void onCheckDetails2() {
-        descriptionDialog.setVisible(true);
-        staffField.setText(currentPageList.get(1).getStaffName());
-        descriptionField.setText(currentPageList.get(1).getPurpose());
+        setTransactionDetails(1);
     }
 
     @FXML
     private void onCheckDetails3() {
-        descriptionDialog.setVisible(true);
-        staffField.setText(currentPageList.get(2).getStaffName());
-        descriptionField.setText(currentPageList.get(2).getPurpose());
+        setTransactionDetails(2);
     }
 
     @FXML
     private void onCheckDetails4() {
-        descriptionDialog.setVisible(true);
-        staffField.setText(currentPageList.get(3).getStaffName());
-        descriptionField.setText(currentPageList.get(3).getPurpose());
+        setTransactionDetails(3);
     }
 
     @FXML
     private void onCheckDetails5() {
-        descriptionDialog.setVisible(true);
-        staffField.setText(currentPageList.get(4).getStaffName());
-        descriptionField.setText(currentPageList.get(4).getPurpose());
+        setTransactionDetails(4);
     }
 
     @FXML
     private void onCheckDetails6() {
-        descriptionDialog.setVisible(true);
-        staffField.setText(currentPageList.get(5).getStaffName());
-        descriptionField.setText(currentPageList.get(5).getPurpose());
+        setTransactionDetails(5);
     }
 
     @FXML
     private void onCheckDetails7() {
+        setTransactionDetails(6);
+    }
+
+    private void setTransactionDetails(int row) {
         descriptionDialog.setVisible(true);
-        staffField.setText(currentPageList.get(6).getStaffName());
-        descriptionField.setText(currentPageList.get(6).getPurpose());
+        staffField.setText(currentPageList.get(row).getStaffName());
+        descriptionField.setText(currentPageList.get(row).getPurpose());
     }
 
     @FXML
-    private void onCloseDescriptionDialog(){
+    private void onCloseDescriptionDialog() {
         descriptionDialog.setVisible(false);
     }
 
