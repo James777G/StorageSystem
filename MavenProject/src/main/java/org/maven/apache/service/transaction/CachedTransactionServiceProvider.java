@@ -4,6 +4,7 @@ import jakarta.annotation.Resource;
 import lombok.Data;
 import org.maven.apache.exception.Warning;
 import org.maven.apache.item.Item;
+import org.maven.apache.mapper.ItemMapper;
 import org.maven.apache.mapper.TransactionMapper;
 import org.maven.apache.service.item.ControllerOrientedCachedItemHandler;
 import org.maven.apache.transaction.Transaction;
@@ -17,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Consumer;
 
 @Service("cachedTransactionService")
 @Data
@@ -32,8 +32,7 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
     private CachedManipulationService cachedManipulationService;
 
     @Resource
-    @Qualifier("cachedItemService")
-    private ControllerOrientedCachedItemHandler cachedItemService;
+    private ItemMapper itemMapper;
 
     public TransactionMapper getTransactionMapper() {
         return transactionMapper;
@@ -159,7 +158,7 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
         } else if (Objects.equals(transaction.getStatus(), "RESTOCK")) {
             item[0].setUnit(item[0].getUnit() + transaction.getUnit());
         }
-        cachedItemService.updateItem(item[0]);
+        itemMapper.update(item[0]);
         updateAllCachedTransactionData();
     }
     /**
@@ -195,7 +194,7 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
         } else if (Objects.equals(transaction[0].getStatus(), "RESTOCK")) {
             item[0].setUnit(item[0].getUnit() - transaction[0].getUnit());
         }
-        cachedItemService.updateItem(item[0]);
+        itemMapper.update(item[0]);
         updateAllCachedTransactionData();
     }
 
@@ -238,7 +237,7 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
         } else if (Objects.equals(transaction.getStatus(), "RESTOCK")) {
             item[0].setUnit(item[0].getUnit() + transaction.getUnit());
         }
-        cachedItemService.updateItem(item[0]);
+        itemMapper.update(item[0]);
         updateAllCachedTransactionData();
     }
 

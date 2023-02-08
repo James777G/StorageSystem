@@ -476,11 +476,16 @@ public class StaffController implements Initializable {
         doContinueButton.setVisible(false);
         executorService.execute(() -> {
             staffService.deleteStaffById(selectedStaffId);
-            try {
-                calculatePageNumber();
-            } catch (UnsupportedPojoException e) {
-                throw new RuntimeException(e);
-            }
+            executorService.execute(() -> {
+                Platform.runLater(() -> {
+                    try {
+                        calculatePageNumber();
+                    } catch (UnsupportedPojoException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+                ;
+            });
             Platform.runLater(() -> pagination.setPageCount(pageNumber));
             getStaffList(pagination.getCurrentPageIndex());
             Platform.runLater(this::assignStaffValue);
