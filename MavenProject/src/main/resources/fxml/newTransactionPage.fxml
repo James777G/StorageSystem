@@ -611,7 +611,6 @@
             </Label>
          </graphic>
       </JFXButton>
-      <JFXButton layoutX="1040.0" layoutY="93.0" onAction="#onRefreshTransitionList" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Refresh" textFill="WHITE" />
       <Pagination fx:id="transactionPagination" layoutX="387.0" layoutY="589.0" maxPageIndicatorCount="8" pageCount="50" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" />
       <MFXGenericDialog fx:id="descriptionDialog" headerText="Transaction Details" layoutX="301.0" onClose="#onCloseDescriptionDialog" showAlwaysOnTop="false" showMinimize="false" AnchorPane.topAnchor="150.0">
          <center>

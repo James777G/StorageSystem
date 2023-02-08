@@ -751,11 +751,6 @@ public class NewTransactionPageController implements Initializable {
     }
 
     @FXML
-    private void onRefreshTransitionList() {
-        refreshPage();
-    }
-
-    @FXML
     private void onEnterBin1() {
         setScaleTransition(binImage1, 100, 1.3);
     }
