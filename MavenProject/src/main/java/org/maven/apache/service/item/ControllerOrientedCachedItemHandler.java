@@ -2,6 +2,7 @@ package org.maven.apache.service.item;
 
 import jakarta.annotation.Resource;
 import javafx.application.Platform;
+import org.maven.apache.controllers.AppPage2Controller;
 import org.maven.apache.controllers.NewTransactionPageController;
 import org.maven.apache.item.Item;
 import org.maven.apache.service.transaction.CachedTransactionService;
@@ -36,6 +37,7 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService{
         cachedTransactionService.updateAllCachedTransactionData();
         try {
             invokeControllerToUpdate();
+            invokeAppPage2ControllerToUpdate();
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
@@ -48,6 +50,7 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService{
         cachedTransactionService.updateAllCachedTransactionData();
         try {
             invokeControllerToUpdate();
+            invokeAppPage2ControllerToUpdate();
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
@@ -55,16 +58,9 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService{
 
     private void invokeControllerToUpdate() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Class<NewTransactionPageController> clazz = NewTransactionPageController.class;
-        Method updatePagination = clazz.getDeclaredMethod("updatePagination", Number.class);
         Method refreshPage = clazz.getDeclaredMethod("refreshPage");
         refreshPage.setAccessible(true);
-        updatePagination.setAccessible(true);
         Platform.runLater(() -> {
-            try {
-                updatePagination.invoke(DataUtils.transactionPageController, DataUtils.transactionPagination.getCurrentPageIndex());
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                throw new RuntimeException(e);
-            }
             try {
                 refreshPage.invoke(DataUtils.transactionPageController);
             } catch (IllegalAccessException | InvocationTargetException e) {
@@ -72,6 +68,23 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService{
             }
         });
 
+    }
+
+    private void invokeAppPage2ControllerToUpdate() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Class<AppPage2Controller> clazz = AppPage2Controller.class;
+        Method fillCargoBoxesInformation = clazz.getDeclaredMethod("fillCargoBoxesInformation",
+                AppPage2Controller.ButtonSelected.class);
+        Method setLists = clazz.getDeclaredMethod("setLists");
+        setLists.setAccessible(true);
+        fillCargoBoxesInformation.setAccessible(true);
+        setLists.invoke(DataUtils.appPage2Controller);
+        Platform.runLater(() -> {
+            try {
+                fillCargoBoxesInformation.invoke(DataUtils.appPage2Controller, DataUtils.buttonSelected);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @Override
