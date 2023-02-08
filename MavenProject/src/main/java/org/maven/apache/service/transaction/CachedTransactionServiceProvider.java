@@ -1,14 +1,18 @@
 package org.maven.apache.service.transaction;
 
 import jakarta.annotation.Resource;
+import javafx.application.Platform;
 import lombok.Data;
+import org.maven.apache.controllers.WarehouseController;
 import org.maven.apache.exception.Warning;
 import org.maven.apache.item.Item;
 import org.maven.apache.mapper.ItemMapper;
 import org.maven.apache.mapper.TransactionMapper;
+import org.maven.apache.service.item.CachedItemService;
 import org.maven.apache.service.item.ControllerOrientedCachedItemHandler;
 import org.maven.apache.transaction.Transaction;
 import org.maven.apache.utils.CargoCachedUtils;
+import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.TransactionCachedUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,6 +20,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,6 +39,9 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
 
     @Resource
     private ItemMapper itemMapper;
+
+    @Resource
+    private CachedItemService cachedItemService;
 
     public TransactionMapper getTransactionMapper() {
         return transactionMapper;
@@ -160,6 +169,12 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
         }
         itemMapper.update(item[0]);
         updateAllCachedTransactionData();
+        cachedItemService.updateAllCachedItemData();
+        try {
+            invokeControllerToUpdate();
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
     /**
      * This method deletes an existing transaction from the database.
@@ -196,6 +211,34 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
         }
         itemMapper.update(item[0]);
         updateAllCachedTransactionData();
+        cachedItemService.updateAllCachedItemData();
+        try {
+            invokeControllerToUpdate();
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void invokeControllerToUpdate() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Class<WarehouseController> clazz = WarehouseController.class;
+        Method generateItemList = clazz.getDeclaredMethod("generateItemList", int.class);
+        Method setTableContents = clazz.getDeclaredMethod("setTableContents");
+        setTableContents.setAccessible(true);
+        generateItemList.setAccessible(true);
+        Platform.runLater(() -> {
+            try {
+                generateItemList.invoke(DataUtils.warehouseController, DataUtils.pagination.getCurrentPageIndex());
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                setTableContents.invoke(DataUtils.warehouseController);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+
     }
 
     /**
@@ -239,6 +282,12 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
         }
         itemMapper.update(item[0]);
         updateAllCachedTransactionData();
+        cachedItemService.updateAllCachedItemData();
+        try {
+            invokeControllerToUpdate();
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

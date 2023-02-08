@@ -2,6 +2,7 @@ package org.maven.apache.service.item;
 
 import jakarta.annotation.Resource;
 import org.maven.apache.item.Item;
+import org.maven.apache.service.transaction.CachedTransactionService;
 import org.maven.apache.utils.CargoCachedUtils;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,9 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService{
     @Resource
     private ItemDataManipulationService itemDataManipulationService;
 
+    @Resource
+    private CachedTransactionService cachedTransactionService;
+
     @Override
     public void updateAllCachedItemData() {
         CargoCachedUtils.putLists(CargoCachedUtils.listType.ALL,
@@ -23,12 +27,18 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService{
     public void addNewItem(Item item) {
         itemService.addNewItem(item);
         updateAllCachedItemData();
+        cachedTransactionService.updateAllCachedTransactionData();
     }
 
     @Override
     public void deleteItemById(int id) {
         itemService.deleteById(id);
         updateAllCachedItemData();
+        cachedTransactionService.updateAllCachedTransactionData();
+    }
+
+    private void invokeControllerToUpdate(){
+
     }
 
     @Override
