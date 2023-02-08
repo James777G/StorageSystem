@@ -279,6 +279,8 @@ public class NewTransactionPageController implements Initializable {
         initializeLabels();
         blockPane.setVisible(false);
         DataUtils.publicTransactionBlockPane = blockPane;
+        DataUtils.transactionPagination = transactionPagination;
+        DataUtils.transactionPageController = this;
         deleteItemPane.setVisible(false);
         descriptionDialog.setVisible(false);
         addTransactionPane.setVisible(false);
