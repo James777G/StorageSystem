@@ -85,6 +85,9 @@ public class NewTransactionPageController implements Initializable {
     private AnchorPane addTransactionPane;
 
     @FXML
+    private AnchorPane deleteItemPane;
+
+    @FXML
     private AnchorPane transactionPane1, transactionPane2, transactionPane3, transactionPane4, transactionPane5, transactionPane6, transactionPane7;
 
     @FXML
@@ -97,9 +100,6 @@ public class NewTransactionPageController implements Initializable {
     private JFXButton restockSelectButton;
 
     @FXML
-    private JFXButton confirmButton;
-
-    @FXML
     private JFXButton searchButton;
 
     @FXML
@@ -109,10 +109,16 @@ public class NewTransactionPageController implements Initializable {
     private JFXButton okayButton;
 
     @FXML
+    private JFXButton clearButton;
+
+    @FXML
+    private JFXButton cargoDialogApplyButton;
+
+    @FXML
     private Label cargoLabel1, cargoLabel2, cargoLabel3, cargoLabel4, cargoLabel5, cargoLabel6, cargoLabel7;
 
     @FXML
-    private Label idLabel1, idLabel2, idLabel3, idLabel4, idLabel5, idLabel6, idLabel7;
+    private Label staffLabel1, staffLabel2, staffLabel3, staffLabel4, staffLabel5, staffLabel6, staffLabel7;
 
     @FXML
     private Label amountLabel1, amountLabel2, amountLabel3, amountLabel4, amountLabel5, amountLabel6, amountLabel7;
@@ -142,10 +148,10 @@ public class NewTransactionPageController implements Initializable {
     private Label confirmDateLabel;
 
     @FXML
-    private Label deletionNotificationLabel;
+    private Label warnMessageInAdd;
 
     @FXML
-    private Label warnMessageInAdd;
+    private Label transactionIdLabel;
 
     @FXML
     private Pagination transactionPagination;
@@ -160,13 +166,13 @@ public class NewTransactionPageController implements Initializable {
     private ImageView binImage1, binImage2, binImage3, binImage4, binImage5, binImage6, binImage7;
 
     @FXML
-    private MFXGenericDialog deletionConfirmationDialog;
+    private ImageView deletionCross;
+
+    @FXML
+    private ImageView deletionTick;
 
     @FXML
     private MFXGenericDialog descriptionDialog;
-
-    @FXML
-    private TextField staffField;
 
     @FXML
     private TextField newItemTextField;
@@ -178,23 +184,44 @@ public class NewTransactionPageController implements Initializable {
     private TextField newStaffTextField;
 
     @FXML
+    private TextField transactionNameInDetails;
+
+    @FXML
+    private TextField staffNameInDetails;
+
+    @FXML
+    private TextField transactionAmountInDetails;
+
+    @FXML
     private TextArea descriptionTextArea;
 
     @FXML
-    private TextArea descriptionField;
+    private TextArea purposeTextInDetails;
 
     @FXML
     private MFXProgressSpinner loadSpinnerInAdd;
 
     @FXML
+    private MFXProgressSpinner loadSpinnerOnDeletePane;
+
+    @FXML
+    private MFXProgressSpinner loadSpinnerInDetails;
+
+    @FXML
     private MFXDatePicker datePicker = new MFXDatePicker(Locale.ENGLISH);
+
+    @FXML
+    private MFXDatePicker transactionDateInDetails;
 
     @FXML
     private MFXToggleButton statusToggleButton;
 
+    @FXML
+    private MFXToggleButton statusToggleButtonInDetails;
+
     private Label[] cargoLabelArray = new Label[7];
 
-    private Label[] idLabelArray = new Label[7];
+    private Label[] staffLabelArray = new Label[7];
 
     private Label[] amountLabelArray = new Label[7];
 
@@ -252,7 +279,7 @@ public class NewTransactionPageController implements Initializable {
         initializeLabels();
         blockPane.setVisible(false);
         DataUtils.publicTransactionBlockPane = blockPane;
-        deletionConfirmationDialog.setVisible(false);
+        deleteItemPane.setVisible(false);
         descriptionDialog.setVisible(false);
         addTransactionPane.setVisible(false);
         warnMessageInAdd.setVisible(false);
@@ -264,6 +291,7 @@ public class NewTransactionPageController implements Initializable {
             updatePagination(newValue);
         });
         setInputValidation(newUnitTextField);
+        getNumOfTransaction();
     }
 
     /**
@@ -279,13 +307,13 @@ public class NewTransactionPageController implements Initializable {
         cargoLabelArray[5] = cargoLabel6;
         cargoLabelArray[6] = cargoLabel7;
         // initialize transaction id labels
-        idLabelArray[0] = idLabel1;
-        idLabelArray[1] = idLabel2;
-        idLabelArray[2] = idLabel3;
-        idLabelArray[3] = idLabel4;
-        idLabelArray[4] = idLabel5;
-        idLabelArray[5] = idLabel6;
-        idLabelArray[6] = idLabel7;
+        staffLabelArray[0] = staffLabel1;
+        staffLabelArray[1] = staffLabel2;
+        staffLabelArray[2] = staffLabel3;
+        staffLabelArray[3] = staffLabel4;
+        staffLabelArray[4] = staffLabel5;
+        staffLabelArray[5] = staffLabel6;
+        staffLabelArray[6] = staffLabel7;
         // initialize amount labels
         amountLabelArray[0] = amountLabel1;
         amountLabelArray[1] = amountLabel2;
@@ -336,7 +364,7 @@ public class NewTransactionPageController implements Initializable {
         // set non-empty labels
         for (int i = 0; i < currentPageList.size(); i++) {
             cargoLabelArray[i].setText(currentPageList.get(i).getItemName());
-            idLabelArray[i].setText(String.valueOf(currentPageList.get(i).getID()));
+            staffLabelArray[i].setText(String.valueOf(currentPageList.get(i).getStaffName()));
             amountLabelArray[i].setText(String.valueOf(currentPageList.get(i).getUnit()));
             dateLabelArray[i].setText(currentPageList.get(i).getTransactionTime());
             transactionPaneArray[i].setVisible(true);
@@ -657,10 +685,8 @@ public class NewTransactionPageController implements Initializable {
 
     @FXML
     private void onCloseDeletionConfirmation() {
-        deletionConfirmationDialog.setVisible(false);
+        deleteItemPane.setVisible(false);
         blockPane.setVisible(false);
-        confirmButton.setDisable(false);
-        deletionNotificationLabel.setText("");
     }
 
     /**
@@ -720,9 +746,29 @@ public class NewTransactionPageController implements Initializable {
     }
 
     private void setDeletionPanes(int row) {
-        deletionConfirmationDialog.setVisible(true);
+        deleteItemPane.setVisible(true);
         blockPane.setVisible(true);
         setRemovalConfirmation(row);
+    }
+
+    @FXML
+    private void onEnterCross() {
+        setScaleTransition(deletionCross, 250, 1.1);
+    }
+
+    @FXML
+    private void onExitCross() {
+        setScaleTransition(deletionCross, 250, 1);
+    }
+
+    @FXML
+    private void onEnterTick() {
+        setScaleTransition(deletionTick, 250, 1.1);
+    }
+
+    @FXML
+    private void onExitTick() {
+        setScaleTransition(deletionTick, 250, 1);
     }
 
     /**
@@ -744,10 +790,23 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onConfirmDeletion() {
-        cachedTransactionService.deleteTransactionById(Integer.parseInt(confirmIdLabel.getText().split(":")[1].strip()));
-        confirmButton.setDisable(true);
-        deletionNotificationLabel.setText("Removal accomplished");
-        refreshPage();
+        deletionCross.setDisable(true);
+        deletionTick.setVisible(false);
+        loadSpinnerOnDeletePane.setVisible(true);
+        executorService.execute(() ->{
+            try{
+                cachedTransactionService.deleteTransactionById(Integer.parseInt(confirmIdLabel.getText().split(":")[1].strip()));
+                Platform.runLater(() -> {
+                    refreshPage();
+                });
+            }finally {
+                // restore nodes after a succeesful deletion
+                deletionCross.setDisable(false);
+                deletionTick.setVisible(true);
+                loadSpinnerOnDeletePane.setVisible(false);
+                onCloseDeletionConfirmation();
+            }
+        });
     }
 
     @FXML
@@ -931,15 +990,71 @@ public class NewTransactionPageController implements Initializable {
         setTransactionDetails(6);
     }
 
+    /**
+     * set transaction details
+     *
+     * @param row transaction entity at which row needs to be modified
+     */
     private void setTransactionDetails(int row) {
         descriptionDialog.setVisible(true);
-        staffField.setText(currentPageList.get(row).getStaffName());
-        descriptionField.setText(currentPageList.get(row).getPurpose());
+        if (currentPageList.get(row).getStatus().equals("TAKEN")){
+            onToggleInDetails();
+        }
+        transactionIdLabel.setText(String.valueOf(currentPageList.get(row).getID()));
+        transactionNameInDetails.setText(currentPageList.get(row).getItemName());
+        transactionDateInDetails.setText(currentPageList.get(row).getTransactionTime());
+        staffNameInDetails.setText(currentPageList.get(row).getStaffName());
+        transactionAmountInDetails.setText(String.valueOf(currentPageList.get(row).getUnit()));
+        purposeTextInDetails.setText(currentPageList.get(row).getPurpose());
+        blockPane.setVisible(true);
     }
 
     @FXML
     private void onCloseDescriptionDialog() {
         descriptionDialog.setVisible(false);
+        blockPane.setVisible(false);
+    }
+
+    @FXML
+    private void onToggleInDetails(){
+        if (statusToggleButtonInDetails.isSelected()){
+            // convert status from RESTOCK to TAKEN
+            statusToggleButtonInDetails.setText("TAKEN");
+        }else{
+            // convert status from TAKEN to RESTOCK
+            statusToggleButtonInDetails.setText("RESTOCK");
+        }
+    }
+
+    /**
+     * close transaction modification page
+     */
+    @FXML
+    private void onClickOkayInDetails(){
+        descriptionDialog.setVisible(false);
+        blockPane.setVisible(false);
+    }
+
+    /**
+     * modify and overwrite new fields to a specified transaction
+     */
+    @FXML
+    private void onClickApplyInDetails(){
+        //TODO save new transaction information to the database
+
+    }
+
+    /**
+     * clear the properties of the new transaction from all text fields
+     */
+    @FXML
+    private void onClickClearInAdd(){
+        newItemTextField.clear();
+        newUnitTextField.clear();
+        newStaffTextField.clear();
+        datePicker.clear();
+        descriptionTextArea.clear();
+        warnMessageInAdd.setVisible(false);
     }
 
     /**
@@ -952,7 +1067,7 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
-     * saves the properties of the added new transaction
+     * add a new transaction to database
      */
     @FXML
     private void onClickApplyInAdd() {
@@ -963,6 +1078,7 @@ public class NewTransactionPageController implements Initializable {
             applyButtonInAdd.setVisible(false);
             loadSpinnerInAdd.setVisible(true);
             okayButton.setDisable(true);
+            clearButton.setDisable(true);
             newTransactionID = getNumOfTransaction() + 1;
             newItemName = newItemTextField.getText();
             newStaffName = newStaffTextField.getText();
@@ -1001,6 +1117,7 @@ public class NewTransactionPageController implements Initializable {
                         warnMessageInAdd.setVisible(false);
                     }
                     okayButton.setDisable(false);
+                    clearButton.setDisable(false);
                 }
             });
         }
