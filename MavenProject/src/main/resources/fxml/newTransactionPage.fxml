@@ -6,6 +6,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Pagination?>
@@ -611,49 +612,118 @@
          </graphic>
       </JFXButton>
       <Pagination fx:id="transactionPagination" layoutX="387.0" layoutY="589.0" maxPageIndicatorCount="8" pageCount="50" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" />
-      <MFXGenericDialog fx:id="descriptionDialog" headerText="Transaction Details" layoutX="301.0" onClose="#onCloseDescriptionDialog" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.topAnchor="150.0">
-         <center>
+      <AnchorPane fx:id="blockPane" layoutX="-4.0" layoutY="-9.0" opacity="0.75" prefHeight="649.0" prefWidth="1207.0" style="-fx-background-color: grey;" visible="false" />
+      <MFXGenericDialog fx:id="descriptionDialog" headerText="Transaction Details" layoutX="10.0" layoutY="10.0" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseDescriptionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
+         <left>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label layoutX="14.0" layoutY="14.0" text="Issued Staff:">
+                  <Label layoutX="562.0" layoutY="14.0" text="Item Name:">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="441.0" layoutY="14.0">
+                  <Label layoutX="245.0" layoutY="14.0" text="Action:">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="252.0" layoutY="110.0" text="Staff In Charge:">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="staffField" editable="false" layoutX="14.0" layoutY="41.0" prefHeight="25.0" prefWidth="146.0" />
-                  <Separator layoutY="72.0" prefHeight="13.0" prefWidth="575.0" />
-                  <Label layoutX="14.0" layoutY="100.0" text="Transaction Description:">
+                  <Label layoutX="-2.0" layoutY="110.0" prefHeight="17.0" prefWidth="159.0" text="Process date:">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
                   </Label>
-                  <TextArea fx:id="descriptionField" editable="false" layoutX="15.0" layoutY="130.0" prefHeight="145.0" prefWidth="544.0" wrapText="true" />
-                  <JFXButton layoutX="207.0" layoutY="39.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="View Transaction" textFill="WHITE" AnchorPane.bottomAnchor="215.0">
+                  <JFXButton layoutX="719.0" layoutY="159.0" style="-fx-background-color: #e2e2e2;" text="Bring To Notepad" AnchorPane.bottomAnchor="170.0">
                      <font>
-                        <Font name="Calibri Bold Italic" size="13.0" />
+                        <Font name="Calibri Bold" size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="441.0" layoutY="39.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Bring To Notepad" textFill="WHITE" AnchorPane.bottomAnchor="215.0">
+                  <Separator layoutY="88.0" prefHeight="3.0" prefWidth="877.0" />
+                  <TextField fx:id="transactionNameInDetails" layoutX="562.0" layoutY="41.0" prefHeight="25.0" prefWidth="210.0">
                      <font>
-                        <Font name="Calibri Bold Italic" size="13.0" />
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="staffNameInDetails" layoutX="252.0" layoutY="140.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="252.0">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </TextField>
+                  <MFXDatePicker fx:id="transactionDateInDetails" layoutX="7.0" layoutY="135.0" prefHeight="38.0" prefWidth="159.0">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </MFXDatePicker>
+                  <Separator layoutX="1.0" layoutY="187.0" prefHeight="13.0" prefWidth="876.0" />
+                  <Label layoutX="-2.0" layoutY="217.0" prefHeight="17.0" prefWidth="209.0" text="Transaction Details (Purposes)" AnchorPane.leftAnchor="0.0">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <TextArea fx:id="purposeTextInDetails" layoutX="9.0" layoutY="243.0" prefHeight="95.0" prefWidth="575.0">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </TextArea>
+                  <Label fx:id="warnMessageInAdd1" layoutX="721.0" layoutY="262.0" prefHeight="57.0" prefWidth="140.0" text="Your changes falied,&#10;please check if all fields&#10;has been filled correctly." textFill="#a10000" visible="false">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="cargoDialogApplyButton" layoutX="788.0" layoutY="321.0" onAction="#onClickApplyInDetails" prefHeight="29.0" prefWidth="75.0" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Apply" textFill="WHITE" AnchorPane.bottomAnchor="4.0">
+                     <font>
+                        <Font name="Calibri Bold" size="16.0" />
                      </font>
                   </JFXButton>
-                  <Label fx:id="itemIdInDetails" layoutX="501.0" layoutY="14.0">
+                  <JFXButton layoutX="702.0" layoutY="324.0" onAction="#onClickOkayInDetails" prefHeight="29.0" prefWidth="75.0" style="-fx-background-color: #e2e2e2; -fx-background-radius: 5; -fx-border-radius: 5;" text="Okay" AnchorPane.bottomAnchor="4.0">
+                     <font>
+                        <Font name="Calibri Bold" size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <Label layoutX="562.0" layoutY="110.0" prefHeight="17.0" prefWidth="159.0" text="Amount Processed:" AnchorPane.bottomAnchor="226.66666666666669">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </Label>
+                  <TextField fx:id="transactionAmountInDetails" layoutX="562.0" layoutY="140.0" prefHeight="27.0" prefWidth="101.0" text="01 : 00 : 34" AnchorPane.bottomAnchor="186.66666666666666" AnchorPane.leftAnchor="562.0">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="transactionIdLabel" layoutX="14.0" layoutY="45.0" text="123456">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="14.0" text="Transaction ID:">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <MFXProgressSpinner fx:id="loadSpinnerInDetails" layoutX="813.0" layoutY="326.0" prefHeight="18.0" prefWidth="25.0" visible="false" />
+                  <MFXToggleButton fx:id="statusToggleButtonInDetails" contentDisposition="RIGHT" layoutX="222.0" layoutY="34.0" onAction="#onToggleInDetails" text="Restock">
+                     <font>
+                        <Font name="Calibri Bold" size="17.0" />
+                     </font>
+                  </MFXToggleButton>
                </children>
             </AnchorPane>
-         </center>
+         </left>
       </MFXGenericDialog>
-      <AnchorPane fx:id="blockPane" layoutX="-4.0" layoutY="-9.0" opacity="0.75" prefHeight="649.0" prefWidth="1207.0" style="-fx-background-color: grey;" visible="false" />
-      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
+      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
          <children>
             <Label layoutX="421.0" layoutY="156.0" opacity="0.4" prefHeight="128.0" prefWidth="320.0" rotate="-38.7" text="TRANS" textFill="#9de4ed59">
                <font>

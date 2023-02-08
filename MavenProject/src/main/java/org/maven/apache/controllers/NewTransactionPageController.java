@@ -112,6 +112,9 @@ public class NewTransactionPageController implements Initializable {
     private JFXButton clearButton;
 
     @FXML
+    private JFXButton cargoDialogApplyButton;
+
+    @FXML
     private Label cargoLabel1, cargoLabel2, cargoLabel3, cargoLabel4, cargoLabel5, cargoLabel6, cargoLabel7;
 
     @FXML
@@ -148,6 +151,9 @@ public class NewTransactionPageController implements Initializable {
     private Label warnMessageInAdd;
 
     @FXML
+    private Label transactionIdLabel;
+
+    @FXML
     private Pagination transactionPagination;
 
     @FXML
@@ -169,9 +175,6 @@ public class NewTransactionPageController implements Initializable {
     private MFXGenericDialog descriptionDialog;
 
     @FXML
-    private TextField staffField;
-
-    @FXML
     private TextField newItemTextField;
 
     @FXML
@@ -181,10 +184,19 @@ public class NewTransactionPageController implements Initializable {
     private TextField newStaffTextField;
 
     @FXML
+    private TextField transactionNameInDetails;
+
+    @FXML
+    private TextField staffNameInDetails;
+
+    @FXML
+    private TextField transactionAmountInDetails;
+
+    @FXML
     private TextArea descriptionTextArea;
 
     @FXML
-    private TextArea descriptionField;
+    private TextArea purposeTextInDetails;
 
     @FXML
     private MFXProgressSpinner loadSpinnerInAdd;
@@ -193,10 +205,19 @@ public class NewTransactionPageController implements Initializable {
     private MFXProgressSpinner loadSpinnerOnDeletePane;
 
     @FXML
+    private MFXProgressSpinner loadSpinnerInDetails;
+
+    @FXML
     private MFXDatePicker datePicker = new MFXDatePicker(Locale.ENGLISH);
 
     @FXML
+    private MFXDatePicker transactionDateInDetails;
+
+    @FXML
     private MFXToggleButton statusToggleButton;
+
+    @FXML
+    private MFXToggleButton statusToggleButtonInDetails;
 
     private Label[] cargoLabelArray = new Label[7];
 
@@ -270,8 +291,6 @@ public class NewTransactionPageController implements Initializable {
             updatePagination(newValue);
         });
         setInputValidation(newUnitTextField);
-
-
         getNumOfTransaction();
     }
 
@@ -971,15 +990,57 @@ public class NewTransactionPageController implements Initializable {
         setTransactionDetails(6);
     }
 
+    /**
+     * set transaction details
+     *
+     * @param row transaction entity at which row needs to be modified
+     */
     private void setTransactionDetails(int row) {
         descriptionDialog.setVisible(true);
-        staffField.setText(currentPageList.get(row).getStaffName());
-        descriptionField.setText(currentPageList.get(row).getPurpose());
+        if (currentPageList.get(row).getStatus().equals("TAKEN")){
+            onToggleInDetails();
+        }
+        transactionIdLabel.setText(String.valueOf(currentPageList.get(row).getID()));
+        transactionNameInDetails.setText(currentPageList.get(row).getItemName());
+        transactionDateInDetails.setText(currentPageList.get(row).getTransactionTime());
+        staffNameInDetails.setText(currentPageList.get(row).getStaffName());
+        transactionAmountInDetails.setText(String.valueOf(currentPageList.get(row).getUnit()));
+        purposeTextInDetails.setText(currentPageList.get(row).getPurpose());
+        blockPane.setVisible(true);
     }
 
     @FXML
     private void onCloseDescriptionDialog() {
         descriptionDialog.setVisible(false);
+        blockPane.setVisible(false);
+    }
+
+    @FXML
+    private void onToggleInDetails(){
+        if (statusToggleButtonInDetails.isSelected()){
+            // convert status from RESTOCK to TAKEN
+            statusToggleButtonInDetails.setText("TAKEN");
+        }else{
+            // convert status from TAKEN to RESTOCK
+            statusToggleButtonInDetails.setText("RESTOCK");
+        }
+    }
+
+    /**
+     * close transaction modification page
+     */
+    @FXML
+    private void onClickOkayInDetails(){
+        descriptionDialog.setVisible(false);
+        blockPane.setVisible(false);
+    }
+
+    /**
+     * modify and overwrite new fields to a specified transaction
+     */
+    @FXML
+    private void onClickApplyInDetails(){
+
     }
 
     /**
