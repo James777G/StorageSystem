@@ -6,7 +6,9 @@ import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
+import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,6 +27,8 @@ import org.maven.apache.service.staff.CachedStaffService;
 import org.maven.apache.staff.Staff;
 import org.maven.apache.utils.ScaleUtils;
 import org.maven.apache.utils.StaffCachedUtils;
+import org.maven.apache.utils.TransitionUtils;
+import org.maven.apache.utils.TranslateUtils;
 
 import java.awt.*;
 import java.net.URL;
@@ -455,8 +459,15 @@ public class StaffController implements Initializable {
 
     @FXML
     private void doNotContinue() {
-        deleteItemPane.setVisible(false);
-        blockPane.setVisible(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,1,0);
+        fadeTransition.setOnFinished(event -> {
+            deleteItemPane.setVisible(false);
+            blockPane.setVisible(false);
+        });
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,0,-45.5);
+        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+        translateTransition.play();
+        fadeTransition.play();
     }
 
     @FXML
@@ -474,12 +485,19 @@ public class StaffController implements Initializable {
             getStaffList(pagination.getCurrentPageIndex());
             Platform.runLater(this::assignStaffValue);
             Platform.runLater(() -> {
-                loadSpinnerOnDeletePane.setVisible(false);
-                doContinueButton.setVisible(true);
-                deleteItemPane.setVisible(false);
+                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,1,0);
+                fadeTransition.setOnFinished(event -> {
+                    loadSpinnerOnDeletePane.setVisible(false);
+                    doContinueButton.setVisible(true);
+                    deleteItemPane.setVisible(false);
+                    blockPane.setVisible(false);
+                });
+                TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,0,-45.5);
+                translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+                translateTransition.play();
+                fadeTransition.play();
             });
         });
-        blockPane.setVisible(false);
     }
 
     @FXML
@@ -650,8 +668,14 @@ public class StaffController implements Initializable {
         List<Staff> currentList = getCurrentList();
         Staff staff = currentList.get(row);
         selectedStaffId = staff.getStaffID();
-        deleteItemPane.setVisible(true);
         blockPane.setVisible(true);
+        deleteItemPane.setOpacity(0);
+        deleteItemPane.setVisible(true);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,0,1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,-45.5,0);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        translateTransition.play();
+        fadeTransition.play();
     }
 
     /**
