@@ -118,7 +118,7 @@ public class NewTransactionPageController implements Initializable {
     private Label cargoLabel1, cargoLabel2, cargoLabel3, cargoLabel4, cargoLabel5, cargoLabel6, cargoLabel7;
 
     @FXML
-    private Label idLabel1, idLabel2, idLabel3, idLabel4, idLabel5, idLabel6, idLabel7;
+    private Label staffLabel1, staffLabel2, staffLabel3, staffLabel4, staffLabel5, staffLabel6, staffLabel7;
 
     @FXML
     private Label amountLabel1, amountLabel2, amountLabel3, amountLabel4, amountLabel5, amountLabel6, amountLabel7;
@@ -221,7 +221,7 @@ public class NewTransactionPageController implements Initializable {
 
     private Label[] cargoLabelArray = new Label[7];
 
-    private Label[] idLabelArray = new Label[7];
+    private Label[] staffLabelArray = new Label[7];
 
     private Label[] amountLabelArray = new Label[7];
 
@@ -307,13 +307,13 @@ public class NewTransactionPageController implements Initializable {
         cargoLabelArray[5] = cargoLabel6;
         cargoLabelArray[6] = cargoLabel7;
         // initialize transaction id labels
-        idLabelArray[0] = idLabel1;
-        idLabelArray[1] = idLabel2;
-        idLabelArray[2] = idLabel3;
-        idLabelArray[3] = idLabel4;
-        idLabelArray[4] = idLabel5;
-        idLabelArray[5] = idLabel6;
-        idLabelArray[6] = idLabel7;
+        staffLabelArray[0] = staffLabel1;
+        staffLabelArray[1] = staffLabel2;
+        staffLabelArray[2] = staffLabel3;
+        staffLabelArray[3] = staffLabel4;
+        staffLabelArray[4] = staffLabel5;
+        staffLabelArray[5] = staffLabel6;
+        staffLabelArray[6] = staffLabel7;
         // initialize amount labels
         amountLabelArray[0] = amountLabel1;
         amountLabelArray[1] = amountLabel2;
@@ -364,7 +364,7 @@ public class NewTransactionPageController implements Initializable {
         // set non-empty labels
         for (int i = 0; i < currentPageList.size(); i++) {
             cargoLabelArray[i].setText(currentPageList.get(i).getItemName());
-            idLabelArray[i].setText(String.valueOf(currentPageList.get(i).getID()));
+            staffLabelArray[i].setText(String.valueOf(currentPageList.get(i).getStaffName()));
             amountLabelArray[i].setText(String.valueOf(currentPageList.get(i).getUnit()));
             dateLabelArray[i].setText(currentPageList.get(i).getTransactionTime());
             transactionPaneArray[i].setVisible(true);
