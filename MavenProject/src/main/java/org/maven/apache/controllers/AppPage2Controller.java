@@ -439,7 +439,7 @@ public class AppPage2Controller implements Initializable {
     public AppPage2Controller() throws IOException {
     }
 
-    enum ButtonSelected {
+    public enum ButtonSelected {
         ALL,
         TAKEN,
         RESTOCK
@@ -533,6 +533,8 @@ public class AppPage2Controller implements Initializable {
         searchField.deselect();
         currentPage = appPagePane;
         DataUtils.publicSettingsDialog = settingsDialog;
+        DataUtils.appPage2Controller = this;
+        DataUtils.buttonSelected = this.buttonSelected;
         settingsDialog.setVisible(false);
         searchTable.setVisible(false);
         usernameLabel.setText(user.getName());
@@ -579,6 +581,11 @@ public class AppPage2Controller implements Initializable {
         blockPane.setVisible(false);
         DataUtils.publicSettingBlockPane = blockPane;
         onUpdateUsername();
+    }
+
+    private void setLists(){
+        dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
+        dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
     }
 
     @FXML
