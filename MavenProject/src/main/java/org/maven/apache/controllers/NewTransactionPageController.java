@@ -85,6 +85,9 @@ public class NewTransactionPageController implements Initializable {
     private AnchorPane addTransactionPane;
 
     @FXML
+    private AnchorPane deleteItemPane;
+
+    @FXML
     private AnchorPane transactionPane1, transactionPane2, transactionPane3, transactionPane4, transactionPane5, transactionPane6, transactionPane7;
 
     @FXML
@@ -95,9 +98,6 @@ public class NewTransactionPageController implements Initializable {
 
     @FXML
     private JFXButton restockSelectButton;
-
-    @FXML
-    private JFXButton confirmButton;
 
     @FXML
     private JFXButton searchButton;
@@ -142,9 +142,6 @@ public class NewTransactionPageController implements Initializable {
     private Label confirmDateLabel;
 
     @FXML
-    private Label deletionNotificationLabel;
-
-    @FXML
     private Label warnMessageInAdd;
 
     @FXML
@@ -160,7 +157,10 @@ public class NewTransactionPageController implements Initializable {
     private ImageView binImage1, binImage2, binImage3, binImage4, binImage5, binImage6, binImage7;
 
     @FXML
-    private MFXGenericDialog deletionConfirmationDialog;
+    private ImageView deletionCross;
+
+    @FXML
+    private ImageView deletionTick;
 
     @FXML
     private MFXGenericDialog descriptionDialog;
@@ -185,6 +185,9 @@ public class NewTransactionPageController implements Initializable {
 
     @FXML
     private MFXProgressSpinner loadSpinnerInAdd;
+
+    @FXML
+    private MFXProgressSpinner loadSpinnerOnDeletePane;
 
     @FXML
     private MFXDatePicker datePicker = new MFXDatePicker(Locale.ENGLISH);
@@ -252,7 +255,7 @@ public class NewTransactionPageController implements Initializable {
         initializeLabels();
         blockPane.setVisible(false);
         DataUtils.publicTransactionBlockPane = blockPane;
-        deletionConfirmationDialog.setVisible(false);
+        deleteItemPane.setVisible(false);
         descriptionDialog.setVisible(false);
         addTransactionPane.setVisible(false);
         warnMessageInAdd.setVisible(false);
@@ -657,10 +660,8 @@ public class NewTransactionPageController implements Initializable {
 
     @FXML
     private void onCloseDeletionConfirmation() {
-        deletionConfirmationDialog.setVisible(false);
+        deleteItemPane.setVisible(false);
         blockPane.setVisible(false);
-        confirmButton.setDisable(false);
-        deletionNotificationLabel.setText("");
     }
 
     /**
@@ -720,9 +721,29 @@ public class NewTransactionPageController implements Initializable {
     }
 
     private void setDeletionPanes(int row) {
-        deletionConfirmationDialog.setVisible(true);
+        deleteItemPane.setVisible(true);
         blockPane.setVisible(true);
         setRemovalConfirmation(row);
+    }
+
+    @FXML
+    private void onEnterCross() {
+        setScaleTransition(deletionCross, 250, 1.1);
+    }
+
+    @FXML
+    private void onExitCross() {
+        setScaleTransition(deletionCross, 250, 1);
+    }
+
+    @FXML
+    private void onEnterTick() {
+        setScaleTransition(deletionTick, 250, 1.1);
+    }
+
+    @FXML
+    private void onExitTick() {
+        setScaleTransition(deletionTick, 250, 1);
     }
 
     /**
@@ -744,10 +765,23 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onConfirmDeletion() {
-        cachedTransactionService.deleteTransactionById(Integer.parseInt(confirmIdLabel.getText().split(":")[1].strip()));
-        confirmButton.setDisable(true);
-        deletionNotificationLabel.setText("Removal accomplished");
-        refreshPage();
+        deletionCross.setDisable(true);
+        deletionTick.setVisible(false);
+        loadSpinnerOnDeletePane.setVisible(true);
+        executorService.execute(() ->{
+            try{
+                cachedTransactionService.deleteTransactionById(Integer.parseInt(confirmIdLabel.getText().split(":")[1].strip()));
+                Platform.runLater(() -> {
+                    refreshPage();
+                });
+            }finally {
+                // restore nodes after a succeesful deletion
+                deletionCross.setDisable(false);
+                deletionTick.setVisible(true);
+                loadSpinnerOnDeletePane.setVisible(false);
+                onCloseDeletionConfirmation();
+            }
+        });
     }
 
     @FXML
@@ -1001,6 +1035,7 @@ public class NewTransactionPageController implements Initializable {
                         warnMessageInAdd.setVisible(false);
                     }
                     okayButton.setDisable(false);
+                    onClickOkayInAdd();
                 }
             });
         }

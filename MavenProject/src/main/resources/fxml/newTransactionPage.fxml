@@ -6,7 +6,6 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Pagination?>
@@ -612,7 +611,7 @@
          </graphic>
       </JFXButton>
       <Pagination fx:id="transactionPagination" layoutX="387.0" layoutY="589.0" maxPageIndicatorCount="8" pageCount="50" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" />
-      <MFXGenericDialog fx:id="descriptionDialog" headerText="Transaction Details" layoutX="301.0" onClose="#onCloseDescriptionDialog" showAlwaysOnTop="false" showMinimize="false" AnchorPane.topAnchor="150.0">
+      <MFXGenericDialog fx:id="descriptionDialog" headerText="Transaction Details" layoutX="301.0" onClose="#onCloseDescriptionDialog" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.topAnchor="150.0">
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
@@ -653,7 +652,7 @@
             </AnchorPane>
          </center>
       </MFXGenericDialog>
-      <AnchorPane fx:id="blockPane" layoutX="-4.0" layoutY="-9.0" opacity="0.75" prefHeight="649.0" prefWidth="1207.0" style="-fx-background-color: grey;" />
+      <AnchorPane fx:id="blockPane" layoutX="-4.0" layoutY="-9.0" opacity="0.75" prefHeight="649.0" prefWidth="1207.0" style="-fx-background-color: grey;" visible="false" />
       <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
          <children>
             <Label layoutX="421.0" layoutY="156.0" opacity="0.4" prefHeight="128.0" prefWidth="320.0" rotate="-38.7" text="TRANS" textFill="#9de4ed59">
@@ -752,13 +751,45 @@
                   <Font name="Calibri Bold" size="17.0" />
                </font>
             </MFXToggleButton>
+            <JFXButton fx:id="clearButton" layoutX="396.0" layoutY="291.0" onAction="#onClickClearInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #e9e9e9;" text="Clear">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+            </JFXButton>
          </children>
       </AnchorPane>
-      <MFXGenericDialog fx:id="deletionConfirmationDialog" headerText="Removal Confirmation" layoutX="10.0" layoutY="10.0" onClose="#onCloseDeletionConfirmation" prefHeight="217.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="203.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="220.0">
-         <center>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="4.0" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="deleteItemPane" layoutX="361.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f6f6f6; -fx-background-radius: 15;" visible="false">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Continue?" AnchorPane.leftAnchor="15.0">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+            </Label>
+            <Separator layoutX="7.0" layoutY="38.0" prefHeight="8.0" prefWidth="488.0" />
+            <Label layoutX="36.0" layoutY="48.0" text="You Are About To Delete A Transaction" textFill="#db5b5b" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="deletionTick" fitHeight="33.0" fitWidth="30.0" layoutX="459.0" layoutY="49.0" onMouseClicked="#onConfirmDeletion" onMouseEntered="#onEnterTick" onMouseExited="#onExitTick" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-checkmark-yes-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="deletionCross" fitHeight="28.0" fitWidth="25.0" layoutX="461.0" layoutY="11.0" onMouseClicked="#onCloseDeletionConfirmation" onMouseEntered="#onEnterCross" onMouseExited="#onExitCross" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-multiply-90.png" />
+               </image>
+            </ImageView>
+            <MFXProgressSpinner fx:id="loadSpinnerOnDeletePane" layoutX="461.0" layoutY="52.0" prefHeight="23.0" prefWidth="25.0" visible="false" />
+            <VBox alignment="TOP_CENTER" layoutX="79.0" layoutY="83.0" prefHeight="136.0" prefWidth="341.0" spacing="4.0">
                <children>
                   <Label fx:id="confirmStatusLabel" text="Status: ***">
+                     <font>
+                        <Font name="Candara Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="confirmCargoNameLabel" text="Item name: ***">
                      <font>
                         <Font name="Candara Bold" size="14.0" />
                      </font>
@@ -768,17 +799,7 @@
                         <Font name="Candara Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="confirmStaffNameLabel" text="Staff issued: ***">
-                     <font>
-                        <Font name="Candara Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="confirmCargoNameLabel" text="Cargo name: ***">
-                     <font>
-                        <Font name="Candara Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="confirmCargoUnitLabel" text="Cargo unit: ***">
+                  <Label fx:id="confirmCargoUnitLabel" text="Unit: ***">
                      <font>
                         <Font name="Candara Bold" size="14.0" />
                      </font>
@@ -788,17 +809,14 @@
                         <Font name="Candara Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="deletionNotificationLabel" prefHeight="17.0" prefWidth="165.0" textAlignment="CENTER" textFill="RED">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
+                  <Label fx:id="confirmStaffNameLabel" text="Staff issued: ***">
+                     <font>
+                        <Font name="Candara Bold" size="14.0" />
+                     </font>
                   </Label>
                </children>
             </VBox>
-         </center>
-         <bottom>
-            <JFXButton fx:id="confirmButton" onAction="#onConfirmDeletion" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Confirm" textFill="WHITE" BorderPane.alignment="CENTER" />
-         </bottom>
-      </MFXGenericDialog>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

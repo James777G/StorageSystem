@@ -521,8 +521,8 @@
             </AnchorPane>
          </center>
       </MFXGenericDialog>
-      <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" />
-      <AnchorPane fx:id="addStaffPane" layoutX="79.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
+      <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" visible="false" />
+      <AnchorPane fx:id="addStaffPane" layoutX="79.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 10;" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
          <children>
             <Label layoutX="454.0" layoutY="148.0" opacity="0.4" prefWidth="289.0" rotate="-38.7" text="STAFF" textFill="#9de4ed59">
                <font>
@@ -593,7 +593,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="deleteItemPane" layoutX="354.0" layoutY="101.0" prefHeight="91.0" prefWidth="495.0" style="-fx-background-color: #f6f6f6; -fx-background-radius: 15;">
+      <AnchorPane fx:id="deleteItemPane" layoutX="354.0" layoutY="101.0" prefHeight="91.0" prefWidth="495.0" style="-fx-background-color: #f6f6f6; -fx-background-radius: 15;" visible="false">
          <children>
             <Label layoutX="14.0" layoutY="14.0" text="Continue?" AnchorPane.leftAnchor="15.0">
                <font>
