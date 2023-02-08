@@ -1,23 +1,33 @@
 package org.maven.apache.service.item;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.maven.apache.item.Item;
 import org.maven.apache.mapper.ItemMapper;
+import org.maven.apache.mapper.TransactionMapper;
+import org.maven.apache.service.text.TransactionTextService;
+import org.maven.apache.transaction.Transaction;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Component("itemService")
 @Transactional
+@Data
 public class ItemServiceProvider implements ItemService{
 
     @Resource
     private ItemMapper itemMapper;
+
+    @Resource
+    private TransactionMapper transactionMapper;
+
+    @Resource
+    private TransactionTextService transactionTextService;
 
     public ItemMapper getItemMapper() {
         return itemMapper;
@@ -36,6 +46,16 @@ public class ItemServiceProvider implements ItemService{
     @Override
     public void addNewItem(Item item) {
         itemMapper.add(item);
+        Transaction transaction = new Transaction();
+        transaction.setItemName(item.getItemName());
+        transaction.setStatus("RESTOCK");
+        transaction.setUnit(item.getUnit());
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        transaction.setStaffName("SYSTEM");
+        transaction.setTransactionTime(dtf.format(now));
+        transaction.setPurpose(transactionTextService.getTextInAddItem(item.getItemName(), item.getUnit()));
+        transactionMapper.addNewTransaction(transaction);
     }
 
     /**
@@ -94,7 +114,18 @@ public class ItemServiceProvider implements ItemService{
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void deleteById(int id) {
+        Item item = itemMapper.selectById(id);
         itemMapper.deleteById(id);
+        Transaction transaction = new Transaction();
+        transaction.setStaffName("SYSTEM");
+        transaction.setItemName(item.getItemName());
+        transaction.setStatus("TAKEN");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        transaction.setTransactionTime(dtf.format(now));
+        transaction.setUnit(item.getUnit());
+        transaction.setPurpose(transactionTextService.getTextInDeleteItem(item.getItemName(), item.getUnit()));
+        transactionMapper.addNewTransaction(transaction);
     }
 
     /**

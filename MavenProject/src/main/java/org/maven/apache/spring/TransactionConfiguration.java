@@ -5,10 +5,12 @@ import javax.sql.DataSource;
 import org.maven.apache.mapper.*;
 import org.maven.apache.service.DateTransaction.DateTransactionServiceProvider;
 import org.maven.apache.service.item.ItemServiceProvider;
+import org.maven.apache.service.text.TransactionTextService;
 import org.maven.apache.service.transaction.CachedTransactionServiceProvider;
 import org.maven.apache.service.user.UserServiceProvider;
 import org.maven.apache.service.verificationCode.VerificationCodeServiceProvider;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -16,12 +18,15 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 @Configuration
 @Import(MyBatisAutoConfiguration.class)
+@ComponentScan(basePackages = "org.maven.apache.service")
 public class TransactionConfiguration {
 
 	@Bean
-	public ItemServiceProvider itemService(ItemMapper itemMapper) {
+	public ItemServiceProvider itemService(ItemMapper itemMapper, TransactionMapper transactionMapper, TransactionTextService transactionTextService) {
 		ItemServiceProvider itemService = new ItemServiceProvider();
 		itemService.setItemMapper(itemMapper);
+		itemService.setTransactionMapper(transactionMapper);
+		itemService.setTransactionTextService(transactionTextService);
 		return itemService;
 	}
 

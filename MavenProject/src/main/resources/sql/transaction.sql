@@ -9,7 +9,7 @@ create table if not exists TransactionTable
     Status      enum('TAKEN', 'RESTOCK')     not null,
     Unit        int                          not null,
     TransactionTime  varchar(30)             not null,
-    Purpose     varchar(60)
+    Purpose     varchar(300)
 );
 
 INSERT INTO TransactionTable(ItemName, StaffName, Status, Unit, TransactionTime, Purpose)
