@@ -109,6 +109,9 @@ public class NewTransactionPageController implements Initializable {
     private JFXButton okayButton;
 
     @FXML
+    private JFXButton clearButton;
+
+    @FXML
     private Label cargoLabel1, cargoLabel2, cargoLabel3, cargoLabel4, cargoLabel5, cargoLabel6, cargoLabel7;
 
     @FXML
@@ -267,6 +270,9 @@ public class NewTransactionPageController implements Initializable {
             updatePagination(newValue);
         });
         setInputValidation(newUnitTextField);
+
+
+        getNumOfTransaction();
     }
 
     /**
@@ -977,6 +983,19 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
+     * clear the properties of the new transaction from all text fields
+     */
+    @FXML
+    private void onClickClearInAdd(){
+        newItemTextField.clear();
+        newUnitTextField.clear();
+        newStaffTextField.clear();
+        datePicker.clear();
+        descriptionTextArea.clear();
+        warnMessageInAdd.setVisible(false);
+    }
+
+    /**
      * close the pane of adding new transaction
      */
     @FXML
@@ -986,7 +1005,7 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
-     * saves the properties of the added new transaction
+     * add a new transaction to database
      */
     @FXML
     private void onClickApplyInAdd() {
@@ -997,6 +1016,7 @@ public class NewTransactionPageController implements Initializable {
             applyButtonInAdd.setVisible(false);
             loadSpinnerInAdd.setVisible(true);
             okayButton.setDisable(true);
+            clearButton.setDisable(true);
             newTransactionID = getNumOfTransaction() + 1;
             newItemName = newItemTextField.getText();
             newStaffName = newStaffTextField.getText();
@@ -1035,7 +1055,7 @@ public class NewTransactionPageController implements Initializable {
                         warnMessageInAdd.setVisible(false);
                     }
                     okayButton.setDisable(false);
-                    onClickOkayInAdd();
+                    clearButton.setDisable(false);
                 }
             });
         }

@@ -726,7 +726,7 @@
                </image>
             </ImageView>
             <MFXProgressSpinner fx:id="loadSpinnerInAdd" layoutX="624.0" layoutY="295.0" prefHeight="18.0" prefWidth="25.0" />
-            <Label fx:id="warnMessageInAdd" layoutX="502.0" layoutY="225.0" text="Your action was not successful,&#10;please check if the fields&#10; have been filled." textFill="#a10000">
+            <Label fx:id="warnMessageInAdd" layoutX="483.0" layoutY="225.0" prefHeight="57.0" prefWidth="197.0" text="Your action was not successful,&#10;please check if the fields&#10; have been filled." textFill="#a10000">
                <font>
                   <Font name="Calibri Bold" size="13.0" />
                </font>
