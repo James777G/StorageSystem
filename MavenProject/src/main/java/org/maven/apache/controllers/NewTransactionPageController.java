@@ -32,6 +32,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
 
 public class NewTransactionPageController implements Initializable {
 
@@ -105,6 +106,9 @@ public class NewTransactionPageController implements Initializable {
     private JFXButton applyButtonInAdd;
 
     @FXML
+    private JFXButton okayButton;
+
+    @FXML
     private Label cargoLabel1, cargoLabel2, cargoLabel3, cargoLabel4, cargoLabel5, cargoLabel6, cargoLabel7;
 
     @FXML
@@ -141,7 +145,7 @@ public class NewTransactionPageController implements Initializable {
     private Label deletionNotificationLabel;
 
     @FXML
-    private Label notificationLabel;
+    private Label warnMessageInAdd;
 
     @FXML
     private Pagination transactionPagination;
@@ -202,6 +206,8 @@ public class NewTransactionPageController implements Initializable {
 
     private final CachedTransactionService cachedTransactionService = MyLauncher.context.getBean("cachedTransactionService", CachedTransactionService.class);
 
+    private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
+
     private List<List<Transaction>> sortedList;
 
     private List<Transaction> currentPageList;
@@ -219,6 +225,8 @@ public class NewTransactionPageController implements Initializable {
     private boolean isDateAscend = false;
 
     private boolean isAmountAscend = false;
+
+    private boolean isAdditionSucceed;
 
     private int currentPage;
 
@@ -247,6 +255,8 @@ public class NewTransactionPageController implements Initializable {
         deletionConfirmationDialog.setVisible(false);
         descriptionDialog.setVisible(false);
         addTransactionPane.setVisible(false);
+        warnMessageInAdd.setVisible(false);
+        loadSpinnerInAdd.setVisible(false);
         setPaginationPages(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_ASC_7));
         refreshPage();
         // perform the action of loading current page content when pagination is clicked
@@ -578,6 +588,7 @@ public class NewTransactionPageController implements Initializable {
     private void refreshPage() {
         setSortCondition();
         updatePagination(0);
+        transactionPagination.setCurrentPageIndex(0);
         setPaginationPages(sortedList);
     }
 
@@ -951,8 +962,12 @@ public class NewTransactionPageController implements Initializable {
     @FXML
     private void onClickApplyInAdd() {
         if (!isValidated()) {
-            notificationLabel.setText("Empty fields");
+            warnMessageInAdd.setVisible(true);
         } else {
+            isAdditionSucceed = true;
+            applyButtonInAdd.setVisible(false);
+            loadSpinnerInAdd.setVisible(true);
+            okayButton.setDisable(true);
             newTransactionID = getNumOfTransaction() + 1;
             newItemName = newItemTextField.getText();
             newStaffName = newStaffTextField.getText();
@@ -967,15 +982,32 @@ public class NewTransactionPageController implements Initializable {
                 transactionDate = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             }
             newTransaction = new Transaction();
-            if (statusToggleButton.isSelected()) {
-                // adding taken cargo
-                addNewTransaction("TAKEN", newTransactionID, newItemName, newStaffName, newUnitAmount, transactionDate, transactionDescription);
-            } else {
-                // adding restock cargo
-                addNewTransaction("RESTOCK", newTransactionID, newItemName, newStaffName, newUnitAmount, transactionDate, transactionDescription);
-            }
-            cachedTransactionService.addNewTransaction(newTransaction);
-            notificationLabel.setText("Transaction added successfully");
+            executorService.execute(() -> {
+                try{
+                    if (statusToggleButton.isSelected()) {
+                        // adding taken cargo
+                        addNewTransaction("TAKEN", newTransactionID, newItemName, newStaffName, newUnitAmount, transactionDate, transactionDescription);
+                    } else {
+                        // adding restock cargo
+                        addNewTransaction("RESTOCK", newTransactionID, newItemName, newStaffName, newUnitAmount, transactionDate, transactionDescription);
+                    }
+                    cachedTransactionService.addNewTransaction(newTransaction);
+                    Platform.runLater(() -> {
+                        refreshPage();
+                    });
+                }catch(Exception e){
+                    warnMessageInAdd.setVisible(true);
+                    isAdditionSucceed = false;
+                }finally{
+                    // restore nodes after a succeesful addition
+                    applyButtonInAdd.setVisible(true);
+                    loadSpinnerInAdd.setVisible(false);
+                    if (isAdditionSucceed){
+                        warnMessageInAdd.setVisible(false);
+                    }
+                    okayButton.setDisable(false);
+                }
+            });
         }
     }
 

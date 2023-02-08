@@ -717,7 +717,7 @@
                   <Image url="@../image/icons8-information-64.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="498.0" layoutY="291.0" onAction="#onClickOkayInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #e9e9e9;" text="Okay">
+            <JFXButton fx:id="okayButton" layoutX="498.0" layoutY="291.0" onAction="#onClickOkayInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #e9e9e9;" text="Okay">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
                </font>
@@ -728,7 +728,7 @@
                </image>
             </ImageView>
             <MFXProgressSpinner fx:id="loadSpinnerInAdd" layoutX="624.0" layoutY="295.0" prefHeight="18.0" prefWidth="25.0" />
-            <Label fx:id="warnMessageInAdd" layoutX="502.0" layoutY="225.0" text="Your action was not successful,&#10;please check if the item name &#10;and item amount have been filled." textFill="#a10000">
+            <Label fx:id="warnMessageInAdd" layoutX="502.0" layoutY="225.0" text="Your action was not successful,&#10;please check if the fields&#10; have been filled." textFill="#a10000">
                <font>
                   <Font name="Calibri Bold" size="13.0" />
                </font>
@@ -747,9 +747,8 @@
                   </TextField>
                </children>
             </AnchorPane>
-            <MFXDatePicker fx:id="datePicker" editable="false" layoutX="204.0" layoutY="132.0" prefHeight="38.0" prefWidth="180.0" />
-            <Label fx:id="notificationLabel" layoutX="451.0" layoutY="170.0" prefHeight="17.0" prefWidth="200.0" textAlignment="CENTER" textFill="RED" />
-            <MFXToggleButton fx:id="statusToggleButton" contentDisposition="RIGHT" layoutX="451.0" layoutY="131.0" onAction="#onToggle" text="Restock">
+            <MFXDatePicker fx:id="datePicker" editable="false" layoutX="197.0" layoutY="132.0" prefHeight="38.0" prefWidth="180.0" />
+            <MFXToggleButton fx:id="statusToggleButton" contentDisposition="RIGHT" layoutX="564.0" layoutY="5.0" onAction="#onToggle" text="Restock">
                <font>
                   <Font name="Calibri Bold" size="17.0" />
                </font>

@@ -147,19 +147,19 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
     @Transactional(propagation = Propagation.REQUIRED)
     public void addNewTransaction(Transaction transaction) {
         transactionMapper.addNewTransaction(transaction);
-//        final Item[] item = {new Item()};
-//        CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL)
-//                .forEach(items -> items.forEach(item1 -> {
-//            if (Objects.equals(item1.getItemName(), transaction.getItemName())){
-//                item[0] = item1;
-//            }
-//        }));
-//        if (Objects.equals(transaction.getStatus(), "TAKEN")) {
-//            item[0].setUnit(item[0].getUnit() - transaction.getUnit());
-//        } else if (Objects.equals(transaction.getStatus(), "RESTOCK")) {
-//            item[0].setUnit(item[0].getUnit() + transaction.getUnit());
-//        }
-//        cachedItemService.updateItem(item[0]);
+        final Item[] item = {new Item()};
+        CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL)
+                .forEach(items -> items.forEach(item1 -> {
+            if (Objects.equals(item1.getItemName(), transaction.getItemName())){
+                item[0] = item1;
+            }
+        }));
+        if (Objects.equals(transaction.getStatus(), "TAKEN")) {
+            item[0].setUnit(item[0].getUnit() - transaction.getUnit());
+        } else if (Objects.equals(transaction.getStatus(), "RESTOCK")) {
+            item[0].setUnit(item[0].getUnit() + transaction.getUnit());
+        }
+        cachedItemService.updateItem(item[0]);
         updateAllCachedTransactionData();
     }
     /**
