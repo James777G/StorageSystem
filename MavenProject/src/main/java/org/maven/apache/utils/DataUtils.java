@@ -3,6 +3,7 @@ package org.maven.apache.utils;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.AnchorPane;
+import org.maven.apache.controllers.NewTransactionPageController;
 import org.maven.apache.controllers.WarehouseController;
 import org.maven.apache.item.Item;
 import org.maven.apache.staff.Staff;
@@ -18,6 +19,10 @@ import java.util.Map;
 public class DataUtils {
 
     public static WarehouseController warehouseController;
+
+    public static NewTransactionPageController transactionPageController;
+
+    public static Pagination transactionPagination;
 
     public static User currentUser;
 
