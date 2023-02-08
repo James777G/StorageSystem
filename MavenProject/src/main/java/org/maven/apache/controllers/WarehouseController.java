@@ -4,7 +4,9 @@ import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
+import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,6 +24,8 @@ import org.maven.apache.service.search.SearchResultService;
 import org.maven.apache.service.search.SearchResultServiceHandler;
 import org.maven.apache.utils.CargoCachedUtils;
 import org.maven.apache.utils.ScaleUtils;
+import org.maven.apache.utils.TransitionUtils;
+import org.maven.apache.utils.TranslateUtils;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -242,8 +246,14 @@ public class WarehouseController implements Initializable {
      */
     private void setDeletionPanes(int row) {
         selectedItemID = itemList.get(row).getItemID();
+        deleteItemPane.setOpacity(0);
         deleteItemPane.setVisible(true);
         blockPane.setVisible(true);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,0,1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,-45,0);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     /**
@@ -409,8 +419,15 @@ public class WarehouseController implements Initializable {
 
     @FXML
     private void doNotContinue() {
-        deleteItemPane.setVisible(false);
-        blockPane.setVisible(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,1,0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,0,-45);
+        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+        translateTransition.setOnFinished(event -> {
+            deleteItemPane.setVisible(false);
+            blockPane.setVisible(false);
+        });
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     @FXML
@@ -419,9 +436,10 @@ public class WarehouseController implements Initializable {
         doContinueButton.setVisible(false);
         executorService.execute(() -> {
             cachedItemService.deleteItemById(selectedItemID);
+            cachedItemService.updateAllCachedItemData();
             Platform.runLater(() -> {
                 try {
-                    generateCachedData();
+                    calculatePageSize();
                 } catch (UnsupportedPojoException e) {
                     throw new RuntimeException(e);
                 }
@@ -429,10 +447,17 @@ public class WarehouseController implements Initializable {
             generateItemList(newPagination.getCurrentPageIndex());
             Platform.runLater(this::setTableContents);
             Platform.runLater(() -> {
-                loadSpinnerOnDeletePane.setVisible(false);
-                doContinueButton.setVisible(true);
-                deleteItemPane.setVisible(false);
-                blockPane.setVisible(false);
+                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,1,0);
+                TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,-0,-45);
+                translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+                translateTransition.setOnFinished(event -> {
+                    loadSpinnerOnDeletePane.setVisible(false);
+                    doContinueButton.setVisible(true);
+                    deleteItemPane.setVisible(false);
+                    blockPane.setVisible(false);
+                });
+                fadeTransition.play();
+                translateTransition.play();
             });
         });
     }
