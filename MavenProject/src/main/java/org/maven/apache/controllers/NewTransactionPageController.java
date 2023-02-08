@@ -1040,6 +1040,7 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickApplyInDetails(){
+        //TODO save new transaction information to the database
 
     }
 
