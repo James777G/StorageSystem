@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
    <children>
       <StackPane fx:id="staffPane" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
       <StackPane fx:id="stackPaneForWarehouse" layoutX="10.0" layoutY="10.0" prefHeight="640.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
@@ -167,6 +167,11 @@
             <Label layoutX="941.0" layoutY="371.0" prefHeight="25.0" prefWidth="55.0" text="Excel:" textFill="#223c40">
                <font>
                   <Font name="Calibri Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="994.0" layoutY="375.0" text="( filename.xls )">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
                </font>
             </Label>
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1057.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true">
@@ -388,6 +393,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
+            <AnchorPane fx:id="appPageBlockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" visible="false" AnchorPane.topAnchor="0.0" />
             <MFXGenericDialog fx:id="transactionDialog" headerText="Transaction Details" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseTransactionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
                <left>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -525,11 +531,6 @@
                   </AnchorPane>
                </left>
             </MFXGenericDialog>
-            <Label layoutX="994.0" layoutY="375.0" text="( filename.xls )">
-               <font>
-                  <Font name="Calibri Bold" size="14.0" />
-               </font>
-            </Label>
          </children>
          <padding>
             <Insets top="60.0" />

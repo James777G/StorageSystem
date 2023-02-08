@@ -256,6 +256,9 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private AnchorPane searchSwitchingBlockPane;
 
+    @FXML
+    private AnchorPane appPageBlockPane;
+
 
     @FXML
     private StackPane stackPane;
@@ -988,7 +991,16 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void onCloseTransactionDialog() {
         transaction = null;
-        transactionDialog.setVisible(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(transactionDialog,300,1,0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(transactionDialog,300,0,-200);
+        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+        translateTransition.setOnFinished(event -> {
+            transactionDialog.setVisible(false);
+            appPageBlockPane.setVisible(false);
+        });
+        fadeTransition.play();
+        translateTransition.play();
+
     }
 
     @FXML
@@ -1846,9 +1858,15 @@ public class AppPage2Controller implements Initializable {
         }
         transactionAmountInDetails.setText(String.valueOf(transaction.getUnit()));
         setTransactionDate(transactionDateInDetails, transaction);
+        appPageBlockPane.setVisible(true);
         transactionDialog.setVisible(true);
-        transactionDialog.setOpacity(1);
+        transactionDialog.setOpacity(0);
         transactionDialog.setPickOnBounds(true);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(transactionDialog,300,0, 1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(transactionDialog,300,-200,0);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     @FXML
@@ -1932,6 +1950,15 @@ public class AppPage2Controller implements Initializable {
                         cargoDialogApplyButton.setVisible(true);
                         loadSpinnerInAdd.setVisible(false);
                         warnMessageInAdd.setVisible(false);
+                        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(transactionDialog,300,1,0);
+                        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(transactionDialog,300,0,-200);
+                        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+                        translateTransition.setOnFinished(event -> {
+                            transactionDialog.setVisible(false);
+                            appPageBlockPane.setVisible(false);
+                        });
+                        fadeTransition.play();
+                        translateTransition.play();
                     });
                 }
             });
