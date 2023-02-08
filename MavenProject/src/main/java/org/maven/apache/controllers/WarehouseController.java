@@ -23,6 +23,7 @@ import org.maven.apache.service.item.CachedItemService;
 import org.maven.apache.service.search.SearchResultService;
 import org.maven.apache.service.search.SearchResultServiceHandler;
 import org.maven.apache.utils.CargoCachedUtils;
+import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.ScaleUtils;
 import org.maven.apache.utils.TransitionUtils;
 import org.maven.apache.utils.TranslateUtils;
@@ -165,6 +166,8 @@ public class WarehouseController implements Initializable {
                 change.getControlNewText().length() <= 50 ? change : null));
         loadSpinner.setVisible(false);
         descriptionDialog.setVisible(false);
+        DataUtils.pagination = newPagination;
+        DataUtils.warehouseController = this;
         warnMessage.setVisible(false);
         try {
             calculatePageSize();
@@ -789,12 +792,13 @@ public class WarehouseController implements Initializable {
     }
 
 
+
     /**
      * This method sets the latest item list based on the latest cached data
      *
      * @param index page number to be displayed
      */
-    private void generateItemList(int index) {
+    private void    generateItemList(int index) {
         try {
             if(!searchBar.getText().isBlank()){
                 itemList = searchResultService.getPagedResultList(CargoCachedUtils
