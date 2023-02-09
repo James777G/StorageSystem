@@ -52,7 +52,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="192.0" layoutY="180.0" prefHeight="60.0" prefWidth="900.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="150.0">
+      <AnchorPane layoutX="192.0" layoutY="180.0" onScroll="#onScrolled" prefHeight="60.0" prefWidth="900.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="150.0">
          <children>
             <Label layoutX="59.0" layoutY="20.0" text="Item" textFill="#223c40" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="20.0">
                <font>
@@ -97,7 +97,7 @@
             </DropShadow>
          </effect>
       </AnchorPane>
-      <AnchorPane layoutX="150.0" layoutY="240.0" prefHeight="50.0" prefWidth="901.0">
+      <AnchorPane layoutX="150.0" layoutY="240.0" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0">
          <children>
             <Label fx:id="itemNameOne" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="ItemName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
@@ -148,7 +148,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="150.0" layoutY="290.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
+      <AnchorPane layoutX="150.0" layoutY="290.0" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
          <children>
             <Label fx:id="itemNameTwo" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="ItemName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
@@ -199,7 +199,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="150.0" layoutY="340.0" prefHeight="50.0" prefWidth="901.0">
+      <AnchorPane layoutX="150.0" layoutY="340.0" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0">
          <children>
             <Label fx:id="itemNameThree" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="ItemName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
@@ -250,7 +250,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="150.0" layoutY="390.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
+      <AnchorPane layoutX="150.0" layoutY="390.0" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
          <children>
             <Label fx:id="itemNameFour" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="ItemName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
@@ -301,7 +301,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="150.0" layoutY="440.0" prefHeight="50.0" prefWidth="901.0">
+      <AnchorPane layoutX="150.0" layoutY="440.0" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0">
          <children>
             <Label fx:id="itemNameFive" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="ItemName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
@@ -352,7 +352,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="150.0" layoutY="490.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
+      <AnchorPane layoutX="150.0" layoutY="490.0" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
          <children>
             <Label fx:id="itemNameSix" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="ItemName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
@@ -403,7 +403,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="150.0" layoutY="540.0" prefHeight="50.0" prefWidth="901.0">
+      <AnchorPane layoutX="150.0" layoutY="540.0" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0">
          <children>
             <Label fx:id="itemNameSeven" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="ItemName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
@@ -551,7 +551,7 @@
       </AnchorPane>
       <BorderPane layoutX="221.0" layoutY="590.0" prefHeight="51.0" prefWidth="761.0">
          <center>
-            <Pagination fx:id="newPagination" maxPageIndicatorCount="8" pageCount="50" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" BorderPane.alignment="CENTER" />
+            <Pagination fx:id="newPagination" maxPageIndicatorCount="8" onScroll="#onScrolled" pageCount="50" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
       <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" visible="false" />

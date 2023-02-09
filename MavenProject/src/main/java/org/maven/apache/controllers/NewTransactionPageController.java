@@ -17,6 +17,7 @@ import javafx.scene.control.Pagination;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.exception.NegativeDataException;
@@ -1071,6 +1072,16 @@ public class NewTransactionPageController implements Initializable {
     private void onClickOkayInAdd() {
         addTransactionPane.setVisible(false);
         blockPane.setVisible(false);
+    }
+
+    @FXML
+    private void onScrolled(ScrollEvent event){
+        if(event.getDeltaY() > 0){
+            transactionPagination.setCurrentPageIndex(transactionPagination.getCurrentPageIndex() + 1);
+        }
+        if(event.getDeltaY() < 0){
+            transactionPagination.setCurrentPageIndex(transactionPagination.getCurrentPageIndex() - 1);
+        }
     }
 
     /**

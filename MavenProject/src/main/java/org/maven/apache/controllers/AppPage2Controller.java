@@ -106,7 +106,7 @@ public class AppPage2Controller implements Initializable {
     private TextArea purposeTextInDetails;
 
     @FXML
-    private TextField transactionAmountInDetails;
+    private Label transactionAmountInDetails;
 
     @FXML
     private ImageView extendArrow;
@@ -342,7 +342,7 @@ public class AppPage2Controller implements Initializable {
     private Label warnMessageInAdd;
 
     @FXML
-    private TextField transactionNameInDetails;
+    private Label transactionNameInDetails;
 
     @FXML
     private Label notificationLabel;

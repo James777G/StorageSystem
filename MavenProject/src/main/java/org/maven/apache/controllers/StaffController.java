@@ -10,6 +10,7 @@ import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -17,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.exception.EmptyValueException;
@@ -187,6 +189,16 @@ public class StaffController implements Initializable {
             throw new RuntimeException(e);
         }
         pagination.setPageCount(pageNumber);
+//        pagination.setOnScroll(new EventHandler<ScrollEvent>() {
+//            @Override
+//            public void handle(ScrollEvent event) {
+//                if(event.getDeltaY() > 0){
+//                    pagination.setCurrentPageIndex(pagination.getCurrentPageIndex() + 1);
+//                } else if(event.getDeltaY() < 0){
+//                    pagination.setCurrentPageIndex(pagination.getCurrentPageIndex() + 1);
+//                }
+//            }
+//        });
         pagination.currentPageIndexProperty().addListener((observable, oldValue, newValue) -> {
             getStaffList(newValue);
             assignStaffValue();
@@ -218,7 +230,15 @@ public class StaffController implements Initializable {
         });
         blockPane.setVisible(false);
     }
-
+    @FXML
+    private void onScrolled(ScrollEvent event){
+        if(event.getDeltaY() > 0){
+            pagination.setCurrentPageIndex(pagination.getCurrentPageIndex() + 1);
+        }
+        if(event.getDeltaY() < 0){
+            pagination.setCurrentPageIndex(pagination.getCurrentPageIndex() - 1);
+        }
+    }
     /**
      * This method updates the latest page number, thus should be executed every time when
      * there is an update in data or change in status

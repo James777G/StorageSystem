@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import lombok.extern.slf4j.Slf4j;
 import org.maven.apache.MyLauncher;
@@ -823,7 +824,15 @@ public class WarehouseController implements Initializable {
         setButtonContent();
         setDeleteContent();
     }
-
+    @FXML
+    private void onScrolled(ScrollEvent event){
+        if(event.getDeltaY() > 0){
+            newPagination.setCurrentPageIndex(newPagination.getCurrentPageIndex() + 1);
+        }
+        if(event.getDeltaY() < 0){
+            newPagination.setCurrentPageIndex(newPagination.getCurrentPageIndex() - 1);
+        }
+    }
     private void setDeleteContent() {
         for (int i = 0; i < itemList.size(); i++) {
             deleteList[i].setVisible(true);
