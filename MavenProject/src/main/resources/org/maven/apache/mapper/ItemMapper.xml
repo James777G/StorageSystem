@@ -115,5 +115,9 @@
         Limit #{pageNumberCal},#{pageSize};
     </select>
 
+    <select id="selectByItemName" resultType="org.maven.apache.item.Item">
+        select * from ItemTable where ItemName = #{itemName};
+    </select>
+
 
 </mapper>

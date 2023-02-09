@@ -20,7 +20,9 @@
         select * from TransactionTable
         order by str_to_date(TransactionTime, '%Y-%m-%d') asc;
     </select>
-
+    <select id="selectById" resultType="org.maven.apache.transaction.Transaction">
+        select * from TransactionTable where ID = #{id};
+    </select>
 
 
     <update id="IdGapInside">

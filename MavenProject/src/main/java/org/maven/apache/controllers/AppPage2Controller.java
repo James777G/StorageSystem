@@ -1941,14 +1941,16 @@ public class AppPage2Controller implements Initializable {
             warnMessageInAdd.setVisible(true);
             return;
         }
-        if (Objects.equals(encapsulatedTransaction,transaction)){return;}
+        if (Objects.equals(encapsulatedTransaction,transaction)){
+            return;
+        }
         cargoDialogApplyButton.setVisible(false);
         loadSpinnerInAdd.setVisible(true);
             executorService.execute(() ->{
-                try {
-                    cachedTransactionService.updateTransaction(encapsulatedTransaction);
+                cachedTransactionService.updateTransaction(encapsulatedTransaction);
+                try{
+
                 }
-                catch (Exception ignored){}
                 finally {
                     Platform.runLater(()->{
                         dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);

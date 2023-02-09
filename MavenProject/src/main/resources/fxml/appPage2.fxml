@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
    <children>
       <StackPane fx:id="staffPane" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
       <StackPane fx:id="stackPaneForWarehouse" layoutX="10.0" layoutY="10.0" prefHeight="640.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
@@ -394,7 +394,7 @@
                </children>
             </AnchorPane>
             <AnchorPane fx:id="appPageBlockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" visible="false" AnchorPane.topAnchor="0.0" />
-            <MFXGenericDialog fx:id="transactionDialog" headerText="Transaction Details" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseTransactionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
+            <MFXGenericDialog fx:id="transactionDialog" headerText="Transaction Details" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseTransactionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
                <left>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
@@ -430,11 +430,6 @@
                            </font>
                         </JFXButton>
                         <Separator layoutY="88.0" prefHeight="3.0" prefWidth="877.0" />
-                        <TextField fx:id="transactionNameInDetails" layoutX="562.0" layoutY="41.0" prefHeight="25.0" prefWidth="210.0">
-                           <font>
-                              <Font name="Calibri Bold" size="14.0" />
-                           </font>
-                        </TextField>
                         <TextField fx:id="staffNameInDetails" layoutX="252.0" layoutY="140.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="252.0">
                            <font>
                               <Font name="Calibri Bold" size="14.0" />
@@ -479,11 +474,6 @@
                               <Font name="Calibri Bold" size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="transactionAmountInDetails" layoutX="562.0" layoutY="140.0" prefHeight="27.0" prefWidth="101.0" text="01 : 00 : 34" AnchorPane.bottomAnchor="186.66666666666666" AnchorPane.leftAnchor="562.0">
-                           <font>
-                              <Font name="Calibri Bold" size="14.0" />
-                           </font>
-                        </TextField>
                         <JFXButton fx:id="statusTakenButton1" layoutX="252.0" layoutY="39.0" onAction="#onClickDialogTakenButton" prefHeight="30.0" prefWidth="75.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="252.0">
                            <graphic>
                               <Label pickOnBounds="false" text="  Taken" textFill="WHITE">
@@ -527,6 +517,16 @@
                            </font>
                         </Label>
                         <MFXProgressSpinner fx:id="loadSpinnerInAdd" layoutX="813.0" layoutY="326.0" prefHeight="18.0" prefWidth="25.0" visible="false" />
+                        <Label fx:id="transactionAmountInDetails" layoutX="562.0" layoutY="131.0" prefHeight="17.0" prefWidth="202.0" text="8888" AnchorPane.topAnchor="135.0">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="transactionNameInDetails" layoutX="562.0" layoutY="44.0" prefHeight="17.0" prefWidth="192.0" text="Label">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </left>

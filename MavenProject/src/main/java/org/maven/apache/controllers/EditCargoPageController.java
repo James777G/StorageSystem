@@ -16,6 +16,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.jetbrains.annotations.NotNull;
 import org.maven.apache.MyLauncher;
+import org.maven.apache.exception.DataNotFoundException;
+import org.maven.apache.exception.NegativeDataException;
+import org.maven.apache.exception.Warning;
 import org.maven.apache.service.transaction.CachedTransactionService;
 import org.maven.apache.transaction.Transaction;
 import org.maven.apache.utils.DataUtils;
@@ -115,6 +118,7 @@ public class EditCargoPageController implements Initializable {
      * add this new transaction record to the database
      */
     @FXML
+    @Warning(Warning.WarningType.IMPROVEMENT)
     private void onPostNewTransaction() {
         // check validation
         if (!isValidated()) {
@@ -141,7 +145,13 @@ public class EditCargoPageController implements Initializable {
                 // adding restock cargo
                 addNewTransaction("RESTOCK", newTransactionID, newItemName, newStaffName, newUnitAmount, transactionDate, transactionDescription);
             }
-            newCachedTransactionService.addNewTransaction(newTransaction);
+            try {
+                newCachedTransactionService.addNewTransaction(newTransaction);
+            } catch (DataNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (NegativeDataException e) {
+                throw new RuntimeException(e);
+            }
             notificationLabel.setText("Transaction added successfully");
         }
     }
