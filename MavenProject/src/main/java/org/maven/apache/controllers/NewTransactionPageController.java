@@ -19,6 +19,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.maven.apache.MyLauncher;
+import org.maven.apache.exception.NegativeDataException;
+import org.maven.apache.exception.Warning;
 import org.maven.apache.service.transaction.CachedTransactionService;
 import org.maven.apache.transaction.Transaction;
 import org.maven.apache.utils.DataUtils;
@@ -791,6 +793,7 @@ public class NewTransactionPageController implements Initializable {
      * user confirms to perform deletion
      */
     @FXML
+    @Warning(Warning.WarningType.IMPROVEMENT)
     private void onConfirmDeletion() {
         deletionCross.setDisable(true);
         deletionTick.setVisible(false);
@@ -801,7 +804,9 @@ public class NewTransactionPageController implements Initializable {
                 Platform.runLater(() -> {
                     refreshPage();
                 });
-            }finally {
+            } catch (NegativeDataException e) {
+                throw new RuntimeException(e);
+            } finally {
                 // restore nodes after a succeesful deletion
                 deletionCross.setDisable(false);
                 deletionTick.setVisible(true);

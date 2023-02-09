@@ -1,5 +1,7 @@
 package org.maven.apache.service.transaction;
 
+import org.maven.apache.exception.DataNotFoundException;
+import org.maven.apache.exception.NegativeDataException;
 import org.maven.apache.transaction.Transaction;
 
 public interface CachedTransactionService {
@@ -26,7 +28,7 @@ public interface CachedTransactionService {
      * </p>
      * @param transaction encapsulated transaction to be added
      */
-    void addNewTransaction(Transaction transaction);
+    void addNewTransaction(Transaction transaction) throws DataNotFoundException, NegativeDataException;
 
 
     /**
@@ -38,7 +40,7 @@ public interface CachedTransactionService {
      * </p>
      * @param id Transaction ID which is unique
      */
-    void deleteTransactionById(int id);
+    void deleteTransactionById(int id) throws NegativeDataException;
 
     /**
      * This method updates an existing transaction in the database.

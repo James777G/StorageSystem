@@ -45,6 +45,8 @@ public interface TransactionMapper {
      */
     void updateTransaction(Transaction transaction);
 
+    Transaction selectById(int id);
+
     /**
      * if id is not continuous use this to fix
      */

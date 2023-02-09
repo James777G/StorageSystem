@@ -27,6 +27,8 @@ public interface ItemMapper {
 	 * @return item
 	 */
 	Item selectById(int id);
+
+	Item selectByItemName(String itemName);
 	
 	/**
 	 * 模糊搜索 条件查询
