@@ -1171,8 +1171,6 @@ public class AppPage2Controller implements Initializable {
 
     private void setTransactionPane() {
         try {
-            //DataUtils.publicDataPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/transactionPage_data.fxml")));
-            DataUtils.editCargoPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/editCargoPane.fxml")));
             AnchorPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/newTransactionPage.fxml")));
             stackPane.getChildren().add(pane);
         } catch (IOException e) {

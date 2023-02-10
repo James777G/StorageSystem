@@ -157,6 +157,20 @@ public class NewTransactionPageController implements Initializable {
     private Label transactionIdLabel;
 
     @FXML
+    private Label transactionStatusInDetails;
+
+    @FXML
+    private Label transactionNameInDetails;
+
+    @FXML
+    private Label transactionDateInDetails;
+
+    @FXML
+    private Label transactionAmountInDetails;
+
+
+
+    @FXML
     private Pagination transactionPagination;
 
     @FXML
@@ -187,13 +201,7 @@ public class NewTransactionPageController implements Initializable {
     private TextField newStaffTextField;
 
     @FXML
-    private TextField transactionNameInDetails;
-
-    @FXML
     private TextField staffNameInDetails;
-
-    @FXML
-    private TextField transactionAmountInDetails;
 
     @FXML
     private TextArea descriptionTextArea;
@@ -214,13 +222,7 @@ public class NewTransactionPageController implements Initializable {
     private MFXDatePicker datePicker = new MFXDatePicker(Locale.ENGLISH);
 
     @FXML
-    private MFXDatePicker transactionDateInDetails;
-
-    @FXML
     private MFXToggleButton statusToggleButton;
-
-    @FXML
-    private MFXToggleButton statusToggleButtonInDetails;
 
     private Label[] cargoLabelArray = new Label[7];
 
@@ -964,49 +966,51 @@ public class NewTransactionPageController implements Initializable {
     }
 
     @FXML
-    private void onCheckDetails1() {
+    private void onEdit1() {
         setTransactionDetails(0);
     }
 
     @FXML
-    private void onCheckDetails2() {
+    private void onEdit2() {
         setTransactionDetails(1);
     }
 
     @FXML
-    private void onCheckDetails3() {
+    private void onEdit3() {
         setTransactionDetails(2);
     }
 
     @FXML
-    private void onCheckDetails4() {
+    private void onEdit4() {
         setTransactionDetails(3);
     }
 
     @FXML
-    private void onCheckDetails5() {
+    private void onEdit5() {
         setTransactionDetails(4);
     }
 
     @FXML
-    private void onCheckDetails6() {
+    private void onEdit6() {
         setTransactionDetails(5);
     }
 
     @FXML
-    private void onCheckDetails7() {
+    private void onEdit7() {
         setTransactionDetails(6);
     }
 
     /**
-     * set transaction details
+     * set transaction attributes
      *
      * @param row transaction entity at which row needs to be modified
      */
     private void setTransactionDetails(int row) {
         descriptionDialog.setVisible(true);
-        if (currentPageList.get(row).getStatus().equals("TAKEN")){
-            onToggleInDetails();
+        if (currentPageList.get(row).getStatus().equals("RESTOCK")){
+            transactionStatusInDetails.setText("RESTOCK");
+        }else{
+            transactionStatusInDetails.setText("TAKEN");
         }
         transactionIdLabel.setText(String.valueOf(currentPageList.get(row).getID()));
         transactionNameInDetails.setText(currentPageList.get(row).getItemName());
@@ -1023,17 +1027,6 @@ public class NewTransactionPageController implements Initializable {
         blockPane.setVisible(false);
     }
 
-    @FXML
-    private void onToggleInDetails(){
-        if (statusToggleButtonInDetails.isSelected()){
-            // convert status from RESTOCK to TAKEN
-            statusToggleButtonInDetails.setText("TAKEN");
-        }else{
-            // convert status from TAKEN to RESTOCK
-            statusToggleButtonInDetails.setText("RESTOCK");
-        }
-    }
-
     /**
      * close transaction modification page
      */
@@ -1044,7 +1037,7 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
-     * modify and overwrite new fields to a specified transaction
+     * modify and overwrite new staff or description fields to the specified transaction
      */
     @FXML
     private void onClickApplyInDetails(){
@@ -1142,7 +1135,7 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
-     * set current transaction status
+     * set new transaction status
      */
     @FXML
     private void onToggle(){
