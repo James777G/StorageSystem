@@ -54,7 +54,7 @@ public class WarehouseController implements Initializable {
     private Label itemAmountOne, itemAmountTwo, itemAmountThree, itemAmountFour, itemAmountFive, itemAmountSix, itemAmountSeven;
 
     @FXML
-    private JFXButton checkOne, checkTwo, checkThree, checkFour, checkFive, checkSix, checkSeven;
+    private JFXButton edit1, edit2, edit3, edit4, edit5, edit6, edit7;
 
     @FXML
     private ImageView deleteOne, deleteTwo, deleteThree, deleteFour, deleteFive, deleteSix, deleteSeven;
@@ -264,17 +264,69 @@ public class WarehouseController implements Initializable {
      * check button event in the warehouse item table
      */
     @FXML
-    private void onClickCheckOne() {
-        setItemAttributes(itemList.get(0));
+    private void onEdit1() {
+        if (itemList.get(0) != null) {
+            setItemAttributes(itemList.get(0));
+        }
     }
 
     /**
      * check button event in the warehouse item table
      */
     @FXML
-    private void onClickCheckTwo() {
+    private void onEdit2() {
         if (itemList.get(1) != null) {
             setItemAttributes(itemList.get(1));
+        }
+    }
+
+    /**
+     * check button event in the warehouse item table
+     */
+    @FXML
+    private void onEdit3() {
+        if (itemList.get(2) != null) {
+            setItemAttributes(itemList.get(2));
+        }
+    }
+
+    /**
+     * check button event in the warehouse item table
+     */
+    @FXML
+    private void onEdit4() {
+        if (itemList.get(3) != null) {
+            setItemAttributes(itemList.get(3));
+        }
+    }
+
+    /**
+     * check button event in the warehouse item table
+     */
+    @FXML
+    private void onEdit5() {
+        if (itemList.get(4) != null) {
+            setItemAttributes(itemList.get(4));
+        }
+    }
+
+    /**
+     * check button event in the warehouse item table
+     */
+    @FXML
+    private void onEdit6() {
+        if (itemList.get(5) != null) {
+            setItemAttributes(itemList.get(5));
+        }
+    }
+
+    /**
+     * check button event in the warehouse item table
+     */
+    @FXML
+    private void onEdit7() {
+        if (itemList.get(6) != null) {
+            setItemAttributes(itemList.get(6));
         }
     }
 
@@ -411,16 +463,6 @@ public class WarehouseController implements Initializable {
         scaleTransition.play();
     }
 
-    /**
-     * check button event in the warehouse item table
-     */
-    @FXML
-    private void onClickCheckThree() {
-        if (itemList.get(2) != null) {
-            setItemAttributes(itemList.get(2));
-        }
-    }
-
     @FXML
     private void doNotContinue() {
         FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,1,0);
@@ -464,46 +506,6 @@ public class WarehouseController implements Initializable {
                 translateTransition.play();
             });
         });
-    }
-
-    /**
-     * check button event in the warehouse item table
-     */
-    @FXML
-    private void onClickCheckFour() {
-        if (itemList.get(3) != null) {
-            setItemAttributes(itemList.get(3));
-        }
-    }
-
-    /**
-     * check button event in the warehouse item table
-     */
-    @FXML
-    private void onClickCheckFive() {
-        if (itemList.get(4) != null) {
-            setItemAttributes(itemList.get(4));
-        }
-    }
-
-    /**
-     * check button event in the warehouse item table
-     */
-    @FXML
-    private void onClickCheckSix() {
-        if (itemList.get(5) != null) {
-            setItemAttributes(itemList.get(5));
-        }
-    }
-
-    /**
-     * check button event in the warehouse item table
-     */
-    @FXML
-    private void onClickCheckSeven() {
-        if (itemList.get(6) != null) {
-            setItemAttributes(itemList.get(6));
-        }
     }
 
     /**
@@ -759,13 +761,13 @@ public class WarehouseController implements Initializable {
      * initialize everything in the table into an array for future access
      */
     private void initializeButtonList() {
-        buttonList[0] = checkOne;
-        buttonList[1] = checkTwo;
-        buttonList[2] = checkThree;
-        buttonList[3] = checkFour;
-        buttonList[4] = checkFive;
-        buttonList[5] = checkSix;
-        buttonList[6] = checkSeven;
+        buttonList[0] = edit1;
+        buttonList[1] = edit2;
+        buttonList[2] = edit3;
+        buttonList[3] = edit4;
+        buttonList[4] = edit5;
+        buttonList[5] = edit6;
+        buttonList[6] = edit7;
     }
 
     /**
