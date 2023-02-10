@@ -964,37 +964,37 @@ public class NewTransactionPageController implements Initializable {
     }
 
     @FXML
-    private void onCheckDetails1() {
+    private void onEdit1() {
         setTransactionDetails(0);
     }
 
     @FXML
-    private void onCheckDetails2() {
+    private void onEdit2() {
         setTransactionDetails(1);
     }
 
     @FXML
-    private void onCheckDetails3() {
+    private void onEdit3() {
         setTransactionDetails(2);
     }
 
     @FXML
-    private void onCheckDetails4() {
+    private void onEdit4() {
         setTransactionDetails(3);
     }
 
     @FXML
-    private void onCheckDetails5() {
+    private void onEdit5() {
         setTransactionDetails(4);
     }
 
     @FXML
-    private void onCheckDetails6() {
+    private void onEdit6() {
         setTransactionDetails(5);
     }
 
     @FXML
-    private void onCheckDetails7() {
+    private void onEdit7() {
         setTransactionDetails(6);
     }
 
