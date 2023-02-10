@@ -1037,7 +1037,7 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
-     * modify and overwrite new fields to a specified transaction
+     * modify and overwrite new staff or description fields to the specified transaction
      */
     @FXML
     private void onClickApplyInDetails(){
@@ -1135,7 +1135,7 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
-     * set current transaction status
+     * set new transaction status
      */
     @FXML
     private void onToggle(){
