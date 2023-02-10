@@ -362,7 +362,7 @@ public class NewTransactionPageController implements Initializable {
 
 
     /**
-     * set the content of transaction list from current page when the pagination is clicked
+     * update the content of which page is going to be indicated
      */
     private void updatePagination(Number currentPage) {
         currentPageList = sortedList.get(currentPage.intValue());
@@ -616,7 +616,7 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
-     * reload the content of current page
+     * recalculate the amount of pages by specifying a particular transaction list and jump into its initial page
      */
     private void refreshPage() {
         setSortCondition();
