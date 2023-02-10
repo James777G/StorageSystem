@@ -157,6 +157,20 @@ public class NewTransactionPageController implements Initializable {
     private Label transactionIdLabel;
 
     @FXML
+    private Label transactionStatusInDetails;
+
+    @FXML
+    private Label transactionNameInDetails;
+
+    @FXML
+    private Label transactionDateInDetails;
+
+    @FXML
+    private Label transactionAmountInDetails;
+
+
+
+    @FXML
     private Pagination transactionPagination;
 
     @FXML
@@ -187,13 +201,7 @@ public class NewTransactionPageController implements Initializable {
     private TextField newStaffTextField;
 
     @FXML
-    private TextField transactionNameInDetails;
-
-    @FXML
     private TextField staffNameInDetails;
-
-    @FXML
-    private TextField transactionAmountInDetails;
 
     @FXML
     private TextArea descriptionTextArea;
@@ -214,13 +222,7 @@ public class NewTransactionPageController implements Initializable {
     private MFXDatePicker datePicker = new MFXDatePicker(Locale.ENGLISH);
 
     @FXML
-    private MFXDatePicker transactionDateInDetails;
-
-    @FXML
     private MFXToggleButton statusToggleButton;
-
-    @FXML
-    private MFXToggleButton statusToggleButtonInDetails;
 
     private Label[] cargoLabelArray = new Label[7];
 
@@ -999,14 +1001,16 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
-     * set transaction details
+     * set transaction attributes
      *
      * @param row transaction entity at which row needs to be modified
      */
     private void setTransactionDetails(int row) {
         descriptionDialog.setVisible(true);
-        if (currentPageList.get(row).getStatus().equals("TAKEN")){
-            onToggleInDetails();
+        if (currentPageList.get(row).getStatus().equals("RESTOCK")){
+            transactionStatusInDetails.setText("RESTOCK");
+        }else{
+            transactionStatusInDetails.setText("TAKEN");
         }
         transactionIdLabel.setText(String.valueOf(currentPageList.get(row).getID()));
         transactionNameInDetails.setText(currentPageList.get(row).getItemName());
@@ -1021,17 +1025,6 @@ public class NewTransactionPageController implements Initializable {
     private void onCloseDescriptionDialog() {
         descriptionDialog.setVisible(false);
         blockPane.setVisible(false);
-    }
-
-    @FXML
-    private void onToggleInDetails(){
-        if (statusToggleButtonInDetails.isSelected()){
-            // convert status from RESTOCK to TAKEN
-            statusToggleButtonInDetails.setText("TAKEN");
-        }else{
-            // convert status from TAKEN to RESTOCK
-            statusToggleButtonInDetails.setText("RESTOCK");
-        }
     }
 
     /**
