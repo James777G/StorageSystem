@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 这个文件的文件路径不要动-->
+<!-- 名称空间-->
+<mapper namespace="org.maven.apache.mapper.MessageMapper">
+
+<!-- star 是deafult 后期update如果收藏-->
+    <insert id="addNewMessage">
+ insert into MessageTable (StaffName,Category,Information,MessageTime) values
+       (#{StaffName},#{Category},#{Information},#{MessageTime});
+    </insert>
+
+    <!--  -->
+
+    <update id="update">
+   update MessageTable
+       <set>
+          <if test=" StaffName!= null and StaffName !=''">
+             StaffName = #{StaffName},
+          </if>
+
+          <if test=" Category!= null and Category !=''">
+             Category = #{Category},
+          </if>
+          <if test=" Information!= null and Information !=''">
+             Information = #{Information},
+          </if>
+          <if test="MessageTime != null and MessageTime != ''">
+             MessageTime = #{MessageTime}
+          </if>
+
+       </set>
+ where MessageID =#{MessageID}
+    </update>
+
+    <!--  -->
+    <delete id="deleteById">
+   delete from MessageTable
+       where MessageID =#{id};
+
+    </delete>
+
+    <!--  -->
+
+    <select id="selectAll" resultType="org.maven.apache.message.Message">
+select * from MessageTable;
+
+    </select>
+
+    <!--  -->
+    <select id="selectById" resultType="org.maven.apache.message.Message">
+select * from MessageTable where MessageID=#{MessageID}
+
+
+    </select>
+
+    <!--  -->
+
+
+</mapper>
