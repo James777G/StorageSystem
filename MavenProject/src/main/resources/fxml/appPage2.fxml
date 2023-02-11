@@ -539,7 +539,7 @@
                   <Font name="Calibri Bold" size="16.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="notificationPane" layoutX="211.0" layoutY="127.0" prefHeight="292.0" prefWidth="460.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-radius: 20;" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="80.0">
+            <AnchorPane fx:id="notificationPane" layoutX="211.0" layoutY="127.0" prefHeight="292.0" prefWidth="460.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-radius: 20;" visible="false" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="80.0">
                <children>
                   <Label layoutX="27.0" layoutY="17.0" text="Notification Center">
                      <font>
