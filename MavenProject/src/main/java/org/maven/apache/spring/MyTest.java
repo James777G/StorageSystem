@@ -3,6 +3,7 @@ package org.maven.apache.spring;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
+import jakarta.mail.MessagingException;
 import org.maven.apache.exception.UnsupportedPojoException;
 import org.maven.apache.service.search.SearchResultService;
 import org.maven.apache.service.search.SearchResultServiceHandler;
@@ -72,7 +73,7 @@ public class MyTest {
 	}
 
 	@Test
-	public void test5() throws InterruptedException {
+	public void test5() throws InterruptedException, MessagingException {
 		MailService mailService = MyLauncher.context.getBean("mailService", MailService.class);
 		mailService.sendEmail("jamesgong0719@gmail.com", "123456999");
 		System.out.println("woshisheiasd");
