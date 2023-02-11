@@ -566,37 +566,40 @@
                         </Label>
                         <AnchorPane layoutY="25.0" AnchorPane.topAnchor="25.0">
                            <children>
-                              <AnchorPane prefHeight="37.0" prefWidth="338.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 10;">
+                              <AnchorPane fx:id="regulatorySpaceOne" prefHeight="37.0" prefWidth="338.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 10;">
                                  <children>
-                                    <Label layoutX="5.0" layoutY="9.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="9.0" />
-                                    <Label layoutX="188.0" layoutY="9.0" prefHeight="17.0" prefWidth="90.0" text="Label" AnchorPane.leftAnchor="188.0" AnchorPane.topAnchor="9.0" />
-                                    <ImageView fitHeight="30.0" fitWidth="26.0" layoutX="300.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="5.0">
+                                    <Label fx:id="regulatoryNameOne" layoutX="5.0" layoutY="9.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="9.0" />
+                                    <Label fx:id="regulatoryAmountOne" layoutX="188.0" layoutY="9.0" prefHeight="17.0" prefWidth="90.0" text="Label" AnchorPane.leftAnchor="188.0" AnchorPane.topAnchor="9.0" />
+                                    <ImageView fx:id="regulatoryDeleteOne" fitHeight="30.0" fitWidth="26.0" layoutX="300.0" layoutY="5.0" onMouseClicked="#onDeleteRegulatoryOne" onMouseEntered="#onEnterRegulatoryDeleteOne" onMouseExited="#onExitRegulatoryDeleteOne" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="5.0">
                                        <image>
                                           <Image url="@../image/icons8-delete-document-64.png" />
                                        </image>
                                     </ImageView>
+                                    <MFXProgressSpinner fx:id="regulatoryDeleteSpinnerOne" layoutX="303.0" layoutY="7.0" prefHeight="20.0" prefWidth="16.0" visible="false" AnchorPane.bottomAnchor="10.333333333333336" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="7.0" />
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutY="42.0" prefHeight="37.0" prefWidth="338.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 10;">
+                              <AnchorPane fx:id="regulatorySpaceTwo" layoutY="42.0" prefHeight="37.0" prefWidth="338.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 10;">
                                  <children>
-                                    <ImageView fitHeight="30.0" fitWidth="26.0" layoutX="298.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="5.0">
+                                    <ImageView fx:id="regulatoryDeleteTwo" fitHeight="30.0" fitWidth="26.0" layoutX="298.0" layoutY="6.0" onMouseClicked="#onDeleteRegulatoryTwo" onMouseEntered="#onEnterRegulatoryDeleteTwo" onMouseExited="#onExitRegulatoryDeleteTwo" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="5.0">
                                        <image>
                                           <Image url="@../image/icons8-delete-document-64.png" />
                                        </image>
                                     </ImageView>
-                                    <Label layoutY="10.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="9.0" />
-                                    <Label layoutX="187.0" layoutY="9.0" prefHeight="17.0" prefWidth="90.0" text="Label" AnchorPane.leftAnchor="187.0" AnchorPane.topAnchor="9.0" />
+                                    <Label fx:id="regulatoryNameTwo" layoutY="10.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="9.0" />
+                                    <Label fx:id="regulatoryAmountTwo" layoutX="187.0" layoutY="9.0" prefHeight="17.0" prefWidth="90.0" text="Label" AnchorPane.leftAnchor="187.0" AnchorPane.topAnchor="9.0" />
+                                    <MFXProgressSpinner fx:id="regulatoryDeleteSpinnerTwo" layoutX="305.0" layoutY="5.0" prefHeight="20.0" prefWidth="16.0" visible="false" AnchorPane.bottomAnchor="10.333333333333336" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="7.0" />
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutY="84.0" prefHeight="37.0" prefWidth="338.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 10;">
+                              <AnchorPane fx:id="regulatorySpaceThree" layoutY="84.0" prefHeight="37.0" prefWidth="338.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 10;">
                                  <children>
-                                    <ImageView fitHeight="30.0" fitWidth="26.0" layoutX="300.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="5.0">
+                                    <ImageView fx:id="regulatoryDeleteThree" fitHeight="30.0" fitWidth="26.0" layoutX="300.0" onMouseClicked="#onDeleteRegulatoryThree" onMouseEntered="#onEnterRegulatoryDeleteThree" onMouseExited="#onExitRegulatoryDeleteThree" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="5.0">
                                        <image>
                                           <Image url="@../image/icons8-delete-document-64.png" />
                                        </image>
                                     </ImageView>
-                                    <Label layoutX="9.0" layoutY="8.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="9.0" />
-                                    <Label layoutX="175.0" layoutY="6.0" prefHeight="17.0" prefWidth="90.0" text="Label" AnchorPane.leftAnchor="187.0" AnchorPane.topAnchor="9.0" />
+                                    <Label fx:id="regulatoryNameThree" layoutX="9.0" layoutY="8.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="9.0" />
+                                    <Label fx:id="regulatoryAmountThree" layoutX="175.0" layoutY="6.0" prefHeight="17.0" prefWidth="90.0" text="Label" AnchorPane.leftAnchor="187.0" AnchorPane.topAnchor="9.0" />
+                                    <MFXProgressSpinner fx:id="regulatoryDeleteSpinnerThree" layoutX="306.0" layoutY="3.0" prefHeight="20.0" prefWidth="16.0" visible="false" AnchorPane.bottomAnchor="10.333333333333336" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="7.0" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -675,12 +678,12 @@
                               <Font name="Calibri" size="12.0" />
                            </font>
                         </MFXTextField>
-                        <JFXButton fx:id="cargoApplyButton" layoutX="246.0" layoutY="84.0" prefHeight="27.0" prefWidth="65.0" style="-fx-background-color: #223c40;" text="Apply" textFill="WHITE">
+                        <JFXButton fx:id="cargoApplyButton" layoutX="246.0" layoutY="84.0" onAction="#onClickApplyInCargo" prefHeight="27.0" prefWidth="65.0" style="-fx-background-color: #223c40;" text="Apply" textFill="WHITE">
                            <font>
                               <Font name="Calibri Bold" size="14.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton layoutX="246.0" layoutY="33.0" prefHeight="27.0" prefWidth="65.0" style="-fx-background-color: #e4e4e4;" text="Clear">
+                        <JFXButton layoutX="246.0" layoutY="33.0" onAction="#onClearRegulatory" prefHeight="27.0" prefWidth="65.0" style="-fx-background-color: #e4e4e4;" text="Clear">
                            <font>
                               <Font name="Calibri Bold" size="14.0" />
                            </font>
@@ -723,6 +726,11 @@
                         <Image url="@../image/icons8-multiply-90.png" />
                      </image>
                   </ImageView>
+                  <Label fx:id="regulatoryWarnMessage" layoutX="27.0" layoutY="439.0" text="Please make sure data is correctly inserted" textFill="RED" visible="false">
+                     <font>
+                        <Font name="Calibri Bold" size="12.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </children>

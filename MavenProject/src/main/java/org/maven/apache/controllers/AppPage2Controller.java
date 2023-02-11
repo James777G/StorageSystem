@@ -30,12 +30,16 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.email.Email;
+import org.maven.apache.exception.DataNotFoundException;
 import org.maven.apache.exception.EmptyValueException;
 import org.maven.apache.exception.InvalidEmailFormatException;
 import org.maven.apache.exception.Warning;
+import org.maven.apache.regulatory.Regulatory;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
 import org.maven.apache.service.email.EmailService;
 import org.maven.apache.service.excel.ExcelConverterService;
+import org.maven.apache.service.regulatory.RegulatoryMailingStrategy;
+import org.maven.apache.service.regulatory.RegulatoryService;
 import org.maven.apache.service.search.PromptSearchBarServiceHandler;
 import org.maven.apache.service.search.SearchBarService;
 import org.maven.apache.service.transaction.CachedTransactionService;
@@ -567,9 +571,33 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private ImageView notificationCross;
 
+    @FXML
+    private Label regulatoryNameOne, regulatoryNameTwo, regulatoryNameThree, regulatoryAmountOne, regulatoryAmountTwo, regulatoryAmountThree;
+
+    private List<Label> regulatoryNameList = new ArrayList<>();
+
+    private List<Label> regulatoryAmountList = new ArrayList<>();
+
+    private final RegulatoryService regulatoryService = MyLauncher.context.getBean("regulatoryService", RegulatoryService.class);
+
+    @FXML
+    private AnchorPane regulatorySpaceOne, regulatorySpaceTwo, regulatorySpaceThree;
+
+    @FXML
+    private ImageView regulatoryDeleteOne, regulatoryDeleteTwo, regulatoryDeleteThree;
+
+    private List<AnchorPane> regulatorySpaceList = new ArrayList<>();
+
+    @FXML
+    private Label regulatoryWarnMessage;
+
+    @FXML
+    private MFXProgressSpinner regulatoryDeleteSpinnerOne, regulatoryDeleteSpinnerTwo, regulatoryDeleteSpinnerThree;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cachedTransactionService.updateAllCachedTransactionData();
+        regulatoryService.updateAllRegulatoryData();
         emailService.updateCachedEmailData();
         dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
         dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
@@ -577,6 +605,7 @@ public class AppPage2Controller implements Initializable {
         searchField.deselect();
         initializeEmailSpaceList();
         initializeEmails();
+        regulatoryWarnMessage.setVisible(false);
         setEmailTable(emailPagination.getCurrentPageIndex());
         emailPagination.setPageCount(EmailCachedUtils.getLists(EmailCachedUtils.listType.ALL).size());
         emailPagination.currentPageIndexProperty().addListener(new ChangeListener<Number>() {
@@ -592,6 +621,20 @@ public class AppPage2Controller implements Initializable {
         settingsDialog.setVisible(false);
         searchTable.setVisible(false);
         usernameLabel.setText(user.getName());
+
+        initializeRegulatoryAmountList();
+        initializeRegulatoryNameList();
+        initializeRegulatorySpaceList();
+        setCargoPageCount();
+        setCargoTable(cargoPagination.getCurrentPageIndex());
+        cargoPagination.setPageCount(RegulatoryCachedUtils.getLists(RegulatoryCachedUtils.listType.ALL).size());
+        cargoPagination.currentPageIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                setCargoTable(newValue.intValue());
+            }
+        });
+
 //        warehouseButton.setOpacity(0);
 //        staffButton.setOpacity(0);
 //        transactionButton.setOpacity(0);
@@ -643,6 +686,47 @@ public class AppPage2Controller implements Initializable {
         dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
     }
 
+    private void initializeRegulatoryNameList(){
+        regulatoryNameList.add(regulatoryNameOne);
+        regulatoryNameList.add(regulatoryNameTwo);
+        regulatoryNameList.add(regulatoryNameThree);
+    }
+
+    private void initializeRegulatoryAmountList(){
+        regulatoryAmountList.add(regulatoryAmountOne);
+        regulatoryAmountList.add(regulatoryAmountTwo);
+        regulatoryAmountList.add(regulatoryAmountThree);
+    }
+
+    private void initializeRegulatorySpaceList(){
+        regulatorySpaceList.add(regulatorySpaceOne);
+        regulatorySpaceList.add(regulatorySpaceTwo);
+        regulatorySpaceList.add(regulatorySpaceThree);
+    }
+
+    private void setCargoTable(int pageNumber){
+        List<Regulatory> regulatories = null;
+        try{
+            regulatories = RegulatoryCachedUtils.getLists(RegulatoryCachedUtils.listType.ALL)
+                    .get(pageNumber);
+        }catch (Exception e){
+            for(int i = 0; i < regulatorySpaceList.size(); i++){
+                regulatorySpaceList.get(i).setVisible(true);
+                regulatoryAmountList.get(i).setText("N/A");
+                regulatoryNameList.get(i).setText("N/A");
+            }
+            return;
+        }
+        for(int i = 0; i < regulatories.size(); i++){
+            regulatorySpaceList.get(i).setVisible(true);
+            regulatoryNameList.get(i).setText(regulatories.get(i).getItemName());
+            regulatoryAmountList.get(i).setText(String.valueOf(regulatories.get(i).getItemAmount()));
+        }
+        for(int i = regulatories.size(); i < regulatoryAmountList.size(); i++){
+            regulatorySpaceList.get(i).setVisible(false);
+        }
+    }
+
     private void initializeEmails() {
         emailList.add(emailOne);
         emailList.add(emailTwo);
@@ -655,9 +739,107 @@ public class AppPage2Controller implements Initializable {
     }
 
     @FXML
+    private void onClickApplyInCargo(){
+        Regulatory regulatory = null;
+        try{
+            regulatory = encapsulateRegulatoryData();
+        } catch (EmptyValueException e){
+            regulatoryWarnMessage.setVisible(true);
+            return;
+        }
+
+        Regulatory finalRegulatory = regulatory;
+        executorService.execute(() -> {
+            Platform.runLater(() -> {
+                cargoApplyButton.setVisible(false);
+                cargoSpinner.setVisible(true);
+            });
+            try{
+                regulatoryService.addNewRegulatory(finalRegulatory);
+                Platform.runLater(() -> regulatoryWarnMessage.setVisible(false));
+            } catch (Exception e) {
+                Platform.runLater(() -> {
+                    regulatoryWarnMessage.setVisible(true);
+                });
+            } finally {
+                regulatoryService.updateAllRegulatoryData();
+                Platform.runLater(() -> {
+                    setCargoPageCount();
+                    setCargoTable(cargoPagination.getCurrentPageIndex());
+                    cargoApplyButton.setVisible(true);
+                    cargoSpinner.setVisible(false);
+                });
+            }
+        });
+    }
+
+    @FXML
+    private void onClearRegulatory(){
+        cargoAmountTextField.clear();
+        cargoNameTextField.clear();
+    }
+
+    private Regulatory encapsulateRegulatoryData() throws EmptyValueException {
+        Regulatory regulatory = new Regulatory();
+        if(cargoNameTextField.getText().isBlank() || cargoAmountTextField.getText().isBlank()){
+            throw new EmptyValueException("Regulatory Necessary Data Left Unhandled");
+        }
+        try{
+            regulatory.setItemName(cargoNameTextField.getText());
+            regulatory.setItemAmount(Integer.parseInt(cargoAmountTextField.getText()));
+        }catch (Exception e){
+            throw new EmptyValueException("wrong data format in regulatory");
+        }
+
+        return regulatory;
+    }
+
+    @FXML
     @Warning(Warning.WarningType.IMPROVEMENT)
     private void onClickAlert() {
         notificationPane.setVisible(true);
+    }
+
+    @FXML
+    private void onEnterRegulatoryDeleteOne(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(regulatoryDeleteOne, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onEnterRegulatoryDeleteTwo(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(regulatoryDeleteTwo, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onEnterRegulatoryDeleteThree(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(regulatoryDeleteThree, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitRegulatoryDeleteOne(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(regulatoryDeleteOne, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitRegulatoryDeleteTwo(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(regulatoryDeleteTwo, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitRegulatoryDeleteThree(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(regulatoryDeleteThree, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
     }
 
     @FXML
@@ -776,13 +958,80 @@ public class AppPage2Controller implements Initializable {
         });
     }
 
+    @FXML
+    private void onDeleteRegulatoryOne(){
+        regulatoryDeleteSpinnerOne.setVisible(true);
+        regulatoryDeleteOne.setVisible(false);
+        executorService.execute(() -> {
+            try{
+                regulatoryService.deleteRegulatory(regulatoryNameOne.getText());
+            } catch(Exception e){
+                regulatoryService.updateAllRegulatoryData();
+            }finally {
+                Platform.runLater(() ->{
+                    setCargoTable(cargoPagination.getCurrentPageIndex());
+                    setCargoPageCount();
+                    regulatoryDeleteOne.setVisible(true);
+                    regulatoryDeleteSpinnerOne.setVisible(false);
+                });
+            }
+        });
+    }
+
+    @FXML
+    private void onDeleteRegulatoryTwo(){
+        regulatoryDeleteSpinnerTwo.setVisible(true);
+        regulatoryDeleteTwo.setVisible(false);
+        executorService.execute(() -> {
+            try{
+                regulatoryService.deleteRegulatory(regulatoryNameTwo.getText());
+            } catch(Exception e){
+                regulatoryService.updateAllRegulatoryData();
+            }finally {
+                Platform.runLater(() ->{
+                    setCargoTable(cargoPagination.getCurrentPageIndex());
+                    setCargoPageCount();
+                    regulatoryDeleteTwo.setVisible(true);
+                    regulatoryDeleteSpinnerTwo.setVisible(false);
+                });
+            }
+        });
+    }
+
+    @FXML
+    private void onDeleteRegulatoryThree(){
+        regulatoryDeleteSpinnerThree.setVisible(true);
+        regulatoryDeleteThree.setVisible(false);
+        executorService.execute(() -> {
+            try{
+                regulatoryService.deleteRegulatory(regulatoryNameThree.getText());
+            } catch(Exception e){
+                regulatoryService.updateAllRegulatoryData();
+            }finally {
+                Platform.runLater(() ->{
+                    setCargoTable(cargoPagination.getCurrentPageIndex());
+                    setCargoPageCount();
+                    regulatoryDeleteThree.setVisible(true);
+                    regulatoryDeleteSpinnerThree.setVisible(false);
+                });
+            }
+        });
+    }
+
     private void setEmailPageCount() {
         if(EmailCachedUtils.getLists(EmailCachedUtils.listType.ALL).size() != 0){
             emailPagination.setPageCount(EmailCachedUtils.getLists(EmailCachedUtils.listType.ALL).size());
         }else{
             emailPagination.setPageCount(1);
         }
+    }
 
+    private void setCargoPageCount(){
+        if(RegulatoryCachedUtils.getLists(RegulatoryCachedUtils.listType.ALL).size() != 0){
+            cargoPagination.setPageCount(RegulatoryCachedUtils.getLists(RegulatoryCachedUtils.listType.ALL).size());
+        } else{
+            cargoPagination.setPageCount(1);
+        }
     }
 
     private Email encapsulateEmailData() throws InvalidEmailFormatException {
@@ -2233,6 +2482,7 @@ public class AppPage2Controller implements Initializable {
         fadeTransition.play();
         translateTransition.play();
     }
+
 
     @FXML
     private void onClickTransactionOne() {

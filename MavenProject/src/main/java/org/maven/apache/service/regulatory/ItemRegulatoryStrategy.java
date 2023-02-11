@@ -5,7 +5,9 @@ import org.maven.apache.item.Item;
 import org.maven.apache.mapper.ItemMapper;
 import org.maven.apache.mapper.RegulatoryMapper;
 import org.maven.apache.regulatory.Regulatory;
+import org.springframework.stereotype.Service;
 
+@Service("regulatoryItemStrategy")
 public final class ItemRegulatoryStrategy extends AbstractRegulatoryStrategy {
 
     @Override
