@@ -112,16 +112,18 @@
                </font>
             </Label>
             <Separator layoutX="37.0" layoutY="43.0" prefWidth="100.0" />
-            <ImageView fx:id="sortByAmount" fitHeight="13.0" fitWidth="13.0" layoutX="592.0" layoutY="26.0" onMouseClicked="#onClickAmount" onMouseEntered="#onEnterAmount" onMouseExited="#onExitAmount" onMousePressed="#onPressedAmount" onMouseReleased="#onReleaseAmount" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="sortByAmount" fitHeight="13.0" fitWidth="13.0" layoutX="592.0" layoutY="26.0" onMouseClicked="#onClickAmount" onMouseEntered="#onEnterAmount" onMouseExited="#onExitAmount" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="592.0" AnchorPane.topAnchor="26.0">
+               <image>
+                  <Image url="@../image/icons8-horizontal-line-96.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="sortByDate" fitHeight="13.0" fitWidth="13.0" layoutX="748.0" layoutY="26.0" onMouseClicked="#onClickDate" onMouseEntered="#onEnterDate" onMouseExited="#onExitDate" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="748.0" AnchorPane.topAnchor="26.0">
                <image>
                   <Image url="@../image/icons8-sort-down-100.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="sortByDate" fitHeight="13.0" fitWidth="13.0" layoutX="748.0" layoutY="26.0" onMouseClicked="#onClickDate" onMouseEntered="#onEnterDate" onMouseExited="#onExitDate" onMousePressed="#onPressedDate" onMouseReleased="#onReleaseDate" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/icons8-sort-down-100.png" />
-               </image>
-            </ImageView>
+            <AnchorPane fx:id="amountArrowBlockPane" layoutX="758.0" layoutY="36.0" prefHeight="13.0" prefWidth="13.0" AnchorPane.leftAnchor="592.0" AnchorPane.topAnchor="26.0" />
+            <AnchorPane fx:id="dateArrowBlockPane" layoutX="577.0" layoutY="-67.0" prefHeight="13.0" prefWidth="13.0" AnchorPane.leftAnchor="748.0" AnchorPane.topAnchor="26.0" />
          </children>
          <effect>
             <DropShadow blurType="ONE_PASS_BOX">
@@ -175,9 +177,9 @@
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <ImageView fx:id="binImage1" fitHeight="25.0" fitWidth="25.0" layoutX="961.0" layoutY="12.0" onMouseClicked="#onClickBin1" onMouseEntered="#onEnterBin1" onMouseExited="#onExitBin1" onMousePressed="#onPressBin1" onMouseReleased="#onReleaseBin1" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.0">
+            <ImageView fx:id="binImage1" fitHeight="40.0" fitWidth="28.0" layoutX="961.0" layoutY="12.0" onMouseClicked="#onClickBin1" onMouseEntered="#onEnterBin1" onMouseExited="#onExitBin1" onMousePressed="#onPressBin1" onMouseReleased="#onReleaseBin1" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0">
                <image>
-                  <Image url="@../image/icons8-trash-can-48.png" />
+                  <Image url="@../image/icons8-delete-document-64.png" />
                </image>
             </ImageView>
          </children>
@@ -226,9 +228,9 @@
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <ImageView fx:id="binImage2" fitHeight="25.0" fitWidth="25.0" layoutX="959.0" layoutY="14.0" onMouseClicked="#onClickBin2" onMouseEntered="#onEnterBin2" onMouseExited="#onExitBin2" onMousePressed="#onPressBin2" onMouseReleased="#onReleaseBin2" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="15.0">
+            <ImageView fx:id="binImage2" fitHeight="40.0" fitWidth="28.0" layoutX="959.0" layoutY="14.0" onMouseClicked="#onClickBin2" onMouseEntered="#onEnterBin2" onMouseExited="#onExitBin2" onMousePressed="#onPressBin2" onMouseReleased="#onReleaseBin2" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0">
                <image>
-                  <Image url="@../image/icons8-trash-can-48.png" />
+                  <Image url="@../image/icons8-delete-document-64.png" />
                </image>
             </ImageView>
          </children>
@@ -277,9 +279,9 @@
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <ImageView fx:id="binImage3" fitHeight="25.0" fitWidth="25.0" layoutX="963.0" layoutY="16.0" onMouseClicked="#onClickBin3" onMouseEntered="#onEnterBin3" onMouseExited="#onExitBin3" onMousePressed="#onPressBin3" onMouseReleased="#onReleaseBin3" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="13.0">
+            <ImageView fx:id="binImage3" fitHeight="40.0" fitWidth="28.0" layoutX="963.0" layoutY="16.0" onMouseClicked="#onClickBin3" onMouseEntered="#onEnterBin3" onMouseExited="#onExitBin3" onMousePressed="#onPressBin3" onMouseReleased="#onReleaseBin3" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0">
                <image>
-                  <Image url="@../image/icons8-trash-can-48.png" />
+                  <Image url="@../image/icons8-delete-document-64.png" />
                </image>
             </ImageView>
          </children>
@@ -328,9 +330,9 @@
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <ImageView fx:id="binImage4" fitHeight="25.0" fitWidth="25.0" layoutX="962.0" layoutY="16.0" onMouseClicked="#onClickBin4" onMouseEntered="#onEnterBin4" onMouseExited="#onExitBin4" onMousePressed="#onPressBin4" onMouseReleased="#onReleaseBin4" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+            <ImageView fx:id="binImage4" fitHeight="40.0" fitWidth="28.0" layoutX="962.0" layoutY="16.0" onMouseClicked="#onClickBin4" onMouseEntered="#onEnterBin4" onMouseExited="#onExitBin4" onMousePressed="#onPressBin4" onMouseReleased="#onReleaseBin4" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0">
                <image>
-                  <Image url="@../image/icons8-trash-can-48.png" />
+                  <Image url="@../image/icons8-delete-document-64.png" />
                </image>
             </ImageView>
          </children>
@@ -379,9 +381,9 @@
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <ImageView fx:id="binImage5" fitHeight="25.0" fitWidth="25.0" layoutX="961.0" layoutY="14.0" onMouseClicked="#onClickBin5" onMouseEntered="#onEnterBin5" onMouseExited="#onExitBin5" onMousePressed="#onPressBin5" onMouseReleased="#onReleaseBin5" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="14.0">
+            <ImageView fx:id="binImage5" fitHeight="40.0" fitWidth="28.0" layoutX="961.0" layoutY="14.0" onMouseClicked="#onClickBin5" onMouseEntered="#onEnterBin5" onMouseExited="#onExitBin5" onMousePressed="#onPressBin5" onMouseReleased="#onReleaseBin5" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0">
                <image>
-                  <Image url="@../image/icons8-trash-can-48.png" />
+                  <Image url="@../image/icons8-delete-document-64.png" />
                </image>
             </ImageView>
          </children>
@@ -430,9 +432,9 @@
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <ImageView fx:id="binImage6" fitHeight="25.0" fitWidth="25.0" layoutX="961.0" layoutY="13.0" onMouseClicked="#onClickBin6" onMouseEntered="#onEnterBin6" onMouseExited="#onExitBin6" onMousePressed="#onPressBin6" onMouseReleased="#onReleaseBin6" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+            <ImageView fx:id="binImage6" fitHeight="40.0" fitWidth="28.0" layoutX="961.0" layoutY="13.0" onMouseClicked="#onClickBin6" onMouseEntered="#onEnterBin6" onMouseExited="#onExitBin6" onMousePressed="#onPressBin6" onMouseReleased="#onReleaseBin6" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0">
                <image>
-                  <Image url="@../image/icons8-trash-can-48.png" />
+                  <Image url="@../image/icons8-delete-document-64.png" />
                </image>
             </ImageView>
          </children>
@@ -481,9 +483,9 @@
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <ImageView fx:id="binImage7" fitHeight="25.0" fitWidth="25.0" layoutX="961.0" layoutY="16.0" onMouseClicked="#onClickBin7" onMouseEntered="#onEnterBin7" onMouseExited="#onExitBin7" onMousePressed="#onPressBin7" onMouseReleased="#onReleaseBin7" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="14.0">
+            <ImageView fx:id="binImage7" fitHeight="40.0" fitWidth="28.0" layoutX="961.0" layoutY="16.0" onMouseClicked="#onClickBin7" onMouseEntered="#onEnterBin7" onMouseExited="#onExitBin7" onMousePressed="#onPressBin7" onMouseReleased="#onReleaseBin7" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0">
                <image>
-                  <Image url="@../image/icons8-trash-can-48.png" />
+                  <Image url="@../image/icons8-delete-document-64.png" />
                </image>
             </ImageView>
          </children>
@@ -793,7 +795,7 @@
             </JFXButton>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="deleteItemPane" layoutX="361.0" layoutY="100.0" prefHeight="220.0" prefWidth="200.0" style="-fx-background-color: #f6f6f6; -fx-background-radius: 15;">
+      <AnchorPane fx:id="deleteItemPane" layoutX="361.0" layoutY="100.0" prefHeight="220.0" prefWidth="200.0" style="-fx-background-color: #f6f6f6; -fx-background-radius: 15;" visible="false">
          <children>
             <Label layoutX="14.0" layoutY="14.0" text="Continue?" AnchorPane.leftAnchor="15.0">
                <font>
