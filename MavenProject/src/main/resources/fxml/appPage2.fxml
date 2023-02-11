@@ -733,6 +733,15 @@
                   </Label>
                </children>
             </AnchorPane>
+            <AnchorPane layoutX="14.0" layoutY="73.0" onMouseClicked="#onNotify" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white; -fx-background-radius: 500; -fx-border-color: #cccccc; -fx-border-radius: 500;">
+               <children>
+                  <ImageView fitHeight="30.0" fitWidth="65.0" layoutX="15.0" layoutY="15.0" opacity="0.67" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-alarm-50.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
          </children>
          <padding>
             <Insets top="60.0" />

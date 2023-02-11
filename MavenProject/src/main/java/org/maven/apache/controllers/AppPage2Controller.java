@@ -38,6 +38,7 @@ import org.maven.apache.regulatory.Regulatory;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
 import org.maven.apache.service.email.EmailService;
 import org.maven.apache.service.excel.ExcelConverterService;
+import org.maven.apache.service.mail.MailNotifyService;
 import org.maven.apache.service.regulatory.RegulatoryMailingStrategy;
 import org.maven.apache.service.regulatory.RegulatoryService;
 import org.maven.apache.service.search.PromptSearchBarServiceHandler;
@@ -189,6 +190,8 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private AnchorPane takenStatusPane;
+
+    private final MailNotifyService mailNotifyService = MyLauncher.context.getBean("mailNotifyService", MailNotifyService.class);
 
     @FXML
     private AnchorPane restockStatusPane;
@@ -1784,6 +1787,11 @@ public class AppPage2Controller implements Initializable {
             throw new RuntimeException(e);
         }
         disableNode(stackPane);
+    }
+
+    @FXML
+    private void onNotify(){
+        mailNotifyService.notifyUsers();
     }
 
     private void setWarehousePane() {
