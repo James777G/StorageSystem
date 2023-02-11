@@ -91,9 +91,9 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public void deleteTransactionById(int id) throws NegativeDataException {
+        strategiesHandler.doStrategies(itemMapper,transactionMapper,id);
         transactionMapper.deleteTransactionById(id);
         updateAllCachedTransactionData();
-        strategiesHandler.doStrategies(itemMapper,transactionMapper,id);
     }
 
     /**
