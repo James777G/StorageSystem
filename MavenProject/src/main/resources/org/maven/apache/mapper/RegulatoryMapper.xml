@@ -19,5 +19,8 @@
     <select id="selectAll" resultType="org.maven.apache.regulatory.Regulatory">
         select * from RegulatoryTable;
     </select>
+    <select id="selectByName" resultType="org.maven.apache.regulatory.Regulatory">
+        select * from RegulatoryTable where ItemName = #{name};
+    </select>
 
 </mapper>

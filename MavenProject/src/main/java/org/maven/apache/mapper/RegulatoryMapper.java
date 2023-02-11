@@ -13,4 +13,6 @@ public interface RegulatoryMapper {
     void addNewRegulatory(Regulatory regulatory);
 
     void deleteRegulatory(String itemName);
+
+    Regulatory selectByName(String name);
 }

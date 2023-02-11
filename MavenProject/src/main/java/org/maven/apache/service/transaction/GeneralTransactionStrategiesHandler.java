@@ -17,15 +17,20 @@ public class GeneralTransactionStrategiesHandler implements GeneralTransactionSt
     @Resource
     private AbstractTransactionStrategy cargoDataStrategy;
 
+    @Resource
+    private AbstractTransactionStrategy alertStrategy;
+
     @Override
     public void doStrategies(ItemMapper itemMapper, TransactionMapper transactionMapper, Transaction transaction) throws DataNotFoundException, NegativeDataException {
         cargoDataStrategy.doStrategy(itemMapper, transactionMapper, transaction);
         warehouseStrategy.doStrategy(itemMapper, transactionMapper, transaction);
+        alertStrategy.doStrategy(itemMapper, transactionMapper, transaction);
     }
 
     @Override
     public void doStrategies(ItemMapper itemMapper, TransactionMapper transactionMapper, int id) throws NegativeDataException {
         cargoDataStrategy.doStrategy(itemMapper, transactionMapper, id);
         warehouseStrategy.doStrategy(itemMapper, transactionMapper, id);
+        alertStrategy.doStrategy(itemMapper, transactionMapper, id);
     }
 }

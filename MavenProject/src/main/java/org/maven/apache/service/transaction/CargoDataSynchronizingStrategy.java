@@ -42,7 +42,7 @@ public final class CargoDataSynchronizingStrategy extends AbstractTransactionStr
         try{
             item = itemMapper.selectByItemName(transaction.getItemName());
         }catch (Exception ignored){
-
+            return;
         }
 
         // increase item unit
@@ -64,7 +64,7 @@ public final class CargoDataSynchronizingStrategy extends AbstractTransactionStr
         try{
             item = itemMapper.selectByItemName(transaction.getItemName());
         }catch (Exception ignored){
-
+            return;
         }
 
         // decrease item unit
