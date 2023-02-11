@@ -5,6 +5,7 @@ import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
+import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -19,15 +20,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.transform.Translate;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.exception.NegativeDataException;
 import org.maven.apache.exception.Warning;
 import org.maven.apache.service.transaction.CachedTransactionService;
 import org.maven.apache.transaction.Transaction;
-import org.maven.apache.utils.DataUtils;
-import org.maven.apache.utils.ScaleUtils;
-import org.maven.apache.utils.TransactionCachedUtils;
-import org.maven.apache.utils.TranslateUtils;
+import org.maven.apache.utils.*;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -692,8 +691,15 @@ public class NewTransactionPageController implements Initializable {
 
     @FXML
     private void onCloseDeletionConfirmation() {
-        deleteItemPane.setVisible(false);
-        blockPane.setVisible(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,1,0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,0,-110);
+        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+        translateTransition.setOnFinished(event -> {
+            deleteItemPane.setVisible(false);
+            blockPane.setVisible(false);
+        });
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     /**
@@ -753,9 +759,15 @@ public class NewTransactionPageController implements Initializable {
     }
 
     private void setDeletionPanes(int row) {
-        deleteItemPane.setVisible(true);
         blockPane.setVisible(true);
+        deleteItemPane.setOpacity(0);
+        deleteItemPane.setVisible(true);
         setRemovalConfirmation(row);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,0,1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,-110,0);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     @FXML
