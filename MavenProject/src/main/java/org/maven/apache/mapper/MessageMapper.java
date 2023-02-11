@@ -38,4 +38,12 @@ public interface MessageMapper {
      */
     void deleteById(int id);
 
+    /**
+     * star the message
+     * @param id the ID that represent the message
+     */
+    void starMessage(int id);
+
+     void IdGapInside();
+
 }

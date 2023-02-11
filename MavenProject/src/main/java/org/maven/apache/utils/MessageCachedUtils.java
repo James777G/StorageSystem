@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class MessageCachedUtils {
     public enum listType{
-    STAR_MESSAGE,NO_STAR
+    STAR_MESSAGE,All_MESSAGE
     }
 
     private static final Map<MessageCachedUtils.listType, List<List<Message>>> messageMap = new HashMap<>();

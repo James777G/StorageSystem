@@ -4,18 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="implemented initial content successfully">
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/mapper/MessageMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/message/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/service/message/CachedMessageService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/service/message/CachedMessageServiceProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/service/message/MessageService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/service/message/MessageServiceProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/utils/MessageCachedUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/org/maven/apache/mapper/MessageMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/sql/message.sql" afterDir="false" />
+    <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="Basic mysql things and create some classes ready to fill the methods">
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/service/message/CachedMessageDataListService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/service/message/CachedMessageListObserve.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/service/message/MessageManipulationServicHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/service/message/MessageManipulationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MavenProject/MavenProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/MavenProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/mapper/MessageMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/mapper/MessageMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/service/message/CachedMessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/service/message/CachedMessageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/service/message/CachedMessageServiceProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/service/message/CachedMessageServiceProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/service/message/MessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/service/message/MessageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/service/message/MessageServiceProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/service/message/MessageServiceProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/utils/MessageCachedUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/utils/MessageCachedUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/org/maven/apache/mapper/MessageMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/org/maven/apache/mapper/MessageMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +27,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -72,6 +73,9 @@
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="extract.method.default.visibility" value="private" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -244,7 +248,14 @@
       <option name="project" value="LOCAL" />
       <updated>1675490968233</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Basic mysql things and create some classes ready to fill the methods">
+      <created>1676088339484</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1676088339484</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -269,7 +280,8 @@
     <MESSAGE value="add bean" />
     <MESSAGE value="，，" />
     <MESSAGE value="implemented initial content successfully" />
-    <option name="LAST_COMMIT_MESSAGE" value="implemented initial content successfully" />
+    <MESSAGE value="Basic mysql things and create some classes ready to fill the methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="Basic mysql things and create some classes ready to fill the methods" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

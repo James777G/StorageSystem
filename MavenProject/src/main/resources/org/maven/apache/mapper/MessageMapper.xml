@@ -32,7 +32,14 @@
           </if>
 
        </set>
- where MessageID =#{MessageID}
+    where MessageID =#{MessageID};
+    </update>
+    <update id="starMessage">
+        update MessageTable
+        <set>
+            Star =1;
+        </set>
+        where MessageID=#{id};
     </update>
 
     <!--  -->
@@ -45,16 +52,28 @@
     <!--  -->
 
     <select id="selectAll" resultType="org.maven.apache.message.Message">
-select * from MessageTable;
+    select *
+        from MessageTable
+        order by MessageTime desc;
 
     </select>
 
     <!--  -->
     <select id="selectById" resultType="org.maven.apache.message.Message">
-select * from MessageTable where MessageID=#{MessageID}
+    select * from MessageTable where MessageID=#{MessageID}
 
 
     </select>
+
+    <update id="IdGapInside">
+        SET @auto_id = 0;
+        update MessageTable
+        <set>
+            MessageID = (@auto_id := @auto_id + 1)
+        </set>
+        where 1=1;
+        ALTER TABLE MessageTable AUTO_INCREMENT = 1;
+    </update>
 
     <!--  -->
 

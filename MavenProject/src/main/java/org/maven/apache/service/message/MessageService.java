@@ -38,4 +38,14 @@ public interface MessageService {
      */
     void deleteById(int id);
 
+    /**
+     * star the message
+     * @param id the ID that represent the message
+     */
+    void starMessage(int id);
+
+    /**
+     * this method should be use after using delete by id
+     */
+    void IdGapInside();
 }
