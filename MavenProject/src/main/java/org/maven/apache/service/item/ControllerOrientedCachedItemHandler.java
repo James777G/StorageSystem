@@ -5,11 +5,13 @@ import javafx.application.Platform;
 import org.maven.apache.controllers.AppPage2Controller;
 import org.maven.apache.controllers.NewTransactionPageController;
 import org.maven.apache.item.Item;
+import org.maven.apache.service.regulatory.RegulatoryService;
 import org.maven.apache.service.transaction.CachedTransactionService;
 import org.maven.apache.utils.CargoCachedUtils;
 import org.maven.apache.utils.DataUtils;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -23,6 +25,9 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService{
 
     @Resource
     private CachedTransactionService cachedTransactionService;
+
+    @Resource
+    private RegulatoryService regulatoryService;
 
     @Override
     public void updateAllCachedItemData() {
@@ -48,9 +53,11 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService{
         itemService.deleteById(id);
         updateAllCachedItemData();
         cachedTransactionService.updateAllCachedTransactionData();
+        regulatoryService.updateAllRegulatoryData();
         try {
             invokeControllerToUpdate();
             invokeAppPage2ControllerToUpdate();
+            invokeRegulatoryToUpdate();
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
@@ -63,6 +70,27 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService{
         Platform.runLater(() -> {
             try {
                 refreshPage.invoke(DataUtils.transactionPageController);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+    }
+
+    private void invokeRegulatoryToUpdate() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Class<AppPage2Controller> clazz = AppPage2Controller.class;
+        Method setCargoPageCount = clazz.getDeclaredMethod("setCargoPageCount");
+        Method setCargoTable = clazz.getDeclaredMethod("setCargoTable", int.class);
+        setCargoTable.setAccessible(true);
+        setCargoPageCount.setAccessible(true);
+        Platform.runLater(() -> {
+            try {
+                setCargoPageCount.invoke(DataUtils.appPage2Controller);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                setCargoTable.invoke(DataUtils.appPage2Controller, DataUtils.cargoPagination.getCurrentPageIndex());
             } catch (IllegalAccessException | InvocationTargetException e) {
                 throw new RuntimeException(e);
             }
