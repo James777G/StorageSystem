@@ -1,9 +1,11 @@
 package org.maven.apache.mapper;
 
 import org.maven.apache.message.Message;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public interface MessageMapper {
 
     /**

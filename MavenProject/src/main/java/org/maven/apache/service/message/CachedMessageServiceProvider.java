@@ -1,6 +1,7 @@
 package org.maven.apache.service.message;
 
 
+import org.maven.apache.exception.Warning;
 import org.maven.apache.item.Item;
 import org.maven.apache.mapper.MessageMapper;
 import org.maven.apache.message.Message;
@@ -26,7 +27,7 @@ private CachedMessageDataListService cachedMessageDataListService;
 @Resource
 private MessageMapper messageMapper;
 
-
+@Warning(Warning.WarningType.DEBUG)//可能需要刷新页面
     /**
      * This method updates all the cached Message data currently stored
      * <p>
@@ -54,7 +55,8 @@ private MessageMapper messageMapper;
      */
     @Override
     public void addNewMessage(Message message) {
-
+    messageService.addNewMessage(message);
+    updateAllCachedMessageData();
     }
 
     /**
@@ -69,7 +71,8 @@ private MessageMapper messageMapper;
      */
     @Override
     public void deleteMessageById(int id) {
-
+    messageService.deleteById(id);
+    updateAllCachedMessageData();
     }
 
     /**
@@ -86,7 +89,8 @@ private MessageMapper messageMapper;
      */
     @Override
     public void updateMessage(Message message) {
-
+    messageService.update(message);
+    updateAllCachedMessageData();
     }
 
     /**
@@ -103,7 +107,8 @@ private MessageMapper messageMapper;
      */
     @Override
     public void starMessage(int id) {
-
+    messageService.starMessage(id);
+    updateAllCachedMessageData();
     }
 
 
