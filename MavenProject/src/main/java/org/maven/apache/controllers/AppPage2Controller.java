@@ -624,7 +624,7 @@ public class AppPage2Controller implements Initializable {
         settingsDialog.setVisible(false);
         searchTable.setVisible(false);
         usernameLabel.setText(user.getName());
-
+        DataUtils.cargoPagination = cargoPagination;
         initializeRegulatoryAmountList();
         initializeRegulatoryNameList();
         initializeRegulatorySpaceList();

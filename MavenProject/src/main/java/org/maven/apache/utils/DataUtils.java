@@ -22,6 +22,8 @@ public class DataUtils {
 
     public static WarehouseController warehouseController;
 
+    public static Pagination cargoPagination;
+
     public static AppPage2Controller.ButtonSelected buttonSelected;
 
     public static AppPage2Controller appPage2Controller;

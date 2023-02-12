@@ -3,9 +3,13 @@ package org.maven.apache.service.item;
 import lombok.Data;
 import org.maven.apache.item.Item;
 import org.maven.apache.mapper.ItemMapper;
+import org.maven.apache.mapper.RegulatoryMapper;
 import org.maven.apache.mapper.TransactionMapper;
+import org.maven.apache.regulatory.Regulatory;
 import org.maven.apache.service.text.TransactionTextService;
 import org.maven.apache.transaction.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +20,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Component("itemService")
-@Transactional
 @Data
 public class ItemServiceProvider implements ItemService{
 
@@ -25,6 +28,10 @@ public class ItemServiceProvider implements ItemService{
 
     @Resource
     private TransactionMapper transactionMapper;
+
+    @Autowired
+    @SuppressWarnings("all")
+    private RegulatoryMapper regulatoryMapper;
 
     @Resource
     private TransactionTextService transactionTextService;
@@ -126,6 +133,13 @@ public class ItemServiceProvider implements ItemService{
         transaction.setUnit(item.getUnit());
         transaction.setPurpose(transactionTextService.getTextInDeleteItem(item.getItemName(), item.getUnit()));
         transactionMapper.addNewTransaction(transaction);
+
+        Regulatory regulatory = regulatoryMapper.selectByName(item.getItemName());
+        System.out.println(regulatory);
+
+        if(regulatory != null){
+            regulatoryMapper.deleteRegulatory(regulatory.getItemName());
+        }
     }
 
     /**

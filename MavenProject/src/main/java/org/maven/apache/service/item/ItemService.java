@@ -1,8 +1,6 @@
 package org.maven.apache.service.item;
 
-import org.apache.ibatis.annotations.Param;
 import org.maven.apache.item.Item;
-import org.maven.apache.mapper.ItemMapper;
 
 import java.util.List;
 
