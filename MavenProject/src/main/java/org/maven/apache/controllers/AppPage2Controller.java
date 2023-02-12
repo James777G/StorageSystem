@@ -1,10 +1,7 @@
 package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import io.github.palexdev.materialfx.controls.MFXDatePicker;
-import io.github.palexdev.materialfx.controls.MFXPasswordField;
-import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
-import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.*;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.*;
 import javafx.application.Platform;
@@ -222,6 +219,9 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private AnchorPane[] cargoBoxBackPanes = new AnchorPane[4];
+
+    @FXML
+    private MFXCircleToggleNode notifyButton;
 
     @FXML
     private AnchorPane cargoBox1FunctionalityPane, cargoBox2FunctionalityPane, cargoBox3FunctionalityPane, cargoBox4FunctionalityPane;
@@ -801,6 +801,20 @@ public class AppPage2Controller implements Initializable {
     @Warning(Warning.WarningType.IMPROVEMENT)
     private void onClickAlert() {
         notificationPane.setVisible(true);
+    }
+
+    @FXML
+    private void onEnterNotify(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(notifyButton, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitNotify(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(notifyButton, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
     }
 
     @FXML
@@ -1791,7 +1805,7 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onNotify(){
-        mailNotifyService.notifyUsers();
+        executorService.execute(() -> mailNotifyService.notifyUsers());
     }
 
     private void setWarehousePane() {

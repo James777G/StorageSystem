@@ -76,9 +76,9 @@ public class GeneralMailNotifyProvider implements MailNotifyService{
                 "\n" +
                 "  <hr style=\"margin-top: 40px\">\n" +
                 "  <p style=\"font-size: small\">\n" +
-                "    This verification code is only used internally in Diamond Homes Limited&#169;<br>\n" +
+                "    This email is only used internally in Diamond Homes Limited&#169;<br>\n" +
                 "    <br>\n" +
-                "    Company Address: 5 Birmingham Road, Ōtara, Auckland 2013\n" +
+                "    Address: 5 Birmingham Road, Ōtara, Auckland 2013\n" +
                 "  </p>\n" +
                 "</div>";
         String generalLeadingHtml = "<div style=\"text-align: center\">\n" +
