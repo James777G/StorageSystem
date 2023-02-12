@@ -5,13 +5,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Pagination;
 import javafx.scene.layout.AnchorPane;
+import org.maven.apache.MyLauncher;
+import org.maven.apache.service.item.CachedItemService;
+import org.maven.apache.service.message.CachedMessageService;
+import org.maven.apache.service.message.CachedMessageServiceProvider;
+import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.TranslateUtils;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
 
 public class MessagePageController implements Initializable {
 
@@ -38,9 +45,16 @@ public class MessagePageController implements Initializable {
 
     @FXML
     private AnchorPane movingLinePane;
+    @FXML
+    private Pagination newPagination;
 
     @FXML
     private  final AnchorPane editMessagePane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/editMessagePage.fxml")));
+
+    private final CachedMessageService cachedMessageService = MyLauncher.context.getBean("cachedMessageService", CachedMessageService.class);
+
+    private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
+
 
     private boolean isMovingLineOnMessage = true;
 
@@ -51,6 +65,9 @@ public class MessagePageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        cachedMessageService.updateAllCachedMessageData();
+//        DataUtils.pagination=newPagination;
+//        newPagination.setMaxPageIndicatorCount(8);
 
     }
 

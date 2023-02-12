@@ -7,27 +7,35 @@ import org.maven.apache.mapper.MessageMapper;
 import org.maven.apache.message.Message;
 import org.maven.apache.service.item.ItemDataManipulationService;
 import org.maven.apache.service.transaction.CachedTransactionDataListService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 这个class中的方法是给controller用
  */
-@Service("CachedMessageService")
-public class CachedMessageServiceProvider implements CachedMessageService{
-@Resource
-private MessageService messageService;
-@Resource
-private MessageManipulationService messageManipulationService;
-@Resource
-private CachedMessageDataListService cachedMessageDataListService;
-@Resource
-private MessageMapper messageMapper;
+@Service("cachedMessageService")
+public class CachedMessageServiceProvider implements CachedMessageService {
+    @Resource
+    private MessageService messageService;
 
-@Warning(Warning.WarningType.DEBUG)//可能需要刷新页面
+    @Resource
+    private MessageManipulationService messageManipulationService;
+
+    @Resource
+    private CachedMessageDataListService cachedMessageDataListService;
+
+
+
+   @Resource
+    private MessageMapper messageMapper;
+
+    @Warning(Warning.WarningType.DEBUG)//可能需要刷新页面
     /**
      * This method updates all the cached Message data currently stored
      * <p>
@@ -37,8 +45,9 @@ private MessageMapper messageMapper;
      * </p>
      */
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public void updateAllCachedMessageData() {
-        cachedMessageDataListService.updateAllLists(messageMapper,messageManipulationService);
+        cachedMessageDataListService.updateAllLists(messageMapper, messageManipulationService);
     }
 
     /**
@@ -54,9 +63,10 @@ private MessageMapper messageMapper;
      * @param message
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void addNewMessage(Message message) {
-    messageService.addNewMessage(message);
-    updateAllCachedMessageData();
+        messageService.addNewMessage(message);
+        updateAllCachedMessageData();
     }
 
     /**
@@ -70,9 +80,10 @@ private MessageMapper messageMapper;
      * @param id message ID is unique
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void deleteMessageById(int id) {
-    messageService.deleteById(id);
-    updateAllCachedMessageData();
+        messageService.deleteById(id);
+        updateAllCachedMessageData();
     }
 
     /**
@@ -88,9 +99,10 @@ private MessageMapper messageMapper;
      * @param message encapsulated message object to be updated with desired attributes
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void updateMessage(Message message) {
-    messageService.update(message);
-    updateAllCachedMessageData();
+        messageService.update(message);
+        updateAllCachedMessageData();
     }
 
     /**
@@ -106,11 +118,11 @@ private MessageMapper messageMapper;
      * @param id
      */
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void starMessage(int id) {
-    messageService.starMessage(id);
-    updateAllCachedMessageData();
+        messageService.starMessage(id);
+        updateAllCachedMessageData();
     }
-
 
 
 }

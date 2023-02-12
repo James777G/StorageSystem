@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.maven.apache.mapper.*;
 import org.maven.apache.service.DateTransaction.DateTransactionServiceProvider;
 import org.maven.apache.service.item.ItemServiceProvider;
+import org.maven.apache.service.message.CachedMessageServiceProvider;
 import org.maven.apache.service.message.MessageServiceProvider;
 import org.maven.apache.service.text.TransactionTextService;
 import org.maven.apache.service.transaction.CachedTransactionServiceProvider;
@@ -44,6 +45,14 @@ public class TransactionConfiguration {
 		messageService.setMessageMapper(messageMapper);
 		return messageService;
 	}
+
+//	@Bean
+//	public CachedMessageServiceProvider cachedMessageService(MessageMapper messageMapper){
+//		CachedMessageServiceProvider cachedMessageService=new CachedMessageServiceProvider();
+//		cachedMessageService.setMessageMapper(messageMapper);
+//		return cachedMessageService;
+//	}
+
 	@Bean
 	public DateTransactionServiceProvider dateTransactionService(DateTransactionMapper dateTransactionMapper){
 		DateTransactionServiceProvider dateTransactionService = new DateTransactionServiceProvider();

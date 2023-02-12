@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 这个provider是给数据库的连接方法
  */
-@Component("MessageService")
+@Component("messageService")
 @Transactional
 @Data
 public class MessageServiceProvider implements MessageService{
