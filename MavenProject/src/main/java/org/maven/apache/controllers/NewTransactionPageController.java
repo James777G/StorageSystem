@@ -24,9 +24,11 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.transform.Translate;
 import org.maven.apache.MyLauncher;
+import org.maven.apache.exception.EmptyValueException;
 import org.maven.apache.exception.NegativeDataException;
 import org.maven.apache.exception.Warning;
 import org.maven.apache.service.transaction.CachedTransactionService;
+import org.maven.apache.staff.Staff;
 import org.maven.apache.transaction.Transaction;
 import org.maven.apache.utils.*;
 
@@ -164,7 +166,7 @@ public class NewTransactionPageController implements Initializable {
     private Label warnMessageInAdd;
 
     @FXML
-    private Label transactionIdLabel;
+    private Label transactionIdInDetails;
 
     @FXML
     private Label transactionStatusInDetails;
@@ -178,11 +180,11 @@ public class NewTransactionPageController implements Initializable {
     @FXML
     private Label transactionAmountInDetails;
 
-
+    @FXML
+    private Label warnMessageInDetails;
 
     @FXML
     private Pagination transactionPagination;
-
 
     @FXML
     private Image arrowImage = new Image(Objects.requireNonNull(NewTransactionPageController.class.getResourceAsStream("/image/icons8-sort-down-100.png")));
@@ -308,6 +310,8 @@ public class NewTransactionPageController implements Initializable {
 
     private Transaction newTransaction;
 
+    private Transaction originalTransaciton = new Transaction();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cachedTransactionService.updateAllCachedTransactionData();
@@ -332,6 +336,7 @@ public class NewTransactionPageController implements Initializable {
         });
         setInputValidation(newUnitTextField);
         getNumOfTransaction();
+        warnMessageInDetails.setVisible(false);
     }
 
     /**
@@ -1201,12 +1206,13 @@ public class NewTransactionPageController implements Initializable {
      * @param row transaction entity at which row needs to be modified
      */
     private void setTransactionDetails(int row) {
+        originalTransaciton = currentPageList.get(row); // pass a temporary transaction instance
         if (currentPageList.get(row).getStatus().equals("RESTOCK")){
             transactionStatusInDetails.setText("RESTOCK");
         }else{
             transactionStatusInDetails.setText("TAKEN");
         }
-        transactionIdLabel.setText(String.valueOf(currentPageList.get(row).getID()));
+        transactionIdInDetails.setText(String.valueOf(currentPageList.get(row).getID()));
         transactionNameInDetails.setText(currentPageList.get(row).getItemName());
         transactionDateInDetails.setText(currentPageList.get(row).getTransactionTime());
         staffNameInDetails.setText(currentPageList.get(row).getStaffName());
@@ -1236,6 +1242,7 @@ public class NewTransactionPageController implements Initializable {
         });
         fadeTransition.play();
         translateTransition.play();
+        warnMessageInDetails.setVisible(false);
     }
 
     /**
@@ -1243,8 +1250,40 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickApplyInDetails(){
-        //TODO save new transaction information to the database
+        cargoDialogApplyButton.setVisible(false);
+        loadSpinnerInDetails.setVisible(true);
+        executorService.execute(() -> {
+            Transaction transaction;
+            try {
+                transaction = encapsulateCurrentStaffData();
+                cachedTransactionService.updateTransaction(transaction);
+            } catch (Exception e) {
+                warnMessageInDetails.setVisible(true);
+            } finally {
+                Platform.runLater(() -> {
+                    loadSpinnerInDetails.setVisible(false);
+                    cargoDialogApplyButton.setVisible(true);
+                });
+            }
+        });
+        refreshPage();
+    }
 
+    /**
+     * encapsulate a new transaction which is going to be overwritten
+     *
+     * @return overrided transaction
+     * @throws EmptyValueException some not-null values are left empty
+     */
+    private Transaction encapsulateCurrentStaffData() throws EmptyValueException{
+        Transaction transaction = new Transaction();
+        transaction = originalTransaciton;
+        if (staffNameInDetails.getText().isBlank()){
+            throw new EmptyValueException("Empty input values in staff name section");
+        }
+        transaction.setStaffName(staffNameInDetails.getText());
+        transaction.setPurpose(purposeTextInDetails.getText());
+        return transaction;
     }
 
     /**
