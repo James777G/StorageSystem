@@ -47,6 +47,7 @@ public class CachedMessageServiceProvider implements CachedMessageService {
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public void updateAllCachedMessageData() {
+
         cachedMessageDataListService.updateAllLists(messageMapper, messageManipulationService);
     }
 
