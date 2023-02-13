@@ -513,8 +513,16 @@ public class WarehouseController implements Initializable {
      */
     @FXML
     private void onCloseDescriptionDialog() {
-        descriptionDialog.setVisible(false);
-        warnMessage.setVisible(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(descriptionDialog,300,1,0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(descriptionDialog,300,0,-170);
+        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+        translateTransition.setOnFinished(event -> {
+            descriptionDialog.setVisible(false);
+            warnMessage.setVisible(false);
+            blockPane.setVisible(false);
+        });
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     /**
@@ -659,10 +667,17 @@ public class WarehouseController implements Initializable {
 
     @FXML
     private void onClickOkayInAdd() {
-        addItemPane.setVisible(false);
-        warnMessageInAdd.setVisible(false);
-        loadSpinnerInAdd.setVisible(false);
-        blockPane.setVisible(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addItemPane,300 ,1,0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addItemPane,300 ,0,-170);
+        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+        translateTransition.setOnFinished(event -> {
+            addItemPane.setVisible(false);
+            warnMessageInAdd.setVisible(false);
+            loadSpinnerInAdd.setVisible(false);
+            blockPane.setVisible(false);
+        });
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     /**
@@ -677,8 +692,14 @@ public class WarehouseController implements Initializable {
 
     @FXML
     private void onClickAddButton() {
+        addItemPane.setOpacity(0);
         addItemPane.setVisible(true);
         blockPane.setVisible(true);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addItemPane,300 ,0,1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addItemPane,300 ,-170,0);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     /**
@@ -710,12 +731,19 @@ public class WarehouseController implements Initializable {
      * @param item the selected item
      */
     private void setItemAttributes(Item item) {
-        descriptionDialog.setVisible(true);
         itemNameInDetails.setText(item.getItemName());
         itemDescriptionInDetails.setText(item.getDescription());
         itemAmountInDetails.setText(item.getUnit().toString());
         itemIdInDetails.setText(item.getItemID().toString());
         selectedItem = item;
+        blockPane.setVisible(true);
+        descriptionDialog.setOpacity(0);
+        descriptionDialog.setVisible(true);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(descriptionDialog,300,0,1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(descriptionDialog,300,-170,0);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     /**
