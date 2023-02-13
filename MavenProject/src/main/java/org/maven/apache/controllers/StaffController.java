@@ -832,9 +832,15 @@ public class StaffController implements Initializable {
      */
     @FXML
     private void onClickAddButton() {
+        addStaffPane.setOpacity(0);
         addStaffPane.setVisible(true);
         staffStatusInAdd.setSelected(true);
         blockPane.setVisible(true);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addStaffPane,300,0,1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addStaffPane,300,-170,0);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     /**
@@ -925,12 +931,20 @@ public class StaffController implements Initializable {
      */
     @FXML
     private void onClickOkayInAdd() {
-        addStaffPane.setVisible(false);
-        warnMessageInAdd.setVisible(false);
-        staffNameInAdd.setText("");
-        staffDescriptionInAdd.setText("");
-        staffStatusInAdd.setSelected(true);
-        blockPane.setVisible(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addStaffPane,300,1,0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addStaffPane,300,0,-170);
+        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+        translateTransition.setOnFinished(event -> {
+            addStaffPane.setVisible(false);
+            warnMessageInAdd.setVisible(false);
+            staffNameInAdd.setText("");
+            staffDescriptionInAdd.setText("");
+            staffStatusInAdd.setSelected(true);
+            blockPane.setVisible(false);
+        });
+        fadeTransition.play();
+        translateTransition.play();
+
     }
 
     /**
