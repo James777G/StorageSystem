@@ -1263,10 +1263,11 @@ public class NewTransactionPageController implements Initializable {
                 Platform.runLater(() -> {
                     loadSpinnerInDetails.setVisible(false);
                     cargoDialogApplyButton.setVisible(true);
+                    refreshPage();
                 });
+
             }
         });
-        refreshPage();
     }
 
     /**
