@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.AnchorPane;
 import org.maven.apache.MyLauncher;
@@ -55,6 +56,7 @@ public class MessagePageController implements Initializable {
 
     private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
 
+    private Label[] staffNameArray= new Label[5];
 
     private boolean isMovingLineOnMessage = true;
 
@@ -66,6 +68,7 @@ public class MessagePageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cachedMessageService.updateAllCachedMessageData();
+
 //        DataUtils.pagination=newPagination;
 //        newPagination.setMaxPageIndicatorCount(8);
 
