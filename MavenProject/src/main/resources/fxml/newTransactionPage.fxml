@@ -22,7 +22,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.NewTransactionPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.NewTransactionPageController">
    <children>
       <MFXTextField floatMode="DISABLED" layoutX="287.0" layoutY="75.0" prefHeight="50.0" prefWidth="550.0" styleClass="inputTransformableField" stylesheets="@../css/transactionPage.css" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="40.0">
          <textFill>
@@ -655,7 +655,7 @@
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="transactionIdLabel" layoutX="14.0" layoutY="45.0" text="123456">
+                  <Label fx:id="transactionIdInDetails" layoutX="14.0" layoutY="45.0" text="123456">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
                      </font>
@@ -684,6 +684,11 @@
                   <Label fx:id="transactionAmountInDetails" layoutX="561.0" layoutY="140.0" prefHeight="16.0" prefWidth="127.0" text="100">
                      <font>
                         <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="warnMessageInDetails" layoutX="705.0" layoutY="239.0" text="Your action was not successful,&#10;please check if the staff name &#10;has been filled." textFill="#a10000">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
                      </font>
                   </Label>
                </children>
