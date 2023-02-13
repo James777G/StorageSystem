@@ -18,14 +18,14 @@ public class CachedManipulationServiceProvider implements CachedManipulationServ
     @SuppressWarnings("all")
     public List<Transaction> getUnitDescendingOrder(List<Transaction> unsortedList) {
         return unsortedList.stream()
-                .sorted((o1, o2) -> (o1.getUnit() == o2.getUnit()) ? 0 : (o1.getUnit() > o2.getUnit() ? 1 : -1)).toList();
+                .sorted((o1, o2) -> (o1.getUnit() == o2.getUnit()) ? 0 : (o1.getUnit() > o2.getUnit() ? -1 : 1)).toList();
     }
 
     @Override
     @SuppressWarnings("all")
     public List<Transaction> getUnitAscendingOrder(List<Transaction> unsortedList) {
         return unsortedList.stream()
-                .sorted((o1, o2) -> (o1.getUnit() == o2.getUnit()) ? 0 : (o1.getUnit() > o2.getUnit() ? -1 : 1)).toList();
+                .sorted((o1, o2) -> (o1.getUnit() == o2.getUnit()) ? 0 : (o1.getUnit() > o2.getUnit() ? 1 : -1)).toList();
     }
 
 
