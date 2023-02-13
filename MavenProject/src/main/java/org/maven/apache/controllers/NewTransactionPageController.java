@@ -1201,7 +1201,6 @@ public class NewTransactionPageController implements Initializable {
      * @param row transaction entity at which row needs to be modified
      */
     private void setTransactionDetails(int row) {
-        descriptionDialog.setVisible(true);
         if (currentPageList.get(row).getStatus().equals("RESTOCK")){
             transactionStatusInDetails.setText("RESTOCK");
         }else{
@@ -1213,22 +1212,30 @@ public class NewTransactionPageController implements Initializable {
         staffNameInDetails.setText(currentPageList.get(row).getStaffName());
         transactionAmountInDetails.setText(String.valueOf(currentPageList.get(row).getUnit()));
         purposeTextInDetails.setText(currentPageList.get(row).getPurpose());
+        descriptionDialog.setOpacity(0);
+        descriptionDialog.setVisible(true);
         blockPane.setVisible(true);
-    }
-
-    @FXML
-    private void onCloseDescriptionDialog() {
-        descriptionDialog.setVisible(false);
-        blockPane.setVisible(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(descriptionDialog,300,0,1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(descriptionDialog,300,-200,0);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     /**
      * close transaction modification page
      */
     @FXML
-    private void onClickOkayInDetails(){
-        descriptionDialog.setVisible(false);
-        blockPane.setVisible(false);
+    private void onCloseDescriptionDialog() {
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(descriptionDialog,300,1,0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(descriptionDialog,300,0,-200);
+        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+        translateTransition.setOnFinished(event -> {
+            descriptionDialog.setVisible(false);
+            blockPane.setVisible(false);
+        });
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     /**

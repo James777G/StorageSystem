@@ -645,7 +645,7 @@
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="702.0" layoutY="324.0" onAction="#onClickOkayInDetails" prefHeight="29.0" prefWidth="75.0" style="-fx-background-color: #e2e2e2; -fx-background-radius: 5; -fx-border-radius: 5;" text="Okay" AnchorPane.bottomAnchor="4.0">
+                  <JFXButton layoutX="702.0" layoutY="324.0" onAction="#onCloseDescriptionDialog" prefHeight="29.0" prefWidth="75.0" style="-fx-background-color: #e2e2e2; -fx-background-radius: 5; -fx-border-radius: 5;" text="Okay" AnchorPane.bottomAnchor="4.0">
                      <font>
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
