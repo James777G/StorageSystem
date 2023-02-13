@@ -53,6 +53,9 @@ public final class AlertSystemSynchronizingStrategy extends AbstractTransactionS
         }catch (Exception e){
             return false;
         }
+        if(item == null){
+            return false;
+        }
         Integer unit = item.getUnit();
 
         try{
