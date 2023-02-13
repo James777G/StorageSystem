@@ -53,7 +53,7 @@ public class ControllerOrientedCachedStaffHandler implements CachedStaffService{
     }
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    @Transactional(propagation = Propagation.REQUIRED)
     public void updateStaff(Staff staff) {
         staffDAOService.updateStaff(staff);
         updateAllCachedStaffData();

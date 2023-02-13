@@ -230,15 +230,17 @@ public class StaffController implements Initializable {
         });
         blockPane.setVisible(false);
     }
+
     @FXML
-    private void onScrolled(ScrollEvent event){
-        if(event.getDeltaY() > 0){
+    private void onScrolled(ScrollEvent event) {
+        if (event.getDeltaY() > 0) {
             pagination.setCurrentPageIndex(pagination.getCurrentPageIndex() + 1);
         }
-        if(event.getDeltaY() < 0){
+        if (event.getDeltaY() < 0) {
             pagination.setCurrentPageIndex(pagination.getCurrentPageIndex() - 1);
         }
     }
+
     /**
      * This method updates the latest page number, thus should be executed every time when
      * there is an update in data or change in status
@@ -479,12 +481,12 @@ public class StaffController implements Initializable {
 
     @FXML
     private void doNotContinue() {
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,1,0);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane, 300, 1, 0);
         fadeTransition.setOnFinished(event -> {
             deleteItemPane.setVisible(false);
             blockPane.setVisible(false);
         });
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,0,-45.5);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane, 300, 0, -45.5);
         translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
         translateTransition.play();
         fadeTransition.play();
@@ -510,14 +512,14 @@ public class StaffController implements Initializable {
             getStaffList(pagination.getCurrentPageIndex());
             Platform.runLater(this::assignStaffValue);
             Platform.runLater(() -> {
-                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,1,0);
+                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane, 300, 1, 0);
                 fadeTransition.setOnFinished(event -> {
                     loadSpinnerOnDeletePane.setVisible(false);
                     doContinueButton.setVisible(true);
                     deleteItemPane.setVisible(false);
                     blockPane.setVisible(false);
                 });
-                TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,0,-45.5);
+                TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane, 300, 0, -45.5);
                 translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
                 translateTransition.play();
                 fadeTransition.play();
@@ -696,8 +698,8 @@ public class StaffController implements Initializable {
         blockPane.setVisible(true);
         deleteItemPane.setOpacity(0);
         deleteItemPane.setVisible(true);
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,0,1);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,-45.5,0);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane, 300, 0, 1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane, 300, -45.5, 0);
         translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
         translateTransition.play();
         fadeTransition.play();
@@ -732,8 +734,8 @@ public class StaffController implements Initializable {
         blockPane.setVisible(true);
         descriptionDialog.setOpacity(0);
         descriptionDialog.setVisible(true);
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(descriptionDialog,300,0,1);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(descriptionDialog,300,-170,0);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(descriptionDialog, 300, 0, 1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(descriptionDialog, 300, -170, 0);
         translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
         fadeTransition.play();
         translateTransition.play();
@@ -814,8 +816,8 @@ public class StaffController implements Initializable {
      */
     @FXML
     private void onCloseDescription() {
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(descriptionDialog,300,1,0);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(descriptionDialog,300,0,-170);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(descriptionDialog, 300, 1, 0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(descriptionDialog, 300, 0, -170);
         translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
         translateTransition.setOnFinished(event -> {
             descriptionDialog.setVisible(false);
@@ -885,7 +887,9 @@ public class StaffController implements Initializable {
             Staff staff;
             try {
                 staff = encapsulateCurrentStaffData();
-                if (selectedStaff.equals(staff)) return;
+                if (selectedStaff.equals(staff)) {
+                    return;
+                }
                 staffService.updateStaff(staff);
                 getStaffList(pagination.getCurrentPageIndex());
                 Platform.runLater(this::run);
