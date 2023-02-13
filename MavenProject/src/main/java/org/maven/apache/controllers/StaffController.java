@@ -729,6 +729,14 @@ public class StaffController implements Initializable {
         staffIdInDetails.setText(Integer.valueOf(selectedStaff.getStaffID()).toString());
         staffStatusInDetails.setSelected("ACTIVE".equals(selectedStaff.getStatus()));
         staffDescriptionInDetails.setText(selectedStaff.getOtherInfo());
+        blockPane.setVisible(true);
+        descriptionDialog.setOpacity(0);
+        descriptionDialog.setVisible(true);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(descriptionDialog,300,0,1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(descriptionDialog,300,-170,0);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     /**
@@ -738,7 +746,6 @@ public class StaffController implements Initializable {
     private void onClickEditOne() {
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(0);
-        descriptionDialog.setVisible(true);
         assignStaffDetails();
     }
 
@@ -749,7 +756,6 @@ public class StaffController implements Initializable {
     private void onClickEditTwo() {
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(1);
-        descriptionDialog.setVisible(true);
         assignStaffDetails();
     }
 
@@ -760,7 +766,6 @@ public class StaffController implements Initializable {
     private void onClickEditThree() {
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(2);
-        descriptionDialog.setVisible(true);
         assignStaffDetails();
     }
 
@@ -771,7 +776,6 @@ public class StaffController implements Initializable {
     private void onClickEditFour() {
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(3);
-        descriptionDialog.setVisible(true);
         assignStaffDetails();
     }
 
@@ -782,7 +786,6 @@ public class StaffController implements Initializable {
     private void onClickEditFive() {
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(4);
-        descriptionDialog.setVisible(true);
         assignStaffDetails();
     }
 
@@ -793,7 +796,6 @@ public class StaffController implements Initializable {
     private void onClickEditSix() {
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(5);
-        descriptionDialog.setVisible(true);
         assignStaffDetails();
     }
 
@@ -804,7 +806,6 @@ public class StaffController implements Initializable {
     private void onClickEditSeven() {
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(6);
-        descriptionDialog.setVisible(true);
         assignStaffDetails();
     }
 
@@ -813,9 +814,17 @@ public class StaffController implements Initializable {
      */
     @FXML
     private void onCloseDescription() {
-        descriptionDialog.setVisible(false);
-        loadSpinner.setVisible(false);
-        warnMessageInDetails.setVisible(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(descriptionDialog,300,1,0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(descriptionDialog,300,0,-170);
+        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+        translateTransition.setOnFinished(event -> {
+            descriptionDialog.setVisible(false);
+            loadSpinner.setVisible(false);
+            warnMessageInDetails.setVisible(false);
+            blockPane.setVisible(false);
+        });
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     /**
