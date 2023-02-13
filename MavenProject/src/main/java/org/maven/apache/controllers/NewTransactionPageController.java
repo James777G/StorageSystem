@@ -398,6 +398,14 @@ public class NewTransactionPageController implements Initializable {
 
     }
 
+    private void resetArrows(){
+        sortByAmount.setRotate(0);
+        sortByAmount.setImage(horizontalLineImage);
+        sortByDate.setRotate(0);
+        sortByDate.setImage(arrowImage);
+        amountArrow = ArrowStatus.HORIZONTAL;
+        dateArrow = ArrowStatus.DOWN;
+    }
     private void setBinsImages(){Arrays.stream(binImages).forEach(imageView -> imageView.setVisible(false));}
 
     /**
@@ -511,27 +519,30 @@ public class NewTransactionPageController implements Initializable {
     @FXML
     private void onClickAllSelectButton() {
         switch (buttonSelected) {
-            case ALL:
-                break;
-            case TAKEN:
+            case ALL -> {
+                return;
+            }
+            case TAKEN -> {
                 onTakenSelectPane.setVisible(false);
                 onAllSelectPane.setVisible(true);
                 buttonSelected = ButtonSelected.ALL;
-                break;
-            case RESTOCK:
+            }
+            case RESTOCK -> {
                 onRestockSelectPane.setVisible(false);
                 onAllSelectPane.setVisible(true);
                 buttonSelected = ButtonSelected.ALL;
-                break;
+            }
         }
         isAll = true;
         isRestock = false;
         isTaken = false;
-        if (isDateAscend) {
-            sortBy = SortBy.ALLDATEASCEND;
-        } else {
-            sortBy = SortBy.ALLDATEDESCEND;
-        }
+//        if (isDateAscend) {
+//            sortBy = SortBy.ALLDATEASCEND;
+//        } else {
+//            sortBy = SortBy.ALLDATEDESCEND;
+//        }
+        resetArrows();
+        sortBy = SortBy.ALLDATEDESCEND;
         refreshPage();
 
     }
@@ -558,11 +569,13 @@ public class NewTransactionPageController implements Initializable {
         isAll = false;
         isRestock = true;
         isTaken = false;
-        if (isDateAscend) {
-            sortBy = SortBy.RESTOCKDATEASCEND;
-        } else {
-            sortBy = SortBy.RESTOCKDATEDESCEND;
-        }
+//        if (isDateAscend) {
+//            sortBy = SortBy.RESTOCKDATEASCEND;
+//        } else {
+//            sortBy = SortBy.RESTOCKDATEDESCEND;
+//        }
+        resetArrows();
+        sortBy = SortBy.RESTOCKDATEDESCEND;
         refreshPage();
     }
 
@@ -588,11 +601,13 @@ public class NewTransactionPageController implements Initializable {
         isAll = false;
         isRestock = false;
         isTaken = true;
-        if (isDateAscend) {
-            sortBy = SortBy.TAKENDATEASCEND;
-        } else {
-            sortBy = SortBy.TAKENDATEDESCEND;
-        }
+//        if (isDateAscend) {
+//            sortBy = SortBy.TAKENDATEASCEND;
+//        } else {
+//            sortBy = SortBy.TAKENDATEDESCEND;
+//        }
+        resetArrows();
+        sortBy = SortBy.TAKENDATEDESCEND;
         refreshPage();
     }
 
