@@ -133,7 +133,7 @@
             </DropShadow>
          </effect>
       </AnchorPane>
-      <AnchorPane fx:id="transactionPane1" layoutX="150.0" layoutY="240.0" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+      <AnchorPane fx:id="transactionPane1" layoutX="150.0" layoutY="240.0" onMouseEntered="#onEnterTransactionPane1" onMouseExited="#onExitTransactionPane1" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
          <children>
             <Label fx:id="cargoLabel1" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="ItemName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
@@ -184,7 +184,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="transactionPane2" layoutX="150.0" layoutY="290.0" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+      <AnchorPane fx:id="transactionPane2" layoutX="150.0" layoutY="290.0" onMouseEntered="#onEnterTransactionPane2" onMouseExited="#onExitTransactionPane2" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
          <children>
             <Label fx:id="cargoLabel2" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="ItemName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
@@ -235,7 +235,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="transactionPane3" layoutX="150.0" layoutY="340.0" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+      <AnchorPane fx:id="transactionPane3" layoutX="150.0" layoutY="340.0" onMouseEntered="#onEnterTransactionPane3" onMouseExited="#onExitTransactionPane3" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
          <children>
             <Label fx:id="cargoLabel3" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="ItemName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
@@ -286,7 +286,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="transactionPane4" layoutX="150.0" layoutY="390.0" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+      <AnchorPane fx:id="transactionPane4" layoutX="150.0" layoutY="390.0" onMouseEntered="#onEnterTransactionPane4" onMouseExited="#onExitTransactionPane4" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
          <children>
             <Label fx:id="cargoLabel4" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="ItemName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
@@ -337,7 +337,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="transactionPane5" layoutX="150.0" layoutY="440.0" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+      <AnchorPane fx:id="transactionPane5" layoutX="150.0" layoutY="440.0" onMouseEntered="#onEnterTransactionPane5" onMouseExited="#onExitTransactionPane5" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
          <children>
             <Label fx:id="cargoLabel5" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="ItemName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
@@ -388,7 +388,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="transactionPane6" layoutX="150.0" layoutY="490.0" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+      <AnchorPane fx:id="transactionPane6" layoutX="150.0" layoutY="490.0" onMouseEntered="#onEnterTransactionPane6" onMouseExited="#onExitTransactionPane6" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
          <children>
             <Label fx:id="cargoLabel6" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="ItemName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>
@@ -439,7 +439,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="transactionPane7" layoutX="150.0" layoutY="540.0" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+      <AnchorPane fx:id="transactionPane7" layoutX="150.0" layoutY="540.0" onMouseEntered="#onEnterTransactionPane7" onMouseExited="#onExitTransactionPane7" onScroll="#onScrolled" prefHeight="50.0" prefWidth="901.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
          <children>
             <Label fx:id="cargoLabel7" layoutX="188.0" layoutY="17.0" prefHeight="17.0" prefWidth="100.0" text="ItemName*****" textFill="#223c40" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="17.0">
                <font>

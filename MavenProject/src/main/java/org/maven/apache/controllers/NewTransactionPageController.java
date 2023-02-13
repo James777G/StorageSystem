@@ -33,11 +33,9 @@ import org.maven.apache.utils.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
+import java.util.function.Consumer;
 
 public class NewTransactionPageController implements Initializable {
 
@@ -202,6 +200,9 @@ public class NewTransactionPageController implements Initializable {
     private ImageView binImage1, binImage2, binImage3, binImage4, binImage5, binImage6, binImage7;
 
     @FXML
+    private ImageView[] binImages = new ImageView[7];
+
+    @FXML
     private ImageView deletionCross;
 
     @FXML
@@ -286,6 +287,8 @@ public class NewTransactionPageController implements Initializable {
     private boolean isAmountAscend = false;
 
     private boolean isAdditionSucceed;
+
+    private boolean isBlockPaneOpen = false;
 
     private int currentPage;
 
@@ -383,17 +386,27 @@ public class NewTransactionPageController implements Initializable {
         transactionPaneArray[4] = transactionPane5;
         transactionPaneArray[5] = transactionPane6;
         transactionPaneArray[6] = transactionPane7;
+        // initialize delete bin imageview
+        binImages[0] = binImage1;
+        binImages[1] = binImage2;
+        binImages[2] = binImage3;
+        binImages[3] = binImage4;
+        binImages[4] = binImage5;
+        binImages[5] = binImage6;
+        binImages[6] = binImage7;
+
+
     }
 
-    private void setBinsImages(){
-        binImage1.setVisible(false);
-        binImage2.setVisible(false);
-        binImage3.setVisible(false);
-        binImage4.setVisible(false);
-        binImage5.setVisible(false);
-        binImage6.setVisible(false);
-        binImage7.setVisible(false);
+    private void resetArrows(){
+        sortByAmount.setRotate(0);
+        sortByAmount.setImage(horizontalLineImage);
+        sortByDate.setRotate(0);
+        sortByDate.setImage(arrowImage);
+        amountArrow = ArrowStatus.HORIZONTAL;
+        dateArrow = ArrowStatus.DOWN;
     }
+    private void setBinsImages(){Arrays.stream(binImages).forEach(imageView -> imageView.setVisible(false));}
 
     /**
      * set how many pages do we need in total
@@ -506,27 +519,30 @@ public class NewTransactionPageController implements Initializable {
     @FXML
     private void onClickAllSelectButton() {
         switch (buttonSelected) {
-            case ALL:
-                break;
-            case TAKEN:
+            case ALL -> {
+                return;
+            }
+            case TAKEN -> {
                 onTakenSelectPane.setVisible(false);
                 onAllSelectPane.setVisible(true);
                 buttonSelected = ButtonSelected.ALL;
-                break;
-            case RESTOCK:
+            }
+            case RESTOCK -> {
                 onRestockSelectPane.setVisible(false);
                 onAllSelectPane.setVisible(true);
                 buttonSelected = ButtonSelected.ALL;
-                break;
+            }
         }
         isAll = true;
         isRestock = false;
         isTaken = false;
-        if (isDateAscend) {
-            sortBy = SortBy.ALLDATEASCEND;
-        } else {
-            sortBy = SortBy.ALLDATEDESCEND;
-        }
+//        if (isDateAscend) {
+//            sortBy = SortBy.ALLDATEASCEND;
+//        } else {
+//            sortBy = SortBy.ALLDATEDESCEND;
+//        }
+        resetArrows();
+        sortBy = SortBy.ALLDATEDESCEND;
         refreshPage();
 
     }
@@ -553,11 +569,13 @@ public class NewTransactionPageController implements Initializable {
         isAll = false;
         isRestock = true;
         isTaken = false;
-        if (isDateAscend) {
-            sortBy = SortBy.RESTOCKDATEASCEND;
-        } else {
-            sortBy = SortBy.RESTOCKDATEDESCEND;
-        }
+//        if (isDateAscend) {
+//            sortBy = SortBy.RESTOCKDATEASCEND;
+//        } else {
+//            sortBy = SortBy.RESTOCKDATEDESCEND;
+//        }
+        resetArrows();
+        sortBy = SortBy.RESTOCKDATEDESCEND;
         refreshPage();
     }
 
@@ -583,11 +601,13 @@ public class NewTransactionPageController implements Initializable {
         isAll = false;
         isRestock = false;
         isTaken = true;
-        if (isDateAscend) {
-            sortBy = SortBy.TAKENDATEASCEND;
-        } else {
-            sortBy = SortBy.TAKENDATEDESCEND;
-        }
+//        if (isDateAscend) {
+//            sortBy = SortBy.TAKENDATEASCEND;
+//        } else {
+//            sortBy = SortBy.TAKENDATEDESCEND;
+//        }
+        resetArrows();
+        sortBy = SortBy.TAKENDATEDESCEND;
         refreshPage();
     }
 
@@ -736,6 +756,8 @@ public class NewTransactionPageController implements Initializable {
         translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
         translateTransition.setOnFinished(event -> {
             deleteItemPane.setVisible(false);
+            isBlockPaneOpen = false;
+            setBinsImages();
             blockPane.setVisible(false);
         });
         fadeTransition.play();
@@ -799,6 +821,7 @@ public class NewTransactionPageController implements Initializable {
     }
 
     private void setDeletionPanes(int row) {
+        isBlockPaneOpen = true;
         blockPane.setVisible(true);
         deleteItemPane.setOpacity(0);
         deleteItemPane.setVisible(true);
@@ -873,72 +896,72 @@ public class NewTransactionPageController implements Initializable {
 
     @FXML
     private void onEnterBin1() {
-        setEnterScaleTransition(binImage1, 100, 1.1);
+        setEnterScaleTransition(binImages[0], 100, 1.1);
     }
 
     @FXML
     private void onEnterBin2() {
-        setEnterScaleTransition(binImage2, 100, 1.1);
+        setEnterScaleTransition(binImages[1], 100, 1.1);
     }
 
     @FXML
     private void onEnterBin3() {
-        setEnterScaleTransition(binImage3, 100, 1.1);
+        setEnterScaleTransition(binImages[2], 100, 1.1);
     }
 
     @FXML
     private void onEnterBin4() {
-        setEnterScaleTransition(binImage4, 100, 1.1);
+        setEnterScaleTransition(binImages[3], 100, 1.1);
     }
 
     @FXML
     private void onEnterBin5() {
-        setEnterScaleTransition(binImage5, 100, 1.1);
+        setEnterScaleTransition(binImages[4], 100, 1.1);
     }
 
     @FXML
     private void onEnterBin6() {
-        setEnterScaleTransition(binImage6, 100, 1.1);
+        setEnterScaleTransition(binImages[5], 100, 1.1);
     }
 
     @FXML
     private void onEnterBin7() {
-        setEnterScaleTransition(binImage7, 100, 1.1);
+        setEnterScaleTransition(binImages[6], 100, 1.1);
     }
 
     @FXML
     private void onExitBin1() {
-        setExitScaleTransition(binImage1, 100, 1);
+        setExitScaleTransition(binImages[0], 100, 1);
     }
 
     @FXML
     private void onExitBin2() {
-        setExitScaleTransition(binImage2, 100, 1);
+        setExitScaleTransition(binImages[1], 100, 1);
     }
 
     @FXML
     private void onExitBin3() {
-        setExitScaleTransition(binImage3, 100, 1);
+        setExitScaleTransition(binImages[2], 100, 1);
     }
 
     @FXML
     private void onExitBin4() {
-        setExitScaleTransition(binImage4, 100, 1);
+        setExitScaleTransition(binImages[3], 100, 1);
     }
 
     @FXML
     private void onExitBin5() {
-        setExitScaleTransition(binImage5, 100, 1);
+        setExitScaleTransition(binImages[4], 100, 1);
     }
 
     @FXML
     private void onExitBin6() {
-        setExitScaleTransition(binImage6, 100, 1);
+        setExitScaleTransition(binImages[5], 100, 1);
     }
 
     @FXML
     private void onExitBin7() {
-        setExitScaleTransition(binImage7, 100, 1);
+        setExitScaleTransition(binImages[6], 100, 1);
     }
 
     @FXML
@@ -1246,6 +1269,76 @@ public class NewTransactionPageController implements Initializable {
         }
         if(event.getDeltaY() < 0){
             transactionPagination.setCurrentPageIndex(transactionPagination.getCurrentPageIndex() - 1);
+        }
+    }
+
+    @FXML
+    private void onEnterTransactionPane1(){binImages[0].setVisible(true);}
+
+    @FXML
+    private void onEnterTransactionPane2(){binImages[1].setVisible(true);}
+
+    @FXML
+    private void onEnterTransactionPane3(){binImages[2].setVisible(true);}
+
+    @FXML
+    private void onEnterTransactionPane4(){binImages[3].setVisible(true);}
+
+    @FXML
+    private void onEnterTransactionPane5(){binImages[4].setVisible(true);}
+
+    @FXML
+    private void onEnterTransactionPane6(){binImages[5].setVisible(true);}
+
+    @FXML
+    private void onEnterTransactionPane7(){binImages[6].setVisible(true);}
+
+    @FXML
+    private void onExitTransactionPane1(){
+        if(!isBlockPaneOpen){
+            binImages[0].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitTransactionPane2() {
+        if (!isBlockPaneOpen) {
+            binImages[1].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitTransactionPane3(){
+        if (!isBlockPaneOpen) {
+            binImages[2].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitTransactionPane4(){
+        if (!isBlockPaneOpen) {
+            binImages[3].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitTransactionPane5(){
+        if (!isBlockPaneOpen) {
+            binImages[4].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitTransactionPane6(){
+        if (!isBlockPaneOpen) {
+            binImages[5].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitTransactionPane7(){
+        if (!isBlockPaneOpen) {
+            binImages[6].setVisible(false);
         }
     }
 
