@@ -140,7 +140,7 @@
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="staffLabel1" layoutX="379.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="580.0" AnchorPane.topAnchor="14.0">
+            <Label fx:id="staffLabel1" alignment="CENTER" layoutX="357.0" layoutY="14.0" maxWidth="100.0" minWidth="100.0" prefHeight="22.0" prefWidth="100.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="14.0">
                <font>
                   <Font name="Candara Bold" size="19.0" />
                </font>
@@ -191,7 +191,7 @@
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="staffLabel2" layoutX="379.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="580.0" AnchorPane.topAnchor="14.0">
+            <Label fx:id="staffLabel2" alignment="CENTER" layoutX="379.0" layoutY="14.0" prefWidth="100.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="14.0">
                <font>
                   <Font name="Candara Bold" size="19.0" />
                </font>
@@ -242,7 +242,7 @@
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="staffLabel3" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="379.0" AnchorPane.rightAnchor="580.0" AnchorPane.topAnchor="14.0">
+            <Label fx:id="staffLabel3" alignment="CENTER" layoutX="355.0" layoutY="14.0" prefWidth="100.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="14.0">
                <font>
                   <Font name="Candara Bold" size="19.0" />
                </font>
@@ -293,7 +293,7 @@
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="staffLabel4" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="580.0" AnchorPane.topAnchor="14.0">
+            <Label fx:id="staffLabel4" alignment="CENTER" layoutX="355.0" layoutY="14.0" prefWidth="100.0" text="0000" textFill="#223c40" AnchorPane.bottomAnchor="16.666666666666664" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="14.0">
                <font>
                   <Font name="Candara Bold" size="19.0" />
                </font>
@@ -344,7 +344,7 @@
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="staffLabel5" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="580.0" AnchorPane.topAnchor="14.0">
+            <Label fx:id="staffLabel5" alignment="CENTER" layoutX="355.0" layoutY="14.0" prefWidth="100.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="14.0">
                <font>
                   <Font name="Candara Bold" size="19.0" />
                </font>
@@ -395,7 +395,7 @@
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="staffLabel6" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="580.0" AnchorPane.topAnchor="14.0">
+            <Label fx:id="staffLabel6" alignment="CENTER" layoutX="355.0" layoutY="14.0" prefWidth="100.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="14.0">
                <font>
                   <Font name="Candara Bold" size="19.0" />
                </font>
@@ -446,7 +446,7 @@
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="staffLabel7" layoutX="355.0" layoutY="14.0" text="0000" textFill="#223c40" AnchorPane.rightAnchor="580.0" AnchorPane.topAnchor="14.0">
+            <Label fx:id="staffLabel7" alignment="CENTER" layoutX="355.0" layoutY="14.0" prefWidth="100.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="14.0">
                <font>
                   <Font name="Candara Bold" size="19.0" />
                </font>

@@ -698,8 +698,14 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickAddButton() {
+        addTransactionPane.setOpacity(0);
         addTransactionPane.setVisible(true);
         blockPane.setVisible(true);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addTransactionPane,300 ,0,1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addTransactionPane,300 ,-170,0);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     @FXML
@@ -1305,8 +1311,15 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickOkayInAdd() {
-        addTransactionPane.setVisible(false);
-        blockPane.setVisible(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addTransactionPane,300 ,1,0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addTransactionPane,300 ,0,-170);
+        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+        translateTransition.setOnFinished(event -> {
+            addTransactionPane.setVisible(false);
+            blockPane.setVisible(false);
+        });
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     @FXML
