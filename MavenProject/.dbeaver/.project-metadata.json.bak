@@ -1,1 +1,1 @@
-{"resources":{"src/main/resources/sql/user.sql":{"default-datasource":"mysql8-18514c92380-35912efc44c6dfa9","default-catalog":"itembase"}}}
+{"resources":{"src/main/resources/sql/message.sql":{"default-datasource":"mysql8-1856045c0a2-23f7d8bbde43774c"}}}

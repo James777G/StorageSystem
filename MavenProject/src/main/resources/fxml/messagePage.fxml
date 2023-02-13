@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: eeeeee;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.MessagePageController">
+<AnchorPane prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: eeeeee;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.MessagePageController">
    <children>
       <AnchorPane prefHeight="50.0" prefWidth="1200.0" style="-fx-background-color: #223c40;">
          <children>
@@ -80,7 +79,7 @@
                   <Font name="Candara" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="390.0" layoutY="21.0" prefHeight="18.0" text="Staff Name:" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="25.0">
+            <Label layoutX="390.0" layoutY="21.0" prefHeight="18.0" text="Message:" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="25.0">
                <font>
                   <Font name="Candara" size="15.0" />
                </font>
@@ -134,7 +133,7 @@
                   <Font name="Candara" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="390.0" layoutY="21.0" prefHeight="18.0" text="Staff Name:" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="25.0">
+            <Label layoutX="390.0" layoutY="21.0" prefHeight="18.0" text="Message:" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="25.0">
                <font>
                   <Font name="Candara" size="15.0" />
                </font>
@@ -188,7 +187,7 @@
                   <Font name="Candara" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="390.0" layoutY="21.0" prefHeight="18.0" text="Staff Name:" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="25.0">
+            <Label layoutX="390.0" layoutY="21.0" prefHeight="18.0" text="Message:" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="25.0">
                <font>
                   <Font name="Candara" size="15.0" />
                </font>
@@ -242,7 +241,7 @@
                   <Font name="Candara" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="390.0" layoutY="21.0" prefHeight="18.0" text="Staff Name:" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="25.0">
+            <Label layoutX="390.0" layoutY="21.0" prefHeight="18.0" text="Message:" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="25.0">
                <font>
                   <Font name="Candara" size="15.0" />
                </font>
@@ -296,7 +295,7 @@
                   <Font name="Candara" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="390.0" layoutY="21.0" prefHeight="18.0" text="Staff Name:" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="25.0">
+            <Label layoutX="390.0" layoutY="21.0" prefHeight="18.0" text="Message:" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="25.0">
                <font>
                   <Font name="Candara" size="15.0" />
                </font>
@@ -322,6 +321,6 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <MFXPagination layoutX="536.0" layoutY="594.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" />
+      <MFXPagination fx:id="newPaginationn" layoutX="536.0" layoutY="594.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="550.0" />
    </children>
 </AnchorPane>
