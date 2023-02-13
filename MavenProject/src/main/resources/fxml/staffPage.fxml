@@ -20,7 +20,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.StaffController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.StaffController">
    <children>
       <MFXTextField fx:id="searchBar" floatMode="DISABLED" layoutX="287.0" layoutY="75.0" prefHeight="50.0" prefWidth="550.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="40.0">
          <textFill>
@@ -453,6 +453,7 @@
             <Pagination fx:id="pagination" maxPageIndicatorCount="8" onScroll="#onScrolled" pageCount="50" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
+      <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" visible="false" />
       <MFXGenericDialog fx:id="descriptionDialog" headerText="Item Details" layoutX="492.0" onClose="#onCloseDescription" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="150.0">
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
@@ -525,7 +526,6 @@
             </AnchorPane>
          </center>
       </MFXGenericDialog>
-      <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" visible="false" />
       <AnchorPane fx:id="addStaffPane" layoutX="79.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 10;" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
          <children>
             <Label layoutX="454.0" layoutY="148.0" opacity="0.4" prefWidth="289.0" rotate="-38.7" text="STAFF" textFill="#9de4ed59">
@@ -605,7 +605,7 @@
                </font>
             </Label>
             <Separator layoutX="7.0" layoutY="38.0" prefHeight="8.0" prefWidth="488.0" />
-            <Label layoutX="36.0" layoutY="48.0" text="You Are About To Delete An Item" textFill="#db5b5b" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="55.0">
+            <Label layoutX="36.0" layoutY="48.0" text="You Are About To Delete A Staff" textFill="#db5b5b" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="55.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
