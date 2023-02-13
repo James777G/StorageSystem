@@ -2,8 +2,12 @@ package org.maven.apache.spring;
 
 
 import jakarta.mail.Authenticator;
+import jakarta.mail.MessagingException;
 import jakarta.mail.PasswordAuthentication;
 import jakarta.mail.Session;
+import jakarta.mail.internet.AddressException;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import org.maven.apache.mail.SimpleOrderManager;
 import org.maven.apache.service.mail.MailService;
 import org.maven.apache.service.mail.MailServiceProvider;
@@ -74,8 +78,10 @@ public class MailConfiguration {
         return mailMessage;
     }
 
+
+
     @Bean
-    public SimpleOrderManager orderManager(MailSender mailSender, SimpleMailMessage templateMessage){
+    public SimpleOrderManager orderManager(JavaMailSender mailSender, SimpleMailMessage templateMessage, Properties accountProperties) throws MessagingException {
         SimpleOrderManager orderManager = new SimpleOrderManager();
         orderManager.setMailSender(mailSender);
         orderManager.setTemplateMessage(templateMessage);

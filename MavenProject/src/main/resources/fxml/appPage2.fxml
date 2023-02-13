@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXCircleToggleNode?>
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
 <?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
 <?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
@@ -9,6 +10,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -41,18 +43,6 @@
                   <Font name="Candara Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="738.0" layoutY="321.0" text="Max amount" textFill="#223c40" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="320.0">
-               <font>
-                  <Font name="Candara Bold" size="15.0" />
-               </font>
-            </Label>
-            <Label layoutX="738.0" layoutY="361.0" text="Min amount" textFill="#223c40" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="360.0">
-               <font>
-                  <Font name="Candara Bold" size="15.0" />
-               </font>
-            </Label>
-            <Separator layoutX="775.0" layoutY="337.0" prefHeight="3.0" prefWidth="89.0" AnchorPane.topAnchor="337.0" />
-            <Separator layoutX="775.0" layoutY="377.0" prefHeight="3.0" prefWidth="89.0" AnchorPane.topAnchor="377.0" />
             <Separator layoutX="100.0" layoutY="417.0" prefWidth="200.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="420.0" />
             <Label fx:id="redTakenLabel" layoutX="111.0" layoutY="441.0" prefHeight="20.0" prefWidth="43.0" style="-fx-background-color: #feccc9; -fx-background-radius: 5;" text=" Taken" textFill="#ff4137" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="430.0">
                <font>
@@ -130,7 +120,7 @@
                   </Label>
                </graphic>
             </JFXButton>
-            <VBox fx:id="searchTable" layoutX="300.0" layoutY="219.0" opacity="0.0" prefHeight="200.0" prefWidth="551.0" styleClass="resultPane" stylesheets="@../css/appPage2.css" AnchorPane.topAnchor="159.0">
+            <VBox fx:id="searchTable" layoutX="300.0" layoutY="219.0" opacity="0.0" prefHeight="200.0" prefWidth="551.0" styleClass="resultPane" stylesheets="@../css/appPage2.css" visible="false" AnchorPane.topAnchor="159.0">
                <children>
                   <JFXButton fx:id="buttonOne" maxWidth="1.7976931348623157E308" onAction="#onClickSearchButtonOne" prefHeight="41.0" prefWidth="551.0" styleClass="topResultButton" stylesheets="@../css/appPage2.css" textAlignment="JUSTIFY">
                      <font>
@@ -159,12 +149,19 @@
                   </JFXButton>
                </children>
             </VBox>
-            <JFXButton layoutX="971.0" layoutY="412.0" onAction="#onClickExcel" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Download Excel" textFill="WHITE" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="350.0">
+            <JFXButton layoutX="941.0" layoutY="409.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onClickExcel" prefHeight="27.0" prefWidth="143.0" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Download Excel" textFill="WHITE" AnchorPane.rightAnchor="116.0">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-downloads-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </JFXButton>
-            <Label layoutX="941.0" layoutY="371.0" prefHeight="25.0" prefWidth="55.0" text="Excel:" textFill="#223c40">
+            <Label layoutX="941.0" layoutY="371.0" prefHeight="25.0" prefWidth="55.0" text="Excel:" textFill="#223c40" AnchorPane.bottomAnchor="303.6666666666667">
                <font>
                   <Font name="Calibri Bold" size="16.0" />
                </font>
@@ -174,11 +171,6 @@
                   <Font name="Calibri Bold" size="14.0" />
                </font>
             </Label>
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1057.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/icons8-downloads-96.png" />
-               </image>
-            </ImageView>
             <TextField fx:id="searchField" layoutX="301.0" layoutY="170.0" onMouseClicked="#onClickSearchBar" prefHeight="50.0" prefWidth="550.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #d7d7d7; -fx-border-radius: 8; -fx-padding: 0 0 0 50;">
                <opaqueInsets>
                   <Insets />
@@ -394,7 +386,7 @@
                </children>
             </AnchorPane>
             <AnchorPane fx:id="appPageBlockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" visible="false" AnchorPane.topAnchor="0.0" />
-            <MFXGenericDialog fx:id="transactionDialog" headerText="Transaction Details" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseTransactionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
+            <MFXGenericDialog fx:id="transactionDialog" headerText="Transaction Details" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseTransactionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
                <left>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
@@ -531,6 +523,229 @@
                   </AnchorPane>
                </left>
             </MFXGenericDialog>
+            <JFXButton layoutX="770.0" layoutY="410.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onClickAlert" prefHeight="27.0" prefWidth="135.0" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Alert Manager" textFill="WHITE" AnchorPane.bottomAnchor="263.0" AnchorPane.leftAnchor="760.0">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="21.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-hint-48.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <Label layoutX="770.0" layoutY="371.0" prefHeight="25.0" prefWidth="102.0" text="Notifications:" textFill="#223c40" AnchorPane.bottomAnchor="304.0" AnchorPane.leftAnchor="760.0">
+               <font>
+                  <Font name="Calibri Bold" size="16.0" />
+               </font>
+            </Label>
+            <AnchorPane fx:id="notificationPane" layoutX="211.0" layoutY="127.0" prefHeight="292.0" prefWidth="460.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-radius: 20;" visible="false" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="80.0">
+               <children>
+                  <Label layoutX="27.0" layoutY="17.0" text="Notification Center">
+                     <font>
+                        <Font name="Calibri Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutY="42.0" prefHeight="3.0" prefWidth="750.0" />
+                  <Label layoutX="27.0" layoutY="61.0" text="Cargo Regulatory:" AnchorPane.leftAnchor="27.0" AnchorPane.topAnchor="52.0">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane layoutX="27.0" layoutY="91.0" AnchorPane.bottomAnchor="173.0">
+                     <children>
+                        <Label layoutY="2.0" text="Item Name:">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="216.0" text="Minimum Amount:">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <AnchorPane layoutY="25.0" AnchorPane.topAnchor="25.0">
+                           <children>
+                              <AnchorPane fx:id="regulatorySpaceOne" prefHeight="37.0" prefWidth="338.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 10;">
+                                 <children>
+                                    <Label fx:id="regulatoryNameOne" layoutX="5.0" layoutY="9.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="9.0" />
+                                    <Label fx:id="regulatoryAmountOne" layoutX="188.0" layoutY="9.0" prefHeight="17.0" prefWidth="90.0" text="Label" AnchorPane.leftAnchor="188.0" AnchorPane.topAnchor="9.0" />
+                                    <ImageView fx:id="regulatoryDeleteOne" fitHeight="30.0" fitWidth="26.0" layoutX="300.0" layoutY="5.0" onMouseClicked="#onDeleteRegulatoryOne" onMouseEntered="#onEnterRegulatoryDeleteOne" onMouseExited="#onExitRegulatoryDeleteOne" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="5.0">
+                                       <image>
+                                          <Image url="@../image/icons8-delete-document-64.png" />
+                                       </image>
+                                    </ImageView>
+                                    <MFXProgressSpinner fx:id="regulatoryDeleteSpinnerOne" layoutX="303.0" layoutY="7.0" prefHeight="20.0" prefWidth="16.0" visible="false" AnchorPane.bottomAnchor="10.333333333333336" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="7.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="regulatorySpaceTwo" layoutY="42.0" prefHeight="37.0" prefWidth="338.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 10;">
+                                 <children>
+                                    <ImageView fx:id="regulatoryDeleteTwo" fitHeight="30.0" fitWidth="26.0" layoutX="298.0" layoutY="6.0" onMouseClicked="#onDeleteRegulatoryTwo" onMouseEntered="#onEnterRegulatoryDeleteTwo" onMouseExited="#onExitRegulatoryDeleteTwo" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="5.0">
+                                       <image>
+                                          <Image url="@../image/icons8-delete-document-64.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="regulatoryNameTwo" layoutY="10.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="9.0" />
+                                    <Label fx:id="regulatoryAmountTwo" layoutX="187.0" layoutY="9.0" prefHeight="17.0" prefWidth="90.0" text="Label" AnchorPane.leftAnchor="187.0" AnchorPane.topAnchor="9.0" />
+                                    <MFXProgressSpinner fx:id="regulatoryDeleteSpinnerTwo" layoutX="305.0" layoutY="5.0" prefHeight="20.0" prefWidth="16.0" visible="false" AnchorPane.bottomAnchor="10.333333333333336" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="7.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="regulatorySpaceThree" layoutY="84.0" prefHeight="37.0" prefWidth="338.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 10;">
+                                 <children>
+                                    <ImageView fx:id="regulatoryDeleteThree" fitHeight="30.0" fitWidth="26.0" layoutX="300.0" onMouseClicked="#onDeleteRegulatoryThree" onMouseEntered="#onEnterRegulatoryDeleteThree" onMouseExited="#onExitRegulatoryDeleteThree" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="5.0">
+                                       <image>
+                                          <Image url="@../image/icons8-delete-document-64.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="regulatoryNameThree" layoutX="9.0" layoutY="8.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="9.0" />
+                                    <Label fx:id="regulatoryAmountThree" layoutX="175.0" layoutY="6.0" prefHeight="17.0" prefWidth="90.0" text="Label" AnchorPane.leftAnchor="187.0" AnchorPane.topAnchor="9.0" />
+                                    <MFXProgressSpinner fx:id="regulatoryDeleteSpinnerThree" layoutX="306.0" layoutY="3.0" prefHeight="20.0" prefWidth="16.0" visible="false" AnchorPane.bottomAnchor="10.333333333333336" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="7.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <Pagination fx:id="cargoPagination" layoutX="68.0" layoutY="151.0" maxPageIndicatorCount="3" prefHeight="23.0" prefWidth="200.0" stylesheets="@../css/pagination.css" />
+                     </children>
+                  </AnchorPane>
+                  <Label layoutX="429.0" layoutY="108.0" text="Label" textFill="#f2f2f2cf" />
+                  <Separator layoutX="3.0" layoutY="298.0" prefHeight="2.0" prefWidth="744.0" />
+                  <Label layoutX="383.0" layoutY="51.0" text="Email Regulatory:" AnchorPane.leftAnchor="388.0">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane layoutX="389.0" layoutY="80.0" AnchorPane.bottomAnchor="173.0">
+                     <children>
+                        <Label layoutY="2.0" text="Email Address:">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Pagination fx:id="emailPagination" layoutX="68.0" layoutY="151.0" maxPageIndicatorCount="3" prefHeight="23.0" prefWidth="200.0" stylesheets="@../css/pagination.css" />
+                        <AnchorPane layoutY="29.0" AnchorPane.topAnchor="25.0">
+                           <children>
+                              <AnchorPane fx:id="emailSpaceOne" prefHeight="37.0" prefWidth="338.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 10;">
+                                 <children>
+                                    <Label fx:id="emailOne" layoutX="5.0" layoutY="9.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="9.0" />
+                                    <ImageView fx:id="emailDeleteOne" fitHeight="30.0" fitWidth="26.0" layoutX="300.0" layoutY="5.0" onMouseClicked="#onClickDeleteEmailOne" onMouseEntered="#onEnterDeleteOne" onMouseExited="#onExitDeleteOne" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="5.0">
+                                       <image>
+                                          <Image url="@../image/icons8-delete-document-64.png" />
+                                       </image>
+                                    </ImageView>
+                                    <MFXProgressSpinner fx:id="emailDeleteSpinnerOne" layoutX="305.0" layoutY="8.0" prefHeight="20.0" prefWidth="16.0" visible="false" AnchorPane.bottomAnchor="9.333333333333336" AnchorPane.leftAnchor="305.0" AnchorPane.topAnchor="8.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="emailSpaceTwo" layoutY="42.0" prefHeight="37.0" prefWidth="338.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 10;">
+                                 <children>
+                                    <ImageView fx:id="emailDeleteTwo" fitHeight="30.0" fitWidth="26.0" layoutX="298.0" layoutY="6.0" onMouseClicked="#onClickDeleteEmailTwo" onMouseEntered="#onEnterDeleteTwo" onMouseExited="#onExitDeleteTwo" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="5.0">
+                                       <image>
+                                          <Image url="@../image/icons8-delete-document-64.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="emailTwo" layoutY="10.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="9.0" />
+                                    <MFXProgressSpinner fx:id="emailDeleteSpinnerTwo" layoutX="307.0" layoutY="7.0" prefHeight="20.0" prefWidth="16.0" visible="false" AnchorPane.bottomAnchor="9.333333333333336" AnchorPane.leftAnchor="305.0" AnchorPane.topAnchor="8.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="emailSpaceThree" layoutY="84.0" prefHeight="37.0" prefWidth="338.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 10;">
+                                 <children>
+                                    <ImageView fx:id="emailDeleteThree" fitHeight="30.0" fitWidth="26.0" layoutX="300.0" onMouseClicked="#onClickDeleteEmailThree" onMouseEntered="#onEnterDeleteThree" onMouseExited="#onExitDeleteThree" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="5.0">
+                                       <image>
+                                          <Image url="@../image/icons8-delete-document-64.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="emailThree" layoutX="9.0" layoutY="8.0" text="Label" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="9.0" />
+                                    <MFXProgressSpinner fx:id="emailDeleteSpinnerThree" layoutX="304.0" layoutY="7.0" prefHeight="20.0" prefWidth="16.0" visible="false" AnchorPane.bottomAnchor="9.333333333333336" AnchorPane.leftAnchor="305.0" AnchorPane.topAnchor="8.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="27.0" layoutY="310.0" AnchorPane.topAnchor="310.0">
+                     <children>
+                        <Label text="New Cargo Under Regulatory:">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <MFXTextField fx:id="cargoNameTextField" floatMode="BORDER" floatingText=" Item Name: " layoutY="30.0" prefHeight="35.0" prefWidth="193.0">
+                           <font>
+                              <Font name="Calibri" size="12.0" />
+                           </font>
+                        </MFXTextField>
+                        <MFXTextField fx:id="cargoAmountTextField" floatMode="BORDER" floatingText=" Item Amount: " layoutY="82.0" prefHeight="35.0" prefWidth="194.0">
+                           <font>
+                              <Font name="Calibri" size="12.0" />
+                           </font>
+                        </MFXTextField>
+                        <JFXButton fx:id="cargoApplyButton" layoutX="246.0" layoutY="84.0" onAction="#onClickApplyInCargo" prefHeight="27.0" prefWidth="65.0" style="-fx-background-color: #223c40;" text="Apply" textFill="WHITE">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton layoutX="246.0" layoutY="33.0" onAction="#onClearRegulatory" prefHeight="27.0" prefWidth="65.0" style="-fx-background-color: #e4e4e4;" text="Clear">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <MFXProgressSpinner fx:id="cargoSpinner" layoutX="267.0" layoutY="85.0" prefHeight="25.0" prefWidth="24.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="413.0" layoutY="313.0" AnchorPane.leftAnchor="413.0" AnchorPane.topAnchor="310.0">
+                     <children>
+                        <Label text="Add New Email:">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <MFXTextField fx:id="emailTextField" floatMode="BORDER" floatingText=" Email Address: " layoutY="30.0" prefHeight="35.0" prefWidth="254.0">
+                           <font>
+                              <Font name="Calibri" size="12.0" />
+                           </font>
+                        </MFXTextField>
+                        <JFXButton fx:id="emailApplyButton" layoutX="175.0" layoutY="83.0" onAction="#onClickApplyInEmail" prefHeight="27.0" prefWidth="65.0" style="-fx-background-color: #223c40;" text="Apply" textFill="WHITE" AnchorPane.rightAnchor="0.0">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton layoutX="101.0" layoutY="84.0" onAction="#onClearEmail" prefHeight="27.0" prefWidth="65.0" style="-fx-background-color: #e4e4e4;" text="Clear" AnchorPane.leftAnchor="0.0">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <Label fx:id="emailWarnMessage" layoutX="121.0" text="Invalid Email Address" textFill="RED" visible="false">
+                           <font>
+                              <Font name="Calibri Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <MFXProgressSpinner fx:id="emailSpinner" layoutX="209.0" layoutY="84.0" prefHeight="25.0" prefWidth="24.0" />
+                     </children>
+                  </AnchorPane>
+                  <ImageView fx:id="notificationCross" fitHeight="37.0" fitWidth="26.0" layoutX="712.0" layoutY="3.0" onMouseClicked="#onClickCloseNotification" onMouseEntered="#onEnterCloseNotification" onMouseExited="#onExitCloseNotification" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                     <image>
+                        <Image url="@../image/icons8-multiply-90.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="regulatoryWarnMessage" layoutX="27.0" layoutY="439.0" text="Please make sure data is correctly inserted" textFill="RED" visible="false">
+                     <font>
+                        <Font name="Calibri Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <MFXCircleToggleNode fx:id="notifyButton" layoutX="6.0" layoutY="70.0" onMouseClicked="#onNotify" onMouseEntered="#onEnterNotify" onMouseExited="#onExitNotify">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="65.0" opacity="0.67" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-alarm-50.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </MFXCircleToggleNode>
          </children>
          <padding>
             <Insets top="60.0" />

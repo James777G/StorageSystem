@@ -10,15 +10,7 @@
         values (#{staffName}, #{status}, #{otherInfo})
     </insert>
 
-    <update id="updateStaff">
-        update StaffTable
-        <set>
-            staffName = #{staffName},
-            status = #{status},
-            otherInfo = #{otherInfo}
-        </set>
-        where staffID = #{staffID};
-    </update>
+
     <delete id="deleteById">
         delete from StaffTable where staffID = #{id};
     </delete>

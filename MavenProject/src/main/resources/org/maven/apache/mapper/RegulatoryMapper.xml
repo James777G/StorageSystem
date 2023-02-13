@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 这个文件的文件路径不要动-->
+<!-- 名称空间-->
+<mapper namespace="org.maven.apache.mapper.RegulatoryMapper">
+
+    <insert id="addNewRegulatory" useGeneratedKeys="true" keyProperty="ID">
+        insert into RegulatoryTable(ItemName, ItemAmount)
+        values (#{itemName}, #{itemAmount});
+    </insert>
+
+    <delete id="deleteRegulatory">
+        delete from RegulatoryTable where ItemName = #{itemName};
+    </delete>
+
+
+    <select id="selectAll" resultType="org.maven.apache.regulatory.Regulatory">
+        select * from RegulatoryTable;
+    </select>
+    <select id="selectByName" resultType="org.maven.apache.regulatory.Regulatory">
+        select * from RegulatoryTable where ItemName = #{name};
+    </select>
+
+</mapper>

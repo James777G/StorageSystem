@@ -5,6 +5,8 @@ import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
+import javafx.animation.FadeTransition;
+import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -16,36 +18,40 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.transform.Translate;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.exception.NegativeDataException;
 import org.maven.apache.exception.Warning;
 import org.maven.apache.service.transaction.CachedTransactionService;
 import org.maven.apache.transaction.Transaction;
-import org.maven.apache.utils.DataUtils;
-import org.maven.apache.utils.ScaleUtils;
-import org.maven.apache.utils.TransactionCachedUtils;
-import org.maven.apache.utils.TranslateUtils;
+import org.maven.apache.utils.*;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 
 public class NewTransactionPageController implements Initializable {
 
     enum SortBy {
-        ALLDATEASCEND, ALLDATEDESCEND, RESTOCKDATEASCEND, RESTOCKDATEDESCEND, TAKENDATEASCEND, TAKENDATEDESCEND, ALLAMOUNTASCEND, ALLAMOUNTDESCEND,
-        RESTOCKAMOUNTASCEND, RESTOCKAMOUNTDESCEND, TAKENAMOUNTASCEND, TAKENAMOUNTDESCEND
+        ALLDATEASCEND, ALLDATEDESCEND, RESTOCKDATEASCEND, RESTOCKDATEDESCEND, TAKENDATEASCEND, TAKENDATEDESCEND,
+        ALLAMOUNTASCEND, ALLAMOUNTDESCEND, RESTOCKAMOUNTASCEND, RESTOCKAMOUNTDESCEND, TAKENAMOUNTASCEND, TAKENAMOUNTDESCEND
     }
 
     enum ButtonSelected {
         ALL, TAKEN, RESTOCK
+    }
+
+    enum ArrowStatus {
+        HORIZONTAL , UP ,DOWN
     }
 
     @FXML
@@ -89,6 +95,12 @@ public class NewTransactionPageController implements Initializable {
 
     @FXML
     private AnchorPane deleteItemPane;
+
+    @FXML
+    private AnchorPane dateArrowBlockPane;
+
+    @FXML
+    private AnchorPane amountArrowBlockPane;
 
     @FXML
     private AnchorPane transactionPane1, transactionPane2, transactionPane3, transactionPane4, transactionPane5, transactionPane6, transactionPane7;
@@ -157,7 +169,28 @@ public class NewTransactionPageController implements Initializable {
     private Label transactionIdLabel;
 
     @FXML
+    private Label transactionStatusInDetails;
+
+    @FXML
+    private Label transactionNameInDetails;
+
+    @FXML
+    private Label transactionDateInDetails;
+
+    @FXML
+    private Label transactionAmountInDetails;
+
+
+
+    @FXML
     private Pagination transactionPagination;
+
+
+    @FXML
+    private Image arrowImage = new Image(Objects.requireNonNull(NewTransactionPageController.class.getResourceAsStream("/image/icons8-sort-down-100.png")));
+
+    @FXML
+    private Image horizontalLineImage  = new Image(Objects.requireNonNull(NewTransactionPageController.class.getResourceAsStream("/image/icons8-horizontal-line-96.png")));
 
     @FXML
     private ImageView sortByAmount;
@@ -187,13 +220,7 @@ public class NewTransactionPageController implements Initializable {
     private TextField newStaffTextField;
 
     @FXML
-    private TextField transactionNameInDetails;
-
-    @FXML
     private TextField staffNameInDetails;
-
-    @FXML
-    private TextField transactionAmountInDetails;
 
     @FXML
     private TextArea descriptionTextArea;
@@ -214,13 +241,7 @@ public class NewTransactionPageController implements Initializable {
     private MFXDatePicker datePicker = new MFXDatePicker(Locale.ENGLISH);
 
     @FXML
-    private MFXDatePicker transactionDateInDetails;
-
-    @FXML
     private MFXToggleButton statusToggleButton;
-
-    @FXML
-    private MFXToggleButton statusToggleButtonInDetails;
 
     private Label[] cargoLabelArray = new Label[7];
 
@@ -245,6 +266,14 @@ public class NewTransactionPageController implements Initializable {
     private SortBy sortBy = SortBy.ALLDATEDESCEND;
 
     private ButtonSelected buttonSelected = ButtonSelected.ALL;
+
+    private ArrowStatus amountArrow = ArrowStatus.HORIZONTAL;
+
+    private ArrowStatus dateArrow = ArrowStatus.DOWN;
+
+    private boolean isArrowRotating = false;
+
+    private boolean isPressAmount ;
 
     private boolean isAll = true;
 
@@ -289,6 +318,9 @@ public class NewTransactionPageController implements Initializable {
         addTransactionPane.setVisible(false);
         warnMessageInAdd.setVisible(false);
         loadSpinnerInAdd.setVisible(false);
+        setBinsImages();
+        amountArrowBlockPane.setVisible(false);
+        dateArrowBlockPane.setVisible(false);
         setPaginationPages(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_ASC_7));
         refreshPage();
         // perform the action of loading current page content when pagination is clicked
@@ -353,6 +385,16 @@ public class NewTransactionPageController implements Initializable {
         transactionPaneArray[6] = transactionPane7;
     }
 
+    private void setBinsImages(){
+        binImage1.setVisible(false);
+        binImage2.setVisible(false);
+        binImage3.setVisible(false);
+        binImage4.setVisible(false);
+        binImage5.setVisible(false);
+        binImage6.setVisible(false);
+        binImage7.setVisible(false);
+    }
+
     /**
      * set how many pages do we need in total
      */
@@ -362,7 +404,7 @@ public class NewTransactionPageController implements Initializable {
 
 
     /**
-     * set the content of transaction list from current page when the pagination is clicked
+     * update the content of which page is going to be indicated
      */
     private void updatePagination(Number currentPage) {
         currentPageList = sortedList.get(currentPage.intValue());
@@ -554,32 +596,33 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickDate() {
-        if (isAll && !isRestock && !isTaken) {
-            if (isDateAscend) {
-                sortBy = SortBy.ALLDATEDESCEND;
-                isDateAscend = false;
-            } else {
-                sortBy = SortBy.ALLDATEASCEND;
-                isDateAscend = true;
-            }
-        } else if (!isAll && isRestock && !isTaken) {
-            if (isDateAscend) {
-                sortBy = SortBy.RESTOCKDATEDESCEND;
-                isDateAscend = false;
-            } else {
-                sortBy = SortBy.RESTOCKDATEASCEND;
-                isDateAscend = true;
-            }
-        } else if (!isAll && !isRestock && isTaken) {
-            if (isDateAscend) {
-                sortBy = SortBy.TAKENDATEDESCEND;
-                isDateAscend = false;
-            } else {
-                sortBy = SortBy.TAKENDATEASCEND;
-                isDateAscend = true;
-            }
-        }
-        refreshPage();
+//            if (isAll && !isRestock && !isTaken) {
+//                if (isDateAscend) {
+//                    sortBy = SortBy.ALLDATEDESCEND;
+//                    isDateAscend = false;
+//                } else {
+//                    sortBy = SortBy.ALLDATEASCEND;
+//                    isDateAscend = true;
+//                }
+//            } else if (!isAll && isRestock && !isTaken) {
+//                if (isDateAscend) {
+//                    sortBy = SortBy.RESTOCKDATEDESCEND;
+//                    isDateAscend = false;
+//                } else {
+//                    sortBy = SortBy.RESTOCKDATEASCEND;
+//                    isDateAscend = true;
+//                }
+//            } else if (!isAll && !isRestock && isTaken) {
+//                if (isDateAscend) {
+//                    sortBy = SortBy.TAKENDATEDESCEND;
+//                    isDateAscend = false;
+//                } else {
+//                    sortBy = SortBy.TAKENDATEASCEND;
+//                    isDateAscend = true;
+//                }
+//            }
+        setPressScaleTransition(false, dateArrow);
+
     }
 
     /**
@@ -587,36 +630,36 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickAmount() {
-        if (isAll && !isRestock && !isTaken) {
-            if (isAmountAscend) {
-                sortBy = SortBy.ALLAMOUNTDESCEND;
-                isAmountAscend = false;
-            } else {
-                sortBy = SortBy.ALLAMOUNTASCEND;
-                isAmountAscend = true;
-            }
-        } else if (!isAll && isRestock && !isTaken) {
-            if (isAmountAscend) {
-                sortBy = SortBy.RESTOCKAMOUNTDESCEND;
-                isAmountAscend = false;
-            } else {
-                sortBy = SortBy.RESTOCKAMOUNTASCEND;
-                isAmountAscend = true;
-            }
-        } else if (!isAll && !isRestock && isTaken) {
-            if (isAmountAscend) {
-                sortBy = SortBy.TAKENAMOUNTDESCEND;
-                isAmountAscend = false;
-            } else {
-                sortBy = SortBy.TAKENAMOUNTASCEND;
-                isAmountAscend = true;
-            }
-        }
-        refreshPage();
+//            if (isAll && !isRestock && !isTaken) {
+//                if (isAmountAscend) {
+//                    sortBy = SortBy.ALLAMOUNTDESCEND;
+//                    isAmountAscend = false;
+//                } else {
+//                    sortBy = SortBy.ALLAMOUNTASCEND;
+//                    isAmountAscend = true;
+//                }
+//            } else if (!isAll && isRestock && !isTaken) {
+//                if (isAmountAscend) {
+//                    sortBy = SortBy.RESTOCKAMOUNTDESCEND;
+//                    isAmountAscend = false;
+//                } else {
+//                    sortBy = SortBy.RESTOCKAMOUNTASCEND;
+//                    isAmountAscend = true;
+//                }
+//            } else if (!isAll && !isRestock && isTaken) {
+//                if (isAmountAscend) {
+//                    sortBy = SortBy.TAKENAMOUNTDESCEND;
+//                    isAmountAscend = false;
+//                } else {
+//                    sortBy = SortBy.TAKENAMOUNTASCEND;
+//                    isAmountAscend = true;
+//                }
+//            }
+        setPressScaleTransition(true, amountArrow);
     }
 
     /**
-     * reload the content of current page
+     * recalculate the amount of pages by specifying a particular transaction list and jump into its initial page
      */
     private void refreshPage() {
         setSortCondition();
@@ -650,48 +693,53 @@ public class NewTransactionPageController implements Initializable {
 
     @FXML
     private void onEnterAmount() {
-        setScaleTransition(sortByAmount, 100, 1.3);
+        setEnterScaleTransition(sortByAmount, 100, 1.1);
     }
 
     @FXML
     private void onExitAmount() {
-        setScaleTransition(sortByAmount, 100, 1);
+        setExitScaleTransition(sortByAmount, 100, 1);
     }
 
     @FXML
     private void onPressedAmount() {
-        setScaleTransition(sortByAmount, 100, 1.1);
     }
 
     @FXML
     private void onReleaseAmount() {
-        setScaleTransition(sortByAmount, 100, 1.3);
+        setEnterScaleTransition(sortByAmount, 100, 1.1);
     }
 
     @FXML
     private void onEnterDate() {
-        setScaleTransition(sortByDate, 100, 1.3);
+        setEnterScaleTransition(sortByDate, 100, 1.1);
     }
 
     @FXML
     private void onExitDate() {
-        setScaleTransition(sortByDate, 100, 1);
+        setExitScaleTransition(sortByDate, 100, 1);
     }
 
     @FXML
     private void onPressedDate() {
-        setScaleTransition(sortByDate, 100, 1.1);
     }
 
     @FXML
     private void onReleaseDate() {
-        setScaleTransition(sortByDate, 100, 1.3);
+        setEnterScaleTransition(sortByDate, 100, 1.1);
     }
 
     @FXML
     private void onCloseDeletionConfirmation() {
-        deleteItemPane.setVisible(false);
-        blockPane.setVisible(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,1,0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,0,-110);
+        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+        translateTransition.setOnFinished(event -> {
+            deleteItemPane.setVisible(false);
+            blockPane.setVisible(false);
+        });
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     /**
@@ -751,29 +799,35 @@ public class NewTransactionPageController implements Initializable {
     }
 
     private void setDeletionPanes(int row) {
-        deleteItemPane.setVisible(true);
         blockPane.setVisible(true);
+        deleteItemPane.setOpacity(0);
+        deleteItemPane.setVisible(true);
         setRemovalConfirmation(row);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,0,1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,-110,0);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     @FXML
     private void onEnterCross() {
-        setScaleTransition(deletionCross, 250, 1.1);
+        setEnterScaleTransition(deletionCross, 250, 1.1);
     }
 
     @FXML
     private void onExitCross() {
-        setScaleTransition(deletionCross, 250, 1);
+        setExitScaleTransition(deletionCross, 250, 1);
     }
 
     @FXML
     private void onEnterTick() {
-        setScaleTransition(deletionTick, 250, 1.1);
+        setEnterScaleTransition(deletionTick, 250, 1.1);
     }
 
     @FXML
     private void onExitTick() {
-        setScaleTransition(deletionTick, 250, 1);
+        setExitScaleTransition(deletionTick, 250, 1);
     }
 
     /**
@@ -819,194 +873,316 @@ public class NewTransactionPageController implements Initializable {
 
     @FXML
     private void onEnterBin1() {
-        setScaleTransition(binImage1, 100, 1.3);
+        setEnterScaleTransition(binImage1, 100, 1.1);
     }
 
     @FXML
     private void onEnterBin2() {
-        setScaleTransition(binImage2, 100, 1.3);
+        setEnterScaleTransition(binImage2, 100, 1.1);
     }
 
     @FXML
     private void onEnterBin3() {
-        setScaleTransition(binImage3, 100, 1.3);
+        setEnterScaleTransition(binImage3, 100, 1.1);
     }
 
     @FXML
     private void onEnterBin4() {
-        setScaleTransition(binImage4, 100, 1.3);
+        setEnterScaleTransition(binImage4, 100, 1.1);
     }
 
     @FXML
     private void onEnterBin5() {
-        setScaleTransition(binImage5, 100, 1.3);
+        setEnterScaleTransition(binImage5, 100, 1.1);
     }
 
     @FXML
     private void onEnterBin6() {
-        setScaleTransition(binImage6, 100, 1.3);
+        setEnterScaleTransition(binImage6, 100, 1.1);
     }
 
     @FXML
     private void onEnterBin7() {
-        setScaleTransition(binImage7, 100, 1.3);
+        setEnterScaleTransition(binImage7, 100, 1.1);
     }
 
     @FXML
     private void onExitBin1() {
-        setScaleTransition(binImage1, 100, 1);
+        setExitScaleTransition(binImage1, 100, 1);
     }
 
     @FXML
     private void onExitBin2() {
-        setScaleTransition(binImage2, 100, 1);
+        setExitScaleTransition(binImage2, 100, 1);
     }
 
     @FXML
     private void onExitBin3() {
-        setScaleTransition(binImage3, 100, 1);
+        setExitScaleTransition(binImage3, 100, 1);
     }
 
     @FXML
     private void onExitBin4() {
-        setScaleTransition(binImage4, 100, 1);
+        setExitScaleTransition(binImage4, 100, 1);
     }
 
     @FXML
     private void onExitBin5() {
-        setScaleTransition(binImage5, 100, 1);
+        setExitScaleTransition(binImage5, 100, 1);
     }
 
     @FXML
     private void onExitBin6() {
-        setScaleTransition(binImage6, 100, 1);
+        setExitScaleTransition(binImage6, 100, 1);
     }
 
     @FXML
     private void onExitBin7() {
-        setScaleTransition(binImage7, 100, 1);
+        setExitScaleTransition(binImage7, 100, 1);
     }
 
     @FXML
     private void onPressBin1() {
-        setScaleTransition(binImage1, 100, 1.1);
+        setExitScaleTransition(binImage1, 100, 0.9);
     }
 
     @FXML
     private void onPressBin2() {
-        setScaleTransition(binImage2, 100, 1.1);
+        setExitScaleTransition(binImage2, 100, 0.9);
     }
 
     @FXML
     private void onPressBin3() {
-        setScaleTransition(binImage3, 100, 1.1);
+        setExitScaleTransition(binImage3, 100, 0.9);
     }
 
     @FXML
     private void onPressBin4() {
-        setScaleTransition(binImage4, 100, 1.1);
+        setExitScaleTransition(binImage4, 100, 0.9);
     }
 
     @FXML
     private void onPressBin5() {
-        setScaleTransition(binImage5, 100, 1.1);
+        setExitScaleTransition(binImage5, 100, 0.9);
     }
 
     @FXML
     private void onPressBin6() {
-        setScaleTransition(binImage6, 100, 1.1);
+        setExitScaleTransition(binImage6, 100, 0.9);
     }
 
     @FXML
     private void onPressBin7() {
-        setScaleTransition(binImage7, 100, 1.1);
+        setExitScaleTransition(binImage7, 100, 0.9);
     }
 
     @FXML
     private void onReleaseBin1() {
-        setScaleTransition(binImage1, 100, 1.3);
+        setEnterScaleTransition(binImage1, 100, 1.1);
     }
 
     @FXML
     private void onReleaseBin2() {
-        setScaleTransition(binImage2, 100, 1.3);
+        setEnterScaleTransition(binImage2, 100, 1.1);
     }
 
     @FXML
     private void onReleaseBin3() {
-        setScaleTransition(binImage3, 100, 1.3);
+        setEnterScaleTransition(binImage3, 100, 1.1);
     }
 
     @FXML
     private void onReleaseBin4() {
-        setScaleTransition(binImage4, 100, 1.3);
+        setEnterScaleTransition(binImage4, 100, 1.3);
     }
 
     @FXML
     private void onReleaseBin5() {
-        setScaleTransition(binImage5, 100, 1.3);
+        setEnterScaleTransition(binImage5, 100, 1.1);
     }
 
     @FXML
     private void onReleaseBin6() {
-        setScaleTransition(binImage6, 100, 1.3);
+        setEnterScaleTransition(binImage6, 100, 1.1);
     }
 
     @FXML
     private void onReleaseBin7() {
-        setScaleTransition(binImage7, 100, 1.3);
+        setEnterScaleTransition(binImage7, 100, 1.1);
     }
 
-    private void setScaleTransition(ImageView imageView, int duration, double size) {
+    private void setEnterScaleTransition(ImageView imageView, int duration, double size) {
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(imageView, duration, size);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    private void setExitScaleTransition(ImageView imageView, int duration, double size) {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(imageView, duration, size);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
     }
 
+    private void setPressScaleTransition( boolean isPressAmount , ArrowStatus currentStatus) {
+        if(!isArrowRotating) {
+            if (isPressAmount) {
+                switch (currentStatus) {
+                    case HORIZONTAL -> {
+                        isAmountAscend = false;
+                        if (isAll && !isRestock && !isTaken) {
+                            sortBy = SortBy.ALLAMOUNTDESCEND;
+                        } else if (!isAll && isRestock && !isTaken) {
+                            sortBy = SortBy.RESTOCKAMOUNTDESCEND;
+                        } else if (!isAll && !isRestock && isTaken) {
+                            sortBy = SortBy.TAKENAMOUNTDESCEND;
+                        }
+                        sortByAmount.setRotate(0);
+                        sortByAmount.setImage(arrowImage);
+                        sortByDate.setImage(horizontalLineImage);
+                        amountArrow = ArrowStatus.DOWN;
+                        dateArrow = ArrowStatus.HORIZONTAL;
+                        refreshPage();
+                    }
+                    case DOWN -> {
+                        isArrowRotating = true;
+                        RotateTransition rotateTransition = RotationUtils.getRotationTransitionFromTo(sortByAmount, 200, 0, -180);
+                        rotateTransition.setOnFinished(event -> {
+                            amountArrow = ArrowStatus.UP;
+                            isAmountAscend = true;
+                            if (isAll && !isRestock && !isTaken) {
+                                sortBy = SortBy.ALLAMOUNTASCEND;
+                            } else if (!isAll && isRestock && !isTaken) {
+                                sortBy = SortBy.RESTOCKAMOUNTASCEND;
+                            } else if (!isAll && !isRestock && isTaken) {
+                                sortBy = SortBy.TAKENAMOUNTASCEND;
+                            }
+                            refreshPage();
+                            isArrowRotating = false;
+                        });
+                        rotateTransition.play();
+                    }
+                    case UP -> {
+                        RotateTransition rotateTransition = RotationUtils.getRotationTransitionFromTo(sortByAmount, 200, -180, 0);
+                        rotateTransition.setOnFinished(event -> {
+                            amountArrow = ArrowStatus.DOWN;
+                            isAmountAscend = false;
+                            if (isAll && !isRestock && !isTaken) {
+                                sortBy = SortBy.ALLAMOUNTDESCEND;
+                            } else if (!isAll && isRestock && !isTaken) {
+                                sortBy = SortBy.RESTOCKAMOUNTDESCEND;
+                            } else if (!isAll && !isRestock && isTaken) {
+                                sortBy = SortBy.TAKENAMOUNTDESCEND;
+                            }
+                            refreshPage();
+                            isArrowRotating = false;
+                        });
+                        rotateTransition.play();
+                    }
+                }
+            } else {
+                switch (currentStatus) {
+                    case HORIZONTAL -> {
+                        isDateAscend = false;
+                        if (isAll && !isRestock && !isTaken) {
+                            sortBy = SortBy.ALLDATEDESCEND;
+                        } else if (!isAll && isRestock && !isTaken) {
+                            sortBy = SortBy.RESTOCKDATEDESCEND;
+                        } else if (!isAll && !isRestock && isTaken) {
+                            sortBy = SortBy.TAKENDATEDESCEND;
+                        }
+                        sortByAmount.setImage(horizontalLineImage);
+                        sortByDate.setRotate(0);
+                        sortByDate.setImage(arrowImage);
+                        amountArrow = ArrowStatus.HORIZONTAL;
+                        dateArrow = ArrowStatus.DOWN;
+                        refreshPage();
+                    }
+                    case DOWN -> {
+                        isArrowRotating = true;
+                        RotateTransition rotateTransition = RotationUtils.getRotationTransitionFromTo(sortByDate, 200, 0, -180);
+                        rotateTransition.setOnFinished(event -> {
+                            dateArrow = ArrowStatus.UP;
+                            isDateAscend = true;
+                            if (isAll && !isRestock && !isTaken) {
+                                sortBy = SortBy.ALLDATEASCEND;
+                            } else if (!isAll && isRestock && !isTaken) {
+                                sortBy = SortBy.RESTOCKDATEASCEND;
+                            } else if (!isAll && !isRestock && isTaken) {
+                                sortBy = SortBy.TAKENDATEASCEND;
+                            }
+                            refreshPage();
+                            isArrowRotating = false;
+                        });
+                        rotateTransition.play();
+                    }
+                    case UP -> {
+                        RotateTransition rotateTransition = RotationUtils.getRotationTransitionFromTo(sortByDate, 200, -180, 0);
+                        rotateTransition.setOnFinished(event -> {
+                            dateArrow = ArrowStatus.DOWN;
+                            isDateAscend = false;
+                            if (isAll && !isRestock && !isTaken) {
+                                sortBy = SortBy.ALLDATEDESCEND;
+                            } else if (!isAll && isRestock && !isTaken) {
+                                sortBy = SortBy.RESTOCKDATEDESCEND;
+                            } else if (!isAll && !isRestock && isTaken) {
+                                sortBy = SortBy.TAKENDATEDESCEND;
+                            }
+                            refreshPage();
+                            isArrowRotating = false;
+                        });
+                        rotateTransition.play();
+                    }
+                }
+            }
+        }
+    }
+
     @FXML
-    private void onCheckDetails1() {
+    private void onEdit1() {
         setTransactionDetails(0);
     }
 
     @FXML
-    private void onCheckDetails2() {
+    private void onEdit2() {
         setTransactionDetails(1);
     }
 
     @FXML
-    private void onCheckDetails3() {
+    private void onEdit3() {
         setTransactionDetails(2);
     }
 
     @FXML
-    private void onCheckDetails4() {
+    private void onEdit4() {
         setTransactionDetails(3);
     }
 
     @FXML
-    private void onCheckDetails5() {
+    private void onEdit5() {
         setTransactionDetails(4);
     }
 
     @FXML
-    private void onCheckDetails6() {
+    private void onEdit6() {
         setTransactionDetails(5);
     }
 
     @FXML
-    private void onCheckDetails7() {
+    private void onEdit7() {
         setTransactionDetails(6);
     }
 
     /**
-     * set transaction details
+     * set transaction attributes
      *
      * @param row transaction entity at which row needs to be modified
      */
     private void setTransactionDetails(int row) {
         descriptionDialog.setVisible(true);
-        if (currentPageList.get(row).getStatus().equals("TAKEN")){
-            onToggleInDetails();
+        if (currentPageList.get(row).getStatus().equals("RESTOCK")){
+            transactionStatusInDetails.setText("RESTOCK");
+        }else{
+            transactionStatusInDetails.setText("TAKEN");
         }
         transactionIdLabel.setText(String.valueOf(currentPageList.get(row).getID()));
         transactionNameInDetails.setText(currentPageList.get(row).getItemName());
@@ -1023,17 +1199,6 @@ public class NewTransactionPageController implements Initializable {
         blockPane.setVisible(false);
     }
 
-    @FXML
-    private void onToggleInDetails(){
-        if (statusToggleButtonInDetails.isSelected()){
-            // convert status from RESTOCK to TAKEN
-            statusToggleButtonInDetails.setText("TAKEN");
-        }else{
-            // convert status from TAKEN to RESTOCK
-            statusToggleButtonInDetails.setText("RESTOCK");
-        }
-    }
-
     /**
      * close transaction modification page
      */
@@ -1044,7 +1209,7 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
-     * modify and overwrite new fields to a specified transaction
+     * modify and overwrite new staff or description fields to the specified transaction
      */
     @FXML
     private void onClickApplyInDetails(){
@@ -1142,7 +1307,7 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
-     * set current transaction status
+     * set new transaction status
      */
     @FXML
     private void onToggle(){

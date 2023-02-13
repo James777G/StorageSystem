@@ -1,10 +1,7 @@
 package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import io.github.palexdev.materialfx.controls.MFXDatePicker;
-import io.github.palexdev.materialfx.controls.MFXPasswordField;
-import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
-import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.*;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.*;
 import javafx.application.Platform;
@@ -16,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.Pagination;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -28,10 +26,18 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.maven.apache.MyLauncher;
+import org.maven.apache.email.Email;
+import org.maven.apache.exception.DataNotFoundException;
 import org.maven.apache.exception.EmptyValueException;
+import org.maven.apache.exception.InvalidEmailFormatException;
 import org.maven.apache.exception.Warning;
+import org.maven.apache.regulatory.Regulatory;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
+import org.maven.apache.service.email.EmailService;
 import org.maven.apache.service.excel.ExcelConverterService;
+import org.maven.apache.service.mail.MailNotifyService;
+import org.maven.apache.service.regulatory.RegulatoryMailingStrategy;
+import org.maven.apache.service.regulatory.RegulatoryService;
 import org.maven.apache.service.search.PromptSearchBarServiceHandler;
 import org.maven.apache.service.search.SearchBarService;
 import org.maven.apache.service.transaction.CachedTransactionService;
@@ -182,6 +188,8 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private AnchorPane takenStatusPane;
 
+    private final MailNotifyService mailNotifyService = MyLauncher.context.getBean("mailNotifyService", MailNotifyService.class);
+
     @FXML
     private AnchorPane restockStatusPane;
 
@@ -213,6 +221,9 @@ public class AppPage2Controller implements Initializable {
     private AnchorPane[] cargoBoxBackPanes = new AnchorPane[4];
 
     @FXML
+    private MFXCircleToggleNode notifyButton;
+
+    @FXML
     private AnchorPane cargoBox1FunctionalityPane, cargoBox2FunctionalityPane, cargoBox3FunctionalityPane, cargoBox4FunctionalityPane;
 
     private AnchorPane[] cargoBoxFunctionalityPanes = new AnchorPane[4];
@@ -242,10 +253,10 @@ public class AppPage2Controller implements Initializable {
     private AnchorPane messageButtonBlockPane;
 
     @FXML
-    private  AnchorPane transactionDialogTakenActionPane;
+    private AnchorPane transactionDialogTakenActionPane;
 
     @FXML
-    private  AnchorPane transactionDialogRestockActionPane;
+    private AnchorPane transactionDialogRestockActionPane;
 
     @FXML
     private AnchorPane cargoSearchPane;
@@ -422,7 +433,7 @@ public class AppPage2Controller implements Initializable {
 
     private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
 
-    private final CachedTransactionService cachedTransactionService = MyLauncher.context.getBean("cachedTransactionService",CachedTransactionService.class);
+    private final CachedTransactionService cachedTransactionService = MyLauncher.context.getBean("cachedTransactionService", CachedTransactionService.class);
 
     private final DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
 
@@ -485,21 +496,21 @@ public class AppPage2Controller implements Initializable {
 
     private TranslateTransition translateTransition_closeMenu = new TranslateTransition();
 
-    private  TranslateTransition translateTransition_openCargoBox1 = new TranslateTransition();
+    private TranslateTransition translateTransition_openCargoBox1 = new TranslateTransition();
 
-    private  TranslateTransition translateTransition_openCargoBox2 = new TranslateTransition();
+    private TranslateTransition translateTransition_openCargoBox2 = new TranslateTransition();
 
-    private  TranslateTransition translateTransition_openCargoBox3 = new TranslateTransition();
+    private TranslateTransition translateTransition_openCargoBox3 = new TranslateTransition();
 
-    private  TranslateTransition translateTransition_openCargoBox4 = new TranslateTransition();
+    private TranslateTransition translateTransition_openCargoBox4 = new TranslateTransition();
 
-    private  TranslateTransition translateTransition_closeCargoBox1 = new TranslateTransition();
+    private TranslateTransition translateTransition_closeCargoBox1 = new TranslateTransition();
 
-    private  TranslateTransition translateTransition_closeCargoBox2 = new TranslateTransition();
+    private TranslateTransition translateTransition_closeCargoBox2 = new TranslateTransition();
 
-    private  TranslateTransition translateTransition_closeCargoBox3 = new TranslateTransition();
+    private TranslateTransition translateTransition_closeCargoBox3 = new TranslateTransition();
 
-    private  TranslateTransition translateTransition_closeCargoBox4 = new TranslateTransition();
+    private TranslateTransition translateTransition_closeCargoBox4 = new TranslateTransition();
 
     private TranslateTransition[] translateTransition_openCargoBox = new TranslateTransition[4];
 
@@ -524,13 +535,88 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private StackPane messagePane;
 
+    @FXML
+    private Label emailWarnMessage;
+
+    private final EmailService emailService = MyLauncher.context.getBean("emailService", EmailService.class);
+
+    @FXML
+    private Label emailOne, emailTwo, emailThree;
+
+    private List<Label> emailList = new ArrayList<>();
+
+    @FXML
+    private Pagination emailPagination, cargoPagination;
+
+    @FXML
+    private MFXTextField emailTextField, cargoNameTextField, cargoAmountTextField;
+
+    @FXML
+    private MFXProgressSpinner emailSpinner, cargoSpinner;
+
+    @FXML
+    private JFXButton emailApplyButton, cargoApplyButton;
+
+    @FXML
+    private AnchorPane notificationPane;
+
+    @FXML
+    private AnchorPane emailSpaceOne, emailSpaceTwo, emailSpaceThree;
+
+    @FXML
+    private ImageView emailDeleteOne, emailDeleteTwo, emailDeleteThree;
+
+    @FXML
+    private MFXProgressSpinner emailDeleteSpinnerOne, emailDeleteSpinnerTwo, emailDeleteSpinnerThree;
+
+    private List<AnchorPane> emailSpaceList = new ArrayList<>();
+
+    @FXML
+    private ImageView notificationCross;
+
+    @FXML
+    private Label regulatoryNameOne, regulatoryNameTwo, regulatoryNameThree, regulatoryAmountOne, regulatoryAmountTwo, regulatoryAmountThree;
+
+    private List<Label> regulatoryNameList = new ArrayList<>();
+
+    private List<Label> regulatoryAmountList = new ArrayList<>();
+
+    private final RegulatoryService regulatoryService = MyLauncher.context.getBean("regulatoryService", RegulatoryService.class);
+
+    @FXML
+    private AnchorPane regulatorySpaceOne, regulatorySpaceTwo, regulatorySpaceThree;
+
+    @FXML
+    private ImageView regulatoryDeleteOne, regulatoryDeleteTwo, regulatoryDeleteThree;
+
+    private List<AnchorPane> regulatorySpaceList = new ArrayList<>();
+
+    @FXML
+    private Label regulatoryWarnMessage;
+
+    @FXML
+    private MFXProgressSpinner regulatoryDeleteSpinnerOne, regulatoryDeleteSpinnerTwo, regulatoryDeleteSpinnerThree;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cachedTransactionService.updateAllCachedTransactionData();
+        regulatoryService.updateAllRegulatoryData();
+        emailService.updateCachedEmailData();
         dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
         dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
         transactionDialog.setVisible(false);
         searchField.deselect();
+        initializeEmailSpaceList();
+        initializeEmails();
+        regulatoryWarnMessage.setVisible(false);
+        setEmailTable(emailPagination.getCurrentPageIndex());
+        emailPagination.setPageCount(EmailCachedUtils.getLists(EmailCachedUtils.listType.ALL).size());
+        emailPagination.currentPageIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                setEmailTable(newValue.intValue());
+            }
+        });
         currentPage = appPagePane;
         DataUtils.publicSettingsDialog = settingsDialog;
         DataUtils.appPage2Controller = this;
@@ -538,6 +624,20 @@ public class AppPage2Controller implements Initializable {
         settingsDialog.setVisible(false);
         searchTable.setVisible(false);
         usernameLabel.setText(user.getName());
+        DataUtils.cargoPagination = cargoPagination;
+        initializeRegulatoryAmountList();
+        initializeRegulatoryNameList();
+        initializeRegulatorySpaceList();
+        setCargoPageCount();
+        setCargoTable(cargoPagination.getCurrentPageIndex());
+        cargoPagination.setPageCount(RegulatoryCachedUtils.getLists(RegulatoryCachedUtils.listType.ALL).size());
+        cargoPagination.currentPageIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                setCargoTable(newValue.intValue());
+            }
+        });
+
 //        warehouseButton.setOpacity(0);
 //        staffButton.setOpacity(0);
 //        transactionButton.setOpacity(0);
@@ -547,7 +647,6 @@ public class AppPage2Controller implements Initializable {
         stackPaneForWarehouse.setOpacity(0);
 //        stackPaneForWarehouse.setPickOnBounds(false);
         stackPaneForWarehouse.setVisible(false);
-
         setButtonList();
         setTransactionPane();
         setWarehousePane();
@@ -559,6 +658,8 @@ public class AppPage2Controller implements Initializable {
 //        stackPane.setPickOnBounds(false);
         stackPane.setOpacity(0);
         stackPane.setVisible(false);
+        emailSpinner.setVisible(false);
+        cargoSpinner.setVisible(false);
         // initialize search per sec when search field is chosen
 //        searchField.focusedProperty().addListener((observable, oldValue, newValue) -> {
 //            if (newValue) {
@@ -583,37 +684,493 @@ public class AppPage2Controller implements Initializable {
         onUpdateUsername();
     }
 
-    private void setLists(){
+    private void setLists() {
         dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
         dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
     }
 
+    private void initializeRegulatoryNameList(){
+        regulatoryNameList.add(regulatoryNameOne);
+        regulatoryNameList.add(regulatoryNameTwo);
+        regulatoryNameList.add(regulatoryNameThree);
+    }
+
+    private void initializeRegulatoryAmountList(){
+        regulatoryAmountList.add(regulatoryAmountOne);
+        regulatoryAmountList.add(regulatoryAmountTwo);
+        regulatoryAmountList.add(regulatoryAmountThree);
+    }
+
+    private void initializeRegulatorySpaceList(){
+        regulatorySpaceList.add(regulatorySpaceOne);
+        regulatorySpaceList.add(regulatorySpaceTwo);
+        regulatorySpaceList.add(regulatorySpaceThree);
+    }
+
+    private void setCargoTable(int pageNumber){
+        List<Regulatory> regulatories = null;
+        try{
+            regulatories = RegulatoryCachedUtils.getLists(RegulatoryCachedUtils.listType.ALL)
+                    .get(pageNumber);
+        }catch (Exception e){
+            for(int i = 0; i < regulatorySpaceList.size(); i++){
+                regulatorySpaceList.get(i).setVisible(true);
+                regulatoryAmountList.get(i).setText("N/A");
+                regulatoryNameList.get(i).setText("N/A");
+            }
+            return;
+        }
+        for(int i = 0; i < regulatories.size(); i++){
+            regulatorySpaceList.get(i).setVisible(true);
+            regulatoryNameList.get(i).setText(regulatories.get(i).getItemName());
+            regulatoryAmountList.get(i).setText(String.valueOf(regulatories.get(i).getItemAmount()));
+        }
+        for(int i = regulatories.size(); i < regulatoryAmountList.size(); i++){
+            regulatorySpaceList.get(i).setVisible(false);
+        }
+    }
+
+    private void initializeEmails() {
+        emailList.add(emailOne);
+        emailList.add(emailTwo);
+        emailList.add(emailThree);
+    }
+
     @FXML
-    private void onClickSearchButtonOne(){
+    private void onClearEmail() {
+        emailTextField.clear();
+    }
+
+    @FXML
+    private void onClickApplyInCargo(){
+        Regulatory regulatory = null;
+        try{
+            regulatory = encapsulateRegulatoryData();
+        } catch (EmptyValueException e){
+            regulatoryWarnMessage.setVisible(true);
+            return;
+        }
+
+        Regulatory finalRegulatory = regulatory;
+        executorService.execute(() -> {
+            Platform.runLater(() -> {
+                cargoApplyButton.setVisible(false);
+                cargoSpinner.setVisible(true);
+            });
+            try{
+                regulatoryService.addNewRegulatory(finalRegulatory);
+                Platform.runLater(() -> regulatoryWarnMessage.setVisible(false));
+            } catch (Exception e) {
+                Platform.runLater(() -> {
+                    regulatoryWarnMessage.setVisible(true);
+                });
+            } finally {
+                regulatoryService.updateAllRegulatoryData();
+                Platform.runLater(() -> {
+                    setCargoPageCount();
+                    setCargoTable(cargoPagination.getCurrentPageIndex());
+                    cargoApplyButton.setVisible(true);
+                    cargoSpinner.setVisible(false);
+                });
+            }
+        });
+    }
+
+    @FXML
+    private void onClearRegulatory(){
+        cargoAmountTextField.clear();
+        cargoNameTextField.clear();
+    }
+
+    private Regulatory encapsulateRegulatoryData() throws EmptyValueException {
+        Regulatory regulatory = new Regulatory();
+        if(cargoNameTextField.getText().isBlank() || cargoAmountTextField.getText().isBlank()){
+            throw new EmptyValueException("Regulatory Necessary Data Left Unhandled");
+        }
+        try{
+            regulatory.setItemName(cargoNameTextField.getText());
+            regulatory.setItemAmount(Integer.parseInt(cargoAmountTextField.getText()));
+        }catch (Exception e){
+            throw new EmptyValueException("wrong data format in regulatory");
+        }
+
+        return regulatory;
+    }
+
+    @FXML
+    @Warning(Warning.WarningType.IMPROVEMENT)
+    private void onClickAlert() {
+        notificationPane.setVisible(true);
+    }
+
+    @FXML
+    private void onEnterNotify(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(notifyButton, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitNotify(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(notifyButton, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onEnterRegulatoryDeleteOne(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(regulatoryDeleteOne, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onEnterRegulatoryDeleteTwo(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(regulatoryDeleteTwo, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onEnterRegulatoryDeleteThree(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(regulatoryDeleteThree, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitRegulatoryDeleteOne(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(regulatoryDeleteOne, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitRegulatoryDeleteTwo(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(regulatoryDeleteTwo, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitRegulatoryDeleteThree(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(regulatoryDeleteThree, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    @Warning(Warning.WarningType.IMPROVEMENT)
+    private void onClickCloseNotification() {
+        notificationPane.setVisible(false);
+    }
+
+    @FXML
+    private void onClickDeleteEmailOne() {
+        emailDeleteSpinnerOne.setVisible(true);
+        emailDeleteOne.setVisible(false);
+        executorService.execute(() -> {
+            try{
+                emailService.deleteEmailByName(emailOne.getText());
+            } catch(Exception e){
+                emailService.updateCachedEmailData();
+            }finally{
+                Platform.runLater(() -> {
+                    setEmailTable(emailPagination.getCurrentPageIndex());
+                    setEmailPageCount();
+                    emailDeleteSpinnerOne.setVisible(false);
+                    emailDeleteOne.setVisible(true);
+                });
+            }
+
+        });
+
+    }
+
+    @FXML
+    private void onClickDeleteEmailTwo() {
+        emailDeleteSpinnerTwo.setVisible(true);
+        emailDeleteTwo.setVisible(false);
+        executorService.execute(() -> {
+            try{
+                emailService.deleteEmailByName(emailTwo.getText());
+            } catch(Exception e){
+                emailService.updateCachedEmailData();
+            }finally{
+                Platform.runLater(() -> {
+                    setEmailTable(emailPagination.getCurrentPageIndex());
+                    setEmailPageCount();
+                    emailDeleteSpinnerTwo.setVisible(false);
+                    emailDeleteTwo.setVisible(true);
+                });
+            }
+
+        });
+
+    }
+
+    @FXML
+    private void onClickDeleteEmailThree() {
+        emailDeleteSpinnerThree.setVisible(true);
+        emailDeleteThree.setVisible(false);
+        executorService.execute(() -> {
+            try{
+                emailService.deleteEmailByName(emailThree.getText());
+            } catch(Exception e){
+                emailService.updateCachedEmailData();
+            }finally{
+                Platform.runLater(() -> {
+                    setEmailTable(emailPagination.getCurrentPageIndex());
+                    setEmailPageCount();
+                    emailDeleteSpinnerThree.setVisible(false);
+                    emailDeleteThree.setVisible(true);
+                });
+            }
+
+        });
+    }
+
+    @FXML
+    private void onClickApplyInEmail() {
+        Email email = null;
+        try {
+            email = encapsulateEmailData();
+        } catch (InvalidEmailFormatException e) {
+            emailWarnMessage.setText("Invalid Email Format");
+            emailWarnMessage.setVisible(true);
+            return;
+        }
+        Email finalEmail = email;
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        emailSpinner.setVisible(true);
+                        emailApplyButton.setVisible(false);
+                    }
+                });
+                try {
+                    emailService.addNewEmail(finalEmail);
+                    Platform.runLater(() -> emailWarnMessage.setVisible(false));
+
+                } catch (Exception e) {
+                    emailService.updateCachedEmailData();
+                    Platform.runLater(() -> {
+                        emailWarnMessage.setVisible(true);
+                        emailWarnMessage.setText("Insertion Failed, Please Check Data");
+                    });
+                } finally {
+                    Platform.runLater(() -> {
+                        setEmailTable(emailPagination.getCurrentPageIndex());
+                        setEmailPageCount();
+                        emailSpinner.setVisible(false);
+                        emailApplyButton.setVisible(true);
+                    });
+
+                }
+
+            }
+        });
+    }
+
+    @FXML
+    private void onDeleteRegulatoryOne(){
+        regulatoryDeleteSpinnerOne.setVisible(true);
+        regulatoryDeleteOne.setVisible(false);
+        executorService.execute(() -> {
+            try{
+                regulatoryService.deleteRegulatory(regulatoryNameOne.getText());
+            } catch(Exception e){
+                regulatoryService.updateAllRegulatoryData();
+            }finally {
+                Platform.runLater(() ->{
+                    setCargoTable(cargoPagination.getCurrentPageIndex());
+                    setCargoPageCount();
+                    regulatoryDeleteOne.setVisible(true);
+                    regulatoryDeleteSpinnerOne.setVisible(false);
+                });
+            }
+        });
+    }
+
+    @FXML
+    private void onDeleteRegulatoryTwo(){
+        regulatoryDeleteSpinnerTwo.setVisible(true);
+        regulatoryDeleteTwo.setVisible(false);
+        executorService.execute(() -> {
+            try{
+                regulatoryService.deleteRegulatory(regulatoryNameTwo.getText());
+            } catch(Exception e){
+                regulatoryService.updateAllRegulatoryData();
+            }finally {
+                Platform.runLater(() ->{
+                    setCargoTable(cargoPagination.getCurrentPageIndex());
+                    setCargoPageCount();
+                    regulatoryDeleteTwo.setVisible(true);
+                    regulatoryDeleteSpinnerTwo.setVisible(false);
+                });
+            }
+        });
+    }
+
+    @FXML
+    private void onDeleteRegulatoryThree(){
+        regulatoryDeleteSpinnerThree.setVisible(true);
+        regulatoryDeleteThree.setVisible(false);
+        executorService.execute(() -> {
+            try{
+                regulatoryService.deleteRegulatory(regulatoryNameThree.getText());
+            } catch(Exception e){
+                regulatoryService.updateAllRegulatoryData();
+            }finally {
+                Platform.runLater(() ->{
+                    setCargoTable(cargoPagination.getCurrentPageIndex());
+                    setCargoPageCount();
+                    regulatoryDeleteThree.setVisible(true);
+                    regulatoryDeleteSpinnerThree.setVisible(false);
+                });
+            }
+        });
+    }
+
+    private void setEmailPageCount() {
+        if(EmailCachedUtils.getLists(EmailCachedUtils.listType.ALL).size() != 0){
+            emailPagination.setPageCount(EmailCachedUtils.getLists(EmailCachedUtils.listType.ALL).size());
+        }else{
+            emailPagination.setPageCount(1);
+        }
+    }
+
+    private void setCargoPageCount(){
+        if(RegulatoryCachedUtils.getLists(RegulatoryCachedUtils.listType.ALL).size() != 0){
+            cargoPagination.setPageCount(RegulatoryCachedUtils.getLists(RegulatoryCachedUtils.listType.ALL).size());
+        } else{
+            cargoPagination.setPageCount(1);
+        }
+    }
+
+    private Email encapsulateEmailData() throws InvalidEmailFormatException {
+        if (RegexUtils.isEmail(emailTextField.getText())) {
+            Email email = new Email();
+            email.setEmailAddress(emailTextField.getText());
+            return email;
+        } else {
+            throw new InvalidEmailFormatException("Email Address is not valid");
+        }
+    }
+
+
+    private void initializeEmailSpaceList() {
+        emailSpaceList.add(emailSpaceOne);
+        emailSpaceList.add(emailSpaceTwo);
+        emailSpaceList.add(emailSpaceThree);
+    }
+
+    private void setEmailTable(int pageNumber) {
+        List<Email> emails = null;
+        try{
+            emails = EmailCachedUtils.getLists(EmailCachedUtils.listType.ALL)
+                    .get(pageNumber);
+        }catch (Exception e){
+            for(int i = 0; i < emailList.size(); i++){
+                emailSpaceList.get(i).setVisible(true);
+                emailList.get(i).setText("N/A");
+            }
+            return;
+        }
+        for (int i = 0; i < emails.size(); i++) {
+            emailSpaceList.get(i).setVisible(true);
+            emailList.get(i).setText(emails.get(i).getEmailAddress());
+        }
+        for (int i = emails.size(); i < emailList.size(); i++) {
+            emailSpaceList.get(i).setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onEnterCloseNotification(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(notificationCross, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitCloseNotification(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(notificationCross, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onEnterDeleteOne(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(emailDeleteOne, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onEnterDeleteTwo(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(emailDeleteTwo, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onEnterDeleteThree(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(emailDeleteThree, 250, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitDeleteOne(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(emailDeleteOne, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitDeleteTwo(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(emailDeleteTwo, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitDeleteThree(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(emailDeleteThree, 250, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onClickSearchButtonOne() {
         searchTable.setVisible(true);
         searchField.setText(buttonOne.getText());
     }
 
     @FXML
-    private void onClickSearchButtonTwo(){
+    private void onClickSearchButtonTwo() {
         searchTable.setVisible(true);
         searchField.setText(buttonTwo.getText());
     }
 
     @FXML
-    private void onClickSearchButtonThree(){
+    private void onClickSearchButtonThree() {
         searchTable.setVisible(true);
         searchField.setText(buttonThree.getText());
     }
 
     @FXML
-    private void onClickSearchButtonFour(){
+    private void onClickSearchButtonFour() {
         searchTable.setVisible(true);
         searchField.setText(buttonFour.getText());
     }
 
     @FXML
-    private void onClickSearchButtonFive(){
+    private void onClickSearchButtonFive() {
         searchTable.setVisible(true);
         searchField.setText(buttonFive.getText());
     }
@@ -631,9 +1188,11 @@ public class AppPage2Controller implements Initializable {
     }
 
     @SuppressWarnings("all")
-    private void changeButtonColorOn(CurrentPaneStatus currentPaneStatus){
-        switch(currentPaneStatus){
-            case HOMEPAGE -> {appPageImageView.setImage(onAppPageHomeImage);}
+    private void changeButtonColorOn(CurrentPaneStatus currentPaneStatus) {
+        switch (currentPaneStatus) {
+            case HOMEPAGE -> {
+                appPageImageView.setImage(onAppPageHomeImage);
+            }
             case WAREHOUSE -> {
                 warehouseLabel.setTextFill(appPageHoverTheme);
                 warehouseImageView.setImage(onWarehousePageCardBoardImage);
@@ -646,16 +1205,18 @@ public class AppPage2Controller implements Initializable {
                 staffLabel.setTextFill(appPageHoverTheme);
                 staffImageView.setImage(onStaffPageUserImage);
             }
-            case MESSAGE-> {
+            case MESSAGE -> {
                 messageLabel.setTextFill(appPageHoverTheme);
                 messageImageView.setImage(onMessagePageEnvelopeImage);
             }
         }
     }
 
-    private void changeButtonColorOff(CurrentPaneStatus currentPaneStatus){
-        switch(currentPaneStatus){
-            case HOMEPAGE -> {appPageImageView.setImage(offAppPageHomeImage);}
+    private void changeButtonColorOff(CurrentPaneStatus currentPaneStatus) {
+        switch (currentPaneStatus) {
+            case HOMEPAGE -> {
+                appPageImageView.setImage(offAppPageHomeImage);
+            }
             case WAREHOUSE -> {
                 warehouseLabel.setTextFill(appPageTheme);
                 warehouseImageView.setImage(offWarehousePageCardBoardImage);
@@ -668,14 +1229,14 @@ public class AppPage2Controller implements Initializable {
                 staffLabel.setTextFill(appPageTheme);
                 staffImageView.setImage(offStaffPageUserImage);
             }
-            case MESSAGE-> {
+            case MESSAGE -> {
                 messageLabel.setTextFill(appPageTheme);
                 messageImageView.setImage(offMessagePageEnvelopeImage);
             }
         }
     }
 
-    private void blockAllSwitchPaneButton(){
+    private void blockAllSwitchPaneButton() {
         homeButtonBlockPane.toFront();
         warehouseButtonBlockPane.toFront();
         transactionButtonBlockPane.toFront();
@@ -683,7 +1244,7 @@ public class AppPage2Controller implements Initializable {
         messageButtonBlockPane.toFront();
     }
 
-    private void enableAllSwitchPaneButton(){
+    private void enableAllSwitchPaneButton() {
         homeButtonBlockPane.toBack();
         warehouseButtonBlockPane.toBack();
         transactionButtonBlockPane.toBack();
@@ -736,64 +1297,125 @@ public class AppPage2Controller implements Initializable {
     }
 
     @SuppressWarnings("all")
-    private void changePaneAnimation(CurrentPaneStatus currentPaneStatus, CurrentPaneStatus switchedPaneStatus){
+    private void changePaneAnimation(CurrentPaneStatus currentPaneStatus, CurrentPaneStatus switchedPaneStatus) {
         blockAllSwitchPaneButton();
         FadeTransition openingPaneFadeTransition = new FadeTransition();
-        switch (switchedPaneStatus){
-            case HOMEPAGE -> {openingPaneFadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 0, 1);}
-            case WAREHOUSE -> {openingPaneFadeTransition= TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 0, 1);}
-            case TRANSACTION -> {openingPaneFadeTransition = TransitionUtils.getFadeTransition(stackPane, 300, 0, 1);}
-            case STAFF -> {openingPaneFadeTransition= TransitionUtils.getFadeTransition(staffPane, 300, 0, 1);}
-            case MESSAGE -> {openingPaneFadeTransition= TransitionUtils.getFadeTransition(messagePane, 300, 0, 1);}
+        switch (switchedPaneStatus) {
+            case HOMEPAGE -> {
+                openingPaneFadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 0, 1);
+            }
+            case WAREHOUSE -> {
+                openingPaneFadeTransition = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 0, 1);
+            }
+            case TRANSACTION -> {
+                openingPaneFadeTransition = TransitionUtils.getFadeTransition(stackPane, 300, 0, 1);
+            }
+            case STAFF -> {
+                openingPaneFadeTransition = TransitionUtils.getFadeTransition(staffPane, 300, 0, 1);
+            }
+            case MESSAGE -> {
+                openingPaneFadeTransition = TransitionUtils.getFadeTransition(messagePane, 300, 0, 1);
+            }
         }
 //        FadeTransition openingPaneFadeTransition = TransitionUtils.getFadeTransition(paneToDisplay, 300, 0, 1);
         openingPaneFadeTransition.setOnFinished(event -> {
-            switch(switchedPaneStatus){
-                case HOMEPAGE -> {enableNode(appPagePane);}
-                case WAREHOUSE -> {enableNode(stackPaneForWarehouse);}
-                case TRANSACTION -> {enableNode(stackPane);}
-                case STAFF -> {enableNode(staffPane);}
-                case MESSAGE -> {enableNode(messagePane);}
+            switch (switchedPaneStatus) {
+                case HOMEPAGE -> {
+                    enableNode(appPagePane);
+                }
+                case WAREHOUSE -> {
+                    enableNode(stackPaneForWarehouse);
+                }
+                case TRANSACTION -> {
+                    enableNode(stackPane);
+                }
+                case STAFF -> {
+                    enableNode(staffPane);
+                }
+                case MESSAGE -> {
+                    enableNode(messagePane);
+                }
             }
 //            enableNode(paneToDisplay);
             enableAllSwitchPaneButton();
-            switch(switchedPaneStatus){
-                case HOMEPAGE -> {homeButtonBlockPane.toFront();}
-                case WAREHOUSE -> {warehouseButtonBlockPane.toFront();}
-                case TRANSACTION -> {transactionButtonBlockPane.toFront();}
-                case STAFF -> {staffButtonBlockPane.toFront();}
-                case MESSAGE -> {messageButtonBlockPane.toFront();}
+            switch (switchedPaneStatus) {
+                case HOMEPAGE -> {
+                    homeButtonBlockPane.toFront();
+                }
+                case WAREHOUSE -> {
+                    warehouseButtonBlockPane.toFront();
+                }
+                case TRANSACTION -> {
+                    transactionButtonBlockPane.toFront();
+                }
+                case STAFF -> {
+                    staffButtonBlockPane.toFront();
+                }
+                case MESSAGE -> {
+                    messageButtonBlockPane.toFront();
+                }
             }
         });
         FadeTransition closingPaneFadeTransition = new FadeTransition();
-        switch (currentPaneStatus){
-            case HOMEPAGE -> {closingPaneFadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 1, 0);}
-            case WAREHOUSE -> {closingPaneFadeTransition = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 1, 0);}
-            case TRANSACTION -> {closingPaneFadeTransition = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);}
-            case STAFF -> {closingPaneFadeTransition = TransitionUtils.getFadeTransition(staffPane, 300, 1, 0);}
-            case MESSAGE -> {closingPaneFadeTransition = TransitionUtils.getFadeTransition(messagePane, 300, 1, 0);}
+        switch (currentPaneStatus) {
+            case HOMEPAGE -> {
+                closingPaneFadeTransition = TransitionUtils.getFadeTransition(appPagePane, 300, 1, 0);
+            }
+            case WAREHOUSE -> {
+                closingPaneFadeTransition = TransitionUtils.getFadeTransition(stackPaneForWarehouse, 300, 1, 0);
+            }
+            case TRANSACTION -> {
+                closingPaneFadeTransition = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);
+            }
+            case STAFF -> {
+                closingPaneFadeTransition = TransitionUtils.getFadeTransition(staffPane, 300, 1, 0);
+            }
+            case MESSAGE -> {
+                closingPaneFadeTransition = TransitionUtils.getFadeTransition(messagePane, 300, 1, 0);
+            }
         }
         //FadeTransition closingPaneFadeTransition = TransitionUtils.getFadeTransition(stackPane, 300, 1, 0);
         FadeTransition finalFadeTransition = openingPaneFadeTransition;
         closingPaneFadeTransition.setOnFinished(event -> {
-            switch(currentPaneStatus){
-                case HOMEPAGE -> {disableNode(appPagePane);}
-                case WAREHOUSE -> {disableNode(stackPaneForWarehouse);}
-                case TRANSACTION -> {disableNode(stackPane);}
-                case STAFF -> {disableNode(staffPane);}
-                case MESSAGE -> {disableNode(messagePane);}
+            switch (currentPaneStatus) {
+                case HOMEPAGE -> {
+                    disableNode(appPagePane);
+                }
+                case WAREHOUSE -> {
+                    disableNode(stackPaneForWarehouse);
+                }
+                case TRANSACTION -> {
+                    disableNode(stackPane);
+                }
+                case STAFF -> {
+                    disableNode(staffPane);
+                }
+                case MESSAGE -> {
+                    disableNode(messagePane);
+                }
             }
-            switch(switchedPaneStatus){
-                case HOMEPAGE -> {appPagePane.setVisible(true);}
-                case WAREHOUSE -> {stackPaneForWarehouse.setVisible(true);}
-                case TRANSACTION -> {stackPane.setVisible(true);}
-                case STAFF -> {staffPane.setVisible(true);}
-                case MESSAGE -> {messagePane.setVisible(true);}
+            switch (switchedPaneStatus) {
+                case HOMEPAGE -> {
+                    appPagePane.setVisible(true);
+                }
+                case WAREHOUSE -> {
+                    stackPaneForWarehouse.setVisible(true);
+                }
+                case TRANSACTION -> {
+                    stackPane.setVisible(true);
+                }
+                case STAFF -> {
+                    staffPane.setVisible(true);
+                }
+                case MESSAGE -> {
+                    messagePane.setVisible(true);
+                }
             }
             finalFadeTransition.play();
         });
         closingPaneFadeTransition.play();
     }
+
     private void fillCargoBoxesInformation(ButtonSelected buttonSelected) {
         int boxNumber = 4;
         takenBoxNumber = 2;
@@ -892,7 +1514,7 @@ public class AppPage2Controller implements Initializable {
         }
         translateTransition_closeCargoBox[index].stop();
         cargoBoxFunctionalityPanes[index].setDisable(false);
-        translateTransition_openCargoBox[index] = TranslateUtils.getTranslateTransitionFromToY(cargoBoxPanes[index],5 * (20-cargoBoxPanes[index].getTranslateY()),cargoBoxPanes[index].getTranslateY(),20);
+        translateTransition_openCargoBox[index] = TranslateUtils.getTranslateTransitionFromToY(cargoBoxPanes[index], 5 * (20 - cargoBoxPanes[index].getTranslateY()), cargoBoxPanes[index].getTranslateY(), 20);
         translateTransition_openCargoBox[index].play();
 //        changeToBack[index] = true;
 //        if (!isChangingSide[index]) {
@@ -951,9 +1573,11 @@ public class AppPage2Controller implements Initializable {
             }
         }
         translateTransition_openCargoBox[index].stop();
-        translateTransition_closeCargoBox[index] = TranslateUtils.getTranslateTransitionFromToY(cargoBoxPanes[index],5 * cargoBoxPanes[index].getTranslateY(),cargoBoxPanes[index].getTranslateY(),0);
+        translateTransition_closeCargoBox[index] = TranslateUtils.getTranslateTransitionFromToY(cargoBoxPanes[index], 5 * cargoBoxPanes[index].getTranslateY(), cargoBoxPanes[index].getTranslateY(), 0);
         int finalIndex = index;
-        translateTransition_closeCargoBox[index].setOnFinished(event -> {cargoBoxFunctionalityPanes[finalIndex].setDisable(true);});
+        translateTransition_closeCargoBox[index].setOnFinished(event -> {
+            cargoBoxFunctionalityPanes[finalIndex].setDisable(true);
+        });
         translateTransition_closeCargoBox[index].play();
 //        changeToBack[index] = false;
 //        if (!isChangingSide[index]) {
@@ -998,8 +1622,8 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void onCloseTransactionDialog() {
         transaction = null;
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(transactionDialog,300,1,0);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(transactionDialog,300,0,-200);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(transactionDialog, 300, 1, 0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(transactionDialog, 300, 0, -200);
         translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
         translateTransition.setOnFinished(event -> {
             transactionDialog.setVisible(false);
@@ -1013,8 +1637,8 @@ public class AppPage2Controller implements Initializable {
     @FXML
     @SuppressWarnings("all")
     private void onClickWarehouseButton() {
-        if (currentPaneStatus != CurrentPaneStatus.WAREHOUSE){
-            changePaneAnimation(currentPaneStatus,CurrentPaneStatus.WAREHOUSE);
+        if (currentPaneStatus != CurrentPaneStatus.WAREHOUSE) {
+            changePaneAnimation(currentPaneStatus, CurrentPaneStatus.WAREHOUSE);
             changeButtonColorOff(currentPaneStatus);
             currentPaneStatus = CurrentPaneStatus.WAREHOUSE;
             changeButtonColorOn(currentPaneStatus);
@@ -1066,9 +1690,9 @@ public class AppPage2Controller implements Initializable {
     }
 
     @FXML
-    private void onClickStaff(){
-        if(currentPaneStatus != CurrentPaneStatus.STAFF){
-            changePaneAnimation(currentPaneStatus,CurrentPaneStatus.STAFF);
+    private void onClickStaff() {
+        if (currentPaneStatus != CurrentPaneStatus.STAFF) {
+            changePaneAnimation(currentPaneStatus, CurrentPaneStatus.STAFF);
             changeButtonColorOff(currentPaneStatus);
             currentPaneStatus = CurrentPaneStatus.STAFF;
             changeButtonColorOn(currentPaneStatus);
@@ -1171,14 +1795,17 @@ public class AppPage2Controller implements Initializable {
 
     private void setTransactionPane() {
         try {
-            //DataUtils.publicDataPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/transactionPage_data.fxml")));
-            DataUtils.editCargoPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/editCargoPane.fxml")));
             AnchorPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/newTransactionPage.fxml")));
             stackPane.getChildren().add(pane);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         disableNode(stackPane);
+    }
+
+    @FXML
+    private void onNotify(){
+        executorService.execute(() -> mailNotifyService.notifyUsers());
     }
 
     private void setWarehousePane() {
@@ -1261,8 +1888,8 @@ public class AppPage2Controller implements Initializable {
     @FXML
     @SuppressWarnings("all")
     private void onClickAppPageButton() {
-        if (currentPaneStatus != CurrentPaneStatus.HOMEPAGE){
-            changePaneAnimation(currentPaneStatus,CurrentPaneStatus.HOMEPAGE);
+        if (currentPaneStatus != CurrentPaneStatus.HOMEPAGE) {
+            changePaneAnimation(currentPaneStatus, CurrentPaneStatus.HOMEPAGE);
             changeButtonColorOff(currentPaneStatus);
             currentPaneStatus = CurrentPaneStatus.HOMEPAGE;
             changeButtonColorOn(currentPaneStatus);
@@ -1320,14 +1947,15 @@ public class AppPage2Controller implements Initializable {
     }
 
     @FXML
-    private void onClickMessage(){
-        if (currentPaneStatus != CurrentPaneStatus.MESSAGE){
-            changePaneAnimation(currentPaneStatus,CurrentPaneStatus.MESSAGE);
+    private void onClickMessage() {
+        if (currentPaneStatus != CurrentPaneStatus.MESSAGE) {
+            changePaneAnimation(currentPaneStatus, CurrentPaneStatus.MESSAGE);
             changeButtonColorOff(currentPaneStatus);
             currentPaneStatus = CurrentPaneStatus.MESSAGE;
             changeButtonColorOn(currentPaneStatus);
         }
     }
+
     private void setButtonList() {
         buttonOne.setAlignment(Pos.CENTER_LEFT);
         buttonTwo.setAlignment(Pos.CENTER_LEFT);
@@ -1395,15 +2023,15 @@ public class AppPage2Controller implements Initializable {
 
 
     @FXML
-    private void onEnterHome(){
-        if(currentPaneStatus != CurrentPaneStatus.HOMEPAGE){
+    private void onEnterHome() {
+        if (currentPaneStatus != CurrentPaneStatus.HOMEPAGE) {
             changeButtonColorOn(CurrentPaneStatus.HOMEPAGE);
         }
     }
 
     @FXML
-    private void onExitHome(){
-        if(currentPaneStatus != CurrentPaneStatus.HOMEPAGE){
+    private void onExitHome() {
+        if (currentPaneStatus != CurrentPaneStatus.HOMEPAGE) {
             changeButtonColorOff(CurrentPaneStatus.HOMEPAGE);
         }
     }
@@ -1411,7 +2039,7 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void enterWarehouseButton() {
 //        warehouseButton.setOpacity(1);
-        if(currentPaneStatus != CurrentPaneStatus.WAREHOUSE) {
+        if (currentPaneStatus != CurrentPaneStatus.WAREHOUSE) {
             changeButtonColorOn(CurrentPaneStatus.WAREHOUSE);
         }
     }
@@ -1419,7 +2047,7 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void exitWarehouseButton() {
 //        warehouseButton.setOpacity(0);
-        if(currentPaneStatus != CurrentPaneStatus.WAREHOUSE){
+        if (currentPaneStatus != CurrentPaneStatus.WAREHOUSE) {
             changeButtonColorOff(CurrentPaneStatus.WAREHOUSE);
         }
     }
@@ -1427,7 +2055,7 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void enterStaffButton() {
 //        staffButton.setOpacity(1);
-        if(currentPaneStatus != CurrentPaneStatus.STAFF) {
+        if (currentPaneStatus != CurrentPaneStatus.STAFF) {
             changeButtonColorOn(CurrentPaneStatus.STAFF);
         }
     }
@@ -1435,7 +2063,7 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void exitStaffButton() {
 //        staffButton.setOpacity(0);
-        if(currentPaneStatus != CurrentPaneStatus.STAFF) {
+        if (currentPaneStatus != CurrentPaneStatus.STAFF) {
             changeButtonColorOff(CurrentPaneStatus.STAFF);
         }
     }
@@ -1443,7 +2071,7 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void enterTransactionButton() {
 //        transactionButton.setOpacity(1);
-        if(currentPaneStatus != CurrentPaneStatus.TRANSACTION) {
+        if (currentPaneStatus != CurrentPaneStatus.TRANSACTION) {
             changeButtonColorOn(CurrentPaneStatus.TRANSACTION);
         }
     }
@@ -1451,7 +2079,7 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void exitTransactionButton() {
 //        transactionButton.setOpacity(0);
-        if(currentPaneStatus != CurrentPaneStatus.TRANSACTION){
+        if (currentPaneStatus != CurrentPaneStatus.TRANSACTION) {
             changeButtonColorOff(CurrentPaneStatus.TRANSACTION);
         }
     }
@@ -1459,7 +2087,7 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void enterMessageButton() {
 //        messageButton.setOpacity(1);
-        if(currentPaneStatus != CurrentPaneStatus.MESSAGE) {
+        if (currentPaneStatus != CurrentPaneStatus.MESSAGE) {
             changeButtonColorOn(CurrentPaneStatus.MESSAGE);
         }
     }
@@ -1467,7 +2095,7 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private void exitMessageButton() {
 //        messageButton.setOpacity(0);
-        if(currentPaneStatus != CurrentPaneStatus.MESSAGE) {
+        if (currentPaneStatus != CurrentPaneStatus.MESSAGE) {
             changeButtonColorOff(CurrentPaneStatus.MESSAGE);
         }
     }
@@ -1501,8 +2129,8 @@ public class AppPage2Controller implements Initializable {
     @FXML
     @SuppressWarnings("all")
     private void onClickTransaction() {
-        if (currentPaneStatus != CurrentPaneStatus.TRANSACTION){
-            changePaneAnimation(currentPaneStatus,CurrentPaneStatus.TRANSACTION);
+        if (currentPaneStatus != CurrentPaneStatus.TRANSACTION) {
+            changePaneAnimation(currentPaneStatus, CurrentPaneStatus.TRANSACTION);
             changeButtonColorOff(currentPaneStatus);
             currentPaneStatus = CurrentPaneStatus.TRANSACTION;
             changeButtonColorOn(currentPaneStatus);
@@ -1822,11 +2450,11 @@ public class AppPage2Controller implements Initializable {
     }
 
     @SuppressWarnings("all")
-    private void setTransactionId(Label label , Transaction transaction){
+    private void setTransactionId(Label label, Transaction transaction) {
         String string = Integer.valueOf(transaction.getID()).toString();
         int zeroFill = 4 - string.length();
-        if (string.length() < 4){
-            for (int i = 0 ; i < zeroFill ; i++){
+        if (string.length() < 4) {
+            for (int i = 0; i < zeroFill; i++) {
                 string = "0" + string;
             }
         }
@@ -1848,7 +2476,7 @@ public class AppPage2Controller implements Initializable {
     }
 
     private void setTransactionDialog(Transaction transaction) {
-        setTransactionId(transactionIdLabel,transaction);
+        setTransactionId(transactionIdLabel, transaction);
         encapsulatedTransaction.setID(transaction.getID());
         transactionNameInDetails.setText(transaction.getItemName());
         staffNameInDetails.setText(transaction.getStaffName());
@@ -1857,8 +2485,7 @@ public class AppPage2Controller implements Initializable {
             isEncapsulatedTransactionStatusTaken = true;
             transactionDialogTakenActionPane.setVisible(true);
             transactionDialogRestockActionPane.setVisible(false);
-        }
-        else {
+        } else {
             isEncapsulatedTransactionStatusTaken = false;
             transactionDialogTakenActionPane.setVisible(false);
             transactionDialogRestockActionPane.setVisible(true);
@@ -1869,12 +2496,13 @@ public class AppPage2Controller implements Initializable {
         transactionDialog.setVisible(true);
         transactionDialog.setOpacity(0);
         transactionDialog.setPickOnBounds(true);
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(transactionDialog,300,0, 1);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(transactionDialog,300,-200,0);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(transactionDialog, 300, 0, 1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(transactionDialog, 300, -200, 0);
         translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
         fadeTransition.play();
         translateTransition.play();
     }
+
 
     @FXML
     private void onClickTransactionOne() {
@@ -1901,7 +2529,7 @@ public class AppPage2Controller implements Initializable {
     }
 
     @FXML
-    private void onClickDialogTakenButton(){
+    private void onClickDialogTakenButton() {
         if (!isEncapsulatedTransactionStatusTaken) {
             transactionDialogRestockActionPane.setVisible(false);
             transactionDialogTakenActionPane.setVisible(true);
@@ -1910,7 +2538,7 @@ public class AppPage2Controller implements Initializable {
     }
 
     @FXML
-    private void onClickDialogRestockButton(){
+    private void onClickDialogRestockButton() {
         if (isEncapsulatedTransactionStatusTaken) {
             transactionDialogRestockActionPane.setVisible(true);
             transactionDialogTakenActionPane.setVisible(false);
@@ -1921,7 +2549,7 @@ public class AppPage2Controller implements Initializable {
     /**
      * !!!!!! WARNING !!!!!!
      * Check the catch ignore section for error message:
-     *      1. Duplicate transaction
+     * 1. Duplicate transaction
      */
     @Warning(Warning.WarningType.DEBUG)
     @FXML
@@ -1936,41 +2564,39 @@ public class AppPage2Controller implements Initializable {
 //        }
         try {
             generateEncapsulatedTransaction();
-        }
-        catch (Exception exception){
+        } catch (Exception exception) {
             warnMessageInAdd.setVisible(true);
             return;
         }
-        if (Objects.equals(encapsulatedTransaction,transaction)){
+        if (Objects.equals(encapsulatedTransaction, transaction)) {
             return;
         }
         cargoDialogApplyButton.setVisible(false);
         loadSpinnerInAdd.setVisible(true);
-            executorService.execute(() ->{
-                cachedTransactionService.updateTransaction(encapsulatedTransaction);
-                try{
+        executorService.execute(() -> {
+            cachedTransactionService.updateTransaction(encapsulatedTransaction);
+            try {
 
-                }
-                finally {
-                    Platform.runLater(()->{
-                        dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
-                        dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
-                        fillCargoBoxesInformation(buttonSelected);
-                        cargoDialogApplyButton.setVisible(true);
-                        loadSpinnerInAdd.setVisible(false);
-                        warnMessageInAdd.setVisible(false);
-                        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(transactionDialog,300,1,0);
-                        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(transactionDialog,300,0,-200);
-                        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
-                        translateTransition.setOnFinished(event -> {
-                            transactionDialog.setVisible(false);
-                            appPageBlockPane.setVisible(false);
-                        });
-                        fadeTransition.play();
-                        translateTransition.play();
+            } finally {
+                Platform.runLater(() -> {
+                    dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
+                    dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
+                    fillCargoBoxesInformation(buttonSelected);
+                    cargoDialogApplyButton.setVisible(true);
+                    loadSpinnerInAdd.setVisible(false);
+                    warnMessageInAdd.setVisible(false);
+                    FadeTransition fadeTransition = TransitionUtils.getFadeTransition(transactionDialog, 300, 1, 0);
+                    TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(transactionDialog, 300, 0, -200);
+                    translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+                    translateTransition.setOnFinished(event -> {
+                        transactionDialog.setVisible(false);
+                        appPageBlockPane.setVisible(false);
                     });
-                }
-            });
+                    fadeTransition.play();
+                    translateTransition.play();
+                });
+            }
+        });
     }
 
     private void generateEncapsulatedTransaction() throws EmptyValueException {
@@ -1979,31 +2605,31 @@ public class AppPage2Controller implements Initializable {
         String format = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         encapsulatedTransaction.setTransactionTime(format);
         encapsulatedTransaction.setPurpose(purposeTextInDetails.getText());
-        if ((staffNameInDetails.getText().isBlank()) || (transactionNameInDetails.getText().isBlank())){
+        if ((staffNameInDetails.getText().isBlank()) || (transactionNameInDetails.getText().isBlank())) {
             throw new EmptyValueException("Input Value for item/staff name is empty or blank");
-        }else {
+        } else {
             encapsulatedTransaction.setStaffName(staffNameInDetails.getText().trim());
             encapsulatedTransaction.setItemName(transactionNameInDetails.getText().trim());
         }
         if (isEncapsulatedTransactionStatusTaken) {
             encapsulatedTransaction.setStatus("TAKEN");
-        }else{
+        } else {
             encapsulatedTransaction.setStatus("RESTOCK");
         }
     }
 
     @FXML
-    private void  onClickStaffSearch(){
+    private void onClickStaffSearch() {
         searchSwitchingBlockPane.toFront();
         cargoSearchPane.setVisible(true);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane,300,0,-15);
-        TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane,300,15,0);
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane,300,1,0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, 0, -15);
+        TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane, 300, 15, 0);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane, 300, 1, 0);
         scaleTransition.setOnFinished(event -> {
             searchSwitchingBlockPane.toBack();
             staffSearchPane.setVisible(false);
         });
-        ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane,300,0,1);
+        ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane, 300, 0, 1);
         translateTransition.play();
         translateTransition1.play();
         scaleTransition.play();
@@ -2012,13 +2638,13 @@ public class AppPage2Controller implements Initializable {
     }
 
     @FXML
-    private void onClickCargoSearch(){
+    private void onClickCargoSearch() {
         searchSwitchingBlockPane.toFront();
         staffSearchPane.setVisible(true);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane,300,-15,0);
-        TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane,300,0,15);
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane,300,0,1);
-        ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane,300,1,0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, -15, 0);
+        TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane, 300, 0, 15);
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane, 300, 0, 1);
+        ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane, 300, 1, 0);
         scaleTransition1.setOnFinished(event -> {
             searchSwitchingBlockPane.toBack();
             cargoSearchPane.setVisible(false);

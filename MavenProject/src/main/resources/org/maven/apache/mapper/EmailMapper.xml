@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 这个文件的文件路径不要动-->
+<!-- 名称空间-->
+<mapper namespace="org.maven.apache.mapper.EmailMapper">
+    <insert id="addNewEmail" useGeneratedKeys="true" keyProperty="ID">
+        insert into EmailTable(emailAddress)
+        values (#{emailAddress});
+    </insert>
+
+    <delete id="deleteById">
+        delete from EmailTable where ID = #{ID};
+    </delete>
+
+    <delete id="deleteByEmailAddress">
+        delete from EmailTable where emailAddress = #{emailAddress}
+    </delete>
+
+
+    <select id="selectAll" resultType="org.maven.apache.email.Email">
+        select * from EmailTable;
+    </select>
+</mapper>

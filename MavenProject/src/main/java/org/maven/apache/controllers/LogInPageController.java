@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
+import jakarta.mail.MessagingException;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
@@ -460,7 +461,7 @@ public class LogInPageController implements Initializable {
 	 * generate a random 6-bit number and send to the email
 	 */
 	@FXML
-	private void onSendVerificationCode() {
+	private void onSendVerificationCode() throws MessagingException {
 		String inputUsername = verificationUsername.getText();
 		int newPasswordLength = newPasswordField.getText().length();
 		if (isUsernameFound(inputUsername) && newPasswordLength > 5) {
