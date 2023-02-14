@@ -443,22 +443,28 @@ public class NewTransactionPageController implements Initializable {
      * update the content of which page is going to be indicated
      */
     private void updatePagination(Number currentPage) {
-        currentPageList = sortedList.get(currentPage.intValue());
-        // set non-empty labels
-        for (int i = 0; i < currentPageList.size(); i++) {
-            cargoLabelArray[i].setText(currentPageList.get(i).getItemName());
-            staffLabelArray[i].setText(String.valueOf(currentPageList.get(i).getStaffName()));
-            amountLabelArray[i].setText(String.valueOf(currentPageList.get(i).getUnit()));
-            dateLabelArray[i].setText(currentPageList.get(i).getTransactionTime());
-            transactionPaneArray[i].setVisible(true);
-        }
-        // set empty labels
-        if (currentPageList.size() != 7) {
-            for (int j = 6; j >= currentPageList.size(); j--) {
-                transactionPaneArray[j].setVisible(false);
+        if (sortedList.size() == 0){
+            for (int k = 0; k < 7; k++){
+                transactionPaneArray[k].setVisible(false);
             }
+        }else{
+            currentPageList = sortedList.get(currentPage.intValue());
+            // set non-empty labels
+            for (int i = 0; i < currentPageList.size(); i++) {
+                cargoLabelArray[i].setText(currentPageList.get(i).getItemName());
+                staffLabelArray[i].setText(String.valueOf(currentPageList.get(i).getStaffName()));
+                amountLabelArray[i].setText(String.valueOf(currentPageList.get(i).getUnit()));
+                dateLabelArray[i].setText(currentPageList.get(i).getTransactionTime());
+                transactionPaneArray[i].setVisible(true);
+            }
+            // set empty labels
+            if (currentPageList.size() != 7) {
+                for (int j = 6; j >= currentPageList.size(); j--) {
+                    transactionPaneArray[j].setVisible(false);
+                }
+            }
+            setUnitStatus();
         }
-        setUnitStatus();
     }
 
     /**
@@ -559,11 +565,6 @@ public class NewTransactionPageController implements Initializable {
         isAll = true;
         isRestock = false;
         isTaken = false;
-//        if (isDateAscend) {
-//            sortBy = SortBy.ALLDATEASCEND;
-//        } else {
-//            sortBy = SortBy.ALLDATEDESCEND;
-//        }
         resetArrows();
         sortBy = SortBy.ALLDATEDESCEND;
         refreshPage();
@@ -592,11 +593,6 @@ public class NewTransactionPageController implements Initializable {
         isAll = false;
         isRestock = true;
         isTaken = false;
-//        if (isDateAscend) {
-//            sortBy = SortBy.RESTOCKDATEASCEND;
-//        } else {
-//            sortBy = SortBy.RESTOCKDATEDESCEND;
-//        }
         resetArrows();
         sortBy = SortBy.RESTOCKDATEDESCEND;
         refreshPage();
@@ -624,11 +620,6 @@ public class NewTransactionPageController implements Initializable {
         isAll = false;
         isRestock = false;
         isTaken = true;
-//        if (isDateAscend) {
-//            sortBy = SortBy.TAKENDATEASCEND;
-//        } else {
-//            sortBy = SortBy.TAKENDATEDESCEND;
-//        }
         resetArrows();
         sortBy = SortBy.TAKENDATEDESCEND;
         refreshPage();
@@ -639,31 +630,6 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickDate() throws UnsupportedPojoException {
-//            if (isAll && !isRestock && !isTaken) {
-//                if (isDateAscend) {
-//                    sortBy = SortBy.ALLDATEDESCEND;
-//                    isDateAscend = false;
-//                } else {
-//                    sortBy = SortBy.ALLDATEASCEND;
-//                    isDateAscend = true;
-//                }
-//            } else if (!isAll && isRestock && !isTaken) {
-//                if (isDateAscend) {
-//                    sortBy = SortBy.RESTOCKDATEDESCEND;
-//                    isDateAscend = false;
-//                } else {
-//                    sortBy = SortBy.RESTOCKDATEASCEND;
-//                    isDateAscend = true;
-//                }
-//            } else if (!isAll && !isRestock && isTaken) {
-//                if (isDateAscend) {
-//                    sortBy = SortBy.TAKENDATEDESCEND;
-//                    isDateAscend = false;
-//                } else {
-//                    sortBy = SortBy.TAKENDATEASCEND;
-//                    isDateAscend = true;
-//                }
-//            }
         setPressScaleTransition(false, dateArrow);
 
     }
@@ -673,31 +639,6 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickAmount() throws UnsupportedPojoException {
-//            if (isAll && !isRestock && !isTaken) {
-//                if (isAmountAscend) {
-//                    sortBy = SortBy.ALLAMOUNTDESCEND;
-//                    isAmountAscend = false;
-//                } else {
-//                    sortBy = SortBy.ALLAMOUNTASCEND;
-//                    isAmountAscend = true;
-//                }
-//            } else if (!isAll && isRestock && !isTaken) {
-//                if (isAmountAscend) {
-//                    sortBy = SortBy.RESTOCKAMOUNTDESCEND;
-//                    isAmountAscend = false;
-//                } else {
-//                    sortBy = SortBy.RESTOCKAMOUNTASCEND;
-//                    isAmountAscend = true;
-//                }
-//            } else if (!isAll && !isRestock && isTaken) {
-//                if (isAmountAscend) {
-//                    sortBy = SortBy.TAKENAMOUNTDESCEND;
-//                    isAmountAscend = false;
-//                } else {
-//                    sortBy = SortBy.TAKENAMOUNTASCEND;
-//                    isAmountAscend = true;
-//                }
-//            }
         setPressScaleTransition(true, amountArrow);
     }
 
@@ -713,8 +654,9 @@ public class NewTransactionPageController implements Initializable {
                 } else if (!isSearchingItem && isSearchingStaff) {
                     sortedList = searchResultService.getPagedResultList(sortedList, searchField.getText(), SearchResultServiceHandler.ResultType.STAFF);
                 }
-            }catch(Exception UnsupportedPojoException){
-                sortedList = new ArrayList<>();
+            }catch(Exception e){
+                sortedList.clear();
+                System.out.println("ERROR");
             }
         }
         updatePagination(0);
@@ -1611,8 +1553,6 @@ public class NewTransactionPageController implements Initializable {
 
     @FXML
     private void onClickStaffSearch() {
-        isSearchingItem = false;
-        isSearchingStaff = true;
         searchSwitchingBlockPane.toFront();
         cargoSearchPane.setVisible(true);
         TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, 0, -15);
@@ -1627,12 +1567,12 @@ public class NewTransactionPageController implements Initializable {
         translateTransition1.play();
         scaleTransition.play();
         scaleTransition1.play();
+        isSearchingItem = true;
+        isSearchingStaff = false;
     }
 
     @FXML
     private void onClickCargoSearch() {
-        isSearchingItem = true;
-        isSearchingStaff = false;
         searchSwitchingBlockPane.toFront();
         staffSearchPane.setVisible(true);
         TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, -15, 0);
@@ -1647,6 +1587,8 @@ public class NewTransactionPageController implements Initializable {
         translateTransition1.play();
         scaleTransition.play();
         scaleTransition1.play();
+        isSearchingItem = false;
+        isSearchingStaff = true;
     }
 
     /**
@@ -1654,18 +1596,7 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickSearch() throws UnsupportedPojoException {
-        try{
-            if (searchField.getText().isBlank()){
-                refreshPage();
-            }else {
-                sortedList = searchResultService.getPagedResultList(sortedList, searchField.getText(), SearchResultServiceHandler.ResultType.CARGO);
-                updatePagination(0);
-                transactionPagination.setCurrentPageIndex(0);
-                setPaginationPages(sortedList);
-            }
-        }catch (Exception e){
-            currentPageList = new ArrayList<>();
-        }
+        refreshPage();
     }
 
 }
