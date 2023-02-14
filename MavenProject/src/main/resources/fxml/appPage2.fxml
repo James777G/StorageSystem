@@ -68,6 +68,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton fx:id="statusRestockButton" layoutX="520.0" layoutY="414.0" onAction="#onClickRestock" prefHeight="30.0" prefWidth="90.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="572.0" AnchorPane.topAnchor="345.0">
                <graphic>
@@ -84,6 +87,9 @@
                      </graphic>
                   </Label>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton fx:id="statusAllButton" layoutX="382.0" layoutY="421.0" onAction="#onClickAll" prefHeight="30.0" prefWidth="65.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="345.0">
                <graphic>
@@ -104,6 +110,9 @@
                      </graphic>
                   </Label>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton fx:id="statusTakenButton" layoutX="527.0" layoutY="436.0" onAction="#onClickTaken" prefHeight="30.0" prefWidth="75.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00" AnchorPane.leftAnchor="496.0" AnchorPane.topAnchor="345.0">
                <graphic>
@@ -120,6 +129,9 @@
                      </graphic>
                   </Label>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <VBox fx:id="searchTable" layoutX="300.0" layoutY="219.0" opacity="0.0" prefHeight="200.0" prefWidth="551.0" styleClass="resultPane" stylesheets="@../css/appPage2.css" visible="false" AnchorPane.topAnchor="159.0">
                <children>
@@ -161,6 +173,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <Label layoutX="941.0" layoutY="371.0" prefHeight="25.0" prefWidth="55.0" text="Excel:" textFill="#223c40" AnchorPane.bottomAnchor="303.6666666666667">
                <font>
@@ -175,7 +190,10 @@
             <TextField fx:id="searchField" layoutX="301.0" layoutY="170.0" onMouseClicked="#onClickSearchBar" prefHeight="50.0" prefWidth="550.0" style="-fx-background-color: white; -fx-background-radius: 8; -fx-border-color: #d7d7d7; -fx-border-radius: 8; -fx-padding: 0 0 0 50;">
                <opaqueInsets>
                   <Insets />
-               </opaqueInsets></TextField>
+               </opaqueInsets>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></TextField>
 
                   <AnchorPane fx:id="cargoBox1BackPane" layoutX="130.0" layoutY="570.0" maxWidth="180.0" minWidth="180.0" pickOnBounds="false" prefHeight="80.0" prefWidth="180.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="500.0">
                <children>
@@ -254,6 +272,9 @@
                      </font>
                   </Label>
                </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </AnchorPane>
             <AnchorPane fx:id="cargoBox2Pane" layoutX="424.0" layoutY="498.0" onMouseEntered="#onEnterCargoBox2" prefHeight="80.0" prefWidth="180.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="500.0">
                <children>
@@ -292,6 +313,9 @@
                      </font>
                   </Label>
                </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </AnchorPane>
             <AnchorPane fx:id="cargoBox3Pane" layoutX="695.0" layoutY="502.0" onMouseEntered="#onEnterCargoBox3" prefHeight="80.0" prefWidth="180.0" style="-fx-background-color: #eceff1;" AnchorPane.leftAnchor="620.0" AnchorPane.topAnchor="500.0">
                <children>
@@ -327,6 +351,9 @@
                      </font>
                   </Label>
                </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </AnchorPane>
             <AnchorPane fx:id="cargoBox4Pane" layoutX="897.0" layoutY="499.0" onMouseEntered="#onEnterCargoBox4" prefHeight="80.0" prefWidth="180.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="500.0">
                <children>
@@ -366,7 +393,10 @@
             <AnchorPane fx:id="cargoBox1FunctionalityPane" disable="true" onMouseClicked="#onClickTransactionOne" onMouseExited="#onExitCargoBox1" prefHeight="100.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="500.0" />
             <AnchorPane fx:id="cargoBox2FunctionalityPane" disable="true" layoutX="130.0" layoutY="570.0" onMouseClicked="#onClickTransactionTwo" onMouseExited="#onExitCargoBox2" prefHeight="100.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="500.0" />
             <AnchorPane fx:id="cargoBox3FunctionalityPane" disable="true" layoutX="140.0" layoutY="580.0" onMouseClicked="#onClickTransactionThree" onMouseExited="#onExitCargoBox3" prefHeight="100.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="620.0" AnchorPane.topAnchor="500.0" />
-            <AnchorPane fx:id="cargoBox4FunctionalityPane" disable="true" layoutX="130.0" layoutY="570.0" onMouseClicked="#onClickTransactionFour" onMouseExited="#onExitCargoBox4" prefHeight="100.0" prefWidth="180.0" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="500.0" />
+            <AnchorPane fx:id="cargoBox4FunctionalityPane" disable="true" layoutX="130.0" layoutY="570.0" onMouseClicked="#onClickTransactionFour" onMouseExited="#onExitCargoBox4" prefHeight="100.0" prefWidth="180.0" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="500.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></AnchorPane>
             <AnchorPane fx:id="searchSwitchingBlockPane" layoutX="301.0" layoutY="170.0" prefHeight="50.0" prefWidth="50.0" style="-fx-backgound-radius: 8; -fx-border-radius: 8;" />
             <AnchorPane fx:id="staffSearchPane" layoutX="311.0" layoutY="180.0" onMouseClicked="#onClickStaffSearch" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #223c40; -fx-border-radius: 5; -fx-background-radius: 5;">
                <children>
@@ -374,6 +404,9 @@
                      <image>
                         <Image url="@../image/icons8-account-48.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                </children>
             </AnchorPane>
@@ -398,6 +431,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <Label layoutX="770.0" layoutY="371.0" prefHeight="25.0" prefWidth="102.0" text="Notifications:" textFill="#223c40" AnchorPane.bottomAnchor="304.0" AnchorPane.leftAnchor="760.0">
                <font>
@@ -605,8 +641,11 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </MFXCircleToggleNode>
-            <MFXGenericDialog fx:id="transactionDialog" headerText="Transaction Details" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseTransactionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
+            <MFXGenericDialog fx:id="transactionDialog" headerText="Transaction Details" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseTransactionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
                <left>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
