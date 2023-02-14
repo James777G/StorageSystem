@@ -829,7 +829,7 @@ public class WarehouseController implements Initializable {
      *
      * @param index page number to be displayed
      */
-    private void    generateItemList(int index) {
+    private void generateItemList(int index) {
         try {
             if(!searchBar.getText().isBlank()){
                 itemList = searchResultService.getPagedResultList(CargoCachedUtils
