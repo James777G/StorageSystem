@@ -133,35 +133,6 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <VBox fx:id="searchTable" layoutX="300.0" layoutY="219.0" opacity="0.0" prefHeight="200.0" prefWidth="551.0" styleClass="resultPane" stylesheets="@../css/appPage2.css" visible="false" AnchorPane.topAnchor="159.0">
-               <children>
-                  <JFXButton fx:id="buttonOne" maxWidth="1.7976931348623157E308" onAction="#onClickSearchButtonOne" prefHeight="41.0" prefWidth="551.0" styleClass="topResultButton" stylesheets="@../css/appPage2.css" textAlignment="JUSTIFY">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="buttonTwo" maxWidth="1.7976931348623157E308" onAction="#onClickSearchButtonTwo" prefHeight="41.0" prefWidth="551.0" styleClass="middleResultButton" stylesheets="@../css/appPage2.css" textAlignment="JUSTIFY">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="buttonThree" maxWidth="1.7976931348623157E308" onAction="#onClickSearchButtonThree" prefHeight="41.0" prefWidth="551.0" styleClass="middleResultButton" stylesheets="@../css/appPage2.css" textAlignment="JUSTIFY">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="buttonFour" maxWidth="1.7976931348623157E308" onAction="#onClickSearchButtonFour" prefHeight="41.0" prefWidth="551.0" styleClass="middleResultButton" stylesheets="@../css/appPage2.css" textAlignment="JUSTIFY">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="buttonFive" maxWidth="1.7976931348623157E308" onAction="#onClickSearchButtonFive" prefHeight="41.0" prefWidth="551.0" styleClass="botResultButton" stylesheets="@../css/appPage2.css" textAlignment="JUSTIFY">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-               </children>
-            </VBox>
             <JFXButton layoutX="941.0" layoutY="409.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onClickExcel" prefHeight="27.0" prefWidth="143.0" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Download Excel" textFill="WHITE" AnchorPane.rightAnchor="116.0">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
@@ -418,6 +389,9 @@
                      </image>
                   </ImageView>
                </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </AnchorPane>
             <AnchorPane fx:id="appPageBlockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" visible="false" AnchorPane.topAnchor="0.0" />
             <JFXButton layoutX="770.0" layoutY="410.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onClickAlert" prefHeight="27.0" prefWidth="135.0" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Alert Manager" textFill="WHITE" AnchorPane.bottomAnchor="263.0" AnchorPane.leftAnchor="760.0">
@@ -778,6 +752,35 @@
                   </AnchorPane>
                </left>
             </MFXGenericDialog>
+            <VBox fx:id="searchTable" layoutX="300.0" layoutY="219.0" opacity="0.0" prefHeight="200.0" prefWidth="551.0" styleClass="resultPane" stylesheets="@../css/appPage2.css" visible="false" AnchorPane.topAnchor="159.0">
+               <children>
+                  <JFXButton fx:id="buttonOne" maxWidth="1.7976931348623157E308" onAction="#onClickSearchButtonOne" prefHeight="41.0" prefWidth="551.0" styleClass="topResultButton" stylesheets="@../css/appPage2.css" textAlignment="JUSTIFY">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="buttonTwo" maxWidth="1.7976931348623157E308" onAction="#onClickSearchButtonTwo" prefHeight="41.0" prefWidth="551.0" styleClass="middleResultButton" stylesheets="@../css/appPage2.css" textAlignment="JUSTIFY">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="buttonThree" maxWidth="1.7976931348623157E308" onAction="#onClickSearchButtonThree" prefHeight="41.0" prefWidth="551.0" styleClass="middleResultButton" stylesheets="@../css/appPage2.css" textAlignment="JUSTIFY">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="buttonFour" maxWidth="1.7976931348623157E308" onAction="#onClickSearchButtonFour" prefHeight="41.0" prefWidth="551.0" styleClass="middleResultButton" stylesheets="@../css/appPage2.css" textAlignment="JUSTIFY">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="buttonFive" maxWidth="1.7976931348623157E308" onAction="#onClickSearchButtonFive" prefHeight="41.0" prefWidth="551.0" styleClass="botResultButton" stylesheets="@../css/appPage2.css" textAlignment="JUSTIFY">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </VBox>
          </children>
          <padding>
             <Insets top="60.0" />
@@ -851,6 +854,9 @@
                      </graphic>
                   </Label>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton fx:id="transactionButton" layoutX="600.0" layoutY="10.0" onAction="#onClickTransaction" onMouseEntered="#enterTransactionButton" onMouseExited="#exitTransactionButton" prefHeight="50.0" prefWidth="120.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="595.0" AnchorPane.topAnchor="5.0">
                <graphic>
@@ -865,6 +871,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Label>
                </graphic>
             </JFXButton>
@@ -881,6 +890,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Label>
                </graphic>
                <padding>
@@ -900,6 +912,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Label>
                </graphic>
                <padding>
