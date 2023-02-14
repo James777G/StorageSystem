@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 @Service("staffService")
@@ -26,6 +27,9 @@ public class ControllerOrientedCachedStaffHandler implements CachedStaffService{
     @Qualifier("staffDataManipulationService")
     private StaffDataManipulationService staffDataManipulationService;
 
+    @Resource
+    private GeneralStaffStrategies staffStrategies;
+
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public void updateAllCachedStaffData() {
@@ -40,22 +44,25 @@ public class ControllerOrientedCachedStaffHandler implements CachedStaffService{
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public void addNewStaff(Staff staff) {
+    public void addNewStaff(Staff staff) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         staffDAOService.add(staff);
         updateAllCachedStaffData();
+        staffStrategies.doStrategies();
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public void deleteStaffById(int id) {
+    public void deleteStaffById(int id) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         staffDAOService.deleteById(id);
         updateAllCachedStaffData();
+        staffStrategies.doStrategies();
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public void updateStaff(Staff staff) {
+    public void updateStaff(Staff staff) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         staffDAOService.updateStaff(staff);
         updateAllCachedStaffData();
+        staffStrategies.doStrategies();
     }
 }

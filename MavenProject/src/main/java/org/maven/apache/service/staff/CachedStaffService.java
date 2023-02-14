@@ -3,6 +3,8 @@ package org.maven.apache.service.staff;
 
 import org.maven.apache.staff.Staff;
 
+import java.lang.reflect.InvocationTargetException;
+
 public interface CachedStaffService {
 
     /**
@@ -27,7 +29,7 @@ public interface CachedStaffService {
      * </p>
      * @param staff encapsulated staff to be added
      */
-    void addNewStaff(Staff staff);
+    void addNewStaff(Staff staff) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException;
 
 
     /**
@@ -39,7 +41,7 @@ public interface CachedStaffService {
      * </p>
      * @param id Staff ID which is unique
      */
-    void deleteStaffById(int id);
+    void deleteStaffById(int id) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException;
 
     /**
      * This method updates an existing staff in the database.
@@ -52,5 +54,5 @@ public interface CachedStaffService {
      * </p>
      * @param staff encapsulated staff object to be updated with desired attributes
      */
-    void updateStaff(Staff staff);
+    void updateStaff(Staff staff) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException;
 }

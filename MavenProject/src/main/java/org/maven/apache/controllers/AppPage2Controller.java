@@ -47,6 +47,7 @@ import org.maven.apache.service.search.PromptSearchBarServiceHandler;
 import org.maven.apache.service.search.SearchBarService;
 import org.maven.apache.service.transaction.CachedTransactionService;
 import org.maven.apache.service.user.UserService;
+import org.maven.apache.staff.Staff;
 import org.maven.apache.transaction.Transaction;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.*;
@@ -322,7 +323,7 @@ public class AppPage2Controller implements Initializable {
     private Label cargoAmountLabel02;
 
     @FXML
-    private TextField staffNameInDetails;
+    private MFXFilterComboBox staffNameInDetails;
 
     @FXML
     private Label cargoAmountLabel03;
@@ -672,6 +673,7 @@ public class AppPage2Controller implements Initializable {
         emailSpinner.setVisible(false);
         cargoSpinner.setVisible(false);
         setPromptTextForRegulatory();
+        setPromptTextForStaff();
 
         // initialize search per sec when search field is chosen
 //        searchField.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -729,6 +731,23 @@ public class AppPage2Controller implements Initializable {
             }
         });
         cargoNameTextField.setItems(FXCollections.observableList(resultList));
+    }
+
+    private void setPromptTextForStaff(){
+        List<List<Staff>> staffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL);
+        List<String> resultList = new ArrayList<>();
+        staffList.forEach(new Consumer<List<Staff>>() {
+            @Override
+            public void accept(List<Staff> staffList) {
+                staffList.forEach(new Consumer<Staff>() {
+                    @Override
+                    public void accept(Staff staff) {
+                        resultList.add(staff.getStaffName());
+                    }
+                });
+            }
+        });
+        staffNameInDetails.setItems(FXCollections.observableList(resultList));
     }
     private void initializeRegulatorySpaceList(){
         regulatorySpaceList.add(regulatorySpaceOne);
