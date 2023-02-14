@@ -31,6 +31,7 @@ import org.maven.apache.utils.TranslateUtils;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
@@ -93,6 +94,12 @@ public class WarehouseController implements Initializable {
     private AnchorPane blockPane;
 
     @FXML
+    private AnchorPane transactionPane1, transactionPane2, transactionPane3, transactionPane4, transactionPane5,transactionPane6, transactionPane7;
+
+    @FXML
+    private AnchorPane[] transactionPanes = new AnchorPane[7];
+
+    @FXML
     private MFXProgressSpinner loadSpinnerInAdd;
 
     @FXML
@@ -146,6 +153,8 @@ public class WarehouseController implements Initializable {
 
     private Integer selectedItemID;
 
+    private boolean isBlockPaneOpen = false;
+
     /**
      * 1. sets up the word limit for description input field inside the description dialog
      * 2. Initialize the attributes of the data
@@ -180,6 +189,7 @@ public class WarehouseController implements Initializable {
         initializeAmountList();
         initializeButtonList();
         initializeDeleteList();
+        initializeTransactionPaneList();
         try {
             generateCachedData();
         } catch (UnsupportedPojoException e) {
@@ -198,6 +208,101 @@ public class WarehouseController implements Initializable {
             Platform.runLater(WarehouseController.this::setTableContents);
         }));
         blockPane.setVisible(false);
+        hideDeleteImageViews();
+    }
+
+    private void initializeTransactionPaneList(){
+        transactionPanes[0] = transactionPane1;
+        transactionPanes[1] = transactionPane2;
+        transactionPanes[2] = transactionPane3;
+        transactionPanes[3] = transactionPane4;
+        transactionPanes[4] = transactionPane5;
+        transactionPanes[5] = transactionPane6;
+        transactionPanes[6] = transactionPane7;
+    }
+
+    @FXML
+    private void onEnterTransactionPane1(){
+        deleteList[0].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterTransactionPane2(){
+        deleteList[1].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterTransactionPane3(){
+        deleteList[2].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterTransactionPane4(){
+        deleteList[3].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterTransactionPane5(){
+        deleteList[4].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterTransactionPane6(){
+        deleteList[5].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterTransactionPane7(){
+        deleteList[6].setVisible(true);
+    }
+
+    @FXML
+    private void onExitTransactionPane1(){
+        if(!isBlockPaneOpen) {
+            deleteList[0].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitTransactionPane2(){
+        if(!isBlockPaneOpen) {
+            deleteList[1].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitTransactionPane3(){
+        if(!isBlockPaneOpen) {
+            deleteList[2].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitTransactionPane4(){
+        if(!isBlockPaneOpen) {
+            deleteList[3].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitTransactionPane5(){
+        if(!isBlockPaneOpen) {
+            deleteList[4].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitTransactionPane6(){
+        if(!isBlockPaneOpen) {
+            deleteList[5].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitTransactionPane7(){
+        if(!isBlockPaneOpen) {
+            deleteList[6].setVisible(false);
+        }
     }
 
     private void initializeDeleteList() {
@@ -208,6 +313,10 @@ public class WarehouseController implements Initializable {
         deleteList[4] = deleteFive;
         deleteList[5] = deleteSix;
         deleteList[6] = deleteSeven;
+    }
+
+    private void  hideDeleteImageViews(){
+        Arrays.stream(deleteList).forEach(imageView ->{imageView.setVisible(false);});
     }
 
     @FXML
@@ -252,6 +361,7 @@ public class WarehouseController implements Initializable {
         selectedItemID = itemList.get(row).getItemID();
         deleteItemPane.setOpacity(0);
         deleteItemPane.setVisible(true);
+        isBlockPaneOpen = true;
         blockPane.setVisible(true);
         FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,0,1);
         TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,-45,0);
@@ -470,7 +580,9 @@ public class WarehouseController implements Initializable {
         translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
         translateTransition.setOnFinished(event -> {
             deleteItemPane.setVisible(false);
+            isBlockPaneOpen = false;
             blockPane.setVisible(false);
+            hideDeleteImageViews();
         });
         fadeTransition.play();
         translateTransition.play();
@@ -500,7 +612,9 @@ public class WarehouseController implements Initializable {
                     loadSpinnerOnDeletePane.setVisible(false);
                     doContinueButton.setVisible(true);
                     deleteItemPane.setVisible(false);
+                    isBlockPaneOpen = false;
                     blockPane.setVisible(false);
+                    hideDeleteImageViews();
                 });
                 fadeTransition.play();
                 translateTransition.play();
