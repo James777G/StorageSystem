@@ -398,6 +398,8 @@ public class AppPage2Controller implements Initializable {
     //pass the user from login page
     private final User user = DataUtils.currentUser;
 
+    private boolean isAppPageBlockPaneOpen = false;
+
     private boolean isTriangleRotating = false;
 
     private boolean isRotating = false;
@@ -1675,7 +1677,9 @@ public class AppPage2Controller implements Initializable {
         translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
         translateTransition.setOnFinished(event -> {
             transactionDialog.setVisible(false);
+            isAppPageBlockPaneOpen = false;
             appPageBlockPane.setVisible(false);
+            exitCargoBoxAnimation(cargoBoxNumber);
         });
         fadeTransition.play();
         translateTransition.play();
@@ -2330,26 +2334,34 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onExitCargoBox1() {
-        cargoBoxNumber = CargoBoxNumber.ONE;
-        exitCargoBoxAnimation(cargoBoxNumber);
+        if (!isAppPageBlockPaneOpen) {
+            cargoBoxNumber = CargoBoxNumber.ONE;
+            exitCargoBoxAnimation(cargoBoxNumber);
+        }
     }
 
     @FXML
     private void onExitCargoBox2() {
-        cargoBoxNumber = CargoBoxNumber.TWO;
-        exitCargoBoxAnimation(cargoBoxNumber);
+        if (!isAppPageBlockPaneOpen) {
+            cargoBoxNumber = CargoBoxNumber.TWO;
+            exitCargoBoxAnimation(cargoBoxNumber);
+        }
     }
 
     @FXML
     private void onExitCargoBox3() {
-        cargoBoxNumber = CargoBoxNumber.THREE;
-        exitCargoBoxAnimation(cargoBoxNumber);
+        if (!isAppPageBlockPaneOpen) {
+            cargoBoxNumber = CargoBoxNumber.THREE;
+            exitCargoBoxAnimation(cargoBoxNumber);
+        }
     }
 
     @FXML
     private void onExitCargoBox4() {
-        cargoBoxNumber = CargoBoxNumber.FOUR;
-        exitCargoBoxAnimation(cargoBoxNumber);
+        if (!isAppPageBlockPaneOpen) {
+            cargoBoxNumber = CargoBoxNumber.FOUR;
+            exitCargoBoxAnimation(cargoBoxNumber);
+        }
     }
 
     @FXML
@@ -2540,6 +2552,7 @@ public class AppPage2Controller implements Initializable {
         }
         transactionAmountInDetails.setText(String.valueOf(transaction.getUnit()));
         setTransactionDate(transactionDateInDetails, transaction);
+        isAppPageBlockPaneOpen = true;
         appPageBlockPane.setVisible(true);
         transactionDialog.setVisible(true);
         transactionDialog.setOpacity(0);
@@ -2633,15 +2646,15 @@ public class AppPage2Controller implements Initializable {
                     cargoDialogApplyButton.setVisible(true);
                     loadSpinnerInAdd.setVisible(false);
                     warnMessageInAdd.setVisible(false);
-                    FadeTransition fadeTransition = TransitionUtils.getFadeTransition(transactionDialog, 300, 1, 0);
-                    TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(transactionDialog, 300, 0, -200);
-                    translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
-                    translateTransition.setOnFinished(event -> {
-                        transactionDialog.setVisible(false);
-                        appPageBlockPane.setVisible(false);
-                    });
-                    fadeTransition.play();
-                    translateTransition.play();
+//                    FadeTransition fadeTransition = TransitionUtils.getFadeTransition(transactionDialog, 300, 1, 0);
+//                    TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(transactionDialog, 300, 0, -200);
+//                    translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+//                    translateTransition.setOnFinished(event -> {
+//                        transactionDialog.setVisible(false);
+//                        appPageBlockPane.setVisible(false);
+//                    });
+//                    fadeTransition.play();
+//                    translateTransition.play();
                 });
             }
         });
