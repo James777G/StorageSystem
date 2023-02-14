@@ -33,6 +33,7 @@ import org.maven.apache.utils.TransitionUtils;
 import org.maven.apache.utils.TranslateUtils;
 
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -497,7 +498,11 @@ public class StaffController implements Initializable {
         loadSpinnerOnDeletePane.setVisible(true);
         doContinueButton.setVisible(false);
         executorService.execute(() -> {
-            staffService.deleteStaffById(selectedStaffId);
+            try {
+                staffService.deleteStaffById(selectedStaffId);
+            } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
             executorService.execute(() -> {
                 Platform.runLater(() -> {
                     try {

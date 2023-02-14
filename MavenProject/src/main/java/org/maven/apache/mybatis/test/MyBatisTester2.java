@@ -178,20 +178,5 @@ public class MyBatisTester2 {
 
 	@Test
 	public void testZ(){
-		CachedStaffService staffService = MyLauncher.context.getBean("staffService", CachedStaffService.class);
-		staffService.updateAllCachedStaffData();
-		System.out.println(StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL));
-		System.out.println(StaffCachedUtils.getLists(StaffCachedUtils.listType.INACTIVE));
-		System.out.println(StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE));
-		Staff staff = new Staff();
-		staff.setStatus("ACTIVE");
-		staff.setStaffName("Peter");
-		staff.setOtherInfo("I AM GOD");
-		staffService.addNewStaff(staff);
-		System.out.println(StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL));
-		System.out.println(StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE));
-		staff.setOtherInfo("I AM NOT GOD");
-		staffService.updateStaff(staff);
-		System.out.println(StaffCachedUtils.getLists(StaffCachedUtils.listType.ACTIVE));
 	}
 }
