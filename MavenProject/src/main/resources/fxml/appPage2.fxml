@@ -148,12 +148,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <Label layoutX="941.0" layoutY="371.0" prefHeight="25.0" prefWidth="55.0" text="Excel:" textFill="#223c40" AnchorPane.bottomAnchor="303.6666666666667">
+            <Label layoutX="941.0" layoutY="379.0" prefHeight="25.0" prefWidth="55.0" text="Excel:" textFill="#223c40" AnchorPane.bottomAnchor="295.6666666666667">
                <font>
                   <Font name="Calibri Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="994.0" layoutY="375.0" text="( filename.xls )">
+            <Label layoutX="996.0" layoutY="383.0" text="( filename.xls )">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
                </font>
@@ -409,7 +409,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <Label layoutX="770.0" layoutY="371.0" prefHeight="25.0" prefWidth="102.0" text="Notifications:" textFill="#223c40" AnchorPane.bottomAnchor="304.0" AnchorPane.leftAnchor="760.0">
+            <Label layoutX="760.0" layoutY="379.0" prefHeight="25.0" prefWidth="102.0" text="Notifications:" textFill="#223c40" AnchorPane.bottomAnchor="295.6666666666667" AnchorPane.leftAnchor="760.0">
                <font>
                   <Font name="Calibri Bold" size="16.0" />
                </font>
