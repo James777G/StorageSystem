@@ -96,9 +96,9 @@
       </AnchorPane>
       <AnchorPane layoutX="150.0" layoutY="240.0" onScroll="#onScrolled">
          <children>
-            <AnchorPane prefHeight="50.0" prefWidth="901.0">
+            <AnchorPane fx:id="staffPane1" onMouseEntered="#onEnterStaffPane1" onMouseExited="#onExitStaffPane1" prefHeight="50.0" prefWidth="901.0">
                <children>
-                  <Label fx:id="staffNameOne" alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="17.0" prefHeight="18.0" prefWidth="146.0" textFill="#223c40" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="17.0">
+                  <Label fx:id="staffNameOne" alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="17.0" prefHeight="18.0" prefWidth="146.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="17.0">
                      <font>
                         <Font name="Candara Bold" size="15.0" />
                      </font>
@@ -142,7 +142,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutY="50.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
+            <AnchorPane fx:id="staffPane2" layoutY="50.0" onMouseEntered="#onEnterStaffPane2" onMouseExited="#onExitStaffPane2" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
                <children>
                   <Label fx:id="staffNameTwo" alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="17.0" prefHeight="18.0" prefWidth="146.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="17.0">
                      <font>
@@ -188,7 +188,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutY="100.0" prefHeight="50.0" prefWidth="901.0">
+            <AnchorPane fx:id="staffPane3" layoutY="100.0" onMouseEntered="#onEnterStaffPane3" onMouseExited="#onExitStaffPane3" prefHeight="50.0" prefWidth="901.0">
                <children>
                   <Label fx:id="staffNameThree" alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="17.0" prefHeight="18.0" prefWidth="146.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="17.0">
                      <font>
@@ -234,7 +234,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutY="150.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
+            <AnchorPane fx:id="staffPane4" layoutY="150.0" onMouseEntered="#onEnterStaffPane4" onMouseExited="#onExitStaffPane4" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
                <children>
                   <Label fx:id="staffNameFour" alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="17.0" prefHeight="18.0" prefWidth="146.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="17.0">
                      <font>
@@ -280,7 +280,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutY="200.0" prefHeight="50.0" prefWidth="901.0">
+            <AnchorPane fx:id="staffPane5" layoutY="200.0" onMouseEntered="#onEnterStaffPane5" onMouseExited="#onExitStaffPane5" prefHeight="50.0" prefWidth="901.0">
                <children>
                   <Label fx:id="staffNameFive" alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="17.0" prefHeight="18.0" prefWidth="146.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="17.0">
                      <font>
@@ -326,7 +326,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutY="250.0" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
+            <AnchorPane fx:id="staffPane6" layoutY="250.0" onMouseEntered="#onEnterStaffPane6" onMouseExited="#onExitStaffPane6" prefHeight="50.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
                <children>
                   <Label fx:id="staffNameSix" alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="17.0" prefHeight="18.0" prefWidth="146.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="17.0">
                      <font>
@@ -372,7 +372,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutY="300.0" prefHeight="50.0" prefWidth="901.0">
+            <AnchorPane fx:id="staffPane7" layoutY="300.0" onMouseEntered="#onEnterStaffPane7" onMouseExited="#onExitStaffPane7" prefHeight="50.0" prefWidth="901.0">
                <children>
                   <Label fx:id="staffNameSeven" alignment="CENTER" contentDisplay="CENTER" layoutX="165.0" layoutY="17.0" prefHeight="18.0" prefWidth="146.0" text="staffName*****" textFill="#223c40" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="17.0">
                      <font>

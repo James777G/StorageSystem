@@ -105,6 +105,12 @@ public class StaffController implements Initializable {
     private AnchorPane blockPane;
 
     @FXML
+    private AnchorPane staffPane1, staffPane2, staffPane3, staffPane4, staffPane5, staffPane6, staffPane7;
+
+    @FXML
+    private AnchorPane[] staffPanes = new AnchorPane[7];
+
+    @FXML
     private JFXButton applyButton;
 
     @FXML
@@ -165,6 +171,8 @@ public class StaffController implements Initializable {
 
     private int pageNumber;
 
+    private boolean isBlockPaneOpen = false;
+
     /**
      * Please check if text formatter has been applied
      *
@@ -208,7 +216,9 @@ public class StaffController implements Initializable {
         initializeStatusList();
         initializeButtonList();
         initializeDeleteList();
+        initializeStaffPaneList();
         assignStaffValue();
+        setInitialDeleteImageViews();
         loadSpinnerInAdd.setVisible(false);
         warnMessageInAdd.setVisible(false);
         warnMessageInDetails.setVisible(false);
@@ -361,18 +371,20 @@ public class StaffController implements Initializable {
     @SuppressWarnings("all")
     private void setTextWithCurrentList(List<Staff> currentStaffList) {
         for (int i = 0; i < currentStaffList.size(); i++) {
+            staffPanes[i].setVisible(true);
             buttonList[i].setDisable(false);
             nameList[i].setText(currentStaffList.get(i).getStaffName());
             idList[i].setText(Integer.valueOf(currentStaffList.get(i).getStaffID()).toString());
             statusList[i].setText(currentStaffList.get(i).getStatus());
-            deleteList[i].setVisible(true);
+//            deleteList[i].setVisible(true);
         }
         for (int j = currentStaffList.size(); j < nameList.length; j++) {
-            nameList[j].setText("N/A");
-            idList[j].setText("N/A");
-            statusList[j].setText("N/A");
-            buttonList[j].setDisable(true);
-            deleteList[j].setVisible(false);
+            staffPanes[j].setVisible(false);
+//            nameList[j].setText("N/A");
+//            idList[j].setText("N/A");
+//            statusList[j].setText("N/A");
+//            buttonList[j].setDisable(true);
+//            deleteList[j].setVisible(false);
         }
     }
 
@@ -472,6 +484,27 @@ public class StaffController implements Initializable {
         deleteList[6] = deleteSeven;
     }
 
+    private void initializeStaffPaneList(){
+        staffPanes[0] = staffPane1;
+        staffPanes[1] = staffPane2;
+        staffPanes[2] = staffPane3;
+        staffPanes[3] = staffPane4;
+        staffPanes[4] = staffPane5;
+        staffPanes[5] = staffPane6;
+        staffPanes[6] = staffPane7;
+    }
+
+    private void setInitialDeleteImageViews(){
+        deleteList[0].setVisible(false);
+        deleteList[1].setVisible(false);
+        deleteList[2].setVisible(false);
+        deleteList[3].setVisible(false);
+        deleteList[4].setVisible(false);
+        deleteList[5].setVisible(false);
+        deleteList[6].setVisible(false);
+
+    }
+
     @FXML
     private void onClickSearch() throws UnsupportedPojoException {
         getStaffList(pagination.getCurrentPageIndex());
@@ -484,7 +517,9 @@ public class StaffController implements Initializable {
         FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane, 300, 1, 0);
         fadeTransition.setOnFinished(event -> {
             deleteItemPane.setVisible(false);
+            isBlockPaneOpen = false;
             blockPane.setVisible(false);
+            setInitialDeleteImageViews();
         });
         TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane, 300, 0, -45.5);
         translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
@@ -517,7 +552,9 @@ public class StaffController implements Initializable {
                     loadSpinnerOnDeletePane.setVisible(false);
                     doContinueButton.setVisible(true);
                     deleteItemPane.setVisible(false);
+                    isBlockPaneOpen = false;
                     blockPane.setVisible(false);
+                    setInitialDeleteImageViews();
                 });
                 TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane, 300, 0, -45.5);
                 translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
@@ -525,6 +562,90 @@ public class StaffController implements Initializable {
                 fadeTransition.play();
             });
         });
+    }
+
+    @FXML
+    private void onEnterStaffPane1(){
+        deleteList[0].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterStaffPane2(){
+        deleteList[1].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterStaffPane3(){
+        deleteList[2].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterStaffPane4(){
+        deleteList[3].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterStaffPane5(){
+        deleteList[4].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterStaffPane6(){
+        deleteList[5].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterStaffPane7(){
+        deleteList[6].setVisible(true);
+    }
+
+    @FXML
+    private void onExitStaffPane1(){
+        if(!isBlockPaneOpen){
+            deleteList[0].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitStaffPane2(){
+        if(!isBlockPaneOpen){
+            deleteList[1].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitStaffPane3(){
+        if(!isBlockPaneOpen){
+            deleteList[2].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitStaffPane4(){
+        if(!isBlockPaneOpen){
+            deleteList[3].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitStaffPane5(){
+        if(!isBlockPaneOpen){
+            deleteList[4].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitStaffPane6(){
+        if(!isBlockPaneOpen){
+            deleteList[5].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitStaffPane7(){
+        if(!isBlockPaneOpen){
+            deleteList[6].setVisible(false);
+        }
     }
 
     @FXML
@@ -695,6 +816,7 @@ public class StaffController implements Initializable {
         List<Staff> currentList = getCurrentList();
         Staff staff = currentList.get(row);
         selectedStaffId = staff.getStaffID();
+        isBlockPaneOpen = true;
         blockPane.setVisible(true);
         deleteItemPane.setOpacity(0);
         deleteItemPane.setVisible(true);
