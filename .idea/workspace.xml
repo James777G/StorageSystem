@@ -7,6 +7,8 @@
     <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="implemented initial content successfully">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/MessagePageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/MessagePageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/messagePage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/messagePage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/sql/message.sql" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/sql/message.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -267,7 +269,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676202995048</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="the left is to manage the scene">
+      <created>1676256294671</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1676256294671</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
