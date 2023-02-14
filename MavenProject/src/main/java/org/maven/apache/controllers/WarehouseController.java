@@ -979,10 +979,10 @@ public class WarehouseController implements Initializable {
     }
     private void setDeleteContent() {
         for (int i = 0; i < itemList.size(); i++) {
-            deleteList[i].setVisible(true);
+            transactionPanes[i].setVisible(true);
         }
         for (int j = itemList.size(); j < deleteList.length; j++) {
-            deleteList[j].setVisible(false);
+            transactionPanes[j].setVisible(false);
         }
     }
 
@@ -990,9 +990,9 @@ public class WarehouseController implements Initializable {
         for (int j = 0; j < itemList.size(); j++) {
             buttonList[j].setDisable(false);
         }
-        for (int i = itemList.size(); i < buttonList.length; i++) {
-            buttonList[i].setDisable(true);
-        }
+//        for (int i = itemList.size(); i < buttonList.length; i++) {
+//            buttonList[i].setDisable(true);
+//        }
     }
 
     /**
@@ -1002,9 +1002,9 @@ public class WarehouseController implements Initializable {
         for (int i = 0; i < itemList.size(); i++) {
             nameList[i].setText(itemList.get(i).getItemName());
         }
-        for (int j = itemList.size(); j < nameList.length; j++) {
-            nameList[j].setText("N/A");
-        }
+//        for (int j = itemList.size(); j < nameList.length; j++) {
+//            nameList[j].setText("N/A");
+//        }
     }
 
     /**
@@ -1014,9 +1014,9 @@ public class WarehouseController implements Initializable {
         for (int i = 0; i < itemList.size(); i++) {
             idList[i].setText(itemList.get(i).getItemID().toString());
         }
-        for (int j = itemList.size(); j < idList.length; j++) {
-            idList[j].setText("N/A");
-        }
+//        for (int j = itemList.size(); j < idList.length; j++) {
+//            idList[j].setText("N/A");
+//        }
     }
 
     /**
@@ -1026,9 +1026,9 @@ public class WarehouseController implements Initializable {
         for (int i = 0; i < itemList.size(); i++) {
             amountList[i].setText(itemList.get(i).getUnit().toString());
         }
-        for (int j = itemList.size(); j < amountList.length; j++) {
-            amountList[j].setText("N/A");
-        }
+//        for (int j = itemList.size(); j < amountList.length; j++) {
+//            amountList[j].setText("N/A");
+//        }
     }
 
     /**
