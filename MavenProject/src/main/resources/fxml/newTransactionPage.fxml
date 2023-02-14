@@ -24,7 +24,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.NewTransactionPageController">
    <children>
-      <MFXTextField floatMode="DISABLED" layoutX="287.0" layoutY="75.0" prefHeight="50.0" prefWidth="550.0" styleClass="inputTransformableField" stylesheets="@../css/transactionPage.css" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="40.0">
+      <MFXTextField fx:id="searchField" floatMode="DISABLED" layoutX="287.0" layoutY="75.0" prefHeight="50.0" prefWidth="550.0" styleClass="inputTransformableField" stylesheets="@../css/transactionPage.css" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="40.0">
          <textFill>
             <Color red="0.13725490868091583" green="0.1411764770746231" blue="0.16470588743686676" opacity="0.8700000047683716" />
          </textFill>
@@ -51,7 +51,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <JFXButton contentDisplay="CENTER" layoutX="850.0" layoutY="40.0" prefHeight="50.0" prefWidth="50.0" styleClass="searchButton" stylesheets="@../css/appPage.css" textFill="#223c40">
+      <JFXButton contentDisplay="CENTER" layoutX="850.0" layoutY="40.0" onAction="#onClickSearch" prefHeight="50.0" prefWidth="50.0" styleClass="searchButton" stylesheets="@../css/appPage.css" textFill="#223c40">
          <graphic>
             <ImageView fx:id="searchImage1" fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                <image>
