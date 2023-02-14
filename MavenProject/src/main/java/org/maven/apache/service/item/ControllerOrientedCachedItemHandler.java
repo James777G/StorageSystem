@@ -43,6 +43,7 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService{
         try {
             invokeControllerToUpdate();
             invokeAppPage2ControllerToUpdate();
+            invokeRegulatoryPromptsToUpdate();
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
@@ -58,6 +59,7 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService{
             invokeControllerToUpdate();
             invokeAppPage2ControllerToUpdate();
             invokeRegulatoryToUpdate();
+            invokeRegulatoryPromptsToUpdate();
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
@@ -70,6 +72,20 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService{
         Platform.runLater(() -> {
             try {
                 refreshPage.invoke(DataUtils.transactionPageController);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+    }
+
+    private void invokeRegulatoryPromptsToUpdate() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Class<AppPage2Controller> clazz = AppPage2Controller.class;
+        Method setPromptTextForRegulatory = clazz.getDeclaredMethod("setPromptTextForRegulatory");
+        setPromptTextForRegulatory.setAccessible(true);
+        Platform.runLater(() -> {
+            try {
+                setPromptTextForRegulatory.invoke(DataUtils.appPage2Controller);
             } catch (IllegalAccessException | InvocationTargetException e) {
                 throw new RuntimeException(e);
             }
@@ -116,8 +132,9 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService{
     }
 
     @Override
-    public void updateItem(Item item) {
+    public void updateItem(Item item) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         itemService.update(item);
         updateAllCachedItemData();
+        invokeRegulatoryPromptsToUpdate();
     }
 }

@@ -7,30 +7,35 @@ import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.Pagination;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.Duration;
+import javafx.util.StringConverter;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.email.Email;
 import org.maven.apache.exception.DataNotFoundException;
 import org.maven.apache.exception.EmptyValueException;
 import org.maven.apache.exception.InvalidEmailFormatException;
 import org.maven.apache.exception.Warning;
+import org.maven.apache.item.Item;
 import org.maven.apache.regulatory.Regulatory;
 import org.maven.apache.service.DateTransaction.DateTransactionService;
 import org.maven.apache.service.email.EmailService;
@@ -54,6 +59,9 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class AppPage2Controller implements Initializable {
 
@@ -549,7 +557,10 @@ public class AppPage2Controller implements Initializable {
     private Pagination emailPagination, cargoPagination;
 
     @FXML
-    private MFXTextField emailTextField, cargoNameTextField, cargoAmountTextField;
+    private MFXTextField emailTextField, cargoAmountTextField;
+
+    @FXML
+    private MFXFilterComboBox cargoNameTextField;
 
     @FXML
     private MFXProgressSpinner emailSpinner, cargoSpinner;
@@ -660,6 +671,8 @@ public class AppPage2Controller implements Initializable {
         stackPane.setVisible(false);
         emailSpinner.setVisible(false);
         cargoSpinner.setVisible(false);
+        setPromptTextForRegulatory();
+
         // initialize search per sec when search field is chosen
 //        searchField.focusedProperty().addListener((observable, oldValue, newValue) -> {
 //            if (newValue) {
@@ -701,6 +714,22 @@ public class AppPage2Controller implements Initializable {
         regulatoryAmountList.add(regulatoryAmountThree);
     }
 
+    private void setPromptTextForRegulatory(){
+        List<List<Item>> itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL);
+        List<String> resultList = new ArrayList<>();
+        itemList.forEach(new Consumer<List<Item>>() {
+            @Override
+            public void accept(List<Item> items) {
+                items.forEach(new Consumer<Item>() {
+                    @Override
+                    public void accept(Item item) {
+                        resultList.add(item.getItemName());
+                    }
+                });
+            }
+        });
+        cargoNameTextField.setItems(FXCollections.observableList(resultList));
+    }
     private void initializeRegulatorySpaceList(){
         regulatorySpaceList.add(regulatorySpaceOne);
         regulatorySpaceList.add(regulatorySpaceTwo);

@@ -2,6 +2,8 @@ package org.maven.apache.service.item;
 
 import org.maven.apache.item.Item;
 
+import java.lang.reflect.InvocationTargetException;
+
 public interface CachedItemService {
 
     /**
@@ -51,5 +53,5 @@ public interface CachedItemService {
      * </p>
      * @param item encapsulated item object to be updated with desired attributes
      */
-    void updateItem(Item item);
+    void updateItem(Item item) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException;
 }
