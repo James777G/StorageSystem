@@ -222,8 +222,7 @@ public class LogInPageController implements Initializable {
 	 */
 	public void updateUserList() {
 		UserService userService = MyLauncher.context.getBean("userService", UserService.class);
-		ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
-		threadPoolExecutor.execute(() -> userList = userService.selectAll());
+		userList = userService.selectAll();
 	}
 
 	@FXML
@@ -319,20 +318,24 @@ public class LogInPageController implements Initializable {
 		});
 	}
 
+
 	@FXML
 	private void onEnterForgotPassword() {
 		lineOnForgotPassword.setVisible(true);
 	}
+
 
 	@FXML
 	private void onExitForgotPassword() {
 		lineOnForgotPassword.setVisible(false);
 	}
 
+
 	@FXML
 	private void onEnterLabelSignIn() {
 		lineOnSignIn.setVisible(true);
 	}
+
 
 	@FXML
 	private void onExitLabelSignIn() {
