@@ -543,7 +543,7 @@
                               <Font name="Calibri Bold" size="14.0" />
                            </font>
                         </Label>
-                        <MFXTextField fx:id="cargoAmountTextField" floatMode="BORDER" floatingText=" Item Amount: " layoutY="82.0" prefHeight="35.0" prefWidth="194.0">
+                        <MFXTextField fx:id="cargoAmountTextField" floatMode="BORDER" floatingText=" Item Amount: " layoutY="82.0" prefHeight="35.0" prefWidth="194.0" stylesheets="@../css/generalTextField.css">
                            <font>
                               <Font name="Calibri" size="12.0" />
                            </font>
@@ -559,7 +559,7 @@
                            </font>
                         </JFXButton>
                         <MFXProgressSpinner fx:id="cargoSpinner" layoutX="267.0" layoutY="85.0" prefHeight="25.0" prefWidth="24.0" />
-                        <MFXFilterComboBox fx:id="cargoNameTextField" allowEdit="true" floatMode="BORDER" floatingText=" Item Name" layoutX="-4.0" layoutY="29.0" prefHeight="38.0" prefWidth="194.0" searchText="" selectable="true" AnchorPane.leftAnchor="-0.0" />
+                        <MFXFilterComboBox fx:id="cargoNameTextField" allowEdit="true" floatMode="BORDER" floatingText=" Item Name" layoutX="-4.0" layoutY="29.0" prefHeight="38.0" prefWidth="194.0" searchText="" selectable="true" stylesheets="@../css/filterCombo.css" AnchorPane.leftAnchor="-0.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="413.0" layoutY="313.0" AnchorPane.leftAnchor="413.0" AnchorPane.topAnchor="310.0">
@@ -569,7 +569,7 @@
                               <Font name="Calibri Bold" size="14.0" />
                            </font>
                         </Label>
-                        <MFXTextField fx:id="emailTextField" floatMode="BORDER" floatingText=" Email Address: " layoutY="30.0" prefHeight="35.0" prefWidth="254.0">
+                        <MFXTextField fx:id="emailTextField" floatMode="BORDER" floatingText=" Email Address: " layoutY="30.0" prefHeight="35.0" prefWidth="254.0" stylesheets="@../css/generalTextField.css">
                            <font>
                               <Font name="Calibri" size="12.0" />
                            </font>

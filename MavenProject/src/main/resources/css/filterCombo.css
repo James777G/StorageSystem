@@ -1,0 +1,11 @@
+@import "generalTextField.css";
+
+.mfx-combo-box-cell {
+    -mfx-main:  #223c40;
+    -mfx-hover: rgba(24, 37, 38, 0.1);
+    -mfx-selected: rgba(24, 37, 38, 0.2);
+}
+.mfx-combo-box .caret .mfx-ripple-generator {
+    -mfx-ripple-color: rgba(24, 37, 38, 0.15);
+    -mfx-ripple-radius: 14;
+}
