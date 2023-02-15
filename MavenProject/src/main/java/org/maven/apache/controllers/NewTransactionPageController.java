@@ -299,9 +299,9 @@ public class NewTransactionPageController implements Initializable {
 
     private boolean isBlockPaneOpen = false;
 
-    private boolean isSearchingItem = false;
+    public static boolean isSearchingItem = false;
 
-    private boolean isSearchingStaff = true;
+    public static boolean isSearchingStaff = true;
 
     private int currentPage;
 
@@ -1549,44 +1549,65 @@ public class NewTransactionPageController implements Initializable {
         newTransaction.setPurpose(purpose);
     }
 
+    /**
+     * search an indicated staff name
+     */
     @FXML
-    private void onClickStaffSearch() {
-        searchSwitchingBlockPane.toFront();
-        cargoSearchPane.setVisible(true);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, 0, -15);
-        TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane, 300, 15, 0);
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane, 300, 1, 0);
-        scaleTransition.setOnFinished(event -> {
-            searchSwitchingBlockPane.toBack();
-            staffSearchPane.setVisible(false);
-        });
-        ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane, 300, 0, 1);
-        translateTransition.play();
-        translateTransition1.play();
-        scaleTransition.play();
-        scaleTransition1.play();
-        isSearchingItem = true;
-        isSearchingStaff = false;
+    public void onClickStaffSearch() {
+        setSearchProperty(true);
+        DataUtils.appPage2Controller.setSearchProperty(true);
     }
 
+    /**
+     * search an indicated cargo name
+     */
     @FXML
-    private void onClickCargoSearch() {
-        searchSwitchingBlockPane.toFront();
-        staffSearchPane.setVisible(true);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, -15, 0);
-        TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane, 300, 0, 15);
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane, 300, 0, 1);
-        ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane, 300, 1, 0);
-        scaleTransition1.setOnFinished(event -> {
-            searchSwitchingBlockPane.toBack();
-            cargoSearchPane.setVisible(false);
-        });
-        translateTransition.play();
-        translateTransition1.play();
-        scaleTransition.play();
-        scaleTransition1.play();
-        isSearchingItem = false;
-        isSearchingStaff = true;
+    public void onClickCargoSearch() {
+        setSearchProperty(false);
+        DataUtils.appPage2Controller.setSearchProperty(false);
+    }
+
+    /**
+     * indicates if the keyword is related to cargo or staff
+     *
+     * @param isStaff searching staff if true
+     */
+    public void setSearchProperty(boolean isStaff){
+        if (isStaff){
+            searchSwitchingBlockPane.toFront();
+            cargoSearchPane.setVisible(true);
+            TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, 0, -15);
+            TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane, 300, 15, 0);
+            ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane, 300, 1, 0);
+            ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane, 300, 0, 1);
+            scaleTransition.setOnFinished(event -> {
+                searchSwitchingBlockPane.toBack();
+                staffSearchPane.setVisible(false);
+            });
+            translateTransition.play();
+            translateTransition1.play();
+            scaleTransition.play();
+            scaleTransition1.play();
+            isSearchingItem = true;
+            isSearchingStaff = false;
+        }else{
+            searchSwitchingBlockPane.toFront();
+            staffSearchPane.setVisible(true);
+            TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, -15, 0);
+            TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane, 300, 0, 15);
+            ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane, 300, 0, 1);
+            ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane, 300, 1, 0);
+            scaleTransition1.setOnFinished(event -> {
+                searchSwitchingBlockPane.toBack();
+                cargoSearchPane.setVisible(false);
+            });
+            translateTransition.play();
+            translateTransition1.play();
+            scaleTransition.play();
+            scaleTransition1.play();
+            isSearchingItem = false;
+            isSearchingStaff = true;
+        }
     }
 
     /**
