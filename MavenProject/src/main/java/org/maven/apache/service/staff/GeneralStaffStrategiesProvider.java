@@ -11,8 +11,11 @@ public class GeneralStaffStrategiesProvider implements GeneralStaffStrategies {
     @Resource
     private AbstractStaffStrategy appPageSynchronizingStaffStrategy;
 
+    @Resource AbstractStaffStrategy transactionPageSynchronizingStaffStrategy;
+
     @Override
     public void doStrategies() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         appPageSynchronizingStaffStrategy.doStrategy();
+        transactionPageSynchronizingStaffStrategy.doStrategy();
     }
 }

@@ -43,6 +43,7 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService {
             invokeControllerToUpdate();
             invokeAppPage2ControllerToUpdate();
             invokeRegulatoryPromptsToUpdate();
+            invokeTransactionToUpdate();
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
@@ -59,6 +60,7 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService {
             invokeAppPage2ControllerToUpdate();
             invokeRegulatoryToUpdate();
             invokeRegulatoryPromptsToUpdate();
+            invokeTransactionToUpdate();
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
@@ -75,7 +77,19 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService {
                 throw new RuntimeException(e);
             }
         });
+    }
 
+    private void invokeTransactionToUpdate() throws NoSuchMethodException {
+        Class<NewTransactionPageController> clazz = NewTransactionPageController.class;
+        Method setPromptTextForStaff = clazz.getDeclaredMethod("setPromptTextForRegulatory");
+        setPromptTextForStaff.setAccessible(true);
+        Platform.runLater(() -> {
+            try {
+                setPromptTextForStaff.invoke(DataUtils.transactionPageController);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     private void invokeRegulatoryPromptsToUpdate() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -134,6 +148,7 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService {
     public void updateItem(Item item) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         itemService.update(item);
         updateAllCachedItemData();
+        invokeTransactionToUpdate();
         invokeRegulatoryPromptsToUpdate();
     }
 }
