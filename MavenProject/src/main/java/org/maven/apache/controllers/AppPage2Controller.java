@@ -115,13 +115,16 @@ public class AppPage2Controller implements Initializable {
     private ImageView refreshImage;
 
     @FXML
-    private MFXDatePicker transactionDateInDetails = new MFXDatePicker(Locale.ENGLISH);
-
-    @FXML
     private TextArea purposeTextInDetails;
 
     @FXML
     private Label transactionAmountInDetails;
+
+    @FXML
+    private Label transactionStatusInDetails;
+
+    @FXML
+    private Label transactionDateInDetails;
 
     @FXML
     private ImageView extendArrow;
@@ -398,6 +401,8 @@ public class AppPage2Controller implements Initializable {
     //pass the user from login page
     private final User user = DataUtils.currentUser;
 
+    private boolean isAppPageBlockPaneOpen = false;
+
     private boolean isTriangleRotating = false;
 
     private boolean isRotating = false;
@@ -432,9 +437,6 @@ public class AppPage2Controller implements Initializable {
 
 
     private final List<JFXButton> buttonList = new ArrayList<>();
-
-    private boolean isEncapsulatedTransactionStatusTaken;
-
 
     private final Timeline timeline = new Timeline();
 
@@ -1675,7 +1677,9 @@ public class AppPage2Controller implements Initializable {
         translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
         translateTransition.setOnFinished(event -> {
             transactionDialog.setVisible(false);
+            isAppPageBlockPaneOpen = false;
             appPageBlockPane.setVisible(false);
+            exitCargoBoxAnimation(cargoBoxNumber);
         });
         fadeTransition.play();
         translateTransition.play();
@@ -2335,26 +2339,34 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onExitCargoBox1() {
-        cargoBoxNumber = CargoBoxNumber.ONE;
-        exitCargoBoxAnimation(cargoBoxNumber);
+        if (!isAppPageBlockPaneOpen) {
+            cargoBoxNumber = CargoBoxNumber.ONE;
+            exitCargoBoxAnimation(cargoBoxNumber);
+        }
     }
 
     @FXML
     private void onExitCargoBox2() {
-        cargoBoxNumber = CargoBoxNumber.TWO;
-        exitCargoBoxAnimation(cargoBoxNumber);
+        if (!isAppPageBlockPaneOpen) {
+            cargoBoxNumber = CargoBoxNumber.TWO;
+            exitCargoBoxAnimation(cargoBoxNumber);
+        }
     }
 
     @FXML
     private void onExitCargoBox3() {
-        cargoBoxNumber = CargoBoxNumber.THREE;
-        exitCargoBoxAnimation(cargoBoxNumber);
+        if (!isAppPageBlockPaneOpen) {
+            cargoBoxNumber = CargoBoxNumber.THREE;
+            exitCargoBoxAnimation(cargoBoxNumber);
+        }
     }
 
     @FXML
     private void onExitCargoBox4() {
-        cargoBoxNumber = CargoBoxNumber.FOUR;
-        exitCargoBoxAnimation(cargoBoxNumber);
+        if (!isAppPageBlockPaneOpen) {
+            cargoBoxNumber = CargoBoxNumber.FOUR;
+            exitCargoBoxAnimation(cargoBoxNumber);
+        }
     }
 
     @FXML
@@ -2495,12 +2507,12 @@ public class AppPage2Controller implements Initializable {
 //    LocalDate currentDate = transactionDateInDetails.getCurrentDate();
 //    String format = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-    private void setTransactionDate(MFXDatePicker transactionDateInDetails, Transaction transaction) {
-        String recordTime = transaction.getTransactionTime();
-        String[] split = recordTime.trim().replaceAll("-", "/").replaceAll("年", "/").replaceAll("月", "/").split("/");
-        transactionDateInDetails.setValue(LocalDate.of(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2])));
-        transactionDateInDetails.setStartingYearMonth(YearMonth.of(Integer.parseInt(split[0]), Integer.parseInt(split[1])));
-    }
+//    private void setTransactionDate(MFXDatePicker transactionDateInDetails, Transaction transaction) {
+//        String recordTime = transaction.getTransactionTime();
+//        String[] split = recordTime.trim().replaceAll("-", "/").replaceAll("年", "/").replaceAll("月", "/").split("/");
+//        transactionDateInDetails.setValue(LocalDate.of(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2])));
+//        transactionDateInDetails.setStartingYearMonth(YearMonth.of(Integer.parseInt(split[0]), Integer.parseInt(split[1])));
+//    }
 
     @SuppressWarnings("all")
     private void setTransactionId(Label label, Transaction transaction) {
@@ -2534,17 +2546,10 @@ public class AppPage2Controller implements Initializable {
         transactionNameInDetails.setText(transaction.getItemName());
         staffNameInDetails.setText(transaction.getStaffName());
         purposeTextInDetails.setText(transaction.getPurpose());
-        if (isTransactionStatusTaken(transaction)) {
-            isEncapsulatedTransactionStatusTaken = true;
-            transactionDialogTakenActionPane.setVisible(true);
-            transactionDialogRestockActionPane.setVisible(false);
-        } else {
-            isEncapsulatedTransactionStatusTaken = false;
-            transactionDialogTakenActionPane.setVisible(false);
-            transactionDialogRestockActionPane.setVisible(true);
-        }
+        transactionStatusInDetails.setText(transaction.getStatus());
         transactionAmountInDetails.setText(String.valueOf(transaction.getUnit()));
-        setTransactionDate(transactionDateInDetails, transaction);
+        transactionDateInDetails.setText(transaction.getTransactionTime());
+        isAppPageBlockPaneOpen = true;
         appPageBlockPane.setVisible(true);
         transactionDialog.setVisible(true);
         transactionDialog.setOpacity(0);
@@ -2579,24 +2584,6 @@ public class AppPage2Controller implements Initializable {
     private void onClickTransactionFour() {
         transaction = dateTransactionListInAppPage[3];
         setTransactionDialog(dateTransactionListInAppPage[3]);
-    }
-
-    @FXML
-    private void onClickDialogTakenButton() {
-        if (!isEncapsulatedTransactionStatusTaken) {
-            transactionDialogRestockActionPane.setVisible(false);
-            transactionDialogTakenActionPane.setVisible(true);
-            isEncapsulatedTransactionStatusTaken = true;
-        }
-    }
-
-    @FXML
-    private void onClickDialogRestockButton() {
-        if (isEncapsulatedTransactionStatusTaken) {
-            transactionDialogRestockActionPane.setVisible(true);
-            transactionDialogTakenActionPane.setVisible(false);
-            isEncapsulatedTransactionStatusTaken = false;
-        }
     }
 
     /**
@@ -2638,15 +2625,15 @@ public class AppPage2Controller implements Initializable {
                     cargoDialogApplyButton.setVisible(true);
                     loadSpinnerInAdd.setVisible(false);
                     warnMessageInAdd.setVisible(false);
-                    FadeTransition fadeTransition = TransitionUtils.getFadeTransition(transactionDialog, 300, 1, 0);
-                    TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(transactionDialog, 300, 0, -200);
-                    translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
-                    translateTransition.setOnFinished(event -> {
-                        transactionDialog.setVisible(false);
-                        appPageBlockPane.setVisible(false);
-                    });
-                    fadeTransition.play();
-                    translateTransition.play();
+//                    FadeTransition fadeTransition = TransitionUtils.getFadeTransition(transactionDialog, 300, 1, 0);
+//                    TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(transactionDialog, 300, 0, -200);
+//                    translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+//                    translateTransition.setOnFinished(event -> {
+//                        transactionDialog.setVisible(false);
+//                        appPageBlockPane.setVisible(false);
+//                    });
+//                    fadeTransition.play();
+//                    translateTransition.play();
                 });
             }
         });
@@ -2654,9 +2641,9 @@ public class AppPage2Controller implements Initializable {
 
     private void generateEncapsulatedTransaction() throws EmptyValueException {
         encapsulatedTransaction.setUnit(Integer.parseInt(transactionAmountInDetails.getText()));
-        LocalDate currentDate = transactionDateInDetails.getValue();
-        String format = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        encapsulatedTransaction.setTransactionTime(format);
+//        LocalDate currentDate = transactionDateInDetails.getValue();
+//        String format = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        encapsulatedTransaction.setTransactionTime(transactionDateInDetails.getText());
         encapsulatedTransaction.setPurpose(purposeTextInDetails.getText());
         if ((staffNameInDetails.getText().isBlank()) || (transactionNameInDetails.getText().isBlank())) {
             throw new EmptyValueException("Input Value for item/staff name is empty or blank");
@@ -2664,11 +2651,7 @@ public class AppPage2Controller implements Initializable {
             encapsulatedTransaction.setStaffName(staffNameInDetails.getText().trim());
             encapsulatedTransaction.setItemName(transactionNameInDetails.getText().trim());
         }
-        if (isEncapsulatedTransactionStatusTaken) {
-            encapsulatedTransaction.setStatus("TAKEN");
-        } else {
-            encapsulatedTransaction.setStatus("RESTOCK");
-        }
+        encapsulatedTransaction.setStatus(transactionStatusInDetails.getText());
     }
 
     @FXML
