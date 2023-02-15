@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Service("staffSearchServiceHandlerAdapter")
 public class StaffSearchServiceHandlerAdapter<R> implements AbstractSearchServiceAdapter<Staff, R> {
 

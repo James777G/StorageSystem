@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("regulatoryService")
-public class RegulatoryDAOServiceHandler implements RegulatoryService{
+public class RegulatoryDAOServiceHandler implements RegulatoryService {
 
     @Resource
     private RegulatoryMapper regulatoryMapper;

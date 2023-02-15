@@ -5,7 +5,7 @@ import org.maven.apache.verificationCode.VerificationCode;
 
 import java.util.List;
 
-public class VerificationCodeServiceProvider implements VerificationCodeService{
+public class VerificationCodeServiceProvider implements VerificationCodeService {
 
     private VerificationCodeMapper verificationCodeMapper;
 

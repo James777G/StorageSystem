@@ -21,7 +21,7 @@ import java.util.List;
 
 @Service("excelConverterService")
 @Data
-public class ExcelConverterServiceProvider implements ExcelConverterService{
+public class ExcelConverterServiceProvider implements ExcelConverterService {
 
     @Resource
     private ItemService itemService;
@@ -42,7 +42,7 @@ public class ExcelConverterServiceProvider implements ExcelConverterService{
 
     }
 
-    private void convertItemToExcel(HSSFWorkbook hssfWorkbook){
+    private void convertItemToExcel(HSSFWorkbook hssfWorkbook) {
         HSSFSheet sheet = hssfWorkbook.createSheet("Item Sheet");
         HSSFCellStyle cellStyle = hssfWorkbook.createCellStyle();
         cellStyle.setAlignment(HorizontalAlignment.CENTER);
@@ -58,7 +58,7 @@ public class ExcelConverterServiceProvider implements ExcelConverterService{
         row.createCell(3).setCellValue("Item Description");
 
         List<Item> itemList = itemService.selectAll();
-        for(Item item : itemList){
+        for (Item item : itemList) {
             HSSFRow newRow = sheet.createRow(sheet.getLastRowNum() + 1);
             newRow.setRowStyle(cellStyle);
             newRow.createCell(0).setCellValue(item.getItemID());
@@ -68,7 +68,7 @@ public class ExcelConverterServiceProvider implements ExcelConverterService{
         }
     }
 
-    private void convertStaffToExcel(HSSFWorkbook hssfWorkbook){
+    private void convertStaffToExcel(HSSFWorkbook hssfWorkbook) {
         HSSFSheet sheet = hssfWorkbook.createSheet("Staff Sheet");
         HSSFCellStyle cellStyle = hssfWorkbook.createCellStyle();
         cellStyle.setAlignment(HorizontalAlignment.CENTER);
@@ -84,7 +84,7 @@ public class ExcelConverterServiceProvider implements ExcelConverterService{
         row.createCell(3).setCellValue("Staff Info");
 
         List<Staff> staffList = staffDAOService.selectAll();
-        for(Staff staff : staffList){
+        for (Staff staff : staffList) {
             HSSFRow newRow = sheet.createRow(sheet.getLastRowNum() + 1);
             newRow.setRowStyle(cellStyle);
             newRow.createCell(0).setCellValue(staff.getStaffID());
@@ -94,7 +94,7 @@ public class ExcelConverterServiceProvider implements ExcelConverterService{
         }
     }
 
-    private void convertTransactionToExcel(HSSFWorkbook hssfWorkbook){
+    private void convertTransactionToExcel(HSSFWorkbook hssfWorkbook) {
         HSSFSheet sheet = hssfWorkbook.createSheet("Transaction Sheet");
         HSSFCellStyle cellStyle = hssfWorkbook.createCellStyle();
         cellStyle.setAlignment(HorizontalAlignment.CENTER);
@@ -114,7 +114,7 @@ public class ExcelConverterServiceProvider implements ExcelConverterService{
         row.createCell(3).setCellValue("Transaction Info");
 
         List<Transaction> transactionList = transactionMapper.selectAll();
-        for(Transaction transaction : transactionList){
+        for (Transaction transaction : transactionList) {
             HSSFRow newRow = sheet.createRow(sheet.getLastRowNum() + 1);
             newRow.setRowStyle(cellStyle);
             newRow.createCell(0).setCellValue(transaction.getID());

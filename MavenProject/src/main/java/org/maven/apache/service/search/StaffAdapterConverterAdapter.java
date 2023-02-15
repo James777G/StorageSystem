@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public final class StaffAdapterConverterAdapter implements SearchAdapterService<Staff>{
+public final class StaffAdapterConverterAdapter implements SearchAdapterService<Staff> {
 
     private static StaffCachedUtils.listType DEFAULT_SOURCE_TYPE = StaffCachedUtils.listType.ALL;
 
-    public void customizeListType(StaffCachedUtils.listType listType){
+    public void customizeListType(StaffCachedUtils.listType listType) {
         DEFAULT_SOURCE_TYPE = listType;
     }
 

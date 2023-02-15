@@ -26,7 +26,7 @@ public final class RegulatoryMailingStrategy extends AbstractRegulatoryStrategy 
     @Override
     public boolean doStrategy(Regulatory regulatory, ItemMapper itemMapper, RegulatoryMapper regulatoryMapper) throws DataNotFoundException {
         Item item = itemMapper.selectByItemName(regulatory.getItemName());
-        if(item.getUnit() < regulatory.getItemAmount()){
+        if (item.getUnit() < regulatory.getItemAmount()) {
             sendEmail(item, regulatory.getItemAmount());
         }
         return true;
@@ -34,7 +34,7 @@ public final class RegulatoryMailingStrategy extends AbstractRegulatoryStrategy 
 
     private void sendEmail(Item item, int itemAmount) {
         List<Email> emails = emailMapper.selectAll();
-        if(emails.isEmpty()){
+        if (emails.isEmpty()) {
             return;
         }
         emails.forEach(email -> {

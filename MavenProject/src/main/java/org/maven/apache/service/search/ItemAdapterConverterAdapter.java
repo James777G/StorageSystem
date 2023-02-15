@@ -13,7 +13,7 @@ public final class ItemAdapterConverterAdapter implements SearchAdapterService<I
 
     private static CargoCachedUtils.listType DEFAULT_SOURCE_TYPE = CargoCachedUtils.listType.ALL;
 
-    private void customizeListType(CargoCachedUtils.listType listType){
+    private void customizeListType(CargoCachedUtils.listType listType) {
         DEFAULT_SOURCE_TYPE = listType;
     }
 

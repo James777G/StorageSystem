@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.lang.reflect.InvocationTargetException;
 
 @Service("staffStrategies")
-public class GeneralStaffStrategiesProvider implements GeneralStaffStrategies{
+public class GeneralStaffStrategiesProvider implements GeneralStaffStrategies {
 
     @Resource
     private AbstractStaffStrategy appPageSynchronizingStaffStrategy;

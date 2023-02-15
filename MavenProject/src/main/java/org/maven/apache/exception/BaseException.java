@@ -1,6 +1,6 @@
 package org.maven.apache.exception;
 
-public class BaseException extends Exception{
+public class BaseException extends Exception {
 
     public BaseException() {
         super();

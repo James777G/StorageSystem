@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("messageManipulationService")
-public class MessageManipulationServiceHandler implements MessageManipulationService{
+public class MessageManipulationServiceHandler implements MessageManipulationService {
 
     /**
      * This method separated all the data into list of list with each list containing a maximum

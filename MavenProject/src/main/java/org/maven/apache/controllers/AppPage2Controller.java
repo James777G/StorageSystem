@@ -26,7 +26,6 @@ import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.maven.apache.App;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.email.Email;
 import org.maven.apache.exception.EmptyValueException;
@@ -35,7 +34,6 @@ import org.maven.apache.exception.UnsupportedPojoException;
 import org.maven.apache.exception.Warning;
 import org.maven.apache.item.Item;
 import org.maven.apache.regulatory.Regulatory;
-import org.maven.apache.service.DateTransaction.DateTransactionService;
 import org.maven.apache.service.email.EmailService;
 import org.maven.apache.service.excel.ExcelConverterService;
 import org.maven.apache.service.mail.MailNotifyService;
@@ -52,10 +50,10 @@ import org.maven.apache.utils.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.function.Consumer;
 
@@ -660,9 +658,9 @@ public class AppPage2Controller implements Initializable {
         searchField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (NewTransactionPageController.isSearchingStaff && !NewTransactionPageController.isSearchingItem){
+                if (NewTransactionPageController.isSearchingStaff && !NewTransactionPageController.isSearchingItem) {
                     searchBarService.setSearchPrompts(buttonList, searchField.getText(), PromptSearchBarServiceHandler.ResultType.STAFF);
-                }else if (!NewTransactionPageController.isSearchingStaff && NewTransactionPageController.isSearchingItem){
+                } else if (!NewTransactionPageController.isSearchingStaff && NewTransactionPageController.isSearchingItem) {
                     searchBarService.setSearchPrompts(buttonList, searchField.getText(), PromptSearchBarServiceHandler.ResultType.CARGO);
                 }
             }
@@ -1631,8 +1629,8 @@ public class AppPage2Controller implements Initializable {
         genericDialog.setOpacity(0);
         genericDialog.setPickOnBounds(true);
         genericDialog.setVisible(true);
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(genericDialog,300,0,1);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(genericDialog,300,-150,0);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(genericDialog, 300, 0, 1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(genericDialog, 300, -150, 0);
         translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
         translateTransition.play();
         fadeTransition.play();
@@ -1640,9 +1638,9 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onClickSearchBar() {
-        if (NewTransactionPageController.isSearchingStaff && !NewTransactionPageController.isSearchingItem){
+        if (NewTransactionPageController.isSearchingStaff && !NewTransactionPageController.isSearchingItem) {
             searchBarService.setSearchPrompts(buttonList, searchField.getText(), PromptSearchBarServiceHandler.ResultType.STAFF);
-        }else if (!NewTransactionPageController.isSearchingStaff && NewTransactionPageController.isSearchingItem){
+        } else if (!NewTransactionPageController.isSearchingStaff && NewTransactionPageController.isSearchingItem) {
             searchBarService.setSearchPrompts(buttonList, searchField.getText(), PromptSearchBarServiceHandler.ResultType.CARGO);
         }
         searchTable.setVisible(true);
@@ -1914,8 +1912,8 @@ public class AppPage2Controller implements Initializable {
      */
     @FXML
     private void onCloseSettings() {
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(settingsDialog,300,1,0);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(settingsDialog,300,0,-150);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(settingsDialog, 300, 1, 0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(settingsDialog, 300, 0, -150);
         translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
         translateTransition.setOnFinished(event -> {
             settingsDialog.setVisible(false);
@@ -2346,8 +2344,8 @@ public class AppPage2Controller implements Initializable {
      *
      * @param isStaff searching staff if true
      */
-    public void setSearchProperty(boolean isStaff){
-        if (isStaff){
+    public void setSearchProperty(boolean isStaff) {
+        if (isStaff) {
             searchSwitchingBlockPane.toFront();
             cargoSearchPane.setVisible(true);
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, 0, -15);
@@ -2364,7 +2362,7 @@ public class AppPage2Controller implements Initializable {
             scaleTransition1.play();
             NewTransactionPageController.isSearchingItem = false;
             NewTransactionPageController.isSearchingStaff = true;
-        }else{
+        } else {
             searchSwitchingBlockPane.toFront();
             staffSearchPane.setVisible(true);
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, -15, 0);

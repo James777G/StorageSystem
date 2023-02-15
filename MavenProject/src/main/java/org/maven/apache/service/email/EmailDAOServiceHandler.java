@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Service("emailService")
-public class EmailDAOServiceHandler implements EmailService{
+public class EmailDAOServiceHandler implements EmailService {
 
     @Resource
     private EmailMapper emailMapper;

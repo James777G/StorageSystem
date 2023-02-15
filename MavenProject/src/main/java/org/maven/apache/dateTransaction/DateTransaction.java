@@ -4,118 +4,117 @@ import lombok.Data;
 
 @Data
 public class DateTransaction {
-	private Integer ItemID;
-	private String ItemName;
-	private Integer AddUnit;
-	private Integer RemoveUnit;
-	private Integer CurrentUnit;
-	private String RecordTime;
-	private String StaffName;
-	private String Purpose;
+    private Integer ItemID;
+    private String ItemName;
+    private Integer AddUnit;
+    private Integer RemoveUnit;
+    private Integer CurrentUnit;
+    private String RecordTime;
+    private String StaffName;
+    private String Purpose;
 
 
-	@Override
-	public String toString() {
-		return "DateTransaction{" +
-				"ItemID=" + ItemID +
-				", ItemName='" + ItemName + '\'' +
-				", AddUnit=" + AddUnit +
-				", RemoveUnit=" + RemoveUnit +
-				", CurrentUnit=" + CurrentUnit +
-				", RecordTime='" + RecordTime + '\'' +
-				", StaffName='" + StaffName + '\'' +
-				", Purpose='" + Purpose + '\'' +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "DateTransaction{" +
+                "ItemID=" + ItemID +
+                ", ItemName='" + ItemName + '\'' +
+                ", AddUnit=" + AddUnit +
+                ", RemoveUnit=" + RemoveUnit +
+                ", CurrentUnit=" + CurrentUnit +
+                ", RecordTime='" + RecordTime + '\'' +
+                ", StaffName='" + StaffName + '\'' +
+                ", Purpose='" + Purpose + '\'' +
+                '}';
+    }
 
-	public String getPurpose() {
-		return Purpose;
-	}
+    public String getPurpose() {
+        return Purpose;
+    }
 
-	public void setPurpose(String purpose) {
-		Purpose = purpose;
-	}
-
-
-	public String getStaffName() {
-		return StaffName;
-	}
-
-	public void setStaffName(String staffName) {
-		StaffName = staffName;
-	}
+    public void setPurpose(String purpose) {
+        Purpose = purpose;
+    }
 
 
+    public String getStaffName() {
+        return StaffName;
+    }
 
-	public Integer getCurrentUnit() {
+    public void setStaffName(String staffName) {
+        StaffName = staffName;
+    }
 
-		if (CurrentUnit == null) {
-			CurrentUnit = 0;
-		}
 
-		return CurrentUnit;
-	}
+    public Integer getCurrentUnit() {
 
-	/**
-	 * input should be the calculation of original currentUnit + addUnit-removeUnit
-	 * 
-	 * @param currentUnit
-	 */
-	public void setCurrentUnit(Integer currentUnit) {
-		if (currentUnit < 0) {
-			System.out.println("Wrong current unit less than 0 in datetransaction.Datetransaction file");
-		}
-		CurrentUnit = currentUnit;
-	}
+        if (CurrentUnit == null) {
+            CurrentUnit = 0;
+        }
 
-	public Integer getItemID() {
-		return ItemID;
-	}
+        return CurrentUnit;
+    }
 
-	public void setItemID(Integer itemID) {
-		ItemID = itemID;
-	}
+    /**
+     * input should be the calculation of original currentUnit + addUnit-removeUnit
+     *
+     * @param currentUnit
+     */
+    public void setCurrentUnit(Integer currentUnit) {
+        if (currentUnit < 0) {
+            System.out.println("Wrong current unit less than 0 in datetransaction.Datetransaction file");
+        }
+        CurrentUnit = currentUnit;
+    }
 
-	public String getItemName() {
-		return ItemName;
-	}
+    public Integer getItemID() {
+        return ItemID;
+    }
 
-	public void setItemName(String itemName) {
-		ItemName = itemName;
-	}
+    public void setItemID(Integer itemID) {
+        ItemID = itemID;
+    }
 
-	public Integer getAddUnit() {
-		return AddUnit;
-	}
+    public String getItemName() {
+        return ItemName;
+    }
 
-	public void setAddUnit(Integer addUnit) {
-		AddUnit = addUnit;
-	}
+    public void setItemName(String itemName) {
+        ItemName = itemName;
+    }
 
-	public Integer getRemoveUnit() {
-		return RemoveUnit;
-	}
+    public Integer getAddUnit() {
+        return AddUnit;
+    }
 
-	public void setRemoveUnit(Integer removeUnit) {
-		RemoveUnit = removeUnit;
-	}
+    public void setAddUnit(Integer addUnit) {
+        AddUnit = addUnit;
+    }
 
-	public String getRecordTime() {
-		return RecordTime;
-	}
+    public Integer getRemoveUnit() {
+        return RemoveUnit;
+    }
 
-	public void setRecordTime(String recordTime) {
-		RecordTime = recordTime;
-	}
+    public void setRemoveUnit(Integer removeUnit) {
+        RemoveUnit = removeUnit;
+    }
 
-	public int calculateCurrentUnit() {
-		if (CurrentUnit == null) {
-			CurrentUnit = 0;
-		}
-		int calculation = CurrentUnit + AddUnit - RemoveUnit;
-		if (calculation < 0) {
-			System.out.println("Remain number should not be minus ");
-		}
-		return calculation;
-	}
+    public String getRecordTime() {
+        return RecordTime;
+    }
+
+    public void setRecordTime(String recordTime) {
+        RecordTime = recordTime;
+    }
+
+    public int calculateCurrentUnit() {
+        if (CurrentUnit == null) {
+            CurrentUnit = 0;
+        }
+        int calculation = CurrentUnit + AddUnit - RemoveUnit;
+        if (calculation < 0) {
+            System.out.println("Remain number should not be minus ");
+        }
+        return calculation;
+    }
 }

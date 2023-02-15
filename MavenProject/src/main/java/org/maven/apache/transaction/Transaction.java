@@ -21,31 +21,59 @@ public class Transaction implements Serializable {
     private String TransactionTime;
     private String Purpose;
 
-    public int getID() {return ID;}
+    public int getID() {
+        return ID;
+    }
 
-    public void setID(int ID) {this.ID = ID;}
+    public void setID(int ID) {
+        this.ID = ID;
+    }
 
-    public String getItemName() {return ItemName;}
+    public String getItemName() {
+        return ItemName;
+    }
 
-    public void setItemName(String itemName) {ItemName = itemName;}
+    public void setItemName(String itemName) {
+        ItemName = itemName;
+    }
 
-    public String getStaffName() {return StaffName;}
+    public String getStaffName() {
+        return StaffName;
+    }
 
-    public void setStaffName(String staffName) {StaffName = staffName;}
+    public void setStaffName(String staffName) {
+        StaffName = staffName;
+    }
 
-    public String getStatus() {return Status;}
+    public String getStatus() {
+        return Status;
+    }
 
-    public void setStatus(String status) {Status = status;}
+    public void setStatus(String status) {
+        Status = status;
+    }
 
-    public int getUnit() {return Unit;}
+    public int getUnit() {
+        return Unit;
+    }
 
-    public void setUnit(int unit) {Unit = unit;}
+    public void setUnit(int unit) {
+        Unit = unit;
+    }
 
-    public String getTransactionTime() {return TransactionTime;}
+    public String getTransactionTime() {
+        return TransactionTime;
+    }
 
-    public void setTransactionTime(String transactionTime) {TransactionTime = transactionTime;}
+    public void setTransactionTime(String transactionTime) {
+        TransactionTime = transactionTime;
+    }
 
-    public String getPurpose() {return Purpose;}
+    public String getPurpose() {
+        return Purpose;
+    }
 
-    public void setPurpose(String purpose) {Purpose = purpose;}
+    public void setPurpose(String purpose) {
+        Purpose = purpose;
+    }
 }

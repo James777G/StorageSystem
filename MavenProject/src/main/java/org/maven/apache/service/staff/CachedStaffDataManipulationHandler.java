@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("staffDataManipulationService")
-public class CachedStaffDataManipulationHandler implements StaffDataManipulationService{
+public class CachedStaffDataManipulationHandler implements StaffDataManipulationService {
 
     @Override
     @Deprecated
     @SuppressWarnings("all")
     public List<Staff> sortByActiveStatus(List<Staff> staffList) {
-        if(staffList.isEmpty()){
+        if (staffList.isEmpty()) {
             return null;
         }
         return staffList.stream()
@@ -24,7 +24,7 @@ public class CachedStaffDataManipulationHandler implements StaffDataManipulation
     @Deprecated
     @SuppressWarnings("all")
     public List<Staff> sortByInactiveStatus(List<Staff> staffList) {
-        if(staffList.isEmpty()){
+        if (staffList.isEmpty()) {
             return null;
         }
         return staffList.stream()

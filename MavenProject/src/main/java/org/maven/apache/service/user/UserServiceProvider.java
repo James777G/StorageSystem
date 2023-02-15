@@ -1,4 +1,3 @@
-
 package org.maven.apache.service.user;
 
 import lombok.AllArgsConstructor;
@@ -17,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @Component
 @Transactional
-public class UserServiceProvider implements UserService{
+public class UserServiceProvider implements UserService {
 
     private UserMapper userMapper;
 

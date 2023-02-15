@@ -428,11 +428,11 @@ public class NewTransactionPageController implements Initializable {
      * update the content of which page is going to be indicated
      */
     private void updatePagination(Number currentPage) {
-        if (sortedList.size() == 0){
-            for (int k = 0; k < 7; k++){
+        if (sortedList.size() == 0) {
+            for (int k = 0; k < 7; k++) {
                 transactionPaneArray[k].setVisible(false);
             }
-        }else{
+        } else {
             currentPageList = sortedList.get(currentPage.intValue());
             // set non-empty labels
             for (int i = 0; i < currentPageList.size(); i++) {
@@ -633,13 +633,13 @@ public class NewTransactionPageController implements Initializable {
     private void refreshPage() throws UnsupportedPojoException {
         setSortCondition();
         if (!searchField.getText().isBlank()) {
-            try{
+            try {
                 if (isSearchingItem && !isSearchingStaff) {
                     sortedList = searchResultService.getPagedResultList(sortedList, searchField.getText(), SearchResultServiceHandler.ResultType.CARGO);
                 } else if (!isSearchingItem && isSearchingStaff) {
                     sortedList = searchResultService.getPagedResultList(sortedList, searchField.getText(), SearchResultServiceHandler.ResultType.STAFF);
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
                 sortedList.clear();
                 System.out.println("ERROR");
             }
@@ -1559,8 +1559,8 @@ public class NewTransactionPageController implements Initializable {
      *
      * @param isStaff searching staff if true
      */
-    public void setSearchProperty(boolean isStaff){
-        if (isStaff){
+    public void setSearchProperty(boolean isStaff) {
+        if (isStaff) {
             searchSwitchingBlockPane.toFront();
             cargoSearchPane.setVisible(true);
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, 0, -15);
@@ -1577,7 +1577,7 @@ public class NewTransactionPageController implements Initializable {
             scaleTransition1.play();
             isSearchingItem = true;
             isSearchingStaff = false;
-        }else{
+        } else {
             searchSwitchingBlockPane.toFront();
             staffSearchPane.setVisible(true);
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, -15, 0);
@@ -1602,7 +1602,7 @@ public class NewTransactionPageController implements Initializable {
      *
      * @param keyword searched keyword
      */
-    public void setKeyword(String keyword){
+    public void setKeyword(String keyword) {
         searchField.setText(keyword);
     }
 

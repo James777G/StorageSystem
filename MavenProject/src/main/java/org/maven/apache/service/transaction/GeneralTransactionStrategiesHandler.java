@@ -9,7 +9,7 @@ import org.maven.apache.transaction.Transaction;
 import org.springframework.stereotype.Service;
 
 @Service("strategiesHandler")
-public class GeneralTransactionStrategiesHandler implements GeneralTransactionStrategiesService{
+public class GeneralTransactionStrategiesHandler implements GeneralTransactionStrategiesService {
 
     @Resource
     private AbstractTransactionStrategy warehouseStrategy;

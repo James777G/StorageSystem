@@ -1,13 +1,13 @@
 package org.maven.apache.service.email;
 
 import org.maven.apache.email.Email;
-import org.maven.apache.item.Item;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Service("emailDataManipulator")
-public class EmailCachedDataManipulator implements EmailCachedDataManipulationService{
+public class EmailCachedDataManipulator implements EmailCachedDataManipulationService {
 
 
     @Override
