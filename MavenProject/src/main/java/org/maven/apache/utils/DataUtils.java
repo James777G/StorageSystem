@@ -22,8 +22,6 @@ public class DataUtils {
 
     public static WarehouseController warehouseController;
 
-    public static Pagination cargoPagination;
-
     public static AppPage2Controller.ButtonSelected buttonSelected;
 
     public static AppPage2Controller appPage2Controller;
@@ -32,13 +30,15 @@ public class DataUtils {
 
     public static Pagination transactionPagination;
 
-    public static User currentUser;
+    public static Pagination cargoPagination;
 
     public static Pagination pagination;
 
     public static AnchorPane publicSettingBlockPane;
 
     public static AnchorPane publicTransactionBlockPane;
+
+    public static User currentUser;
 
     public static MFXGenericDialog publicSettingsDialog;
 

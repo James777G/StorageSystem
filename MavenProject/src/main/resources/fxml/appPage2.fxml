@@ -752,7 +752,7 @@
                   </AnchorPane>
                </left>
             </MFXGenericDialog>
-            <VBox fx:id="searchTable" layoutX="300.0" layoutY="219.0" opacity="0.0" prefHeight="200.0" prefWidth="551.0" styleClass="resultPane" stylesheets="@../css/appPage2.css" visible="false" AnchorPane.topAnchor="159.0">
+            <VBox fx:id="searchTable" layoutX="300.0" layoutY="219.0" prefHeight="200.0" prefWidth="551.0" styleClass="resultPane" stylesheets="@../css/appPage2.css" visible="false" AnchorPane.topAnchor="159.0">
                <children>
                   <JFXButton fx:id="buttonOne" maxWidth="1.7976931348623157E308" onAction="#onClickSearchButtonOne" prefHeight="41.0" prefWidth="551.0" styleClass="topResultButton" stylesheets="@../css/appPage2.css" textAlignment="JUSTIFY">
                      <font>
@@ -807,7 +807,7 @@
             </ImageView>
             <Separator layoutX="728.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="50.0" prefWidth="15.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="750.0" AnchorPane.topAnchor="10.0" />
             <JFXButton fx:id="appPageButton" layoutX="25.0" layoutY="15.0" onAction="#onClickAppPageButton" onMouseEntered="#onEnterHome" onMouseExited="#onExitHome" prefHeight="30.0" prefWidth="30.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" textFill="#ffffff00" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="15.0" />
-            <AnchorPane layoutX="1030.0" onMouseClicked="#onClickExtend" onMouseEntered="#onEnterExtend" onMouseExited="#onExitExtend" prefHeight="60.0" prefWidth="170.0" AnchorPane.leftAnchor="1030.0">
+            <AnchorPane layoutX="1030.0" onMouseEntered="#onEnterExtend" onMouseExited="#onExitExtend" prefHeight="60.0" prefWidth="170.0" AnchorPane.leftAnchor="1030.0">
                <children>
                   <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="985.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <image>
@@ -925,7 +925,7 @@
       </AnchorPane>
       <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: grey;" visible="false" AnchorPane.bottomAnchor="0.0" />
 
-      <MFXGenericDialog fx:id="settingsDialog" headerText="Update your account Info" onClose="#onCloseSettings" opacity="0.0" prefWidth="700.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="175.0">
+      <MFXGenericDialog fx:id="settingsDialog" headerText="Update your account Info" onClose="#onCloseSettings" prefWidth="700.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="175.0">
          <center>
             <AnchorPane prefHeight="233.0" prefWidth="709.0" BorderPane.alignment="CENTER">
                <children>

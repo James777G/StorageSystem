@@ -414,8 +414,6 @@ public class NewTransactionPageController implements Initializable {
         binImages[4] = binImage5;
         binImages[5] = binImage6;
         binImages[6] = binImage7;
-
-
     }
 
     private void resetArrows() {
@@ -1592,10 +1590,19 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
+     * set a keyword into the input field
+     *
+     * @param keyword searched keyword
+     */
+    public void setKeyword(String keyword){
+        searchField.setText(keyword);
+    }
+
+    /**
      * search and return a list corresponds to the input item or staff keyword
      */
     @FXML
-    private void onClickSearch() throws UnsupportedPojoException {
+    public void onClickSearch() throws UnsupportedPojoException {
         refreshPage();
     }
 
