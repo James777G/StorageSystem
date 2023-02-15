@@ -27,9 +27,10 @@
           <if test=" Information!= null and Information !=''">
              Information = #{Information},
           </if>
-          <if test="MessageTime != null and MessageTime != ''">
-             MessageTime = #{MessageTime}
-          </if>
+
+             MessageTime = #{MessageTime},
+
+           Star=#{Star}
 
        </set>
     where MessageID =#{MessageID};

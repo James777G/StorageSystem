@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -89,7 +91,7 @@
                   <Font name="Candara" size="13.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="908.0" layoutY="37.0" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ec0000; -fx-border-width: 0.5; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="34.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
+            <AnchorPane fx:id="deleteOne" layoutX="908.0" layoutY="37.0" onMouseClicked="#onClickDeleteOne" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ec0000; -fx-border-width: 0.5; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="34.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
                <children>
                   <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                      <image>
@@ -98,10 +100,13 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="871.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.topAnchor="35.0">
+            <ImageView fx:id="star1" fitHeight="30.0" fitWidth="30.0" layoutX="876.0" layoutY="38.0" onMouseClicked="#OnStar1" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="871.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="35.0">
                <image>
                   <Image url="@../image/icons8-star-filled-96.png" />
                </image>
+               <effect>
+                  <ColorAdjust />
+               </effect>
             </ImageView>
          </children>
       </AnchorPane>
@@ -138,7 +143,7 @@
                   <Font name="Candara" size="13.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="908.0" layoutY="37.0" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="34.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
+            <AnchorPane fx:id="deleteTwo" layoutX="908.0" layoutY="37.0" onMouseClicked="#onClickDeleteTwo" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="34.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
                <children>
                   <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                      <image>
@@ -147,7 +152,59 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="871.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.topAnchor="35.0">
+            <ImageView fx:id="star2" fitHeight="30.0" fitWidth="30.0" layoutX="871.0" layoutY="39.0" onMouseClicked="#OnStar2" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="871.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="35.0">
+               <image>
+                  <Image url="@../image/icons8-star-filled-96.png" />
+               </image>
+               <effect>
+                  <ColorAdjust />
+               </effect>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="notePadPane4" layoutX="137.0" layoutY="380.0" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="395.0">
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
+               <image>
+                  <Image url="@../image/icons8-account-96%20(2).png" />
+               </image>
+            </ImageView>
+            <Label fx:id="staffName4" layoutX="102.0" layoutY="24.0" prefHeight="18.0" text="Staff Name" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font name="Candara Bold" size="15.0" />
+               </font>
+            </Label>
+            <Separator layoutX="82.0" layoutY="49.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
+            <Label fx:id="category4" layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Category" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Candara Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="time4" layoutX="175.0" layoutY="55.0" prefHeight="18.0" text="Days ago" textFill="#223c40" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Candara" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="390.0" layoutY="21.0" prefHeight="18.0" text="Message:" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font name="Candara" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="message4" layoutX="390.0" layoutY="46.0" prefHeight="18.0" prefWidth="486.0" text="carrgo number should be 300接下来是废话，看他能打多少字，打到后面会有省略号...." textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="45.0">
+               <font>
+                  <Font name="Candara" size="13.0" />
+               </font>
+            </Label>
+            <AnchorPane fx:id="deleteFour" layoutX="908.0" layoutY="37.0" onMouseClicked="#onClickDeleteFour" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                     <image>
+                        <Image url="@../image/icons8-multiply-90%20(1).png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <ImageView fx:id="star4" fitHeight="30.0" fitWidth="30.0" layoutX="871.0" layoutY="39.0" onMouseClicked="#OnStar4" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="871.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="35.0">
                <image>
                   <Image url="@../image/icons8-star-filled-96.png" />
                </image>
@@ -187,7 +244,7 @@
                   <Font name="Candara" size="13.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="908.0" layoutY="37.0" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
+            <AnchorPane fx:id="deleteThree" layoutX="908.0" layoutY="37.0" onMouseClicked="#onClickDeleteThree" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
                <children>
                   <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                      <image>
@@ -196,56 +253,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="871.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.topAnchor="35.0">
-               <image>
-                  <Image url="@../image/icons8-star-filled-96.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="notePadPane4" layoutX="137.0" layoutY="380.0" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="395.0">
-         <children>
-            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
-               <image>
-                  <Image url="@../image/icons8-account-96%20(2).png" />
-               </image>
-            </ImageView>
-            <Label fx:id="staffName4" layoutX="102.0" layoutY="24.0" prefHeight="18.0" text="Staff Name" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="25.0">
-               <font>
-                  <Font name="Candara Bold" size="15.0" />
-               </font>
-            </Label>
-            <Separator layoutX="82.0" layoutY="49.0" prefWidth="150.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
-            <Label fx:id="category4" layoutX="100.0" layoutY="57.0" prefHeight="18.0" text="Category" textFill="#223c40" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="55.0">
-               <font>
-                  <Font name="Candara Bold" size="13.0" />
-               </font>
-            </Label>
-            <Label fx:id="time4" layoutX="175.0" layoutY="55.0" prefHeight="18.0" text="Days ago" textFill="#223c40" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="55.0">
-               <font>
-                  <Font name="Candara" size="13.0" />
-               </font>
-            </Label>
-            <Label layoutX="390.0" layoutY="21.0" prefHeight="18.0" text="Message:" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="25.0">
-               <font>
-                  <Font name="Candara" size="15.0" />
-               </font>
-            </Label>
-            <Label fx:id="message4" layoutX="390.0" layoutY="46.0" prefHeight="18.0" prefWidth="486.0" text="carrgo number should be 300接下来是废话，看他能打多少字，打到后面会有省略号...." textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="45.0">
-               <font>
-                  <Font name="Candara" size="13.0" />
-               </font>
-            </Label>
-            <AnchorPane layoutX="908.0" layoutY="37.0" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
-               <children>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-                     <image>
-                        <Image url="@../image/icons8-multiply-90%20(1).png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="871.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.topAnchor="35.0">
+            <ImageView fx:id="star3" fitHeight="30.0" fitWidth="30.0" layoutX="871.0" layoutY="39.0" onMouseClicked="#OnStar3" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="871.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="35.0">
                <image>
                   <Image url="@../image/icons8-star-filled-96.png" />
                </image>
@@ -285,7 +293,7 @@
                   <Font name="Candara" size="13.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="908.0" layoutY="37.0" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
+            <AnchorPane fx:id="deleteFive" layoutX="908.0" layoutY="37.0" onMouseClicked="#onClickDeleteFive" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
                <children>
                   <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                      <image>
@@ -294,7 +302,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="871.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.topAnchor="35.0">
+            <ImageView fx:id="star5" fitHeight="30.0" fitWidth="30.0" layoutX="871.0" layoutY="39.0" onMouseClicked="#OnStar5" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.topAnchor="35.0">
                <image>
                   <Image url="@../image/icons8-star-filled-96.png" />
                </image>
@@ -302,5 +310,32 @@
          </children>
       </AnchorPane>
       <Pagination fx:id="newPagination" layoutX="397.0" layoutY="599.0" maxPageIndicatorCount="8" onScroll="#onScrolled" pageCount="50" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" AnchorPane.leftAnchor="397.0" AnchorPane.topAnchor="593.0" />
+      <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="deleteMessagePane" layoutX="361.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f6f6f6; -fx-background-radius: 15;" visible="false">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Continue?" AnchorPane.leftAnchor="15.0">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+            </Label>
+            <Separator layoutX="7.0" layoutY="38.0" prefHeight="8.0" prefWidth="488.0" />
+            <Label layoutX="36.0" layoutY="48.0" text="You Are About To Delete A Message" textFill="#db5b5b" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="55.0">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="doContinueButton" fitHeight="33.0" fitWidth="30.0" layoutX="459.0" layoutY="49.0" onMouseClicked="#doContinue" onMouseEntered="#onEnterTick" onMouseExited="#onExitTick" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-checkmark-yes-64.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="doNotContinueButton" fitHeight="28.0" fitWidth="25.0" layoutX="461.0" layoutY="11.0" onMouseClicked="#doNotContinue" onMouseEntered="#onEnterCross" onMouseExited="#onExitCross" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-multiply-90.png" />
+               </image>
+            </ImageView>
+            <MFXProgressSpinner fx:id="loadSpinnerOnDeletePane" layoutX="461.0" layoutY="52.0" prefHeight="23.0" prefWidth="25.0" visible="false" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
