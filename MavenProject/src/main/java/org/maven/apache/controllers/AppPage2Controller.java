@@ -645,17 +645,13 @@ public class AppPage2Controller implements Initializable {
                 setCargoTable(newValue.intValue());
             }
         });
-        searchTable.setOpacity(1);
-        stackPaneForWarehouse.setOpacity(0);
         stackPaneForWarehouse.setVisible(false);
         setButtonList();
         setTransactionPane();
         setWarehousePane();
         setStaffPane();
         setMessagePane();
-        staffPane.setOpacity(0);
         staffPane.setVisible(false);
-        stackPane.setOpacity(0);
         stackPane.setVisible(false);
         emailSpinner.setVisible(false);
         cargoSpinner.setVisible(false);
@@ -664,7 +660,11 @@ public class AppPage2Controller implements Initializable {
         searchField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                searchBarService.setSearchPrompts(buttonList, newValue, PromptSearchBarServiceHandler.ResultType.CARGO);
+                if (NewTransactionPageController.isSearchingStaff && !NewTransactionPageController.isSearchingItem){
+                    searchBarService.setSearchPrompts(buttonList, searchField.getText(), PromptSearchBarServiceHandler.ResultType.STAFF);
+                }else if (!NewTransactionPageController.isSearchingStaff && NewTransactionPageController.isSearchingItem){
+                    searchBarService.setSearchPrompts(buttonList, searchField.getText(), PromptSearchBarServiceHandler.ResultType.CARGO);
+                }
             }
         });
         setDrawer();
@@ -1631,7 +1631,11 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onClickSearchBar() {
-        searchBarService.setSearchPrompts(buttonList, searchField.getText(), PromptSearchBarServiceHandler.ResultType.CARGO);
+        if (NewTransactionPageController.isSearchingStaff && !NewTransactionPageController.isSearchingItem){
+            searchBarService.setSearchPrompts(buttonList, searchField.getText(), PromptSearchBarServiceHandler.ResultType.STAFF);
+        }else if (!NewTransactionPageController.isSearchingStaff && NewTransactionPageController.isSearchingItem){
+            searchBarService.setSearchPrompts(buttonList, searchField.getText(), PromptSearchBarServiceHandler.ResultType.CARGO);
+        }
         searchTable.setVisible(true);
     }
 
