@@ -13,10 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 @Service("mailNotifyService")
-public class GeneralMailNotifyProvider implements MailNotifyService{
+public class GeneralMailNotifyProvider implements MailNotifyService {
 
     @Resource
     private ItemMapper itemMapper;
@@ -36,39 +35,39 @@ public class GeneralMailNotifyProvider implements MailNotifyService{
         List<Regulatory> regulatories = regulatoryMapper.selectAll();
         Map<Item, Regulatory> resultMap = new HashMap<>();
         regulatories.forEach(regulatory -> {
-            if(isUrgent(regulatory)){
+            if (isUrgent(regulatory)) {
                 resultMap.put(itemMapper.selectByItemName(regulatory.getItemName()), regulatory);
             }
         });
         sendNotifications(resultMap);
     }
 
-    private boolean isUrgent(Regulatory regulatory){
+    private boolean isUrgent(Regulatory regulatory) {
         String itemName = regulatory.getItemName();
         Item item = null;
-        try{
+        try {
             item = itemMapper.selectByItemName(itemName);
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
         return item.getUnit() < regulatory.getItemAmount();
     }
 
-    private String concatenateHtml(Item item, Regulatory regulatory){
-        return  "    <h2 style=\"font-size: 18px\">\n" +
-                "      Item Name: " + (item.getItemName().length() >= 10 ? "<br>" : "") + item.getItemName() +"<br>\n" +
+    private String concatenateHtml(Item item, Regulatory regulatory) {
+        return "    <h2 style=\"font-size: 18px\">\n" +
+                "      Item Name: " + (item.getItemName().length() >= 10 ? "<br>" : "") + item.getItemName() + "<br>\n" +
                 "      <hr style=\"color: #223c40\">\n" +
                 "    </h2>\n" +
                 "    <h3 style=\"font-size: 16px; padding-top: 15px\">\n" +
-                "      Current Unit: " + item.getUnit() +"<br><br>\n" +
-                "      Acceptable amount: " + regulatory.getItemAmount() +"<br><br>\n" +
+                "      Current Unit: " + item.getUnit() + "<br><br>\n" +
+                "      Acceptable amount: " + regulatory.getItemAmount() + "<br><br>\n" +
                 "    </h3>\n";
     }
 
-    private String joinConcatenatedHtml(Map<Item, Regulatory> map){
+    private String joinConcatenatedHtml(Map<Item, Regulatory> map) {
         StringBuilder result = new StringBuilder();
-        if(!map.isEmpty()){
-            for(Item item : map.keySet()){
+        if (!map.isEmpty()) {
+            for (Item item : map.keySet()) {
                 result.append(concatenateHtml(item, map.get(item)));
             }
         }
@@ -95,9 +94,9 @@ public class GeneralMailNotifyProvider implements MailNotifyService{
         return generalLeadingHtml + result + generalFollowingHtml;
     }
 
-    private void sendNotifications(Map<Item, Regulatory> map){
+    private void sendNotifications(Map<Item, Regulatory> map) {
         List<Email> emails = emailMapper.selectAll();
-        if(!emails.isEmpty()){
+        if (!emails.isEmpty()) {
             emails.forEach(email -> {
                 try {
                     mailService.sendHtmlMail("Notification", joinConcatenatedHtml(map), email.getEmailAddress());

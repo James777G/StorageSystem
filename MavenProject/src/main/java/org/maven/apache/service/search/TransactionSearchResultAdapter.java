@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.function.Function;
 
 @Service("transactionResultAdapter")
 public final class TransactionSearchResultAdapter<R> extends AbstractSearchResultAdapter<Transaction, R> {
@@ -30,6 +29,6 @@ public final class TransactionSearchResultAdapter<R> extends AbstractSearchResul
 
     @Override
     public List<R> invoke(List<R> sourceList, String inputText, SearchResultServiceHandler.ResultType resultType) {
-        return postConvert(transactionResultFilter.doFilter(doConvert(sourceList),inputText,resultType));
+        return postConvert(transactionResultFilter.doFilter(doConvert(sourceList), inputText, resultType));
     }
 }

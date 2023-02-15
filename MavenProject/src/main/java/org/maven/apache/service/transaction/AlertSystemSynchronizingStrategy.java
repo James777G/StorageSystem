@@ -31,7 +31,7 @@ public final class AlertSystemSynchronizingStrategy extends AbstractTransactionS
 
     @Override
     public void doStrategy(ItemMapper itemMapper, TransactionMapper transactionMapper, Transaction transaction) throws DataNotFoundException, NegativeDataException {
-        if("TAKEN".equals(transaction.getStatus()) && isUrgent(itemMapper, transactionMapper, transaction)){
+        if ("TAKEN".equals(transaction.getStatus()) && isUrgent(itemMapper, transactionMapper, transaction)) {
             sendEmails(itemMapper, transaction);
         }
     }
@@ -39,36 +39,36 @@ public final class AlertSystemSynchronizingStrategy extends AbstractTransactionS
     @Override
     public void doStrategy(ItemMapper itemMapper, TransactionMapper transactionMapper, int id) throws NegativeDataException {
         Transaction transaction = transactionMapper.selectById(id);
-        if("RESTOCK".equals(transaction.getStatus()) && isUrgent(itemMapper,transactionMapper,transaction)){
+        if ("RESTOCK".equals(transaction.getStatus()) && isUrgent(itemMapper, transactionMapper, transaction)) {
             sendEmails(itemMapper, transaction);
         }
     }
 
-    private boolean isUrgent(ItemMapper itemMapper, TransactionMapper transactionMapper, Transaction transaction){
+    private boolean isUrgent(ItemMapper itemMapper, TransactionMapper transactionMapper, Transaction transaction) {
         Item item = null;
         Regulatory regulatory = null;
 
-        try{
+        try {
             item = itemMapper.selectByItemName(transaction.getItemName());
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
-        if(item == null){
+        if (item == null) {
             return false;
         }
         Integer unit = item.getUnit();
 
-        try{
+        try {
             regulatory = regulatoryMapper.selectByName(transaction.getItemName());
             return unit < regulatory.getItemAmount();
-        }catch(Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
 
-    private void sendEmails(ItemMapper itemMapper, Transaction transaction){
+    private void sendEmails(ItemMapper itemMapper, Transaction transaction) {
         List<Email> emails = emailMapper.selectAll();
-        if(!emails.isEmpty()){
+        if (!emails.isEmpty()) {
             emails.forEach(email -> {
                 try {
                     mailService.sendWarningEmails(itemMapper.selectByItemName(transaction.getItemName()),

@@ -8,10 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.AnchorPane;
 import org.maven.apache.MyLauncher;
-import org.maven.apache.service.item.CachedItemService;
 import org.maven.apache.service.message.CachedMessageService;
-import org.maven.apache.service.message.CachedMessageServiceProvider;
-import org.maven.apache.utils.DataUtils;
 import org.maven.apache.utils.TranslateUtils;
 
 import java.io.IOException;
@@ -49,7 +46,7 @@ public class MessagePageController implements Initializable {
     private Pagination newPagination;
 
     @FXML
-    private  final AnchorPane editMessagePane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/editMessagePage.fxml")));
+    private final AnchorPane editMessagePane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/editMessagePage.fxml")));
 
     private final CachedMessageService cachedMessageService = MyLauncher.context.getBean("cachedMessageService", CachedMessageService.class);
 
@@ -72,21 +69,22 @@ public class MessagePageController implements Initializable {
     }
 
     @FXML
-    private void enableNode(Node node){
+    private void enableNode(Node node) {
         node.setOpacity(1);
         node.setVisible(true);
         node.setPickOnBounds(true);
     }
 
     @FXML
-    private void disable(Node node){
+    private void disable(Node node) {
         node.setOpacity(0);
         node.setVisible(false);
         node.setPickOnBounds(false);
     }
+
     @FXML
-    private void onClickMessage(){
-        if((!isMovingLineOnMessage) && (!isLineMoving)){
+    private void onClickMessage() {
+        if ((!isMovingLineOnMessage) && (!isLineMoving)) {
             isLineMoving = true;
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionByX(movingLinePane, 500, -120);
             translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
@@ -99,8 +97,8 @@ public class MessagePageController implements Initializable {
     }
 
     @FXML
-    private void onClickStarred(){
-        if((isMovingLineOnMessage) && (!isLineMoving)){
+    private void onClickStarred() {
+        if ((isMovingLineOnMessage) && (!isLineMoving)) {
             isLineMoving = true;
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionByX(movingLinePane, 500, 120);
             translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
@@ -112,7 +110,7 @@ public class MessagePageController implements Initializable {
         }
     }
 
-    private void onClickNotePads(){
+    private void onClickNotePads() {
 
     }
 }

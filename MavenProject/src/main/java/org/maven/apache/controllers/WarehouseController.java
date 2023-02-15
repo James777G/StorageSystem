@@ -23,11 +23,7 @@ import org.maven.apache.item.Item;
 import org.maven.apache.service.item.CachedItemService;
 import org.maven.apache.service.search.SearchResultService;
 import org.maven.apache.service.search.SearchResultServiceHandler;
-import org.maven.apache.utils.CargoCachedUtils;
-import org.maven.apache.utils.DataUtils;
-import org.maven.apache.utils.ScaleUtils;
-import org.maven.apache.utils.TransitionUtils;
-import org.maven.apache.utils.TranslateUtils;
+import org.maven.apache.utils.*;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -94,7 +90,7 @@ public class WarehouseController implements Initializable {
     private AnchorPane blockPane;
 
     @FXML
-    private AnchorPane transactionPane1, transactionPane2, transactionPane3, transactionPane4, transactionPane5,transactionPane6, transactionPane7;
+    private AnchorPane transactionPane1, transactionPane2, transactionPane3, transactionPane4, transactionPane5, transactionPane6, transactionPane7;
 
     @FXML
     private AnchorPane[] transactionPanes = new AnchorPane[7];
@@ -211,7 +207,7 @@ public class WarehouseController implements Initializable {
         hideDeleteImageViews();
     }
 
-    private void initializeTransactionPaneList(){
+    private void initializeTransactionPaneList() {
         transactionPanes[0] = transactionPane1;
         transactionPanes[1] = transactionPane2;
         transactionPanes[2] = transactionPane3;
@@ -222,85 +218,85 @@ public class WarehouseController implements Initializable {
     }
 
     @FXML
-    private void onEnterTransactionPane1(){
+    private void onEnterTransactionPane1() {
         deleteList[0].setVisible(true);
     }
 
     @FXML
-    private void onEnterTransactionPane2(){
+    private void onEnterTransactionPane2() {
         deleteList[1].setVisible(true);
     }
 
     @FXML
-    private void onEnterTransactionPane3(){
+    private void onEnterTransactionPane3() {
         deleteList[2].setVisible(true);
     }
 
     @FXML
-    private void onEnterTransactionPane4(){
+    private void onEnterTransactionPane4() {
         deleteList[3].setVisible(true);
     }
 
     @FXML
-    private void onEnterTransactionPane5(){
+    private void onEnterTransactionPane5() {
         deleteList[4].setVisible(true);
     }
 
     @FXML
-    private void onEnterTransactionPane6(){
+    private void onEnterTransactionPane6() {
         deleteList[5].setVisible(true);
     }
 
     @FXML
-    private void onEnterTransactionPane7(){
+    private void onEnterTransactionPane7() {
         deleteList[6].setVisible(true);
     }
 
     @FXML
-    private void onExitTransactionPane1(){
-        if(!isBlockPaneOpen) {
+    private void onExitTransactionPane1() {
+        if (!isBlockPaneOpen) {
             deleteList[0].setVisible(false);
         }
     }
 
     @FXML
-    private void onExitTransactionPane2(){
-        if(!isBlockPaneOpen) {
+    private void onExitTransactionPane2() {
+        if (!isBlockPaneOpen) {
             deleteList[1].setVisible(false);
         }
     }
 
     @FXML
-    private void onExitTransactionPane3(){
-        if(!isBlockPaneOpen) {
+    private void onExitTransactionPane3() {
+        if (!isBlockPaneOpen) {
             deleteList[2].setVisible(false);
         }
     }
 
     @FXML
-    private void onExitTransactionPane4(){
-        if(!isBlockPaneOpen) {
+    private void onExitTransactionPane4() {
+        if (!isBlockPaneOpen) {
             deleteList[3].setVisible(false);
         }
     }
 
     @FXML
-    private void onExitTransactionPane5(){
-        if(!isBlockPaneOpen) {
+    private void onExitTransactionPane5() {
+        if (!isBlockPaneOpen) {
             deleteList[4].setVisible(false);
         }
     }
 
     @FXML
-    private void onExitTransactionPane6(){
-        if(!isBlockPaneOpen) {
+    private void onExitTransactionPane6() {
+        if (!isBlockPaneOpen) {
             deleteList[5].setVisible(false);
         }
     }
 
     @FXML
-    private void onExitTransactionPane7(){
-        if(!isBlockPaneOpen) {
+    private void onExitTransactionPane7() {
+        if (!isBlockPaneOpen) {
             deleteList[6].setVisible(false);
         }
     }
@@ -315,8 +311,10 @@ public class WarehouseController implements Initializable {
         deleteList[6] = deleteSeven;
     }
 
-    private void  hideDeleteImageViews(){
-        Arrays.stream(deleteList).forEach(imageView ->{imageView.setVisible(false);});
+    private void hideDeleteImageViews() {
+        Arrays.stream(deleteList).forEach(imageView -> {
+            imageView.setVisible(false);
+        });
     }
 
     @FXML
@@ -363,8 +361,8 @@ public class WarehouseController implements Initializable {
         deleteItemPane.setVisible(true);
         isBlockPaneOpen = true;
         blockPane.setVisible(true);
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,0,1);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,-45,0);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane, 300, 0, 1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane, 300, -45, 0);
         translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
         fadeTransition.play();
         translateTransition.play();
@@ -575,8 +573,8 @@ public class WarehouseController implements Initializable {
 
     @FXML
     private void doNotContinue() {
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,1,0);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,0,-45);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane, 300, 1, 0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane, 300, 0, -45);
         translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
         translateTransition.setOnFinished(event -> {
             deleteItemPane.setVisible(false);
@@ -593,9 +591,9 @@ public class WarehouseController implements Initializable {
         loadSpinnerOnDeletePane.setVisible(true);
         doContinueButton.setVisible(false);
         executorService.execute(() -> {
-            try{
+            try {
                 cachedItemService.deleteItemById(selectedItemID);
-            }catch(Exception e){
+            } catch (Exception e) {
                 cachedItemService.updateAllCachedItemData();
             }
             Platform.runLater(() -> {
@@ -608,8 +606,8 @@ public class WarehouseController implements Initializable {
             generateItemList(newPagination.getCurrentPageIndex());
             Platform.runLater(this::setTableContents);
             Platform.runLater(() -> {
-                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,1,0);
-                TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,-0,-45);
+                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane, 300, 1, 0);
+                TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane, 300, -0, -45);
                 translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
                 translateTransition.setOnFinished(event -> {
                     loadSpinnerOnDeletePane.setVisible(false);
@@ -630,8 +628,8 @@ public class WarehouseController implements Initializable {
      */
     @FXML
     private void onCloseDescriptionDialog() {
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(descriptionDialog,300,1,0);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(descriptionDialog,300,0,-170);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(descriptionDialog, 300, 1, 0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(descriptionDialog, 300, 0, -170);
         translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
         translateTransition.setOnFinished(event -> {
             descriptionDialog.setVisible(false);
@@ -807,8 +805,8 @@ public class WarehouseController implements Initializable {
 
     @FXML
     private void onClickOkayInAdd() {
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addItemPane,300 ,1,0);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addItemPane,300 ,0,-170);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addItemPane, 300, 1, 0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addItemPane, 300, 0, -170);
         translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
         translateTransition.setOnFinished(event -> {
             addItemPane.setVisible(false);
@@ -835,8 +833,8 @@ public class WarehouseController implements Initializable {
         addItemPane.setOpacity(0);
         addItemPane.setVisible(true);
         blockPane.setVisible(true);
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addItemPane,300 ,0,1);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addItemPane,300 ,-170,0);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addItemPane, 300, 0, 1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addItemPane, 300, -170, 0);
         translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
         fadeTransition.play();
         translateTransition.play();
@@ -879,8 +877,8 @@ public class WarehouseController implements Initializable {
         blockPane.setVisible(true);
         descriptionDialog.setOpacity(0);
         descriptionDialog.setVisible(true);
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(descriptionDialog,300,0,1);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(descriptionDialog,300,-170,0);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(descriptionDialog, 300, 0, 1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(descriptionDialog, 300, -170, 0);
         translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
         fadeTransition.play();
         translateTransition.play();
@@ -942,8 +940,8 @@ public class WarehouseController implements Initializable {
      * Return the maximum number of pages of the current data
      */
     private void calculatePageSize() throws UnsupportedPojoException {
-        try{
-            if(searchBar.getText().isBlank()){
+        try {
+            if (searchBar.getText().isBlank()) {
                 pageSize = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).size();
             } else {
                 pageSize = searchResultService.getPagedResultList(CargoCachedUtils
@@ -951,17 +949,16 @@ public class WarehouseController implements Initializable {
                         searchBar.getText(),
                         SearchResultServiceHandler.ResultType.CARGO).size();
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             pageSize = 0;
         }
-        if(pageSize != 0){
+        if (pageSize != 0) {
             newPagination.setPageCount(pageSize);
-        } else{
+        } else {
             newPagination.setPageCount(1);
         }
 
     }
-
 
 
     /**
@@ -971,7 +968,7 @@ public class WarehouseController implements Initializable {
      */
     private void generateItemList(int index) {
         try {
-            if(!searchBar.getText().isBlank()){
+            if (!searchBar.getText().isBlank()) {
                 itemList = searchResultService.getPagedResultList(CargoCachedUtils
                                 .getLists(CargoCachedUtils.listType.ALL),
                         searchBar.getText(),
@@ -994,15 +991,17 @@ public class WarehouseController implements Initializable {
         setButtonContent();
         setDeleteContent();
     }
+
     @FXML
-    private void onScrolled(ScrollEvent event){
-        if(event.getDeltaY() > 0){
+    private void onScrolled(ScrollEvent event) {
+        if (event.getDeltaY() > 0) {
             newPagination.setCurrentPageIndex(newPagination.getCurrentPageIndex() + 1);
         }
-        if(event.getDeltaY() < 0){
+        if (event.getDeltaY() < 0) {
             newPagination.setCurrentPageIndex(newPagination.getCurrentPageIndex() - 1);
         }
     }
+
     private void setDeleteContent() {
         for (int i = 0; i < itemList.size(); i++) {
             transactionPanes[i].setVisible(true);

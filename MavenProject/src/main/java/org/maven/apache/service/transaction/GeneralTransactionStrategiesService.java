@@ -10,12 +10,14 @@ public interface GeneralTransactionStrategiesService {
 
     /**
      * This method is responsible for handling all the strategies in the addNewTransaction
+     *
      * @param transaction the transaction to be added
      */
     void doStrategies(ItemMapper itemMapper, TransactionMapper transactionMapper, Transaction transaction) throws DataNotFoundException, NegativeDataException;
 
     /**
      * This method is responsible for handling all the strategies related to delete operation
+     *
      * @param id transaction to be deleted
      */
     void doStrategies(ItemMapper itemMapper, TransactionMapper transactionMapper, int id) throws NegativeDataException;

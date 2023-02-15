@@ -12,26 +12,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("searchResultService")
-public class SearchResultServiceHandler<R> implements SearchResultService<R>{
-
-    public enum ResultType{
-        STAFF, CARGO
-    }
-
-
+public class SearchResultServiceHandler<R> implements SearchResultService<R> {
 
     @Resource
     @Qualifier("staffResultAdapter")
     private SearchResultAdapterService<Staff, R> staffResultAdapter;
-
     @Resource
     @Qualifier("transactionResultAdapter")
     private SearchResultAdapterService<Transaction, R> transactionResultAdapter;
-
     @Resource
     @Qualifier("itemResultAdapter")
     private SearchResultAdapterService<Item, R> itemResultAdapter;
-
 
     @Override
     public List<List<R>> getPagedResultList(List<List<R>> sourceList, String inputText, ResultType resultType) throws UnsupportedPojoException {
@@ -40,8 +31,8 @@ public class SearchResultServiceHandler<R> implements SearchResultService<R>{
 
     @Override
     public List<R> getResultList(List<List<R>> sourceList, String inputText, ResultType resultType) throws UnsupportedPojoException {
-        if(sourceList.size() > 0){
-            if(isItem(sourceList)){
+        if (sourceList.size() > 0) {
+            if (isItem(sourceList)) {
                 return itemResultAdapter.invoke(doConvert(sourceList), inputText, resultType);
             } else if (isStaff(sourceList)) {
                 return staffResultAdapter.invoke(doConvert(sourceList), inputText, resultType);
@@ -77,16 +68,20 @@ public class SearchResultServiceHandler<R> implements SearchResultService<R>{
         return pagedCachedList;
     }
 
-    private boolean isItem(List<List<R>> sourceList){
+    private boolean isItem(List<List<R>> sourceList) {
         return doConvert(sourceList).get(0) instanceof Item;
     }
 
-    private boolean isStaff(List<List<R>> sourceList){
+    private boolean isStaff(List<List<R>> sourceList) {
         return doConvert(sourceList).get(0) instanceof Staff;
     }
 
-    private boolean isTransaction(List<List<R>> sourceList){
+    private boolean isTransaction(List<List<R>> sourceList) {
         return doConvert(sourceList).get(0) instanceof Transaction;
+    }
+
+    public enum ResultType {
+        STAFF, CARGO
     }
 
 }

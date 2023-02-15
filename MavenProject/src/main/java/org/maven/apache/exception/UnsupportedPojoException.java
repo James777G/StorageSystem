@@ -1,6 +1,6 @@
 package org.maven.apache.exception;
 
-public class UnsupportedPojoException extends BaseException{
+public class UnsupportedPojoException extends BaseException {
 
     public UnsupportedPojoException() {
         super();

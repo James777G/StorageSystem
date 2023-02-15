@@ -10,13 +10,9 @@ import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
@@ -32,7 +28,6 @@ import org.maven.apache.utils.StaffCachedUtils;
 import org.maven.apache.utils.TransitionUtils;
 import org.maven.apache.utils.TranslateUtils;
 
-import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -485,7 +480,7 @@ public class StaffController implements Initializable {
         deleteList[6] = deleteSeven;
     }
 
-    private void initializeStaffPaneList(){
+    private void initializeStaffPaneList() {
         staffPanes[0] = staffPane1;
         staffPanes[1] = staffPane2;
         staffPanes[2] = staffPane3;
@@ -495,7 +490,7 @@ public class StaffController implements Initializable {
         staffPanes[6] = staffPane7;
     }
 
-    private void setInitialDeleteImageViews(){
+    private void setInitialDeleteImageViews() {
         deleteList[0].setVisible(false);
         deleteList[1].setVisible(false);
         deleteList[2].setVisible(false);
@@ -574,85 +569,85 @@ public class StaffController implements Initializable {
     }
 
     @FXML
-    private void onEnterStaffPane1(){
+    private void onEnterStaffPane1() {
         deleteList[0].setVisible(true);
     }
 
     @FXML
-    private void onEnterStaffPane2(){
+    private void onEnterStaffPane2() {
         deleteList[1].setVisible(true);
     }
 
     @FXML
-    private void onEnterStaffPane3(){
+    private void onEnterStaffPane3() {
         deleteList[2].setVisible(true);
     }
 
     @FXML
-    private void onEnterStaffPane4(){
+    private void onEnterStaffPane4() {
         deleteList[3].setVisible(true);
     }
 
     @FXML
-    private void onEnterStaffPane5(){
+    private void onEnterStaffPane5() {
         deleteList[4].setVisible(true);
     }
 
     @FXML
-    private void onEnterStaffPane6(){
+    private void onEnterStaffPane6() {
         deleteList[5].setVisible(true);
     }
 
     @FXML
-    private void onEnterStaffPane7(){
+    private void onEnterStaffPane7() {
         deleteList[6].setVisible(true);
     }
 
     @FXML
-    private void onExitStaffPane1(){
-        if(!isBlockPaneOpen){
+    private void onExitStaffPane1() {
+        if (!isBlockPaneOpen) {
             deleteList[0].setVisible(false);
         }
     }
 
     @FXML
-    private void onExitStaffPane2(){
-        if(!isBlockPaneOpen){
+    private void onExitStaffPane2() {
+        if (!isBlockPaneOpen) {
             deleteList[1].setVisible(false);
         }
     }
 
     @FXML
-    private void onExitStaffPane3(){
-        if(!isBlockPaneOpen){
+    private void onExitStaffPane3() {
+        if (!isBlockPaneOpen) {
             deleteList[2].setVisible(false);
         }
     }
 
     @FXML
-    private void onExitStaffPane4(){
-        if(!isBlockPaneOpen){
+    private void onExitStaffPane4() {
+        if (!isBlockPaneOpen) {
             deleteList[3].setVisible(false);
         }
     }
 
     @FXML
-    private void onExitStaffPane5(){
-        if(!isBlockPaneOpen){
+    private void onExitStaffPane5() {
+        if (!isBlockPaneOpen) {
             deleteList[4].setVisible(false);
         }
     }
 
     @FXML
-    private void onExitStaffPane6(){
-        if(!isBlockPaneOpen){
+    private void onExitStaffPane6() {
+        if (!isBlockPaneOpen) {
             deleteList[5].setVisible(false);
         }
     }
 
     @FXML
-    private void onExitStaffPane7(){
-        if(!isBlockPaneOpen){
+    private void onExitStaffPane7() {
+        if (!isBlockPaneOpen) {
             deleteList[6].setVisible(false);
         }
     }
@@ -969,8 +964,8 @@ public class StaffController implements Initializable {
         addStaffPane.setVisible(true);
         staffStatusInAdd.setSelected(true);
         blockPane.setVisible(true);
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addStaffPane,300,0,1);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addStaffPane,300,-170,0);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addStaffPane, 300, 0, 1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addStaffPane, 300, -170, 0);
         translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
         fadeTransition.play();
         translateTransition.play();
@@ -1067,8 +1062,8 @@ public class StaffController implements Initializable {
      */
     @FXML
     private void onClickOkayInAdd() {
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addStaffPane,300,1,0);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addStaffPane,300,0,-170);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addStaffPane, 300, 1, 0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addStaffPane, 300, 0, -170);
         translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
         translateTransition.setOnFinished(event -> {
             addStaffPane.setVisible(false);

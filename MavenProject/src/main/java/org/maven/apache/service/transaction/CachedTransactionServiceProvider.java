@@ -9,14 +9,10 @@ import org.maven.apache.mapper.ItemMapper;
 import org.maven.apache.mapper.TransactionMapper;
 import org.maven.apache.service.item.CachedItemService;
 import org.maven.apache.transaction.Transaction;
-import org.maven.apache.utils.TransactionCachedUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service("cachedTransactionService")
 @Data
@@ -77,6 +73,7 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
         updateAllCachedTransactionData();
         strategiesHandler.doStrategies(itemMapper, transactionMapper, transaction);
     }
+
     /**
      * This method deletes an existing transaction from the database.
      * <p>
@@ -91,7 +88,7 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public void deleteTransactionById(int id) throws NegativeDataException {
-        strategiesHandler.doStrategies(itemMapper,transactionMapper,id);
+        strategiesHandler.doStrategies(itemMapper, transactionMapper, id);
         transactionMapper.deleteTransactionById(id);
         updateAllCachedTransactionData();
     }

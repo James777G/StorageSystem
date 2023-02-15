@@ -1,6 +1,5 @@
 package org.maven.apache.utils;
 
-import org.maven.apache.email.Email;
 import org.maven.apache.regulatory.Regulatory;
 
 import java.util.HashMap;
@@ -9,7 +8,7 @@ import java.util.Map;
 
 public class RegulatoryCachedUtils {
 
-    public enum listType{
+    public enum listType {
         ALL
     }
 

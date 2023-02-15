@@ -29,9 +29,9 @@ public final class WarehouseControllerSynchronizingStrategy extends AbstractTran
     private void executeGenerateItemList() {
         Class<WarehouseController> clazz = WarehouseController.class;
         Method generateItemList = null;
-        try{
+        try {
             generateItemList = clazz.getDeclaredMethod("generateItemList", int.class);
-        }catch(Exception ignored){
+        } catch (Exception ignored) {
         }
         assert generateItemList != null;
         generateItemList.setAccessible(true);
@@ -48,9 +48,9 @@ public final class WarehouseControllerSynchronizingStrategy extends AbstractTran
     private void executeSetTableContents() {
         Class<WarehouseController> clazz = WarehouseController.class;
         Method setTableContents = null;
-        try{
+        try {
             setTableContents = clazz.getDeclaredMethod("setTableContents");
-        }catch(Exception ignored){
+        } catch (Exception ignored) {
         }
         assert setTableContents != null;
         setTableContents.setAccessible(true);

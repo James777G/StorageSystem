@@ -2,12 +2,10 @@ package org.maven.apache.service.search;
 
 import jakarta.annotation.Resource;
 import org.maven.apache.staff.Staff;
-import org.maven.apache.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.function.Function;
 
 @Service("staffResultAdapter")
 public final class StaffSearchResultAdapter<R> extends AbstractSearchResultAdapter<Staff, R> {

@@ -1,6 +1,6 @@
 package org.maven.apache.exception;
 
-public class EmptyValueException extends BaseException{
+public class EmptyValueException extends BaseException {
     public EmptyValueException() {
         super();
     }

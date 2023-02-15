@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 @Service("itemResultFilter")
 public class ItemResultFilteringHandler implements SearchResultFilteringService<Item> {
@@ -15,7 +14,7 @@ public class ItemResultFilteringHandler implements SearchResultFilteringService<
     public List<Item> doFilter(List<Item> sourceList, String inputText, SearchResultServiceHandler.ResultType resultType) {
         List<Item> resultList = new ArrayList<>();
         sourceList.forEach(item -> {
-            if(isContaining(item.getItemName(), inputText)){
+            if (isContaining(item.getItemName(), inputText)) {
                 resultList.add(item);
             }
         });

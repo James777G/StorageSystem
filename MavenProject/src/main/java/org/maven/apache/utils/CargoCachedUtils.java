@@ -1,7 +1,6 @@
 package org.maven.apache.utils;
 
 import org.maven.apache.item.Item;
-import org.maven.apache.staff.Staff;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.Map;
 
 public class CargoCachedUtils {
 
-    public enum listType{
+    public enum listType {
         ALL
     }
 

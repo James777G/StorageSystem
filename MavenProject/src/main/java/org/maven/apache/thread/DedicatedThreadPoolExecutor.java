@@ -2,7 +2,10 @@ package org.maven.apache.thread;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.concurrent.*;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.RejectedExecutionHandler;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 线程池
@@ -29,7 +32,6 @@ import java.util.concurrent.*;
  * 1. 考虑到项目的需求， 本线程池并没有配置拒绝机制
  * 2. 同一时间所能执行的异步工作数量为 14
  * 3. 若超出 14 则会报错
- *
  */
 public class DedicatedThreadPoolExecutor extends ThreadPoolExecutor {
     public DedicatedThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, @NotNull TimeUnit unit, @NotNull BlockingQueue<Runnable> workQueue, @NotNull RejectedExecutionHandler handler) {

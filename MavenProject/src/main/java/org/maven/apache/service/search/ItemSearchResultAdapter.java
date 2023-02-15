@@ -2,12 +2,10 @@ package org.maven.apache.service.search;
 
 import jakarta.annotation.Resource;
 import org.maven.apache.item.Item;
-import org.maven.apache.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.function.Function;
 
 @Service("itemResultAdapter")
 public final class ItemSearchResultAdapter<R> extends AbstractSearchResultAdapter<Item, R> {
@@ -15,6 +13,7 @@ public final class ItemSearchResultAdapter<R> extends AbstractSearchResultAdapte
     @Resource
     @Qualifier("itemResultFilter")
     private SearchResultFilteringService<Item> itemResultFilter;
+
     @Override
     public List<Item> doConvert(List<R> sourceList) {
         return sourceList.stream()

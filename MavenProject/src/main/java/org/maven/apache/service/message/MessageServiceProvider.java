@@ -16,7 +16,7 @@ import java.util.List;
 @Component("messageService")
 @Transactional
 @Data
-public class MessageServiceProvider implements MessageService{
+public class MessageServiceProvider implements MessageService {
     @Resource
     private MessageMapper messageMapper;
 
@@ -39,7 +39,7 @@ public class MessageServiceProvider implements MessageService{
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void addNewMessage(Message message) {
-    messageMapper.addNewMessage(message);
+        messageMapper.addNewMessage(message);
     }
 
     /**
@@ -85,8 +85,8 @@ public class MessageServiceProvider implements MessageService{
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public void deleteById(int id) {
-    messageMapper.deleteById(id);
-    IdGapInside();
+        messageMapper.deleteById(id);
+        IdGapInside();
     }
 
     /**
@@ -97,7 +97,7 @@ public class MessageServiceProvider implements MessageService{
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public void starMessage(int id) {
-    messageMapper.starMessage(id);
+        messageMapper.starMessage(id);
     }
 
     /**
@@ -106,7 +106,7 @@ public class MessageServiceProvider implements MessageService{
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public void IdGapInside() {
-    messageMapper.IdGapInside();
+        messageMapper.IdGapInside();
     }
 
 }

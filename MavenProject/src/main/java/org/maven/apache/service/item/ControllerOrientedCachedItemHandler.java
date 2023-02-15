@@ -11,12 +11,11 @@ import org.maven.apache.utils.CargoCachedUtils;
 import org.maven.apache.utils.DataUtils;
 import org.springframework.stereotype.Service;
 
-import javax.xml.crypto.Data;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 @Service("cachedItemService")
-public class ControllerOrientedCachedItemHandler implements CachedItemService{
+public class ControllerOrientedCachedItemHandler implements CachedItemService {
     @Resource
     private ItemService itemService;
 
