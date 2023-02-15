@@ -537,6 +537,10 @@ public class StaffController implements Initializable {
                 staffService.deleteStaffById(selectedStaffId);
             } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
                 throw new RuntimeException(e);
+            } finally {
+                staffService.updateAllCachedStaffData();
+                getStaffList(pagination.getCurrentPageIndex());
+                Platform.runLater(this::assignStaffValue);
             }
             executorService.execute(() -> {
                 Platform.runLater(() -> {
@@ -1029,6 +1033,7 @@ public class StaffController implements Initializable {
             } catch (Exception e) {
                 warnMessageInDetails.setVisible(true);
             } finally {
+                staffService.updateAllCachedStaffData();
                 Platform.runLater(() -> {
                     assignStaffValue();
                     loadSpinner.setVisible(false);
@@ -1109,6 +1114,7 @@ public class StaffController implements Initializable {
             } catch (Exception e) {
                 warnMessageInAdd.setVisible(true);
             } finally {
+                staffService.updateAllCachedStaffData();
                 Platform.runLater(() -> {
                     pagination.setPageCount(pageNumber);
                     assignStaffValue();

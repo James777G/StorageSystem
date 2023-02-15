@@ -593,8 +593,11 @@ public class WarehouseController implements Initializable {
         loadSpinnerOnDeletePane.setVisible(true);
         doContinueButton.setVisible(false);
         executorService.execute(() -> {
-            cachedItemService.deleteItemById(selectedItemID);
-            cachedItemService.updateAllCachedItemData();
+            try{
+                cachedItemService.deleteItemById(selectedItemID);
+            }catch(Exception e){
+                cachedItemService.updateAllCachedItemData();
+            }
             Platform.runLater(() -> {
                 try {
                     calculatePageSize();
@@ -696,6 +699,18 @@ public class WarehouseController implements Initializable {
                     loadSpinner.setVisible(false);
                 });
                 warnMessage.setVisible(true);
+            } finally {
+                cachedItemService.updateAllCachedItemData();
+                Platform.runLater(() -> {
+                    try {
+                        generateCachedData();
+                    } catch (UnsupportedPojoException e) {
+                        throw new RuntimeException(e);
+                    }
+                    int currentPage = newPagination.getCurrentPageIndex();
+                    generateItemList(currentPage);
+                    setTableContents();
+                });
             }
         });
 
@@ -759,6 +774,17 @@ public class WarehouseController implements Initializable {
             } catch (Exception e) {
                 warnMessageInAdd.setVisible(true);
             } finally {
+                cachedItemService.updateAllCachedItemData();
+                Platform.runLater(() -> {
+                    generateItemList(newPagination.getCurrentPageIndex());
+                    try {
+                        calculatePageSize();
+                    } catch (UnsupportedPojoException e) {
+                        throw new RuntimeException(e);
+                    }
+                    setTableContents();
+                    warnMessageInAdd.setVisible(false);
+                });
                 loadSpinnerInAdd.setVisible(false);
                 applyButtonInAdd.setVisible(true);
             }

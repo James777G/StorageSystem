@@ -1795,9 +1795,14 @@ public class AppPage2Controller implements Initializable {
         FileChooser fc = new FileChooser();
         Stage stage = new Stage();
         File imageToClassify = fc.showSaveDialog(stage);
-        ExcelConverterService excelConverterService = MyLauncher.context.getBean("excelConverterService", ExcelConverterService.class);
-        excelConverterService.convertToExcel(imageToClassify);
-
+        executorService.execute(() -> {
+            ExcelConverterService excelConverterService = MyLauncher.context.getBean("excelConverterService", ExcelConverterService.class);
+            try {
+                excelConverterService.convertToExcel(imageToClassify);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @FXML
