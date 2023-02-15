@@ -1814,9 +1814,14 @@ public class AppPage2Controller implements Initializable {
     }
 
     private static void onClickSettingsTwo(MFXGenericDialog genericDialog) {
-        genericDialog.setOpacity(1);
+        genericDialog.setOpacity(0);
         genericDialog.setPickOnBounds(true);
         genericDialog.setVisible(true);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(genericDialog,300,0,1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(genericDialog,300,-150,0);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        translateTransition.play();
+        fadeTransition.play();
     }
 
     @FXML
@@ -2236,19 +2241,26 @@ public class AppPage2Controller implements Initializable {
      */
     @FXML
     private void onCloseSettings() {
-        settingsDialog.setVisible(false);
-        infoVBox.setVisible(true);
-        passwordVBox.setVisible(false);
-        currentInfoTextField.clear();
-        newInfoTextField.clear();
-        currentPasswordField.clear();
-        newPasswordField.clear();
-        confirmUpdateInfo.setDisable(true);
-        isUpdatingUsername = false;
-        isUpdatingEmail = false;
-        isUpdatingPassword = false;
-        notificationLabel.setText("");
-        blockPane.setVisible(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(settingsDialog,300,1,0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(settingsDialog,300,0,-150);
+        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+        translateTransition.setOnFinished(event -> {
+            settingsDialog.setVisible(false);
+            infoVBox.setVisible(true);
+            passwordVBox.setVisible(false);
+            currentInfoTextField.clear();
+            newInfoTextField.clear();
+            currentPasswordField.clear();
+            newPasswordField.clear();
+            confirmUpdateInfo.setDisable(true);
+            isUpdatingUsername = false;
+            isUpdatingEmail = false;
+            isUpdatingPassword = false;
+            notificationLabel.setText("");
+            blockPane.setVisible(false);
+        });
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     @FXML
