@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
@@ -714,11 +715,6 @@
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="newItemTextField" layoutY="15.0" prefHeight="28.0" prefWidth="162.0" styleClass="lineStyleInputField" stylesheets="@../css/staffPane.css">
-                     <font>
-                        <Font name="Calibri" size="12.0" />
-                     </font>
-                  </TextField>
                </children>
             </AnchorPane>
             <AnchorPane layoutX="433.0" layoutY="70.0">
@@ -728,11 +724,6 @@
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="newStaffTextField" layoutY="15.0" prefHeight="28.0" prefWidth="162.0" styleClass="lineStyleInputField" stylesheets="@../css/staffPane.css">
-                     <font>
-                        <Font name="Calibri" size="12.0" />
-                     </font>
-                  </TextField>
                </children>
             </AnchorPane>
             <Label layoutX="14.0" layoutY="161.0" prefHeight="17.0" prefWidth="152.0" text="Transaction Information:">
@@ -798,6 +789,8 @@
                   <Font name="Calibri Bold" size="14.0" />
                </font>
             </JFXButton>
+            <MFXFilterComboBox fx:id="newItemFilterComboBox" floatMode="BORDER" layoutX="14.0" layoutY="87.0" prefHeight="34.0" prefWidth="152.0" />
+            <MFXFilterComboBox fx:id="newStaffFilterComboBox" floatMode="BORDER" layoutX="433.0" layoutY="87.0" prefHeight="34.0" prefWidth="152.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="deleteItemPane" layoutX="361.0" layoutY="100.0" prefHeight="220.0" prefWidth="200.0" style="-fx-background-color: #f6f6f6; -fx-background-radius: 15;" visible="false">

@@ -1,10 +1,7 @@
 package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import io.github.palexdev.materialfx.controls.MFXDatePicker;
-import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
-import io.github.palexdev.materialfx.controls.MFXTextField;
-import io.github.palexdev.materialfx.controls.MFXToggleButton;
+import io.github.palexdev.materialfx.controls.*;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
@@ -13,6 +10,7 @@ import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -32,6 +30,7 @@ import org.maven.apache.item.Item;
 import org.maven.apache.service.search.SearchResultService;
 import org.maven.apache.service.search.SearchResultServiceHandler;
 import org.maven.apache.service.transaction.CachedTransactionService;
+import org.maven.apache.staff.Staff;
 import org.maven.apache.transaction.Transaction;
 import org.maven.apache.utils.*;
 
@@ -40,6 +39,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
+import java.util.function.Consumer;
 
 public class NewTransactionPageController implements Initializable {
 
@@ -55,15 +55,6 @@ public class NewTransactionPageController implements Initializable {
     enum ArrowStatus {
         HORIZONTAL, UP, DOWN
     }
-
-    @FXML
-    private AnchorPane movingLinePane;
-
-    @FXML
-    private AnchorPane cargoPane;
-
-    @FXML
-    private AnchorPane dataPane;
 
     @FXML
     private AnchorPane addButton;
@@ -216,13 +207,7 @@ public class NewTransactionPageController implements Initializable {
     private MFXGenericDialog descriptionDialog;
 
     @FXML
-    private TextField newItemTextField;
-
-    @FXML
     private TextField newUnitTextField;
-
-    @FXML
-    private TextField newStaffTextField;
 
     @FXML
     private TextField staffNameInDetails;
@@ -250,6 +235,12 @@ public class NewTransactionPageController implements Initializable {
 
     @FXML
     private MFXTextField searchField;
+
+    @FXML
+    private MFXFilterComboBox newItemFilterComboBox;
+
+    @FXML
+    private MFXFilterComboBox newStaffFilterComboBox;
 
     private Label[] cargoLabelArray = new Label[7];
 
@@ -283,8 +274,6 @@ public class NewTransactionPageController implements Initializable {
 
     private boolean isArrowRotating = false;
 
-    private boolean isPressAmount;
-
     private boolean isAll = true;
 
     private boolean isRestock = false;
@@ -303,13 +292,9 @@ public class NewTransactionPageController implements Initializable {
 
     public static boolean isSearchingStaff = true;
 
-    private int currentPage;
-
     private int newUnitAmount;
 
     private int newTransactionID;
-
-    private int numOfTransaction;
 
     private String newItemName;
 
@@ -352,6 +337,8 @@ public class NewTransactionPageController implements Initializable {
         setInputValidation(newUnitTextField);
         getNumOfTransaction();
         warnMessageInDetails.setVisible(false);
+        setPromptTextForStaff();
+        setPromptTextForRegulatory();
     }
 
     /**
@@ -1291,9 +1278,9 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickClearInAdd() {
-        newItemTextField.clear();
+        newItemFilterComboBox.clear();
         newUnitTextField.clear();
-        newStaffTextField.clear();
+        newStaffFilterComboBox.clear();
         datePicker.clear();
         descriptionTextArea.clear();
         warnMessageInAdd.setVisible(false);
@@ -1423,8 +1410,8 @@ public class NewTransactionPageController implements Initializable {
             okayButton.setDisable(true);
             clearButton.setDisable(true);
             newTransactionID = getNumOfTransaction() + 1;
-            newItemName = newItemTextField.getText();
-            newStaffName = newStaffTextField.getText();
+            newItemName = newItemFilterComboBox.getText();
+            newStaffName = newStaffFilterComboBox.getText();
             newUnitAmount = Integer.valueOf(newUnitTextField.getText());
             if (datePicker.getText().equals("")) {
                 // return current date and time
@@ -1505,7 +1492,7 @@ public class NewTransactionPageController implements Initializable {
      * @return true or false
      */
     private boolean isValidated() {
-        if (!newItemTextField.getText().equals("") && !newStaffTextField.getText().equals("") && !newUnitTextField.getText().equals("")) {
+        if (!newItemFilterComboBox.getText().equals("") && !newStaffFilterComboBox.getText().equals("") && !newUnitTextField.getText().equals("")) {
             return true;
         }
         return false;
@@ -1553,7 +1540,7 @@ public class NewTransactionPageController implements Initializable {
      * search an indicated staff name
      */
     @FXML
-    public void onClickStaffSearch() {
+    private void onClickStaffSearch() {
         setSearchProperty(true);
         DataUtils.appPage2Controller.setSearchProperty(true);
     }
@@ -1562,7 +1549,7 @@ public class NewTransactionPageController implements Initializable {
      * search an indicated cargo name
      */
     @FXML
-    public void onClickCargoSearch() {
+    private void onClickCargoSearch() {
         setSearchProperty(false);
         DataUtils.appPage2Controller.setSearchProperty(false);
     }
@@ -1627,4 +1614,43 @@ public class NewTransactionPageController implements Initializable {
         refreshPage();
     }
 
+    /**
+     * set all prompt staff names from database
+     */
+    private void setPromptTextForStaff() {
+        List<List<Staff>> staffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL);
+        List<String> resultList = new ArrayList<>();
+        staffList.forEach(new Consumer<List<Staff>>() {
+            @Override
+            public void accept(List<Staff> staffList) {
+                staffList.forEach(new Consumer<Staff>() {
+                    @Override
+                    public void accept(Staff staff) {
+                        resultList.add(staff.getStaffName());
+                    }
+                });
+            }
+        });
+        newStaffFilterComboBox.setItems(FXCollections.observableList(resultList));
+    }
+
+    /**
+     * set all prompt item names from database
+     */
+    private void setPromptTextForRegulatory() {
+        List<List<Item>> itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL);
+        List<String> resultList = new ArrayList<>();
+        itemList.forEach(new Consumer<List<Item>>() {
+            @Override
+            public void accept(List<Item> items) {
+                items.forEach(new Consumer<Item>() {
+                    @Override
+                    public void accept(Item item) {
+                        resultList.add(item.getItemName());
+                    }
+                });
+            }
+        });
+        newItemFilterComboBox.setItems(FXCollections.observableList(resultList));
+    }
 }

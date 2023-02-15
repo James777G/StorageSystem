@@ -439,8 +439,6 @@ public class AppPage2Controller implements Initializable {
 
     private final CachedTransactionService cachedTransactionService = MyLauncher.context.getBean("cachedTransactionService", CachedTransactionService.class);
 
-    private final DateTransactionService dateTransactionService = MyLauncher.context.getBean("dateTransactionService", DateTransactionService.class);
-
     private final UserService userService = MyLauncher.context.getBean("userService", UserService.class);
 
     private int takenBoxNumber = 2;
@@ -647,10 +645,10 @@ public class AppPage2Controller implements Initializable {
         });
         stackPaneForWarehouse.setVisible(false);
         setButtonList();
-        setTransactionPane();
         setWarehousePane();
         setStaffPane();
         setMessagePane();
+        setTransactionPane();
         staffPane.setVisible(false);
         stackPane.setVisible(false);
         emailSpinner.setVisible(false);
@@ -2332,7 +2330,7 @@ public class AppPage2Controller implements Initializable {
      * search an indicated staff name
      */
     @FXML
-    public void onClickStaffSearch() {
+    private void onClickStaffSearch() {
         setSearchProperty(true);
         DataUtils.transactionPageController.setSearchProperty(true);
     }
@@ -2341,7 +2339,7 @@ public class AppPage2Controller implements Initializable {
      * search an indicated cargo name
      */
     @FXML
-    public void onClickCargoSearch() {
+    private void onClickCargoSearch() {
         setSearchProperty(false);
         DataUtils.transactionPageController.setSearchProperty(false);
     }
