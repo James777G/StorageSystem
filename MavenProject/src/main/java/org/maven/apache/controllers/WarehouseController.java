@@ -710,7 +710,6 @@ public class WarehouseController implements Initializable {
                 });
             }
         });
-
     }
 
     /**
@@ -785,8 +784,6 @@ public class WarehouseController implements Initializable {
                 applyButtonInAdd.setVisible(true);
             }
         });
-
-
     }
 
     private Item encapsulateCurrentItemInAdd() throws EmptyValueException {
@@ -955,7 +952,6 @@ public class WarehouseController implements Initializable {
         } else {
             newPagination.setPageCount(1);
         }
-
     }
 
 
@@ -1013,9 +1009,6 @@ public class WarehouseController implements Initializable {
         for (int j = 0; j < itemList.size(); j++) {
             buttonList[j].setDisable(false);
         }
-//        for (int i = itemList.size(); i < buttonList.length; i++) {
-//            buttonList[i].setDisable(true);
-//        }
     }
 
     /**
@@ -1025,9 +1018,6 @@ public class WarehouseController implements Initializable {
         for (int i = 0; i < itemList.size(); i++) {
             nameList[i].setText(itemList.get(i).getItemName());
         }
-//        for (int j = itemList.size(); j < nameList.length; j++) {
-//            nameList[j].setText("N/A");
-//        }
     }
 
     /**
@@ -1037,9 +1027,6 @@ public class WarehouseController implements Initializable {
         for (int i = 0; i < itemList.size(); i++) {
             idList[i].setText(itemList.get(i).getItemID().toString());
         }
-//        for (int j = itemList.size(); j < idList.length; j++) {
-//            idList[j].setText("N/A");
-//        }
     }
 
     /**
@@ -1061,5 +1048,17 @@ public class WarehouseController implements Initializable {
     public void generateCachedData() throws UnsupportedPojoException {
         calculatePageSize();
         cachedItemService.updateAllCachedItemData();
+    }
+
+    /**
+     * search the corresponding transactions pursuant to a particular item name while moving to transaction page
+     */
+    @FXML
+    private void onViewTransaction() throws UnsupportedPojoException {
+        DataUtils.appPage2Controller.setSearchProperty(true);
+        DataUtils.transactionPageController.setSearchProperty(true);
+        DataUtils.transactionPageController.setKeyword(itemNameInDetails.getText());
+        DataUtils.transactionPageController.onClickSearch();
+        DataUtils.appPage2Controller.onClickTransaction();
     }
 }

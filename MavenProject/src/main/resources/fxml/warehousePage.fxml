@@ -19,7 +19,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.WarehouseController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.WarehouseController">
    <children>
       <MFXTextField fx:id="searchBar" floatMode="DISABLED" layoutX="287.0" layoutY="75.0" prefHeight="50.0" prefWidth="550.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="40.0">
          <textFill>
@@ -515,7 +515,7 @@
                      </font>
                   </Label>
                   <TextArea fx:id="itemDescriptionInDetails" layoutX="15.0" layoutY="130.0" prefHeight="145.0" prefWidth="375.0" wrapText="true" />
-                  <JFXButton layoutX="207.0" layoutY="41.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="View Transaction" textFill="WHITE" AnchorPane.bottomAnchor="227.66666666666666">
+                  <JFXButton layoutX="441.0" layoutY="87.0" onAction="#onViewTransaction" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="View Transaction" textFill="WHITE" AnchorPane.bottomAnchor="181.0">
                      <font>
                         <Font name="Calibri Bold Italic" size="13.0" />
                      </font>
@@ -545,7 +545,7 @@
                         <Font name="Calibri Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="itemAmountInDetails" layoutX="302.0" layoutY="14.0" text="0">
+                  <Label fx:id="itemAmountInDetails" layoutX="207.0" layoutY="45.0" prefHeight="17.0" prefWidth="50.0" text="0">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>

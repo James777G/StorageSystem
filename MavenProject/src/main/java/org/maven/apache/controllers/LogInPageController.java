@@ -213,6 +213,10 @@ public class LogInPageController implements Initializable {
         loadIndicator.setStyle(" -fx-progress-color: black;");
         loadIndicator.setVisible(false);
         loginButton.setDisable(false);
+        setFieldStatus(false);
+        /****/
+        fastLoginButton.setDisable(false);  // TEST ONLY
+        /****/
     }
 
     /**
@@ -379,6 +383,7 @@ public class LogInPageController implements Initializable {
             Platform.runLater(() -> {
                 loginButton.setDisable(true);
                 loadIndicator.setVisible(true);
+                setFieldStatus(true);
             });
             // get the user list
             updateUserList();
@@ -395,7 +400,6 @@ public class LogInPageController implements Initializable {
                         loginButton.setDisable(true);
                         loadIndicator.setVisible(true);
                         // head to the app page (appPage2) in the background
-
                         threadPoolExecutor.execute(() -> {
                             DataUtils.currentUser = currentUser;
                             Stage stage = (Stage) loginButton.getScene().getWindow();
@@ -418,7 +422,6 @@ public class LogInPageController implements Initializable {
                 }
             });
         });
-
     }
 
     /**
@@ -611,6 +614,43 @@ public class LogInPageController implements Initializable {
 
     public String getSignUpPasswordString() {
         return signUpPassword.getText();
+    }
+
+    /**
+     * all clickable ndoes are disabled during a successful login
+     *
+     * @param isLoggingIn becomes true if logging in
+     */
+    private void setFieldStatus(boolean isLoggingIn){
+        if (isLoggingIn){
+            userNameField.setDisable(true);
+            passwordField.setDisable(true);
+            labelOnForgotPassword.setDisable(true);
+            labelOnSignUp.setDisable(true);
+        }else{
+            userNameField.setDisable(false);
+            passwordField.setDisable(false);
+            labelOnForgotPassword.setDisable(false);
+            labelOnSignUp.setDisable(false);
+        }
+    }
+
+    /**
+     * TEST ONLY
+     */
+    @FXML
+    private Button fastLoginButton;
+
+    /**
+     * TEST ONLY
+     * login as piper by clicking a button
+     */
+    @FXML
+    private void onFastLogin(){
+        userNameField.setText("Piper");
+        passwordField.setText("sir");
+        fastLoginButton.setDisable(true);
+        onSignInAction();
     }
 
 }
