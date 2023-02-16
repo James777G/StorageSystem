@@ -85,10 +85,14 @@ public final class CargoDataSynchronizingStrategy extends AbstractTransactionStr
     private void doIncreaseStrategyInAdd(ItemMapper itemMapper, TransactionMapper transactionMapper, Transaction transaction) throws DataNotFoundException {
         // find item which is involved in this transaction
 
-        Item item = null;
+        Item item;
         try {
             item = itemMapper.selectByItemName(transaction.getItemName());
         } catch (Exception e) {
+            throw new DataNotFoundException("Item with this item name does not exist in the database");
+        }
+
+        if(item == null){
             throw new DataNotFoundException("Item with this item name does not exist in the database");
         }
 
@@ -109,6 +113,10 @@ public final class CargoDataSynchronizingStrategy extends AbstractTransactionStr
         try {
             item = itemMapper.selectByItemName(transaction.getItemName());
         } catch (Exception e) {
+            throw new DataNotFoundException("Item with this item name does not exist in the database");
+        }
+
+        if(item == null){
             throw new DataNotFoundException("Item with this item name does not exist in the database");
         }
 

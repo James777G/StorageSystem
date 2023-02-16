@@ -7,6 +7,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -143,7 +144,7 @@
             </Label>
             <Label fx:id="staffLabel1" alignment="CENTER" layoutX="357.0" layoutY="14.0" maxWidth="100.0" minWidth="100.0" prefHeight="22.0" prefWidth="100.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="14.0">
                <font>
-                  <Font name="Candara Bold" size="19.0" />
+                  <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
             <Label fx:id="amountLabel1" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
@@ -194,7 +195,7 @@
             </Label>
             <Label fx:id="staffLabel2" alignment="CENTER" layoutX="379.0" layoutY="14.0" prefWidth="100.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="14.0">
                <font>
-                  <Font name="Candara Bold" size="19.0" />
+                  <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
             <Label fx:id="amountLabel2" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
@@ -245,7 +246,7 @@
             </Label>
             <Label fx:id="staffLabel3" alignment="CENTER" layoutX="355.0" layoutY="14.0" prefWidth="100.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="14.0">
                <font>
-                  <Font name="Candara Bold" size="19.0" />
+                  <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
             <Label fx:id="amountLabel3" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
@@ -296,7 +297,7 @@
             </Label>
             <Label fx:id="staffLabel4" alignment="CENTER" layoutX="355.0" layoutY="14.0" prefWidth="100.0" text="0000" textFill="#223c40" AnchorPane.bottomAnchor="16.666666666666664" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="14.0">
                <font>
-                  <Font name="Candara Bold" size="19.0" />
+                  <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
             <Label fx:id="amountLabel4" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
@@ -347,7 +348,7 @@
             </Label>
             <Label fx:id="staffLabel5" alignment="CENTER" layoutX="355.0" layoutY="14.0" prefWidth="100.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="14.0">
                <font>
-                  <Font name="Candara Bold" size="19.0" />
+                  <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
             <Label fx:id="amountLabel5" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
@@ -398,7 +399,7 @@
             </Label>
             <Label fx:id="staffLabel6" alignment="CENTER" layoutX="355.0" layoutY="14.0" prefWidth="100.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="14.0">
                <font>
-                  <Font name="Candara Bold" size="19.0" />
+                  <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
             <Label fx:id="amountLabel6" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
@@ -449,7 +450,7 @@
             </Label>
             <Label fx:id="staffLabel7" alignment="CENTER" layoutX="355.0" layoutY="14.0" prefWidth="100.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="14.0">
                <font>
-                  <Font name="Candara Bold" size="19.0" />
+                  <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
             <Label fx:id="amountLabel7" layoutX="555.0" layoutY="16.0" text="0000" textFill="#223c40" AnchorPane.leftAnchor="525.0" AnchorPane.topAnchor="14.0">
@@ -696,7 +697,7 @@
             </AnchorPane>
          </left>
       </MFXGenericDialog>
-      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
+      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
          <children>
             <Label layoutX="421.0" layoutY="156.0" opacity="0.4" prefHeight="128.0" prefWidth="320.0" rotate="-38.7" text="TRANS" textFill="#9de4ed59">
                <font>
@@ -708,46 +709,20 @@
                   <Font name="Calibri Bold" size="20.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="14.0" layoutY="70.0">
-               <children>
-                  <Label prefHeight="17.0" prefWidth="139.0" text="Item Name (required)">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-            <AnchorPane layoutX="433.0" layoutY="70.0">
-               <children>
-                  <Label prefHeight="17.0" prefWidth="139.0" text="Staff Name (required)">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-            <Label layoutX="14.0" layoutY="161.0" prefHeight="17.0" prefWidth="152.0" text="Transaction Information:">
+            <AnchorPane layoutX="14.0" layoutY="70.0" />
+            <AnchorPane layoutX="433.0" layoutY="70.0" />
+            <Label layoutX="14.0" layoutY="183.0" prefHeight="17.0" prefWidth="152.0" text="Transaction Information:">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
                </font>
             </Label>
-            <TextArea fx:id="descriptionTextArea" layoutX="14.0" layoutY="189.0" prefHeight="129.0" prefWidth="366.0" styleClass="lineStyleTextArea" stylesheets="@../css/staffPane.css" />
+            <TextArea fx:id="descriptionTextArea" layoutX="14.0" layoutY="207.0" prefHeight="111.0" prefWidth="366.0" styleClass="lineStyleTextArea" stylesheets="@../css/staffPane.css" />
             <JFXButton fx:id="applyButtonInAdd" layoutX="599.0" layoutY="291.0" onAction="#onClickApplyInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #223c40;" text="Apply" textFill="WHITE">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
                </font>
             </JFXButton>
             <Separator layoutX="1.0" layoutY="44.0" prefHeight="5.0" prefWidth="697.0" />
-            <Label layoutX="501.0" layoutY="192.0" prefHeight="17.0" prefWidth="197.0" text="Transaction-ID is auto-generated">
-               <font>
-                  <Font name="Calibri Bold" size="14.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="28.0" fitWidth="32.0" layoutX="469.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/icons8-information-64.png" />
-               </image>
-            </ImageView>
             <JFXButton fx:id="okayButton" layoutX="498.0" layoutY="291.0" onAction="#onClickOkayInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #e9e9e9;" text="Okay">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
@@ -759,26 +734,17 @@
                </image>
             </ImageView>
             <MFXProgressSpinner fx:id="loadSpinnerInAdd" layoutX="624.0" layoutY="295.0" prefHeight="18.0" prefWidth="25.0" />
-            <Label fx:id="warnMessageInAdd" layoutX="483.0" layoutY="225.0" prefHeight="57.0" prefWidth="197.0" text="Your action was not successful,&#10;please check if the fields&#10; have been filled." textFill="#a10000">
+            <Label fx:id="warnMessageInAdd" layoutX="394.0" layoutY="233.0" prefHeight="57.0" prefWidth="243.0" text="Your action was not successful,&#10;please check if the fields have been filled." textFill="#a10000">
                <font>
                   <Font name="Calibri Bold" size="13.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="222.0" layoutY="71.0">
-               <children>
-                  <Label prefHeight="17.0" prefWidth="152.0" text="Item Amount (required)">
-                     <font>
-                        <Font name="Calibri Bold" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="newUnitTextField" layoutY="15.0" prefHeight="28.0" prefWidth="162.0" styleClass="lineStyleInputField" stylesheets="@../css/staffPane.css">
-                     <font>
-                        <Font name="Calibri" size="12.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </AnchorPane>
-            <MFXDatePicker fx:id="datePicker" editable="false" layoutX="197.0" layoutY="132.0" prefHeight="38.0" prefWidth="180.0" />
+            <AnchorPane layoutX="222.0" layoutY="71.0" />
+            <MFXDatePicker fx:id="datePicker" editable="false" layoutX="228.0" layoutY="85.0" prefHeight="28.0" prefWidth="139.0">
+               <stylesheets>
+                  <URL value="@../css/generalTextField.css" />
+                  <URL value="@../css/filterCombo.css" />
+               </stylesheets></MFXDatePicker>
             <MFXToggleButton fx:id="statusToggleButton" contentDisposition="RIGHT" layoutX="564.0" layoutY="5.0" onAction="#onToggle" text="Restock">
                <font>
                   <Font name="Calibri Bold" size="17.0" />
@@ -789,8 +755,29 @@
                   <Font name="Calibri Bold" size="14.0" />
                </font>
             </JFXButton>
-            <MFXFilterComboBox fx:id="newItemFilterComboBox" floatMode="BORDER" layoutX="14.0" layoutY="87.0" prefHeight="34.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" />
-            <MFXFilterComboBox fx:id="newStaffFilterComboBox" floatMode="BORDER" layoutX="433.0" layoutY="87.0" prefHeight="34.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" />
+            <MFXFilterComboBox fx:id="newItemFilterComboBox" floatMode="BORDER" layoutX="14.0" layoutY="87.0" prefHeight="34.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" AnchorPane.topAnchor="87.0" />
+            <MFXFilterComboBox fx:id="newStaffFilterComboBox" floatMode="BORDER" layoutX="422.0" layoutY="85.0" prefHeight="34.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" AnchorPane.topAnchor="87.0" />
+            <Label layoutX="428.0" layoutY="60.0" prefHeight="17.0" prefWidth="139.0" text="Staff Name (required)" AnchorPane.topAnchor="60.0">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="422.0" layoutY="138.0" prefHeight="17.0" prefWidth="152.0" text="Item Amount (required)">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="20.0" layoutY="61.0" prefHeight="17.0" prefWidth="139.0" text="Item Name (required)" AnchorPane.topAnchor="60.0">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="228.0" layoutY="61.0" prefHeight="17.0" prefWidth="139.0" text="Process Date:">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+            </Label>
+            <MFXTextField fx:id="newUnitTextField" floatMode="DISABLED" layoutX="422.0" layoutY="166.0" prefHeight="34.0" prefWidth="152.0" stylesheets="@../css/generalTextField.css" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="deleteItemPane" layoutX="361.0" layoutY="100.0" prefHeight="220.0" prefWidth="200.0" style="-fx-background-color: #f6f6f6; -fx-background-radius: 15;" visible="false">

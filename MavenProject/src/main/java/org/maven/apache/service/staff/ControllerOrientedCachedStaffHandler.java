@@ -2,6 +2,7 @@ package org.maven.apache.service.staff;
 
 import jakarta.annotation.Resource;
 import lombok.Data;
+import org.maven.apache.exception.BaseException;
 import org.maven.apache.staff.Staff;
 import org.maven.apache.utils.StaffCachedUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,7 +30,7 @@ public class ControllerOrientedCachedStaffHandler implements CachedStaffService 
     private GeneralStaffStrategies staffStrategies;
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = BaseException.class)
     public void updateAllCachedStaffData() {
         List<Staff> staffList = staffDAOService.selectAll();
         StaffCachedUtils.putLists(StaffCachedUtils.listType.ALL, staffDataManipulationService
@@ -41,7 +42,7 @@ public class ControllerOrientedCachedStaffHandler implements CachedStaffService 
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = BaseException.class)
     public void addNewStaff(Staff staff) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         staffDAOService.add(staff);
         updateAllCachedStaffData();
@@ -49,7 +50,7 @@ public class ControllerOrientedCachedStaffHandler implements CachedStaffService 
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = BaseException.class)
     public void deleteStaffById(int id) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         staffDAOService.deleteById(id);
         updateAllCachedStaffData();
@@ -57,7 +58,7 @@ public class ControllerOrientedCachedStaffHandler implements CachedStaffService 
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = BaseException.class)
     public void updateStaff(Staff staff) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         staffDAOService.updateStaff(staff);
         updateAllCachedStaffData();

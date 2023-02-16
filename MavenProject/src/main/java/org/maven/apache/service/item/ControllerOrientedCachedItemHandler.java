@@ -4,12 +4,15 @@ import jakarta.annotation.Resource;
 import javafx.application.Platform;
 import org.maven.apache.controllers.AppPage2Controller;
 import org.maven.apache.controllers.NewTransactionPageController;
+import org.maven.apache.exception.BaseException;
 import org.maven.apache.item.Item;
 import org.maven.apache.service.regulatory.RegulatoryService;
 import org.maven.apache.service.transaction.CachedTransactionService;
 import org.maven.apache.utils.CargoCachedUtils;
 import org.maven.apache.utils.DataUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -29,12 +32,14 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService {
     private RegulatoryService regulatoryService;
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = BaseException.class)
     public void updateAllCachedItemData() {
         CargoCachedUtils.putLists(CargoCachedUtils.listType.ALL,
                 itemDataManipulationService.getPagedCacheList(itemService.selectAll(), 7));
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = BaseException.class)
     public void addNewItem(Item item) {
         itemService.addNewItem(item);
         updateAllCachedItemData();
@@ -50,6 +55,7 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = BaseException.class)
     public void deleteItemById(int id) {
         itemService.deleteById(id);
         updateAllCachedItemData();
@@ -145,6 +151,7 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = BaseException.class)
     public void updateItem(Item item) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         itemService.update(item);
         updateAllCachedItemData();

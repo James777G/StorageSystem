@@ -2,6 +2,7 @@ package org.maven.apache.service.transaction;
 
 import jakarta.annotation.Resource;
 import lombok.Data;
+import org.maven.apache.exception.BaseException;
 import org.maven.apache.exception.DataNotFoundException;
 import org.maven.apache.exception.NegativeDataException;
 import org.maven.apache.exception.Warning;
@@ -47,7 +48,7 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
      * </p>
      */
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = BaseException.class)
     public void updateAllCachedTransactionData() {
         cachedTransactionListService.updateAllLists(transactionMapper, cachedManipulationService);
     }
@@ -67,11 +68,11 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
      */
     @Warning(Warning.WarningType.DEBUG)
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = BaseException.class)
     public void addNewTransaction(Transaction transaction) throws DataNotFoundException, NegativeDataException {
+        strategiesHandler.doStrategies(itemMapper, transactionMapper, transaction);
         transactionMapper.addNewTransaction(transaction);
         updateAllCachedTransactionData();
-        strategiesHandler.doStrategies(itemMapper, transactionMapper, transaction);
     }
 
     /**
@@ -86,7 +87,7 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
      */
     @Warning(Warning.WarningType.DEBUG)
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = BaseException.class)
     public void deleteTransactionById(int id) throws NegativeDataException {
         strategiesHandler.doStrategies(itemMapper, transactionMapper, id);
         transactionMapper.deleteTransactionById(id);
@@ -106,7 +107,7 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
      * @param transaction encapsulated transaction object to be updated with desired attributes
      */
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = BaseException.class)
     public void updateTransaction(Transaction transaction) {
         transactionMapper.updateTransaction(transaction);
         updateAllCachedTransactionData();
