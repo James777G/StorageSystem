@@ -173,6 +173,7 @@ public class LogInPageController implements Initializable {
     private int time;
 
     private static volatile List<User> userList;
+
     private final ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
 
     private final UserService userService = MyLauncher.context.getBean("userService", UserService.class);
