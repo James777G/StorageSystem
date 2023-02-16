@@ -5,7 +5,6 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.Separator?>
@@ -103,7 +102,6 @@
             <AnchorPane fx:id="lineOnForgotPassword" layoutX="980.0" layoutY="411.0" prefHeight="1.0" prefWidth="136.0" style="-fx-background-color: black;" />
             <AnchorPane fx:id="lineOnSignUp" layoutX="835.0" layoutY="598.0" prefHeight="1.0" prefWidth="146.0" style="-fx-background-color: black;" />
             <ProgressIndicator fx:id="loadIndicator" layoutX="1014.0" layoutY="472.0" />
-            <Button fx:id="fastLoginButton" layoutX="853.0" layoutY="193.0" mnemonicParsing="false" onAction="#onFastLogin" text="Login as Piper" visible="false" />
             <Label layoutX="874.0" layoutY="218.0" text="Test only" textFill="RED" visible="false" />
          </children>
       </AnchorPane>
