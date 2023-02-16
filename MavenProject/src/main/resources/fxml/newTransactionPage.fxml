@@ -7,7 +7,6 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -697,7 +696,7 @@
             </AnchorPane>
          </left>
       </MFXGenericDialog>
-      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
+      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
          <children>
             <Label layoutX="421.0" layoutY="156.0" opacity="0.4" prefHeight="128.0" prefWidth="320.0" rotate="-38.7" text="TRANS" textFill="#9de4ed59">
                <font>
@@ -740,11 +739,7 @@
                </font>
             </Label>
             <AnchorPane layoutX="222.0" layoutY="71.0" />
-            <MFXDatePicker fx:id="datePicker" editable="false" layoutX="228.0" layoutY="85.0" prefHeight="28.0" prefWidth="139.0">
-               <stylesheets>
-                  <URL value="@../css/generalTextField.css" />
-                  <URL value="@../css/filterCombo.css" />
-               </stylesheets></MFXDatePicker>
+            <MFXDatePicker fx:id="datePicker" editable="false" layoutX="228.0" layoutY="85.0" prefHeight="28.0" prefWidth="139.0" stylesheets="@../css/calendar.css" />
             <MFXToggleButton fx:id="statusToggleButton" contentDisposition="RIGHT" layoutX="564.0" layoutY="5.0" onAction="#onToggle" text="Restock">
                <font>
                   <Font name="Calibri Bold" size="17.0" />

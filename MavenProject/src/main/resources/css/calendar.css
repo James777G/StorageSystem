@@ -1,0 +1,44 @@
+@import "filterCombo.css";
+
+
+
+.mfx-date-picker:focus-within .icon {
+    -mfx-color: #223c40;
+}
+
+.mfx-date-picker .date-picker-popup .left-arrow .mfx-ripple-generator,
+.mfx-date-picker .date-picker-popup .right-arrow .mfx-ripple-generator {
+    -mfx-ripple-color: rgba(24, 37, 38, 0.05);
+}
+
+.mfx-date-picker .date-picker-popup .months-combo:focus-within,
+.mfx-date-picker .date-picker-popup .years-combo:focus-within {
+    -fx-background-color: rgba(24, 37, 38, 0.1);
+    -fx-text-fill: #223c40;
+}
+
+.mfx-date-picker .date-picker-popup .months-combo .virtual-flow .mfx-combo-box-cell:selected .label,
+.mfx-date-picker .date-picker-popup .years-combo .virtual-flow .mfx-combo-box-cell:selected .label {
+    -fx-text-fill: #223c40;
+}
+
+.mfx-date-picker .date-picker-popup .week-day {
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-text-fill: #223c40;
+    -fx-padding: 0 0 5 0;
+}
+
+.mfx-date-picker .date-picker-popup .months-combo .virtual-flow .mfx-combo-box-cell:hover,
+.mfx-date-picker .date-picker-popup .years-combo .virtual-flow .mfx-combo-box-cell:hover {
+    -fx-background-color: rgba(24, 37, 38, 0.1);
+}
+
+.mfx-date-picker .date-picker-popup .months-combo .virtual-flow .mfx-combo-box-cell:selected,
+.mfx-date-picker .date-picker-popup .years-combo .virtual-flow .mfx-combo-box-cell:selected {
+    -fx-background-color: rgba(24, 37, 38, 0.1);
+}
+
+.mfx-combo-box .caret .mfx-ripple-generator {
+    -mfx-ripple-color: rgba(24, 37, 38, 0.1);
+    -mfx-ripple-radius: 14;
+}
