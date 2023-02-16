@@ -46,24 +46,6 @@ import java.util.concurrent.ExecutorService;
 
 public class LogInPageController implements Initializable {
 
-    private String signUpUserNameString;
-
-    private String verificationCode;
-
-    private int time;
-
-    private static volatile List<User> userList;
-
-    private final UserService userService = MyLauncher.context.getBean("userService", UserService.class);
-
-    private final MailService mailService = MyLauncher.context.getBean("mailService", MailService.class);
-
-    private final Timeline usernameTimeline = new Timeline();
-
-    private final Timeline passwordTimeline = new Timeline();
-
-    public static boolean isCounting = false;
-
     @FXML
     private ImageView exitButton2;
 
@@ -184,8 +166,23 @@ public class LogInPageController implements Initializable {
     @FXML
     private ProgressIndicator loadIndicator;
 
-    @FXML
-    private Button fastLoginButton;
+    private String signUpUserNameString;
+
+    private String verificationCode;
+
+    private int time;
+
+    private static volatile List<User> userList;
+
+    private final UserService userService = MyLauncher.context.getBean("userService", UserService.class);
+
+    private final MailService mailService = MyLauncher.context.getBean("mailService", MailService.class);
+
+    private final Timeline usernameTimeline = new Timeline();
+
+    private final Timeline passwordTimeline = new Timeline();
+
+    public static boolean isCounting = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -318,24 +315,20 @@ public class LogInPageController implements Initializable {
         });
     }
 
-
     @FXML
     private void onEnterForgotPassword() {
         lineOnForgotPassword.setVisible(true);
     }
-
 
     @FXML
     private void onExitForgotPassword() {
         lineOnForgotPassword.setVisible(false);
     }
 
-
     @FXML
     private void onEnterLabelSignIn() {
         lineOnSignIn.setVisible(true);
     }
-
 
     @FXML
     private void onExitLabelSignIn() {
@@ -391,9 +384,6 @@ public class LogInPageController implements Initializable {
         } else {
             // if the user exists, check its verification (correct password)
             if (currentUser.getPassword().equals(passwordField.getText())) {
-                /***********/
-                fastLoginButton.setDisable(true); //test only
-                /***********/
                 // show progress indicator and disable signing button
                 loginButton.setDisable(true);
                 loadIndicator.setVisible(true);
@@ -611,16 +601,6 @@ public class LogInPageController implements Initializable {
 
     public String getSignUpPasswordString() {
         return signUpPassword.getText();
-    }
-
-    /**
-     * a shortcut for logging in as Piper (test only)
-     */
-    @FXML
-    private void onFastLogin() {
-        userNameField.setText("Piper");
-        passwordField.setText("sir");
-        onSignInAction();
     }
 
 }
