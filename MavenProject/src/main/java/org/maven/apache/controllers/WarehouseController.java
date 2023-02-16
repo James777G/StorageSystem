@@ -35,12 +35,6 @@ import java.util.concurrent.ExecutorService;
 @Slf4j
 public class WarehouseController implements Initializable {
 
-    private final SearchResultService<Item> searchResultService = MyLauncher.context.getBean("searchResultService", SearchResultService.class);
-
-    private final CachedItemService cachedItemService = MyLauncher.context.getBean("cachedItemService", CachedItemService.class);
-
-    private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
-
     @FXML
     private Label itemNameOne, itemNameTwo, itemNameThree, itemNameFour, itemNameFive, itemNameSix, itemNameSeven;
 
@@ -51,34 +45,61 @@ public class WarehouseController implements Initializable {
     private Label itemAmountOne, itemAmountTwo, itemAmountThree, itemAmountFour, itemAmountFive, itemAmountSix, itemAmountSeven;
 
     @FXML
-    private JFXButton edit1, edit2, edit3, edit4, edit5, edit6, edit7;
-
-    @FXML
-    private ImageView deleteOne, deleteTwo, deleteThree, deleteFour, deleteFive, deleteSix, deleteSeven;
-
-    @FXML
-    private TextField itemNameInDetails;
-
-    @FXML
     private Label itemIdInDetails;
 
     @FXML
     private Label itemAmountInDetails;
 
     @FXML
-    private TextArea itemDescriptionInDetails;
-
-    @FXML
-    private MFXGenericDialog descriptionDialog;
-
-    @FXML
     private Label warnMessage;
+
+    @FXML
+    private Label warnMessageInAdd;
+
+    @FXML
+    private JFXButton edit1, edit2, edit3, edit4, edit5, edit6, edit7;
 
     @FXML
     private JFXButton applyButton;
 
     @FXML
+    private JFXButton applyButtonInAdd;
+
+    @FXML
+    private ImageView deleteOne, deleteTwo, deleteThree, deleteFour, deleteFive, deleteSix, deleteSeven;
+
+    @FXML
+    private ImageView doContinueButton;
+
+    @FXML
+    private ImageView doNotContinueButton;
+
+    @FXML
+    private TextField itemNameInDetails;
+
+    @FXML
+    private TextField itemAmountInAdd;
+
+    @FXML
+    private TextField itemNameInAdd;
+
+    @FXML
+    private TextArea itemDescriptionInDetails;
+
+    @FXML
+    private TextArea itemDescriptionInAdd;
+
+    @FXML
+    private MFXGenericDialog descriptionDialog;
+
+    @FXML
     private MFXProgressSpinner loadSpinner;
+
+    @FXML
+    private MFXProgressSpinner loadSpinnerInAdd;
+
+    @FXML
+    private MFXProgressSpinner loadSpinnerOnDeletePane;
 
     @FXML
     private AnchorPane addButton;
@@ -93,43 +114,19 @@ public class WarehouseController implements Initializable {
     private AnchorPane transactionPane1, transactionPane2, transactionPane3, transactionPane4, transactionPane5, transactionPane6, transactionPane7;
 
     @FXML
-    private AnchorPane[] transactionPanes = new AnchorPane[7];
-
-    @FXML
-    private MFXProgressSpinner loadSpinnerInAdd;
-
-    @FXML
-    private TextField itemAmountInAdd;
-
-    @FXML
-    private TextField itemNameInAdd;
-
-    @FXML
-    private TextArea itemDescriptionInAdd;
-
-    @FXML
-    private Label warnMessageInAdd;
-
-    @FXML
-    private JFXButton applyButtonInAdd;
-
-    @FXML
     private AnchorPane deleteItemPane;
 
     @FXML
     private Pagination newPagination;
 
     @FXML
-    private ImageView doContinueButton;
-
-    @FXML
-    private MFXProgressSpinner loadSpinnerOnDeletePane;
-
-    @FXML
-    private ImageView doNotContinueButton;
-
-    @FXML
     private MFXTextField searchBar;
+
+    private final SearchResultService<Item> searchResultService = MyLauncher.context.getBean("searchResultService", SearchResultService.class);
+
+    private final CachedItemService cachedItemService = MyLauncher.context.getBean("cachedItemService", CachedItemService.class);
+
+    private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
 
     private int pageSize;
 
@@ -144,6 +141,8 @@ public class WarehouseController implements Initializable {
     private final ImageView[] deleteList = new ImageView[7];
 
     private final JFXButton[] buttonList = new JFXButton[7];
+
+    private AnchorPane[] transactionPanes = new AnchorPane[7];
 
     private Item selectedItem;
 
@@ -757,7 +756,6 @@ public class WarehouseController implements Initializable {
         loadSpinnerInAdd.setVisible(true);
         executorService.execute(() -> {
             try {
-//                warnMessageInAdd.setVisible(true);
                 cachedItemService.addNewItem(item);
                 Platform.runLater(() -> {
                     generateItemList(newPagination.getCurrentPageIndex());
@@ -1051,9 +1049,6 @@ public class WarehouseController implements Initializable {
         for (int i = 0; i < itemList.size(); i++) {
             amountList[i].setText(itemList.get(i).getUnit().toString());
         }
-//        for (int j = itemList.size(); j < amountList.length; j++) {
-//            amountList[j].setText("N/A");
-//        }
     }
 
     /**
