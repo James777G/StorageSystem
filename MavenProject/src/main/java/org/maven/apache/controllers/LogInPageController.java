@@ -173,6 +173,7 @@ public class LogInPageController implements Initializable {
     private int time;
 
     private static volatile List<User> userList;
+    private final ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
 
     private final UserService userService = MyLauncher.context.getBean("userService", UserService.class);
 
@@ -378,42 +379,50 @@ public class LogInPageController implements Initializable {
      */
     @FXML
     private void onSignInAction() {
-        // get the user list
-        updateUserList();
-        String username = userNameField.getText();
-        User currentUser = getUser(username);
-        if (!isUsernameFound(username)) {
-            // if the user does not exist, show alert
-            callErrorDialog();
-        } else {
-            // if the user exists, check its verification (correct password)
-            if (currentUser.getPassword().equals(passwordField.getText())) {
-                // show progress indicator and disable signing button
+        threadPoolExecutor.execute(() -> {
+            Platform.runLater(() -> {
                 loginButton.setDisable(true);
                 loadIndicator.setVisible(true);
-                setFieldStatus(true);
-                // head to the app page (appPage2) in the background
-                ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
-                threadPoolExecutor.execute(() -> {
-                    DataUtils.currentUser = currentUser;
-                    Stage stage = (Stage) loginButton.getScene().getWindow();
-                    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/appPage2.fxml"));
-                    final Scene scene;
-                    try {
-                        scene = new Scene(loader.load());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
+            });
+            // get the user list
+            updateUserList();
+            String username = userNameField.getText();
+            User currentUser = getUser(username);
+            Platform.runLater(() -> {
+                if (!isUsernameFound(username)) {
+                    // if the user does not exist, show alert
+                    callErrorDialog();
+                } else {
+                    // if the user exists, check its verification (correct password)
+                    if (currentUser.getPassword().equals(passwordField.getText())) {
+                        // show progress indicator and disable signing button
+                        loginButton.setDisable(true);
+                        loadIndicator.setVisible(true);
+                        // head to the app page (appPage2) in the background
+
+                        threadPoolExecutor.execute(() -> {
+                            DataUtils.currentUser = currentUser;
+                            Stage stage = (Stage) loginButton.getScene().getWindow();
+                            FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/appPage2.fxml"));
+                            final Scene scene;
+                            try {
+                                scene = new Scene(loader.load());
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                            Platform.runLater(() -> {
+                                stage.setScene(scene);
+                                stage.show();
+                            });
+                        });
+                    } else {
+                        // incorrect username or password
+                        callErrorDialog();
                     }
-                    Platform.runLater(() -> {
-                        stage.setScene(scene);
-                        stage.show();
-                    });
-                });
-            } else {
-                // incorrect username or password
-                callErrorDialog();
-            }
-        }
+                }
+            });
+        });
+
     }
 
     /**
