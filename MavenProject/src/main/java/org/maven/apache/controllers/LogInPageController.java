@@ -212,6 +212,9 @@ public class LogInPageController implements Initializable {
         loadIndicator.setStyle(" -fx-progress-color: black;");
         loadIndicator.setVisible(false);
         loginButton.setDisable(false);
+        /****/
+        fastLoginButton.setDisable(true);  // TEST ONLY
+        /****/
     }
 
     /**
@@ -601,6 +604,24 @@ public class LogInPageController implements Initializable {
 
     public String getSignUpPasswordString() {
         return signUpPassword.getText();
+    }
+
+    /**
+     * TEST ONLY
+     */
+    @FXML
+    private Button fastLoginButton;
+
+    /**
+     * TEST ONLY
+     * login as piper by clicking a button
+     */
+    @FXML
+    private void onFastLogin(){
+        userNameField.setText("Piper");
+        passwordField.setText("sir");
+        fastLoginButton.setDisable(true);
+        onSignInAction();
     }
 
 }

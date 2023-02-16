@@ -5,6 +5,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.Separator?>
@@ -102,7 +103,8 @@
             <AnchorPane fx:id="lineOnForgotPassword" layoutX="980.0" layoutY="411.0" prefHeight="1.0" prefWidth="136.0" style="-fx-background-color: black;" />
             <AnchorPane fx:id="lineOnSignUp" layoutX="835.0" layoutY="598.0" prefHeight="1.0" prefWidth="146.0" style="-fx-background-color: black;" />
             <ProgressIndicator fx:id="loadIndicator" layoutX="1014.0" layoutY="472.0" />
-            <Label layoutX="874.0" layoutY="218.0" text="Test only" textFill="RED" visible="false" />
+            <Label layoutX="874.0" layoutY="218.0" text="Test only" textFill="RED" />
+            <Button fx:id="fastLoginButton" layoutX="858.0" layoutY="187.0" mnemonicParsing="false" onAction="#onFastLogin" text="Login as Piper" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="720.0" prefWidth="600.0" style="-fx-background-color: #23242a;">
@@ -134,8 +136,8 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="720.0" prefWidth="1220.0" style="-fx-background-color: grey;" />
-      <MFXGenericDialog fx:id="errorDialog" alwaysOnTop="true" contentText="&#10;&#10;" headerText="Error" layoutX="400.0" layoutY="240.0" onClose="#onCloseErrorDialog" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false" styleClass="errorMessageDialog">
+      <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="720.0" prefWidth="1220.0" style="-fx-background-color: grey;" visible="false" />
+      <MFXGenericDialog fx:id="errorDialog" alwaysOnTop="true" contentText="&#10;&#10;" headerText="Error" layoutX="400.0" layoutY="240.0" onClose="#onCloseErrorDialog" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false" styleClass="errorMessageDialog" visible="false">
          <center>
             <Label alignment="TOP_LEFT" prefHeight="127.0" prefWidth="378.0" text="You have entered incorrect username and password.&#10;&#10;*Please check and sign in again*&#10;" textFill="#514f4f" BorderPane.alignment="CENTER">
                <font>
@@ -144,7 +146,7 @@
             </Label>
          </center>
       </MFXGenericDialog>
-      <MFXGenericDialog fx:id="confirmDialog" headerText="Confirmation" layoutX="400.0" layoutY="230.0" onClose="#onCloseConfirmDialog" prefHeight="260.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false">
+      <MFXGenericDialog fx:id="confirmDialog" headerText="Confirmation" layoutX="400.0" layoutY="230.0" onClose="#onCloseConfirmDialog" prefHeight="260.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false" visible="false">
          <center>
             <Pane prefHeight="189.0" prefWidth="378.0" BorderPane.alignment="CENTER">
                <children>
@@ -173,7 +175,7 @@
                </font></JFXButton>
          </bottom>
       </MFXGenericDialog>
-      <MFXGenericDialog fx:id="verificationDialog" headerText="Verification Code" layoutX="400.0" layoutY="230.0" maxHeight="310.0" maxWidth="500.0" onClose="#onCloseVerificationDialog" prefHeight="310.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false">
+      <MFXGenericDialog fx:id="verificationDialog" headerText="Verification Code" layoutX="400.0" layoutY="230.0" maxHeight="310.0" maxWidth="500.0" onClose="#onCloseVerificationDialog" prefHeight="310.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false" visible="false">
          <center>
             <VBox alignment="CENTER" prefHeight="218.0" prefWidth="273.0" BorderPane.alignment="CENTER">
                <padding>
