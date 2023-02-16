@@ -19,7 +19,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
@@ -696,7 +695,7 @@
             </AnchorPane>
          </left>
       </MFXGenericDialog>
-      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
+      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
          <children>
             <Label layoutX="421.0" layoutY="156.0" opacity="0.4" prefHeight="128.0" prefWidth="320.0" rotate="-38.7" text="TRANS" textFill="#9de4ed59">
                <font>
@@ -775,7 +774,7 @@
             <MFXTextField fx:id="newUnitTextField" floatMode="DISABLED" layoutX="422.0" layoutY="166.0" prefHeight="34.0" prefWidth="152.0" stylesheets="@../css/generalTextField.css" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="deleteItemPane" layoutX="361.0" layoutY="100.0" prefHeight="220.0" prefWidth="200.0" style="-fx-background-color: #f6f6f6; -fx-background-radius: 15;" visible="false">
+      <AnchorPane fx:id="deleteItemPane" layoutX="361.0" layoutY="100.0" prefHeight="171.0" prefWidth="495.0" style="-fx-background-color: #f6f6f6; -fx-background-radius: 15;">
          <children>
             <Label layoutX="14.0" layoutY="14.0" text="Continue?" AnchorPane.leftAnchor="15.0">
                <font>
@@ -783,7 +782,7 @@
                </font>
             </Label>
             <Separator layoutX="7.0" layoutY="38.0" prefHeight="8.0" prefWidth="488.0" />
-            <Label layoutX="36.0" layoutY="48.0" text="You Are About To Delete A Transaction" textFill="#db5b5b" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="55.0">
+            <Label layoutX="36.0" layoutY="48.0" text="You Are About To Delete The Following Transaction:" textFill="#db5b5b" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="55.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -799,40 +798,45 @@
                </image>
             </ImageView>
             <MFXProgressSpinner fx:id="loadSpinnerOnDeletePane" layoutX="461.0" layoutY="52.0" prefHeight="23.0" prefWidth="25.0" visible="false" />
-            <VBox alignment="TOP_CENTER" layoutX="79.0" layoutY="83.0" prefHeight="136.0" prefWidth="341.0" spacing="4.0">
+            <AnchorPane layoutX="12.0" layoutY="86.0">
                <children>
                   <Label fx:id="confirmStatusLabel" text="Status: ***">
                      <font>
                         <Font name="Candara Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="confirmCargoNameLabel" text="Item name: ***">
+                  <Label fx:id="confirmCargoNameLabel" layoutY="22.0" text="Item name: ***">
                      <font>
                         <Font name="Candara Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="confirmIdLabel" text="Transaction id: ***">
+                  <Label fx:id="confirmIdLabel" layoutX="219.0" text="Transaction id: ***">
                      <font>
                         <Font name="Candara Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="confirmCargoUnitLabel" text="Unit: ***">
+                  <Label fx:id="confirmCargoUnitLabel" layoutX="219.0" layoutY="22.0" text="Unit: ***">
                      <font>
                         <Font name="Candara Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="confirmDateLabel" text="Date of completion: ***">
+                  <Label fx:id="confirmDateLabel" layoutX="1.0" layoutY="47.0" text="Date of completion: ***">
                      <font>
                         <Font name="Candara Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="confirmStaffNameLabel" text="Staff issued: ***">
+                  <Label fx:id="confirmStaffNameLabel" layoutX="219.0" layoutY="47.0" text="Staff issued: ***">
                      <font>
                         <Font name="Candara Bold" size="14.0" />
                      </font>
                   </Label>
                </children>
-            </VBox>
+            </AnchorPane>
+            <Label fx:id="warnMessageInDelete" layoutX="225.0" layoutY="15.0" text="Deletion Failed, insufficient item amount." textFill="RED" visible="false">
+               <font>
+                  <Font name="Candara Bold" size="12.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>

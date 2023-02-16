@@ -239,6 +239,9 @@ public class NewTransactionPageController implements Initializable {
     @FXML
     private MFXFilterComboBox newStaffFilterComboBox;
 
+    @FXML
+    private Label warnMessageInDelete;
+
     private Label[] cargoLabelArray = new Label[7];
 
     private Label[] staffLabelArray = new Label[7];
@@ -723,6 +726,7 @@ public class NewTransactionPageController implements Initializable {
         });
         fadeTransition.play();
         translateTransition.play();
+        warnMessageInDelete.setVisible(false);
     }
 
     /**
@@ -843,18 +847,21 @@ public class NewTransactionPageController implements Initializable {
                 Platform.runLater(() -> {
                     try {
                         refreshPage();
+                        warnMessageInDelete.setVisible(false);
                     } catch (UnsupportedPojoException e) {
                         throw new RuntimeException(e);
                     }
+                    // restore nodes after a succeesful deletion
+                    deletionCross.setDisable(false);
+                    deletionTick.setVisible(true);
+                    loadSpinnerOnDeletePane.setVisible(false);
+                    onCloseDeletionConfirmation();
                 });
             } catch (NegativeDataException e) {
-                throw new RuntimeException(e);
-            } finally {
-                // restore nodes after a succeesful deletion
+                warnMessageInDelete.setVisible(true);
                 deletionCross.setDisable(false);
                 deletionTick.setVisible(true);
                 loadSpinnerOnDeletePane.setVisible(false);
-                onCloseDeletionConfirmation();
             }
         });
     }
