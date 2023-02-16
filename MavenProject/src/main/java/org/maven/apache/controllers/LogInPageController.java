@@ -383,6 +383,7 @@ public class LogInPageController implements Initializable {
             Platform.runLater(() -> {
                 loginButton.setDisable(true);
                 loadIndicator.setVisible(true);
+                setFieldStatus(true);
             });
             // get the user list
             updateUserList();
@@ -399,7 +400,6 @@ public class LogInPageController implements Initializable {
                         loginButton.setDisable(true);
                         loadIndicator.setVisible(true);
                         // head to the app page (appPage2) in the background
-
                         threadPoolExecutor.execute(() -> {
                             DataUtils.currentUser = currentUser;
                             Stage stage = (Stage) loginButton.getScene().getWindow();
@@ -422,7 +422,6 @@ public class LogInPageController implements Initializable {
                 }
             });
         });
-
     }
 
     /**
