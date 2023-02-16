@@ -1,6 +1,5 @@
 package org.maven.apache.service.regulatory;
 
-import org.maven.apache.email.Email;
 import org.maven.apache.regulatory.Regulatory;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("regulatoryDataManipulator")
-public class RegulatoryCachedDataManipulator implements RegulatoryDataManipulationService{
+public class RegulatoryCachedDataManipulator implements RegulatoryDataManipulationService {
 
     @Override
     public List<List<Regulatory>> getPagedCacheList(List<Regulatory> cachedList, int pageSize) {

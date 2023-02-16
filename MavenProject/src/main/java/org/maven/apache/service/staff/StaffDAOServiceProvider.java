@@ -1,6 +1,5 @@
 package org.maven.apache.service.staff;
 
-import jakarta.annotation.Resource;
 import lombok.Data;
 import org.maven.apache.mapper.StaffMapper;
 import org.maven.apache.staff.Staff;
@@ -13,7 +12,7 @@ import java.util.List;
 
 @Component("staffDAOService")
 @Data
-public class StaffDAOServiceProvider implements StaffDAOService{
+public class StaffDAOServiceProvider implements StaffDAOService {
 
     @Autowired
     @SuppressWarnings("all")

@@ -1,9 +1,9 @@
-
 package org.maven.apache.service.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.maven.apache.exception.BaseException;
 import org.maven.apache.mapper.UserMapper;
 import org.maven.apache.user.User;
 import org.springframework.stereotype.Component;
@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Component
 @Transactional
-public class UserServiceProvider implements UserService{
+public class UserServiceProvider implements UserService {
 
     private UserMapper userMapper;
 
@@ -35,7 +35,7 @@ public class UserServiceProvider implements UserService{
      * @return List
      */
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = BaseException.class)
     public List<User> selectAll() {
         return userMapper.selectAll();
     }
@@ -47,7 +47,7 @@ public class UserServiceProvider implements UserService{
      * @return item
      */
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = BaseException.class)
     public User selectById(int id) {
         return userMapper.selectById(id);
     }
@@ -61,7 +61,7 @@ public class UserServiceProvider implements UserService{
      * @return List
      */
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = BaseException.class)
     public List<User> selectByUsername(String UserName) {
         return userMapper.selectByUsername(UserName);
     }
@@ -75,7 +75,7 @@ public class UserServiceProvider implements UserService{
      * @param user user
      */
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = BaseException.class)
     public void add(User user) {
         userMapper.add(user);
     }
@@ -87,7 +87,7 @@ public class UserServiceProvider implements UserService{
      * @return an integer showing how many rows are affected
      */
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = BaseException.class)
     public int update(User user) {
         return userMapper.update(user);
     }
@@ -99,7 +99,7 @@ public class UserServiceProvider implements UserService{
      * @return a user
      */
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = BaseException.class)
     public List<User> selectByName(String name) {
         return userMapper.selectByName(name);
     }
@@ -110,7 +110,7 @@ public class UserServiceProvider implements UserService{
      * @param id
      */
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = BaseException.class)
     public void deleteById(int id) {
         userMapper.deleteById(id);
     }
@@ -121,7 +121,7 @@ public class UserServiceProvider implements UserService{
      * @param ids an array of id
      */
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = BaseException.class)
     public void deleteByIds(int[] ids) {
         userMapper.deleteByIds(ids);
     }

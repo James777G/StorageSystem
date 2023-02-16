@@ -1,9 +1,7 @@
 package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import io.github.palexdev.materialfx.controls.MFXDatePicker;
-import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
-import io.github.palexdev.materialfx.controls.MFXToggleButton;
+import io.github.palexdev.materialfx.controls.*;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
@@ -12,6 +10,7 @@ import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -22,22 +21,22 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.transform.Translate;
 import org.maven.apache.MyLauncher;
-import org.maven.apache.exception.NegativeDataException;
-import org.maven.apache.exception.Warning;
+import org.maven.apache.exception.*;
+import org.maven.apache.item.Item;
+import org.maven.apache.service.search.SearchResultService;
+import org.maven.apache.service.search.SearchResultServiceHandler;
 import org.maven.apache.service.transaction.CachedTransactionService;
+import org.maven.apache.staff.Staff;
 import org.maven.apache.transaction.Transaction;
 import org.maven.apache.utils.*;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
+import java.util.function.Consumer;
 
 public class NewTransactionPageController implements Initializable {
 
@@ -51,17 +50,8 @@ public class NewTransactionPageController implements Initializable {
     }
 
     enum ArrowStatus {
-        HORIZONTAL , UP ,DOWN
+        HORIZONTAL, UP, DOWN
     }
-
-    @FXML
-    private AnchorPane movingLinePane;
-
-    @FXML
-    private AnchorPane cargoPane;
-
-    @FXML
-    private AnchorPane dataPane;
 
     @FXML
     private AnchorPane addButton;
@@ -166,7 +156,7 @@ public class NewTransactionPageController implements Initializable {
     private Label warnMessageInAdd;
 
     @FXML
-    private Label transactionIdLabel;
+    private Label transactionIdInDetails;
 
     @FXML
     private Label transactionStatusInDetails;
@@ -180,17 +170,17 @@ public class NewTransactionPageController implements Initializable {
     @FXML
     private Label transactionAmountInDetails;
 
-
+    @FXML
+    private Label warnMessageInDetails;
 
     @FXML
     private Pagination transactionPagination;
-
 
     @FXML
     private Image arrowImage = new Image(Objects.requireNonNull(NewTransactionPageController.class.getResourceAsStream("/image/icons8-sort-down-100.png")));
 
     @FXML
-    private Image horizontalLineImage  = new Image(Objects.requireNonNull(NewTransactionPageController.class.getResourceAsStream("/image/icons8-horizontal-line-96.png")));
+    private Image horizontalLineImage = new Image(Objects.requireNonNull(NewTransactionPageController.class.getResourceAsStream("/image/icons8-horizontal-line-96.png")));
 
     @FXML
     private ImageView sortByAmount;
@@ -202,6 +192,9 @@ public class NewTransactionPageController implements Initializable {
     private ImageView binImage1, binImage2, binImage3, binImage4, binImage5, binImage6, binImage7;
 
     @FXML
+    private ImageView[] binImages = new ImageView[7];
+
+    @FXML
     private ImageView deletionCross;
 
     @FXML
@@ -211,16 +204,10 @@ public class NewTransactionPageController implements Initializable {
     private MFXGenericDialog descriptionDialog;
 
     @FXML
-    private TextField newItemTextField;
-
-    @FXML
     private TextField newUnitTextField;
 
     @FXML
-    private TextField newStaffTextField;
-
-    @FXML
-    private TextField staffNameInDetails;
+    private MFXFilterComboBox staffNameInDetails;
 
     @FXML
     private TextArea descriptionTextArea;
@@ -243,6 +230,18 @@ public class NewTransactionPageController implements Initializable {
     @FXML
     private MFXToggleButton statusToggleButton;
 
+    @FXML
+    private MFXTextField searchField;
+
+    @FXML
+    private MFXFilterComboBox newItemFilterComboBox;
+
+    @FXML
+    private MFXFilterComboBox newStaffFilterComboBox;
+
+    @FXML
+    private Label warnMessageInDelete;
+
     private Label[] cargoLabelArray = new Label[7];
 
     private Label[] staffLabelArray = new Label[7];
@@ -259,6 +258,8 @@ public class NewTransactionPageController implements Initializable {
 
     private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
 
+    private final SearchResultService<Transaction> searchResultService = MyLauncher.context.getBean("searchResultService", SearchResultService.class);
+
     private List<List<Transaction>> sortedList;
 
     private List<Transaction> currentPageList;
@@ -273,8 +274,6 @@ public class NewTransactionPageController implements Initializable {
 
     private boolean isArrowRotating = false;
 
-    private boolean isPressAmount ;
-
     private boolean isAll = true;
 
     private boolean isRestock = false;
@@ -287,13 +286,13 @@ public class NewTransactionPageController implements Initializable {
 
     private boolean isAdditionSucceed;
 
-    private int currentPage;
+    private boolean isBlockPaneOpen = false;
+
+    public static boolean isSearchingStaff = true;
 
     private int newUnitAmount;
 
     private int newTransactionID;
-
-    private int numOfTransaction;
 
     private String newItemName;
 
@@ -304,6 +303,8 @@ public class NewTransactionPageController implements Initializable {
     private String transactionDescription = "";
 
     private Transaction newTransaction;
+
+    private Transaction originalTransaciton = new Transaction();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -322,13 +323,20 @@ public class NewTransactionPageController implements Initializable {
         amountArrowBlockPane.setVisible(false);
         dateArrowBlockPane.setVisible(false);
         setPaginationPages(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_ASC_7));
-        refreshPage();
+        try {
+            refreshPage();
+        } catch (UnsupportedPojoException e) {
+            throw new RuntimeException(e);
+        }
         // perform the action of loading current page content when pagination is clicked
         transactionPagination.currentPageIndexProperty().addListener((observable, oldValue, newValue) -> {
             updatePagination(newValue);
         });
         setInputValidation(newUnitTextField);
         getNumOfTransaction();
+        warnMessageInDetails.setVisible(false);
+        setPromptTextForStaff();
+        setPromptTextForRegulatory();
     }
 
     /**
@@ -383,16 +391,27 @@ public class NewTransactionPageController implements Initializable {
         transactionPaneArray[4] = transactionPane5;
         transactionPaneArray[5] = transactionPane6;
         transactionPaneArray[6] = transactionPane7;
+        // initialize delete bin imageview
+        binImages[0] = binImage1;
+        binImages[1] = binImage2;
+        binImages[2] = binImage3;
+        binImages[3] = binImage4;
+        binImages[4] = binImage5;
+        binImages[5] = binImage6;
+        binImages[6] = binImage7;
     }
 
-    private void setBinsImages(){
-        binImage1.setVisible(false);
-        binImage2.setVisible(false);
-        binImage3.setVisible(false);
-        binImage4.setVisible(false);
-        binImage5.setVisible(false);
-        binImage6.setVisible(false);
-        binImage7.setVisible(false);
+    private void resetArrows() {
+        sortByAmount.setRotate(0);
+        sortByAmount.setImage(horizontalLineImage);
+        sortByDate.setRotate(0);
+        sortByDate.setImage(arrowImage);
+        amountArrow = ArrowStatus.HORIZONTAL;
+        dateArrow = ArrowStatus.DOWN;
+    }
+
+    private void setBinsImages() {
+        Arrays.stream(binImages).forEach(imageView -> imageView.setVisible(false));
     }
 
     /**
@@ -407,22 +426,28 @@ public class NewTransactionPageController implements Initializable {
      * update the content of which page is going to be indicated
      */
     private void updatePagination(Number currentPage) {
-        currentPageList = sortedList.get(currentPage.intValue());
-        // set non-empty labels
-        for (int i = 0; i < currentPageList.size(); i++) {
-            cargoLabelArray[i].setText(currentPageList.get(i).getItemName());
-            staffLabelArray[i].setText(String.valueOf(currentPageList.get(i).getStaffName()));
-            amountLabelArray[i].setText(String.valueOf(currentPageList.get(i).getUnit()));
-            dateLabelArray[i].setText(currentPageList.get(i).getTransactionTime());
-            transactionPaneArray[i].setVisible(true);
-        }
-        // set empty labels
-        if (currentPageList.size() != 7) {
-            for (int j = 6; j >= currentPageList.size(); j--) {
-                transactionPaneArray[j].setVisible(false);
+        if (sortedList.size() == 0) {
+            for (int k = 0; k < 7; k++) {
+                transactionPaneArray[k].setVisible(false);
             }
+        } else {
+            currentPageList = sortedList.get(currentPage.intValue());
+            // set non-empty labels
+            for (int i = 0; i < currentPageList.size(); i++) {
+                cargoLabelArray[i].setText(currentPageList.get(i).getItemName());
+                staffLabelArray[i].setText(String.valueOf(currentPageList.get(i).getStaffName()));
+                amountLabelArray[i].setText(String.valueOf(currentPageList.get(i).getUnit()));
+                dateLabelArray[i].setText(currentPageList.get(i).getTransactionTime());
+                transactionPaneArray[i].setVisible(true);
+            }
+            // set empty labels
+            if (currentPageList.size() != 7) {
+                for (int j = 6; j >= currentPageList.size(); j--) {
+                    transactionPaneArray[j].setVisible(false);
+                }
+            }
+            setUnitStatus();
         }
-        setUnitStatus();
     }
 
     /**
@@ -504,29 +529,27 @@ public class NewTransactionPageController implements Initializable {
      * Clicked the button labeled with "ALL" and returns an ascend list ordered by date including both status
      */
     @FXML
-    private void onClickAllSelectButton() {
+    private void onClickAllSelectButton() throws UnsupportedPojoException {
         switch (buttonSelected) {
-            case ALL:
-                break;
-            case TAKEN:
+            case ALL -> {
+                return;
+            }
+            case TAKEN -> {
                 onTakenSelectPane.setVisible(false);
                 onAllSelectPane.setVisible(true);
                 buttonSelected = ButtonSelected.ALL;
-                break;
-            case RESTOCK:
+            }
+            case RESTOCK -> {
                 onRestockSelectPane.setVisible(false);
                 onAllSelectPane.setVisible(true);
                 buttonSelected = ButtonSelected.ALL;
-                break;
+            }
         }
         isAll = true;
         isRestock = false;
         isTaken = false;
-        if (isDateAscend) {
-            sortBy = SortBy.ALLDATEASCEND;
-        } else {
-            sortBy = SortBy.ALLDATEDESCEND;
-        }
+        resetArrows();
+        sortBy = SortBy.ALLDATEDESCEND;
         refreshPage();
 
     }
@@ -535,7 +558,7 @@ public class NewTransactionPageController implements Initializable {
      * Clicked the button labeled with "RESTOCK" and returns an ascend list ordered by date including restock status only
      */
     @FXML
-    private void onClickRestockSelectButton() {
+    private void onClickRestockSelectButton() throws UnsupportedPojoException {
         switch (buttonSelected) {
             case ALL:
                 onAllSelectPane.setVisible(false);
@@ -553,11 +576,8 @@ public class NewTransactionPageController implements Initializable {
         isAll = false;
         isRestock = true;
         isTaken = false;
-        if (isDateAscend) {
-            sortBy = SortBy.RESTOCKDATEASCEND;
-        } else {
-            sortBy = SortBy.RESTOCKDATEDESCEND;
-        }
+        resetArrows();
+        sortBy = SortBy.RESTOCKDATEDESCEND;
         refreshPage();
     }
 
@@ -565,7 +585,7 @@ public class NewTransactionPageController implements Initializable {
      * Clicked the button labeled with "TAKEN" and returns an ascend list ordered by date including taken status only
      */
     @FXML
-    private void onClickTakenSelectButton() {
+    private void onClickTakenSelectButton() throws UnsupportedPojoException {
         switch (buttonSelected) {
             case ALL:
                 onAllSelectPane.setVisible(false);
@@ -583,11 +603,8 @@ public class NewTransactionPageController implements Initializable {
         isAll = false;
         isRestock = false;
         isTaken = true;
-        if (isDateAscend) {
-            sortBy = SortBy.TAKENDATEASCEND;
-        } else {
-            sortBy = SortBy.TAKENDATEDESCEND;
-        }
+        resetArrows();
+        sortBy = SortBy.TAKENDATEDESCEND;
         refreshPage();
     }
 
@@ -595,32 +612,7 @@ public class NewTransactionPageController implements Initializable {
      * sort the list by date
      */
     @FXML
-    private void onClickDate() {
-//            if (isAll && !isRestock && !isTaken) {
-//                if (isDateAscend) {
-//                    sortBy = SortBy.ALLDATEDESCEND;
-//                    isDateAscend = false;
-//                } else {
-//                    sortBy = SortBy.ALLDATEASCEND;
-//                    isDateAscend = true;
-//                }
-//            } else if (!isAll && isRestock && !isTaken) {
-//                if (isDateAscend) {
-//                    sortBy = SortBy.RESTOCKDATEDESCEND;
-//                    isDateAscend = false;
-//                } else {
-//                    sortBy = SortBy.RESTOCKDATEASCEND;
-//                    isDateAscend = true;
-//                }
-//            } else if (!isAll && !isRestock && isTaken) {
-//                if (isDateAscend) {
-//                    sortBy = SortBy.TAKENDATEDESCEND;
-//                    isDateAscend = false;
-//                } else {
-//                    sortBy = SortBy.TAKENDATEASCEND;
-//                    isDateAscend = true;
-//                }
-//            }
+    private void onClickDate() throws UnsupportedPojoException {
         setPressScaleTransition(false, dateArrow);
 
     }
@@ -629,40 +621,26 @@ public class NewTransactionPageController implements Initializable {
      * sort the list by amount (all unit, restock unit, taken unit)
      */
     @FXML
-    private void onClickAmount() {
-//            if (isAll && !isRestock && !isTaken) {
-//                if (isAmountAscend) {
-//                    sortBy = SortBy.ALLAMOUNTDESCEND;
-//                    isAmountAscend = false;
-//                } else {
-//                    sortBy = SortBy.ALLAMOUNTASCEND;
-//                    isAmountAscend = true;
-//                }
-//            } else if (!isAll && isRestock && !isTaken) {
-//                if (isAmountAscend) {
-//                    sortBy = SortBy.RESTOCKAMOUNTDESCEND;
-//                    isAmountAscend = false;
-//                } else {
-//                    sortBy = SortBy.RESTOCKAMOUNTASCEND;
-//                    isAmountAscend = true;
-//                }
-//            } else if (!isAll && !isRestock && isTaken) {
-//                if (isAmountAscend) {
-//                    sortBy = SortBy.TAKENAMOUNTDESCEND;
-//                    isAmountAscend = false;
-//                } else {
-//                    sortBy = SortBy.TAKENAMOUNTASCEND;
-//                    isAmountAscend = true;
-//                }
-//            }
+    private void onClickAmount() throws UnsupportedPojoException {
         setPressScaleTransition(true, amountArrow);
     }
 
     /**
      * recalculate the amount of pages by specifying a particular transaction list and jump into its initial page
      */
-    private void refreshPage() {
+    private void refreshPage() throws UnsupportedPojoException {
         setSortCondition();
+        if (!searchField.getText().isBlank()) {
+            try {
+                if (isSearchingStaff) {
+                    sortedList = searchResultService.getPagedResultList(sortedList, searchField.getText(), SearchResultServiceHandler.ResultType.STAFF);
+                } else {
+                    sortedList = searchResultService.getPagedResultList(sortedList, searchField.getText(), SearchResultServiceHandler.ResultType.CARGO);
+                }
+            } catch (Exception e) {
+                sortedList.clear();
+            }
+        }
         updatePagination(0);
         transactionPagination.setCurrentPageIndex(0);
         setPaginationPages(sortedList);
@@ -673,8 +651,14 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickAddButton() {
+        addTransactionPane.setOpacity(0);
         addTransactionPane.setVisible(true);
         blockPane.setVisible(true);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addTransactionPane, 300, 0, 1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addTransactionPane, 300, -170, 0);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     @FXML
@@ -731,15 +715,18 @@ public class NewTransactionPageController implements Initializable {
 
     @FXML
     private void onCloseDeletionConfirmation() {
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,1,0);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,0,-110);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane, 300, 1, 0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane, 300, 0, -110);
         translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
         translateTransition.setOnFinished(event -> {
             deleteItemPane.setVisible(false);
+            isBlockPaneOpen = false;
+            setBinsImages();
             blockPane.setVisible(false);
         });
         fadeTransition.play();
         translateTransition.play();
+        warnMessageInDelete.setVisible(false);
     }
 
     /**
@@ -799,12 +786,13 @@ public class NewTransactionPageController implements Initializable {
     }
 
     private void setDeletionPanes(int row) {
+        isBlockPaneOpen = true;
         blockPane.setVisible(true);
         deleteItemPane.setOpacity(0);
         deleteItemPane.setVisible(true);
         setRemovalConfirmation(row);
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,0,1);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,-110,0);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane, 300, 0, 1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane, 300, -110, 0);
         translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
         fadeTransition.play();
         translateTransition.play();
@@ -853,92 +841,99 @@ public class NewTransactionPageController implements Initializable {
         deletionCross.setDisable(true);
         deletionTick.setVisible(false);
         loadSpinnerOnDeletePane.setVisible(true);
-        executorService.execute(() ->{
-            try{
+        executorService.execute(() -> {
+            try {
                 cachedTransactionService.deleteTransactionById(Integer.parseInt(confirmIdLabel.getText().split(":")[1].strip()));
                 Platform.runLater(() -> {
-                    refreshPage();
+                    try {
+                        refreshPage();
+                        warnMessageInDelete.setVisible(false);
+                    } catch (UnsupportedPojoException e) {
+                        throw new RuntimeException(e);
+                    }
+                    // restore nodes after a succeesful deletion
+                    deletionCross.setDisable(false);
+                    deletionTick.setVisible(true);
+                    loadSpinnerOnDeletePane.setVisible(false);
+                    onCloseDeletionConfirmation();
                 });
             } catch (NegativeDataException e) {
-                throw new RuntimeException(e);
-            } finally {
-                // restore nodes after a succeesful deletion
+                warnMessageInDelete.setVisible(true);
                 deletionCross.setDisable(false);
                 deletionTick.setVisible(true);
                 loadSpinnerOnDeletePane.setVisible(false);
-                onCloseDeletionConfirmation();
             }
         });
     }
 
     @FXML
     private void onEnterBin1() {
-        setEnterScaleTransition(binImage1, 100, 1.1);
+        setEnterScaleTransition(binImages[0], 100, 1.1);
     }
 
     @FXML
     private void onEnterBin2() {
-        setEnterScaleTransition(binImage2, 100, 1.1);
+        setEnterScaleTransition(binImages[1], 100, 1.1);
     }
 
     @FXML
     private void onEnterBin3() {
-        setEnterScaleTransition(binImage3, 100, 1.1);
+        setEnterScaleTransition(binImages[2], 100, 1.1);
     }
 
     @FXML
     private void onEnterBin4() {
-        setEnterScaleTransition(binImage4, 100, 1.1);
+        setEnterScaleTransition(binImages[3], 100, 1.1);
     }
 
     @FXML
     private void onEnterBin5() {
-        setEnterScaleTransition(binImage5, 100, 1.1);
+        setEnterScaleTransition(binImages[4], 100, 1.1);
     }
 
     @FXML
     private void onEnterBin6() {
-        setEnterScaleTransition(binImage6, 100, 1.1);
+        setEnterScaleTransition(binImages[5], 100, 1.1);
     }
 
     @FXML
     private void onEnterBin7() {
-        setEnterScaleTransition(binImage7, 100, 1.1);
+        setEnterScaleTransition(binImages[6], 100, 1.1);
     }
 
     @FXML
     private void onExitBin1() {
-        setExitScaleTransition(binImage1, 100, 1);
+        setExitScaleTransition(binImages[0], 100, 1);
     }
 
     @FXML
     private void onExitBin2() {
-        setExitScaleTransition(binImage2, 100, 1);
+        setExitScaleTransition(binImages[1], 100, 1);
     }
 
     @FXML
     private void onExitBin3() {
-        setExitScaleTransition(binImage3, 100, 1);
+        setExitScaleTransition(binImages[2], 100, 1);
     }
 
     @FXML
     private void onExitBin4() {
-        setExitScaleTransition(binImage4, 100, 1);
+        setExitScaleTransition(binImages[3], 100, 1);
     }
 
     @FXML
     private void onExitBin5() {
-        setExitScaleTransition(binImage5, 100, 1);
+        setExitScaleTransition(binImages[4], 100, 1);
     }
 
     @FXML
     private void onExitBin6() {
-        setExitScaleTransition(binImage6, 100, 1);
+        setExitScaleTransition(binImages[5], 100, 1);
     }
 
     @FXML
     private void onExitBin7() {
-        setExitScaleTransition(binImage7, 100, 1);
+        setExitScaleTransition(binImages[6], 100, 1);
     }
 
     @FXML
@@ -1023,8 +1018,8 @@ public class NewTransactionPageController implements Initializable {
         scaleTransition.play();
     }
 
-    private void setPressScaleTransition( boolean isPressAmount , ArrowStatus currentStatus) {
-        if(!isArrowRotating) {
+    private void setPressScaleTransition(boolean isPressAmount, ArrowStatus currentStatus) throws UnsupportedPojoException {
+        if (!isArrowRotating) {
             if (isPressAmount) {
                 switch (currentStatus) {
                     case HORIZONTAL -> {
@@ -1056,7 +1051,11 @@ public class NewTransactionPageController implements Initializable {
                             } else if (!isAll && !isRestock && isTaken) {
                                 sortBy = SortBy.TAKENAMOUNTASCEND;
                             }
-                            refreshPage();
+                            try {
+                                refreshPage();
+                            } catch (UnsupportedPojoException e) {
+                                throw new RuntimeException(e);
+                            }
                             isArrowRotating = false;
                         });
                         rotateTransition.play();
@@ -1073,7 +1072,11 @@ public class NewTransactionPageController implements Initializable {
                             } else if (!isAll && !isRestock && isTaken) {
                                 sortBy = SortBy.TAKENAMOUNTDESCEND;
                             }
-                            refreshPage();
+                            try {
+                                refreshPage();
+                            } catch (UnsupportedPojoException e) {
+                                throw new RuntimeException(e);
+                            }
                             isArrowRotating = false;
                         });
                         rotateTransition.play();
@@ -1110,7 +1113,11 @@ public class NewTransactionPageController implements Initializable {
                             } else if (!isAll && !isRestock && isTaken) {
                                 sortBy = SortBy.TAKENDATEASCEND;
                             }
-                            refreshPage();
+                            try {
+                                refreshPage();
+                            } catch (UnsupportedPojoException e) {
+                                throw new RuntimeException(e);
+                            }
                             isArrowRotating = false;
                         });
                         rotateTransition.play();
@@ -1127,7 +1134,11 @@ public class NewTransactionPageController implements Initializable {
                             } else if (!isAll && !isRestock && isTaken) {
                                 sortBy = SortBy.TAKENDATEDESCEND;
                             }
-                            refreshPage();
+                            try {
+                                refreshPage();
+                            } catch (UnsupportedPojoException e) {
+                                throw new RuntimeException(e);
+                            }
                             isArrowRotating = false;
                         });
                         rotateTransition.play();
@@ -1178,53 +1189,99 @@ public class NewTransactionPageController implements Initializable {
      * @param row transaction entity at which row needs to be modified
      */
     private void setTransactionDetails(int row) {
-        descriptionDialog.setVisible(true);
-        if (currentPageList.get(row).getStatus().equals("RESTOCK")){
+        originalTransaciton = currentPageList.get(row); // pass a temporary transaction instance
+        if (currentPageList.get(row).getStatus().equals("RESTOCK")) {
             transactionStatusInDetails.setText("RESTOCK");
-        }else{
+        } else {
             transactionStatusInDetails.setText("TAKEN");
         }
-        transactionIdLabel.setText(String.valueOf(currentPageList.get(row).getID()));
+        transactionIdInDetails.setText(String.valueOf(currentPageList.get(row).getID()));
         transactionNameInDetails.setText(currentPageList.get(row).getItemName());
         transactionDateInDetails.setText(currentPageList.get(row).getTransactionTime());
         staffNameInDetails.setText(currentPageList.get(row).getStaffName());
         transactionAmountInDetails.setText(String.valueOf(currentPageList.get(row).getUnit()));
         purposeTextInDetails.setText(currentPageList.get(row).getPurpose());
+        descriptionDialog.setOpacity(0);
+        descriptionDialog.setVisible(true);
         blockPane.setVisible(true);
-    }
-
-    @FXML
-    private void onCloseDescriptionDialog() {
-        descriptionDialog.setVisible(false);
-        blockPane.setVisible(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(descriptionDialog, 300, 0, 1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(descriptionDialog, 300, -200, 0);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     /**
      * close transaction modification page
      */
     @FXML
-    private void onClickOkayInDetails(){
-        descriptionDialog.setVisible(false);
-        blockPane.setVisible(false);
+    private void onCloseDescriptionDialog() {
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(descriptionDialog, 300, 1, 0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(descriptionDialog, 300, 0, -200);
+        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+        translateTransition.setOnFinished(event -> {
+            descriptionDialog.setVisible(false);
+            blockPane.setVisible(false);
+        });
+        fadeTransition.play();
+        translateTransition.play();
+        warnMessageInDetails.setVisible(false);
     }
 
     /**
      * modify and overwrite new staff or description fields to the specified transaction
      */
     @FXML
-    private void onClickApplyInDetails(){
-        //TODO save new transaction information to the database
+    private void onClickApplyInDetails() {
+        cargoDialogApplyButton.setVisible(false);
+        loadSpinnerInDetails.setVisible(true);
+        executorService.execute(() -> {
+            Transaction transaction;
+            try {
+                transaction = encapsulateCurrentStaffData();
+                cachedTransactionService.updateTransaction(transaction);
+            } catch (Exception e) {
+                warnMessageInDetails.setVisible(true);
+            } finally {
+                Platform.runLater(() -> {
+                    loadSpinnerInDetails.setVisible(false);
+                    cargoDialogApplyButton.setVisible(true);
+                    try {
+                        refreshPage();
+                    } catch (UnsupportedPojoException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
 
+            }
+        });
+    }
+
+    /**
+     * encapsulate a new transaction which is going to be overwritten
+     *
+     * @return overrided transaction
+     * @throws EmptyValueException some not-null values are left empty
+     */
+    private Transaction encapsulateCurrentStaffData() throws EmptyValueException {
+        Transaction transaction = new Transaction();
+        transaction = originalTransaciton;
+        if (staffNameInDetails.getText().isBlank()) {
+            throw new EmptyValueException("Empty input values in staff name section");
+        }
+        transaction.setStaffName(staffNameInDetails.getText());
+        transaction.setPurpose(purposeTextInDetails.getText());
+        return transaction;
     }
 
     /**
      * clear the properties of the new transaction from all text fields
      */
     @FXML
-    private void onClickClearInAdd(){
-        newItemTextField.clear();
+    private void onClickClearInAdd() {
+        newItemFilterComboBox.clear();
         newUnitTextField.clear();
-        newStaffTextField.clear();
+        newStaffFilterComboBox.clear();
         datePicker.clear();
         descriptionTextArea.clear();
         warnMessageInAdd.setVisible(false);
@@ -1235,17 +1292,108 @@ public class NewTransactionPageController implements Initializable {
      */
     @FXML
     private void onClickOkayInAdd() {
-        addTransactionPane.setVisible(false);
-        blockPane.setVisible(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addTransactionPane, 300, 1, 0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addTransactionPane, 300, 0, -170);
+        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+        translateTransition.setOnFinished(event -> {
+            addTransactionPane.setVisible(false);
+            blockPane.setVisible(false);
+        });
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     @FXML
-    private void onScrolled(ScrollEvent event){
-        if(event.getDeltaY() > 0){
+    private void onScrolled(ScrollEvent event) {
+        if (event.getDeltaY() > 0) {
             transactionPagination.setCurrentPageIndex(transactionPagination.getCurrentPageIndex() + 1);
         }
-        if(event.getDeltaY() < 0){
+        if (event.getDeltaY() < 0) {
             transactionPagination.setCurrentPageIndex(transactionPagination.getCurrentPageIndex() - 1);
+        }
+    }
+
+    @FXML
+    private void onEnterTransactionPane1() {
+        binImages[0].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterTransactionPane2() {
+        binImages[1].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterTransactionPane3() {
+        binImages[2].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterTransactionPane4() {
+        binImages[3].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterTransactionPane5() {
+        binImages[4].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterTransactionPane6() {
+        binImages[5].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterTransactionPane7() {
+        binImages[6].setVisible(true);
+    }
+
+    @FXML
+    private void onExitTransactionPane1() {
+        if (!isBlockPaneOpen) {
+            binImages[0].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitTransactionPane2() {
+        if (!isBlockPaneOpen) {
+            binImages[1].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitTransactionPane3() {
+        if (!isBlockPaneOpen) {
+            binImages[2].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitTransactionPane4() {
+        if (!isBlockPaneOpen) {
+            binImages[3].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitTransactionPane5() {
+        if (!isBlockPaneOpen) {
+            binImages[4].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitTransactionPane6() {
+        if (!isBlockPaneOpen) {
+            binImages[5].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitTransactionPane7() {
+        if (!isBlockPaneOpen) {
+            binImages[6].setVisible(false);
         }
     }
 
@@ -1255,6 +1403,7 @@ public class NewTransactionPageController implements Initializable {
     @FXML
     private void onClickApplyInAdd() {
         if (!isValidated()) {
+            warnMessageInAdd.setText("Insertion Failed. \r\nPlease check your data are valid.");
             warnMessageInAdd.setVisible(true);
         } else {
             isAdditionSucceed = true;
@@ -1263,8 +1412,8 @@ public class NewTransactionPageController implements Initializable {
             okayButton.setDisable(true);
             clearButton.setDisable(true);
             newTransactionID = getNumOfTransaction() + 1;
-            newItemName = newItemTextField.getText();
-            newStaffName = newStaffTextField.getText();
+            newItemName = newItemFilterComboBox.getText();
+            newStaffName = newStaffFilterComboBox.getText();
             newUnitAmount = Integer.valueOf(newUnitTextField.getText());
             if (datePicker.getText().equals("")) {
                 // return current date and time
@@ -1277,7 +1426,7 @@ public class NewTransactionPageController implements Initializable {
             }
             newTransaction = new Transaction();
             executorService.execute(() -> {
-                try{
+                try {
                     if (statusToggleButton.isSelected()) {
                         // adding taken cargo
                         addNewTransaction("TAKEN", newTransactionID, newItemName, newStaffName, newUnitAmount, transactionDate, transactionDescription);
@@ -1285,18 +1434,40 @@ public class NewTransactionPageController implements Initializable {
                         // adding restock cargo
                         addNewTransaction("RESTOCK", newTransactionID, newItemName, newStaffName, newUnitAmount, transactionDate, transactionDescription);
                     }
-                    cachedTransactionService.addNewTransaction(newTransaction);
+                    try{
+                        cachedTransactionService.addNewTransaction(newTransaction);
+                    }catch (DataNotFoundException dataNotFoundException){
+                        Platform.runLater(() -> {
+                            warnMessageInAdd.setText("Insertion Failed. \r\nThis item does not exit in our warehouse!");
+                            warnMessageInAdd.setVisible(true);
+                        });
+                        isAdditionSucceed = false;
+                    }catch (NegativeDataException negativeDataException){
+                        Platform.runLater(() -> {
+                            warnMessageInAdd.setText("Insertion Failed. \r\nInsufficient item amount left");
+                            warnMessageInAdd.setVisible(true);
+                        });
+                        isAdditionSucceed = false;
+                    }
+
                     Platform.runLater(() -> {
-                        refreshPage();
+                        try {
+                            refreshPage();
+                        } catch (UnsupportedPojoException e) {
+                            throw new RuntimeException(e);
+                        }
                     });
-                }catch(Exception e){
-                    warnMessageInAdd.setVisible(true);
+                } catch (Exception e) {
+                    Platform.runLater(() -> {
+                        warnMessageInAdd.setText("Insertion Failed. \r\nPlease check your inserted data are indeed valid.");
+                        warnMessageInAdd.setVisible(true);
+                    });
                     isAdditionSucceed = false;
-                }finally{
+                } finally {
                     // restore nodes after a succeesful addition
                     applyButtonInAdd.setVisible(true);
                     loadSpinnerInAdd.setVisible(false);
-                    if (isAdditionSucceed){
+                    if (isAdditionSucceed) {
                         warnMessageInAdd.setVisible(false);
                     }
                     okayButton.setDisable(false);
@@ -1310,11 +1481,11 @@ public class NewTransactionPageController implements Initializable {
      * set new transaction status
      */
     @FXML
-    private void onToggle(){
-        if (statusToggleButton.isSelected()){
+    private void onToggle() {
+        if (statusToggleButton.isSelected()) {
             // convert status from RESTOCK to TAKEN
             statusToggleButton.setText("TAKEN");
-        }else{
+        } else {
             // convert status from TAKEN to RESTOCK
             statusToggleButton.setText("RESTOCK");
         }
@@ -1341,7 +1512,7 @@ public class NewTransactionPageController implements Initializable {
      * @return true or false
      */
     private boolean isValidated() {
-        if (!newItemTextField.getText().equals("") && !newStaffTextField.getText().equals("") && !newUnitTextField.getText().equals("")) {
+        if (!newItemFilterComboBox.getText().equals("") && !newStaffFilterComboBox.getText().equals("") && !newUnitTextField.getText().equals("")) {
             return true;
         }
         return false;
@@ -1385,39 +1556,122 @@ public class NewTransactionPageController implements Initializable {
         newTransaction.setPurpose(purpose);
     }
 
+    /**
+     * search an indicated staff name
+     */
     @FXML
     private void onClickStaffSearch() {
-        searchSwitchingBlockPane.toFront();
-        cargoSearchPane.setVisible(true);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, 0, -15);
-        TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane, 300, 15, 0);
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane, 300, 1, 0);
-        scaleTransition.setOnFinished(event -> {
-            searchSwitchingBlockPane.toBack();
-            staffSearchPane.setVisible(false);
-        });
-        ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane, 300, 0, 1);
-        translateTransition.play();
-        translateTransition1.play();
-        scaleTransition.play();
-        scaleTransition1.play();
+        setSearchProperty(true);
+        DataUtils.appPage2Controller.setSearchProperty(true);
     }
 
+    /**
+     * search an indicated cargo name
+     */
     @FXML
     private void onClickCargoSearch() {
-        searchSwitchingBlockPane.toFront();
-        staffSearchPane.setVisible(true);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, -15, 0);
-        TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane, 300, 0, 15);
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane, 300, 0, 1);
-        ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane, 300, 1, 0);
-        scaleTransition1.setOnFinished(event -> {
-            searchSwitchingBlockPane.toBack();
-            cargoSearchPane.setVisible(false);
+        setSearchProperty(false);
+        DataUtils.appPage2Controller.setSearchProperty(false);
+    }
+
+    /**
+     * indicates if the keyword is related to cargo or staff
+     *
+     * @param isStaff searching staff if true
+     */
+    public void setSearchProperty(boolean isCargo) {
+        if (isCargo) {
+            // convert item to staff icon
+            searchSwitchingBlockPane.toFront();
+            cargoSearchPane.setVisible(true);
+            TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, 0, -15);
+            TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane, 300, 15, 0);
+            ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane, 300, 1, 0);
+            ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane, 300, 0, 1);
+            scaleTransition.setOnFinished(event -> {
+                searchSwitchingBlockPane.toBack();
+                staffSearchPane.setVisible(false);
+            });
+            translateTransition.play();
+            translateTransition1.play();
+            scaleTransition.play();
+            scaleTransition1.play();
+            isSearchingStaff = false;
+        } else {
+            // convert staff to item icon
+            searchSwitchingBlockPane.toFront();
+            staffSearchPane.setVisible(true);
+            TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, -15, 0);
+            TranslateTransition translateTransition1 = TranslateUtils.getTranslateTransitionFromToY(cargoSearchPane, 300, 0, 15);
+            ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionFromToY(staffSearchPane, 300, 0, 1);
+            ScaleTransition scaleTransition1 = ScaleUtils.getScaleTransitionFromToY(cargoSearchPane, 300, 1, 0);
+            scaleTransition1.setOnFinished(event -> {
+                searchSwitchingBlockPane.toBack();
+                cargoSearchPane.setVisible(false);
+            });
+            translateTransition.play();
+            translateTransition1.play();
+            scaleTransition.play();
+            scaleTransition1.play();
+            isSearchingStaff = true;
+        }
+    }
+
+    /**
+     * set a keyword into the input field
+     *
+     * @param keyword searched keyword
+     */
+    public void setKeyword(String keyword) {
+        searchField.setText(keyword);
+    }
+
+    /**
+     * search and return a list corresponds to the input item or staff keyword
+     */
+    @FXML
+    public void onClickSearch() throws UnsupportedPojoException {
+        refreshPage();
+    }
+
+    /**
+     * set all prompt staff names from database
+     */
+    private void setPromptTextForStaff() {
+        List<List<Staff>> staffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL);
+        List<String> resultList = new ArrayList<>();
+        staffList.forEach(new Consumer<List<Staff>>() {
+            @Override
+            public void accept(List<Staff> staffList) {
+                staffList.forEach(new Consumer<Staff>() {
+                    @Override
+                    public void accept(Staff staff) {
+                        resultList.add(staff.getStaffName());
+                    }
+                });
+            }
         });
-        translateTransition.play();
-        translateTransition1.play();
-        scaleTransition.play();
-        scaleTransition1.play();
+        newStaffFilterComboBox.setItems(FXCollections.observableList(resultList));
+        staffNameInDetails.setItems(FXCollections.observableList(resultList));
+    }
+
+    /**
+     * set all prompt item names from database
+     */
+    private void setPromptTextForRegulatory() {
+        List<List<Item>> itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL);
+        List<String> resultList = new ArrayList<>();
+        itemList.forEach(new Consumer<List<Item>>() {
+            @Override
+            public void accept(List<Item> items) {
+                items.forEach(new Consumer<Item>() {
+                    @Override
+                    public void accept(Item item) {
+                        resultList.add(item.getItemName());
+                    }
+                });
+            }
+        });
+        newItemFilterComboBox.setItems(FXCollections.observableList(resultList));
     }
 }

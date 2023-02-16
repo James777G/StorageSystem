@@ -3,6 +3,8 @@ package org.maven.apache.mapper;
 import org.maven.apache.dateTransaction.DateTransaction;
 import org.maven.apache.transaction.Transaction;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Component
@@ -18,6 +20,7 @@ public interface TransactionMapper {
      * </p>
      * @param transaction encapsulated transaction to be added
      */
+    @Transactional(propagation = Propagation.REQUIRED)
     void addNewTransaction(Transaction transaction);
 
 
@@ -30,6 +33,7 @@ public interface TransactionMapper {
      * </p>
      * @param id Transaction ID which is unique
      */
+    @Transactional(propagation = Propagation.REQUIRED)
     void deleteTransactionById(int id);
 
     /**
@@ -43,13 +47,16 @@ public interface TransactionMapper {
      * </p>
      * @param transaction encapsulated transaction object to be updated with desired attributes
      */
+    @Transactional(propagation = Propagation.REQUIRED)
     void updateTransaction(Transaction transaction);
 
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     Transaction selectById(int id);
 
     /**
      * if id is not continuous use this to fix
      */
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     void IdGapInside();
 
     /**
@@ -57,7 +64,9 @@ public interface TransactionMapper {
      *
      * @return
      */
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     List<Transaction> selectAll();
 
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     List<Transaction> orderByDateAsc();
 }

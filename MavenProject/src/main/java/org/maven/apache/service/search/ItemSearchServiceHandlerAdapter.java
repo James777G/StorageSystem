@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("itemSearchServiceHandlerAdapter")
-public class ItemSearchServiceHandlerAdapter<R> implements AbstractSearchServiceAdapter<Item, R>{
+public class ItemSearchServiceHandlerAdapter<R> implements AbstractSearchServiceAdapter<Item, R> {
     @Override
     public List<Item> doConvert(List<R> sourceList) {
         List<Item> itemList = new ArrayList<>();

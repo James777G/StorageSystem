@@ -18,6 +18,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import org.aspectj.bridge.MessageUtil;
 import org.maven.apache.MyLauncher;
+
 import org.maven.apache.exception.NegativeDataException;
 import org.maven.apache.exception.UnsupportedPojoException;
 import org.maven.apache.message.Message;
@@ -27,6 +28,7 @@ import org.maven.apache.service.message.CachedMessageServiceProvider;
 import org.maven.apache.transaction.Transaction;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.*;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -138,7 +140,7 @@ public class MessagePageController implements Initializable {
 
 
     @FXML
-    private  final AnchorPane editMessagePane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/editMessagePage.fxml")));
+    private final AnchorPane editMessagePane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/editMessagePage.fxml")));
 
     private final User user = DataUtils.currentUser;
 
@@ -634,19 +636,21 @@ public class MessagePageController implements Initializable {
     }
 
     @FXML
-    private void enableNode(Node node){
+    private void enableNode(Node node) {
         node.setOpacity(1);
         node.setVisible(true);
         node.setPickOnBounds(true);
     }
 
     @FXML
-    private void disable(Node node){
+    private void disable(Node node) {
         node.setOpacity(0);
         node.setVisible(false);
         node.setPickOnBounds(false);
     }
+
     @FXML
+
     private void onClickMessage(){
         clickStarredMessage = false;
         executorService.execute(()->{
@@ -658,6 +662,7 @@ public class MessagePageController implements Initializable {
             );
         });
         if((!isMovingLineOnMessage) && (!isLineMoving)){
+
             isLineMoving = true;
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionByX(movingLinePane, 500, -120);
             translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
@@ -679,6 +684,7 @@ public class MessagePageController implements Initializable {
     }
 
     @FXML
+
     private void onClickStarred(){
         clickStarredMessage=true;
         executorService.execute(()->{
@@ -690,6 +696,7 @@ public class MessagePageController implements Initializable {
             );
         });
         if((isMovingLineOnMessage) && (!isLineMoving)){
+
             isLineMoving = true;
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionByX(movingLinePane, 500, 120);
             translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
@@ -700,6 +707,7 @@ public class MessagePageController implements Initializable {
             translateTransition.play();
         }
     }
+
 
     @FXML
     private void onScrolled(ScrollEvent event){
@@ -741,6 +749,7 @@ public class MessagePageController implements Initializable {
 
 
     private void onClickNotePads(){
+
 
     }
 }

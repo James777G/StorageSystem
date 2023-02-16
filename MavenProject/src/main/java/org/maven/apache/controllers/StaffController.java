@@ -10,13 +10,9 @@ import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
@@ -27,12 +23,9 @@ import org.maven.apache.service.search.SearchResultService;
 import org.maven.apache.service.search.SearchResultServiceHandler;
 import org.maven.apache.service.staff.CachedStaffService;
 import org.maven.apache.staff.Staff;
-import org.maven.apache.utils.ScaleUtils;
-import org.maven.apache.utils.StaffCachedUtils;
-import org.maven.apache.utils.TransitionUtils;
-import org.maven.apache.utils.TranslateUtils;
+import org.maven.apache.utils.*;
 
-import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,20 +34,9 @@ import java.util.concurrent.ExecutorService;
 
 public class StaffController implements Initializable {
 
-    private void run() {
-        warnMessageInDetails.setVisible(false);
-    }
-
     private enum Status {
         ACTIVE, ALL, INACTIVE
     }
-
-    @SuppressWarnings("all")
-    private final SearchResultService<Staff> searchResultService = MyLauncher.context.getBean("searchResultService", SearchResultService.class);
-
-    private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
-
-    private final CachedStaffService staffService = MyLauncher.context.getBean("staffService", CachedStaffService.class);
 
     @FXML
     private Label staffNameOne, staffNameTwo, staffNameThree, staffNameFour, staffNameFive, staffNameSix, staffNameSeven;
@@ -66,10 +48,31 @@ public class StaffController implements Initializable {
     private Label staffStatusOne, staffStatusTwo, staffStatusThree, staffStatusFour, staffStatusFive, staffStatusSix, staffStatusSeven;
 
     @FXML
+    private Label warnMessageInAdd;
+
+    @FXML
+    private Label staffIdInDetails;
+
+    @FXML
+    private Label warnMessageInDetails;
+
+    @FXML
     private JFXButton editOne, editTwo, editThree, editFour, editFive, editSix, editSeven;
 
     @FXML
+    private JFXButton applyButton;
+
+    @FXML
+    private JFXButton applyButtonInAdd;
+
+    @FXML
     private ImageView deleteOne, deleteTwo, deleteThree, deleteFour, deleteFive, deleteSix, deleteSeven;
+
+    @FXML
+    private ImageView doNotContinueButton;
+
+    @FXML
+    private ImageView doContinueButton;
 
     @FXML
     private MFXGenericDialog descriptionDialog;
@@ -84,19 +87,19 @@ public class StaffController implements Initializable {
     private TextField staffNameInDetails;
 
     @FXML
-    private MFXToggleButton staffStatusInDetails;
-
-    @FXML
-    private Label warnMessageInAdd;
-
-    @FXML
-    private Label staffIdInDetails;
+    private TextField staffNameInAdd;
 
     @FXML
     private MFXTextField searchBar;
 
     @FXML
+    private MFXToggleButton staffStatusInDetails;
+
+    @FXML
     private TextArea staffDescriptionInDetails;
+
+    @FXML
+    private TextArea staffDescriptionInAdd;
 
     @FXML
     private AnchorPane addButton;
@@ -105,57 +108,50 @@ public class StaffController implements Initializable {
     private AnchorPane blockPane;
 
     @FXML
-    private JFXButton applyButton;
-
-    @FXML
     private AnchorPane addStaffPane;
 
     @FXML
-    private TextField staffNameInAdd;
-
-    @FXML
-    private TextArea staffDescriptionInAdd;
-
-    @FXML
-    private MFXCheckbox staffStatusInAdd;
-
-    @FXML
-    private MFXProgressSpinner loadSpinnerInAdd;
-
-    @FXML
-    private JFXButton applyButtonInAdd;
-
-    @FXML
-    private Label warnMessageInDetails;
+    private AnchorPane staffPane1, staffPane2, staffPane3, staffPane4, staffPane5, staffPane6, staffPane7;
 
     @FXML
     private AnchorPane deleteItemPane;
 
     @FXML
-    private ImageView doNotContinueButton;
-
-    @FXML
-    private ImageView doContinueButton;
-
-    @FXML
-    private MFXProgressSpinner loadSpinnerOnDeletePane;
+    private MFXCheckbox staffStatusInAdd;
 
     @FXML
     private MFXCheckbox statusButton;
 
+    @FXML
+    private MFXProgressSpinner loadSpinnerInAdd;
+
+    @FXML
+    private MFXProgressSpinner loadSpinnerOnDeletePane;
+
+    @SuppressWarnings("all")
+    private final SearchResultService<Staff> searchResultService = MyLauncher.context.getBean("searchResultService", SearchResultService.class);
+
+    private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
+
+    private final CachedStaffService staffService = MyLauncher.context.getBean("staffService", CachedStaffService.class);
+
     private final Label[] nameList = new Label[7];
+
     private final Label[] idList = new Label[7];
+
     private final Label[] statusList = new Label[7];
+
     private final JFXButton[] buttonList = new JFXButton[7];
 
     private final ImageView[] deleteList = new ImageView[7];
+
+    private AnchorPane[] staffPanes = new AnchorPane[7];
 
     private List<Staff> currentStaffList;
 
     private List<Staff> currentActiveStaffList;
 
     private List<Staff> currentInactiveStaffList;
-
 
     private Status status = Status.ALL;
 
@@ -164,6 +160,8 @@ public class StaffController implements Initializable {
     private Staff selectedStaff;
 
     private int pageNumber;
+
+    private boolean isBlockPaneOpen = false;
 
     /**
      * Please check if text formatter has been applied
@@ -189,16 +187,6 @@ public class StaffController implements Initializable {
             throw new RuntimeException(e);
         }
         pagination.setPageCount(pageNumber);
-//        pagination.setOnScroll(new EventHandler<ScrollEvent>() {
-//            @Override
-//            public void handle(ScrollEvent event) {
-//                if(event.getDeltaY() > 0){
-//                    pagination.setCurrentPageIndex(pagination.getCurrentPageIndex() + 1);
-//                } else if(event.getDeltaY() < 0){
-//                    pagination.setCurrentPageIndex(pagination.getCurrentPageIndex() + 1);
-//                }
-//            }
-//        });
         pagination.currentPageIndexProperty().addListener((observable, oldValue, newValue) -> {
             getStaffList(newValue);
             assignStaffValue();
@@ -208,7 +196,9 @@ public class StaffController implements Initializable {
         initializeStatusList();
         initializeButtonList();
         initializeDeleteList();
+        initializeStaffPaneList();
         assignStaffValue();
+        setInitialDeleteImageViews();
         loadSpinnerInAdd.setVisible(false);
         warnMessageInAdd.setVisible(false);
         warnMessageInDetails.setVisible(false);
@@ -230,15 +220,21 @@ public class StaffController implements Initializable {
         });
         blockPane.setVisible(false);
     }
+
+    private void run() {
+        warnMessageInDetails.setVisible(false);
+    }
+
     @FXML
-    private void onScrolled(ScrollEvent event){
-        if(event.getDeltaY() > 0){
+    private void onScrolled(ScrollEvent event) {
+        if (event.getDeltaY() > 0) {
             pagination.setCurrentPageIndex(pagination.getCurrentPageIndex() + 1);
         }
-        if(event.getDeltaY() < 0){
+        if (event.getDeltaY() < 0) {
             pagination.setCurrentPageIndex(pagination.getCurrentPageIndex() - 1);
         }
     }
+
     /**
      * This method updates the latest page number, thus should be executed every time when
      * there is an update in data or change in status
@@ -359,18 +355,14 @@ public class StaffController implements Initializable {
     @SuppressWarnings("all")
     private void setTextWithCurrentList(List<Staff> currentStaffList) {
         for (int i = 0; i < currentStaffList.size(); i++) {
+            staffPanes[i].setVisible(true);
             buttonList[i].setDisable(false);
             nameList[i].setText(currentStaffList.get(i).getStaffName());
             idList[i].setText(Integer.valueOf(currentStaffList.get(i).getStaffID()).toString());
             statusList[i].setText(currentStaffList.get(i).getStatus());
-            deleteList[i].setVisible(true);
         }
         for (int j = currentStaffList.size(); j < nameList.length; j++) {
-            nameList[j].setText("N/A");
-            idList[j].setText("N/A");
-            statusList[j].setText("N/A");
-            buttonList[j].setDisable(true);
-            deleteList[j].setVisible(false);
+            staffPanes[j].setVisible(false);
         }
     }
 
@@ -470,6 +462,27 @@ public class StaffController implements Initializable {
         deleteList[6] = deleteSeven;
     }
 
+    private void initializeStaffPaneList() {
+        staffPanes[0] = staffPane1;
+        staffPanes[1] = staffPane2;
+        staffPanes[2] = staffPane3;
+        staffPanes[3] = staffPane4;
+        staffPanes[4] = staffPane5;
+        staffPanes[5] = staffPane6;
+        staffPanes[6] = staffPane7;
+    }
+
+    private void setInitialDeleteImageViews() {
+        deleteList[0].setVisible(false);
+        deleteList[1].setVisible(false);
+        deleteList[2].setVisible(false);
+        deleteList[3].setVisible(false);
+        deleteList[4].setVisible(false);
+        deleteList[5].setVisible(false);
+        deleteList[6].setVisible(false);
+
+    }
+
     @FXML
     private void onClickSearch() throws UnsupportedPojoException {
         getStaffList(pagination.getCurrentPageIndex());
@@ -479,12 +492,14 @@ public class StaffController implements Initializable {
 
     @FXML
     private void doNotContinue() {
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,1,0);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane, 300, 1, 0);
         fadeTransition.setOnFinished(event -> {
             deleteItemPane.setVisible(false);
+            isBlockPaneOpen = false;
             blockPane.setVisible(false);
+            setInitialDeleteImageViews();
         });
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,0,-45.5);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane, 300, 0, -45.5);
         translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
         translateTransition.play();
         fadeTransition.play();
@@ -495,7 +510,15 @@ public class StaffController implements Initializable {
         loadSpinnerOnDeletePane.setVisible(true);
         doContinueButton.setVisible(false);
         executorService.execute(() -> {
-            staffService.deleteStaffById(selectedStaffId);
+            try {
+                staffService.deleteStaffById(selectedStaffId);
+            } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
+                throw new RuntimeException(e);
+            } finally {
+                staffService.updateAllCachedStaffData();
+                getStaffList(pagination.getCurrentPageIndex());
+                Platform.runLater(this::assignStaffValue);
+            }
             executorService.execute(() -> {
                 Platform.runLater(() -> {
                     try {
@@ -510,19 +533,105 @@ public class StaffController implements Initializable {
             getStaffList(pagination.getCurrentPageIndex());
             Platform.runLater(this::assignStaffValue);
             Platform.runLater(() -> {
-                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,1,0);
+                FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane, 300, 1, 0);
                 fadeTransition.setOnFinished(event -> {
                     loadSpinnerOnDeletePane.setVisible(false);
                     doContinueButton.setVisible(true);
                     deleteItemPane.setVisible(false);
+                    isBlockPaneOpen = false;
                     blockPane.setVisible(false);
+                    setInitialDeleteImageViews();
                 });
-                TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,0,-45.5);
+                TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane, 300, 0, -45.5);
                 translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
                 translateTransition.play();
                 fadeTransition.play();
             });
         });
+    }
+
+    @FXML
+    private void onEnterStaffPane1() {
+        deleteList[0].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterStaffPane2() {
+        deleteList[1].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterStaffPane3() {
+        deleteList[2].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterStaffPane4() {
+        deleteList[3].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterStaffPane5() {
+        deleteList[4].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterStaffPane6() {
+        deleteList[5].setVisible(true);
+    }
+
+    @FXML
+    private void onEnterStaffPane7() {
+        deleteList[6].setVisible(true);
+    }
+
+    @FXML
+    private void onExitStaffPane1() {
+        if (!isBlockPaneOpen) {
+            deleteList[0].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitStaffPane2() {
+        if (!isBlockPaneOpen) {
+            deleteList[1].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitStaffPane3() {
+        if (!isBlockPaneOpen) {
+            deleteList[2].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitStaffPane4() {
+        if (!isBlockPaneOpen) {
+            deleteList[3].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitStaffPane5() {
+        if (!isBlockPaneOpen) {
+            deleteList[4].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitStaffPane6() {
+        if (!isBlockPaneOpen) {
+            deleteList[5].setVisible(false);
+        }
+    }
+
+    @FXML
+    private void onExitStaffPane7() {
+        if (!isBlockPaneOpen) {
+            deleteList[6].setVisible(false);
+        }
     }
 
     @FXML
@@ -693,11 +802,12 @@ public class StaffController implements Initializable {
         List<Staff> currentList = getCurrentList();
         Staff staff = currentList.get(row);
         selectedStaffId = staff.getStaffID();
+        isBlockPaneOpen = true;
         blockPane.setVisible(true);
         deleteItemPane.setOpacity(0);
         deleteItemPane.setVisible(true);
-        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane,300,0,1);
-        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane,300,-45.5,0);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteItemPane, 300, 0, 1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteItemPane, 300, -45.5, 0);
         translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
         translateTransition.play();
         fadeTransition.play();
@@ -729,6 +839,14 @@ public class StaffController implements Initializable {
         staffIdInDetails.setText(Integer.valueOf(selectedStaff.getStaffID()).toString());
         staffStatusInDetails.setSelected("ACTIVE".equals(selectedStaff.getStatus()));
         staffDescriptionInDetails.setText(selectedStaff.getOtherInfo());
+        blockPane.setVisible(true);
+        descriptionDialog.setOpacity(0);
+        descriptionDialog.setVisible(true);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(descriptionDialog, 300, 0, 1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(descriptionDialog, 300, -170, 0);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     /**
@@ -738,7 +856,6 @@ public class StaffController implements Initializable {
     private void onClickEditOne() {
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(0);
-        descriptionDialog.setVisible(true);
         assignStaffDetails();
     }
 
@@ -749,7 +866,6 @@ public class StaffController implements Initializable {
     private void onClickEditTwo() {
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(1);
-        descriptionDialog.setVisible(true);
         assignStaffDetails();
     }
 
@@ -760,7 +876,6 @@ public class StaffController implements Initializable {
     private void onClickEditThree() {
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(2);
-        descriptionDialog.setVisible(true);
         assignStaffDetails();
     }
 
@@ -771,7 +886,6 @@ public class StaffController implements Initializable {
     private void onClickEditFour() {
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(3);
-        descriptionDialog.setVisible(true);
         assignStaffDetails();
     }
 
@@ -782,7 +896,6 @@ public class StaffController implements Initializable {
     private void onClickEditFive() {
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(4);
-        descriptionDialog.setVisible(true);
         assignStaffDetails();
     }
 
@@ -793,7 +906,6 @@ public class StaffController implements Initializable {
     private void onClickEditSix() {
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(5);
-        descriptionDialog.setVisible(true);
         assignStaffDetails();
     }
 
@@ -804,7 +916,6 @@ public class StaffController implements Initializable {
     private void onClickEditSeven() {
         List<Staff> currentList = getCurrentList();
         selectedStaff = currentList.get(6);
-        descriptionDialog.setVisible(true);
         assignStaffDetails();
     }
 
@@ -813,9 +924,17 @@ public class StaffController implements Initializable {
      */
     @FXML
     private void onCloseDescription() {
-        descriptionDialog.setVisible(false);
-        loadSpinner.setVisible(false);
-        warnMessageInDetails.setVisible(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(descriptionDialog, 300, 1, 0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(descriptionDialog, 300, 0, -170);
+        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+        translateTransition.setOnFinished(event -> {
+            descriptionDialog.setVisible(false);
+            loadSpinner.setVisible(false);
+            warnMessageInDetails.setVisible(false);
+            blockPane.setVisible(false);
+        });
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     /**
@@ -823,9 +942,15 @@ public class StaffController implements Initializable {
      */
     @FXML
     private void onClickAddButton() {
+        addStaffPane.setOpacity(0);
         addStaffPane.setVisible(true);
         staffStatusInAdd.setSelected(true);
         blockPane.setVisible(true);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addStaffPane, 300, 0, 1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addStaffPane, 300, -170, 0);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     /**
@@ -876,13 +1001,16 @@ public class StaffController implements Initializable {
             Staff staff;
             try {
                 staff = encapsulateCurrentStaffData();
-                if (selectedStaff.equals(staff)) return;
+                if (selectedStaff.equals(staff)) {
+                    return;
+                }
                 staffService.updateStaff(staff);
                 getStaffList(pagination.getCurrentPageIndex());
                 Platform.runLater(this::run);
             } catch (Exception e) {
                 warnMessageInDetails.setVisible(true);
             } finally {
+                staffService.updateAllCachedStaffData();
                 Platform.runLater(() -> {
                     assignStaffValue();
                     loadSpinner.setVisible(false);
@@ -916,12 +1044,19 @@ public class StaffController implements Initializable {
      */
     @FXML
     private void onClickOkayInAdd() {
-        addStaffPane.setVisible(false);
-        warnMessageInAdd.setVisible(false);
-        staffNameInAdd.setText("");
-        staffDescriptionInAdd.setText("");
-        staffStatusInAdd.setSelected(true);
-        blockPane.setVisible(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addStaffPane, 300, 1, 0);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addStaffPane, 300, 0, -170);
+        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+        translateTransition.setOnFinished(event -> {
+            addStaffPane.setVisible(false);
+            warnMessageInAdd.setVisible(false);
+            staffNameInAdd.setText("");
+            staffDescriptionInAdd.setText("");
+            staffStatusInAdd.setSelected(true);
+            blockPane.setVisible(false);
+        });
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     /**
@@ -955,6 +1090,7 @@ public class StaffController implements Initializable {
             } catch (Exception e) {
                 warnMessageInAdd.setVisible(true);
             } finally {
+                staffService.updateAllCachedStaffData();
                 Platform.runLater(() -> {
                     pagination.setPageCount(pageNumber);
                     assignStaffValue();
@@ -963,7 +1099,6 @@ public class StaffController implements Initializable {
                 });
             }
         });
-
     }
 
     /**
@@ -983,4 +1118,17 @@ public class StaffController implements Initializable {
         staff.setOtherInfo(staffDescriptionInAdd.getText());
         return staff;
     }
+
+    /**
+     * search the corresponding transactions pursuant to a particular staff name while moving to transaction page
+     */
+    @FXML
+    private void onViewTransaction() throws UnsupportedPojoException {
+        DataUtils.appPage2Controller.setSearchProperty(false);
+        DataUtils.transactionPageController.setSearchProperty(false);
+        DataUtils.transactionPageController.setKeyword(staffNameInDetails.getText());
+        DataUtils.transactionPageController.onClickSearch();
+        DataUtils.appPage2Controller.onClickTransaction();
+    }
+
 }

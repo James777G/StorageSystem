@@ -4,7 +4,6 @@ import jakarta.mail.MessagingException;
 import lombok.Data;
 import org.maven.apache.item.Item;
 import org.maven.apache.mail.SimpleOrderManager;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 @Data
@@ -29,7 +28,7 @@ public class MailServiceProvider implements MailService {
                 "            <h4 style=\"color: white\">Verification Code:</h4>\n" +
                 "        </div>\n" +
                 "        <div>\n" +
-                "            <h1 style=\"color: #223c40; font-size: 30px; padding-top: 20px\">"  +  verificationCode + "</h1>\n" +
+                "            <h1 style=\"color: #223c40; font-size: 30px; padding-top: 20px\">" + verificationCode + "</h1>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
                 "    <hr style=\"margin-top: 150px\">\n" +
@@ -55,7 +54,7 @@ public class MailServiceProvider implements MailService {
                 "  </div>\n" +
                 "  <div style=\"padding-top: 0px; padding-bottom: 20px; border: solid thick #223c40; border-radius: 30px; width: 70%; margin-top: 60px; margin-left: auto; margin-right: auto;\">\n" +
                 "    <h2 style=\"font-size: 18px\">\n" +
-                "      Item Name: " + (item.getItemName().length() >= 10 ? "<br>" : "") + item.getItemName() +"<br>\n" +
+                "      Item Name: " + (item.getItemName().length() >= 10 ? "<br>" : "") + item.getItemName() + "<br>\n" +
                 "      <hr style=\"color: #223c40\">\n" +
                 "    </h2>\n" +
                 "    <h3 style=\"font-size: 16px; padding-top: 15px\">\n" +

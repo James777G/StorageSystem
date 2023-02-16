@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service("transactionTextService")
 @PropertySource("classpath:/text/transaction.properties")
-public class TransactionTextServiceProvider implements TransactionTextService{
+public class TransactionTextServiceProvider implements TransactionTextService {
 
     @Value("${transaction.add.item.prependText}")
     private String prependTextInAdd;

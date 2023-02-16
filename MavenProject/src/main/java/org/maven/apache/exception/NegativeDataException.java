@@ -1,6 +1,6 @@
 package org.maven.apache.exception;
 
-public class NegativeDataException extends BaseException{
+public class NegativeDataException extends BaseException {
 
     public NegativeDataException() {
         super();

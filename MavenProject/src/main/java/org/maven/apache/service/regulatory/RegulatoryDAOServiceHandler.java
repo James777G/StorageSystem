@@ -1,6 +1,7 @@
 package org.maven.apache.service.regulatory;
 
 import jakarta.annotation.Resource;
+import org.maven.apache.exception.BaseException;
 import org.maven.apache.exception.DataNotFoundException;
 import org.maven.apache.mapper.ItemMapper;
 import org.maven.apache.mapper.RegulatoryMapper;
@@ -11,7 +12,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("regulatoryService")
-public class RegulatoryDAOServiceHandler implements RegulatoryService{
+public class RegulatoryDAOServiceHandler implements RegulatoryService {
 
     @Resource
     private RegulatoryMapper regulatoryMapper;
@@ -26,21 +27,21 @@ public class RegulatoryDAOServiceHandler implements RegulatoryService{
     private ItemMapper itemMapper;
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = BaseException.class)
     public void updateAllRegulatoryData() {
         RegulatoryCachedUtils.putLists(RegulatoryCachedUtils.listType.ALL,
                 regulatoryDataManipulator.getPagedCacheList(regulatoryMapper.selectAll(), 3));
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = BaseException.class)
     public void addNewRegulatory(Regulatory regulatory) throws DataNotFoundException {
         regulatoryAddStrategies.proceed(regulatory, itemMapper, regulatoryMapper);
         updateAllRegulatoryData();
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = BaseException.class)
     public void deleteRegulatory(String itemName) {
         regulatoryMapper.deleteRegulatory(itemName);
         updateAllRegulatoryData();

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("itemDataManipulationService")
-public class CachedItemDataManipulationHandler implements ItemDataManipulationService{
+public class CachedItemDataManipulationHandler implements ItemDataManipulationService {
 
     @Override
     public List<List<Item>> getPagedCacheList(List<Item> cachedList, int pageSize) {

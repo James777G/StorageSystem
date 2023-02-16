@@ -9,7 +9,6 @@ import org.maven.apache.regulatory.Regulatory;
 import org.maven.apache.service.text.TransactionTextService;
 import org.maven.apache.transaction.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +20,7 @@ import java.util.List;
 
 @Component("itemService")
 @Data
-public class ItemServiceProvider implements ItemService{
+public class ItemServiceProvider implements ItemService {
 
     @Resource
     private ItemMapper itemMapper;
@@ -137,7 +136,7 @@ public class ItemServiceProvider implements ItemService{
         Regulatory regulatory = regulatoryMapper.selectByName(item.getItemName());
         System.out.println(regulatory);
 
-        if(regulatory != null){
+        if (regulatory != null) {
             regulatoryMapper.deleteRegulatory(regulatory.getItemName());
         }
     }
@@ -163,7 +162,7 @@ public class ItemServiceProvider implements ItemService{
     @Override
     public List<Item> pageAskedNOOrder(int pageNumber, int pageSize) {
         int pageCal = pageNumberCal(pageNumber, pageSize);
-        return itemMapper.pageAskedNOOrder(pageCal,pageSize);
+        return itemMapper.pageAskedNOOrder(pageCal, pageSize);
     }
 
     /**
@@ -176,7 +175,7 @@ public class ItemServiceProvider implements ItemService{
     @Override
     public List<Item> pageAskedUnitAscend(int pageNumber, int pageSize) {
         int pageCal = pageNumberCal(pageNumber, pageSize);
-        return itemMapper.pageAskedUnitAscend(pageCal,pageSize);
+        return itemMapper.pageAskedUnitAscend(pageCal, pageSize);
     }
 
     /**
@@ -189,7 +188,7 @@ public class ItemServiceProvider implements ItemService{
     @Override
     public List<Item> pageAskedUnitDescend(int pageNumber, int pageSize) {
         int pageCal = pageNumberCal(pageNumber, pageSize);
-        return itemMapper.pageAskedUnitDescend(pageCal,pageSize);
+        return itemMapper.pageAskedUnitDescend(pageCal, pageSize);
     }
 
     /**
@@ -202,7 +201,7 @@ public class ItemServiceProvider implements ItemService{
     @Override
     public List<Item> pageAskedItemIDAscend(int pageNumber, int pageSize) {
         int pageCal = pageNumberCal(pageNumber, pageSize);
-        return itemMapper.pageAskedItemIDAscend(pageCal,pageSize);
+        return itemMapper.pageAskedItemIDAscend(pageCal, pageSize);
     }
 
     /**
@@ -215,7 +214,7 @@ public class ItemServiceProvider implements ItemService{
     @Override
     public List<Item> pageAskedItemIDDescend(int pageNumber, int pageSize) {
         int pageCal = pageNumberCal(pageNumber, pageSize);
-        return itemMapper.pageAskedItemIDDescend(pageCal,pageSize);
+        return itemMapper.pageAskedItemIDDescend(pageCal, pageSize);
     }
 
     private int pageNumberCal(int pageNumber, int pageSize) {

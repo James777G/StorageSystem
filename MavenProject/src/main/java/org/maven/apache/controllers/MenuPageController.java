@@ -2,15 +2,16 @@ package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.maven.apache.App;
+import org.maven.apache.MyLauncher;
 import org.maven.apache.utils.DataUtils;
 
 import java.io.IOException;
@@ -19,8 +20,9 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
 
-public class MenuPageController implements Initializable{
+public class MenuPageController implements Initializable {
 
     @FXML
     private JFXButton signOffButton;
@@ -46,6 +48,8 @@ public class MenuPageController implements Initializable{
     @FXML
     private final Image onExitSettingImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/image/icons8-settings-384.png")));
 
+    private final ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         settingImageView.setImage(onExitSettingImage);
@@ -53,33 +57,42 @@ public class MenuPageController implements Initializable{
     }
 
     @FXML
-    private void onEnterSetting(){
+    private void onEnterSetting() {
         settingImageView.setImage(onEnterSettingImage);
     }
 
     @FXML
-    private void onExitSetting(){
+    private void onExitSetting() {
         settingImageView.setImage(onExitSettingImage);
     }
 
     @FXML
-    private void onEnterLogOut(){
+    private void onEnterLogOut() {
         logOutImageView.setImage(onEnterLogOutImage);
     }
 
     @FXML
-    private void onExitLogOut(){
+    private void onExitLogOut() {
         logOutImageView.setImage(onExitLogOutImage);
     }
 
 
     @FXML
-    private void onSignOff() throws IOException {
-        Stage stage = (Stage) signOffButton.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/logInPage.fxml"));
-        Scene scene = new Scene(loader.load());
-        stage.setScene(scene);
-        stage.show();
+    private void onSignOff() {
+        threadPoolExecutor.execute(() -> {
+            Stage stage = (Stage) signOffButton.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/logInPage.fxml"));
+            final Scene scene;
+            try {
+                scene = new Scene(loader.load());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            Platform.runLater(() -> {
+                stage.setScene(scene);
+                stage.show();
+            });
+        });
     }
 
     @FXML

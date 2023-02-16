@@ -1,20 +1,13 @@
 package org.maven.apache.service.message;
 
 
+import jakarta.annotation.Resource;
 import org.maven.apache.exception.Warning;
-import org.maven.apache.item.Item;
 import org.maven.apache.mapper.MessageMapper;
 import org.maven.apache.message.Message;
-import org.maven.apache.service.item.ItemDataManipulationService;
-import org.maven.apache.service.transaction.CachedTransactionDataListService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import jakarta.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 这个class中的方法是给controller用
@@ -31,8 +24,7 @@ public class CachedMessageServiceProvider implements CachedMessageService {
     private CachedMessageDataListService cachedMessageDataListService;
 
 
-
-   @Resource
+    @Resource
     private MessageMapper messageMapper;
 
     @Warning(Warning.WarningType.DEBUG)//可能需要刷新页面

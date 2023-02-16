@@ -1,7 +1,6 @@
 package org.maven.apache.utils;
 
 import org.maven.apache.email.Email;
-import org.maven.apache.item.Item;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.Map;
 
 public class EmailCachedUtils {
 
-    public enum listType{
+    public enum listType {
         ALL
     }
 

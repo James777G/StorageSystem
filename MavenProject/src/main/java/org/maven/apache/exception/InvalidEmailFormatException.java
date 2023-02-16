@@ -1,6 +1,6 @@
 package org.maven.apache.exception;
 
-public class InvalidEmailFormatException extends BaseException{
+public class InvalidEmailFormatException extends BaseException {
 
     public InvalidEmailFormatException() {
         super();

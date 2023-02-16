@@ -18,17 +18,17 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class SpringConfiguration {
 
     @Bean
-    public MailAspect mailAspect(){
+    public MailAspect mailAspect() {
         return new MailAspect();
     }
 
     @Bean
-    public ExcelAspect excelAspect(){
+    public ExcelAspect excelAspect() {
         return new ExcelAspect();
     }
 
     @Bean
-    public ExcelConverterService excelConverterService(ItemService itemService, StaffDAOService staffDAOService, TransactionMapper transactionMapper){
+    public ExcelConverterService excelConverterService(ItemService itemService, StaffDAOService staffDAOService, TransactionMapper transactionMapper) {
         ExcelConverterServiceProvider excelConverterServiceProvider = new ExcelConverterServiceProvider();
         excelConverterServiceProvider.setStaffDAOService(staffDAOService);
         excelConverterServiceProvider.setItemService(itemService);

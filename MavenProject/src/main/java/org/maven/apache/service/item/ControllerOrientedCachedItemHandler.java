@@ -4,19 +4,21 @@ import jakarta.annotation.Resource;
 import javafx.application.Platform;
 import org.maven.apache.controllers.AppPage2Controller;
 import org.maven.apache.controllers.NewTransactionPageController;
+import org.maven.apache.exception.BaseException;
 import org.maven.apache.item.Item;
 import org.maven.apache.service.regulatory.RegulatoryService;
 import org.maven.apache.service.transaction.CachedTransactionService;
 import org.maven.apache.utils.CargoCachedUtils;
 import org.maven.apache.utils.DataUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.xml.crypto.Data;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 @Service("cachedItemService")
-public class ControllerOrientedCachedItemHandler implements CachedItemService{
+public class ControllerOrientedCachedItemHandler implements CachedItemService {
     @Resource
     private ItemService itemService;
 
@@ -30,12 +32,14 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService{
     private RegulatoryService regulatoryService;
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = BaseException.class)
     public void updateAllCachedItemData() {
         CargoCachedUtils.putLists(CargoCachedUtils.listType.ALL,
                 itemDataManipulationService.getPagedCacheList(itemService.selectAll(), 7));
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = BaseException.class)
     public void addNewItem(Item item) {
         itemService.addNewItem(item);
         updateAllCachedItemData();
@@ -43,12 +47,15 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService{
         try {
             invokeControllerToUpdate();
             invokeAppPage2ControllerToUpdate();
+            invokeRegulatoryPromptsToUpdate();
+            invokeTransactionToUpdate();
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = BaseException.class)
     public void deleteItemById(int id) {
         itemService.deleteById(id);
         updateAllCachedItemData();
@@ -58,6 +65,8 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService{
             invokeControllerToUpdate();
             invokeAppPage2ControllerToUpdate();
             invokeRegulatoryToUpdate();
+            invokeRegulatoryPromptsToUpdate();
+            invokeTransactionToUpdate();
         } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
@@ -70,6 +79,32 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService{
         Platform.runLater(() -> {
             try {
                 refreshPage.invoke(DataUtils.transactionPageController);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    private void invokeTransactionToUpdate() throws NoSuchMethodException {
+        Class<NewTransactionPageController> clazz = NewTransactionPageController.class;
+        Method setPromptTextForStaff = clazz.getDeclaredMethod("setPromptTextForRegulatory");
+        setPromptTextForStaff.setAccessible(true);
+        Platform.runLater(() -> {
+            try {
+                setPromptTextForStaff.invoke(DataUtils.transactionPageController);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    private void invokeRegulatoryPromptsToUpdate() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Class<AppPage2Controller> clazz = AppPage2Controller.class;
+        Method setPromptTextForRegulatory = clazz.getDeclaredMethod("setPromptTextForRegulatory");
+        setPromptTextForRegulatory.setAccessible(true);
+        Platform.runLater(() -> {
+            try {
+                setPromptTextForRegulatory.invoke(DataUtils.appPage2Controller);
             } catch (IllegalAccessException | InvocationTargetException e) {
                 throw new RuntimeException(e);
             }
@@ -116,8 +151,11 @@ public class ControllerOrientedCachedItemHandler implements CachedItemService{
     }
 
     @Override
-    public void updateItem(Item item) {
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = BaseException.class)
+    public void updateItem(Item item) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         itemService.update(item);
         updateAllCachedItemData();
+        invokeTransactionToUpdate();
+        invokeRegulatoryPromptsToUpdate();
     }
 }
