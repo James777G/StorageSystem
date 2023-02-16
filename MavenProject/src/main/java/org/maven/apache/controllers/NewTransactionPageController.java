@@ -207,7 +207,7 @@ public class NewTransactionPageController implements Initializable {
     private TextField newUnitTextField;
 
     @FXML
-    private TextField staffNameInDetails;
+    private MFXFilterComboBox staffNameInDetails;
 
     @FXML
     private TextArea descriptionTextArea;
@@ -1652,6 +1652,7 @@ public class NewTransactionPageController implements Initializable {
             }
         });
         newStaffFilterComboBox.setItems(FXCollections.observableList(resultList));
+        staffNameInDetails.setItems(FXCollections.observableList(resultList));
     }
 
     /**
