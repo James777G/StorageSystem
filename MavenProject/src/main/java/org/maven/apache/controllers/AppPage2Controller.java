@@ -26,6 +26,8 @@ import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.apache.poi.hssf.record.DVALRecord;
+import org.maven.apache.App;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.email.Email;
 import org.maven.apache.exception.EmptyValueException;
@@ -49,6 +51,7 @@ import org.maven.apache.utils.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,35 +62,47 @@ import java.util.function.Consumer;
 
 public class AppPage2Controller implements Initializable {
 
-    @FXML
-    private final Image onAppPageHomeImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-warehouse-100.png")));
+    private URL url1 = App.class.getResource("/image/icons8-warehouse-100.png");
+    private URL url2 = MyLauncher.class.getResource("/image/icons8-warehouse-50.png");
+    private URL url3 = MyLauncher.class.getResource("/image/icons8-cardboard-box-100 (3).png");
+    private URL url4 = MyLauncher.class.getResource("/image/icons8-cardboard-box-100 (2).png");
+    private URL url5 = MyLauncher.class.getResource("/image/icons8-up-down-arrow-96 (2).png");
+    private URL url6 = MyLauncher.class.getResource("/image/icons8-up-down-arrow-96 (1).png");
 
-    @FXML
-    private final Image offAppPageHomeImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-warehouse-50.png")));
+    private URL url7 = MyLauncher.class.getResource("/image/icons8-account-96 (1).png");
+    private URL url8 = MyLauncher.class.getResource("/image/icons8-account-96 (2).png");
+    private URL url9 = MyLauncher.class.getResource("/image/icons8-envelope-96 (1).png");
+    private URL url10 = MyLauncher.class.getResource("/image/icons8-envelope-96.png");
 
-    @FXML
-    private final Image onWarehousePageCardBoardImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-cardboard-box-100 (3).png")));
+    private final Image onAppPageHomeImage = new Image(url1.toExternalForm());
 
-    @FXML
-    private final Image offWarehousePageCardBoardImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-cardboard-box-100 (2).png")));
 
-    @FXML
-    private final Image onTransactionPageArrowUpDownImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-up-down-arrow-96 (2).png")));
+    private final Image offAppPageHomeImage = new Image(url2.toExternalForm());
 
-    @FXML
-    private final Image offTransactionPageArrowUpDownImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-up-down-arrow-96 (1).png")));
 
-    @FXML
-    private final Image onStaffPageUserImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-account-96 (1).png")));
+    private final Image onWarehousePageCardBoardImage = new Image(url3.toExternalForm());
 
-    @FXML
-    private final Image offStaffPageUserImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-account-96 (2).png")));
 
-    @FXML
-    private final Image onMessagePageEnvelopeImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-envelope-96 (1).png")));
 
-    @FXML
-    private final Image offMessagePageEnvelopeImage = new Image(Objects.requireNonNull(AppPage2Controller.class.getResourceAsStream("/Image/icons8-envelope-96.png")));
+    private final Image offWarehousePageCardBoardImage = new Image(url4.toExternalForm());
+
+
+    private final Image onTransactionPageArrowUpDownImage = new Image(url5.toExternalForm());
+
+
+    private final Image offTransactionPageArrowUpDownImage = new Image(url6.toExternalForm());
+
+
+    private final Image onStaffPageUserImage = new Image(url7.toExternalForm());
+
+
+    private final Image offStaffPageUserImage = new Image(url8.toExternalForm());
+
+
+    private final Image onMessagePageEnvelopeImage = new Image(url9.toExternalForm());
+
+
+    private final Image offMessagePageEnvelopeImage = new Image(url10.toExternalForm());
 
     @FXML
     private ImageView appPageImageView;
