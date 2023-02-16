@@ -3,6 +3,7 @@ package org.maven.apache.controllers;
 import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXPagination;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
+import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
@@ -11,10 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.Pagination;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
@@ -69,7 +67,8 @@ public class MessagePageController implements Initializable {
     private AnchorPane movingLinePane;
     @FXML
     private Pagination newPagination;
-
+    @FXML
+    private MFXGenericDialog descriptionDialog;
     @FXML
     private Label staffName1,staffName2,staffName3,staffName4,staffName5;
 
@@ -129,6 +128,16 @@ public class MessagePageController implements Initializable {
     private TextField newUnitTextField;
 
     @FXML
+    private Label staffNameInDetail;
+    @FXML
+    private Label categoryDetail;
+    @FXML
+    private TextArea itemDescriptionInDetails;
+    @FXML
+    private Label dateDetail;
+
+
+    @FXML
     private  final AnchorPane editMessagePane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/editMessagePage.fxml")));
 
     private final User user = DataUtils.currentUser;
@@ -177,7 +186,11 @@ public class MessagePageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cachedMessageService.updateAllCachedMessageData();
+
+//        itemDescriptionInDetails.setTextFormatter(new TextFormatter<String>(change ->
+//                change.getControlNewText().length() <= 100 ? change : null));
         clickStarredMessage=false;
+        descriptionDialog.setVisible(false);
         blockPane.setVisible(false);
         deleteMessagePane.setVisible(false);
         loadSpinnerOnDeletePane.setVisible(false);
@@ -198,11 +211,22 @@ public class MessagePageController implements Initializable {
         });
 
     }
+
+    @FXML
+    private void onCloseDescriptionDialog() {
+        descriptionDialog.setVisible(false);
+        blockPane.setVisible(false);
+
+    }
     @FXML
     private void onEnterAddButton() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(addButton, 500, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
+    }
+    @FXML
+    private void onClickOkay() {
+        onCloseDescriptionDialog();
     }
 
     @FXML
@@ -371,6 +395,31 @@ public class MessagePageController implements Initializable {
     @FXML
     private void OnStar5() {onClickStarMethodNumber(4);}
 
+    @FXML
+    private void OnPane1(){clickMessagePane(0);}
+    @FXML
+    private void OnPane2(){clickMessagePane(1);}
+    @FXML
+    private void OnPane3(){clickMessagePane(2);}
+    @FXML
+    private void OnPane4(){clickMessagePane(3);}
+    @FXML
+    private void OnPane5(){clickMessagePane(4);}
+
+
+
+    private void clickMessagePane(int row){
+        message = currentPageList.get(row);
+        descriptionDialog.setVisible(true);
+        blockPane.setVisible(true);
+        staffNameInDetail.setText(message.getStaffName());
+        categoryDetail.setText(message.getCategory());
+        dateDetail.setText(dateText(message.getMessageTime()));
+        itemDescriptionInDetails.setText(message.getInformation());
+    itemDescriptionInDetails.setWrapText(true);
+        itemDescriptionInDetails.setEditable(false);
+
+    }
 
 
     @FXML

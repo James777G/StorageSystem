@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="Two things left Add message and click message">
+    <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="One thing left when clikc the message shoudl show the information">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/MessagePageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/MessagePageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/messagePage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/messagePage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/org/maven/apache/mapper/MessageMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/org/maven/apache/mapper/MessageMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,7 +212,8 @@
       <workItem from="1675821704369" duration="335000" />
       <workItem from="1676003258489" duration="1984000" />
       <workItem from="1676449918282" duration="5982000" />
-      <workItem from="1676500085162" duration="14101000" />
+      <workItem from="1676500085162" duration="14447000" />
+      <workItem from="1676530354505" duration="6092000" />
     </task>
     <task id="LOCAL-00001" summary="the only tew sql list is two the left list is based on these two list">
       <created>1674189362992</created>
@@ -292,7 +292,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676505478658</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="One thing left when clikc the message shoudl show the information">
+      <created>1676515858764</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1676515858764</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -323,7 +330,8 @@
     <MESSAGE value="the left is to manage the scene" />
     <MESSAGE value="the message are showed on the labels" />
     <MESSAGE value="Two things left Add message and click message" />
-    <option name="LAST_COMMIT_MESSAGE" value="Two things left Add message and click message" />
+    <MESSAGE value="One thing left when clikc the message shoudl show the information" />
+    <option name="LAST_COMMIT_MESSAGE" value="One thing left when clikc the message shoudl show the information" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
