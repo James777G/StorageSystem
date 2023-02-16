@@ -2294,15 +2294,6 @@ public class AppPage2Controller implements Initializable {
                     cargoDialogApplyButton.setVisible(true);
                     loadSpinnerInAdd.setVisible(false);
                     warnMessageInAdd.setVisible(false);
-//                    FadeTransition fadeTransition = TransitionUtils.getFadeTransition(transactionDialog, 300, 1, 0);
-//                    TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(transactionDialog, 300, 0, -200);
-//                    translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
-//                    translateTransition.setOnFinished(event -> {
-//                        transactionDialog.setVisible(false);
-//                        appPageBlockPane.setVisible(false);
-//                    });
-//                    fadeTransition.play();
-//                    translateTransition.play();
                 });
             }
         });
@@ -2310,8 +2301,6 @@ public class AppPage2Controller implements Initializable {
 
     private void generateEncapsulatedTransaction() throws EmptyValueException {
         encapsulatedTransaction.setUnit(Integer.parseInt(transactionAmountInDetails.getText()));
-//        LocalDate currentDate = transactionDateInDetails.getValue();
-//        String format = currentDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         encapsulatedTransaction.setTransactionTime(transactionDateInDetails.getText());
         encapsulatedTransaction.setPurpose(purposeTextInDetails.getText());
         if ((staffNameInDetails.getText().isBlank()) || (transactionNameInDetails.getText().isBlank())) {
