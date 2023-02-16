@@ -277,7 +277,7 @@
             <ColorAdjust />
          </effect>
       </ImageView>
-      <AnchorPane fx:id="deleteOne" layoutX="1060.0" layoutY="135.0" onMouseClicked="#onClickDeleteOne" prefHeight="31.0" prefWidth="31.0" style="-fx-border-color: ec0000; -fx-border-width: 0.5; -fx-background-radius: 3; -fx-border-radius: 3;">
+      <AnchorPane fx:id="deleteOne" layoutX="1060.0" layoutY="135.0" onMouseClicked="#onClickDeleteOne" onMouseEntered="#onEnterDeleteOne" onMouseExited="#onExitDeleteOne" prefHeight="31.0" prefWidth="31.0" style="-fx-border-color: ec0000; -fx-border-width: 0.5; -fx-background-radius: 3; -fx-border-radius: 3;">
          <children>
             <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                <image>
@@ -299,7 +299,7 @@
             <Image url="@../image/icons8-star-filled-96.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="deleteTwo" layoutX="1060.0" layoutY="235.0" onMouseClicked="#onClickDeleteTwo" prefHeight="31.0" prefWidth="31.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;">
+      <AnchorPane fx:id="deleteTwo" layoutX="1060.0" layoutY="235.0" onMouseClicked="#onClickDeleteTwo" onMouseEntered="#onEnterDeleteTwo" onMouseExited="#onExitDeleteTwo" prefHeight="31.0" prefWidth="31.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;">
          <children>
             <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                <image>
@@ -308,7 +308,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="deleteThree" layoutX="1060.0" layoutY="335.0" onMouseClicked="#onClickDeleteThree" prefHeight="31.0" prefWidth="31.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;">
+      <AnchorPane fx:id="deleteThree" layoutX="1060.0" layoutY="335.0" onMouseClicked="#onClickDeleteThree" onMouseEntered="#onEnterDeleteThree" onMouseExited="#onExitDeleteThree" prefHeight="31.0" prefWidth="31.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;">
          <children>
             <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                <image>
@@ -322,7 +322,7 @@
             <Image url="@../image/icons8-star-filled-96.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="deleteFour" layoutX="1060.0" layoutY="435.0" onMouseClicked="#onClickDeleteFour" prefHeight="31.0" prefWidth="31.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;">
+      <AnchorPane fx:id="deleteFour" layoutX="1060.0" layoutY="435.0" onMouseClicked="#onClickDeleteFour" onMouseEntered="#onEnterDeleteFour" onMouseExited="#onExitDeleteFour" prefHeight="31.0" prefWidth="31.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;">
          <children>
             <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                <image>
@@ -331,7 +331,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="deleteFive" layoutX="1060.0" layoutY="535.0" onMouseClicked="#onClickDeleteFive" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;">
+      <AnchorPane fx:id="deleteFive" layoutX="1060.0" layoutY="535.0" onMouseClicked="#onClickDeleteFive" onMouseEntered="#onEnterDeleteFive" onMouseExited="#onExitDeleteFive" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;">
          <children>
             <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                <image>
