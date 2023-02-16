@@ -37,20 +37,9 @@ import java.util.concurrent.ExecutorService;
 
 public class StaffController implements Initializable {
 
-    private void run() {
-        warnMessageInDetails.setVisible(false);
-    }
-
     private enum Status {
         ACTIVE, ALL, INACTIVE
     }
-
-    @SuppressWarnings("all")
-    private final SearchResultService<Staff> searchResultService = MyLauncher.context.getBean("searchResultService", SearchResultService.class);
-
-    private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
-
-    private final CachedStaffService staffService = MyLauncher.context.getBean("staffService", CachedStaffService.class);
 
     @FXML
     private Label staffNameOne, staffNameTwo, staffNameThree, staffNameFour, staffNameFive, staffNameSix, staffNameSeven;
@@ -62,10 +51,31 @@ public class StaffController implements Initializable {
     private Label staffStatusOne, staffStatusTwo, staffStatusThree, staffStatusFour, staffStatusFive, staffStatusSix, staffStatusSeven;
 
     @FXML
+    private Label warnMessageInAdd;
+
+    @FXML
+    private Label staffIdInDetails;
+
+    @FXML
+    private Label warnMessageInDetails;
+
+    @FXML
     private JFXButton editOne, editTwo, editThree, editFour, editFive, editSix, editSeven;
 
     @FXML
+    private JFXButton applyButton;
+
+    @FXML
+    private JFXButton applyButtonInAdd;
+
+    @FXML
     private ImageView deleteOne, deleteTwo, deleteThree, deleteFour, deleteFive, deleteSix, deleteSeven;
+
+    @FXML
+    private ImageView doNotContinueButton;
+
+    @FXML
+    private ImageView doContinueButton;
 
     @FXML
     private MFXGenericDialog descriptionDialog;
@@ -80,19 +90,19 @@ public class StaffController implements Initializable {
     private TextField staffNameInDetails;
 
     @FXML
-    private MFXToggleButton staffStatusInDetails;
-
-    @FXML
-    private Label warnMessageInAdd;
-
-    @FXML
-    private Label staffIdInDetails;
+    private TextField staffNameInAdd;
 
     @FXML
     private MFXTextField searchBar;
 
     @FXML
+    private MFXToggleButton staffStatusInDetails;
+
+    @FXML
     private TextArea staffDescriptionInDetails;
+
+    @FXML
+    private TextArea staffDescriptionInAdd;
 
     @FXML
     private AnchorPane addButton;
@@ -101,63 +111,50 @@ public class StaffController implements Initializable {
     private AnchorPane blockPane;
 
     @FXML
-    private AnchorPane staffPane1, staffPane2, staffPane3, staffPane4, staffPane5, staffPane6, staffPane7;
-
-    @FXML
-    private AnchorPane[] staffPanes = new AnchorPane[7];
-
-    @FXML
-    private JFXButton applyButton;
-
-    @FXML
     private AnchorPane addStaffPane;
 
     @FXML
-    private TextField staffNameInAdd;
-
-    @FXML
-    private TextArea staffDescriptionInAdd;
-
-    @FXML
-    private MFXCheckbox staffStatusInAdd;
-
-    @FXML
-    private MFXProgressSpinner loadSpinnerInAdd;
-
-    @FXML
-    private JFXButton applyButtonInAdd;
-
-    @FXML
-    private Label warnMessageInDetails;
+    private AnchorPane staffPane1, staffPane2, staffPane3, staffPane4, staffPane5, staffPane6, staffPane7;
 
     @FXML
     private AnchorPane deleteItemPane;
 
     @FXML
-    private ImageView doNotContinueButton;
-
-    @FXML
-    private ImageView doContinueButton;
-
-    @FXML
-    private MFXProgressSpinner loadSpinnerOnDeletePane;
+    private MFXCheckbox staffStatusInAdd;
 
     @FXML
     private MFXCheckbox statusButton;
 
+    @FXML
+    private MFXProgressSpinner loadSpinnerInAdd;
+
+    @FXML
+    private MFXProgressSpinner loadSpinnerOnDeletePane;
+
+    @SuppressWarnings("all")
+    private final SearchResultService<Staff> searchResultService = MyLauncher.context.getBean("searchResultService", SearchResultService.class);
+
+    private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
+
+    private final CachedStaffService staffService = MyLauncher.context.getBean("staffService", CachedStaffService.class);
+
     private final Label[] nameList = new Label[7];
+
     private final Label[] idList = new Label[7];
+
     private final Label[] statusList = new Label[7];
+
     private final JFXButton[] buttonList = new JFXButton[7];
 
     private final ImageView[] deleteList = new ImageView[7];
+
+    private AnchorPane[] staffPanes = new AnchorPane[7];
 
     private List<Staff> currentStaffList;
 
     private List<Staff> currentActiveStaffList;
 
     private List<Staff> currentInactiveStaffList;
-
 
     private Status status = Status.ALL;
 
@@ -193,16 +190,6 @@ public class StaffController implements Initializable {
             throw new RuntimeException(e);
         }
         pagination.setPageCount(pageNumber);
-//        pagination.setOnScroll(new EventHandler<ScrollEvent>() {
-//            @Override
-//            public void handle(ScrollEvent event) {
-//                if(event.getDeltaY() > 0){
-//                    pagination.setCurrentPageIndex(pagination.getCurrentPageIndex() + 1);
-//                } else if(event.getDeltaY() < 0){
-//                    pagination.setCurrentPageIndex(pagination.getCurrentPageIndex() + 1);
-//                }
-//            }
-//        });
         pagination.currentPageIndexProperty().addListener((observable, oldValue, newValue) -> {
             getStaffList(newValue);
             assignStaffValue();
@@ -235,6 +222,10 @@ public class StaffController implements Initializable {
             assignStaffValue();
         });
         blockPane.setVisible(false);
+    }
+
+    private void run() {
+        warnMessageInDetails.setVisible(false);
     }
 
     @FXML
@@ -372,15 +363,9 @@ public class StaffController implements Initializable {
             nameList[i].setText(currentStaffList.get(i).getStaffName());
             idList[i].setText(Integer.valueOf(currentStaffList.get(i).getStaffID()).toString());
             statusList[i].setText(currentStaffList.get(i).getStatus());
-//            deleteList[i].setVisible(true);
         }
         for (int j = currentStaffList.size(); j < nameList.length; j++) {
             staffPanes[j].setVisible(false);
-//            nameList[j].setText("N/A");
-//            idList[j].setText("N/A");
-//            statusList[j].setText("N/A");
-//            buttonList[j].setDisable(true);
-//            deleteList[j].setVisible(false);
         }
     }
 
@@ -1075,7 +1060,6 @@ public class StaffController implements Initializable {
         });
         fadeTransition.play();
         translateTransition.play();
-
     }
 
     /**
@@ -1118,7 +1102,6 @@ public class StaffController implements Initializable {
                 });
             }
         });
-
     }
 
     /**
