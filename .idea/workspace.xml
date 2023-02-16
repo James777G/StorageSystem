@@ -7,6 +7,7 @@
     <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="implemented initial content successfully">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/AppPage2Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/AppPage2Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage2.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +223,7 @@
       <workItem from="1676276481058" duration="671000" />
       <workItem from="1676279900156" duration="3389000" />
       <workItem from="1676415882167" duration="10702000" />
-      <workItem from="1676516346673" duration="9120000" />
+      <workItem from="1676516346673" duration="10477000" />
     </task>
     <task id="LOCAL-00001" summary="the only tew sql list is two the left list is based on these two list">
       <created>1674189362992</created>

@@ -178,9 +178,6 @@ public class AppPage2Controller implements Initializable {
     private JFXButton updatePasswordButton;
 
     @FXML
-    private JFXButton confirmUpdateInfo;
-
-    @FXML
     private JFXButton cargoDialogApplyButton;
 
     @FXML
@@ -668,7 +665,6 @@ public class AppPage2Controller implements Initializable {
             }
         });
         setDrawer();
-        confirmUpdateInfo.setDisable(true);
         initializeLabels();
         fillCargoBoxesInformation(buttonSelected);
         blockPane.setVisible(false);
@@ -1924,10 +1920,6 @@ public class AppPage2Controller implements Initializable {
             newInfoTextField.clear();
             currentPasswordField.clear();
             newPasswordField.clear();
-            confirmUpdateInfo.setDisable(true);
-            isUpdatingUsername = false;
-            isUpdatingEmail = false;
-            isUpdatingPassword = false;
             notificationLabel.setText("");
             blockPane.setVisible(false);
         });
@@ -2079,7 +2071,7 @@ public class AppPage2Controller implements Initializable {
                 isUpdatingPassword = false;
                 infoVBox.setVisible(true);
                 passwordVBox.setVisible(false);
-                currentInfoTextField.setFloatingText(" Current " + infoType);
+                currentInfoTextField.setFloatingText(" Old " + infoType);
                 newInfoTextField.setFloatingText(" New " + infoType);
                 settingsDialog.setHeaderText("Update your Username");
                 break;
@@ -2089,7 +2081,7 @@ public class AppPage2Controller implements Initializable {
                 isUpdatingPassword = false;
                 infoVBox.setVisible(true);
                 passwordVBox.setVisible(false);
-                currentInfoTextField.setFloatingText(" Current " + infoType);
+                currentInfoTextField.setFloatingText(" Old " + infoType);
                 newInfoTextField.setFloatingText(" New " + infoType);
                 settingsDialog.setHeaderText("Update your Email");
                 break;
@@ -2102,7 +2094,6 @@ public class AppPage2Controller implements Initializable {
                 settingsDialog.setHeaderText("Update your Password");
                 break;
         }
-        confirmUpdateInfo.setDisable(false);
         currentInfoTextField.clear();
         newInfoTextField.clear();
         currentPasswordField.clear();
@@ -2153,7 +2144,7 @@ public class AppPage2Controller implements Initializable {
                 userService.update(currentUser);
                 notificationLabel.setText("Username updated");
             } else {
-                notificationLabel.setText("Invalid old or new Username");
+                notificationLabel.setText("Invalid information");
             }
         } else if (!isUpdatingUsername && isUpdatingEmail && !isUpdatingPassword) {
             // updating email
@@ -2165,7 +2156,7 @@ public class AppPage2Controller implements Initializable {
                 userService.update(currentUser);
                 notificationLabel.setText("Email updated");
             } else {
-                notificationLabel.setText("Invalid old or new Email");
+                notificationLabel.setText("Invalid information");
             }
         } else if (!isUpdatingUsername && !isUpdatingEmail && isUpdatingPassword) {
             // updating password
@@ -2175,7 +2166,7 @@ public class AppPage2Controller implements Initializable {
                 userService.update(currentUser);
                 notificationLabel.setText("Password updated");
             } else {
-                notificationLabel.setText("Invalid old or new Password");
+                notificationLabel.setText("Invalid information");
             }
         }
     }
@@ -2229,8 +2220,7 @@ public class AppPage2Controller implements Initializable {
         fadeTransition.play();
         translateTransition.play();
     }
-
-
+    
     @FXML
     private void onClickTransactionOne() {
         transaction = dateTransactionListInAppPage[0];

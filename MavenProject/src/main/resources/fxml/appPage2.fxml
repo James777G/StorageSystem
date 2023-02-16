@@ -903,7 +903,7 @@
       </AnchorPane>
       <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: grey;" visible="false" AnchorPane.bottomAnchor="0.0" />
 
-      <MFXGenericDialog fx:id="settingsDialog" headerText="Update your account Info" minHeight="300.0" onClose="#onCloseSettings" prefHeight="300.0" prefWidth="700.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="175.0">
+      <MFXGenericDialog fx:id="settingsDialog" headerText="Update your account Info" minHeight="300.0" onClose="#onCloseSettings" prefHeight="300.0" prefWidth="700.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="175.0">
          <center>
             <AnchorPane prefHeight="233.0" prefWidth="709.0" BorderPane.alignment="CENTER">
                <children>
@@ -941,7 +941,7 @@
                         <Insets bottom="15.0" left="15.0" right="15.0" top="10.0" />
                      </padding>
                   </VBox>
-                  <Label fx:id="notificationLabel" layoutX="116.0" layoutY="179.0" opacity="0.0" prefHeight="17.0" prefWidth="460.0" text="The above change is valid" textAlignment="CENTER" textFill="#007235">
+                  <Label fx:id="notificationLabel" ellipsisString="" layoutX="266.0" layoutY="187.0" prefHeight="17.0" prefWidth="213.0" text="The above change is valid" textAlignment="CENTER" textFill="#f20000">
                      <font>
                         <Font name="Calibri" size="14.0" />
                      </font>
@@ -967,7 +967,7 @@
                   </HBox>
                   <Separator layoutX="7.0" layoutY="42.0" prefHeight="3.0" prefWidth="694.0" />
                   <AnchorPane fx:id="transitionSettingLine" layoutX="7.0" layoutY="42.0" prefHeight="3.0" prefWidth="75.0" style="-fx-background-color: #223c40;" />
-                  <JFXButton fx:id="confirmUpdateInfo" layoutX="415.0" layoutY="212.0" onAction="#onConfirmUpdateInfo" prefHeight="25.0" prefWidth="89.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" text="Confirm" textAlignment="CENTER" textFill="WHITE">
+                  <JFXButton layoutX="415.0" layoutY="212.0" onAction="#onConfirmUpdateInfo" prefHeight="25.0" prefWidth="89.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" text="Confirm" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Calibri" size="14.0" />
                      </font>
