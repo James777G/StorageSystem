@@ -1060,7 +1060,6 @@ public class StaffController implements Initializable {
         });
         fadeTransition.play();
         translateTransition.play();
-
     }
 
     /**
@@ -1103,7 +1102,6 @@ public class StaffController implements Initializable {
                 });
             }
         });
-
     }
 
     /**
