@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="the message are showed on the labels">
+    <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="Two things left Add message and click message">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/MessagePageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/MessagePageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/messagePage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/messagePage.fxml" afterDir="false" />
@@ -213,7 +213,7 @@
       <workItem from="1675821704369" duration="335000" />
       <workItem from="1676003258489" duration="1984000" />
       <workItem from="1676449918282" duration="5982000" />
-      <workItem from="1676500085162" duration="5108000" />
+      <workItem from="1676500085162" duration="14101000" />
     </task>
     <task id="LOCAL-00001" summary="the only tew sql list is two the left list is based on these two list">
       <created>1674189362992</created>
@@ -285,7 +285,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676357587916</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Two things left Add message and click message">
+      <created>1676505478658</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1676505478658</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -315,7 +322,8 @@
     <MESSAGE value="try to finish the scene" />
     <MESSAGE value="the left is to manage the scene" />
     <MESSAGE value="the message are showed on the labels" />
-    <option name="LAST_COMMIT_MESSAGE" value="the message are showed on the labels" />
+    <MESSAGE value="Two things left Add message and click message" />
+    <option name="LAST_COMMIT_MESSAGE" value="Two things left Add message and click message" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

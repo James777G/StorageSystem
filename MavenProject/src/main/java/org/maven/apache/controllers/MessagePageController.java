@@ -1,5 +1,6 @@
 package org.maven.apache.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXPagination;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import javafx.animation.FadeTransition;
@@ -12,6 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
@@ -23,11 +26,15 @@ import org.maven.apache.message.Message;
 import org.maven.apache.service.item.CachedItemService;
 import org.maven.apache.service.message.CachedMessageService;
 import org.maven.apache.service.message.CachedMessageServiceProvider;
+import org.maven.apache.transaction.Transaction;
+import org.maven.apache.user.User;
 import org.maven.apache.utils.*;
 
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -96,9 +103,35 @@ public class MessagePageController implements Initializable {
     @FXML
     private MFXProgressSpinner loadSpinnerOnDeletePane;
 
+    @FXML
+    private Label userNameLabel; //直接user。settextuser.getname
+
+    @FXML
+    private Label messageDateLabel;
+
+    @FXML
+    private JFXButton clearButton;
+    @FXML
+    private Label warnMessageInAdd;
+    @FXML
+    private MFXProgressSpinner loadSpinnerInAdd;
+    @FXML
+    private JFXButton okayButton;
+    @FXML
+    private JFXButton applyButtonInAdd;
+    @FXML
+    private TextArea descriptionTextArea;
+    @FXML
+    private AnchorPane addButton;
+    @FXML
+    private AnchorPane addTransactionPane;
+    @FXML
+    private TextField newUnitTextField;
 
     @FXML
     private  final AnchorPane editMessagePane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/editMessagePage.fxml")));
+
+    private final User user = DataUtils.currentUser;
 
     private final CachedMessageService cachedMessageService = MyLauncher.context.getBean("cachedMessageService", CachedMessageService.class);
 
@@ -113,6 +146,7 @@ public class MessagePageController implements Initializable {
     );
 
     private int MessageID;
+    private boolean isAdditionSucceed;
 
     private Label[] staffNameArray= new Label[5];
 
@@ -147,6 +181,10 @@ public class MessagePageController implements Initializable {
         blockPane.setVisible(false);
         deleteMessagePane.setVisible(false);
         loadSpinnerOnDeletePane.setVisible(false);
+        warnMessageInAdd.setVisible(false);
+        loadSpinnerInAdd.setVisible(false);
+        addTransactionPane.setVisible(false);
+        isAdditionSucceed=false;
 
 
         initializeLabels();
@@ -159,6 +197,114 @@ public class MessagePageController implements Initializable {
             updatePagination(newValue);
         });
 
+    }
+    @FXML
+    private void onEnterAddButton() {
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(addButton, 500, 1.1);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void onExitAddButton() {
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(addButton, 500, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+    @FXML
+    private void onClickAddButton() {
+        addTransactionPane.setVisible(true);
+        blockPane.setVisible(true);
+        userNameLabel.setText(user.getName());
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String today = sdf.format(date);
+        messageDateLabel.setText(today);
+    }
+
+
+    @FXML
+    private void onClickApplyInAdd() {
+        if (!isValidated()) {
+            warnMessageInAdd.setVisible(true);
+        } else {
+//            Date date = new Date();
+//            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+//
+//            java.sql.Date date1 = new java.sql.Date(date.getTime());
+            isAdditionSucceed = true;
+            applyButtonInAdd.setVisible(false);
+            loadSpinnerInAdd.setVisible(true);
+            okayButton.setDisable(true);
+            clearButton.setDisable(true);
+         //   int newMessageID = getNumOfTransaction() + 1;
+         //   message.setMessageID(newMessageID);
+            Message insertMessage = new Message();
+            insertMessage.setStaffName(user.getName());
+            insertMessage.setCategory(newUnitTextField.getText());
+            insertMessage.setInformation(descriptionTextArea.getText());
+
+
+            executorService.execute(() -> {
+                try{
+                    cachedMessageService.addNewMessage(insertMessage);
+
+                    Platform.runLater(() -> {
+                        setContent();
+                    });
+                }catch(Exception e){
+                    warnMessageInAdd.setVisible(true);
+                    isAdditionSucceed = false;
+                }finally{
+                    // restore nodes after a succeesful addition
+                    applyButtonInAdd.setVisible(true);
+                    loadSpinnerInAdd.setVisible(false);
+                    if (isAdditionSucceed){
+                        warnMessageInAdd.setVisible(false);
+                        isAdditionSucceed=false;
+                    }
+                    okayButton.setDisable(false);
+                    clearButton.setDisable(false);
+                }
+            });
+        }
+    }
+
+
+
+
+
+    private int getNumOfTransaction() {
+        int count = 0;
+        for (int i = 0; i < MessageCachedUtils.getLists(MessageCachedUtils.listType.All_MESSAGE).size(); i++) {
+            for (int j = 0; j < MessageCachedUtils.getLists(MessageCachedUtils.listType.All_MESSAGE).get(i).size(); j++) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+
+    @FXML
+    private void onClickOkayInAdd() {
+        addTransactionPane.setVisible(false);
+        blockPane.setVisible(false);
+    }
+    @FXML
+    private void onClickClearInAdd(){
+
+        newUnitTextField.clear();
+
+
+        descriptionTextArea.clear();
+        warnMessageInAdd.setVisible(false);
+    }
+
+    private boolean isValidated() {
+        if ( !descriptionTextArea.getText().equals("")&& !newUnitTextField.getText().equals("")) {
+            return true;
+        }
+        return false;
     }
 
 
@@ -174,6 +320,7 @@ public class MessagePageController implements Initializable {
     private void setPaginationPages(List<List<Message>> messagePageList) {
         newPagination.setPageCount(messagePageList.size());
     }
+
 
 
     private void updatePagination(Number currentPage) {

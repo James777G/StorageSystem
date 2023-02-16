@@ -9,7 +9,7 @@
 <!-- star 是deafult 后期update如果收藏-->
     <insert id="addNewMessage">
  insert into MessageTable (StaffName,Category,Information,MessageTime) values
-       (#{StaffName},#{Category},#{Information},#{MessageTime});
+       (#{StaffName},#{Category},#{Information},curdate());
     </insert>
 
     <!--  -->
