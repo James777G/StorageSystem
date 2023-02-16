@@ -212,8 +212,9 @@ public class LogInPageController implements Initializable {
         loadIndicator.setStyle(" -fx-progress-color: black;");
         loadIndicator.setVisible(false);
         loginButton.setDisable(false);
+        setFieldStatus(false);
         /****/
-        fastLoginButton.setDisable(true);  // TEST ONLY
+        fastLoginButton.setDisable(false);  // TEST ONLY
         /****/
     }
 
@@ -390,6 +391,7 @@ public class LogInPageController implements Initializable {
                 // show progress indicator and disable signing button
                 loginButton.setDisable(true);
                 loadIndicator.setVisible(true);
+                setFieldStatus(true);
                 // head to the app page (appPage2) in the background
                 ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
                 threadPoolExecutor.execute(() -> {
@@ -604,6 +606,25 @@ public class LogInPageController implements Initializable {
 
     public String getSignUpPasswordString() {
         return signUpPassword.getText();
+    }
+
+    /**
+     * all clickable ndoes are disabled during a successful login
+     *
+     * @param isLoggingIn becomes true if logging in
+     */
+    private void setFieldStatus(boolean isLoggingIn){
+        if (isLoggingIn){
+            userNameField.setDisable(true);
+            passwordField.setDisable(true);
+            labelOnForgotPassword.setDisable(true);
+            labelOnSignUp.setDisable(true);
+        }else{
+            userNameField.setDisable(false);
+            passwordField.setDisable(false);
+            labelOnForgotPassword.setDisable(false);
+            labelOnSignUp.setDisable(false);
+        }
     }
 
     /**
