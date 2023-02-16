@@ -20,7 +20,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.StaffController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.StaffController">
    <children>
       <MFXTextField fx:id="searchBar" floatMode="DISABLED" layoutX="287.0" layoutY="75.0" prefHeight="50.0" prefWidth="550.0" styleClass="inputFields" stylesheets="@../css/logInPage.css" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="40.0">
          <textFill>
@@ -481,7 +481,7 @@
                      </font>
                   </Label>
                   <TextArea fx:id="staffDescriptionInDetails" layoutX="15.0" layoutY="130.0" prefHeight="145.0" prefWidth="375.0" wrapText="true" />
-                  <JFXButton layoutX="441.0" layoutY="87.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="View Transaction" textFill="WHITE" AnchorPane.bottomAnchor="181.66666666666669">
+                  <JFXButton layoutX="441.0" layoutY="87.0" onAction="#onViewTransaction" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="View Transaction" textFill="WHITE" AnchorPane.bottomAnchor="181.66666666666669">
                      <font>
                         <Font name="Calibri Bold Italic" size="13.0" />
                      </font>
@@ -517,7 +517,7 @@
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </MFXToggleButton>
-                  <Label fx:id="warnMessageInDetails" layoutX="403.0" layoutY="195.0" text="Your action was not successful,&#10;please check if the staff name &#10;has been filled." textFill="#a10000">
+                  <Label fx:id="warnMessageInDetails" layoutX="403.0" layoutY="186.0" text="Your action was not successful,&#10;please check if the staff name &#10;has been filled." textFill="#a10000">
                      <font>
                         <Font name="Calibri Bold" size="13.0" />
                      </font>

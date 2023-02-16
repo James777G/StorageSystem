@@ -1576,7 +1576,6 @@ public class AppPage2Controller implements Initializable {
         });
         fadeTransition.play();
         translateTransition.play();
-
     }
 
     @FXML
@@ -1900,7 +1899,7 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     @SuppressWarnings("all")
-    private void onClickTransaction() {
+    public void onClickTransaction() {
         if (currentPaneStatus != CurrentPaneStatus.TRANSACTION) {
             changePaneAnimation(currentPaneStatus, CurrentPaneStatus.TRANSACTION);
             changeButtonColorOff(currentPaneStatus);
@@ -2184,13 +2183,6 @@ public class AppPage2Controller implements Initializable {
     private boolean isTransactionStatusTaken(Transaction transaction) {
         return Objects.equals(transaction.getStatus(), "TAKEN");
     }
-
-//    private void setTransactionDate(MFXDatePicker transactionDateInDetails, Transaction transaction) {
-//        String recordTime = transaction.getTransactionTime();
-//        String[] split = recordTime.trim().replaceAll("-", "/").replaceAll("年", "/").replaceAll("月", "/").split("/");
-//        transactionDateInDetails.setValue(LocalDate.of(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2])));
-//        transactionDateInDetails.setStartingYearMonth(YearMonth.of(Integer.parseInt(split[0]), Integer.parseInt(split[1])));
-//    }
 
     @SuppressWarnings("all")
     private void setTransactionId(Label label, Transaction transaction) {

@@ -23,10 +23,7 @@ import org.maven.apache.service.search.SearchResultService;
 import org.maven.apache.service.search.SearchResultServiceHandler;
 import org.maven.apache.service.staff.CachedStaffService;
 import org.maven.apache.staff.Staff;
-import org.maven.apache.utils.ScaleUtils;
-import org.maven.apache.utils.StaffCachedUtils;
-import org.maven.apache.utils.TransitionUtils;
-import org.maven.apache.utils.TranslateUtils;
+import org.maven.apache.utils.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
@@ -1121,4 +1118,17 @@ public class StaffController implements Initializable {
         staff.setOtherInfo(staffDescriptionInAdd.getText());
         return staff;
     }
+
+    /**
+     * search the corresponding transactions pursuant to a particular staff name while moving to transaction page
+     */
+    @FXML
+    private void onViewTransaction() throws UnsupportedPojoException {
+        //DataUtils.appPage2Controller.setSearchProperty(true);
+        //DataUtils.transactionPageController.setSearchProperty(true);
+        DataUtils.transactionPageController.setKeyword(staffNameInDetails.getText());
+        DataUtils.transactionPageController.onClickSearch();
+        DataUtils.appPage2Controller.onClickTransaction();
+    }
+
 }
