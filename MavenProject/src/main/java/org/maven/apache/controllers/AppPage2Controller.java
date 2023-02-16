@@ -660,9 +660,9 @@ public class AppPage2Controller implements Initializable {
         searchField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (NewTransactionPageController.isSearchingStaff && !NewTransactionPageController.isSearchingItem) {
+                if (NewTransactionPageController.isSearchingStaff) {
                     searchBarService.setSearchPrompts(buttonList, searchField.getText(), PromptSearchBarServiceHandler.ResultType.STAFF);
-                } else if (!NewTransactionPageController.isSearchingStaff && NewTransactionPageController.isSearchingItem) {
+                } else {
                     searchBarService.setSearchPrompts(buttonList, searchField.getText(), PromptSearchBarServiceHandler.ResultType.CARGO);
                 }
             }
@@ -1639,9 +1639,9 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onClickSearchBar() {
-        if (NewTransactionPageController.isSearchingStaff && !NewTransactionPageController.isSearchingItem) {
+        if (NewTransactionPageController.isSearchingStaff) {
             searchBarService.setSearchPrompts(buttonList, searchField.getText(), PromptSearchBarServiceHandler.ResultType.STAFF);
-        } else if (!NewTransactionPageController.isSearchingStaff && NewTransactionPageController.isSearchingItem) {
+        } else {
             searchBarService.setSearchPrompts(buttonList, searchField.getText(), PromptSearchBarServiceHandler.ResultType.CARGO);
         }
         searchTable.setVisible(true);
@@ -2329,6 +2329,7 @@ public class AppPage2Controller implements Initializable {
      */
     public void setSearchProperty(boolean isStaff) {
         if (isStaff) {
+            // convert item to staff icon
             searchSwitchingBlockPane.toFront();
             cargoSearchPane.setVisible(true);
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, 0, -15);
@@ -2343,9 +2344,9 @@ public class AppPage2Controller implements Initializable {
             translateTransition1.play();
             scaleTransition.play();
             scaleTransition1.play();
-            NewTransactionPageController.isSearchingItem = false;
-            NewTransactionPageController.isSearchingStaff = true;
+            NewTransactionPageController.isSearchingStaff = false;
         } else {
+            // convert staff to item icon
             searchSwitchingBlockPane.toFront();
             staffSearchPane.setVisible(true);
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, -15, 0);
@@ -2360,8 +2361,7 @@ public class AppPage2Controller implements Initializable {
             translateTransition1.play();
             scaleTransition.play();
             scaleTransition1.play();
-            NewTransactionPageController.isSearchingItem = true;
-            NewTransactionPageController.isSearchingStaff = false;
+            NewTransactionPageController.isSearchingStaff = true;
         }
     }
 

@@ -285,8 +285,6 @@ public class NewTransactionPageController implements Initializable {
 
     private boolean isBlockPaneOpen = false;
 
-    public static boolean isSearchingItem = false;
-
     public static boolean isSearchingStaff = true;
 
     private int newUnitAmount;
@@ -631,14 +629,13 @@ public class NewTransactionPageController implements Initializable {
         setSortCondition();
         if (!searchField.getText().isBlank()) {
             try {
-                if (isSearchingItem && !isSearchingStaff) {
-                    sortedList = searchResultService.getPagedResultList(sortedList, searchField.getText(), SearchResultServiceHandler.ResultType.CARGO);
-                } else if (!isSearchingItem && isSearchingStaff) {
+                if (isSearchingStaff) {
                     sortedList = searchResultService.getPagedResultList(sortedList, searchField.getText(), SearchResultServiceHandler.ResultType.STAFF);
+                } else {
+                    sortedList = searchResultService.getPagedResultList(sortedList, searchField.getText(), SearchResultServiceHandler.ResultType.CARGO);
                 }
             } catch (Exception e) {
                 sortedList.clear();
-                System.out.println("ERROR");
             }
         }
         updatePagination(0);
@@ -1577,6 +1574,7 @@ public class NewTransactionPageController implements Initializable {
      */
     public void setSearchProperty(boolean isStaff) {
         if (isStaff) {
+            // convert item to staff icon
             searchSwitchingBlockPane.toFront();
             cargoSearchPane.setVisible(true);
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, 0, -15);
@@ -1591,9 +1589,9 @@ public class NewTransactionPageController implements Initializable {
             translateTransition1.play();
             scaleTransition.play();
             scaleTransition1.play();
-            isSearchingItem = true;
             isSearchingStaff = false;
         } else {
+            // convert staff to item icon
             searchSwitchingBlockPane.toFront();
             staffSearchPane.setVisible(true);
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(staffSearchPane, 300, -15, 0);
@@ -1608,7 +1606,6 @@ public class NewTransactionPageController implements Initializable {
             translateTransition1.play();
             scaleTransition.play();
             scaleTransition1.play();
-            isSearchingItem = false;
             isSearchingStaff = true;
         }
     }
