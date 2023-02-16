@@ -99,23 +99,6 @@
                   <Font name="Candara" size="13.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="deleteOne" layoutX="908.0" layoutY="37.0" onMouseClicked="#onClickDeleteOne" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ec0000; -fx-border-width: 0.5; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="34.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
-               <children>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-                     <image>
-                        <Image url="@../image/icons8-multiply-90%20(1).png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <ImageView fx:id="star1" fitHeight="30.0" fitWidth="30.0" layoutX="876.0" layoutY="38.0" onMouseClicked="#OnStar1" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="871.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="35.0">
-               <image>
-                  <Image url="@../image/icons8-star-filled-96.png" />
-               </image>
-               <effect>
-                  <ColorAdjust />
-               </effect>
-            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="notePadPane2" layoutX="120.0" layoutY="176.0" onMouseClicked="#OnPane2" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="195.0">
@@ -151,23 +134,6 @@
                   <Font name="Candara" size="13.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="deleteTwo" layoutX="908.0" layoutY="37.0" onMouseClicked="#onClickDeleteTwo" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="34.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
-               <children>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-                     <image>
-                        <Image url="@../image/icons8-multiply-90%20(1).png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <ImageView fx:id="star2" fitHeight="30.0" fitWidth="30.0" layoutX="871.0" layoutY="39.0" onMouseClicked="#OnStar2" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="871.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="35.0">
-               <image>
-                  <Image url="@../image/icons8-star-filled-96.png" />
-               </image>
-               <effect>
-                  <ColorAdjust />
-               </effect>
-            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="notePadPane3" layoutX="129.0" layoutY="280.0" onMouseClicked="#OnPane3" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="295.0">
@@ -203,20 +169,6 @@
                   <Font name="Candara" size="13.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="deleteThree" layoutX="908.0" layoutY="37.0" onMouseClicked="#onClickDeleteThree" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
-               <children>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-                     <image>
-                        <Image url="@../image/icons8-multiply-90%20(1).png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <ImageView fx:id="star3" fitHeight="30.0" fitWidth="30.0" layoutX="871.0" layoutY="39.0" onMouseClicked="#OnStar3" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="871.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="35.0">
-               <image>
-                  <Image url="@../image/icons8-star-filled-96.png" />
-               </image>
-            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="notePadPane4" layoutX="137.0" layoutY="380.0" onMouseClicked="#OnPane4" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="395.0">
@@ -252,20 +204,6 @@
                   <Font name="Candara" size="13.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="deleteFour" layoutX="908.0" layoutY="37.0" onMouseClicked="#onClickDeleteFour" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
-               <children>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-                     <image>
-                        <Image url="@../image/icons8-multiply-90%20(1).png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <ImageView fx:id="star4" fitHeight="30.0" fitWidth="30.0" layoutX="871.0" layoutY="39.0" onMouseClicked="#OnStar4" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="871.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="35.0">
-               <image>
-                  <Image url="@../image/icons8-star-filled-96.png" />
-               </image>
-            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="notePadPane5" layoutX="127.0" layoutY="480.0" onMouseClicked="#OnPane5" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="495.0">
@@ -301,20 +239,6 @@
                   <Font name="Candara" size="13.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="deleteFive" layoutX="908.0" layoutY="37.0" onMouseClicked="#onClickDeleteFive" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0">
-               <children>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-                     <image>
-                        <Image url="@../image/icons8-multiply-90%20(1).png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <ImageView fx:id="star5" fitHeight="30.0" fitWidth="30.0" layoutX="871.0" layoutY="39.0" onMouseClicked="#OnStar5" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.0" AnchorPane.topAnchor="35.0">
-               <image>
-                  <Image url="@../image/icons8-star-filled-96.png" />
-               </image>
-            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="1156.0" layoutY="515.0" prefHeight="80.0" prefWidth="60.0" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="53.0">
@@ -345,8 +269,84 @@
             </Label>
          </children>
       </AnchorPane>
+      <ImageView fx:id="star1" fitHeight="30.0" fitWidth="30.0" layoutX="982.0" layoutY="135.0" onMouseClicked="#OnStar1" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/icons8-star-filled-96.png" />
+         </image>
+         <effect>
+            <ColorAdjust />
+         </effect>
+      </ImageView>
+      <AnchorPane fx:id="deleteOne" layoutX="1060.0" layoutY="135.0" onMouseClicked="#onClickDeleteOne" prefHeight="31.0" prefWidth="31.0" style="-fx-border-color: ec0000; -fx-border-width: 0.5; -fx-background-radius: 3; -fx-border-radius: 3;">
+         <children>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+               <image>
+                  <Image url="@../image/icons8-multiply-90%20(1).png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <ImageView fx:id="star2" fitHeight="30.0" fitWidth="30.0" layoutX="982.0" layoutY="235.0" onMouseClicked="#OnStar2" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/icons8-star-filled-96.png" />
+         </image>
+         <effect>
+            <ColorAdjust />
+         </effect>
+      </ImageView>
+      <ImageView fx:id="star3" fitHeight="30.0" fitWidth="30.0" layoutX="982.0" layoutY="335.0" onMouseClicked="#OnStar3" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/icons8-star-filled-96.png" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="deleteTwo" layoutX="1060.0" layoutY="235.0" onMouseClicked="#onClickDeleteTwo" prefHeight="31.0" prefWidth="31.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;">
+         <children>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+               <image>
+                  <Image url="@../image/icons8-multiply-90%20(1).png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="deleteThree" layoutX="1060.0" layoutY="335.0" onMouseClicked="#onClickDeleteThree" prefHeight="31.0" prefWidth="31.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;">
+         <children>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+               <image>
+                  <Image url="@../image/icons8-multiply-90%20(1).png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <ImageView fx:id="star4" fitHeight="30.0" fitWidth="30.0" layoutX="982.0" layoutY="435.0" onMouseClicked="#OnStar4" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/icons8-star-filled-96.png" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="deleteFour" layoutX="1060.0" layoutY="435.0" onMouseClicked="#onClickDeleteFour" prefHeight="31.0" prefWidth="31.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;">
+         <children>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+               <image>
+                  <Image url="@../image/icons8-multiply-90%20(1).png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="deleteFive" layoutX="1060.0" layoutY="535.0" onMouseClicked="#onClickDeleteFive" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;">
+         <children>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+               <image>
+                  <Image url="@../image/icons8-multiply-90%20(1).png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <ImageView fx:id="star5" fitHeight="30.0" fitWidth="30.0" layoutX="982.0" layoutY="535.0" onMouseClicked="#OnStar5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/icons8-star-filled-96.png" />
+         </image>
+      </ImageView>
       <Pagination fx:id="newPagination" layoutX="397.0" layoutY="599.0" maxPageIndicatorCount="8" onScroll="#onScrolled" pageCount="50" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" AnchorPane.leftAnchor="397.0" AnchorPane.topAnchor="593.0" />
-      <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="blockPane" layoutX="1071.0" layoutY="145.0" opacity="0.75" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <AnchorPane fx:id="deleteMessagePane" layoutX="361.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f6f6f6; -fx-background-radius: 15;" visible="false">
          <children>
             <Label layoutX="14.0" layoutY="14.0" text="Continue?" AnchorPane.leftAnchor="15.0">

@@ -169,6 +169,8 @@ public class MessagePageController implements Initializable {
 
     private  ImageView[] starArray = new ImageView[5];
 
+    private AnchorPane[] deleteArray = new AnchorPane[5];
+
     private boolean clickStarredMessage;
 
     private List<List<Message>> messagePageList;
@@ -368,12 +370,17 @@ public class MessagePageController implements Initializable {
 
 
            notePadPaneArray[i].setVisible(true);
+            starArray[i].setVisible(true);
+            deleteArray[i].setVisible(true);
+
 
        }
         // set empty labels
         if (currentPageList.size() != 5) {
             for (int j = 4; j >= currentPageList.size(); j--) {
                 notePadPaneArray[j].setVisible(false);
+                starArray[j].setVisible(false);
+                deleteArray[j].setVisible(false);
             }
         }
 
@@ -486,9 +493,14 @@ public class MessagePageController implements Initializable {
     private void setDeletionPanes(int row) {
 
         MessageID = currentPageList.get(row).getMessageID(); // 为了使用deletebyID
-        int paneID = row+1;
+
         deleteMessagePane.setVisible(true);
+
+
+
+
         blockPane.setVisible(true);
+
 
         FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteMessagePane,300,0,1);
         TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteMessagePane,300,-45,0);
@@ -612,6 +624,12 @@ public class MessagePageController implements Initializable {
         starArray[2] = star3;
         starArray[3] = star4;
         starArray[4] = star5;
+        //
+        deleteArray[0] = deleteOne;
+        deleteArray[1] = deleteTwo;
+        deleteArray[2] = deleteThree;
+        deleteArray[3] = deleteFour;
+        deleteArray[4] = deleteFive;
 
     }
 
