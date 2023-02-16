@@ -9,7 +9,7 @@
 <!-- star 是deafult 后期update如果收藏-->
     <insert id="addNewMessage">
  insert into MessageTable (StaffName,Category,Information,MessageTime) values
-       (#{StaffName},#{Category},#{Information},#{MessageTime});
+       (#{StaffName},#{Category},#{Information},curdate());
     </insert>
 
     <!--  -->
@@ -27,9 +27,10 @@
           <if test=" Information!= null and Information !=''">
              Information = #{Information},
           </if>
-          <if test="MessageTime != null and MessageTime != ''">
-             MessageTime = #{MessageTime}
-          </if>
+
+             MessageTime = #{MessageTime},
+
+           Star=#{Star}
 
        </set>
     where MessageID =#{MessageID};

@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+
     <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="implemented initial content successfully">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/AppPage2Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/AppPage2Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage2.fxml" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,10 +44,12 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/MavenProject/pom.xml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/App.java" root0="FORCE_HIGHLIGHTING" />
+
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/Doc.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/MyLauncher.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/AppPage2Controller.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/LogInPageController.java" root0="SKIP_INSPECTION" />
+
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/NewTransactionPageController.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/WarehouseController.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/spring/MyBatisAutoConfiguration.java" root0="FORCE_HIGHLIGHTING" />
@@ -220,10 +224,12 @@
       <workItem from="1675810132057" duration="6899000" />
       <workItem from="1675821704369" duration="335000" />
       <workItem from="1676003258489" duration="1984000" />
+
       <workItem from="1676276481058" duration="671000" />
       <workItem from="1676279900156" duration="3389000" />
       <workItem from="1676415882167" duration="10702000" />
       <workItem from="1676516346673" duration="10477000" />
+
     </task>
     <task id="LOCAL-00001" summary="the only tew sql list is two the left list is based on these two list">
       <created>1674189362992</created>
@@ -281,7 +287,42 @@
       <option name="project" value="LOCAL" />
       <updated>1676202995048</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="the left is to manage the scene">
+      <created>1676256294671</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1676256294671</updated>
+    </task>
+    <task id="LOCAL-00010" summary="the message are showed on the labels">
+      <created>1676357587916</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1676357587916</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Two things left Add message and click message">
+      <created>1676505478658</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1676505478658</updated>
+    </task>
+    <task id="LOCAL-00012" summary="One thing left when clikc the message shoudl show the information">
+      <created>1676515858764</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1676515858764</updated>
+    </task>
+    <task id="LOCAL-00013" summary="已阅还没整">
+      <created>1676537783652</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1676537783653</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -309,7 +350,11 @@
     <MESSAGE value="need to finish the scene controller and the provider" />
     <MESSAGE value="try to finish the scene" />
     <MESSAGE value="the left is to manage the scene" />
-    <option name="LAST_COMMIT_MESSAGE" value="the left is to manage the scene" />
+    <MESSAGE value="the message are showed on the labels" />
+    <MESSAGE value="Two things left Add message and click message" />
+    <MESSAGE value="One thing left when clikc the message shoudl show the information" />
+    <MESSAGE value="已阅还没整" />
+    <option name="LAST_COMMIT_MESSAGE" value="已阅还没整" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
