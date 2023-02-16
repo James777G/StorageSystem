@@ -1124,8 +1124,8 @@ public class StaffController implements Initializable {
      */
     @FXML
     private void onViewTransaction() throws UnsupportedPojoException {
-        //DataUtils.appPage2Controller.setSearchProperty(true);
-        //DataUtils.transactionPageController.setSearchProperty(true);
+        DataUtils.appPage2Controller.setSearchProperty(false);
+        DataUtils.transactionPageController.setSearchProperty(false);
         DataUtils.transactionPageController.setKeyword(staffNameInDetails.getText());
         DataUtils.transactionPageController.onClickSearch();
         DataUtils.appPage2Controller.onClickTransaction();

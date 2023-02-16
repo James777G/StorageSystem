@@ -1055,8 +1055,8 @@ public class WarehouseController implements Initializable {
      */
     @FXML
     private void onViewTransaction() throws UnsupportedPojoException {
-        //DataUtils.appPage2Controller.setSearchProperty(true);
-        //DataUtils.transactionPageController.setSearchProperty(true);
+        DataUtils.appPage2Controller.setSearchProperty(true);
+        DataUtils.transactionPageController.setSearchProperty(true);
         DataUtils.transactionPageController.setKeyword(itemNameInDetails.getText());
         DataUtils.transactionPageController.onClickSearch();
         DataUtils.appPage2Controller.onClickTransaction();

@@ -1572,8 +1572,8 @@ public class NewTransactionPageController implements Initializable {
      *
      * @param isStaff searching staff if true
      */
-    public void setSearchProperty(boolean isStaff) {
-        if (isStaff) {
+    public void setSearchProperty(boolean isCargo) {
+        if (isCargo) {
             // convert item to staff icon
             searchSwitchingBlockPane.toFront();
             cargoSearchPane.setVisible(true);
