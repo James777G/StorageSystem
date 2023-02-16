@@ -26,7 +26,6 @@ import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.apache.poi.hssf.record.DVALRecord;
 import org.maven.apache.App;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.email.Email;
@@ -51,7 +50,6 @@ import org.maven.apache.utils.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,47 +60,26 @@ import java.util.function.Consumer;
 
 public class AppPage2Controller implements Initializable {
 
-    private URL url1 = App.class.getResource("/image/icons8-warehouse-100.png");
-    private URL url2 = MyLauncher.class.getResource("/image/icons8-warehouse-50.png");
-    private URL url3 = MyLauncher.class.getResource("/image/icons8-cardboard-box-100 (3).png");
-    private URL url4 = MyLauncher.class.getResource("/image/icons8-cardboard-box-100 (2).png");
-    private URL url5 = MyLauncher.class.getResource("/image/icons8-up-down-arrow-96 (2).png");
-    private URL url6 = MyLauncher.class.getResource("/image/icons8-up-down-arrow-96 (1).png");
+    public enum ButtonSelected {
+        ALL,
+        TAKEN,
+        RESTOCK
+    }
 
-    private URL url7 = MyLauncher.class.getResource("/image/icons8-account-96 (1).png");
-    private URL url8 = MyLauncher.class.getResource("/image/icons8-account-96 (2).png");
-    private URL url9 = MyLauncher.class.getResource("/image/icons8-envelope-96 (1).png");
-    private URL url10 = MyLauncher.class.getResource("/image/icons8-envelope-96.png");
+    enum CargoBoxNumber {
+        ONE,
+        TWO,
+        THREE,
+        FOUR
+    }
 
-    private final Image onAppPageHomeImage = new Image(url1.toExternalForm());
-
-
-    private final Image offAppPageHomeImage = new Image(url2.toExternalForm());
-
-
-    private final Image onWarehousePageCardBoardImage = new Image(url3.toExternalForm());
-
-
-
-    private final Image offWarehousePageCardBoardImage = new Image(url4.toExternalForm());
-
-
-    private final Image onTransactionPageArrowUpDownImage = new Image(url5.toExternalForm());
-
-
-    private final Image offTransactionPageArrowUpDownImage = new Image(url6.toExternalForm());
-
-
-    private final Image onStaffPageUserImage = new Image(url7.toExternalForm());
-
-
-    private final Image offStaffPageUserImage = new Image(url8.toExternalForm());
-
-
-    private final Image onMessagePageEnvelopeImage = new Image(url9.toExternalForm());
-
-
-    private final Image offMessagePageEnvelopeImage = new Image(url10.toExternalForm());
+    enum CurrentPaneStatus {
+        HOMEPAGE,
+        WAREHOUSE,
+        TRANSACTION,
+        STAFF,
+        MESSAGE
+    }
 
     @FXML
     private ImageView appPageImageView;
@@ -123,19 +100,19 @@ public class AppPage2Controller implements Initializable {
     private ImageView refreshImage;
 
     @FXML
-    private TextArea purposeTextInDetails;
+    private ImageView regulatoryDeleteOne, regulatoryDeleteTwo, regulatoryDeleteThree;
 
     @FXML
-    private Label transactionAmountInDetails;
-
-    @FXML
-    private Label transactionStatusInDetails;
-
-    @FXML
-    private Label transactionDateInDetails;
+    private ImageView emailDeleteOne, emailDeleteTwo, emailDeleteThree;
 
     @FXML
     private ImageView extendArrow;
+
+    @FXML
+    private ImageView notificationCross;
+
+    @FXML
+    private TextArea purposeTextInDetails;
 
     @FXML
     private VBox searchTable;
@@ -147,7 +124,14 @@ public class AppPage2Controller implements Initializable {
     private VBox infoVBox;
 
     @FXML
+    private VBox vbox;
+
+    @FXML
+    private VBox drawerVBox = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/menuPage.fxml")));
+
+    @FXML
     private JFXButton appPageButton;
+
     @FXML
     private JFXButton warehouseButton;
 
@@ -200,6 +184,9 @@ public class AppPage2Controller implements Initializable {
     private JFXButton cargoDialogApplyButton;
 
     @FXML
+    private JFXButton emailApplyButton, cargoApplyButton;
+
+    @FXML
     private AnchorPane appPagePane;
 
     @FXML
@@ -207,8 +194,6 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private AnchorPane takenStatusPane;
-
-    private final MailNotifyService mailNotifyService = MyLauncher.context.getBean("mailNotifyService", MailNotifyService.class);
 
     @FXML
     private AnchorPane restockStatusPane;
@@ -237,7 +222,6 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private AnchorPane cargoBox4BackPane;
 
-    @FXML
     private AnchorPane[] cargoBoxBackPanes = new AnchorPane[4];
 
     @FXML
@@ -290,12 +274,35 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private AnchorPane appPageBlockPane;
 
+    @FXML
+    private AnchorPane notificationPane;
+
+    @FXML
+    private AnchorPane emailSpaceOne, emailSpaceTwo, emailSpaceThree;
+
+    @FXML
+    private AnchorPane regulatorySpaceOne, regulatorySpaceTwo, regulatorySpaceThree;
 
     @FXML
     private StackPane stackPane;
 
     @FXML
     private StackPane stackPaneForWarehouse;
+
+    @FXML
+    private StackPane staffPane;
+
+    @FXML
+    private StackPane messagePane;
+
+    @FXML
+    private Label transactionAmountInDetails;
+
+    @FXML
+    private Label transactionStatusInDetails;
+
+    @FXML
+    private Label transactionDateInDetails;
 
     @FXML
     private Label warehouseLabel;
@@ -324,7 +331,6 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private Label cargoNameLabel04;
 
-    @FXML
     private Label[] cargoNameLabels = new Label[4];//{cargoNameLabel01,cargoNameLabel02,cargoNameLabel03,cargoNameLabel04};
 
     @FXML
@@ -334,15 +340,14 @@ public class AppPage2Controller implements Initializable {
     private Label cargoAmountLabel02;
 
     @FXML
-    private MFXFilterComboBox staffNameInDetails;
-
-    @FXML
     private Label cargoAmountLabel03;
 
     @FXML
     private Label cargoAmountLabel04;
 
     @FXML
+    private Label emailWarnMessage;
+
     private Label[] cargoAmountLabels = new Label[4];//{cargoAmountLabel01,cargoAmountLabel02,cargoAmountLabel03,cargoAmountLabel04};
 
     @FXML
@@ -357,7 +362,6 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private Label staffNameLabel04;
 
-    @FXML
     private Label[] staffNameLabels = new Label[4];//{staffNameLabel01,staffNameLabel02,staffNameLabel03,staffNameLabel04}
 
     @FXML
@@ -379,6 +383,15 @@ public class AppPage2Controller implements Initializable {
     private Label notificationLabel;
 
     @FXML
+    private Label emailOne, emailTwo, emailThree;
+
+    @FXML
+    private Label regulatoryNameOne, regulatoryNameTwo, regulatoryNameThree, regulatoryAmountOne, regulatoryAmountTwo, regulatoryAmountThree;
+
+    @FXML
+    private Label regulatoryWarnMessage;
+
+    @FXML
     private TextField searchField;
 
     @FXML
@@ -386,6 +399,9 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private MFXTextField newInfoTextField;
+
+    @FXML
+    private MFXTextField emailTextField, cargoAmountTextField;
 
     @FXML
     private MFXPasswordField currentPasswordField;
@@ -402,6 +418,64 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private MFXProgressSpinner loadSpinnerInAdd;
 
+    @FXML
+    private MFXProgressSpinner emailSpinner, cargoSpinner;
+
+    @FXML
+    private MFXProgressSpinner emailDeleteSpinnerOne, emailDeleteSpinnerTwo, emailDeleteSpinnerThree;
+
+    @FXML
+    private MFXProgressSpinner regulatoryDeleteSpinnerOne, regulatoryDeleteSpinnerTwo, regulatoryDeleteSpinnerThree;
+
+    @FXML
+    private MFXFilterComboBox staffNameInDetails;
+
+    @FXML
+    private MFXFilterComboBox cargoNameTextField;
+
+    @FXML
+    private Pagination emailPagination, cargoPagination;
+
+    private URL url1 = App.class.getResource("/image/icons8-warehouse-100.png");
+
+    private URL url2 = MyLauncher.class.getResource("/image/icons8-warehouse-50.png");
+
+    private URL url3 = MyLauncher.class.getResource("/image/icons8-cardboard-box-100 (3).png");
+
+    private URL url4 = MyLauncher.class.getResource("/image/icons8-cardboard-box-100 (2).png");
+
+    private URL url5 = MyLauncher.class.getResource("/image/icons8-up-down-arrow-96 (2).png");
+
+    private URL url6 = MyLauncher.class.getResource("/image/icons8-up-down-arrow-96 (1).png");
+
+    private URL url7 = MyLauncher.class.getResource("/image/icons8-account-96 (1).png");
+
+    private URL url8 = MyLauncher.class.getResource("/image/icons8-account-96 (2).png");
+
+    private URL url9 = MyLauncher.class.getResource("/image/icons8-envelope-96 (1).png");
+
+    private URL url10 = MyLauncher.class.getResource("/image/icons8-envelope-96.png");
+
+    private final Image onAppPageHomeImage = new Image(url1.toExternalForm());
+
+    private final Image offAppPageHomeImage = new Image(url2.toExternalForm());
+
+    private final Image onWarehousePageCardBoardImage = new Image(url3.toExternalForm());
+
+    private final Image offWarehousePageCardBoardImage = new Image(url4.toExternalForm());
+
+    private final Image onTransactionPageArrowUpDownImage = new Image(url5.toExternalForm());
+
+    private final Image offTransactionPageArrowUpDownImage = new Image(url6.toExternalForm());
+
+    private final Image onStaffPageUserImage = new Image(url7.toExternalForm());
+
+    private final Image offStaffPageUserImage = new Image(url8.toExternalForm());
+
+    private final Image onMessagePageEnvelopeImage = new Image(url9.toExternalForm());
+
+    private final Image offMessagePageEnvelopeImage = new Image(url10.toExternalForm());
+
     private final Paint appPageHoverTheme = Paint.valueOf("#37a592");
 
     private final Paint appPageTheme = Paint.valueOf("#223c40");
@@ -411,8 +485,6 @@ public class AppPage2Controller implements Initializable {
 
     private boolean isAppPageBlockPaneOpen = false;
 
-    private boolean isTriangleRotating = false;
-
     private boolean isRotating = false;
 
     private boolean isUpdatingUsername = false;
@@ -420,8 +492,6 @@ public class AppPage2Controller implements Initializable {
     private boolean isUpdatingEmail = false;
 
     private boolean isUpdatingPassword = false;
-
-    private boolean isSearchTableMoving = false;
 
     private boolean isChangingSide_CargoBox1 = false;
 
@@ -431,8 +501,6 @@ public class AppPage2Controller implements Initializable {
 
     private boolean isChangingSide_CargoBox4 = false;
 
-    private boolean[] isChangingSide = new boolean[4];
-
     private boolean changeToBack_CargoBox1 = false;
 
     private boolean changeToBack_CargoBox2 = false;
@@ -440,64 +508,6 @@ public class AppPage2Controller implements Initializable {
     private boolean changeToBack_CargoBox3 = false;
 
     private boolean changeToBack_CargoBox4 = false;
-
-    private boolean[] changeToBack = new boolean[4];
-
-
-    private final List<JFXButton> buttonList = new ArrayList<>();
-
-    private final Timeline timeline = new Timeline();
-
-    private Node currentPage;
-
-    private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
-
-    private final CachedTransactionService cachedTransactionService = MyLauncher.context.getBean("cachedTransactionService", CachedTransactionService.class);
-
-    private final UserService userService = MyLauncher.context.getBean("userService", UserService.class);
-
-    private int takenBoxNumber = 2;
-
-    private int restockBoxNumber = 2;
-
-    private Transaction transaction;
-
-    private Transaction encapsulatedTransaction = new Transaction();
-
-    public AppPage2Controller() throws IOException {
-    }
-
-    public enum ButtonSelected {
-        ALL,
-        TAKEN,
-        RESTOCK
-    }
-
-    enum CargoBoxNumber {
-        ONE,
-        TWO,
-        THREE,
-        FOUR
-    }
-
-    enum CurrentPaneStatus {
-        HOMEPAGE,
-        WAREHOUSE,
-        TRANSACTION,
-        STAFF,
-        MESSAGE
-    }
-
-    CurrentPaneStatus currentPaneStatus = CurrentPaneStatus.HOMEPAGE;
-    private List<Transaction> dateTransactions_Restock;
-
-    private List<Transaction> dateTransactions_Taken;
-
-    private ButtonSelected buttonSelected = ButtonSelected.ALL;
-
-    private CargoBoxNumber cargoBoxNumber;
-
-    private Transaction[] dateTransactionListInAppPage = new Transaction[4];
 
     private boolean isSearchTableOut = false;
 
@@ -508,6 +518,40 @@ public class AppPage2Controller implements Initializable {
     private boolean isVBoxOnOpenAnimation = false;
 
     private boolean isVBoxOnCloseAnimation = false;
+
+    private boolean[] changeToBack = new boolean[4];
+
+    private boolean[] isChangingSide = new boolean[4];
+
+    private int takenBoxNumber = 2;
+
+    private int restockBoxNumber = 2;
+
+    private Node currentPage;
+
+    private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
+
+    private final CachedTransactionService cachedTransactionService = MyLauncher.context.getBean("cachedTransactionService", CachedTransactionService.class);
+
+    private final UserService userService = MyLauncher.context.getBean("userService", UserService.class);
+
+    private final MailNotifyService mailNotifyService = MyLauncher.context.getBean("mailNotifyService", MailNotifyService.class);
+
+    private final SearchBarService searchBarService = MyLauncher.context.getBean("searchBarService", SearchBarService.class);
+
+    private final EmailService emailService = MyLauncher.context.getBean("emailService", EmailService.class);
+
+    private final RegulatoryService regulatoryService = MyLauncher.context.getBean("regulatoryService", RegulatoryService.class);
+
+    private Transaction transaction;
+
+    private Transaction encapsulatedTransaction = new Transaction();
+
+    private Transaction[] dateTransactionListInAppPage = new Transaction[4];
+
+    private ButtonSelected buttonSelected = ButtonSelected.ALL;
+
+    private CargoBoxNumber cargoBoxNumber;
 
     private TranslateTransition translateTransition_openMenu = new TranslateTransition();
 
@@ -539,84 +583,27 @@ public class AppPage2Controller implements Initializable {
 
     private Timeline timeline_menuDelay = new Timeline();
 
-    private final SearchBarService searchBarService = MyLauncher.context.getBean("searchBarService", SearchBarService.class);
-
-    @FXML
-    private VBox vbox;
-
-    @FXML
-    private VBox drawerVBox = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/menuPage.fxml")));
-
-    @FXML
-    private StackPane staffPane;
-
-    @FXML
-    private StackPane messagePane;
-
-    @FXML
-    private Label emailWarnMessage;
-
-    private final EmailService emailService = MyLauncher.context.getBean("emailService", EmailService.class);
-
-    @FXML
-    private Label emailOne, emailTwo, emailThree;
-
     private List<Label> emailList = new ArrayList<>();
-
-    @FXML
-    private Pagination emailPagination, cargoPagination;
-
-    @FXML
-    private MFXTextField emailTextField, cargoAmountTextField;
-
-    @FXML
-    private MFXFilterComboBox cargoNameTextField;
-
-    @FXML
-    private MFXProgressSpinner emailSpinner, cargoSpinner;
-
-    @FXML
-    private JFXButton emailApplyButton, cargoApplyButton;
-
-    @FXML
-    private AnchorPane notificationPane;
-
-    @FXML
-    private AnchorPane emailSpaceOne, emailSpaceTwo, emailSpaceThree;
-
-    @FXML
-    private ImageView emailDeleteOne, emailDeleteTwo, emailDeleteThree;
-
-    @FXML
-    private MFXProgressSpinner emailDeleteSpinnerOne, emailDeleteSpinnerTwo, emailDeleteSpinnerThree;
-
-    private List<AnchorPane> emailSpaceList = new ArrayList<>();
-
-    @FXML
-    private ImageView notificationCross;
-
-    @FXML
-    private Label regulatoryNameOne, regulatoryNameTwo, regulatoryNameThree, regulatoryAmountOne, regulatoryAmountTwo, regulatoryAmountThree;
 
     private List<Label> regulatoryNameList = new ArrayList<>();
 
     private List<Label> regulatoryAmountList = new ArrayList<>();
 
-    private final RegulatoryService regulatoryService = MyLauncher.context.getBean("regulatoryService", RegulatoryService.class);
-
-    @FXML
-    private AnchorPane regulatorySpaceOne, regulatorySpaceTwo, regulatorySpaceThree;
-
-    @FXML
-    private ImageView regulatoryDeleteOne, regulatoryDeleteTwo, regulatoryDeleteThree;
+    private List<AnchorPane> emailSpaceList = new ArrayList<>();
 
     private List<AnchorPane> regulatorySpaceList = new ArrayList<>();
 
-    @FXML
-    private Label regulatoryWarnMessage;
+    private List<Transaction> dateTransactions_Restock;
 
-    @FXML
-    private MFXProgressSpinner regulatoryDeleteSpinnerOne, regulatoryDeleteSpinnerTwo, regulatoryDeleteSpinnerThree;
+    private List<Transaction> dateTransactions_Taken;
+
+    private final List<JFXButton> buttonList = new ArrayList<>();
+
+    CurrentPaneStatus currentPaneStatus = CurrentPaneStatus.HOMEPAGE;
+
+    public AppPage2Controller() throws IOException {
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
