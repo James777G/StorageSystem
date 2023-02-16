@@ -22,10 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import org.maven.apache.MyLauncher;
-import org.maven.apache.exception.EmptyValueException;
-import org.maven.apache.exception.NegativeDataException;
-import org.maven.apache.exception.UnsupportedPojoException;
-import org.maven.apache.exception.Warning;
+import org.maven.apache.exception.*;
 import org.maven.apache.item.Item;
 import org.maven.apache.service.search.SearchResultService;
 import org.maven.apache.service.search.SearchResultServiceHandler;
@@ -1402,6 +1399,7 @@ public class NewTransactionPageController implements Initializable {
     @FXML
     private void onClickApplyInAdd() {
         if (!isValidated()) {
+            warnMessageInAdd.setText("Insertion Failed. \r\nPlease check your data are valid.");
             warnMessageInAdd.setVisible(true);
         } else {
             isAdditionSucceed = true;
@@ -1432,7 +1430,22 @@ public class NewTransactionPageController implements Initializable {
                         // adding restock cargo
                         addNewTransaction("RESTOCK", newTransactionID, newItemName, newStaffName, newUnitAmount, transactionDate, transactionDescription);
                     }
-                    cachedTransactionService.addNewTransaction(newTransaction);
+                    try{
+                        cachedTransactionService.addNewTransaction(newTransaction);
+                    }catch (DataNotFoundException dataNotFoundException){
+                        Platform.runLater(() -> {
+                            warnMessageInAdd.setText("Insertion Failed. \r\nThis item does not exit in our warehouse!");
+                            warnMessageInAdd.setVisible(true);
+                        });
+                        isAdditionSucceed = false;
+                    }catch (NegativeDataException negativeDataException){
+                        Platform.runLater(() -> {
+                            warnMessageInAdd.setText("Insertion Failed. \r\nInsufficient item amount left");
+                            warnMessageInAdd.setVisible(true);
+                        });
+                        isAdditionSucceed = false;
+                    }
+
                     Platform.runLater(() -> {
                         try {
                             refreshPage();
@@ -1441,7 +1454,10 @@ public class NewTransactionPageController implements Initializable {
                         }
                     });
                 } catch (Exception e) {
-                    warnMessageInAdd.setVisible(true);
+                    Platform.runLater(() -> {
+                        warnMessageInAdd.setText("Insertion Failed. \r\nPlease check your inserted data are indeed valid.");
+                        warnMessageInAdd.setVisible(true);
+                    });
                     isAdditionSucceed = false;
                 } finally {
                     // restore nodes after a succeesful addition
