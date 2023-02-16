@@ -23,7 +23,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.AppPage2Controller">
    <children>
       <StackPane fx:id="staffPane" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
       <StackPane fx:id="stackPaneForWarehouse" layoutX="10.0" layoutY="10.0" prefHeight="640.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
@@ -903,18 +903,18 @@
       </AnchorPane>
       <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: grey;" visible="false" AnchorPane.bottomAnchor="0.0" />
 
-      <MFXGenericDialog fx:id="settingsDialog" headerText="Update your account Info" minHeight="300.0" onClose="#onCloseSettings" prefHeight="300.0" prefWidth="700.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="175.0">
+      <MFXGenericDialog fx:id="settingsDialog" headerText="Update your account Info" minHeight="300.0" onClose="#onCloseSettings" prefHeight="300.0" prefWidth="700.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="175.0">
          <center>
             <AnchorPane prefHeight="233.0" prefWidth="709.0" BorderPane.alignment="CENTER">
                <children>
                   <VBox fx:id="passwordVBox" layoutX="89.0" layoutY="45.0" prefHeight="135.0" prefWidth="478.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="60.0">
                      <children>
-                        <MFXPasswordField fx:id="currentPasswordField" floatMode="BORDER" floatingText=" Current Password" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.5" prefWidth="478.0">
+                        <MFXPasswordField fx:id="currentPasswordField" floatMode="BORDER" floatingText=" Old Password" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="478.0">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
                         </MFXPasswordField>
-                        <MFXPasswordField fx:id="newPasswordField" floatMode="BORDER" floatingText=" New Password" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.5" prefWidth="478.0">
+                        <MFXPasswordField fx:id="newPasswordField" floatMode="BORDER" floatingText=" New Password" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="478.0">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
@@ -926,7 +926,7 @@
                   </VBox>
                   <VBox fx:id="infoVBox" layoutX="89.0" layoutY="45.0" pickOnBounds="false" prefHeight="135.0" prefWidth="478.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="60.0">
                      <children>
-                        <MFXTextField fx:id="currentInfoTextField" floatMode="BORDER" floatingText=" Current Account Info" graphicTextGap="5.0" prefHeight="40.0" prefWidth="478.0" stylesheets="@../css/textField.css">
+                        <MFXTextField fx:id="currentInfoTextField" floatMode="BORDER" floatingText=" Old Account Info" graphicTextGap="5.0" prefHeight="40.0" prefWidth="478.0" stylesheets="@../css/textField.css">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>

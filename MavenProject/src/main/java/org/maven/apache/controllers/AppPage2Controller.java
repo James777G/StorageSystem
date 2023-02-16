@@ -1627,8 +1627,8 @@ public class AppPage2Controller implements Initializable {
     }
 
     private static void onClickSettingsTwo(MFXGenericDialog genericDialog) {
-        genericDialog.setOpacity(0);
-        genericDialog.setPickOnBounds(true);
+//        genericDialog.setOpacity(0);
+//        genericDialog.setPickOnBounds(true);
         genericDialog.setVisible(true);
         FadeTransition fadeTransition = TransitionUtils.getFadeTransition(genericDialog, 300, 0, 1);
         TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(genericDialog, 300, -150, 0);
