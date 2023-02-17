@@ -455,7 +455,7 @@
          </center>
       </BorderPane>
       <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" visible="false" />
-      <MFXGenericDialog fx:id="descriptionDialog" headerText="Item Details" layoutX="492.0" onClose="#onCloseDescription" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="150.0">
+      <MFXGenericDialog fx:id="descriptionDialog" headerText="Item Details" layoutX="492.0" onClose="#onCloseDescription" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="150.0">
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
@@ -487,7 +487,7 @@
                         <Font name="Calibri Bold Italic" size="13.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="441.0" layoutY="41.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Bring To Notepad" textFill="WHITE" AnchorPane.bottomAnchor="227.66666666666666">
+                  <JFXButton layoutX="441.0" layoutY="41.0" onAction="#bringToNote" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #223c40;" text="Bring To Notepad" textFill="WHITE" AnchorPane.bottomAnchor="227.66666666666666">
                      <font>
                         <Font name="Calibri Bold Italic" size="13.0" />
                      </font>

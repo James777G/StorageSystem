@@ -410,12 +410,32 @@
                   <Font name="Calibri Bold" size="14.0" />
                </font>
             </Label>
-            <TextArea fx:id="descriptionTextArea" layoutX="14.0" layoutY="189.0" prefHeight="129.0" prefWidth="366.0" styleClass="lineStyleTextArea" stylesheets="@../css/staffPane.css" />
-            <JFXButton fx:id="applyButtonInAdd" layoutX="599.0" layoutY="291.0" onAction="#onClickApplyInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #223c40;" text="Apply" textFill="WHITE">
-               <font>
-                  <Font name="Calibri Bold" size="14.0" />
-               </font>
-            </JFXButton>
+            <TextArea fx:id="descriptionTextArea" layoutX="14.0" layoutY="189.0" prefHeight="129.0" prefWidth="403.0" styleClass="lineStyleTextArea" stylesheets="@../css/staffPane.css" />
+            <AnchorPane layoutX="431.0" layoutY="233.0">
+               <children>
+                  <JFXButton fx:id="applyButtonInAdd" layoutX="205.0" layoutY="58.0" onAction="#onClickApplyInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #223c40;" text="Apply" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="okayButton" layoutX="104.0" layoutY="58.0" onAction="#onClickOkayInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #e9e9e9;" text="Okay">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <MFXProgressSpinner fx:id="loadSpinnerInAdd" layoutX="230.0" layoutY="62.0" prefHeight="18.0" prefWidth="25.0" />
+                  <Label fx:id="warnMessageInAdd" prefHeight="57.0" prefWidth="283.0" text="Your action was not successful,&#10;please check if the fields have been filled." textFill="#a10000">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="clearButton" layoutX="2.0" layoutY="58.0" onAction="#onClickClearInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #e9e9e9;" text="Clear">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
             <Separator layoutX="1.0" layoutY="41.0" prefHeight="8.0" prefWidth="735.0" />
             <AnchorPane layoutX="509.0" AnchorPane.topAnchor="8.0">
                <children>
@@ -431,22 +451,11 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <JFXButton fx:id="okayButton" layoutX="498.0" layoutY="291.0" onAction="#onClickOkayInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #e9e9e9;" text="Okay">
-               <font>
-                  <Font name="Calibri Bold" size="14.0" />
-               </font>
-            </JFXButton>
             <ImageView fitHeight="28.0" fitWidth="32.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/icons8-add-new-100.png" />
                </image>
             </ImageView>
-            <MFXProgressSpinner fx:id="loadSpinnerInAdd" layoutX="624.0" layoutY="295.0" prefHeight="18.0" prefWidth="25.0" />
-            <Label fx:id="warnMessageInAdd" layoutX="394.0" layoutY="233.0" prefHeight="57.0" prefWidth="283.0" text="Your action was not successful,&#10;please check if the fields have been filled." textFill="#a10000">
-               <font>
-                  <Font name="Calibri Bold" size="13.0" />
-               </font>
-            </Label>
             <AnchorPane layoutX="222.0" layoutY="71.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="152.0" text="Category (required)">
@@ -461,11 +470,6 @@
                   </TextField>
                </children>
             </AnchorPane>
-            <JFXButton fx:id="clearButton" layoutX="396.0" layoutY="291.0" onAction="#onClickClearInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #e9e9e9;" text="Clear">
-               <font>
-                  <Font name="Calibri Bold" size="14.0" />
-               </font>
-            </JFXButton>
          </children>
       </AnchorPane>
       <MFXGenericDialog fx:id="descriptionDialog" headerText="Message Details" layoutX="10.0" layoutY="10.0" onClose="#onCloseDescriptionDialog" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="150.0">

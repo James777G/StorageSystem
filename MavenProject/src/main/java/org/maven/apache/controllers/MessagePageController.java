@@ -22,6 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.message.Message;
 import org.maven.apache.service.message.CachedMessageService;
+import org.maven.apache.service.text.AbstractMessageTextService;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.*;
 
@@ -137,6 +138,12 @@ public class MessagePageController implements Initializable {
 
     private final User user = DataUtils.currentUser;
 
+    private final AbstractMessageTextService staffMessage = MyLauncher.context.getBean("staffMessage", AbstractMessageTextService.class);
+
+    private final AbstractMessageTextService transactionMessage = MyLauncher.context.getBean("transactionMessage", AbstractMessageTextService.class);
+
+    private final AbstractMessageTextService cargoMessage = MyLauncher.context.getBean("cargoMessage", AbstractMessageTextService.class);
+
     private final CachedMessageService cachedMessageService = MyLauncher.context.getBean("cachedMessageService", CachedMessageService.class);
 
     private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
@@ -195,6 +202,7 @@ public class MessagePageController implements Initializable {
         loadSpinnerInAdd.setVisible(false);
         addTransactionPane.setVisible(false);
         isAdditionSucceed = false;
+        DataUtils.messageController = this;
 
 
         initializeLabels();
@@ -241,6 +249,39 @@ public class MessagePageController implements Initializable {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String today = sdf.format(date);
+        messageDateLabel.setText(today);
+    }
+
+    private void onClickAddButtonForStaff(String id, String name) {
+        addTransactionPane.setVisible(true);
+        blockPane.setVisible(true);
+        userNameLabel.setText(user.getName());
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String today = sdf.format(date);
+        descriptionTextArea.setText(staffMessage.getHeaderText(id, name));
+        messageDateLabel.setText(today);
+    }
+
+    private void onClickAddButtonForCargo(String id, String name) {
+        addTransactionPane.setVisible(true);
+        blockPane.setVisible(true);
+        userNameLabel.setText(user.getName());
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String today = sdf.format(date);
+        descriptionTextArea.setText(cargoMessage.getHeaderText(id, name));
+        messageDateLabel.setText(today);
+    }
+
+    private void onClickAddButtonForTransaction(String id, String name) {
+        addTransactionPane.setVisible(true);
+        blockPane.setVisible(true);
+        userNameLabel.setText(user.getName());
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String today = sdf.format(date);
+        descriptionTextArea.setText(transactionMessage.getHeaderText(id, name));
         messageDateLabel.setText(today);
     }
 
