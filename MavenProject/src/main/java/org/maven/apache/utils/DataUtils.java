@@ -4,6 +4,7 @@ import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.AnchorPane;
 import org.maven.apache.controllers.AppPage2Controller;
+import org.maven.apache.controllers.MessagePageController;
 import org.maven.apache.controllers.NewTransactionPageController;
 import org.maven.apache.controllers.StaffController;
 import org.maven.apache.controllers.WarehouseController;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Component;
 public class DataUtils {
 
     public static WarehouseController warehouseController;
+
+    public static MessagePageController messageController;
 
     public static AppPage2Controller.ButtonSelected buttonSelected;
 

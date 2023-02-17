@@ -584,7 +584,7 @@
          </image>
       </ImageView>
       <AnchorPane fx:id="blockPane" layoutX="-4.0" layoutY="-9.0" opacity="0.75" prefHeight="649.0" prefWidth="1207.0" style="-fx-background-color: grey;" visible="false" />
-      <MFXGenericDialog fx:id="descriptionDialog" headerText="Transaction Details" layoutX="10.0" layoutY="10.0" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseDescriptionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
+      <MFXGenericDialog fx:id="descriptionDialog" headerText="Transaction Details" layoutX="10.0" layoutY="10.0" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseDescriptionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
          <left>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
@@ -614,7 +614,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <JFXButton layoutX="719.0" layoutY="159.0" style="-fx-background-color: #e2e2e2;" text="Bring To Notepad" AnchorPane.bottomAnchor="170.0">
+                  <JFXButton layoutX="719.0" layoutY="159.0" onAction="#bringToNote" style="-fx-background-color: #e2e2e2;" text="Bring To Notepad" AnchorPane.bottomAnchor="170.0">
                      <font>
                         <Font name="Calibri Bold" size="16.0" />
                      </font>

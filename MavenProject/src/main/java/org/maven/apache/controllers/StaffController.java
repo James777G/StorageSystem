@@ -26,6 +26,7 @@ import org.maven.apache.staff.Staff;
 import org.maven.apache.utils.*;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -234,6 +235,18 @@ public class StaffController implements Initializable {
         if (event.getDeltaY() > 0) {
             pagination.setCurrentPageIndex(pagination.getCurrentPageIndex() - 1);
         }
+    }
+
+    @FXML
+    private void bringToNote() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Class<AppPage2Controller> appPage2ControllerClass = AppPage2Controller.class;
+        Method onClickMessage = appPage2ControllerClass.getDeclaredMethod("onClickMessage");
+        onClickMessage.setAccessible(true);
+        Class<MessagePageController> messagePageControllerClass = MessagePageController.class;
+        Method onClickAddButtonForStaff = messagePageControllerClass.getDeclaredMethod("onClickAddButtonForStaff", String.class, String.class);
+        onClickAddButtonForStaff.setAccessible(true);
+        onClickMessage.invoke(DataUtils.appPage2Controller);
+        onClickAddButtonForStaff.invoke(DataUtils.messageController, staffIdInDetails.getText(), staffNameInDetails.getText());
     }
 
     /**
