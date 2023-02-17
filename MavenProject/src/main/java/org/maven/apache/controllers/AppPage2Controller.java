@@ -49,6 +49,7 @@ import org.maven.apache.transaction.Transaction;
 import org.maven.apache.user.User;
 import org.maven.apache.utils.*;
 
+import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -2374,6 +2375,22 @@ public class AppPage2Controller implements Initializable {
             scaleTransition1.play();
             NewTransactionPageController.isSearchingStaff = true;
         }
+    }
+
+    /**
+     * reload cache from database
+     */
+    @FXML
+    private void onRefresh() throws UnsupportedPojoException {
+        regulatoryService.updateAllRegulatoryData();
+        emailService.updateCachedEmailData();
+        setCargoPageCount();
+        setEmailPageCount();
+        setCargoTable(0);
+        setEmailTable(0);
+        DataUtils.warehouseController.onRefresh();
+        DataUtils.transactionPageController.onRefresh();
+        DataUtils.staffController.onRefresh();
     }
 
 }

@@ -9,6 +9,7 @@
 <?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.Separator?>
@@ -59,6 +60,7 @@
                   <Image url="@../image/Refresh-10.png" />
                </image>
             </ImageView>
+            <Button layoutX="998.0" layoutY="294.0" mnemonicParsing="false" onAction="#onRefresh" prefHeight="25.0" prefWidth="65.0" text="refresh" />
             <JFXButton contentDisplay="CENTER" layoutX="850.0" layoutY="170.0" onAction="#onClickSearch" prefHeight="50.0" prefWidth="50.0" styleClass="searchButton" stylesheets="@../css/appPage.css" textFill="#223c4000">
                <graphic>
                   <ImageView fx:id="searchImage11" fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
@@ -413,7 +415,7 @@
                   <Font name="Calibri Bold" size="16.0" />
                </font>
             </Label>
-            <AnchorPane fx:id="notificationPane" layoutX="211.0" layoutY="127.0" prefHeight="292.0" prefWidth="460.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-radius: 20;" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="80.0">
+            <AnchorPane fx:id="notificationPane" layoutX="211.0" layoutY="127.0" prefHeight="292.0" prefWidth="460.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-radius: 20;" visible="false" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="80.0">
                <children>
                   <Label layoutX="27.0" layoutY="17.0" text="Notification Center">
                      <font>
@@ -603,7 +605,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <MFXCircleToggleNode fx:id="notifyButton" layoutX="6.0" layoutY="70.0" onMouseClicked="#onNotify" onMouseEntered="#onEnterNotify" onMouseExited="#onExitNotify">
+            <MFXCircleToggleNode fx:id="notifyButton" layoutX="6.0" layoutY="70.0" onMouseClicked="#onNotify" onMouseEntered="#onEnterNotify" onMouseExited="#onExitNotify" pickOnBounds="false" prefHeight="88.0" prefWidth="94.0">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
                </font>
