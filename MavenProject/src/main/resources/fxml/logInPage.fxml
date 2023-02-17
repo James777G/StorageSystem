@@ -33,7 +33,7 @@
                   <Font size="21.0" />
                </font>
             </JFXButton>
-            <Label fx:id="labelOnSignIn" layoutX="240.0" layoutY="643.0" onMouseClicked="#onSignIn" onMouseEntered="#onEnterLabelSignIn" onMouseExited="#onExitLabelSignIn" text="Already have an account?" AnchorPane.bottomAnchor="80.0" />
+            <Label fx:id="labelOnSignIn" layoutX="240.0" layoutY="643.0" onMouseClicked="#onSignIn" text="Already have an account?" AnchorPane.bottomAnchor="80.0" />
             <Separator layoutX="213.0" layoutY="610.0" prefHeight="22.0" prefWidth="200.0" AnchorPane.bottomAnchor="101.0" />
             <ImageView fitHeight="29.0" fitWidth="34.0" layoutX="61.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="61.0">
                <image>
@@ -64,7 +64,6 @@
             <MFXTextField fx:id="signUpUserName" floatingText="Username" layoutX="103.0" layoutY="340.0" prefHeight="49.0" prefWidth="419.0" stylesheets="@../css/textField.css" />
             <MFXTextField fx:id="signUpEmailAddress" floatingText="Email Address" layoutX="103.0" layoutY="270.0" prefHeight="49.0" prefWidth="419.0" stylesheets="@../css/textField.css" />
             <MFXTextField fx:id="signUpFullName" floatingText="Full Name" layoutX="103.0" layoutY="200.0" prefHeight="49.0" prefWidth="419.0" stylesheets="@../css/textField.css" />
-            <AnchorPane fx:id="lineOnSignIn" layoutX="238.0" layoutY="639.0" prefHeight="1.0" prefWidth="155.0" style="-fx-background-color: black;" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="signInPane" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-color: white;">
@@ -84,7 +83,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <Label fx:id="labelOnForgotPassword" layoutX="994.0" layoutY="393.0" onMouseClicked="#onForgetPassword" onMouseEntered="#onEnterForgotPassword" onMouseExited="#onExitForgotPassword" text="Forgot your password?" AnchorPane.rightAnchor="104.0" AnchorPane.topAnchor="393.0" />
+            <Label fx:id="labelOnForgotPassword" layoutX="994.0" layoutY="393.0" onMouseClicked="#onForgetPassword" text="Forgot your password?" AnchorPane.rightAnchor="104.0" AnchorPane.topAnchor="393.0" />
             <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="662.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="662.0" AnchorPane.rightAnchor="528.3333333333333">
                <image>
                   <Image url="@../image/icons8-user-96.png" />
@@ -100,12 +99,10 @@
                   <Image url="@../image/icons8-multiply-90.png" />
                </image>
             </ImageView>
-            <Label fx:id="labelOnSignUp" layoutX="835.0" layoutY="582.0" onMouseClicked="#onSignUp" onMouseEntered="#onEnterSignUp" onMouseExited="#onExitSignUp" text="Do not have an account?" AnchorPane.bottomAnchor="120.66666666666663" />
+            <Label fx:id="labelOnSignUp" layoutX="835.0" layoutY="582.0" onMouseClicked="#onSignUp" text="Do not have an account?" AnchorPane.bottomAnchor="120.66666666666663" />
             <Separator layoutX="801.0" layoutY="568.0" prefWidth="200.0" AnchorPane.bottomAnchor="150.0" />
             <MFXTextField fx:id="userNameField" floatMode="BORDER" floatingText=" Username " layoutX="700.0" layoutY="250.0" prefHeight="49.0" prefWidth="419.0" stylesheets="@../css/textField.css" />
             <MFXPasswordField fx:id="passwordField" floatMode="BORDER" floatingText=" Password " layoutX="700.0" layoutY="339.0" prefHeight="49.0" prefWidth="419.0" stylesheets="@../css/textField.css" />
-            <AnchorPane fx:id="lineOnForgotPassword" layoutX="980.0" layoutY="411.0" prefHeight="1.0" prefWidth="136.0" style="-fx-background-color: black;" />
-            <AnchorPane fx:id="lineOnSignUp" layoutX="835.0" layoutY="598.0" prefHeight="1.0" prefWidth="146.0" style="-fx-background-color: black;" />
             <ProgressIndicator fx:id="loadIndicator" layoutX="1014.0" layoutY="472.0" />
             <Label layoutX="874.0" layoutY="218.0" text="Test only" textFill="RED" />
             <Button fx:id="fastLoginButton" layoutX="852.0" layoutY="182.0" mnemonicParsing="false" onAction="#onFastLogin" text="Login as Piper" />
