@@ -106,14 +106,6 @@ public class LogInPageController implements Initializable {
     @FXML
     private AnchorPane signInPane;
 
-    @FXML
-    private AnchorPane lineOnSignIn;
-
-    @FXML
-    private AnchorPane lineOnSignUp;
-
-    @FXML
-    private AnchorPane lineOnForgotPassword;
 
     @FXML
     private AnchorPane blockPane;
@@ -197,13 +189,7 @@ public class LogInPageController implements Initializable {
         sendVerificationCodeButton.setDisable(true);
         labelOnSignUp.setCursor(Cursor.HAND);
         labelOnSignIn.setCursor(Cursor.HAND);
-        lineOnSignIn.setCursor(Cursor.HAND);
-        lineOnSignUp.setCursor(Cursor.HAND);
         labelOnForgotPassword.setCursor(Cursor.HAND);
-        lineOnForgotPassword.setCursor(Cursor.HAND);
-        lineOnSignIn.setVisible(false);
-        lineOnForgotPassword.setVisible(false);
-        lineOnSignUp.setVisible(false);
         FadeTransition fadeTransition = TransitionUtils.getFadeTransition(imageOnStorage, 3000, 0, 1);
         fadeTransition.play();
         blockPane.setVisible(false);
@@ -311,45 +297,17 @@ public class LogInPageController implements Initializable {
     }
 
     private void setVisibility(AnchorPane signInPane, AnchorPane signUpPane) {
-        signInPane.setVisible(true);
         FadeTransition fadeTransition = TransitionUtils.getFadeTransition(signUpPane, 300, 1, 0);
         FadeTransition fadeTransition1 = TransitionUtils.getFadeTransition(signInPane, 300, 0, 1);
         fadeTransition.play();
         fadeTransition.setOnFinished(event -> {
-            fadeTransition1.play();
+            signInPane.setVisible(true);
+            signInPane.setOpacity(0);
             signUpPane.setVisible(false);
+            fadeTransition1.play();
         });
     }
 
-    @FXML
-    private void onEnterForgotPassword() {
-        lineOnForgotPassword.setVisible(true);
-    }
-
-    @FXML
-    private void onExitForgotPassword() {
-        lineOnForgotPassword.setVisible(false);
-    }
-
-    @FXML
-    private void onEnterLabelSignIn() {
-        lineOnSignIn.setVisible(true);
-    }
-
-    @FXML
-    private void onExitLabelSignIn() {
-        lineOnSignIn.setVisible(false);
-    }
-
-    @FXML
-    private void onEnterSignUp() {
-        lineOnSignUp.setVisible(true);
-    }
-
-    @FXML
-    private void onExitSignUp() {
-        lineOnSignUp.setVisible(false);
-    }
 
     private void callErrorDialog() {
         errorDialog.setVisible(true);
