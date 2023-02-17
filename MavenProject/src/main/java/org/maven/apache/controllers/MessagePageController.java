@@ -148,13 +148,9 @@ public class MessagePageController implements Initializable {
 
     private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
 
-    private Image emptyStar = new Image(
-            Objects.requireNonNull(getClass().getResourceAsStream("/image/icons8-star-empty-48.png"))
-    );
+    private Image emptyStar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/icons8-star-empty-48.png")));
 
-    private Image filledStar = new Image(
-            Objects.requireNonNull(getClass().getResourceAsStream("/image/icons8-star-filled-96.png"))
-    );
+    private Image filledStar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/icons8-star-filled-96.png")));
 
     private int MessageID;
     private boolean isAdditionSucceed;
@@ -499,7 +495,7 @@ public class MessagePageController implements Initializable {
             changeToEmptyStarImage(paneID);
             executorService.execute(() -> {
                 cachedMessageService.updateMessage(message);
-                Platform.runLater(this::setContent);
+//                Platform.runLater(this::setContent);
             });
         } else {
             //empty
@@ -508,7 +504,7 @@ public class MessagePageController implements Initializable {
         }
         executorService.execute(() -> {
             cachedMessageService.updateMessage(message);
-            Platform.runLater(this::setContent);
+//            Platform.runLater(this::setContent);
         });
 
 
