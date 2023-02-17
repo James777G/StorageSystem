@@ -578,13 +578,8 @@
          </graphic>
       </JFXButton>
       <Pagination fx:id="transactionPagination" layoutX="387.0" layoutY="589.0" maxPageIndicatorCount="8" onScroll="#onScrolled" pageCount="50" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" />
-      <ImageView fitHeight="50.0" fitWidth="46.0" layoutX="917.0" layoutY="42.0" onMouseClicked="#onRefresh" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/Refresh-10.png" />
-         </image>
-      </ImageView>
       <AnchorPane fx:id="blockPane" layoutX="-4.0" layoutY="-9.0" opacity="0.75" prefHeight="649.0" prefWidth="1207.0" style="-fx-background-color: grey;" visible="false" />
-      <MFXGenericDialog fx:id="descriptionDialog" headerText="Transaction Details" layoutX="10.0" layoutY="10.0" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseDescriptionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
+      <MFXGenericDialog fx:id="descriptionDialog" headerText="Transaction Details" layoutX="10.0" layoutY="10.0" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseDescriptionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
          <left>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
@@ -853,5 +848,11 @@
             </Label>
          </children>
       </AnchorPane>
+      <ImageView fx:id="refreshImage" fitHeight="30.0" fitWidth="30.0" layoutX="915.0" layoutY="50.0" onMouseClicked="#onRefresh" onMouseEntered="#enterRefreshImage" onMouseExited="#exitRefreshImage" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/Refresh-10.png" />
+         </image>
+      </ImageView>
+      <MFXProgressSpinner fx:id="refreshSpinner" layoutX="915.0" layoutY="51.0" prefHeight="28.0" prefWidth="30.0" />
    </children>
 </AnchorPane>

@@ -31,6 +31,7 @@ import org.maven.apache.staff.Staff;
 import org.maven.apache.transaction.Transaction;
 import org.maven.apache.utils.*;
 
+import javax.xml.crypto.Data;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -194,13 +195,13 @@ public class NewTransactionPageController implements Initializable {
     private ImageView binImage1, binImage2, binImage3, binImage4, binImage5, binImage6, binImage7;
 
     @FXML
-    private ImageView[] binImages = new ImageView[7];
-
-    @FXML
     private ImageView deletionCross;
 
     @FXML
     private ImageView deletionTick;
+
+    @FXML
+    private ImageView refreshImage;
 
     @FXML
     private MFXGenericDialog descriptionDialog;
@@ -225,6 +226,9 @@ public class NewTransactionPageController implements Initializable {
 
     @FXML
     private MFXProgressSpinner loadSpinnerInDetails;
+
+    @FXML
+    private MFXProgressSpinner refreshSpinner;
 
     @FXML
     private MFXDatePicker datePicker = new MFXDatePicker(Locale.ENGLISH);
@@ -255,6 +259,8 @@ public class NewTransactionPageController implements Initializable {
     private Label[] statusLabelArray = new Label[7];
 
     private AnchorPane[] transactionPaneArray = new AnchorPane[7];
+
+    private ImageView[] binImages = new ImageView[7];
 
     private final CachedTransactionService cachedTransactionService = MyLauncher.context.getBean("cachedTransactionService", CachedTransactionService.class);
 
@@ -290,6 +296,8 @@ public class NewTransactionPageController implements Initializable {
 
     private boolean isBlockPaneOpen = false;
 
+    private boolean isRotating = false;
+
     public static boolean isSearchingStaff = true;
 
     private int newUnitAmount;
@@ -323,6 +331,7 @@ public class NewTransactionPageController implements Initializable {
         addTransactionPane.setVisible(false);
         warnMessageInAdd.setVisible(false);
         loadSpinnerInAdd.setVisible(false);
+        refreshSpinner.setVisible(false);
         setBinsImages();
         amountArrowBlockPane.setVisible(false);
         dateArrowBlockPane.setVisible(false);
@@ -648,9 +657,11 @@ public class NewTransactionPageController implements Initializable {
                 sortedList.clear();
             }
         }
-        updatePagination(0);
-        transactionPagination.setCurrentPageIndex(0);
-        setPaginationPages(sortedList);
+        Platform.runLater(() -> {
+            updatePagination(0);
+            transactionPagination.setCurrentPageIndex(0);
+            setPaginationPages(sortedList);
+        });
     }
 
     /**
@@ -1675,12 +1686,38 @@ public class NewTransactionPageController implements Initializable {
         newItemFilterComboBox.setItems(FXCollections.observableList(resultList));
     }
 
+    @FXML
+    private void enterRefreshImage() {
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(refreshImage, 500, 1.2);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void exitRefreshImage() {
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(refreshImage, 500, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
     /**
      * reload cache from database
      */
     @FXML
     public void onRefresh() throws UnsupportedPojoException {
-        cachedTransactionService.updateAllCachedTransactionData();
-        refreshPage();
+        refreshImage.setVisible(false);
+        refreshSpinner.setVisible(true);
+        executorService.execute(() -> {
+            try {
+                cachedTransactionService.updateAllCachedTransactionData();
+                refreshPage();
+            } catch (UnsupportedPojoException e) {
+                throw new RuntimeException(e);
+            } finally {
+                refreshImage.setVisible(true);
+                refreshSpinner.setVisible(false);
+            }
+        });
     }
+
 }
