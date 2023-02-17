@@ -652,6 +652,14 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
+     * reload cache from database
+     */
+    private void onRefresh() throws UnsupportedPojoException {
+        cachedTransactionService.updateAllCachedTransactionData();
+        refreshPage();
+    }
+
+    /**
      * show the pane of adding new transaction
      */
     @FXML
