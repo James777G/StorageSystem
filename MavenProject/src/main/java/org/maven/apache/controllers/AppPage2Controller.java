@@ -218,24 +218,14 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private AnchorPane cargoBox4BackPane;
 
-    private AnchorPane[] cargoBoxBackPanes = new AnchorPane[4];
-
-    @FXML
-    private MFXCircleToggleNode notifyButton;
-
     @FXML
     private AnchorPane cargoBox1FunctionalityPane, cargoBox2FunctionalityPane, cargoBox3FunctionalityPane, cargoBox4FunctionalityPane;
-
-    private AnchorPane[] cargoBoxFunctionalityPanes = new AnchorPane[4];
 
     @FXML
     private AnchorPane blockPane;
 
     @FXML
     private AnchorPane transitionSettingLine;
-
-    @FXML
-    private AnchorPane[] cargoBoxPanes = new AnchorPane[4];//{cargoBox1Pane,cargoBox2Pane,cargoBox3Pane,cargoBox4Pane};
 
     @FXML
     private AnchorPane homeButtonBlockPane;
@@ -292,6 +282,9 @@ public class AppPage2Controller implements Initializable {
     private StackPane messagePane;
 
     @FXML
+    private MFXCircleToggleNode notifyButton;
+
+    @FXML
     private Label transactionAmountInDetails;
 
     @FXML
@@ -327,8 +320,6 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private Label cargoNameLabel04;
 
-    private Label[] cargoNameLabels = new Label[4];//{cargoNameLabel01,cargoNameLabel02,cargoNameLabel03,cargoNameLabel04};
-
     @FXML
     private Label cargoAmountLabel01;
 
@@ -344,8 +335,6 @@ public class AppPage2Controller implements Initializable {
     @FXML
     private Label emailWarnMessage;
 
-    private Label[] cargoAmountLabels = new Label[4];//{cargoAmountLabel01,cargoAmountLabel02,cargoAmountLabel03,cargoAmountLabel04};
-
     @FXML
     private Label staffNameLabel01;
 
@@ -357,8 +346,6 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private Label staffNameLabel04;
-
-    private Label[] staffNameLabels = new Label[4];//{staffNameLabel01,staffNameLabel02,staffNameLabel03,staffNameLabel04}
 
     @FXML
     private Label redTakenLabel;
@@ -422,6 +409,9 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private MFXProgressSpinner regulatoryDeleteSpinnerOne, regulatoryDeleteSpinnerTwo, regulatoryDeleteSpinnerThree;
+
+    @FXML
+    private MFXProgressSpinner refreshSpinner;
 
     @FXML
     private MFXFilterComboBox staffNameInDetails;
@@ -545,6 +535,18 @@ public class AppPage2Controller implements Initializable {
 
     private Transaction[] dateTransactionListInAppPage = new Transaction[4];
 
+    private Label[] staffNameLabels = new Label[4];//{staffNameLabel01,staffNameLabel02,staffNameLabel03,staffNameLabel04}
+
+    private Label[] cargoAmountLabels = new Label[4];//{cargoAmountLabel01,cargoAmountLabel02,cargoAmountLabel03,cargoAmountLabel04};
+
+    private Label[] cargoNameLabels = new Label[4];//{cargoNameLabel01,cargoNameLabel02,cargoNameLabel03,cargoNameLabel04};
+
+    private AnchorPane[] cargoBoxBackPanes = new AnchorPane[4];
+
+    private AnchorPane[] cargoBoxFunctionalityPanes = new AnchorPane[4];
+
+    private AnchorPane[] cargoBoxPanes = new AnchorPane[4];//{cargoBox1Pane,cargoBox2Pane,cargoBox3Pane,cargoBox4Pane};
+
     private ButtonSelected buttonSelected = ButtonSelected.ALL;
 
     private CargoBoxNumber cargoBoxNumber;
@@ -651,6 +653,7 @@ public class AppPage2Controller implements Initializable {
         stackPane.setVisible(false);
         emailSpinner.setVisible(false);
         cargoSpinner.setVisible(false);
+        refreshSpinner.setVisible(false);
         setPromptTextForRegulatory();
         setPromptTextForStaff();
         searchField.textProperty().addListener(new ChangeListener<String>() {
@@ -2364,7 +2367,6 @@ public class AppPage2Controller implements Initializable {
         }
     }
 
-
     /**
      * reload cache from database
      */
@@ -2388,19 +2390,16 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onRefresh() throws UnsupportedPojoException {
-        RotateTransition rotate = RotationUtils.getRotationTransitionFromBy(refreshImage, 1500, 0,
-                RotationUtils.Direction.COUNTERCLOCKWISE, 360);
-        rotate = RotationUtils.addEaseOutTranslateInterpolator(rotate);
-        rotate.setOnFinished(event -> isRotating = false);
-        if (!isRotating) {
-            isRotating = true;
-            rotate.play();
-        }
+        refreshImage.setVisible(false);
+        refreshSpinner.setVisible(true);
         executorService.execute(() -> {
             try {
                 refreshCache();
             } catch (UnsupportedPojoException e) {
                 throw new RuntimeException(e);
+            } finally {
+                refreshImage.setVisible(true);
+                refreshSpinner.setVisible(false);
             }
         });
     }

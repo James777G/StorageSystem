@@ -59,6 +59,7 @@
                   <Image url="@../image/Refresh-10.png" />
                </image>
             </ImageView>
+            <MFXProgressSpinner fx:id="refreshSpinner" layoutX="1072.0" layoutY="495.0" prefHeight="28.0" prefWidth="30.0" />
             <JFXButton contentDisplay="CENTER" layoutX="850.0" layoutY="170.0" onAction="#onClickSearch" prefHeight="50.0" prefWidth="50.0" styleClass="searchButton" stylesheets="@../css/appPage.css" textFill="#223c4000">
                <graphic>
                   <ImageView fx:id="searchImage11" fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
