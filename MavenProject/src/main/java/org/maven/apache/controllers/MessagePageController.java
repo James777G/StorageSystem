@@ -20,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import org.maven.apache.MyLauncher;
+import org.maven.apache.exception.UnsupportedPojoException;
 import org.maven.apache.message.Message;
 import org.maven.apache.service.message.CachedMessageService;
 import org.maven.apache.service.text.AbstractMessageTextService;
@@ -125,10 +126,16 @@ public class MessagePageController implements Initializable {
     private ImageView doNotContinueButton;
 
     @FXML
+    private ImageView refreshImage;
+
+    @FXML
     private MFXProgressSpinner loadSpinnerOnDeletePane;
 
     @FXML
     private MFXProgressSpinner loadSpinnerInAdd;
+
+    @FXML
+    private MFXProgressSpinner refreshSpinner;
 
     @FXML
     private JFXButton clearButton;
@@ -206,10 +213,11 @@ public class MessagePageController implements Initializable {
         descriptionDialog.setVisible(false);
         blockPane.setVisible(false);
         deleteMessagePane.setVisible(false);
-        loadSpinnerOnDeletePane.setVisible(false);
-        warnMessageInAdd.setVisible(false);
-        loadSpinnerInAdd.setVisible(false);
         addTransactionPane.setVisible(false);
+        loadSpinnerOnDeletePane.setVisible(false);
+        loadSpinnerInAdd.setVisible(false);
+        refreshSpinner.setVisible(false);
+        warnMessageInAdd.setVisible(false);
         isAdditionSucceed = false;
         DataUtils.messageController = this;
         initializeLabels();
@@ -316,7 +324,6 @@ public class MessagePageController implements Initializable {
             executorService.execute(() -> {
                 try {
                     cachedMessageService.addNewMessage(insertMessage);
-
                     Platform.runLater(() -> {
                         setContent();
                     });
@@ -579,8 +586,6 @@ public class MessagePageController implements Initializable {
         executorService.execute(() -> {
             cachedMessageService.deleteMessageById(MessageID);
             //    cachedMessageService.updateAllCachedMessageData();
-
-
             //    generateItemList(newPagination.getCurrentPageIndex());
             Platform.runLater(this::setContent);
             Platform.runLater(() -> {
@@ -702,15 +707,12 @@ public class MessagePageController implements Initializable {
     private void onClickMessage() {
         clickStarredMessage = false;
         executorService.execute(() -> {
-
             Platform.runLater(() -> {
                         setContent();
                     }
-
             );
         });
         if ((!isMovingLineOnMessage) && (!isLineMoving)) {
-
             isLineMoving = true;
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionByX(movingLinePane, 500, -120);
             translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
@@ -728,19 +730,15 @@ public class MessagePageController implements Initializable {
         } else {
             messagePageList = MessageCachedUtils.getLists(MessageCachedUtils.listType.All_MESSAGE);
         }
-
     }
 
     @FXML
-
     private void onClickStarred() {
         clickStarredMessage = true;
         executorService.execute(() -> {
-
             Platform.runLater(() -> {
                         setContent();
                     }
-
             );
         });
         if ((isMovingLineOnMessage) && (!isLineMoving)) {
@@ -755,7 +753,6 @@ public class MessagePageController implements Initializable {
             translateTransition.play();
         }
     }
-
 
     @FXML
     private void onScrolled(ScrollEvent event) {
@@ -869,5 +866,38 @@ public class MessagePageController implements Initializable {
 
     }
 
+    @FXML
+    private void enterRefreshImage() {
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(refreshImage, 500, 1.2);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void exitRefreshImage() {
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(refreshImage, 500, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    /**
+     * reload cache from database
+     */
+    @FXML
+    public void onRefresh() throws UnsupportedPojoException {
+        refreshImage.setVisible(false);
+        refreshSpinner.setVisible(true);
+        executorService.execute(() -> {
+            try {
+                cachedMessageService.updateAllCachedMessageData();
+                Platform.runLater(() -> {
+                    setContent();
+                });
+            } finally {
+                refreshImage.setVisible(true);
+                refreshSpinner.setVisible(false);
+            }
+        });
+    }
 
 }
