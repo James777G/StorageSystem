@@ -6,7 +6,6 @@
 <?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
-<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -691,7 +690,7 @@
             </AnchorPane>
          </left>
       </MFXGenericDialog>
-      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
+      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
          <children>
             <Label layoutX="476.0" layoutY="155.0" opacity="0.4" prefHeight="128.0" prefWidth="320.0" rotate="-38.7" text="TRANS" textFill="#9de4ed59">
                <font>
@@ -744,11 +743,6 @@
             </ImageView>
             <AnchorPane layoutX="222.0" layoutY="71.0" />
             <MFXDatePicker fx:id="datePicker" editable="false" layoutX="228.0" layoutY="85.0" prefHeight="28.0" prefWidth="139.0" stylesheets="@../css/calendar.css" AnchorPane.topAnchor="85.0" />
-            <MFXToggleButton fx:id="statusToggleButton" contentDisposition="RIGHT" layoutX="378.0" layoutY="132.0" onAction="#onToggle" text="Restock">
-               <font>
-                  <Font name="Calibri Bold" size="17.0" />
-               </font>
-            </MFXToggleButton>
             <MFXFilterComboBox fx:id="newItemFilterComboBox" floatMode="BORDER" layoutX="14.0" layoutY="87.0" prefHeight="38.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" AnchorPane.topAnchor="85.0" />
             <MFXFilterComboBox fx:id="newStaffFilterComboBox" floatMode="BORDER" layoutX="422.0" layoutY="85.0" prefHeight="38.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" AnchorPane.topAnchor="85.0" />
             <Label layoutX="428.0" layoutY="60.0" prefHeight="17.0" prefWidth="139.0" text="Staff Name (required)" AnchorPane.topAnchor="60.0">
@@ -776,7 +770,7 @@
                   <Font name="Calibri Bold" size="14.0" />
                </font>
             </Label>
-            <MFXComboBox fx:id="statusButtonInDetails" floatMode="BORDER" floatingText=" Status " layoutX="624.0" layoutY="151.0" prefHeight="38.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" />
+            <MFXComboBox fx:id="newStatusComboBox" floatMode="BORDER" floatingText=" Status " layoutX="624.0" layoutY="151.0" prefHeight="38.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" />
             <Label layoutX="574.0" layoutY="17.0" prefHeight="17.0" prefWidth="206.0" text="Transaction-ID is auto-generated">
                <font>
                   <Font name="Calibri Bold" size="14.0" />

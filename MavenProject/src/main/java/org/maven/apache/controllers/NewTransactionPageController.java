@@ -228,9 +228,6 @@ public class NewTransactionPageController implements Initializable {
     private MFXDatePicker datePicker = new MFXDatePicker(Locale.ENGLISH);
 
     @FXML
-    private MFXToggleButton statusToggleButton;
-
-    @FXML
     private MFXTextField searchField;
 
     @FXML
@@ -243,7 +240,7 @@ public class NewTransactionPageController implements Initializable {
     private Label warnMessageInDelete;
 
     @FXML
-    private MFXComboBox statusButtonInDetails;
+    private MFXComboBox newStatusComboBox;
 
     private Label[] cargoLabelArray = new Label[7];
 
@@ -303,6 +300,8 @@ public class NewTransactionPageController implements Initializable {
 
     private String transactionDate;
 
+    private String newTransactionStatus;
+
     private String transactionDescription = "";
 
     private Transaction newTransaction;
@@ -328,7 +327,7 @@ public class NewTransactionPageController implements Initializable {
         List<String> status = new ArrayList<>();
         status.add("TAKEN");
         status.add("RESTOCK");
-        statusButtonInDetails.setItems(FXCollections.observableList(status));
+        newStatusComboBox.setItems(FXCollections.observableList(status));
         setPaginationPages(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_ASC_7));
         try {
             refreshPage();
@@ -558,7 +557,6 @@ public class NewTransactionPageController implements Initializable {
         resetArrows();
         sortBy = SortBy.ALLDATEDESCEND;
         refreshPage();
-
     }
 
     /**
@@ -1422,6 +1420,8 @@ public class NewTransactionPageController implements Initializable {
             newItemName = newItemFilterComboBox.getText();
             newStaffName = newStaffFilterComboBox.getText();
             newUnitAmount = Integer.valueOf(newUnitTextField.getText());
+            newTransactionStatus = newStatusComboBox.getText();
+            transactionDescription = descriptionTextArea.getText();
             if (datePicker.getText().equals("")) {
                 // return current date and time
                 LocalDate dateTime = LocalDate.now();
@@ -1434,13 +1434,7 @@ public class NewTransactionPageController implements Initializable {
             newTransaction = new Transaction();
             executorService.execute(() -> {
                 try {
-                    if (statusToggleButton.isSelected()) {
-                        // adding taken cargo
-                        addNewTransaction("TAKEN", newTransactionID, newItemName, newStaffName, newUnitAmount, transactionDate, transactionDescription);
-                    } else {
-                        // adding restock cargo
-                        addNewTransaction("RESTOCK", newTransactionID, newItemName, newStaffName, newUnitAmount, transactionDate, transactionDescription);
-                    }
+                    addNewTransaction(newTransactionStatus, newTransactionID, newItemName, newStaffName, newUnitAmount, transactionDate, transactionDescription);
                     try{
                         cachedTransactionService.addNewTransaction(newTransaction);
                     }catch (DataNotFoundException dataNotFoundException){
@@ -1456,7 +1450,6 @@ public class NewTransactionPageController implements Initializable {
                         });
                         isAdditionSucceed = false;
                     }
-
                     Platform.runLater(() -> {
                         try {
                             refreshPage();
@@ -1485,20 +1478,6 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
-     * set new transaction status
-     */
-    @FXML
-    private void onToggle() {
-        if (statusToggleButton.isSelected()) {
-            // convert status from RESTOCK to TAKEN
-            statusToggleButton.setText("TAKEN");
-        } else {
-            // convert status from TAKEN to RESTOCK
-            statusToggleButton.setText("RESTOCK");
-        }
-    }
-
-    /**
      * get the total amount of transaction to increment id
      *
      * @return amount of transaction
@@ -1519,7 +1498,7 @@ public class NewTransactionPageController implements Initializable {
      * @return true or false
      */
     private boolean isValidated() {
-        if (!newItemFilterComboBox.getText().equals("") && !newStaffFilterComboBox.getText().equals("") && !newUnitTextField.getText().equals("")) {
+        if (!newItemFilterComboBox.getText().equals("") && !newStaffFilterComboBox.getText().equals("") && !newUnitTextField.getText().equals("") && !newStatusComboBox.getText().equals("")) {
             return true;
         }
         return false;
