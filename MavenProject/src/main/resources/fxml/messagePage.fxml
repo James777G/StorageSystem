@@ -65,6 +65,12 @@
                   </ImageView>
                </children>
             </AnchorPane>
+            <ImageView fx:id="refreshImage" fitHeight="30.0" fitWidth="30.0" layoutX="982.0" layoutY="5.0" onMouseClicked="#onRefresh" onMouseEntered="#enterRefreshImage" onMouseExited="#exitRefreshImage" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/Refresh-10.png" />
+               </image>
+            </ImageView>
+            <MFXProgressSpinner fx:id="refreshSpinner" layoutX="982.0" layoutY="6.0" prefHeight="28.0" prefWidth="30.0" />
          </children></AnchorPane>
       <AnchorPane fx:id="notePadPane1" layoutX="121.0" layoutY="90.0" onMouseClicked="#OnPane1" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.bottomAnchor="454.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="95.0">
          <children>
