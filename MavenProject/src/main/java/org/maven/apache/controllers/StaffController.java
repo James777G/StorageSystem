@@ -227,10 +227,10 @@ public class StaffController implements Initializable {
 
     @FXML
     private void onScrolled(ScrollEvent event) {
-        if (event.getDeltaY() > 0) {
+        if (event.getDeltaY() < 0) {
             pagination.setCurrentPageIndex(pagination.getCurrentPageIndex() + 1);
         }
-        if (event.getDeltaY() < 0) {
+        if (event.getDeltaY() > 0) {
             pagination.setCurrentPageIndex(pagination.getCurrentPageIndex() - 1);
         }
     }
