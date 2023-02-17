@@ -453,13 +453,8 @@
             <Pagination fx:id="pagination" maxPageIndicatorCount="8" onScroll="#onScrolled" pageCount="50" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
-      <ImageView fitHeight="50.0" fitWidth="46.0" layoutX="919.0" layoutY="42.0" onMouseClicked="#onRefresh" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/Refresh-10.png" />
-         </image>
-      </ImageView>
       <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" visible="false" />
-      <MFXGenericDialog fx:id="descriptionDialog" headerText="Item Details" layoutX="492.0" onClose="#onCloseDescription" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="150.0">
+      <MFXGenericDialog fx:id="descriptionDialog" headerText="Item Details" layoutX="492.0" onClose="#onCloseDescription" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="150.0">
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
@@ -632,5 +627,11 @@
             <MFXProgressSpinner fx:id="loadSpinnerOnDeletePane" layoutX="461.0" layoutY="52.0" prefHeight="23.0" prefWidth="25.0" visible="false" />
          </children>
       </AnchorPane>
+      <ImageView fx:id="refreshImage" fitHeight="30.0" fitWidth="30.0" layoutX="915.0" layoutY="51.0" onMouseClicked="#onRefresh" onMouseEntered="#enterRefreshImage" onMouseExited="#exitRefreshImage" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/Refresh-10.png" />
+         </image>
+      </ImageView>
+      <MFXProgressSpinner fx:id="refreshSpinner" layoutX="915.0" layoutY="51.0" prefHeight="28.0" prefWidth="30.0" />
    </children>
 </AnchorPane>
