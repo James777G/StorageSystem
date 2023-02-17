@@ -30,10 +30,7 @@ import javafx.util.Duration;
 import org.maven.apache.App;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.email.Email;
-import org.maven.apache.exception.EmptyValueException;
-import org.maven.apache.exception.InvalidEmailFormatException;
-import org.maven.apache.exception.UnsupportedPojoException;
-import org.maven.apache.exception.Warning;
+import org.maven.apache.exception.*;
 import org.maven.apache.item.Item;
 import org.maven.apache.regulatory.Regulatory;
 import org.maven.apache.service.email.EmailService;
@@ -1892,18 +1889,6 @@ public class AppPage2Controller implements Initializable {
     }
 
     @FXML
-    private void refreshPage() {
-        RotateTransition rotate = RotationUtils.getRotationTransitionFromBy(refreshImage, 1500, 0,
-                RotationUtils.Direction.COUNTERCLOCKWISE, 360);
-        rotate = RotationUtils.addEaseOutTranslateInterpolator(rotate);
-        rotate.setOnFinished(event -> isRotating = false);
-        if (!isRotating) {
-            isRotating = true;
-            rotate.play();
-        }
-    }
-
-    @FXML
     private void enterRefreshImage() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(refreshImage, 500, 1.2);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
@@ -2379,20 +2364,45 @@ public class AppPage2Controller implements Initializable {
         }
     }
 
+
     /**
      * reload cache from database
      */
-    @FXML
-    private void onRefresh() throws UnsupportedPojoException {
+    private void refreshCache() throws UnsupportedPojoException {
         regulatoryService.updateAllRegulatoryData();
         emailService.updateCachedEmailData();
-        setCargoPageCount();
-        setEmailPageCount();
-        setCargoTable(0);
-        setEmailTable(0);
-        DataUtils.warehouseController.onRefresh();
-        DataUtils.transactionPageController.onRefresh();
-        DataUtils.staffController.onRefresh();
+        Platform.runLater(() -> {
+            setCargoPageCount();
+            setEmailPageCount();
+            setCargoTable(0);
+            setEmailTable(0);
+            try {
+                DataUtils.warehouseController.onRefresh();
+                DataUtils.transactionPageController.onRefresh();
+                DataUtils.staffController.onRefresh();
+            } catch (UnsupportedPojoException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    @FXML
+    private void onRefresh() throws UnsupportedPojoException {
+        RotateTransition rotate = RotationUtils.getRotationTransitionFromBy(refreshImage, 1500, 0,
+                RotationUtils.Direction.COUNTERCLOCKWISE, 360);
+        rotate = RotationUtils.addEaseOutTranslateInterpolator(rotate);
+        rotate.setOnFinished(event -> isRotating = false);
+        if (!isRotating) {
+            isRotating = true;
+            rotate.play();
+        }
+        executorService.execute(() -> {
+            try {
+                refreshCache();
+            } catch (UnsupportedPojoException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
 }

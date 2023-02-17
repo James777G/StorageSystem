@@ -54,12 +54,7 @@
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <ImageView fx:id="refreshImage" fitHeight="30.0" fitWidth="30.0" layoutX="1072.0" layoutY="495.0" onMouseClicked="#refreshPage" onMouseEntered="#enterRefreshImage" onMouseExited="#exitRefreshImage" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/Refresh-10.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="50.0" fitWidth="46.0" layoutX="918.0" layoutY="172.0" onMouseClicked="#onRefresh" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="refreshImage" fitHeight="30.0" fitWidth="30.0" layoutX="1072.0" layoutY="495.0" onMouseClicked="#onRefresh" onMouseEntered="#enterRefreshImage" onMouseExited="#exitRefreshImage" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/Refresh-10.png" />
                </image>
