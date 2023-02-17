@@ -76,6 +76,9 @@ public class StaffController implements Initializable {
     private ImageView doContinueButton;
 
     @FXML
+    private ImageView refreshImage;
+
+    @FXML
     private MFXGenericDialog descriptionDialog;
 
     @FXML
@@ -129,6 +132,9 @@ public class StaffController implements Initializable {
     @FXML
     private MFXProgressSpinner loadSpinnerOnDeletePane;
 
+    @FXML
+    private MFXProgressSpinner refreshSpinner;
+
     @SuppressWarnings("all")
     private final SearchResultService<Staff> searchResultService = MyLauncher.context.getBean("searchResultService", SearchResultService.class);
 
@@ -181,6 +187,7 @@ public class StaffController implements Initializable {
         staffService.updateAllCachedStaffData();
         descriptionDialog.setVisible(false);
         loadSpinner.setVisible(false);
+        refreshSpinner.setVisible(false);
         getStaffList(pagination.getCurrentPageIndex());
         try {
             calculatePageNumber();
@@ -1145,16 +1152,41 @@ public class StaffController implements Initializable {
         DataUtils.appPage2Controller.onClickTransaction();
     }
 
+    @FXML
+    private void enterRefreshImage() {
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(refreshImage, 500, 1.2);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void exitRefreshImage() {
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(refreshImage, 500, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
     /**
      * reload cache from database
      */
     @FXML
     public void onRefresh() throws UnsupportedPojoException {
-        staffService.updateAllCachedStaffData();
-        getStaffList(0);
-        assignStaffValue();
-        calculatePageNumber();
-        pagination.setCurrentPageIndex(0);
+        refreshImage.setVisible(false);
+        refreshSpinner.setVisible(true);
+        executorService.execute(() -> {
+            try {
+                staffService.updateAllCachedStaffData();
+                getStaffList(0);
+                assignStaffValue();
+                calculatePageNumber();
+                pagination.setCurrentPageIndex(0);
+            } catch (UnsupportedPojoException e) {
+                throw new RuntimeException(e);
+            } finally {
+                refreshImage.setVisible(true);
+                refreshSpinner.setVisible(false);
+            }
+        });
     }
 
 }

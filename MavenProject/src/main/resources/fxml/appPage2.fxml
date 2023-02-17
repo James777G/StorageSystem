@@ -54,16 +54,12 @@
                   <Font name="Candara Bold" size="14.0" />
                </font>
             </Label>
-            <ImageView fx:id="refreshImage" fitHeight="30.0" fitWidth="30.0" layoutX="1072.0" layoutY="495.0" onMouseClicked="#refreshPage" onMouseEntered="#enterRefreshImage" onMouseExited="#exitRefreshImage" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="refreshImage" fitHeight="30.0" fitWidth="30.0" layoutX="1072.0" layoutY="495.0" onMouseClicked="#onRefresh" onMouseEntered="#enterRefreshImage" onMouseExited="#exitRefreshImage" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/Refresh-10.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="50.0" fitWidth="46.0" layoutX="918.0" layoutY="172.0" onMouseClicked="#onRefresh" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/Refresh-10.png" />
-               </image>
-            </ImageView>
+            <MFXProgressSpinner fx:id="refreshSpinner" layoutX="1072.0" layoutY="495.0" prefHeight="28.0" prefWidth="30.0" />
             <JFXButton contentDisplay="CENTER" layoutX="850.0" layoutY="170.0" onAction="#onClickSearch" prefHeight="50.0" prefWidth="50.0" styleClass="searchButton" stylesheets="@../css/appPage.css" textFill="#223c4000">
                <graphic>
                   <ImageView fx:id="searchImage11" fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
@@ -230,7 +226,7 @@
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="142.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="28.0">
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="142.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="28.0">
                      <image>
                         <Image url="@../image/icons8-3d-boxes-48.png" />
                      </image>
@@ -271,7 +267,7 @@
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="142.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="28.0">
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="142.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="28.0">
                      <image>
                         <Image url="@../image/icons8-3d-boxes-48.png" />
                      </image>
@@ -309,7 +305,7 @@
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="142.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="28.0">
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="142.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="28.0">
                      <image>
                         <Image url="@../image/icons8-3d-boxes-48.png" />
                      </image>
@@ -347,7 +343,7 @@
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="142.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="28.0">
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="142.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="28.0">
                      <image>
                         <Image url="@../image/icons8-3d-boxes-48.png" />
                      </image>

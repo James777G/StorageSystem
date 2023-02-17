@@ -77,6 +77,9 @@ public class WarehouseController implements Initializable {
     private ImageView doNotContinueButton;
 
     @FXML
+    private ImageView refreshImage;
+
+    @FXML
     private TextField itemNameInDetails;
 
     @FXML
@@ -102,6 +105,9 @@ public class WarehouseController implements Initializable {
 
     @FXML
     private MFXProgressSpinner loadSpinnerOnDeletePane;
+
+    @FXML
+    private MFXProgressSpinner refreshSpinner;
 
     @FXML
     private AnchorPane addButton;
@@ -172,6 +178,7 @@ public class WarehouseController implements Initializable {
         itemNameInDetails.setTextFormatter(new TextFormatter<String>(change ->
                 change.getControlNewText().length() <= 50 ? change : null));
         loadSpinner.setVisible(false);
+        refreshSpinner.setVisible(false);
         descriptionDialog.setVisible(false);
         DataUtils.pagination = newPagination;
         DataUtils.warehouseController = this;
@@ -1077,14 +1084,39 @@ public class WarehouseController implements Initializable {
         DataUtils.appPage2Controller.onClickTransaction();
     }
 
+    @FXML
+    private void enterRefreshImage() {
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(refreshImage, 500, 1.2);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
+    private void exitRefreshImage() {
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(refreshImage, 500, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
     /**
      * reload cache from database
      */
     @FXML
     public void onRefresh() throws UnsupportedPojoException {
-        cachedItemService.updateAllCachedItemData();
-        calculatePageSize();
-        setTableContents();
-        newPagination.setCurrentPageIndex(0);
+        refreshImage.setVisible(false);
+        refreshSpinner.setVisible(true);
+        executorService.execute(() -> {
+            try {
+                cachedItemService.updateAllCachedItemData();
+                calculatePageSize();
+                setTableContents();
+                newPagination.setCurrentPageIndex(0);
+            } catch (UnsupportedPojoException e) {
+                throw new RuntimeException(e);
+            } finally {
+                refreshImage.setVisible(true);
+                refreshSpinner.setVisible(false);
+            }
+        });
     }
 }
