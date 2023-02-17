@@ -230,7 +230,7 @@
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="142.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="28.0">
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="142.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="28.0">
                      <image>
                         <Image url="@../image/icons8-3d-boxes-48.png" />
                      </image>
@@ -271,7 +271,7 @@
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="142.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="28.0">
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="142.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="28.0">
                      <image>
                         <Image url="@../image/icons8-3d-boxes-48.png" />
                      </image>
@@ -309,7 +309,7 @@
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="142.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="28.0">
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="142.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="28.0">
                      <image>
                         <Image url="@../image/icons8-3d-boxes-48.png" />
                      </image>
@@ -347,7 +347,7 @@
                         <Font name="Arial Bold" size="14.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="142.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="28.0">
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="142.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="28.0">
                      <image>
                         <Image url="@../image/icons8-3d-boxes-48.png" />
                      </image>
