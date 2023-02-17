@@ -202,6 +202,7 @@ public class MessagePageController implements Initializable {
     private Message message;
 
     public MessagePageController() throws IOException {
+        
     }
 
     @Override
@@ -319,8 +320,6 @@ public class MessagePageController implements Initializable {
             insertMessage.setStaffName(user.getName());
             insertMessage.setCategory(newUnitTextField.getText());
             insertMessage.setInformation(descriptionTextArea.getText());
-
-
             executorService.execute(() -> {
                 try {
                     cachedMessageService.addNewMessage(insertMessage);
@@ -345,7 +344,6 @@ public class MessagePageController implements Initializable {
         }
     }
 
-
     private int getNumOfTransaction() {
         int count = 0;
         for (int i = 0; i < MessageCachedUtils.getLists(MessageCachedUtils.listType.All_MESSAGE).size(); i++) {
@@ -355,7 +353,6 @@ public class MessagePageController implements Initializable {
         }
         return count;
     }
-
 
     @FXML
     private void onClickOkayInAdd() {
@@ -380,7 +377,6 @@ public class MessagePageController implements Initializable {
         return false;
     }
 
-
     private void setContent() {
         setMessagePageList();
         updatePagination(0);
@@ -388,15 +384,12 @@ public class MessagePageController implements Initializable {
         setPaginationPages(messagePageList);
     }
 
-
     private void setPaginationPages(List<List<Message>> messagePageList) {
         newPagination.setPageCount(messagePageList.size());
     }
 
-
     private void updatePagination(Number currentPage) {
         currentPageList = messagePageList.get(currentPage.intValue());
-
         // set non-empty labels
         for (int i = 0; i < currentPageList.size(); i++) {
             staffNameArray[i].setText(currentPageList.get(i).getStaffName());
@@ -412,13 +405,9 @@ public class MessagePageController implements Initializable {
             } else {
                 starArray[i].setImage(filledStar);
             }
-
-
             notePadPaneArray[i].setVisible(true);
             starArray[i].setVisible(true);
             deleteArray[i].setVisible(true);
-
-
         }
         // set empty labels
         if (currentPageList.size() != 5) {
@@ -428,8 +417,6 @@ public class MessagePageController implements Initializable {
                 deleteArray[j].setVisible(false);
             }
         }
-
-
     }
 
     @FXML
@@ -482,7 +469,6 @@ public class MessagePageController implements Initializable {
         clickMessagePane(4);
     }
 
-
     private void clickMessagePane(int row) {
         message = currentPageList.get(row);
         descriptionDialog.setVisible(true);
@@ -493,9 +479,7 @@ public class MessagePageController implements Initializable {
         itemDescriptionInDetails.setText(message.getInformation());
         itemDescriptionInDetails.setWrapText(true);
         itemDescriptionInDetails.setEditable(false);
-
     }
-
 
     @FXML
     private void onClickStarMethodNumber(int row) {
@@ -548,17 +532,10 @@ public class MessagePageController implements Initializable {
         setDeletionPanes(4);
     }
 
-
     private void setDeletionPanes(int row) {
-
         MessageID = currentPageList.get(row).getMessageID(); // 为了使用deletebyID
-
         deleteMessagePane.setVisible(true);
-
-
         blockPane.setVisible(true);
-
-
         FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteMessagePane, 300, 0, 1);
         TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(deleteMessagePane, 300, -45, 0);
         translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
@@ -634,13 +611,11 @@ public class MessagePageController implements Initializable {
         }
     }
 
-
     private String dateText(Date messageTime) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = sdf.format(messageTime);
         return dateString;
     }
-
 
     private void initializeLabels() {
         //initialize staffName Label
@@ -679,13 +654,12 @@ public class MessagePageController implements Initializable {
         starArray[2] = star3;
         starArray[3] = star4;
         starArray[4] = star5;
-        //
+        //initialize deletion icon
         deleteArray[0] = deleteOne;
         deleteArray[1] = deleteTwo;
         deleteArray[2] = deleteThree;
         deleteArray[3] = deleteFour;
         deleteArray[4] = deleteFive;
-
     }
 
     @FXML
@@ -860,10 +834,6 @@ public class MessagePageController implements Initializable {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(deleteFive, 250, 1);
         scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
         scaleTransition.play();
-    }
-
-    private void onClickNotePads() {
-
     }
 
     @FXML
