@@ -242,6 +242,9 @@ public class NewTransactionPageController implements Initializable {
     @FXML
     private Label warnMessageInDelete;
 
+    @FXML
+    private MFXComboBox statusButtonInDetails;
+
     private Label[] cargoLabelArray = new Label[7];
 
     private Label[] staffLabelArray = new Label[7];
@@ -322,6 +325,10 @@ public class NewTransactionPageController implements Initializable {
         setBinsImages();
         amountArrowBlockPane.setVisible(false);
         dateArrowBlockPane.setVisible(false);
+        List<String> status = new ArrayList<>();
+        status.add("TAKEN");
+        status.add("RESTOCK");
+        statusButtonInDetails.setItems(FXCollections.observableList(status));
         setPaginationPages(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.DATE_ASC_7));
         try {
             refreshPage();
