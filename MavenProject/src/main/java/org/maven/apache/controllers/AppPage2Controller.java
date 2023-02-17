@@ -825,6 +825,7 @@ public class AppPage2Controller implements Initializable {
     @Warning(Warning.WarningType.IMPROVEMENT)
     private void onClickAlert() {
         notificationPane.setVisible(true);
+        appPageBlockPane.setVisible(true);
     }
 
     @FXML
@@ -887,6 +888,7 @@ public class AppPage2Controller implements Initializable {
     @Warning(Warning.WarningType.IMPROVEMENT)
     private void onClickCloseNotification() {
         notificationPane.setVisible(false);
+        appPageBlockPane.setVisible(false);
     }
 
     @FXML
