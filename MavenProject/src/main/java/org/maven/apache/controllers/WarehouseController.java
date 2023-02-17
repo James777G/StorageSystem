@@ -1061,4 +1061,13 @@ public class WarehouseController implements Initializable {
         DataUtils.transactionPageController.onClickSearch();
         DataUtils.appPage2Controller.onClickTransaction();
     }
+
+    /**
+     * reload cache from database
+     */
+    private void onRefresh() throws UnsupportedPojoException {
+        cachedItemService.updateAllCachedItemData();
+        calculatePageSize();
+        setTableContents();
+    }
 }

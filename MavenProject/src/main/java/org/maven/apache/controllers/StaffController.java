@@ -1131,4 +1131,14 @@ public class StaffController implements Initializable {
         DataUtils.appPage2Controller.onClickTransaction();
     }
 
+    /**
+     * reload cache from database
+     */
+    private void onRefresh() throws UnsupportedPojoException {
+        staffService.updateAllCachedStaffData();
+        getStaffList(0);
+        assignStaffValue();
+        calculatePageNumber();
+    }
+
 }

@@ -652,14 +652,6 @@ public class NewTransactionPageController implements Initializable {
     }
 
     /**
-     * reload cache from database
-     */
-    private void onRefresh() throws UnsupportedPojoException {
-        cachedTransactionService.updateAllCachedTransactionData();
-        refreshPage();
-    }
-
-    /**
      * show the pane of adding new transaction
      */
     @FXML
@@ -1667,5 +1659,13 @@ public class NewTransactionPageController implements Initializable {
             }
         });
         newItemFilterComboBox.setItems(FXCollections.observableList(resultList));
+    }
+
+    /**
+     * reload cache from database
+     */
+    private void onRefresh() throws UnsupportedPojoException {
+        cachedTransactionService.updateAllCachedTransactionData();
+        refreshPage();
     }
 }
