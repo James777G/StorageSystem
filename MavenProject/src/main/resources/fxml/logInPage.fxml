@@ -82,7 +82,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <Label fx:id="labelOnForgotPassword" layoutX="315.66668701171875" layoutY="276.0" onMouseClicked="#onForgetPassword" text="Forgot your password?" />
+                  <Label fx:id="labelOnForgotPassword" layoutX="340.0" layoutY="271.0" onMouseClicked="#onForgetPassword" text="Forgot your password?" AnchorPane.topAnchor="275.0" />
                   <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="3.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/icons8-user-96.png" />

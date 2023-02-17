@@ -262,7 +262,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </AnchorPane>
-            <Label layoutX="16.0" layoutY="59.0" text="ORDER" textFill="#b33d18" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.5" AnchorPane.topAnchor="61.0">
+            <Label layoutX="-2.0" layoutY="66.0" prefHeight="19.0" prefWidth="64.0" text="MESSAGE" textFill="#b33d18" AnchorPane.bottomAnchor="-5.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="66.0">
                <font>
                   <Font name="Candara Bold" size="15.0" />
                </font>
@@ -373,7 +373,7 @@
             <MFXProgressSpinner fx:id="loadSpinnerOnDeletePane" layoutX="461.0" layoutY="52.0" prefHeight="23.0" prefWidth="25.0" visible="false" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="addTransactionPane" layoutX="20.0" layoutY="20.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
+      <AnchorPane fx:id="addTransactionPane" layoutX="20.0" layoutY="20.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
          <children>
             <Label layoutX="421.0" layoutY="156.0" opacity="0.4" prefHeight="128.0" prefWidth="320.0" rotate="-38.7" text="MESSAGE" textFill="#9de4ed59">
                <font>
