@@ -19,6 +19,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -1686,6 +1687,26 @@ public class AppPage2Controller implements Initializable {
             throw new RuntimeException(e);
         }
         disableNode(messagePane);
+    }
+
+    @FXML
+    private void onScrollForRegulatory(ScrollEvent event){
+        if (event.getDeltaY() < 0) {
+            cargoPagination.setCurrentPageIndex(cargoPagination.getCurrentPageIndex() + 1);
+        }
+        if (event.getDeltaY() > 0) {
+            cargoPagination.setCurrentPageIndex(cargoPagination.getCurrentPageIndex() - 1);
+        }
+    }
+
+    @FXML
+    private void onScrollForEmail(ScrollEvent event){
+        if (event.getDeltaY() < 0) {
+            emailPagination.setCurrentPageIndex(emailPagination.getCurrentPageIndex() + 1);
+        }
+        if (event.getDeltaY() > 0) {
+            emailPagination.setCurrentPageIndex(emailPagination.getCurrentPageIndex() - 1);
+        }
     }
 
     private void setDrawer() {

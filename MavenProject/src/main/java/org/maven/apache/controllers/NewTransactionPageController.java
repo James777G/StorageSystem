@@ -1312,10 +1312,10 @@ public class NewTransactionPageController implements Initializable {
 
     @FXML
     private void onScrolled(ScrollEvent event) {
-        if (event.getDeltaY() > 0) {
+        if (event.getDeltaY() < 0) {
             transactionPagination.setCurrentPageIndex(transactionPagination.getCurrentPageIndex() + 1);
         }
-        if (event.getDeltaY() < 0) {
+        if (event.getDeltaY() > 0) {
             transactionPagination.setCurrentPageIndex(transactionPagination.getCurrentPageIndex() - 1);
         }
     }

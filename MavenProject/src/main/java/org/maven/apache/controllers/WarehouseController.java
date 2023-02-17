@@ -988,10 +988,10 @@ public class WarehouseController implements Initializable {
 
     @FXML
     private void onScrolled(ScrollEvent event) {
-        if (event.getDeltaY() > 0) {
+        if (event.getDeltaY() < 0) {
             newPagination.setCurrentPageIndex(newPagination.getCurrentPageIndex() + 1);
         }
-        if (event.getDeltaY() < 0) {
+        if (event.getDeltaY() > 0) {
             newPagination.setCurrentPageIndex(newPagination.getCurrentPageIndex() - 1);
         }
     }
