@@ -191,6 +191,7 @@ public class StaffController implements Initializable {
             getStaffList(newValue);
             assignStaffValue();
         });
+        DataUtils.staffController = this;
         initializeNameList();
         initializeIdList();
         initializeStatusList();
@@ -1135,7 +1136,7 @@ public class StaffController implements Initializable {
      * reload cache from database
      */
     @FXML
-    private void onRefresh() throws UnsupportedPojoException {
+    public void onRefresh() throws UnsupportedPojoException {
         staffService.updateAllCachedStaffData();
         getStaffList(0);
         assignStaffValue();
