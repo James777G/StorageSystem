@@ -149,7 +149,7 @@ public class MessagePageController implements Initializable {
     private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
 
     private Image emptyStar = new Image(
-         Objects.requireNonNull(getClass().getResourceAsStream("/image/aicons8-Message-emptyStar.png"))
+         Objects.requireNonNull(getClass().getResourceAsStream("/image/icons8-star-empty-48.png"))
     );
 
     private Image filledStar = new Image(
