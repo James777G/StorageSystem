@@ -37,7 +37,6 @@ import java.util.concurrent.ExecutorService;
 
 public class MessagePageController implements Initializable {
 
-
     @FXML
     private AnchorPane notePadPane1;
 
@@ -60,11 +59,32 @@ public class MessagePageController implements Initializable {
     private AnchorPane onMoveToStarredPane;
 
     @FXML
+    private AnchorPane deleteMessagePane;
+
+    @FXML
+    private AnchorPane blockPane;
+
+    @FXML
     private AnchorPane movingLinePane;
+
+    @FXML
+    private AnchorPane addButton;
+
+    @FXML
+    private AnchorPane deleteOne, deleteTwo, deleteThree, deleteFour, deleteFive;
+
+    @FXML
+    private AnchorPane addTransactionPane;
+
+    @FXML
+    private final AnchorPane editMessagePane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/editMessagePage.fxml")));
+
     @FXML
     private Pagination newPagination;
+
     @FXML
     private MFXGenericDialog descriptionDialog;
+
     @FXML
     private Label staffName1, staffName2, staffName3, staffName4, staffName5;
 
@@ -78,10 +98,25 @@ public class MessagePageController implements Initializable {
     private Label message1, message2, message3, message4, message5;
 
     @FXML
-    private ImageView star1, star2, star3, star4, star5;
+    private Label userNameLabel;
 
     @FXML
-    private AnchorPane deleteOne, deleteTwo, deleteThree, deleteFour, deleteFive;
+    private Label messageDateLabel;
+
+    @FXML
+    private Label warnMessageInAdd;
+
+    @FXML
+    private Label staffNameInDetail;
+
+    @FXML
+    private Label categoryDetail;
+
+    @FXML
+    private Label dateDetail;
+
+    @FXML
+    private ImageView star1, star2, star3, star4, star5;
 
     @FXML
     private ImageView doContinueButton;
@@ -90,51 +125,28 @@ public class MessagePageController implements Initializable {
     private ImageView doNotContinueButton;
 
     @FXML
-    private AnchorPane deleteMessagePane;
-
-    @FXML
-    private AnchorPane blockPane;
-
-    @FXML
     private MFXProgressSpinner loadSpinnerOnDeletePane;
 
     @FXML
-    private Label userNameLabel;
-
-    @FXML
-    private Label messageDateLabel;
+    private MFXProgressSpinner loadSpinnerInAdd;
 
     @FXML
     private JFXButton clearButton;
-    @FXML
-    private Label warnMessageInAdd;
-    @FXML
-    private MFXProgressSpinner loadSpinnerInAdd;
+
     @FXML
     private JFXButton okayButton;
+
     @FXML
     private JFXButton applyButtonInAdd;
+
     @FXML
     private TextArea descriptionTextArea;
-    @FXML
-    private AnchorPane addButton;
-    @FXML
-    private AnchorPane addTransactionPane;
+
     @FXML
     private TextField newUnitTextField;
 
     @FXML
-    private Label staffNameInDetail;
-    @FXML
-    private Label categoryDetail;
-    @FXML
     private TextArea itemDescriptionInDetails;
-    @FXML
-    private Label dateDetail;
-
-
-    @FXML
-    private final AnchorPane editMessagePane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/editMessagePage.fxml")));
 
     private final User user = DataUtils.currentUser;
 
@@ -153,7 +165,6 @@ public class MessagePageController implements Initializable {
     private Image filledStar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/image/icons8-star-filled-96.png")));
 
     private int MessageID;
-    private boolean isAdditionSucceed;
 
     private final Label[] staffNameArray = new Label[5];
 
@@ -171,12 +182,15 @@ public class MessagePageController implements Initializable {
 
     private boolean clickStarredMessage;
 
-    private List<List<Message>> messagePageList;
-
-    private List<Message> currentPageList;
     private boolean isMovingLineOnMessage = true;
 
     private boolean isLineMoving = false;
+
+    private boolean isAdditionSucceed;
+
+    private List<List<Message>> messagePageList;
+
+    private List<Message> currentPageList;
 
     private Message message;
 
@@ -186,9 +200,8 @@ public class MessagePageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cachedMessageService.updateAllCachedMessageData();
-
 //        itemDescriptionInDetails.setTextFormatter(new TextFormatter<String>(change ->
-//                change.getControlNewText().length() <= 100 ? change : null));
+//                change.getControlNewText().length() <= 250 ? change : null));
         clickStarredMessage = false;
         descriptionDialog.setVisible(false);
         blockPane.setVisible(false);
@@ -199,23 +212,17 @@ public class MessagePageController implements Initializable {
         addTransactionPane.setVisible(false);
         isAdditionSucceed = false;
         DataUtils.messageController = this;
-
-
         initializeLabels();
         executorService.execute(this::setContent);
-
-
         newPagination.currentPageIndexProperty().addListener((observable, oldValue, newValue) -> {
             updatePagination(newValue);
         });
-
     }
 
     @FXML
     private void onCloseDescriptionDialog() {
         descriptionDialog.setVisible(false);
         blockPane.setVisible(false);
-
     }
 
     @FXML
@@ -283,7 +290,6 @@ public class MessagePageController implements Initializable {
         newUnitTextField.setText("Transaction");
         messageDateLabel.setText(today);
     }
-
 
     @FXML
     private void onClickApplyInAdd() {
@@ -859,9 +865,9 @@ public class MessagePageController implements Initializable {
         scaleTransition.play();
     }
 
-
     private void onClickNotePads() {
 
-
     }
+
+
 }
