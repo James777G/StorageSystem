@@ -526,7 +526,7 @@
             </AnchorPane>
          </center>
       </MFXGenericDialog>
-      <AnchorPane fx:id="addStaffPane" layoutX="79.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 10;" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
+      <AnchorPane fx:id="addStaffPane" layoutX="79.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
          <children>
             <Label layoutX="454.0" layoutY="148.0" opacity="0.4" prefWidth="289.0" rotate="-38.7" text="STAFF" textFill="#9de4ed59">
                <font>
@@ -569,16 +569,20 @@
                </font>
             </JFXButton>
             <Separator layoutX="1.0" layoutY="44.0" prefHeight="5.0" prefWidth="697.0" />
-            <Label layoutX="524.0" layoutY="61.0" prefHeight="17.0" prefWidth="162.0" text="Staff-ID is auto-generated">
-               <font>
-                  <Font name="Calibri Bold" size="14.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="28.0" fitWidth="32.0" layoutX="484.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/icons8-information-64.png" />
-               </image>
-            </ImageView>
+            <AnchorPane layoutX="484.0" layoutY="55.0">
+               <children>
+                  <Label layoutX="40.0" layoutY="6.0" prefHeight="17.0" prefWidth="162.0" text="Staff-ID is auto-generated">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="28.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-information-64.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
             <JFXButton layoutX="498.0" layoutY="291.0" onAction="#onClickOkayInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #e9e9e9;" text="Okay">
                <font>
                   <Font name="Calibri Bold" size="14.0" />

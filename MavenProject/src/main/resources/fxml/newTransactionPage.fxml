@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
 <?import io.github.palexdev.materialfx.controls.MFXFilterComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
@@ -579,7 +580,7 @@
       </JFXButton>
       <Pagination fx:id="transactionPagination" layoutX="387.0" layoutY="589.0" maxPageIndicatorCount="8" onScroll="#onScrolled" pageCount="50" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" />
       <AnchorPane fx:id="blockPane" layoutX="-4.0" layoutY="-9.0" opacity="0.75" prefHeight="649.0" prefWidth="1207.0" style="-fx-background-color: grey;" visible="false" />
-      <MFXGenericDialog fx:id="descriptionDialog" headerText="Transaction Details" layoutX="10.0" layoutY="10.0" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseDescriptionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
+      <MFXGenericDialog fx:id="descriptionDialog" headerText="Transaction Details" layoutX="10.0" layoutY="10.0" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseDescriptionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
          <left>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
@@ -690,9 +691,9 @@
             </AnchorPane>
          </left>
       </MFXGenericDialog>
-      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
+      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
          <children>
-            <Label layoutX="421.0" layoutY="156.0" opacity="0.4" prefHeight="128.0" prefWidth="320.0" rotate="-38.7" text="TRANS" textFill="#9de4ed59">
+            <Label layoutX="476.0" layoutY="155.0" opacity="0.4" prefHeight="128.0" prefWidth="320.0" rotate="-38.7" text="TRANS" textFill="#9de4ed59">
                <font>
                   <Font name="Calibri Bold" size="100.0" />
                </font>
@@ -709,64 +710,83 @@
                   <Font name="Calibri Bold" size="14.0" />
                </font>
             </Label>
-            <TextArea fx:id="descriptionTextArea" layoutX="14.0" layoutY="207.0" prefHeight="111.0" prefWidth="366.0" styleClass="lineStyleTextArea" stylesheets="@../css/staffPane.css" />
-            <JFXButton fx:id="applyButtonInAdd" layoutX="599.0" layoutY="291.0" onAction="#onClickApplyInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #223c40;" text="Apply" textFill="WHITE">
-               <font>
-                  <Font name="Calibri Bold" size="14.0" />
-               </font>
-            </JFXButton>
-            <Separator layoutX="1.0" layoutY="44.0" prefHeight="5.0" prefWidth="697.0" />
-            <JFXButton fx:id="okayButton" layoutX="498.0" layoutY="291.0" onAction="#onClickOkayInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #e9e9e9;" text="Okay">
-               <font>
-                  <Font name="Calibri Bold" size="14.0" />
-               </font>
-            </JFXButton>
+            <TextArea fx:id="descriptionTextArea" layoutX="14.0" layoutY="207.0" prefHeight="111.0" prefWidth="463.0" styleClass="lineStyleTextArea" stylesheets="@../css/staffPane.css" />
+            <AnchorPane layoutX="496.0" layoutY="233.0">
+               <children>
+                  <JFXButton fx:id="applyButtonInAdd" layoutX="205.0" layoutY="58.0" onAction="#onClickApplyInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #223c40;" text="Apply" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="okayButton" layoutX="104.0" layoutY="58.0" onAction="#onClickOkayInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #e9e9e9;" text="Okay">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <Label fx:id="warnMessageInAdd" prefHeight="57.0" prefWidth="243.0" text="Your action was not successful,&#10;please check if the fields have been filled." textFill="#a10000">
+                     <font>
+                        <Font name="Calibri Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="clearButton" layoutX="2.0" layoutY="58.0" onAction="#onClickClearInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #e9e9e9;" text="Clear">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <MFXProgressSpinner fx:id="loadSpinnerInAdd" layoutX="230.0" layoutY="62.0" prefHeight="18.0" prefWidth="25.0" />
+               </children>
+            </AnchorPane>
+            <Separator layoutX="1.0" layoutY="41.0" prefHeight="8.0" prefWidth="800.0" />
             <ImageView fitHeight="28.0" fitWidth="32.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/icons8-add-new-100.png" />
                </image>
             </ImageView>
-            <MFXProgressSpinner fx:id="loadSpinnerInAdd" layoutX="624.0" layoutY="295.0" prefHeight="18.0" prefWidth="25.0" />
-            <Label fx:id="warnMessageInAdd" layoutX="394.0" layoutY="233.0" prefHeight="57.0" prefWidth="243.0" text="Your action was not successful,&#10;please check if the fields have been filled." textFill="#a10000">
-               <font>
-                  <Font name="Calibri Bold" size="13.0" />
-               </font>
-            </Label>
             <AnchorPane layoutX="222.0" layoutY="71.0" />
-            <MFXDatePicker fx:id="datePicker" editable="false" layoutX="228.0" layoutY="85.0" prefHeight="28.0" prefWidth="139.0" stylesheets="@../css/calendar.css" />
-            <MFXToggleButton fx:id="statusToggleButton" contentDisposition="RIGHT" layoutX="564.0" layoutY="5.0" onAction="#onToggle" text="Restock">
+            <MFXDatePicker fx:id="datePicker" editable="false" layoutX="228.0" layoutY="85.0" prefHeight="28.0" prefWidth="139.0" stylesheets="@../css/calendar.css" AnchorPane.topAnchor="85.0" />
+            <MFXToggleButton fx:id="statusToggleButton" contentDisposition="RIGHT" layoutX="378.0" layoutY="132.0" onAction="#onToggle" text="Restock">
                <font>
                   <Font name="Calibri Bold" size="17.0" />
                </font>
             </MFXToggleButton>
-            <JFXButton fx:id="clearButton" layoutX="396.0" layoutY="291.0" onAction="#onClickClearInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #e9e9e9;" text="Clear">
-               <font>
-                  <Font name="Calibri Bold" size="14.0" />
-               </font>
-            </JFXButton>
-            <MFXFilterComboBox fx:id="newItemFilterComboBox" floatMode="BORDER" layoutX="14.0" layoutY="87.0" prefHeight="34.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" AnchorPane.topAnchor="87.0" />
-            <MFXFilterComboBox fx:id="newStaffFilterComboBox" floatMode="BORDER" layoutX="422.0" layoutY="85.0" prefHeight="34.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" AnchorPane.topAnchor="87.0" />
+            <MFXFilterComboBox fx:id="newItemFilterComboBox" floatMode="BORDER" layoutX="14.0" layoutY="87.0" prefHeight="38.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" AnchorPane.topAnchor="85.0" />
+            <MFXFilterComboBox fx:id="newStaffFilterComboBox" floatMode="BORDER" layoutX="422.0" layoutY="85.0" prefHeight="38.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" AnchorPane.topAnchor="85.0" />
             <Label layoutX="428.0" layoutY="60.0" prefHeight="17.0" prefWidth="139.0" text="Staff Name (required)" AnchorPane.topAnchor="60.0">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="422.0" layoutY="138.0" prefHeight="17.0" prefWidth="152.0" text="Item Amount (required)">
-               <font>
-                  <Font name="Calibri Bold" size="14.0" />
-               </font>
-            </Label>
+            <AnchorPane layoutX="624.0" layoutY="61.0" AnchorPane.topAnchor="61.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="152.0" text="Item Amount (required)">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <MFXTextField fx:id="newUnitTextField" floatMode="DISABLED" layoutY="28.0" prefHeight="38.0" prefWidth="152.0" stylesheets="@../css/generalTextField.css" AnchorPane.topAnchor="24.0" />
+               </children>
+            </AnchorPane>
             <Label layoutX="20.0" layoutY="61.0" prefHeight="17.0" prefWidth="139.0" text="Item Name (required)" AnchorPane.topAnchor="60.0">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="228.0" layoutY="61.0" prefHeight="17.0" prefWidth="139.0" text="Process Date:">
+            <Label layoutX="228.0" layoutY="60.0" prefHeight="17.0" prefWidth="139.0" text="Process Date:">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
                </font>
             </Label>
-            <MFXTextField fx:id="newUnitTextField" floatMode="DISABLED" layoutX="422.0" layoutY="166.0" prefHeight="34.0" prefWidth="152.0" stylesheets="@../css/generalTextField.css" />
+            <MFXComboBox fx:id="statusButtonInDetails" floatMode="BORDER" floatingText=" Status " layoutX="624.0" layoutY="151.0" prefHeight="38.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" />
+            <Label layoutX="574.0" layoutY="17.0" prefHeight="17.0" prefWidth="206.0" text="Transaction-ID is auto-generated">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="542.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-information-64.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="deleteItemPane" layoutX="361.0" layoutY="100.0" prefHeight="171.0" prefWidth="495.0" style="-fx-background-color: #f6f6f6; -fx-background-radius: 15;" visible="false">
