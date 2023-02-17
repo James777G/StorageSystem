@@ -1065,6 +1065,7 @@ public class WarehouseController implements Initializable {
     /**
      * reload cache from database
      */
+    @FXML
     private void onRefresh() throws UnsupportedPojoException {
         cachedItemService.updateAllCachedItemData();
         calculatePageSize();

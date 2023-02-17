@@ -1134,6 +1134,7 @@ public class StaffController implements Initializable {
     /**
      * reload cache from database
      */
+    @FXML
     private void onRefresh() throws UnsupportedPojoException {
         staffService.updateAllCachedStaffData();
         getStaffList(0);
