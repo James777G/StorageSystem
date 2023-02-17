@@ -260,6 +260,7 @@ public class MessagePageController implements Initializable {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String today = sdf.format(date);
         descriptionTextArea.setText(staffMessage.getHeaderText(id, name));
+        newUnitTextField.setText("Staff");
         messageDateLabel.setText(today);
     }
 
@@ -271,6 +272,7 @@ public class MessagePageController implements Initializable {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String today = sdf.format(date);
         descriptionTextArea.setText(cargoMessage.getHeaderText(id, name));
+        newUnitTextField.setText("Item");
         messageDateLabel.setText(today);
     }
 
@@ -282,6 +284,7 @@ public class MessagePageController implements Initializable {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String today = sdf.format(date);
         descriptionTextArea.setText(transactionMessage.getHeaderText(id, name));
+        newUnitTextField.setText("Transaction");
         messageDateLabel.setText(today);
     }
 

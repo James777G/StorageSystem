@@ -52,6 +52,8 @@ import org.maven.apache.utils.*;
 import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -1587,6 +1589,15 @@ public class AppPage2Controller implements Initializable {
             currentPaneStatus = CurrentPaneStatus.WAREHOUSE;
             changeButtonColorOn(currentPaneStatus);
         }
+    }
+
+    @FXML
+    private void bringToNote() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Class<MessagePageController> messagePageControllerClass = MessagePageController.class;
+        Method onClickAddButtonForStaff = messagePageControllerClass.getDeclaredMethod("onClickAddButtonForTransaction", String.class, String.class);
+        onClickAddButtonForStaff.setAccessible(true);
+        onClickMessage();
+        onClickAddButtonForStaff.invoke(DataUtils.messageController, transactionIdLabel.getText(), transactionNameInDetails.getText());
     }
 
     @FXML
