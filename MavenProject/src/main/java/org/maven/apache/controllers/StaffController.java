@@ -1140,6 +1140,7 @@ public class StaffController implements Initializable {
         getStaffList(0);
         assignStaffValue();
         calculatePageNumber();
+        pagination.setCurrentPageIndex(0);
     }
 
 }

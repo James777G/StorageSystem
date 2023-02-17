@@ -1070,5 +1070,6 @@ public class WarehouseController implements Initializable {
         cachedItemService.updateAllCachedItemData();
         calculatePageSize();
         setTableContents();
+        newPagination.setCurrentPageIndex(0);
     }
 }
