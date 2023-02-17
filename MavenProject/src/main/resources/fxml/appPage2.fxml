@@ -623,7 +623,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </MFXCircleToggleNode>
-            <MFXGenericDialog fx:id="transactionDialog" headerText="Transaction Details" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseTransactionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
+            <MFXGenericDialog fx:id="transactionDialog" headerText="Transaction Details" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseTransactionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
                <left>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
@@ -653,7 +653,7 @@
                               <Insets left="10.0" />
                            </padding>
                         </Label>
-                        <JFXButton layoutX="719.0" layoutY="159.0" style="-fx-background-color: #e2e2e2;" text="Bring To Notepad" AnchorPane.bottomAnchor="170.0">
+                        <JFXButton layoutX="719.0" layoutY="159.0" onAction="#bringToNote" style="-fx-background-color: #e2e2e2;" text="Bring To Notepad" AnchorPane.bottomAnchor="170.0">
                            <font>
                               <Font name="Calibri Bold" size="16.0" />
                            </font>

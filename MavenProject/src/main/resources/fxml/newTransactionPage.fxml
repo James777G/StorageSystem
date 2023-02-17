@@ -695,7 +695,7 @@
             </AnchorPane>
          </left>
       </MFXGenericDialog>
-      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
+      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
          <children>
             <Label layoutX="476.0" layoutY="155.0" opacity="0.4" prefHeight="128.0" prefWidth="320.0" rotate="-38.7" text="TRANS" textFill="#9de4ed59">
                <font>
@@ -775,7 +775,7 @@
                   <Font name="Calibri Bold" size="14.0" />
                </font>
             </Label>
-            <MFXComboBox fx:id="newStatusComboBox" floatMode="BORDER" floatingText=" Status " layoutX="624.0" layoutY="151.0" prefHeight="38.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" />
+            <MFXComboBox fx:id="newStatusComboBox" floatMode="BORDER" layoutX="624.0" layoutY="164.0" prefHeight="38.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" />
             <Label layoutX="574.0" layoutY="17.0" prefHeight="17.0" prefWidth="206.0" text="Transaction-ID is auto-generated">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
@@ -786,6 +786,11 @@
                   <Image url="@../image/icons8-information-64.png" />
                </image>
             </ImageView>
+            <Label layoutX="624.0" layoutY="140.0" prefHeight="17.0" prefWidth="152.0" text="Status (required)" AnchorPane.topAnchor="140.0">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="deleteItemPane" layoutX="361.0" layoutY="100.0" prefHeight="171.0" prefWidth="495.0" style="-fx-background-color: #f6f6f6; -fx-background-radius: 15;" visible="false">

@@ -37,6 +37,7 @@ import org.maven.apache.utils.ThreadUtils;
 import org.maven.apache.utils.TransitionUtils;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.List;
 import java.util.Optional;
@@ -344,42 +345,66 @@ public class LogInPageController implements Initializable {
                 loadIndicator.setVisible(true);
                 setFieldStatus(true);
             });
-            // get the user list
-            updateUserList();
-            String username = userNameField.getText();
-            User currentUser = getUser(username);
-            Platform.runLater(() -> {
-                if (!isUsernameFound(username)) {
-                    // if the user does not exist, show alert
-                    callErrorDialog();
-                } else {
-                    // if the user exists, check its verification (correct password)
-                    if (currentUser.getPassword().equals(passwordField.getText())) {
-                        // show progress indicator and disable signing button
-                        loginButton.setDisable(true);
-                        loadIndicator.setVisible(true);
-                        // head to the app page (appPage2) in the background
-                        threadPoolExecutor.execute(() -> {
-                            DataUtils.currentUser = currentUser;
-                            Stage stage = (Stage) loginButton.getScene().getWindow();
-                            FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/appPage2.fxml"));
-                            final Scene scene;
-                            try {
-                                scene = new Scene(loader.load());
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                            Platform.runLater(() -> {
-                                stage.setScene(scene);
-                                stage.show();
-                            });
+            try{
+                // get the user list
+                updateUserList();
+                String username = userNameField.getText();
+                User currentUser = getUser(username);
+                Platform.runLater(() -> {
+                    if (!isUsernameFound(username)) {
+                        Platform.runLater(() -> {
+                            loginButton.setDisable(false);
+                            loadIndicator.setVisible(false);
+                            setFieldStatus(false);
                         });
-                    } else {
-                        // incorrect username or password
+                        // if the user does not exist, show alert
                         callErrorDialog();
+                    } else {
+                        // if the user exists, check its verification (correct password)
+                        if (currentUser.getPassword().equals(passwordField.getText())) {
+                            // show progress indicator and disable signing button
+                            loginButton.setDisable(true);
+                            loadIndicator.setVisible(true);
+                            // head to the app page (appPage2) in the background
+                            threadPoolExecutor.execute(() -> {
+                                DataUtils.currentUser = currentUser;
+                                Stage stage = (Stage) loginButton.getScene().getWindow();
+                                FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/appPage2.fxml"));
+                                Scene scene = null;
+                                try {
+                                    scene = new Scene(loader.load());
+                                } catch (IOException e) {
+                                    Platform.runLater(() -> {
+                                        loginButton.setDisable(false);
+                                        loadIndicator.setVisible(false);
+                                        setFieldStatus(false);
+                                    });
+                                }
+                                Scene finalScene = scene;
+                                Platform.runLater(() -> {
+                                    stage.setScene(finalScene);
+                                    stage.show();
+                                });
+                            });
+                        } else {
+                            Platform.runLater(() -> {
+                                loginButton.setDisable(false);
+                                loadIndicator.setVisible(false);
+                                setFieldStatus(false);
+                            });
+                            // incorrect username or password
+                            callErrorDialog();
+                        }
                     }
-                }
-            });
+                });
+            }catch(Exception e){
+                Platform.runLater(() -> {
+                    loginButton.setDisable(false);
+                    loadIndicator.setVisible(false);
+                    setFieldStatus(false);
+                });
+            }
+
         });
     }
 
@@ -580,13 +605,13 @@ public class LogInPageController implements Initializable {
      *
      * @param isLoggingIn becomes true if logging in
      */
-    private void setFieldStatus(boolean isLoggingIn){
-        if (isLoggingIn){
+    private void setFieldStatus(boolean isLoggingIn) {
+        if (isLoggingIn) {
             userNameField.setDisable(true);
             passwordField.setDisable(true);
             labelOnForgotPassword.setDisable(true);
             labelOnSignUp.setDisable(true);
-        }else{
+        } else {
             userNameField.setDisable(false);
             passwordField.setDisable(false);
             labelOnForgotPassword.setDisable(false);
@@ -605,7 +630,7 @@ public class LogInPageController implements Initializable {
      * login as piper by clicking a button
      */
     @FXML
-    private void onFastLogin(){
+    private void onFastLogin() {
         userNameField.setText("Piper");
         passwordField.setText("sir");
         fastLoginButton.setDisable(true);
