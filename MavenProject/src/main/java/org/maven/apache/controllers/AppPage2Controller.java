@@ -626,7 +626,7 @@ public class AppPage2Controller implements Initializable {
         initializeEmails();
         regulatoryWarnMessage.setVisible(false);
         setEmailTable(emailPagination.getCurrentPageIndex());
-        emailPagination.setPageCount(EmailCachedUtils.getLists(EmailCachedUtils.listType.ALL).size());
+        setEmailPageCount();
         emailPagination.currentPageIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
