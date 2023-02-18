@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="implemented initial content successfully">
-      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/EditMessagePageController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/editMessagePage.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/resources/fxml/appPage2.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,7 +231,9 @@
       <workItem from="1676601103111" duration="831000" />
       <workItem from="1676669540685" duration="6077000" />
       <workItem from="1676687025413" duration="2170000" />
-      <workItem from="1676691081716" duration="478000" />
+      <workItem from="1676691081716" duration="579000" />
+      <workItem from="1676698597824" duration="56000" />
+      <workItem from="1676759597566" duration="664000" />
     </task>
     <task id="LOCAL-00001" summary="the only tew sql list is two the left list is based on these two list">
       <created>1674189362992</created>
