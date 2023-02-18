@@ -219,6 +219,9 @@ public class NewTransactionPageController implements Initializable {
     private TextArea purposeTextInDetails;
 
     @FXML
+    private ImageView searchImage11;
+
+    @FXML
     private MFXProgressSpinner loadSpinnerInAdd;
 
     @FXML
@@ -1332,6 +1335,21 @@ public class NewTransactionPageController implements Initializable {
         onClickAddButtonForStaff.setAccessible(true);
         onClickMessage.invoke(DataUtils.appPage2Controller);
         onClickAddButtonForStaff.invoke(DataUtils.messageController, transactionIdInDetails.getText(), transactionNameInDetails.getText());
+    }
+
+    @FXML
+    private void onEnterSearchButton(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(searchImage11, 500, 1.2);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+
+    }
+
+    @FXML
+    private void onExitSearchButton(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(searchImage11, 500, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
     }
 
     @FXML
