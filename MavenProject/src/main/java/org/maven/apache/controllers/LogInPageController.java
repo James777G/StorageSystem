@@ -6,10 +6,7 @@ import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import jakarta.mail.MessagingException;
-import javafx.animation.FadeTransition;
-import javafx.animation.KeyFrame;
-import javafx.animation.ScaleTransition;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -32,10 +29,7 @@ import org.maven.apache.MyLauncher;
 import org.maven.apache.service.mail.MailService;
 import org.maven.apache.service.user.UserService;
 import org.maven.apache.user.User;
-import org.maven.apache.utils.DataUtils;
-import org.maven.apache.utils.ScaleUtils;
-import org.maven.apache.utils.ThreadUtils;
-import org.maven.apache.utils.TransitionUtils;
+import org.maven.apache.utils.*;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -443,19 +437,27 @@ public class LogInPageController implements Initializable {
 
     @FXML
     private void onForgetPassword() {
+        verificationDialog.setOpacity(0);
         verificationDialog.setVisible(true);
         blockPane.setVisible(true);
-        resetPasswordButton.setDisable(true);
-        // initialize username verification per sec
-        KeyFrame usernameKeyFrame = ThreadUtils.generateUsernameVerificationKeyFrame(verificationUsername, usernameCheck, usernameCross, usernameNotificationLabel);
-        usernameTimeline.getKeyFrames().add(usernameKeyFrame);
-        usernameTimeline.setCycleCount(Timeline.INDEFINITE);
-        usernameTimeline.playFromStart();
-        // initialize password verification per sec
-        KeyFrame passwordKeyFrame = ThreadUtils.generatePasswordVerificationKeyFrame(newPasswordField, passwordCheck, passwordCross, newPasswordNotificationLabel, sendVerificationCodeButton);
-        passwordTimeline.getKeyFrames().add(passwordKeyFrame);
-        passwordTimeline.setCycleCount(Timeline.INDEFINITE);
-        passwordTimeline.playFromStart();
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(verificationDialog,300,0,1);
+        fadeTransition.setOnFinished(event -> {
+            KeyFrame usernameKeyFrame = ThreadUtils.generateUsernameVerificationKeyFrame(verificationUsername, usernameCheck, usernameCross, usernameNotificationLabel);
+            usernameTimeline.getKeyFrames().add(usernameKeyFrame);
+            usernameTimeline.setCycleCount(Timeline.INDEFINITE);
+            usernameTimeline.playFromStart();
+            // initialize password verification per sec
+            KeyFrame passwordKeyFrame = ThreadUtils.generatePasswordVerificationKeyFrame(newPasswordField, passwordCheck, passwordCross, newPasswordNotificationLabel, sendVerificationCodeButton);
+            passwordTimeline.getKeyFrames().add(passwordKeyFrame);
+            passwordTimeline.setCycleCount(Timeline.INDEFINITE);
+            passwordTimeline.playFromStart();
+            // initialize username verification per sec
+            resetPasswordButton.setDisable(true);
+        });
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(verificationDialog,300,-137.5,0);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     /**
@@ -521,14 +523,21 @@ public class LogInPageController implements Initializable {
      */
     @FXML
     private void onCloseVerificationDialog() {
-        verificationDialog.setVisible(false);
-        notificationLabel.setText("");
-        blockPane.setVisible(false);
-        verificationUsername.clear();
-        newPasswordField.clear();
-        verificationCodeField.clear();
-        usernameTimeline.stop();
-        passwordTimeline.stop();
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(verificationDialog,300,1,0);
+        fadeTransition.setOnFinished(event -> {
+            verificationDialog.setVisible(false);
+            notificationLabel.setText("");
+            blockPane.setVisible(false);
+            verificationUsername.clear();
+            newPasswordField.clear();
+            verificationCodeField.clear();
+            usernameTimeline.stop();
+            passwordTimeline.stop();
+        });
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(verificationDialog,300,0,-137.5);
+        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     /**
