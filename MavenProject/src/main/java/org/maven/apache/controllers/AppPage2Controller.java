@@ -678,9 +678,9 @@ public class AppPage2Controller implements Initializable {
         });
         setDrawer();
         initializeLabels();
-        System.out.println("=======================================");
+        System.out.println("999999999999999999999999999999999999");
         fillCargoBoxesInformation(buttonSelected);
-        System.out.println("=======================================");
+        System.out.println("999999999999999999999999999999999999");
         blockPane.setVisible(false);
         DataUtils.publicSettingBlockPane = blockPane;
         onUpdateUsername();
@@ -1460,16 +1460,22 @@ public class AppPage2Controller implements Initializable {
                 enableNode(redTakenLabel);
                 enableNode(greenRestockLabel);
                 greenRestockLabel.setTranslateX(0);
-                if (dateTransactions_Taken.size() < 2) {
+                try{
                     takenBoxNumber = dateTransactions_Taken.size();
-                    for (int hideAllTaken = 1; hideAllTaken >= dateTransactions_Taken.size(); hideAllTaken--) {
+                    restockBoxNumber = dateTransactions_Restock.size();
+                }catch (Exception e){
+                    takenBoxNumber = 0;
+                    restockBoxNumber = 0;
+                }
+                if (takenBoxNumber < 2) {
+                    for (int hideAllTaken = 1; hideAllTaken >= takenBoxNumber; hideAllTaken--) {
                         disableNode(cargoBoxPanes[hideAllTaken]);
                         disableNode(cargoBoxFunctionalityPanes[hideAllTaken]);
                     }
+                    System.out.println("=======================================");
                 }
-                if (dateTransactions_Restock.size() < 2) {
-                    restockBoxNumber = dateTransactions_Restock.size();
-                    for (int hideAllRestock = 3; hideAllRestock >= dateTransactions_Restock.size() + 2; hideAllRestock--) {
+                if (restockBoxNumber < 2) {
+                    for (int hideAllRestock = 3; hideAllRestock >= restockBoxNumber + 2; hideAllRestock--) {
                         disableNode(cargoBoxPanes[hideAllRestock]);
                         disableNode(cargoBoxFunctionalityPanes[hideAllRestock]);
                     }
@@ -1491,9 +1497,13 @@ public class AppPage2Controller implements Initializable {
             case TAKEN -> {
                 enableNode(redTakenLabel);
                 disableNode(greenRestockLabel);
-                if (dateTransactions_Taken.size() < 4) {
+                try{
                     boxNumber = dateTransactions_Taken.size();
-                    for (int hideTaken = 3; hideTaken > dateTransactions_Taken.size() - 1; hideTaken--) {
+                }catch(Exception e){
+                    boxNumber = 0;
+                }
+                if (boxNumber < 4) {
+                    for (int hideTaken = 3; hideTaken > boxNumber - 1; hideTaken--) {
                         disableNode(cargoBoxPanes[hideTaken]);
                         disableNode(cargoBoxFunctionalityPanes[hideTaken]);
                     }
@@ -1510,9 +1520,13 @@ public class AppPage2Controller implements Initializable {
                 disableNode(redTakenLabel);
                 enableNode(greenRestockLabel);
                 greenRestockLabel.setTranslateX(-500);
-                if (dateTransactions_Restock.size() < 4) {
+                try{
                     boxNumber = dateTransactions_Restock.size();
-                    for (int hideRestock = 3; hideRestock > dateTransactions_Restock.size() - 1; hideRestock--) {
+                }catch(Exception e){
+                    boxNumber = 0;
+                }
+                if (boxNumber < 4) {
+                    for (int hideRestock = 3; hideRestock > boxNumber - 1; hideRestock--) {
                         disableNode(cargoBoxPanes[hideRestock]);
                         disableNode(cargoBoxFunctionalityPanes[hideRestock]);
                     }

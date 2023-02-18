@@ -78,9 +78,6 @@ public class MessagePageController implements Initializable {
     private AnchorPane addTransactionPane;
 
     @FXML
-    private final AnchorPane editMessagePane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/editMessagePage.fxml")));
-
-    @FXML
     private Pagination newPagination;
 
     @FXML
@@ -201,12 +198,9 @@ public class MessagePageController implements Initializable {
 
     private Message message;
 
-    public MessagePageController() throws IOException {
-        
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         cachedMessageService.updateAllCachedMessageData();
 //        itemDescriptionInDetails.setTextFormatter(new TextFormatter<String>(change ->
 //                change.getControlNewText().length() <= 250 ? change : null));

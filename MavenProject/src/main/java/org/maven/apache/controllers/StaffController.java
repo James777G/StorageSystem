@@ -206,9 +206,7 @@ public class StaffController implements Initializable {
         initializeButtonList();
         initializeDeleteList();
         initializeStaffPaneList();
-        System.out.println("=======================================");
         assignStaffValue();
-        System.out.println("=======================================");
         setInitialDeleteImageViews();
         loadSpinnerInAdd.setVisible(false);
         warnMessageInAdd.setVisible(false);
