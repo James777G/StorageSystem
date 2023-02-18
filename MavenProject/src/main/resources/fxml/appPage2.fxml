@@ -258,9 +258,6 @@
                      </font>
                   </Label>
                </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
             </AnchorPane>
             <AnchorPane fx:id="cargoBox2Pane" layoutX="424.0" layoutY="498.0" onMouseEntered="#onEnterCargoBox2" prefHeight="80.0" prefWidth="180.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="500.0">
                <children>
@@ -299,9 +296,6 @@
                      </font>
                   </Label>
                </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
             </AnchorPane>
             <AnchorPane fx:id="cargoBox3Pane" layoutX="695.0" layoutY="502.0" onMouseEntered="#onEnterCargoBox3" prefHeight="80.0" prefWidth="180.0" style="-fx-background-color: #eceff1;" AnchorPane.leftAnchor="620.0" AnchorPane.topAnchor="500.0">
                <children>
@@ -337,9 +331,6 @@
                      </font>
                   </Label>
                </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
             </AnchorPane>
             <AnchorPane fx:id="cargoBox4Pane" layoutX="897.0" layoutY="499.0" onMouseEntered="#onEnterCargoBox4" prefHeight="80.0" prefWidth="180.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="500.0">
                <children>
@@ -376,9 +367,18 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="cargoBox1FunctionalityPane" disable="true" onMouseClicked="#onClickTransactionOne" onMouseExited="#onExitCargoBox1" prefHeight="100.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="500.0" />
-            <AnchorPane fx:id="cargoBox2FunctionalityPane" disable="true" layoutX="130.0" layoutY="570.0" onMouseClicked="#onClickTransactionTwo" onMouseExited="#onExitCargoBox2" prefHeight="100.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="500.0" />
-            <AnchorPane fx:id="cargoBox3FunctionalityPane" disable="true" layoutX="140.0" layoutY="580.0" onMouseClicked="#onClickTransactionThree" onMouseExited="#onExitCargoBox3" prefHeight="100.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="620.0" AnchorPane.topAnchor="500.0" />
+            <AnchorPane fx:id="cargoBox1FunctionalityPane" disable="true" onMouseClicked="#onClickTransactionOne" onMouseExited="#onExitCargoBox1" prefHeight="100.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="500.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></AnchorPane>
+            <AnchorPane fx:id="cargoBox2FunctionalityPane" disable="true" layoutX="130.0" layoutY="570.0" onMouseClicked="#onClickTransactionTwo" onMouseExited="#onExitCargoBox2" prefHeight="100.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="500.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></AnchorPane>
+            <AnchorPane fx:id="cargoBox3FunctionalityPane" disable="true" layoutX="140.0" layoutY="580.0" onMouseClicked="#onClickTransactionThree" onMouseExited="#onExitCargoBox3" prefHeight="100.0" prefWidth="180.0" visible="false" AnchorPane.leftAnchor="620.0" AnchorPane.topAnchor="500.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></AnchorPane>
             <AnchorPane fx:id="cargoBox4FunctionalityPane" disable="true" layoutX="130.0" layoutY="570.0" onMouseClicked="#onClickTransactionFour" onMouseExited="#onExitCargoBox4" prefHeight="100.0" prefWidth="180.0" AnchorPane.leftAnchor="850.0" AnchorPane.topAnchor="500.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -661,7 +661,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <MFXCircleToggleNode fx:id="notifyButton" layoutX="6.0" layoutY="70.0" onMouseClicked="#onNotify" onMouseEntered="#onEnterNotify" onMouseExited="#onExitNotify" pickOnBounds="false" prefHeight="88.0" prefWidth="94.0">
+            <MFXCircleToggleNode fx:id="notifyButton" gap="-5.0" layoutX="14.0" layoutY="70.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onNotify" onMouseEntered="#onEnterNotify" onMouseExited="#onExitNotify" pickOnBounds="false" prefHeight="93.0" prefWidth="70.0">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
                </font>
@@ -776,7 +776,10 @@
                               <Font name="Calibri Bold" size="14.0" />
                            </font>
                         </Label>
-                        <MFXFilterComboBox fx:id="staffNameInDetails" floatMode="BORDER" floatingText=" Name " layoutX="252.0" layoutY="136.0" prefHeight="25.0" prefWidth="170.0" />
+                        <MFXFilterComboBox fx:id="staffNameInDetails" floatMode="BORDER" floatingText=" Name " layoutX="252.0" layoutY="136.0" prefHeight="25.0" prefWidth="170.0">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></MFXFilterComboBox>
                         <Label fx:id="transactionStatusInDetails" layoutX="245.0" layoutY="44.0" prefHeight="17.0" prefWidth="192.0" text="Label" AnchorPane.leftAnchor="245.0">
                            <font>
                               <Font name="Calibri Bold" size="14.0" />
