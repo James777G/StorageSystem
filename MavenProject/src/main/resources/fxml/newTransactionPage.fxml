@@ -762,7 +762,7 @@
             </AnchorPane>
          </left>
       </MFXGenericDialog>
-      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
+      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
          <children>
             <Label layoutX="476.0" layoutY="155.0" opacity="0.4" prefHeight="128.0" prefWidth="320.0" rotate="-38.7" text="TRANS" textFill="#9de4ed59">
                <font>
@@ -827,13 +827,13 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></MFXDatePicker>
-            <MFXFilterComboBox fx:id="newItemFilterComboBox" floatMode="BORDER" layoutX="14.0" layoutY="87.0" prefHeight="38.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" AnchorPane.topAnchor="85.0">
+            <MFXFilterComboBox fx:id="newItemFilterComboBox" editable="false" floatMode="BORDER" layoutX="14.0" layoutY="87.0" prefHeight="38.0" prefWidth="152.0" scrollOnOpen="true" stylesheets="@../css/filterCombo.css" AnchorPane.topAnchor="85.0">
                <cursor>
-                  <Cursor fx:constant="HAND" />
+                  <Cursor fx:constant="DEFAULT" />
                </cursor></MFXFilterComboBox>
-            <MFXFilterComboBox fx:id="newStaffFilterComboBox" floatMode="BORDER" layoutX="422.0" layoutY="85.0" prefHeight="38.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" AnchorPane.topAnchor="85.0">
+            <MFXFilterComboBox fx:id="newStaffFilterComboBox" floatMode="BORDER" layoutX="422.0" layoutY="85.0" prefHeight="38.0" prefWidth="152.0" scrollOnOpen="true" stylesheets="@../css/filterCombo.css" AnchorPane.topAnchor="85.0">
                <cursor>
-                  <Cursor fx:constant="HAND" />
+                  <Cursor fx:constant="DEFAULT" />
                </cursor></MFXFilterComboBox>
             <Label layoutX="428.0" layoutY="60.0" prefHeight="17.0" prefWidth="139.0" text="Staff Name (required)" AnchorPane.topAnchor="60.0">
                <font>

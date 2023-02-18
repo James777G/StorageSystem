@@ -22,4 +22,8 @@ public interface GeneralTransactionStrategiesService {
      */
     void doStrategies(ItemMapper itemMapper, TransactionMapper transactionMapper, int id) throws NegativeDataException;
 
+    void doPostStrategies(ItemMapper itemMapper, TransactionMapper transactionMapper, Transaction transaction) throws DataNotFoundException, NegativeDataException;
+
+    void doPostStrategies(ItemMapper itemMapper, TransactionMapper transactionMapper, int id) throws NegativeDataException;
+
 }
