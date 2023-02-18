@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("staffService")
@@ -33,12 +34,20 @@ public class ControllerOrientedCachedStaffHandler implements CachedStaffService 
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = BaseException.class)
     public void updateAllCachedStaffData() {
         List<Staff> staffList = staffDAOService.selectAll();
-        StaffCachedUtils.putLists(StaffCachedUtils.listType.ALL, staffDataManipulationService
-                .getPagedCacheList(staffList, 7));
-        StaffCachedUtils.putLists(StaffCachedUtils.listType.ACTIVE, staffDataManipulationService
-                .getPagedCacheActiveList(staffList, 7));
-        StaffCachedUtils.putLists(StaffCachedUtils.listType.INACTIVE, staffDataManipulationService
-                .getPagedCacheInactiveList(staffList, 7));
+        List<List<Staff>> list = new ArrayList<>();
+        if(staffList.isEmpty()){
+            StaffCachedUtils.putLists(StaffCachedUtils.listType.ALL, list);
+            StaffCachedUtils.putLists(StaffCachedUtils.listType.ACTIVE, list);
+            StaffCachedUtils.putLists(StaffCachedUtils.listType.INACTIVE, list);
+        } else {
+            StaffCachedUtils.putLists(StaffCachedUtils.listType.ALL, staffDataManipulationService
+                    .getPagedCacheList(staffList, 7));
+            StaffCachedUtils.putLists(StaffCachedUtils.listType.ACTIVE, staffDataManipulationService
+                    .getPagedCacheActiveList(staffList, 7));
+            StaffCachedUtils.putLists(StaffCachedUtils.listType.INACTIVE, staffDataManipulationService
+                    .getPagedCacheInactiveList(staffList, 7));
+        }
+
     }
 
     @Override

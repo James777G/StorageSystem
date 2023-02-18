@@ -27,14 +27,14 @@ public class CachedListObserver implements CachedTransactionDataListService {
         List<List<Transaction>> amountDesc7_Restock = cachedManipulationService.getPagedCacheList(cachedManipulationService.getRestockList(cachedManipulationService.getUnitDescendingOrder(allTransaction)), 7);
         List<List<Transaction>> dateAsc7_Restock = cachedManipulationService.getPagedCacheList(cachedManipulationService.getRestockList(dateTransactionASC), 7);
         List<List<Transaction>> dateDesc7_Restock = cachedManipulationService.getPagedCacheList(cachedManipulationService.getRestockList(cachedManipulationService.getReversedList(dateTransactionASC)), 7);
-        System.out.println("amountAsc4_Restock:");
-        amountAsc4_Restock.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getUnit())));
-        System.out.println("amountDesc4_Restock:");
-        amountDesc4_Restock.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getUnit())));
-        System.out.println("dateAsc4_Restock:");
-        dateAsc4_Restock.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getTransactionTime())));
-        System.out.println("dateDesc4_Restock:");
-        dateDesc4_Restock.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getTransactionTime())));
+//        System.out.println("amountAsc4_Restock:");
+//        amountAsc4_Restock.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getUnit())));
+//        System.out.println("amountDesc4_Restock:");
+//        amountDesc4_Restock.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getUnit())));
+//        System.out.println("dateAsc4_Restock:");
+//        dateAsc4_Restock.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getTransactionTime())));
+//        System.out.println("dateDesc4_Restock:");
+//        dateDesc4_Restock.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getTransactionTime())));
         ////Taken
         List<List<Transaction>> amountAsc4_Taken = cachedManipulationService.getPagedCacheList(cachedManipulationService.getTakenList(cachedManipulationService.getUnitAscendingOrder(allTransaction)), 4);
         List<List<Transaction>> amountDesc4_Taken = cachedManipulationService.getPagedCacheList(cachedManipulationService.getTakenList(cachedManipulationService.getUnitDescendingOrder(allTransaction)), 4);
@@ -44,14 +44,14 @@ public class CachedListObserver implements CachedTransactionDataListService {
         List<List<Transaction>> amountDesc7_Taken = cachedManipulationService.getPagedCacheList(cachedManipulationService.getTakenList(cachedManipulationService.getUnitDescendingOrder(allTransaction)), 7);
         List<List<Transaction>> dateAsc7_Taken = cachedManipulationService.getPagedCacheList(cachedManipulationService.getTakenList(dateTransactionASC), 7);
         List<List<Transaction>> dateDesc7_Taken = cachedManipulationService.getPagedCacheList(cachedManipulationService.getTakenList(cachedManipulationService.getReversedList(dateTransactionASC)), 7);
-        System.out.println("amountAsc4_Taken:");
-        amountAsc4_Taken.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getUnit())));
-        System.out.println("amountDesc4_Taken:");
-        amountDesc4_Taken.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getUnit())));
-        System.out.println("dateAsc4_Taken :");
-        dateAsc4_Taken.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getTransactionTime())));
-        System.out.println("dateDesc4_Taken:");
-        dateDesc4_Taken.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getTransactionTime())));
+//        System.out.println("amountAsc4_Taken:");
+//        amountAsc4_Taken.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getUnit())));
+//        System.out.println("amountDesc4_Taken:");
+//        amountDesc4_Taken.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getUnit())));
+//        System.out.println("dateAsc4_Taken :");
+//        dateAsc4_Taken.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getTransactionTime())));
+//        System.out.println("dateDesc4_Taken:");
+//        dateDesc4_Taken.forEach(transactions -> transactions.forEach(transaction -> System.out.println(transaction.getTransactionTime())));
         ////All
         List<List<Transaction>> amountAsc4 = cachedManipulationService.getPagedCacheList(cachedManipulationService.getUnitAscendingOrder(allTransaction), 4);
         List<List<Transaction>> amountAsc7 = cachedManipulationService.getPagedCacheList(cachedManipulationService.getUnitAscendingOrder(allTransaction), 7);
