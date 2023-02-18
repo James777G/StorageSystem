@@ -2420,9 +2420,12 @@ public class AppPage2Controller implements Initializable {
     private void refreshCache() throws UnsupportedPojoException {
         regulatoryService.updateAllRegulatoryData();
         emailService.updateCachedEmailData();
+        cachedTransactionService.updateAllCachedTransactionData();
+        setLists();
         Platform.runLater(() -> {
             setCargoPageCount();
             setEmailPageCount();
+            fillCargoBoxesInformation(buttonSelected);
             setCargoTable(0);
             setEmailTable(0);
             try {
