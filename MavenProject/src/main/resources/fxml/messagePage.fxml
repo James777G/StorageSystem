@@ -50,6 +50,9 @@
                      </image>
                   </ImageView>
                </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </AnchorPane>
             <AnchorPane fx:id="onMoveToStarredPane" layoutX="240.0" onMouseClicked="#onClickStarred" prefHeight="40.0" prefWidth="120.0" AnchorPane.bottomAnchor="0.0">
                <children>
@@ -64,11 +67,17 @@
                      </image>
                   </ImageView>
                </children>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </AnchorPane>
             <ImageView fx:id="refreshImage" fitHeight="30.0" fitWidth="30.0" layoutX="982.0" layoutY="5.0" onMouseClicked="#onRefresh" onMouseEntered="#enterRefreshImage" onMouseExited="#exitRefreshImage" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/Refresh-10.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <MFXProgressSpinner fx:id="refreshSpinner" layoutX="982.0" layoutY="6.0" prefHeight="28.0" prefWidth="30.0" />
          </children></AnchorPane>
@@ -247,7 +256,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="1156.0" layoutY="515.0" prefHeight="80.0" prefWidth="60.0" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="53.0">
+      <AnchorPane layoutX="1156.0" layoutY="515.0" pickOnBounds="false" prefHeight="80.0" prefWidth="60.0" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="53.0">
          <children>
             <AnchorPane fx:id="addButton" layoutX="4.0" layoutY="8.0" onMouseClicked="#onClickAddButton" onMouseEntered="#onEnterAddButton" onMouseExited="#onExitAddButton" pickOnBounds="false" prefHeight="60.0" prefWidth="60.0" styleClass="addPane" stylesheets="@../css/transactionPage.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <effect>
@@ -274,6 +283,9 @@
                </font>
             </Label>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </AnchorPane>
       <ImageView fx:id="star1" fitHeight="30.0" fitWidth="30.0" layoutX="982.0" layoutY="135.0" onMouseClicked="#OnStar1" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -282,6 +294,9 @@
          <effect>
             <ColorAdjust />
          </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <AnchorPane fx:id="deleteOne" layoutX="1060.0" layoutY="135.0" onMouseClicked="#onClickDeleteOne" onMouseEntered="#onEnterDeleteOne" onMouseExited="#onExitDeleteOne" prefHeight="31.0" prefWidth="31.0" style="-fx-border-color: ec0000; -fx-border-width: 0.5; -fx-background-radius: 3; -fx-border-radius: 3;">
          <children>
@@ -291,6 +306,9 @@
                </image>
             </ImageView>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </AnchorPane>
       <ImageView fx:id="star2" fitHeight="30.0" fitWidth="30.0" layoutX="982.0" layoutY="235.0" onMouseClicked="#OnStar2" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -299,11 +317,17 @@
          <effect>
             <ColorAdjust />
          </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="star3" fitHeight="30.0" fitWidth="30.0" layoutX="982.0" layoutY="335.0" onMouseClicked="#OnStar3" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/icons8-star-filled-96.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <AnchorPane fx:id="deleteTwo" layoutX="1060.0" layoutY="235.0" onMouseClicked="#onClickDeleteTwo" onMouseEntered="#onEnterDeleteTwo" onMouseExited="#onExitDeleteTwo" prefHeight="31.0" prefWidth="31.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;">
          <children>
@@ -313,6 +337,9 @@
                </image>
             </ImageView>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </AnchorPane>
       <AnchorPane fx:id="deleteThree" layoutX="1060.0" layoutY="335.0" onMouseClicked="#onClickDeleteThree" onMouseEntered="#onEnterDeleteThree" onMouseExited="#onExitDeleteThree" prefHeight="31.0" prefWidth="31.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;">
          <children>
@@ -322,11 +349,17 @@
                </image>
             </ImageView>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </AnchorPane>
       <ImageView fx:id="star4" fitHeight="30.0" fitWidth="30.0" layoutX="982.0" layoutY="435.0" onMouseClicked="#OnStar4" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/icons8-star-filled-96.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <AnchorPane fx:id="deleteFour" layoutX="1060.0" layoutY="435.0" onMouseClicked="#onClickDeleteFour" onMouseEntered="#onEnterDeleteFour" onMouseExited="#onExitDeleteFour" prefHeight="31.0" prefWidth="31.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;">
          <children>
@@ -336,6 +369,9 @@
                </image>
             </ImageView>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </AnchorPane>
       <AnchorPane fx:id="deleteFive" layoutX="1060.0" layoutY="535.0" onMouseClicked="#onClickDeleteFive" onMouseEntered="#onEnterDeleteFive" onMouseExited="#onExitDeleteFive" prefHeight="30.0" prefWidth="30.0" style="-fx-border-color: ab0000; -fx-border-width: 0.3; -fx-background-radius: 3; -fx-border-radius: 3;">
          <children>
@@ -345,15 +381,24 @@
                </image>
             </ImageView>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </AnchorPane>
       <ImageView fx:id="star5" fitHeight="30.0" fitWidth="30.0" layoutX="982.0" layoutY="535.0" onMouseClicked="#OnStar5" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/icons8-star-filled-96.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <Pagination fx:id="newPagination" layoutX="397.0" layoutY="599.0" maxPageIndicatorCount="8" onScroll="#onScrolled" pageCount="50" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" AnchorPane.leftAnchor="397.0" AnchorPane.topAnchor="593.0" />
+      <Pagination fx:id="newPagination" layoutX="397.0" layoutY="599.0" maxPageIndicatorCount="8" onScroll="#onScrolled" pageCount="50" pickOnBounds="false" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" AnchorPane.leftAnchor="397.0" AnchorPane.topAnchor="593.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pagination>
       <AnchorPane fx:id="blockPane" layoutX="1071.0" layoutY="145.0" opacity="0.75" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <AnchorPane fx:id="deleteMessagePane" layoutX="361.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f6f6f6; -fx-background-radius: 15;" visible="false">
+      <AnchorPane fx:id="deleteMessagePane" layoutX="361.0" layoutY="100.0" prefHeight="85.0" prefWidth="495.0" style="-fx-background-color: #f6f6f6; -fx-background-radius: 15;">
          <children>
             <Label layoutX="14.0" layoutY="14.0" text="Continue?" AnchorPane.leftAnchor="15.0">
                <font>
@@ -370,11 +415,17 @@
                <image>
                   <Image url="@../image/icons8-checkmark-yes-64.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="doNotContinueButton" fitHeight="28.0" fitWidth="25.0" layoutX="461.0" layoutY="11.0" onMouseClicked="#doNotContinue" onMouseEntered="#onEnterCross" onMouseExited="#onExitCross" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/icons8-multiply-90.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <MFXProgressSpinner fx:id="loadSpinnerOnDeletePane" layoutX="461.0" layoutY="52.0" prefHeight="23.0" prefWidth="25.0" visible="false" />
          </children>
@@ -423,11 +474,17 @@
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <JFXButton fx:id="okayButton" layoutX="104.0" layoutY="58.0" onAction="#onClickOkayInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #e9e9e9;" text="Okay">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <MFXProgressSpinner fx:id="loadSpinnerInAdd" layoutX="230.0" layoutY="62.0" prefHeight="18.0" prefWidth="25.0" />
                   <Label fx:id="warnMessageInAdd" prefHeight="57.0" prefWidth="283.0" text="Your action was not successful,&#10;please check if the fields have been filled." textFill="#a10000">
@@ -439,6 +496,9 @@
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                </children>
             </AnchorPane>
@@ -514,6 +574,9 @@
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <Label fx:id="itemIdInDetails" layoutX="501.0" layoutY="14.0">
                      <font>

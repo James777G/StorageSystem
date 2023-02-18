@@ -58,6 +58,9 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
       <AnchorPane layoutY="131.0" prefHeight="50.0" style="-fx-background-color: #223c40;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
          <children>
@@ -165,6 +168,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <Label fx:id="dateLabel1" layoutX="674.0" layoutY="16.0" prefHeight="22.0" prefWidth="107.0" text="2022-12-31" textFill="#223c40" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="219.0" AnchorPane.topAnchor="16.0">
                <font>
@@ -180,6 +186,9 @@
                <image>
                   <Image url="@../image/icons8-delete-document-64.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </AnchorPane>
@@ -216,6 +225,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <Label fx:id="dateLabel2" layoutX="670.0" layoutY="14.0" prefHeight="22.0" prefWidth="107.0" text="2022-12-31" textFill="#223c40" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="219.0" AnchorPane.topAnchor="16.0">
                <font>
@@ -231,6 +243,9 @@
                <image>
                   <Image url="@../image/icons8-delete-document-64.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </AnchorPane>
@@ -267,6 +282,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <Label fx:id="dateLabel3" layoutX="671.0" layoutY="15.0" prefHeight="22.0" prefWidth="107.0" text="2022-12-31" textFill="#223c40" AnchorPane.rightAnchor="219.0" AnchorPane.topAnchor="16.0">
                <font>
@@ -282,6 +300,9 @@
                <image>
                   <Image url="@../image/icons8-delete-document-64.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </AnchorPane>
@@ -318,6 +339,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <Label fx:id="dateLabel4" layoutX="669.0" layoutY="15.0" prefHeight="22.0" prefWidth="107.0" text="2022-12-31" textFill="#223c40" AnchorPane.rightAnchor="219.0" AnchorPane.topAnchor="16.0">
                <font>
@@ -333,6 +357,9 @@
                <image>
                   <Image url="@../image/icons8-delete-document-64.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </AnchorPane>
@@ -369,6 +396,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <Label fx:id="dateLabel5" layoutX="670.0" layoutY="15.0" prefHeight="22.0" prefWidth="107.0" text="2022-12-31" textFill="#223c40" AnchorPane.rightAnchor="219.0" AnchorPane.topAnchor="16.0">
                <font>
@@ -384,6 +414,9 @@
                <image>
                   <Image url="@../image/icons8-delete-document-64.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </AnchorPane>
@@ -420,6 +453,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <Label fx:id="dateLabel6" layoutX="667.0" layoutY="14.0" prefHeight="22.0" prefWidth="107.0" text="2022-12-31" textFill="#223c40" AnchorPane.rightAnchor="219.0" AnchorPane.topAnchor="16.0">
                <font>
@@ -435,6 +471,9 @@
                <image>
                   <Image url="@../image/icons8-delete-document-64.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </AnchorPane>
@@ -471,6 +510,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <Label fx:id="dateLabel7" layoutX="667.0" layoutY="14.0" prefHeight="22.0" prefWidth="107.0" text="2022-12-31" textFill="#223c40" AnchorPane.rightAnchor="219.0" AnchorPane.topAnchor="16.0">
                <font>
@@ -486,6 +528,9 @@
                <image>
                   <Image url="@../image/icons8-delete-document-64.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </AnchorPane>
@@ -516,6 +561,9 @@
                </font>
             </Label>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </AnchorPane>
       <JFXButton fx:id="allSelectButton" layoutX="35.0" layoutY="90.0" onAction="#onClickAllSelectButton" prefHeight="30.0" prefWidth="65.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00">
          <graphic>
@@ -536,6 +584,9 @@
                </graphic>
             </Label>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
       <JFXButton fx:id="takenSelectButton" layoutX="108.0" layoutY="90.0" onAction="#onClickTakenSelectButton" prefHeight="30.0" prefWidth="75.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00">
          <graphic>
@@ -556,6 +607,9 @@
                </graphic>
             </Label>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
       <JFXButton fx:id="restockSelectButton" layoutX="193.0" layoutY="90.0" onAction="#onClickRestockSelectButton" prefHeight="30.0" prefWidth="90.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" text="Button" textFill="#ffffff00">
          <graphic>
@@ -576,8 +630,14 @@
                </graphic>
             </Label>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </JFXButton>
-      <Pagination fx:id="transactionPagination" layoutX="387.0" layoutY="589.0" maxPageIndicatorCount="8" onScroll="#onScrolled" pageCount="50" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" />
+      <Pagination fx:id="transactionPagination" layoutX="387.0" layoutY="589.0" maxPageIndicatorCount="8" onScroll="#onScrolled" pageCount="50" pickOnBounds="false" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Pagination>
       <AnchorPane fx:id="blockPane" layoutX="-4.0" layoutY="-9.0" opacity="0.75" prefHeight="649.0" prefWidth="1207.0" style="-fx-background-color: grey;" visible="false" />
       <MFXGenericDialog fx:id="descriptionDialog" headerText="Transaction Details" layoutX="10.0" layoutY="10.0" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseDescriptionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
          <left>
@@ -613,6 +673,9 @@
                      <font>
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <Separator layoutY="88.0" prefHeight="3.0" prefWidth="877.0" />
                   <Separator layoutX="1.0" layoutY="187.0" prefHeight="13.0" prefWidth="876.0" />
@@ -638,11 +701,17 @@
                      <font>
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <JFXButton layoutX="702.0" layoutY="324.0" onAction="#onCloseDescriptionDialog" prefHeight="29.0" prefWidth="75.0" style="-fx-background-color: #e2e2e2; -fx-background-radius: 5; -fx-border-radius: 5;" text="Okay" AnchorPane.bottomAnchor="4.0">
                      <font>
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <Label layoutX="562.0" layoutY="110.0" prefHeight="17.0" prefWidth="159.0" text="Amount Processed:" AnchorPane.bottomAnchor="226.66666666666669">
                      <font>
@@ -685,12 +754,15 @@
                         <Font name="Calibri Bold" size="13.0" />
                      </font>
                   </Label>
-                  <MFXFilterComboBox fx:id="staffNameInDetails" floatMode="DISABLED" layoutX="252.0" layoutY="132.0" prefHeight="23.0" prefWidth="152.0" />
+                  <MFXFilterComboBox fx:id="staffNameInDetails" floatMode="DISABLED" layoutX="252.0" layoutY="132.0" prefHeight="23.0" prefWidth="152.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></MFXFilterComboBox>
                </children>
             </AnchorPane>
          </left>
       </MFXGenericDialog>
-      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
+      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
          <children>
             <Label layoutX="476.0" layoutY="155.0" opacity="0.4" prefHeight="128.0" prefWidth="320.0" rotate="-38.7" text="TRANS" textFill="#9de4ed59">
                <font>
@@ -716,11 +788,17 @@
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <JFXButton fx:id="okayButton" layoutX="104.0" layoutY="58.0" onAction="#onClickOkayInAdd" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: #e9e9e9;" text="Okay">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <Label fx:id="warnMessageInAdd" prefHeight="57.0" prefWidth="243.0" text="Your action was not successful,&#10;please check if the fields have been filled." textFill="#a10000">
                      <font>
@@ -731,6 +809,9 @@
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <MFXProgressSpinner fx:id="loadSpinnerInAdd" layoutX="230.0" layoutY="62.0" prefHeight="18.0" prefWidth="25.0" />
                </children>
@@ -742,9 +823,18 @@
                </image>
             </ImageView>
             <AnchorPane layoutX="222.0" layoutY="71.0" />
-            <MFXDatePicker fx:id="datePicker" editable="false" layoutX="228.0" layoutY="85.0" prefHeight="28.0" prefWidth="139.0" stylesheets="@../css/calendar.css" AnchorPane.topAnchor="85.0" />
-            <MFXFilterComboBox fx:id="newItemFilterComboBox" floatMode="BORDER" layoutX="14.0" layoutY="87.0" prefHeight="38.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" AnchorPane.topAnchor="85.0" />
-            <MFXFilterComboBox fx:id="newStaffFilterComboBox" floatMode="BORDER" layoutX="422.0" layoutY="85.0" prefHeight="38.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" AnchorPane.topAnchor="85.0" />
+            <MFXDatePicker fx:id="datePicker" editable="false" layoutX="228.0" layoutY="85.0" prefHeight="28.0" prefWidth="139.0" stylesheets="@../css/calendar.css" AnchorPane.topAnchor="85.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></MFXDatePicker>
+            <MFXFilterComboBox fx:id="newItemFilterComboBox" editable="false" floatMode="BORDER" layoutX="14.0" layoutY="87.0" prefHeight="38.0" prefWidth="152.0" scrollOnOpen="true" stylesheets="@../css/filterCombo.css" AnchorPane.topAnchor="85.0">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor></MFXFilterComboBox>
+            <MFXFilterComboBox fx:id="newStaffFilterComboBox" floatMode="BORDER" layoutX="422.0" layoutY="85.0" prefHeight="38.0" prefWidth="152.0" scrollOnOpen="true" stylesheets="@../css/filterCombo.css" AnchorPane.topAnchor="85.0">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor></MFXFilterComboBox>
             <Label layoutX="428.0" layoutY="60.0" prefHeight="17.0" prefWidth="139.0" text="Staff Name (required)" AnchorPane.topAnchor="60.0">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
@@ -770,7 +860,10 @@
                   <Font name="Calibri Bold" size="14.0" />
                </font>
             </Label>
-            <MFXComboBox fx:id="newStatusComboBox" floatMode="BORDER" layoutX="624.0" layoutY="164.0" prefHeight="38.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css" />
+            <MFXComboBox fx:id="newStatusComboBox" floatMode="BORDER" layoutX="624.0" layoutY="164.0" prefHeight="38.0" prefWidth="152.0" stylesheets="@../css/filterCombo.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></MFXComboBox>
             <Label layoutX="574.0" layoutY="17.0" prefHeight="17.0" prefWidth="206.0" text="Transaction-ID is auto-generated">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
@@ -805,11 +898,17 @@
                <image>
                   <Image url="@../image/icons8-checkmark-yes-64.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fx:id="deletionCross" fitHeight="28.0" fitWidth="25.0" layoutX="461.0" layoutY="11.0" onMouseClicked="#onCloseDeletionConfirmation" onMouseEntered="#onEnterCross" onMouseExited="#onExitCross" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/icons8-multiply-90.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <MFXProgressSpinner fx:id="loadSpinnerOnDeletePane" layoutX="461.0" layoutY="52.0" prefHeight="23.0" prefWidth="25.0" visible="false" />
             <AnchorPane layoutX="12.0" layoutY="86.0">
@@ -857,6 +956,9 @@
          <image>
             <Image url="@../image/Refresh-10.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <MFXProgressSpinner fx:id="refreshSpinner" layoutX="915.0" layoutY="51.0" prefHeight="28.0" prefWidth="30.0" />
    </children>

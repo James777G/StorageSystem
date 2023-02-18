@@ -787,7 +787,6 @@ public class WarehouseController implements Initializable {
                         throw new RuntimeException(e);
                     }
                     setTableContents();
-                    warnMessageInAdd.setVisible(false);
                 });
                 loadSpinnerInAdd.setVisible(false);
                 applyButtonInAdd.setVisible(true);
@@ -829,7 +828,11 @@ public class WarehouseController implements Initializable {
     @Deprecated
     @SuppressWarnings("all")
     private void initializeItemList() {
-        itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(0);
+        if(CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).isEmpty()){
+            itemList = new ArrayList<>();
+        }else{
+            itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(0);
+        }
     }
 
     @FXML

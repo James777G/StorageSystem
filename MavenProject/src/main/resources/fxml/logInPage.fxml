@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
 <?import javafx.scene.Cursor?>
@@ -29,8 +30,14 @@
                <font>
                   <Font size="21.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
-            <Label fx:id="labelOnSignIn" layoutX="240.0" layoutY="643.0" onMouseClicked="#onSignIn" text="Already have an account?" AnchorPane.bottomAnchor="80.0" />
+            <Label fx:id="labelOnSignIn" layoutX="240.0" layoutY="643.0" onMouseClicked="#onSignIn" text="Already have an account?" AnchorPane.bottomAnchor="80.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
             <Separator layoutX="213.0" layoutY="610.0" prefHeight="22.0" prefWidth="200.0" AnchorPane.bottomAnchor="101.0" />
             <ImageView fitHeight="29.0" fitWidth="34.0" layoutX="61.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="61.0">
                <image>
@@ -56,6 +63,9 @@
                <image>
                   <Image url="@../image/icons8-multiply-90.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <MFXPasswordField fx:id="signUpPassword" floatingText="Password" layoutX="103.0" layoutY="410.0" prefHeight="49.0" prefWidth="419.0" stylesheets="@../css/textField.css" />
             <MFXTextField fx:id="signUpUserName" floatingText="Username" layoutX="103.0" layoutY="340.0" prefHeight="49.0" prefWidth="419.0" stylesheets="@../css/textField.css" />
@@ -82,7 +92,10 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <Label fx:id="labelOnForgotPassword" layoutX="340.0" layoutY="271.0" onMouseClicked="#onForgetPassword" text="Forgot your password?" AnchorPane.topAnchor="275.0" />
+                  <Label fx:id="labelOnForgotPassword" layoutX="340.0" layoutY="271.0" onMouseClicked="#onForgetPassword" text="Forgot your password?" AnchorPane.topAnchor="275.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Label>
                   <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="3.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/icons8-user-96.png" />
@@ -93,12 +106,18 @@
                         <Image url="@../image/icons8-lock-104.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="labelOnSignUp" layoutX="176.0" layoutY="445.0" onMouseClicked="#onSignUp" text="Do not have an account?" />
+                  <Label fx:id="labelOnSignUp" layoutX="176.0" layoutY="445.0" onMouseClicked="#onSignUp" text="Do not have an account?">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Label>
                   <Separator layoutX="142.0" layoutY="429.66668701171875" prefWidth="200.0" />
                   <MFXTextField fx:id="userNameField" floatMode="BORDER" floatingText=" Username " layoutX="41.0" layoutY="133.0" prefHeight="49.0" prefWidth="419.0" stylesheets="@../css/textField.css" />
                   <MFXPasswordField fx:id="passwordField" floatMode="BORDER" floatingText=" Password " layoutX="41.0" layoutY="222.0" prefHeight="49.0" prefWidth="419.0" stylesheets="@../css/textField.css" />
                   <Label layoutX="215.0" layoutY="101.0" text="Test only" textFill="RED" />
-                  <Button fx:id="fastLoginButton" layoutX="193.0" layoutY="65.0" mnemonicParsing="false" onAction="#onFastLogin" text="Login as Piper" />
+                  <Button fx:id="fastLoginButton" layoutX="193.0" layoutY="65.0" mnemonicParsing="false" onAction="#onFastLogin" text="Login as Piper">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <ProgressIndicator fx:id="loadIndicator" layoutX="349.0" layoutY="330.0" />
                </children>
             </AnchorPane>
@@ -143,7 +162,7 @@
             </Label>
          </center>
       </MFXGenericDialog>
-      <MFXGenericDialog fx:id="confirmDialog" headerText="Confirmation" layoutX="400.0" layoutY="230.0" onClose="#onCloseConfirmDialog" prefHeight="260.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false" visible="false">
+      <MFXGenericDialog fx:id="confirmDialog" headerText="Confirmation" layoutX="400.0" layoutY="230.0" onClose="#onCloseConfirmDialog" prefHeight="260.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false">
          <center>
             <Pane prefHeight="189.0" prefWidth="378.0" BorderPane.alignment="CENTER">
                <children>
@@ -166,10 +185,19 @@
             </Pane>
          </center>
          <bottom>
-            <JFXButton fx:id="confimButton" maxHeight="25.0" maxWidth="85.0" minHeight="25.0" minWidth="85.0" onAction="#onConfirmationButton" prefHeight="25.0" prefWidth="85.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Confirm" BorderPane.alignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font></JFXButton>
+            <AnchorPane prefHeight="43.0" prefWidth="378.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton fx:id="confirmButton" layoutX="146.0" layoutY="16.0" maxHeight="25.0" maxWidth="85.0" minHeight="25.0" minWidth="85.0" onAction="#onConfirmationButton" prefHeight="25.0" prefWidth="85.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Confirm">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <MFXProgressSpinner fx:id="confirmSpinner" layoutX="176.0" layoutY="16.0" prefHeight="26.0" prefWidth="26.0" />
+               </children>
+            </AnchorPane>
          </bottom>
       </MFXGenericDialog>
       <MFXGenericDialog fx:id="verificationDialog" headerText="Verification Code" layoutX="400.0" layoutY="230.0" maxHeight="310.0" maxWidth="520.0" onClose="#onCloseVerificationDialog" prefHeight="275.0" prefWidth="520.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="350.0">
@@ -228,11 +256,17 @@
                      <font>
                         <Font name="Calibri Bold" size="12.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <JFXButton fx:id="resetPasswordButton" buttonType="RAISED" cancelButton="true" layoutX="396.0" layoutY="172.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onResetPassword" prefHeight="25.0" prefWidth="70.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Confirm" AnchorPane.topAnchor="172.0">
                      <font>
                         <Font name="Calibri Bold" size="12.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                   <Label fx:id="notificationLabel" alignment="TOP_CENTER" layoutX="300.0" layoutY="148.0" prefHeight="18.0" prefWidth="167.0" textAlignment="CENTER" textFill="RED">
                      <font>

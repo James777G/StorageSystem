@@ -671,6 +671,7 @@ public class NewTransactionPageController implements Initializable {
     private void onClickAddButton() {
         addTransactionPane.setOpacity(0);
         addTransactionPane.setVisible(true);
+        datePicker.setValue(LocalDate.now());
         blockPane.setVisible(true);
         FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addTransactionPane, 300, 0, 1);
         TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addTransactionPane, 300, -170, 0);
@@ -1651,17 +1652,19 @@ public class NewTransactionPageController implements Initializable {
     private void setPromptTextForStaff() {
         List<List<Staff>> staffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL);
         List<String> resultList = new ArrayList<>();
-        staffList.forEach(new Consumer<List<Staff>>() {
-            @Override
-            public void accept(List<Staff> staffList) {
-                staffList.forEach(new Consumer<Staff>() {
-                    @Override
-                    public void accept(Staff staff) {
-                        resultList.add(staff.getStaffName());
-                    }
-                });
-            }
-        });
+        if(!staffList.isEmpty() && staffList != null){
+            staffList.forEach(new Consumer<List<Staff>>() {
+                @Override
+                public void accept(List<Staff> staffList) {
+                    staffList.forEach(new Consumer<Staff>() {
+                        @Override
+                        public void accept(Staff staff) {
+                            resultList.add(staff.getStaffName());
+                        }
+                    });
+                }
+            });
+        }
         newStaffFilterComboBox.setItems(FXCollections.observableList(resultList));
         staffNameInDetails.setItems(FXCollections.observableList(resultList));
     }
@@ -1672,18 +1675,21 @@ public class NewTransactionPageController implements Initializable {
     private void setPromptTextForRegulatory() {
         List<List<Item>> itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL);
         List<String> resultList = new ArrayList<>();
-        itemList.forEach(new Consumer<List<Item>>() {
-            @Override
-            public void accept(List<Item> items) {
-                items.forEach(new Consumer<Item>() {
-                    @Override
-                    public void accept(Item item) {
-                        resultList.add(item.getItemName());
-                    }
-                });
-            }
-        });
+        if(!itemList.isEmpty() && itemList != null){
+            itemList.forEach(new Consumer<List<Item>>() {
+                @Override
+                public void accept(List<Item> items) {
+                    items.forEach(new Consumer<Item>() {
+                        @Override
+                        public void accept(Item item) {
+                            resultList.add(item.getItemName());
+                        }
+                    });
+                }
+            });
+        }
         newItemFilterComboBox.setItems(FXCollections.observableList(resultList));
+        newItemFilterComboBox.setSearchText("");
     }
 
     @FXML
