@@ -18,8 +18,3 @@
     -fx-background-radius: 10;
     -fx-border-radius: 10;
 }
-.searchButton:hover{
-    -fx-background-color: transparent;
-    -fx-border-color: #223c40;
-    -fx-border-width: 2;
-}

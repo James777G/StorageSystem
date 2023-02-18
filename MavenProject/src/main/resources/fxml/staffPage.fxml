@@ -30,9 +30,9 @@
             <Font name="Calibri Bold" size="15.0" />
          </font>
       </MFXTextField>
-      <JFXButton contentDisplay="CENTER" layoutX="850.0" layoutY="40.0" onAction="#onClickSearch" prefHeight="50.0" prefWidth="50.0" styleClass="searchButton" stylesheets="@../css/appPage.css" textFill="#223c40">
+      <JFXButton contentDisplay="CENTER" layoutX="850.0" layoutY="40.0" onAction="#onClickSearch" onMouseEntered="#onEnterSearchButton" onMouseExited="#onExitSearchButton" prefHeight="50.0" prefWidth="50.0" styleClass="searchButton" stylesheets="@../css/appPage.css" textFill="#223c40">
          <graphic>
-            <ImageView fx:id="searchImage1" fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
+            <ImageView fx:id="searchImage11" fitHeight="20.0" fitWidth="20.0" preserveRatio="true">
                <image>
                   <Image url="@../image/icons8-search-64.png" />
                </image>
