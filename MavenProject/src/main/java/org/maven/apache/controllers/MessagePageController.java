@@ -30,10 +30,7 @@ import org.maven.apache.utils.*;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 
 public class MessagePageController implements Initializable {
@@ -379,11 +376,20 @@ public class MessagePageController implements Initializable {
     }
 
     private void setPaginationPages(List<List<Message>> messagePageList) {
-        newPagination.setPageCount(messagePageList.size());
+        if(messagePageList.size() > 0){
+            newPagination.setPageCount(messagePageList.size());
+        } else{
+            newPagination.setPageCount(1);
+        }
+
     }
 
     private void updatePagination(Number currentPage) {
-        currentPageList = messagePageList.get(currentPage.intValue());
+        if(!messagePageList.isEmpty() && messagePageList != null){
+            currentPageList = messagePageList.get(currentPage.intValue());
+        }else{
+            currentPageList = new ArrayList<>();
+        }
         // set non-empty labels
         for (int i = 0; i < currentPageList.size(); i++) {
             staffNameArray[i].setText(currentPageList.get(i).getStaffName());
