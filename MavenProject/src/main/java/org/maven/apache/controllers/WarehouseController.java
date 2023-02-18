@@ -130,6 +130,9 @@ public class WarehouseController implements Initializable {
     @FXML
     private MFXTextField searchBar;
 
+    @FXML
+    private ImageView searchImage11;
+
     private final SearchResultService<Item> searchResultService = MyLauncher.context.getBean("searchResultService", SearchResultService.class);
 
     private final CachedItemService cachedItemService = MyLauncher.context.getBean("cachedItemService", CachedItemService.class);
@@ -404,6 +407,21 @@ public class WarehouseController implements Initializable {
         if (itemList.get(2) != null) {
             setItemAttributes(itemList.get(2));
         }
+    }
+
+    @FXML
+    private void onEnterSearchButton(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(searchImage11, 500, 1.2);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+
+    }
+
+    @FXML
+    private void onExitSearchButton(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(searchImage11, 500, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
     }
 
     /**
