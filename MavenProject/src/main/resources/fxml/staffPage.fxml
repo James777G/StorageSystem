@@ -87,7 +87,10 @@
                </font>
             </Label>
             <Separator layoutX="706.0" layoutY="44.0" prefWidth="100.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="675.0" />
-            <MFXCheckbox fx:id="statusButton" contentDisposition="TEXT_ONLY" layoutX="572.0" layoutY="21.0" minHeight="-Infinity" prefHeight="15.0" prefWidth="15.0" />
+            <MFXCheckbox fx:id="statusButton" contentDisposition="TEXT_ONLY" layoutX="572.0" layoutY="21.0" minHeight="-Infinity" prefHeight="15.0" prefWidth="15.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></MFXCheckbox>
          </children>
          <effect>
             <DropShadow blurType="ONE_PASS_BOX">
