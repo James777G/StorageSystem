@@ -671,6 +671,7 @@ public class NewTransactionPageController implements Initializable {
     private void onClickAddButton() {
         addTransactionPane.setOpacity(0);
         addTransactionPane.setVisible(true);
+        datePicker.setValue(LocalDate.now());
         blockPane.setVisible(true);
         FadeTransition fadeTransition = TransitionUtils.getFadeTransition(addTransactionPane, 300, 0, 1);
         TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(addTransactionPane, 300, -170, 0);
