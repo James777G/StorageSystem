@@ -501,15 +501,22 @@
             <Pagination fx:id="pagination" maxPageIndicatorCount="8" onScroll="#onScrolled" pageCount="50" pickOnBounds="false" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
-      <ImageView fx:id="refreshImage" fitHeight="30.0" fitWidth="30.0" layoutX="915.0" layoutY="51.0" onMouseClicked="#onRefresh" onMouseEntered="#enterRefreshImage" onMouseExited="#exitRefreshImage" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/Refresh-10.png" />
-         </image>
+      <JFXButton fx:id="refreshButton" layoutX="981.0" layoutY="85.0" onAction="#onRefresh" prefHeight="32.0" prefWidth="107.0" style="-fx-background-color: #223c40;" text="Refresh" textFill="WHITE" AnchorPane.bottomAnchor="519.0" AnchorPane.rightAnchor="71.0">
+         <font>
+            <Font name="Calibri Bold" size="15.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="22.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/icons8-repeat-24.png" />
+               </image>
+            </ImageView>
+         </graphic>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
-      </ImageView>
-      <MFXProgressSpinner fx:id="refreshSpinner" layoutX="915.0" layoutY="51.0" prefHeight="28.0" prefWidth="30.0" />
+      </JFXButton>
+      <MFXProgressSpinner fx:id="refreshSpinner" layoutX="1061.0" layoutY="91.0" prefHeight="28.0" prefWidth="30.0" />
       <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" visible="false" />
       <MFXGenericDialog fx:id="descriptionDialog" headerText="Item Details" layoutX="492.0" onClose="#onCloseDescription" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="150.0">
          <center>

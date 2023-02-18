@@ -120,9 +120,6 @@ public class MessagePageController implements Initializable {
     private ImageView doNotContinueButton;
 
     @FXML
-    private ImageView refreshImage;
-
-    @FXML
     private MFXProgressSpinner loadSpinnerOnDeletePane;
 
     @FXML
@@ -139,6 +136,9 @@ public class MessagePageController implements Initializable {
 
     @FXML
     private JFXButton applyButtonInAdd;
+
+    @FXML
+    private JFXButton refreshButton;
 
     @FXML
     private TextArea descriptionTextArea;
@@ -836,26 +836,12 @@ public class MessagePageController implements Initializable {
         scaleTransition.play();
     }
 
-    @FXML
-    private void enterRefreshImage() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(refreshImage, 500, 1.2);
-        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
-    }
-
-    @FXML
-    private void exitRefreshImage() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(refreshImage, 500, 1);
-        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
-    }
-
     /**
      * reload cache from database
      */
     @FXML
     public void onRefresh() throws UnsupportedPojoException {
-        refreshImage.setVisible(false);
+        refreshButton.setVisible(false);
         refreshSpinner.setVisible(true);
         executorService.execute(() -> {
             try {
@@ -864,7 +850,7 @@ public class MessagePageController implements Initializable {
                     setContent();
                 });
             } finally {
-                refreshImage.setVisible(true);
+                refreshButton.setVisible(true);
                 refreshSpinner.setVisible(false);
             }
         });
