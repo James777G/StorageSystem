@@ -1,6 +1,7 @@
 package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -29,7 +30,7 @@ public class MenuPageController implements Initializable {
     private JFXButton signOffButton;
 
     @FXML
-    private JFXButton settingButton;
+    private MFXButton settingButton;
 
     @FXML
     private ImageView settingImageView;
