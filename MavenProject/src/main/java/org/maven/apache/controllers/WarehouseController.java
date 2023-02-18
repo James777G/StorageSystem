@@ -787,7 +787,6 @@ public class WarehouseController implements Initializable {
                         throw new RuntimeException(e);
                     }
                     setTableContents();
-                    warnMessageInAdd.setVisible(false);
                 });
                 loadSpinnerInAdd.setVisible(false);
                 applyButtonInAdd.setVisible(true);

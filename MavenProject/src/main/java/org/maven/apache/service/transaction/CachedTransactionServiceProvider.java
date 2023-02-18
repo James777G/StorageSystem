@@ -73,6 +73,7 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
         strategiesHandler.doStrategies(itemMapper, transactionMapper, transaction);
         transactionMapper.addNewTransaction(transaction);
         updateAllCachedTransactionData();
+        strategiesHandler.doPostStrategies(itemMapper, transactionMapper, transaction);
     }
 
     /**
@@ -92,6 +93,7 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
         strategiesHandler.doStrategies(itemMapper, transactionMapper, id);
         transactionMapper.deleteTransactionById(id);
         updateAllCachedTransactionData();
+        strategiesHandler.doPostStrategies(itemMapper, transactionMapper, id);
     }
 
     /**
@@ -111,6 +113,11 @@ public class CachedTransactionServiceProvider implements CachedTransactionServic
     public void updateTransaction(Transaction transaction) {
         transactionMapper.updateTransaction(transaction);
         updateAllCachedTransactionData();
+        try {
+            strategiesHandler.doPostStrategies(itemMapper, transactionMapper, transaction);
+        } catch (DataNotFoundException | NegativeDataException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

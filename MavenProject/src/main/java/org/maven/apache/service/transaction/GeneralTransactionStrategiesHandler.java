@@ -20,6 +20,12 @@ public class GeneralTransactionStrategiesHandler implements GeneralTransactionSt
     @Resource
     private AbstractTransactionStrategy alertStrategy;
 
+    @Resource
+    private AbstractTransactionStrategy appPageControllerSynchronizer;
+
+    @Resource
+    private AbstractTransactionStrategy transactionPageControllerSynchronizer;
+
     @Override
     public void doStrategies(ItemMapper itemMapper, TransactionMapper transactionMapper, Transaction transaction) throws DataNotFoundException, NegativeDataException {
         cargoDataStrategy.doStrategy(itemMapper, transactionMapper, transaction);
@@ -32,5 +38,18 @@ public class GeneralTransactionStrategiesHandler implements GeneralTransactionSt
         cargoDataStrategy.doStrategy(itemMapper, transactionMapper, id);
         warehouseStrategy.doStrategy(itemMapper, transactionMapper, id);
         alertStrategy.doStrategy(itemMapper, transactionMapper, id);
+
+    }
+
+    @Override
+    public void doPostStrategies(ItemMapper itemMapper, TransactionMapper transactionMapper, Transaction transaction) throws DataNotFoundException, NegativeDataException {
+        appPageControllerSynchronizer.doStrategy(itemMapper, transactionMapper, transaction);
+        transactionPageControllerSynchronizer.doStrategy(itemMapper, transactionMapper, transaction);
+    }
+
+    @Override
+    public void doPostStrategies(ItemMapper itemMapper, TransactionMapper transactionMapper, int id) throws NegativeDataException {
+        appPageControllerSynchronizer.doStrategy(itemMapper, transactionMapper, id);
+        transactionPageControllerSynchronizer.doStrategy(itemMapper, transactionMapper, id);
     }
 }

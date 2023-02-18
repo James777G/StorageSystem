@@ -616,7 +616,7 @@ public class AppPage2Controller implements Initializable {
             dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
         }
         if(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).isEmpty()){
-            dateTransactions_Restock = new ArrayList<>();
+            dateTransactions_Taken = new ArrayList<>();
         }else{
             dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
         }
@@ -687,8 +687,16 @@ public class AppPage2Controller implements Initializable {
     }
 
     private void setLists() {
-        dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
-        dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
+        if(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).isEmpty()){
+            dateTransactions_Restock = new ArrayList<>();
+        } else {
+            dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
+        }
+        if(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).isEmpty()){
+            dateTransactions_Taken = new ArrayList<>();
+        }else{
+            dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
+        }
     }
 
     private void initializeRegulatoryNameList() {
@@ -706,34 +714,38 @@ public class AppPage2Controller implements Initializable {
     private void setPromptTextForRegulatory() {
         List<List<Item>> itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL);
         List<String> resultList = new ArrayList<>();
-        itemList.forEach(new Consumer<List<Item>>() {
-            @Override
-            public void accept(List<Item> items) {
-                items.forEach(new Consumer<Item>() {
-                    @Override
-                    public void accept(Item item) {
-                        resultList.add(item.getItemName());
-                    }
-                });
-            }
-        });
+        if(itemList != null && !itemList.isEmpty()){
+            itemList.forEach(new Consumer<List<Item>>() {
+                @Override
+                public void accept(List<Item> items) {
+                    items.forEach(new Consumer<Item>() {
+                        @Override
+                        public void accept(Item item) {
+                            resultList.add(item.getItemName());
+                        }
+                    });
+                }
+            });
+        }
         cargoNameTextField.setItems(FXCollections.observableList(resultList));
     }
 
     private void setPromptTextForStaff() {
         List<List<Staff>> staffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL);
         List<String> resultList = new ArrayList<>();
-        staffList.forEach(new Consumer<List<Staff>>() {
-            @Override
-            public void accept(List<Staff> staffList) {
-                staffList.forEach(new Consumer<Staff>() {
-                    @Override
-                    public void accept(Staff staff) {
-                        resultList.add(staff.getStaffName());
-                    }
-                });
-            }
-        });
+        if(!staffList.isEmpty() && staffList != null){
+            staffList.forEach(new Consumer<List<Staff>>() {
+                @Override
+                public void accept(List<Staff> staffList) {
+                    staffList.forEach(new Consumer<Staff>() {
+                        @Override
+                        public void accept(Staff staff) {
+                            resultList.add(staff.getStaffName());
+                        }
+                    });
+                }
+            });
+        }
         staffNameInDetails.setItems(FXCollections.observableList(resultList));
     }
 
