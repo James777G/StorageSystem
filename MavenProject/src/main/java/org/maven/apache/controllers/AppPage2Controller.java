@@ -677,6 +677,7 @@ public class AppPage2Controller implements Initializable {
                 } else {
                     searchBarService.setSearchPrompts(buttonList, searchField.getText(), PromptSearchBarServiceHandler.ResultType.CARGO);
                 }
+                searchTable.setVisible(true);
             }
         });
         setDrawer();
@@ -1211,32 +1212,32 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private void onClickSearchButtonOne() {
-        searchTable.setVisible(true);
         searchField.setText(buttonOne.getText());
+        searchTable.setVisible(false);
     }
 
     @FXML
     private void onClickSearchButtonTwo() {
-        searchTable.setVisible(true);
         searchField.setText(buttonTwo.getText());
+        searchTable.setVisible(false);
     }
 
     @FXML
     private void onClickSearchButtonThree() {
-        searchTable.setVisible(true);
         searchField.setText(buttonThree.getText());
+        searchTable.setVisible(false);
     }
 
     @FXML
     private void onClickSearchButtonFour() {
-        searchTable.setVisible(true);
         searchField.setText(buttonFour.getText());
+        searchTable.setVisible(false);
     }
 
     @FXML
     private void onClickSearchButtonFive() {
-        searchTable.setVisible(true);
         searchField.setText(buttonFive.getText());
+        searchTable.setVisible(false);
     }
 
     private void enableNode(Node node) {
