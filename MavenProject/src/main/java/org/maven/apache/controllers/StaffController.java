@@ -375,16 +375,23 @@ public class StaffController implements Initializable {
     @Deprecated
     @SuppressWarnings("all")
     private void setTextWithCurrentList(List<Staff> currentStaffList) {
-        for (int i = 0; i < currentStaffList.size(); i++) {
-            staffPanes[i].setVisible(true);
-            buttonList[i].setDisable(false);
-            nameList[i].setText(currentStaffList.get(i).getStaffName());
-            idList[i].setText(Integer.valueOf(currentStaffList.get(i).getStaffID()).toString());
-            statusList[i].setText(currentStaffList.get(i).getStatus());
+        if(currentStaffList != null && currentStaffList.size() > 0){
+            for (int i = 0; i < currentStaffList.size(); i++) {
+                staffPanes[i].setVisible(true);
+                buttonList[i].setDisable(false);
+                nameList[i].setText(currentStaffList.get(i).getStaffName());
+                idList[i].setText(Integer.valueOf(currentStaffList.get(i).getStaffID()).toString());
+                statusList[i].setText(currentStaffList.get(i).getStatus());
+            }
+            for (int j = currentStaffList.size(); j < nameList.length; j++) {
+                staffPanes[j].setVisible(false);
+            }
+        } else {
+            for (int j = 0; j < nameList.length; j++) {
+                staffPanes[j].setVisible(false);
+            }
         }
-        for (int j = currentStaffList.size(); j < nameList.length; j++) {
-            staffPanes[j].setVisible(false);
-        }
+
     }
 
     /**

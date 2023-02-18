@@ -610,15 +610,23 @@ public class AppPage2Controller implements Initializable {
         cachedTransactionService.updateAllCachedTransactionData();
         regulatoryService.updateAllRegulatoryData();
         emailService.updateCachedEmailData();
-        dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
-        dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
+        if(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).isEmpty()){
+            dateTransactions_Restock = new ArrayList<>();
+        } else {
+            dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
+        }
+        if(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).isEmpty()){
+            dateTransactions_Taken = new ArrayList<>();
+        }else{
+            dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
+        }
         transactionDialog.setVisible(false);
         searchField.deselect();
         initializeEmailSpaceList();
         initializeEmails();
         regulatoryWarnMessage.setVisible(false);
         setEmailTable(emailPagination.getCurrentPageIndex());
-        emailPagination.setPageCount(EmailCachedUtils.getLists(EmailCachedUtils.listType.ALL).size());
+        setEmailPageCount();
         emailPagination.currentPageIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -670,15 +678,25 @@ public class AppPage2Controller implements Initializable {
         });
         setDrawer();
         initializeLabels();
+        System.out.println("999999999999999999999999999999999999");
         fillCargoBoxesInformation(buttonSelected);
+        System.out.println("999999999999999999999999999999999999");
         blockPane.setVisible(false);
         DataUtils.publicSettingBlockPane = blockPane;
         onUpdateUsername();
     }
 
     private void setLists() {
-        dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
-        dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
+        if(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).isEmpty()){
+            dateTransactions_Restock = new ArrayList<>();
+        } else {
+            dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
+        }
+        if(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).isEmpty()){
+            dateTransactions_Taken = new ArrayList<>();
+        }else{
+            dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
+        }
     }
 
     private void initializeRegulatoryNameList() {
@@ -696,34 +714,38 @@ public class AppPage2Controller implements Initializable {
     private void setPromptTextForRegulatory() {
         List<List<Item>> itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL);
         List<String> resultList = new ArrayList<>();
-        itemList.forEach(new Consumer<List<Item>>() {
-            @Override
-            public void accept(List<Item> items) {
-                items.forEach(new Consumer<Item>() {
-                    @Override
-                    public void accept(Item item) {
-                        resultList.add(item.getItemName());
-                    }
-                });
-            }
-        });
+        if(itemList != null && !itemList.isEmpty()){
+            itemList.forEach(new Consumer<List<Item>>() {
+                @Override
+                public void accept(List<Item> items) {
+                    items.forEach(new Consumer<Item>() {
+                        @Override
+                        public void accept(Item item) {
+                            resultList.add(item.getItemName());
+                        }
+                    });
+                }
+            });
+        }
         cargoNameTextField.setItems(FXCollections.observableList(resultList));
     }
 
     private void setPromptTextForStaff() {
         List<List<Staff>> staffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL);
         List<String> resultList = new ArrayList<>();
-        staffList.forEach(new Consumer<List<Staff>>() {
-            @Override
-            public void accept(List<Staff> staffList) {
-                staffList.forEach(new Consumer<Staff>() {
-                    @Override
-                    public void accept(Staff staff) {
-                        resultList.add(staff.getStaffName());
-                    }
-                });
-            }
-        });
+        if(!staffList.isEmpty() && staffList != null){
+            staffList.forEach(new Consumer<List<Staff>>() {
+                @Override
+                public void accept(List<Staff> staffList) {
+                    staffList.forEach(new Consumer<Staff>() {
+                        @Override
+                        public void accept(Staff staff) {
+                            resultList.add(staff.getStaffName());
+                        }
+                    });
+                }
+            });
+        }
         staffNameInDetails.setItems(FXCollections.observableList(resultList));
     }
 
@@ -1450,16 +1472,22 @@ public class AppPage2Controller implements Initializable {
                 enableNode(redTakenLabel);
                 enableNode(greenRestockLabel);
                 greenRestockLabel.setTranslateX(0);
-                if (dateTransactions_Taken.size() < 2) {
+                try{
                     takenBoxNumber = dateTransactions_Taken.size();
-                    for (int hideAllTaken = 1; hideAllTaken >= dateTransactions_Taken.size(); hideAllTaken--) {
+                    restockBoxNumber = dateTransactions_Restock.size();
+                }catch (Exception e){
+                    takenBoxNumber = 0;
+                    restockBoxNumber = 0;
+                }
+                if (takenBoxNumber < 2) {
+                    for (int hideAllTaken = 1; hideAllTaken >= takenBoxNumber; hideAllTaken--) {
                         disableNode(cargoBoxPanes[hideAllTaken]);
                         disableNode(cargoBoxFunctionalityPanes[hideAllTaken]);
                     }
+                    System.out.println("=======================================");
                 }
-                if (dateTransactions_Restock.size() < 2) {
-                    restockBoxNumber = dateTransactions_Restock.size();
-                    for (int hideAllRestock = 3; hideAllRestock >= dateTransactions_Restock.size() + 2; hideAllRestock--) {
+                if (restockBoxNumber < 2) {
+                    for (int hideAllRestock = 3; hideAllRestock >= restockBoxNumber + 2; hideAllRestock--) {
                         disableNode(cargoBoxPanes[hideAllRestock]);
                         disableNode(cargoBoxFunctionalityPanes[hideAllRestock]);
                     }
@@ -1481,9 +1509,13 @@ public class AppPage2Controller implements Initializable {
             case TAKEN -> {
                 enableNode(redTakenLabel);
                 disableNode(greenRestockLabel);
-                if (dateTransactions_Taken.size() < 4) {
+                try{
                     boxNumber = dateTransactions_Taken.size();
-                    for (int hideTaken = 3; hideTaken > dateTransactions_Taken.size() - 1; hideTaken--) {
+                }catch(Exception e){
+                    boxNumber = 0;
+                }
+                if (boxNumber < 4) {
+                    for (int hideTaken = 3; hideTaken > boxNumber - 1; hideTaken--) {
                         disableNode(cargoBoxPanes[hideTaken]);
                         disableNode(cargoBoxFunctionalityPanes[hideTaken]);
                     }
@@ -1500,9 +1532,13 @@ public class AppPage2Controller implements Initializable {
                 disableNode(redTakenLabel);
                 enableNode(greenRestockLabel);
                 greenRestockLabel.setTranslateX(-500);
-                if (dateTransactions_Restock.size() < 4) {
+                try{
                     boxNumber = dateTransactions_Restock.size();
-                    for (int hideRestock = 3; hideRestock > dateTransactions_Restock.size() - 1; hideRestock--) {
+                }catch(Exception e){
+                    boxNumber = 0;
+                }
+                if (boxNumber < 4) {
+                    for (int hideRestock = 3; hideRestock > boxNumber - 1; hideRestock--) {
                         disableNode(cargoBoxPanes[hideRestock]);
                         disableNode(cargoBoxFunctionalityPanes[hideRestock]);
                     }
@@ -2384,9 +2420,12 @@ public class AppPage2Controller implements Initializable {
     private void refreshCache() throws UnsupportedPojoException {
         regulatoryService.updateAllRegulatoryData();
         emailService.updateCachedEmailData();
+        cachedTransactionService.updateAllCachedTransactionData();
+        setLists();
         Platform.runLater(() -> {
             setCargoPageCount();
             setEmailPageCount();
+            fillCargoBoxesInformation(buttonSelected);
             setCargoTable(0);
             setEmailTable(0);
             try {
