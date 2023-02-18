@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -84,7 +85,9 @@ public class MenuPageController implements Initializable {
             FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/logInPage.fxml"));
             final Scene scene;
             try {
+                signOffButton.setCursor(Cursor.WAIT);
                 scene = new Scene(loader.load());
+
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
