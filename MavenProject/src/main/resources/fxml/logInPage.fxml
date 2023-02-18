@@ -125,6 +125,9 @@
                <image>
                   <Image url="@../image/icons8-multiply-90.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
       </AnchorPane>
@@ -162,7 +165,7 @@
             </Label>
          </center>
       </MFXGenericDialog>
-      <MFXGenericDialog fx:id="confirmDialog" headerText="Confirmation" layoutX="400.0" layoutY="230.0" onClose="#onCloseConfirmDialog" prefHeight="260.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false">
+      <MFXGenericDialog fx:id="confirmDialog" headerText="Confirmation" layoutX="400.0" layoutY="230.0" onClose="#onCloseConfirmDialog" prefHeight="260.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false" visible="false">
          <center>
             <Pane prefHeight="189.0" prefWidth="378.0" BorderPane.alignment="CENTER">
                <children>

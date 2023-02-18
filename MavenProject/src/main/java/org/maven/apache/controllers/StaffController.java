@@ -67,6 +67,9 @@ public class StaffController implements Initializable {
     private JFXButton applyButtonInAdd;
 
     @FXML
+    private JFXButton refreshButton;
+
+    @FXML
     private ImageView deleteOne, deleteTwo, deleteThree, deleteFour, deleteFive, deleteSix, deleteSeven;
 
     @FXML
@@ -74,9 +77,6 @@ public class StaffController implements Initializable {
 
     @FXML
     private ImageView doContinueButton;
-
-    @FXML
-    private ImageView refreshImage;
 
     @FXML
     private MFXGenericDialog descriptionDialog;
@@ -1177,26 +1177,12 @@ public class StaffController implements Initializable {
         DataUtils.appPage2Controller.onClickTransaction();
     }
 
-    @FXML
-    private void enterRefreshImage() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(refreshImage, 500, 1.2);
-        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
-    }
-
-    @FXML
-    private void exitRefreshImage() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(refreshImage, 500, 1);
-        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
-    }
-
     /**
      * reload cache from database
      */
     @FXML
     public void onRefresh() throws UnsupportedPojoException {
-        refreshImage.setVisible(false);
+        refreshButton.setVisible(false);
         refreshSpinner.setVisible(true);
         executorService.execute(() -> {
             try {
@@ -1208,7 +1194,7 @@ public class StaffController implements Initializable {
             } catch (UnsupportedPojoException e) {
                 throw new RuntimeException(e);
             } finally {
-                refreshImage.setVisible(true);
+                refreshButton.setVisible(true);
                 refreshSpinner.setVisible(false);
             }
         });

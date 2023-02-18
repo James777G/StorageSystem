@@ -71,15 +71,22 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </AnchorPane>
-            <ImageView fx:id="refreshImage" fitHeight="30.0" fitWidth="30.0" layoutX="982.0" layoutY="5.0" onMouseClicked="#onRefresh" onMouseEntered="#enterRefreshImage" onMouseExited="#exitRefreshImage" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/Refresh-10.png" />
-               </image>
+            <JFXButton fx:id="refreshButton" layoutX="1023.0" layoutY="4.0" onAction="#onRefresh" prefHeight="32.0" prefWidth="107.0" style="-fx-background-color: #223c40;" text="Refresh" textFill="WHITE">
+               <font>
+                  <Font name="Calibri Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icons8-repeat-24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </ImageView>
-            <MFXProgressSpinner fx:id="refreshSpinner" layoutX="982.0" layoutY="6.0" prefHeight="28.0" prefWidth="30.0" />
+            </JFXButton>
+            <MFXProgressSpinner fx:id="refreshSpinner" layoutX="1062.0" layoutY="6.0" prefHeight="28.0" prefWidth="30.0" />
          </children></AnchorPane>
       <AnchorPane fx:id="notePadPane1" layoutX="121.0" layoutY="90.0" onMouseClicked="#OnPane1" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.bottomAnchor="454.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="95.0">
          <children>
@@ -256,7 +263,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="1156.0" layoutY="515.0" pickOnBounds="false" prefHeight="80.0" prefWidth="60.0" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="53.0">
+      <AnchorPane layoutX="1156.0" layoutY="515.0" pickOnBounds="false" prefHeight="80.0" prefWidth="60.0" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="20.0">
          <children>
             <AnchorPane fx:id="addButton" layoutX="4.0" layoutY="8.0" onMouseClicked="#onClickAddButton" onMouseEntered="#onEnterAddButton" onMouseExited="#onExitAddButton" pickOnBounds="false" prefHeight="60.0" prefWidth="60.0" styleClass="addPane" stylesheets="@../css/transactionPage.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <effect>
@@ -283,9 +290,6 @@
                </font>
             </Label>
          </children>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
       </AnchorPane>
       <ImageView fx:id="star1" fitHeight="30.0" fitWidth="30.0" layoutX="982.0" layoutY="135.0" onMouseClicked="#OnStar1" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -398,7 +402,7 @@
             <Cursor fx:constant="HAND" />
          </cursor></Pagination>
       <AnchorPane fx:id="blockPane" layoutX="1071.0" layoutY="145.0" opacity="0.75" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <AnchorPane fx:id="deleteMessagePane" layoutX="361.0" layoutY="100.0" prefHeight="85.0" prefWidth="495.0" style="-fx-background-color: #f6f6f6; -fx-background-radius: 15;">
+      <AnchorPane fx:id="deleteMessagePane" layoutX="361.0" layoutY="100.0" prefHeight="85.0" prefWidth="495.0" style="-fx-background-color: #f6f6f6; -fx-background-radius: 15;" visible="false">
          <children>
             <Label layoutX="14.0" layoutY="14.0" text="Continue?" AnchorPane.leftAnchor="15.0">
                <font>
