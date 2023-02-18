@@ -632,7 +632,7 @@
          </cursor>
       </JFXButton>
       <Pagination fx:id="transactionPagination" layoutX="387.0" layoutY="589.0" maxPageIndicatorCount="8" onScroll="#onScrolled" pageCount="50" pickOnBounds="false" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" />
-      <JFXButton fx:id="refreshButton" layoutX="1022.0" layoutY="89.0" onAction="#onRefresh" prefHeight="32.0" prefWidth="107.0" style="-fx-background-color: #223c40;" text="Refresh" textFill="WHITE">
+      <JFXButton fx:id="refreshButton" layoutX="1022.0" layoutY="89.0" onAction="#onRefresh" prefHeight="32.0" prefWidth="107.0" style="-fx-background-color: #223c40;" text="Refresh" textFill="WHITE" AnchorPane.bottomAnchor="519.0" AnchorPane.rightAnchor="71.0">
          <font>
             <Font name="Calibri Bold" size="15.0" />
          </font>
