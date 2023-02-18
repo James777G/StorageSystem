@@ -534,7 +534,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="1119.0" layoutY="552.0" prefHeight="80.0" prefWidth="60.0">
+      <AnchorPane layoutX="1119.0" layoutY="552.0" prefHeight="80.0" prefWidth="60.0" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="20.0">
          <children>
             <AnchorPane fx:id="addButton" layoutX="4.0" layoutY="8.0" onMouseClicked="#onClickAddButton" onMouseEntered="#onEnterAddButton" onMouseExited="#onExitAddButton" pickOnBounds="false" prefHeight="60.0" prefWidth="60.0" styleClass="addPane" stylesheets="@../css/transactionPage.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <effect>
@@ -561,9 +561,6 @@
                </font>
             </Label>
          </children>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
       </AnchorPane>
       <JFXButton fx:id="allSelectButton" layoutX="35.0" layoutY="90.0" onAction="#onClickAllSelectButton" prefHeight="30.0" prefWidth="65.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: #223c40;" textFill="#ffffff00">
          <graphic>
@@ -634,10 +631,16 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <Pagination fx:id="transactionPagination" layoutX="387.0" layoutY="589.0" maxPageIndicatorCount="8" onScroll="#onScrolled" pageCount="50" pickOnBounds="false" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css">
+      <Pagination fx:id="transactionPagination" layoutX="387.0" layoutY="589.0" maxPageIndicatorCount="8" onScroll="#onScrolled" pageCount="50" pickOnBounds="false" prefHeight="39.0" prefWidth="426.0" stylesheets="@../css/pagination.css" />
+      <ImageView fx:id="refreshImage" fitHeight="30.0" fitWidth="30.0" layoutX="915.0" layoutY="50.0" onMouseClicked="#onRefresh" onMouseEntered="#enterRefreshImage" onMouseExited="#exitRefreshImage" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/Refresh-10.png" />
+         </image>
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Pagination>
+         </cursor>
+      </ImageView>
+      <MFXProgressSpinner fx:id="refreshSpinner" layoutX="915.0" layoutY="51.0" prefHeight="28.0" prefWidth="30.0" />
       <AnchorPane fx:id="blockPane" layoutX="-4.0" layoutY="-9.0" opacity="0.75" prefHeight="649.0" prefWidth="1207.0" style="-fx-background-color: grey;" visible="false" />
       <MFXGenericDialog fx:id="descriptionDialog" headerText="Transaction Details" layoutX="10.0" layoutY="10.0" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseDescriptionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
          <left>
@@ -762,7 +765,7 @@
             </AnchorPane>
          </left>
       </MFXGenericDialog>
-      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
+      <AnchorPane fx:id="addTransactionPane" layoutX="10.0" layoutY="10.0" prefHeight="329.0" prefWidth="741.0" style="-fx-background-color: white; -fx-background-radius: 10;" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
          <children>
             <Label layoutX="476.0" layoutY="155.0" opacity="0.4" prefHeight="128.0" prefWidth="320.0" rotate="-38.7" text="TRANS" textFill="#9de4ed59">
                <font>
@@ -829,11 +832,11 @@
                </cursor></MFXDatePicker>
             <MFXFilterComboBox fx:id="newItemFilterComboBox" editable="false" floatMode="BORDER" layoutX="14.0" layoutY="87.0" prefHeight="38.0" prefWidth="152.0" scrollOnOpen="true" stylesheets="@../css/filterCombo.css" AnchorPane.topAnchor="85.0">
                <cursor>
-                  <Cursor fx:constant="DEFAULT" />
+                  <Cursor fx:constant="HAND" />
                </cursor></MFXFilterComboBox>
             <MFXFilterComboBox fx:id="newStaffFilterComboBox" floatMode="BORDER" layoutX="422.0" layoutY="85.0" prefHeight="38.0" prefWidth="152.0" scrollOnOpen="true" stylesheets="@../css/filterCombo.css" AnchorPane.topAnchor="85.0">
                <cursor>
-                  <Cursor fx:constant="DEFAULT" />
+                  <Cursor fx:constant="HAND" />
                </cursor></MFXFilterComboBox>
             <Label layoutX="428.0" layoutY="60.0" prefHeight="17.0" prefWidth="139.0" text="Staff Name (required)" AnchorPane.topAnchor="60.0">
                <font>
@@ -847,7 +850,10 @@
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </Label>
-                  <MFXTextField fx:id="newUnitTextField" floatMode="DISABLED" layoutY="28.0" prefHeight="38.0" prefWidth="152.0" stylesheets="@../css/generalTextField.css" AnchorPane.topAnchor="24.0" />
+                  <MFXTextField fx:id="newUnitTextField" floatMode="DISABLED" layoutY="28.0" prefHeight="38.0" prefWidth="152.0" stylesheets="@../css/generalTextField.css" AnchorPane.topAnchor="24.0">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></MFXTextField>
                </children>
             </AnchorPane>
             <Label layoutX="20.0" layoutY="61.0" prefHeight="17.0" prefWidth="139.0" text="Item Name (required)" AnchorPane.topAnchor="60.0">
@@ -952,14 +958,5 @@
             </Label>
          </children>
       </AnchorPane>
-      <ImageView fx:id="refreshImage" fitHeight="30.0" fitWidth="30.0" layoutX="915.0" layoutY="50.0" onMouseClicked="#onRefresh" onMouseEntered="#enterRefreshImage" onMouseExited="#exitRefreshImage" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/Refresh-10.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
-      <MFXProgressSpinner fx:id="refreshSpinner" layoutX="915.0" layoutY="51.0" prefHeight="28.0" prefWidth="30.0" />
    </children>
 </AnchorPane>
