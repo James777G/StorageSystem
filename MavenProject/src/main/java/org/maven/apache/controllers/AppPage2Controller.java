@@ -610,8 +610,16 @@ public class AppPage2Controller implements Initializable {
         cachedTransactionService.updateAllCachedTransactionData();
         regulatoryService.updateAllRegulatoryData();
         emailService.updateCachedEmailData();
-        dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
-        dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
+        if(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).isEmpty()){
+            dateTransactions_Restock = new ArrayList<>();
+        } else {
+            dateTransactions_Restock = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0);
+        }
+        if(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).isEmpty()){
+            dateTransactions_Restock = new ArrayList<>();
+        }else{
+            dateTransactions_Taken = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0);
+        }
         transactionDialog.setVisible(false);
         searchField.deselect();
         initializeEmailSpaceList();
@@ -670,7 +678,9 @@ public class AppPage2Controller implements Initializable {
         });
         setDrawer();
         initializeLabels();
+        System.out.println("=======================================");
         fillCargoBoxesInformation(buttonSelected);
+        System.out.println("=======================================");
         blockPane.setVisible(false);
         DataUtils.publicSettingBlockPane = blockPane;
         onUpdateUsername();

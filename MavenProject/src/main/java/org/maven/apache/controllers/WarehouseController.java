@@ -829,7 +829,11 @@ public class WarehouseController implements Initializable {
     @Deprecated
     @SuppressWarnings("all")
     private void initializeItemList() {
-        itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(0);
+        if(CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).isEmpty()){
+            itemList = new ArrayList<>();
+        }else{
+            itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(0);
+        }
     }
 
     @FXML
