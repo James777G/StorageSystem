@@ -1502,7 +1502,7 @@ public class AppPage2Controller implements Initializable {
                 if (restockBoxNumber < 2) {
                     for (int hideAllRestock = 3; hideAllRestock >= restockBoxNumber + 2; hideAllRestock--) {
                         disableNode(cargoBoxPanes[hideAllRestock]);
-                        disableNode(cargoBoxBackPanes[hideAllTaken]);
+                        disableNode(cargoBoxBackPanes[hideAllRestock]);
                         disableNode(cargoBoxFunctionalityPanes[hideAllRestock]);
                     }
                 }
