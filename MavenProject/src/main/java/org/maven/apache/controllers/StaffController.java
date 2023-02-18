@@ -135,6 +135,9 @@ public class StaffController implements Initializable {
     @FXML
     private MFXProgressSpinner refreshSpinner;
 
+    @FXML
+    private ImageView searchImage11;
+
     @SuppressWarnings("all")
     private final SearchResultService<Staff> searchResultService = MyLauncher.context.getBean("searchResultService", SearchResultService.class);
 
@@ -242,6 +245,21 @@ public class StaffController implements Initializable {
         if (event.getDeltaY() > 0) {
             pagination.setCurrentPageIndex(pagination.getCurrentPageIndex() - 1);
         }
+    }
+
+    @FXML
+    private void onEnterSearchButton(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(searchImage11, 500, 1.2);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+
+    }
+
+    @FXML
+    private void onExitSearchButton(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(searchImage11, 500, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
     }
 
     @FXML

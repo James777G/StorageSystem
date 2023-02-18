@@ -92,6 +92,9 @@ public class AppPage2Controller implements Initializable {
     private ImageView transactionImageView;
 
     @FXML
+    private ImageView searchImage11;
+
+    @FXML
     private ImageView staffImageView;
 
     @FXML
@@ -1164,6 +1167,21 @@ public class AppPage2Controller implements Initializable {
     }
 
     @FXML
+    private void onEnterSearchButton(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(searchImage11, 500, 1.2);
+        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+
+    }
+
+    @FXML
+    private void onExitSearchButton(){
+        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(searchImage11, 500, 1);
+        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
+        scaleTransition.play();
+    }
+
+    @FXML
     private void onEnterDeleteThree() {
         ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(emailDeleteThree, 250, 1.1);
         scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
@@ -1700,8 +1718,6 @@ public class AppPage2Controller implements Initializable {
      */
     @FXML
     private void onClickSearch() throws UnsupportedPojoException, IOException {
-        isSearchTableOut = true;
-        searchTable.setVisible(true);
         DataUtils.transactionPageController.setKeyword(searchField.getText());
         DataUtils.transactionPageController.onClickSearch();
         onClickTransaction();
