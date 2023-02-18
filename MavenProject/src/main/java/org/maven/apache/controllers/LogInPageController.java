@@ -2,6 +2,7 @@ package org.maven.apache.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import jakarta.mail.MessagingException;
@@ -151,6 +152,9 @@ public class LogInPageController implements Initializable {
     private JFXButton resetPasswordButton;
 
     @FXML
+    private JFXButton confirmButton;
+
+    @FXML
     private JFXButton loginButton;
 
     @FXML
@@ -158,6 +162,9 @@ public class LogInPageController implements Initializable {
 
     @FXML
     private ProgressIndicator loadIndicator;
+
+    @FXML
+    private MFXProgressSpinner confirmSpinner;
 
     private String signUpUserNameString;
 
@@ -195,6 +202,7 @@ public class LogInPageController implements Initializable {
         fadeTransition.play();
         blockPane.setVisible(false);
         usernameCross.setVisible(false);
+        confirmSpinner.setVisible(false);
         usernameCheck.setVisible(false);
         passwordCross.setVisible(false);
         passwordCheck.setVisible(false);
@@ -345,7 +353,7 @@ public class LogInPageController implements Initializable {
                 loadIndicator.setVisible(true);
                 setFieldStatus(true);
             });
-            try{
+            try {
                 // get the user list
                 updateUserList();
                 String username = userNameField.getText();
@@ -397,7 +405,7 @@ public class LogInPageController implements Initializable {
                         }
                     }
                 });
-            }catch(Exception e){
+            } catch (Exception e) {
                 Platform.runLater(() -> {
                     loginButton.setDisable(false);
                     loadIndicator.setVisible(false);
@@ -415,7 +423,11 @@ public class LogInPageController implements Initializable {
      * @return boolean
      */
     public static boolean isUsernameFound(String userName) {
-        return userList.stream().anyMatch(user -> user.getUsername().equals(userName));
+        if (!userList.isEmpty() && userList != null) {
+            return userList.stream().anyMatch(user -> user.getUsername().equals(userName));
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -557,23 +569,36 @@ public class LogInPageController implements Initializable {
     // the function for button confirmation in order to add a new user to database
     @FXML
     private void onConfirmationButton() {
-        if (checkExist()) {
-            Alert existAlert = new Alert(AlertType.WARNING);
-            existAlert.setTitle("Warning");
-            existAlert.setHeaderText("The username already exist");
-            existAlert.setContentText("Please change a user name");
-            existAlert.showAndWait();
-        } else {
-            User userSignUp = new User();
-            userSignUp.setName(getSignUpFullNameString());
-            userSignUp.setEmailAddress(getSignUpEmailAddressString());
-            userSignUp.setUsername(getSignUpUserNameString());
-            userSignUp.setPassword(getSignUpPasswordString());
-            userService.add(userSignUp);
-            // if user sign up successfully then would go back to the sign in scene
-            onCloseConfirmDialog();
-            setVisibility(signInPane, signUpPane);
-        }
+        confirmButton.setVisible(false);
+        confirmSpinner.setVisible(true);
+        threadPoolExecutor.execute(() -> {
+            if (checkExist()) {
+                Platform.runLater(() -> {
+                    Alert existAlert = new Alert(AlertType.WARNING);
+                    existAlert.setTitle("Warning");
+                    existAlert.setHeaderText("The username already exist");
+                    existAlert.setContentText("Please change a user name");
+                    existAlert.showAndWait();
+                    confirmButton.setVisible(true);
+                    confirmSpinner.setVisible(false);
+                });
+            } else {
+                User userSignUp = new User();
+                userSignUp.setName(getSignUpFullNameString());
+                userSignUp.setEmailAddress(getSignUpEmailAddressString());
+                userSignUp.setUsername(getSignUpUserNameString());
+                userSignUp.setPassword(getSignUpPasswordString());
+                userService.add(userSignUp);
+                Platform.runLater(() -> {
+                    confirmButton.setVisible(true);
+                    confirmSpinner.setVisible(false);
+                    // if user sign up successfully then would go back to the sign in scene
+                    onCloseConfirmDialog();
+                    setVisibility(signInPane, signUpPane);
+                });
+            }
+        });
+
     }
 
     // the function for check whether the user already has an account based on

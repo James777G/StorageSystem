@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import io.github.palexdev.materialfx.dialogs.MFXGenericDialog?>
 <?import javafx.scene.Cursor?>
@@ -161,7 +162,7 @@
             </Label>
          </center>
       </MFXGenericDialog>
-      <MFXGenericDialog fx:id="confirmDialog" headerText="Confirmation" layoutX="400.0" layoutY="230.0" onClose="#onCloseConfirmDialog" prefHeight="260.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false" visible="false">
+      <MFXGenericDialog fx:id="confirmDialog" headerText="Confirmation" layoutX="400.0" layoutY="230.0" onClose="#onCloseConfirmDialog" prefHeight="260.0" prefWidth="400.0" showAlwaysOnTop="false" showMinimize="false">
          <center>
             <Pane prefHeight="189.0" prefWidth="378.0" BorderPane.alignment="CENTER">
                <children>
@@ -184,13 +185,19 @@
             </Pane>
          </center>
          <bottom>
-            <JFXButton fx:id="confimButton" maxHeight="25.0" maxWidth="85.0" minHeight="25.0" minWidth="85.0" onAction="#onConfirmationButton" prefHeight="25.0" prefWidth="85.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Confirm" BorderPane.alignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></JFXButton>
+            <AnchorPane prefHeight="43.0" prefWidth="378.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton fx:id="confirmButton" layoutX="146.0" layoutY="16.0" maxHeight="25.0" maxWidth="85.0" minHeight="25.0" minWidth="85.0" onAction="#onConfirmationButton" prefHeight="25.0" prefWidth="85.0" styleClass="JFXButton" stylesheets="@../css/logInPage.css" text="Confirm">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <MFXProgressSpinner fx:id="confirmSpinner" layoutX="176.0" layoutY="16.0" prefHeight="26.0" prefWidth="26.0" />
+               </children>
+            </AnchorPane>
          </bottom>
       </MFXGenericDialog>
       <MFXGenericDialog fx:id="verificationDialog" headerText="Verification Code" layoutX="400.0" layoutY="230.0" maxHeight="310.0" maxWidth="520.0" onClose="#onCloseVerificationDialog" prefHeight="275.0" prefWidth="520.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="350.0">
