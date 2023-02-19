@@ -2231,7 +2231,7 @@ public class AppPage2Controller implements Initializable {
     }
 
     /**
-     * update any account info for current logged in user
+     * update any personal info for current logged in user if VALID
      */
     @FXML
     private void onConfirmUpdateInfo() {
@@ -2251,7 +2251,9 @@ public class AppPage2Controller implements Initializable {
             if (currentInfo.equals(currentUsername) && newInfo.length() > 1) {
                 // old username is matched with database and new username has length of at least 2
                 currentUser.setUsername(newInfo);
-                userService.update(currentUser);
+                executorService.execute(() -> {
+                    userService.update(currentUser);
+                });
                 notificationLabel.setText("Username updated");
             } else {
                 notificationLabel.setText("Invalid information");
@@ -2263,7 +2265,9 @@ public class AppPage2Controller implements Initializable {
                 // new email contains characters "@" and string ".com"
                 // and has length of at least 6
                 currentUser.setEmailAddress(newInfo);
-                userService.update(currentUser);
+                executorService.execute(() -> {
+                    userService.update(currentUser);
+                });
                 notificationLabel.setText("Email updated");
             } else {
                 notificationLabel.setText("Invalid information");
@@ -2273,12 +2277,19 @@ public class AppPage2Controller implements Initializable {
             if (currentPassword.equals(currentUserPassword) && newPassword.length() > 5) {
                 // old password is matched and new password has length of at least 6
                 currentUser.setPassword(newPassword);
-                userService.update(currentUser);
+                executorService.execute(() -> {
+                    userService.update(currentUser);
+                });
                 notificationLabel.setText("Password updated");
             } else {
                 notificationLabel.setText("Invalid information");
             }
         }
+    }
+
+    @FXML
+    private void onCloseUpdateDialog(){
+        onCloseSettings();
     }
 
     private boolean isTransactionStatusTaken(Transaction transaction) {
