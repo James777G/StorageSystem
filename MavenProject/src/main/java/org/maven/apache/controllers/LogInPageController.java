@@ -43,13 +43,7 @@ import java.util.concurrent.ExecutorService;
 public class LogInPageController implements Initializable {
 
     @FXML
-    private ImageView exitButton2;
-
-    @FXML
     private ImageView errorMessageIcon;
-
-    @FXML
-    private ImageView exitButton;
 
     @FXML
     private ImageView imageOnStorage;
@@ -215,78 +209,6 @@ public class LogInPageController implements Initializable {
     public void updateUserList() {
         UserService userService = MyLauncher.context.getBean("userService", UserService.class);
         userList = userService.selectAll();
-    }
-
-    @FXML
-    private void onExit() {
-        Platform.exit();
-        ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
-        threadPoolExecutor.shutdown();
-        System.exit(0);
-    }
-
-    @FXML
-    private void onExit2() {
-        Platform.exit();
-        ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
-        threadPoolExecutor.shutdown();
-        System.exit(0);
-    }
-
-    @FXML
-    private void onEnterExitButton() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(exitButton, 500, 1.2);
-        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
-    }
-
-    @FXML
-    private void onEnterExitButton2() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(exitButton2, 500, 1.2);
-        scaleTransition = ScaleUtils.addEaseOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
-    }
-
-    @FXML
-    private void onLeaveExitButton2() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(exitButton2, 500, 1);
-        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
-    }
-
-    @FXML
-    private void onPressExitButton2() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(exitButton2, 500, 0.8);
-        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
-    }
-
-    @FXML
-    private void onReleaseExitButton2() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(exitButton2, 500, 1);
-        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
-    }
-
-    @FXML
-    private void onLeaveExitButton() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(exitButton, 500, 1);
-        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
-    }
-
-    @FXML
-    private void onPressExitButton() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(exitButton, 500, 0.8);
-        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
-    }
-
-    @FXML
-    private void onReleaseExitButton() {
-        ScaleTransition scaleTransition = ScaleUtils.getScaleTransitionToXY(exitButton, 500, 1);
-        scaleTransition = ScaleUtils.addEaseInOutTranslateInterpolator(scaleTransition);
-        scaleTransition.play();
     }
 
     @FXML
@@ -611,7 +533,6 @@ public class LogInPageController implements Initializable {
                 });
             }
         });
-
     }
 
     // the function for check whether the user already has an account based on

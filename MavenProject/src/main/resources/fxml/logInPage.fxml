@@ -59,14 +59,6 @@
                   <Image url="@../image/icons8-lock-104.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="exitButton" fitHeight="26.0" fitWidth="32.0" layoutX="570.0" layoutY="7.0" onMouseClicked="#onExit" onMouseEntered="#onEnterExitButton" onMouseExited="#onLeaveExitButton" onMousePressed="#onPressExitButton" onMouseReleased="#onReleaseExitButton" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="553.0" AnchorPane.topAnchor="14.0">
-               <image>
-                  <Image url="@../image/icons8-multiply-90.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
             <MFXPasswordField fx:id="signUpPassword" floatingText="Password" layoutX="103.0" layoutY="410.0" prefHeight="49.0" prefWidth="419.0" stylesheets="@../css/textField.css" />
             <MFXTextField fx:id="signUpUserName" floatingText="Username" layoutX="103.0" layoutY="340.0" prefHeight="49.0" prefWidth="419.0" stylesheets="@../css/textField.css" />
             <MFXTextField fx:id="signUpEmailAddress" floatingText="Email Address" layoutX="103.0" layoutY="270.0" prefHeight="49.0" prefWidth="419.0" stylesheets="@../css/textField.css" />
@@ -121,14 +113,6 @@
                   <ProgressIndicator fx:id="loadIndicator" layoutX="349.0" layoutY="330.0" />
                </children>
             </AnchorPane>
-            <ImageView fx:id="exitButton2" fitHeight="26.0" fitWidth="32.0" layoutX="1153.0" layoutY="14.0" onMouseClicked="#onExit2" onMouseEntered="#onEnterExitButton2" onMouseExited="#onLeaveExitButton2" onMousePressed="#onPressExitButton2" onMouseReleased="#onReleaseExitButton2" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="1153.0" AnchorPane.topAnchor="14.0">
-               <image>
-                  <Image url="@../image/icons8-multiply-90.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" style="-fx-background-color: #23242a;">
