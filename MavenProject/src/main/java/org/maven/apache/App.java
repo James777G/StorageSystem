@@ -48,7 +48,7 @@ public class App extends Application {
             threadPoolExecutor.shutdown();
             System.exit(0);
         });
-        scene.setFill(Color.TRANSPARENT);
+        stage.setTitle("Pendulum: Login");
         stage.setScene(scene);
         stage.show();
     }
