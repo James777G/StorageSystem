@@ -1,5 +1,6 @@
 package org.maven.apache.service.transaction;
 
+import javafx.application.Platform;
 import org.maven.apache.controllers.NewTransactionPageController;
 import org.maven.apache.exception.DataNotFoundException;
 import org.maven.apache.exception.NegativeDataException;
@@ -34,11 +35,15 @@ public final class TransactionPageControllerSynchronizingStrategy extends Abstra
             throw new RuntimeException(e);
         }
         refreshPage.setAccessible(true);
-        try {
-            refreshPage.invoke(DataUtils.transactionPageController);
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException(e);
-        }
+
+        Method finalRefreshPage = refreshPage;
+        Platform.runLater(()->{
+            try {
+                finalRefreshPage.invoke(DataUtils.transactionPageController);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }
 

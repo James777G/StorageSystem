@@ -1,5 +1,6 @@
 package org.maven.apache.service.transaction;
 
+import javafx.application.Platform;
 import org.maven.apache.controllers.AppPage2Controller;
 import org.maven.apache.exception.DataNotFoundException;
 import org.maven.apache.exception.NegativeDataException;
@@ -40,12 +41,17 @@ public final class AppPageControllerSynchronizingStrategy extends AbstractTransa
         setLists.setAccessible(true);
         fillCargoBoxesInformation.setAccessible(true);
 
-        try {
-            setLists.invoke(DataUtils.appPage2Controller);
-            fillCargoBoxesInformation.invoke(DataUtils.appPage2Controller, DataUtils.buttonSelected);
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException(e);
-        }
+        Method finalSetLists = setLists;
+        Method finalFillCargoBoxesInformation = fillCargoBoxesInformation;
+        Platform.runLater(()->{
+            try {
+                finalSetLists.invoke(DataUtils.appPage2Controller);
+                finalFillCargoBoxesInformation.invoke(DataUtils.appPage2Controller, DataUtils.buttonSelected);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
 
 
     }
