@@ -692,9 +692,7 @@ public class AppPage2Controller implements Initializable {
         });
         setDrawer();
         initializeLabels();
-//        System.out.println("999999999999999999999999999999999999");
         fillCargoBoxesInformation(buttonSelected);
-        System.out.println("999999999999999999999999999999999999");
         blockPane.setVisible(false);
         DataUtils.publicSettingBlockPane = blockPane;
         onUpdateUsername();
