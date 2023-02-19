@@ -188,6 +188,12 @@ public class AppPage2Controller implements Initializable {
     private JFXButton emailApplyButton, cargoApplyButton;
 
     @FXML
+    private JFXButton okayButtonInUpdate;
+
+    @FXML
+    private JFXButton confirmButton;
+
+    @FXML
     private AnchorPane appPagePane;
 
     @FXML
@@ -417,6 +423,9 @@ public class AppPage2Controller implements Initializable {
 
     @FXML
     private MFXProgressSpinner refreshSpinner;
+
+    @FXML
+    private MFXProgressSpinner updateSpinner;
 
     @FXML
     private MFXFilterComboBox staffNameInDetails;
@@ -667,6 +676,7 @@ public class AppPage2Controller implements Initializable {
         emailSpinner.setVisible(false);
         cargoSpinner.setVisible(false);
         refreshSpinner.setVisible(false);
+        updateSpinner.setVisible(false);
         setPromptTextForRegulatory();
         setPromptTextForStaff();
         searchField.textProperty().addListener(new ChangeListener<String>() {
@@ -2260,11 +2270,22 @@ public class AppPage2Controller implements Initializable {
             // updating username
             if (currentInfo.equals(currentUsername) && newInfo.length() > 1) {
                 // old username is matched with database and new username has length of at least 2
+                updateSpinner.setVisible(true);
+                confirmButton.setVisible(false);
+                okayButtonInUpdate.setDisable(true);
                 currentUser.setUsername(newInfo);
                 executorService.execute(() -> {
-                    userService.update(currentUser);
+                    try{
+                        userService.update(currentUser);
+                    }finally{
+                        Platform.runLater(() -> {
+                            notificationLabel.setText("Username updated");
+                            updateSpinner.setVisible(false);
+                            confirmButton.setVisible(true);
+                            okayButtonInUpdate.setDisable(false);
+                        });
+                    }
                 });
-                notificationLabel.setText("Username updated");
             } else {
                 notificationLabel.setText("Invalid information");
             }
@@ -2274,11 +2295,22 @@ public class AppPage2Controller implements Initializable {
                 // old email is matched with database and
                 // new email contains characters "@" and string ".com"
                 // and has length of at least 6
-                currentUser.setEmailAddress(newInfo);
+                updateSpinner.setVisible(true);
+                confirmButton.setVisible(false);
+                okayButtonInUpdate.setDisable(true);
+                currentUser.setUsername(newInfo);
                 executorService.execute(() -> {
-                    userService.update(currentUser);
+                    try{
+                        userService.update(currentUser);
+                    }finally{
+                        Platform.runLater(() -> {
+                            notificationLabel.setText("Email updated");
+                            updateSpinner.setVisible(false);
+                            confirmButton.setVisible(true);
+                            okayButtonInUpdate.setDisable(false);
+                        });
+                    }
                 });
-                notificationLabel.setText("Email updated");
             } else {
                 notificationLabel.setText("Invalid information");
             }
@@ -2286,11 +2318,22 @@ public class AppPage2Controller implements Initializable {
             // updating password
             if (currentPassword.equals(currentUserPassword) && newPassword.length() > 5) {
                 // old password is matched and new password has length of at least 6
-                currentUser.setPassword(newPassword);
+                updateSpinner.setVisible(true);
+                confirmButton.setVisible(false);
+                okayButtonInUpdate.setDisable(true);
+                currentUser.setUsername(newInfo);
                 executorService.execute(() -> {
-                    userService.update(currentUser);
+                    try{
+                        userService.update(currentUser);
+                    }finally{
+                        Platform.runLater(() -> {
+                            notificationLabel.setText("Password updated");
+                            updateSpinner.setVisible(false);
+                            confirmButton.setVisible(true);
+                            okayButtonInUpdate.setDisable(false);
+                        });
+                    }
                 });
-                notificationLabel.setText("Password updated");
             } else {
                 notificationLabel.setText("Invalid information");
             }
