@@ -1,6 +1,7 @@
 package org.maven.apache;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
 
 public class App extends Application {
 
@@ -38,11 +40,16 @@ public class App extends Application {
      */
     @Override
     public void start(final Stage stage) throws IOException {
-
         final Scene scene = new Scene(loadFxml("logInPage"));
+        // terminate the program as long as the stage (the app) is closed
+        stage.setOnCloseRequest( e -> {
+            Platform.exit();
+            ExecutorService threadPoolExecutor = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
+            threadPoolExecutor.shutdown();
+            System.exit(0);
+        });
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
-        stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
     }
 
