@@ -24,8 +24,10 @@ import javafx.scene.layout.AnchorPane;
 import org.maven.apache.MyLauncher;
 import org.maven.apache.exception.*;
 import org.maven.apache.item.Item;
+import org.maven.apache.service.item.CachedItemService;
 import org.maven.apache.service.search.SearchResultService;
 import org.maven.apache.service.search.SearchResultServiceHandler;
+import org.maven.apache.service.staff.CachedStaffService;
 import org.maven.apache.service.transaction.CachedTransactionService;
 import org.maven.apache.staff.Staff;
 import org.maven.apache.transaction.Transaction;
@@ -270,6 +272,10 @@ public class NewTransactionPageController implements Initializable {
     private final ExecutorService executorService = MyLauncher.context.getBean("threadPoolExecutor", ExecutorService.class);
 
     private final SearchResultService<Transaction> searchResultService = MyLauncher.context.getBean("searchResultService", SearchResultService.class);
+
+    private final CachedStaffService staffService = MyLauncher.context.getBean("staffService", CachedStaffService.class);
+
+    private final CachedItemService cachedItemService = MyLauncher.context.getBean("cachedItemService", CachedItemService.class);
 
     private List<List<Transaction>> sortedList;
 
@@ -1719,6 +1725,8 @@ public class NewTransactionPageController implements Initializable {
         refreshSpinner.setVisible(true);
         executorService.execute(() -> {
             try {
+                staffService.updateAllCachedStaffData();
+                cachedItemService.updateAllCachedItemData();
                 cachedTransactionService.updateAllCachedTransactionData();
                 Platform.runLater(() -> {
                     setPromptTextForRegulatory();

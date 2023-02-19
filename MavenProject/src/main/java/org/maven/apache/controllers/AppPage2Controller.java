@@ -35,10 +35,12 @@ import org.maven.apache.item.Item;
 import org.maven.apache.regulatory.Regulatory;
 import org.maven.apache.service.email.EmailService;
 import org.maven.apache.service.excel.ExcelConverterService;
+import org.maven.apache.service.item.CachedItemService;
 import org.maven.apache.service.mail.MailNotifyService;
 import org.maven.apache.service.regulatory.RegulatoryService;
 import org.maven.apache.service.search.PromptSearchBarServiceHandler;
 import org.maven.apache.service.search.SearchBarService;
+import org.maven.apache.service.staff.CachedStaffService;
 import org.maven.apache.service.transaction.CachedTransactionService;
 import org.maven.apache.service.user.UserService;
 import org.maven.apache.staff.Staff;
@@ -542,6 +544,10 @@ public class AppPage2Controller implements Initializable {
     private final EmailService emailService = MyLauncher.context.getBean("emailService", EmailService.class);
 
     private final RegulatoryService regulatoryService = MyLauncher.context.getBean("regulatoryService", RegulatoryService.class);
+
+    private final CachedStaffService staffService = MyLauncher.context.getBean("staffService", CachedStaffService.class);
+
+    private final CachedItemService cachedItemService = MyLauncher.context.getBean("cachedItemService", CachedItemService.class);
 
     private Transaction transaction;
 
@@ -2511,6 +2517,8 @@ public class AppPage2Controller implements Initializable {
         regulatoryService.updateAllRegulatoryData();
         emailService.updateCachedEmailData();
         cachedTransactionService.updateAllCachedTransactionData();
+        cachedItemService.updateAllCachedItemData();
+        staffService.updateAllCachedStaffData();
         setLists();
         Platform.runLater(() -> {
             setCargoPageCount();
