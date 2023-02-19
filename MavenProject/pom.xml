@@ -4,7 +4,7 @@
     <!-- 没啥用 忽略就好了 随便起的名字-->
     <groupId>org.maven.apache</groupId>
     <!-- 我们的项目名字-->
-    <artifactId>MavenProject</artifactId>
+    <artifactId>PENDULUM</artifactId>
     <build>
         <plugins>
             <plugin>
@@ -328,6 +328,5 @@
         <!-- UTF8mb4 字符集 功能很强大 支持你在String 和 Character里面打各国语言-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <!-- 我瞎写的版本号 其实就是我没改 系统默认的 一点用没有-->
-    <version>0.0.1-SNAPSHOT</version>
+    <version>DEPLOY-1.0</version>
 </project>
