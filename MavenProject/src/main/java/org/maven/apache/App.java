@@ -48,7 +48,8 @@ public class App extends Application {
             threadPoolExecutor.shutdown();
             System.exit(0);
         });
-        scene.setFill(Color.TRANSPARENT);
+        stage.setResizable(false); // disabled maximize button (fullscreen button) and dragging functionality
+        stage.setTitle("Pendulum");
         stage.setScene(scene);
         stage.show();
     }
