@@ -98,7 +98,7 @@
                </cursor>
             </AnchorPane>
          </children></AnchorPane>
-      <AnchorPane fx:id="notePadPane1" layoutX="121.0" layoutY="90.0" onScroll="#onScrolled" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.bottomAnchor="454.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="95.0">
+      <AnchorPane fx:id="notePadPane1" layoutX="121.0" layoutY="90.0" onMouseClicked="#OnPane1" onScroll="#onScrolled" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.bottomAnchor="454.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="95.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
                <image>
@@ -133,7 +133,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="notePadPane2" layoutX="120.0" layoutY="176.0" onScroll="#onScrolled" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="195.0">
+      <AnchorPane fx:id="notePadPane2" layoutX="120.0" layoutY="176.0" onMouseClicked="#OnPane2" onScroll="#onScrolled" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="195.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
                <image>
@@ -168,7 +168,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="notePadPane3" layoutX="129.0" layoutY="280.0" onScroll="#onScrolled" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="295.0">
+      <AnchorPane fx:id="notePadPane3" layoutX="129.0" layoutY="280.0" onMouseClicked="#OnPane3" onScroll="#onScrolled" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="295.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
                <image>
@@ -203,7 +203,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="notePadPane4" layoutX="137.0" layoutY="380.0" onScroll="#onScrolled" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="395.0">
+      <AnchorPane fx:id="notePadPane4" layoutX="137.0" layoutY="380.0" onMouseClicked="#OnPane4" onScroll="#onScrolled" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="395.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="25.0">
                <image>
@@ -238,7 +238,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="notePadPane5" layoutX="127.0" layoutY="480.0" onScroll="#onScrolled" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="495.0">
+      <AnchorPane fx:id="notePadPane5" layoutX="127.0" layoutY="480.0" onMouseClicked="#OnPane5" onScroll="#onScrolled" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="495.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="26.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="25.0">
                <image>
