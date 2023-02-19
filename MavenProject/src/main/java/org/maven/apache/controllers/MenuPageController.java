@@ -86,11 +86,13 @@ public class MenuPageController implements Initializable {
             FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/logInPage.fxml"));
             final Scene scene;
             try {
-                signOffButton.setCursor(Cursor.WAIT);
+                DataUtils.publicSettingBlockPane.setCursor(Cursor.WAIT);
+                DataUtils.publicSettingBlockPane.setVisible(true);
                 scene = new Scene(loader.load());
-
             } catch (IOException e) {
                 throw new RuntimeException(e);
+            }finally{
+                DataUtils.publicSettingBlockPane.setVisible(true);
             }
             Platform.runLater(() -> {
                 stage.setScene(scene);

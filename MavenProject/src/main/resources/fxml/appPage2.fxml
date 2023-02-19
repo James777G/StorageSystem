@@ -1028,7 +1028,7 @@
                         <Font name="Calibri" size="14.0" />
                      </font>
                   </Label>
-                  <HBox layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="277.0">
+                  <HBox layoutX="7.0" layoutY="14.0" prefHeight="30.0" prefWidth="277.0">
                      <children>
                         <JFXButton fx:id="updateUsernameButton" onAction="#onUpdateUsername" prefHeight="25.0" prefWidth="89.0" style="-fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: transparent;" text="Username" textAlignment="CENTER">
                            <font>
@@ -1057,8 +1057,8 @@
                      </children>
                   </HBox>
                   <Separator layoutX="7.0" layoutY="42.0" prefHeight="3.0" prefWidth="694.0" />
-                  <AnchorPane fx:id="transitionSettingLine" layoutX="25.0" layoutY="43.0" prefHeight="3.0" prefWidth="75.0" style="-fx-background-color: #223c40;" />
-                  <JFXButton layoutX="153.0" layoutY="215.0" onAction="#onCloseUpdateDialog" prefHeight="29.0" prefWidth="75.0" style="-fx-background-color: #e2e2e2; -fx-background-radius: 5; -fx-border-radius: 5;" text="Okay">
+                  <AnchorPane fx:id="transitionSettingLine" layoutX="7.0" layoutY="41.0" prefHeight="3.0" prefWidth="85.0" style="-fx-background-color: #223c40;" />
+                  <JFXButton fx:id="okayButtonInUpdate" layoutX="153.0" layoutY="215.0" onAction="#onCloseUpdateDialog" prefHeight="29.0" prefWidth="75.0" style="-fx-background-color: #e2e2e2; -fx-background-radius: 5; -fx-border-radius: 5;" text="Okay">
                      <font>
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
@@ -1066,7 +1066,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton layoutX="479.0" layoutY="215.0" onAction="#onConfirmUpdateInfo" prefHeight="29.0" prefWidth="75.0" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Confirm" textFill="WHITE">
+                  <JFXButton fx:id="confirmButton" layoutX="479.0" layoutY="215.0" onAction="#onConfirmUpdateInfo" prefHeight="29.0" prefWidth="75.0" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Confirm" textFill="WHITE">
                      <font>
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
@@ -1074,6 +1074,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
+                  <MFXProgressSpinner fx:id="updateSpinner" layoutX="502.0" layoutY="216.0" prefHeight="28.0" prefWidth="30.0" />
                </children>
             </AnchorPane>
          </center>
