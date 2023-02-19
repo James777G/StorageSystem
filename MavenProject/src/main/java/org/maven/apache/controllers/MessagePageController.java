@@ -11,10 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.Pagination;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ScrollEvent;
@@ -205,8 +202,8 @@ public class MessagePageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         cachedMessageService.updateAllCachedMessageData();
-//        itemDescriptionInDetails.setTextFormatter(new TextFormatter<String>(change ->
-//                change.getControlNewText().length() <= 250 ? change : null));
+        itemDescriptionInDetails.setTextFormatter(new TextFormatter<String>(change ->
+                change.getControlNewText().length() <= 250 ? change : null));
         clickStarredMessage = false;
         descriptionDialog.setVisible(false);
         blockPane.setVisible(false);

@@ -328,5 +328,5 @@
         <!-- UTF8mb4 字符集 功能很强大 支持你在String 和 Character里面打各国语言-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <version>DEPLOY-1.0</version>
+    <version>1.0</version>
 </project>
