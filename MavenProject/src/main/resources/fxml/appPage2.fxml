@@ -411,7 +411,6 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </AnchorPane>
-            <AnchorPane fx:id="appPageBlockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" visible="false" AnchorPane.topAnchor="0.0" />
             <JFXButton layoutX="770.0" layoutY="410.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onClickAlert" prefHeight="27.0" prefWidth="135.0" style="-fx-background-color: #223c40; -fx-background-radius: 5; -fx-border-radius: 5;" text="Alert Manager" textFill="WHITE" AnchorPane.bottomAnchor="263.0" AnchorPane.leftAnchor="760.0">
                <font>
                   <Font name="Calibri Bold" size="14.0" />
@@ -427,6 +426,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
+            <AnchorPane fx:id="appPageBlockPane" opacity="0.75" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: grey;" visible="false" AnchorPane.topAnchor="0.0" />
             <Label layoutX="760.0" layoutY="379.0" prefHeight="25.0" prefWidth="102.0" text="Notifications:" textFill="#223c40" AnchorPane.bottomAnchor="295.6666666666667" AnchorPane.leftAnchor="760.0">
                <font>
                   <Font name="Calibri Bold" size="16.0" />
@@ -676,7 +676,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </MFXCircleToggleNode>
-            <MFXGenericDialog fx:id="transactionDialog" headerText="Transaction Details" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseTransactionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
+            <MFXGenericDialog fx:id="transactionDialog" headerText="Transaction Details" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseTransactionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
                <left>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
