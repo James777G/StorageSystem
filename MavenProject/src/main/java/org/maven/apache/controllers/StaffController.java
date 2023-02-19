@@ -1187,12 +1187,16 @@ public class StaffController implements Initializable {
         executorService.execute(() -> {
             try {
                 staffService.updateAllCachedStaffData();
-                getStaffList(0);
-                assignStaffValue();
-                calculatePageNumber();
-                pagination.setCurrentPageIndex(0);
-            } catch (UnsupportedPojoException e) {
-                throw new RuntimeException(e);
+                Platform.runLater(() ->{
+                    assignStaffValue();
+                    try {
+                        calculatePageNumber();
+                    } catch (UnsupportedPojoException e) {
+                        throw new RuntimeException(e);
+                    }
+                    getStaffList(1);
+                    pagination.setCurrentPageIndex(0);
+                });
             } finally {
                 refreshButton.setVisible(true);
                 refreshSpinner.setVisible(false);

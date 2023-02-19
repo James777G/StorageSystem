@@ -1115,11 +1115,15 @@ public class WarehouseController implements Initializable {
         executorService.execute(() -> {
             try {
                 cachedItemService.updateAllCachedItemData();
-                calculatePageSize();
-                setTableContents();
-                newPagination.setCurrentPageIndex(0);
-            } catch (UnsupportedPojoException e) {
-                throw new RuntimeException(e);
+                Platform.runLater(() -> {
+                    try {
+                        calculatePageSize();
+                    } catch (UnsupportedPojoException e) {
+                        throw new RuntimeException(e);
+                    }
+                    setTableContents();
+                    newPagination.setCurrentPageIndex(0);
+                });
             } finally {
                 refreshButton.setVisible(true);
                 refreshSpinner.setVisible(false);
