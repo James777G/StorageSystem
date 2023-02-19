@@ -1118,10 +1118,10 @@ public class WarehouseController implements Initializable {
                 Platform.runLater(() -> {
                     try {
                         calculatePageSize();
+                        setTableContents();
                     } catch (UnsupportedPojoException e) {
                         throw new RuntimeException(e);
                     }
-                    setTableContents();
                     newPagination.setCurrentPageIndex(0);
                 });
             } finally {
