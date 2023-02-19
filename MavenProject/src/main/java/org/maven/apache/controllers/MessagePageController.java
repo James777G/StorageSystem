@@ -200,7 +200,6 @@ public class MessagePageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         cachedMessageService.updateAllCachedMessageData();
         itemDescriptionInDetails.setTextFormatter(new TextFormatter<String>(change ->
                 change.getControlNewText().length() <= 250 ? change : null));
@@ -737,10 +736,10 @@ public class MessagePageController implements Initializable {
 
     @FXML
     private void onScrolled(ScrollEvent event) {
-        if (event.getDeltaY() > 0) {
+        if (event.getDeltaY() < 0) {
             newPagination.setCurrentPageIndex(newPagination.getCurrentPageIndex() + 1);
         }
-        if (event.getDeltaY() < 0) {
+        if (event.getDeltaY() > 0) {
             newPagination.setCurrentPageIndex(newPagination.getCurrentPageIndex() - 1);
         }
     }
