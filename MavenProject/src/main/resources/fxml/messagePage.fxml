@@ -18,7 +18,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: eeeeee;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.MessagePageController">
+<AnchorPane prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: eeeeee;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.maven.apache.controllers.MessagePageController">
    <children>
       <AnchorPane prefHeight="50.0" prefWidth="1200.0" style="-fx-background-color: #223c40;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
@@ -37,7 +37,7 @@
       <AnchorPane layoutY="50.0" prefHeight="40.0" prefWidth="1200.0" style="-fx-background-color: #cfd8dc;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <AnchorPane fx:id="movingLinePane" layoutX="31.0" layoutY="39.0" prefHeight="2.0" prefWidth="120.0" style="-fx-background-color: #0DaD8D;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" />
-            <AnchorPane fx:id="onMoveToMessagePane" layoutX="120.0" onMouseClicked="#onClickMessage" prefHeight="40.0" prefWidth="120.0" AnchorPane.leftAnchor="120.0">
+            <AnchorPane fx:id="onMoveToMessagePane" layoutX="120.0" onMouseClicked="#onClickMessage" prefHeight="40.0" prefWidth="120.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="991.0">
                <children>
                   <Label prefHeight="18.0" prefWidth="68.0" text="Message" textFill="#223c40" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="0.0">
                      <font>
@@ -87,6 +87,16 @@
                </cursor>
             </JFXButton>
             <MFXProgressSpinner fx:id="refreshSpinner" layoutX="1062.0" layoutY="6.0" prefHeight="28.0" prefWidth="30.0" />
+            <AnchorPane fx:id="onMoveToStarredBlockPane" layoutX="130.0" layoutY="10.0" onMouseClicked="#onClickMessage" prefHeight="40.0" prefWidth="120.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="991.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
+            <AnchorPane fx:id="onMoveToMessageBlockPane" layoutX="130.0" layoutY="10.0" onMouseClicked="#onClickMessage" prefHeight="40.0" prefWidth="120.0" visible="false" AnchorPane.leftAnchor="240.0" AnchorPane.topAnchor="0.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </AnchorPane>
          </children></AnchorPane>
       <AnchorPane fx:id="notePadPane1" layoutX="121.0" layoutY="90.0" onMouseClicked="#OnPane1" prefHeight="100.0" prefWidth="960.0" styleClass="AnchorPane" stylesheets="@../css/messagePage.css" AnchorPane.bottomAnchor="454.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="95.0">
          <children>

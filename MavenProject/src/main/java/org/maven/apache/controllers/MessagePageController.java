@@ -75,6 +75,12 @@ public class MessagePageController implements Initializable {
     private AnchorPane addTransactionPane;
 
     @FXML
+    private AnchorPane onMoveToStarredBlockPane;
+
+    @FXML
+    private AnchorPane onMoveToMessageBlockPane;
+
+    @FXML
     private Pagination newPagination;
 
     @FXML
@@ -688,9 +694,11 @@ public class MessagePageController implements Initializable {
         });
         if ((!isMovingLineOnMessage) && (!isLineMoving)) {
             isLineMoving = true;
+            onMoveToMessageBlockPane.setVisible(true);
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionByX(movingLinePane, 500, -120);
             translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
             translateTransition.setOnFinished(event -> {
+                onMoveToMessageBlockPane.setVisible(false);
                 isLineMoving = false;
                 isMovingLineOnMessage = true;
             });
@@ -718,9 +726,11 @@ public class MessagePageController implements Initializable {
         if ((isMovingLineOnMessage) && (!isLineMoving)) {
 
             isLineMoving = true;
+            onMoveToStarredBlockPane.setVisible(true);
             TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionByX(movingLinePane, 500, 120);
             translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
             translateTransition.setOnFinished(event -> {
+                onMoveToStarredBlockPane.setVisible(false);
                 isLineMoving = false;
                 isMovingLineOnMessage = false;
             });
