@@ -491,14 +491,27 @@ public class LogInPageController implements Initializable {
         confirmationUserName.setText("Username: " + getSignUpUserNameString());
         confirmationPassword.setText("Password: " + getSignUpPasswordString());
         confirmationEmailAddress.setText("Email Address: " + getSignUpEmailAddressString());
+        confirmDialog.setOpacity(0);
         confirmDialog.setVisible(true);
         blockPane.setVisible(true);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(confirmDialog,300,0,1);
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(confirmDialog,300,-130,0);
+        translateTransition = TranslateUtils.addEaseOutTranslateInterpolator(translateTransition);
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     @FXML
     private void onCloseConfirmDialog() {
-        confirmDialog.setVisible(false);
-        blockPane.setVisible(false);
+        FadeTransition fadeTransition = TransitionUtils.getFadeTransition(confirmDialog,300,1,0);
+        fadeTransition.setOnFinished(event->{
+            confirmDialog.setVisible(false);
+            blockPane.setVisible(false);
+        });
+        TranslateTransition translateTransition = TranslateUtils.getTranslateTransitionFromToY(confirmDialog,300,0,-130);
+        translateTransition = TranslateUtils.addEaseInTranslateInterpolator(translateTransition);
+        fadeTransition.play();
+        translateTransition.play();
     }
 
     // the function for button confirmation in order to add a new user to database
