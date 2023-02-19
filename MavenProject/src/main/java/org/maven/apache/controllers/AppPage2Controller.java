@@ -691,6 +691,7 @@ public class AppPage2Controller implements Initializable {
     }
 
     private void setLists() {
+        DataUtils.buttonSelected = buttonSelected;
         if(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).isEmpty()){
             dateTransactions_Restock = new ArrayList<>();
         } else {
@@ -1484,9 +1485,6 @@ public class AppPage2Controller implements Initializable {
                 disableNode(cargoBoxBackPanes[i]);
                 disableNode(cargoBoxPanes[i]);
                 disableNode(cargoBoxFunctionalityPanes[i]);
-                System.out.println("Enter disable for loop ");
-                System.out.println();
-                System.out.println();
                 return;
             }
         }
@@ -1563,15 +1561,6 @@ public class AppPage2Controller implements Initializable {
                         disableNode(cargoBoxBackPanes[hideTaken]);
                         disableNode(cargoBoxFunctionalityPanes[hideTaken]);
                     }
-                    return;
-                }
-                if (TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0).size() < 4) {
-                    boxNumber = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0).size();
-                    for (int hideTaken = 3; hideTaken > TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0).size() - 1; hideTaken--) {
-                        disableNode(cargoBoxPanes[hideTaken]);
-                        disableNode(cargoBoxBackPanes[hideTaken]);
-                        disableNode(cargoBoxFunctionalityPanes[hideTaken]);
-                    }
                 }
                 for (int index = 0; index < boxNumber; index++) {
                     dateTransactionListInAppPage[index] = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0).get(index);
@@ -1592,15 +1581,6 @@ public class AppPage2Controller implements Initializable {
                 }
                 if (boxNumber < 4) {
                     for (int hideRestock = 3; hideRestock > boxNumber - 1; hideRestock--) {
-                        disableNode(cargoBoxPanes[hideRestock]);
-                        disableNode(cargoBoxBackPanes[hideRestock]);
-                        disableNode(cargoBoxFunctionalityPanes[hideRestock]);
-                    }
-                    return;
-                }
-                if (TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0).size() < 4) {
-                    boxNumber = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0).size();
-                    for (int hideRestock = 3; hideRestock > TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0).size() - 1; hideRestock--) {
                         disableNode(cargoBoxPanes[hideRestock]);
                         disableNode(cargoBoxBackPanes[hideRestock]);
                         disableNode(cargoBoxFunctionalityPanes[hideRestock]);
