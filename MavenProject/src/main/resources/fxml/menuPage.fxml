@@ -35,11 +35,7 @@
                   <Font name="Candara Bold" size="12.0" />
                </font>
             </Label>
-            <ImageView fitHeight="16.0" fitWidth="13.0" layoutX="111.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="7.0">
-               <image>
-                  <Image url="@../image/icons8-star-filled-48-%23FCC419E0.png" />
-               </image>
-            </ImageView>
+            <AnchorPane layoutX="123.0" layoutY="10.0" prefHeight="5.0" prefWidth="5.0" style="-fx-background-color: #94e69e; -fx-background-radius: 100;" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="12.0" />
          </children>
       </AnchorPane>
       <AnchorPane>
