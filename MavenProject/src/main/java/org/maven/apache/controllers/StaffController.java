@@ -1198,7 +1198,7 @@ public class StaffController implements Initializable {
                     } catch (UnsupportedPojoException e) {
                         throw new RuntimeException(e);
                     }
-                    getStaffList(1);
+                    getStaffList(0);
                     pagination.setCurrentPageIndex(0);
                 });
             } finally {

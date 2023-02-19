@@ -1119,6 +1119,7 @@ public class WarehouseController implements Initializable {
                     try {
                         calculatePageSize();
                         setTableContents();
+                        generateItemList(0);
                     } catch (UnsupportedPojoException e) {
                         throw new RuntimeException(e);
                     }
