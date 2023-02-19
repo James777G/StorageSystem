@@ -198,9 +198,6 @@ public class LogInPageController implements Initializable {
         loadIndicator.setVisible(false);
         loginButton.setDisable(false);
         setFieldStatus(false);
-        /****/
-        fastLoginButton.setDisable(false);  // TEST ONLY
-        /****/
     }
 
     /**
@@ -589,24 +586,6 @@ public class LogInPageController implements Initializable {
             labelOnForgotPassword.setDisable(false);
             labelOnSignUp.setDisable(false);
         }
-    }
-
-    /**
-     * TEST ONLY
-     */
-    @FXML
-    private Button fastLoginButton;
-
-    /**
-     * TEST ONLY
-     * login as piper by clicking a button
-     */
-    @FXML
-    private void onFastLogin() {
-        userNameField.setText("Piper");
-        passwordField.setText("sir");
-        fastLoginButton.setDisable(true);
-        onSignInAction();
     }
 
 }
