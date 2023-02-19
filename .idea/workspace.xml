@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7edfefdc-13d6-40ba-9d84-03fa844b95db" name="Changes" comment="implemented initial content successfully">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/StaffController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/StaffController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/WarehouseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/WarehouseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/MessagePageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MavenProject/src/main/java/org/maven/apache/controllers/MessagePageController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

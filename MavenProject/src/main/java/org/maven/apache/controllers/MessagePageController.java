@@ -563,9 +563,15 @@ public class MessagePageController implements Initializable {
         loadSpinnerOnDeletePane.setVisible(true);
         doContinueButton.setVisible(false);
         executorService.execute(() -> {
-            cachedMessageService.deleteMessageById(MessageID);
-            //    cachedMessageService.updateAllCachedMessageData();
-            //    generateItemList(newPagination.getCurrentPageIndex());
+            try{
+                cachedMessageService.deleteMessageById(MessageID);
+            }catch(Exception e){
+                try {
+                    onRefresh();
+                } catch (UnsupportedPojoException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
             Platform.runLater(this::setContent);
             Platform.runLater(() -> {
                 FadeTransition fadeTransition = TransitionUtils.getFadeTransition(deleteMessagePane, 300, 1, 0);
