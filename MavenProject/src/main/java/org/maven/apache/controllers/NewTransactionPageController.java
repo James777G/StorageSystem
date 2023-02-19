@@ -1503,7 +1503,7 @@ public class NewTransactionPageController implements Initializable {
                     });
                 } catch (Exception e) {
                     Platform.runLater(() -> {
-                        warnMessageInAdd.setText("Insertion Failed. \r\nPlease check your inserted data are indeed valid.");
+                        warnMessageInAdd.setText("Insertion Failed. \r\nPlease check your data are valid.");
                         warnMessageInAdd.setVisible(true);
                     });
                     isAdditionSucceed = false;
