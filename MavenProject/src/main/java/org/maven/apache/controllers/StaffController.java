@@ -1138,7 +1138,11 @@ public class StaffController implements Initializable {
             } finally {
                 staffService.updateAllCachedStaffData();
                 Platform.runLater(() -> {
-                    pagination.setPageCount(pageNumber);
+                    try {
+                        calculatePageNumber();
+                    } catch (UnsupportedPojoException e) {
+                        throw new RuntimeException(e);
+                    }
                     assignStaffValue();
                     loadSpinnerInAdd.setVisible(false);
                     applyButtonInAdd.setVisible(true);
