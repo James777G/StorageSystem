@@ -1667,7 +1667,7 @@ public class NewTransactionPageController implements Initializable {
     /**
      * set all prompt staff names from database
      */
-    private void setPromptTextForStaff() {
+    public void setPromptTextForStaff() {
         List<List<Staff>> staffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL);
         List<String> resultList = new ArrayList<>();
         if(!staffList.isEmpty() && staffList != null){
@@ -1690,7 +1690,7 @@ public class NewTransactionPageController implements Initializable {
     /**
      * set all prompt item names from database
      */
-    private void setPromptTextForRegulatory() {
+    public void setPromptTextForRegulatory() {
         List<List<Item>> itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL);
         List<String> resultList = new ArrayList<>();
         if(!itemList.isEmpty() && itemList != null){
@@ -1720,6 +1720,10 @@ public class NewTransactionPageController implements Initializable {
         executorService.execute(() -> {
             try {
                 cachedTransactionService.updateAllCachedTransactionData();
+                Platform.runLater(() -> {
+                    setPromptTextForRegulatory();
+                    setPromptTextForStaff();
+                });
                 refreshPage();
             } catch (UnsupportedPojoException e) {
                 throw new RuntimeException(e);

@@ -1117,6 +1117,10 @@ public class WarehouseController implements Initializable {
                 cachedItemService.updateAllCachedItemData();
                 Platform.runLater(() -> {
                     try {
+                        DataUtils.transactionPageController.setPromptTextForRegulatory();
+                        DataUtils.transactionPageController.setPromptTextForStaff();
+                        DataUtils.appPage2Controller.setPromptTextForRegulatory();
+                        DataUtils.appPage2Controller.setPromptTextForStaff();
                         calculatePageSize();
                         setTableContents();
                         generateItemList(0);

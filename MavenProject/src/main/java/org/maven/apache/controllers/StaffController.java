@@ -1192,6 +1192,8 @@ public class StaffController implements Initializable {
             try {
                 staffService.updateAllCachedStaffData();
                 Platform.runLater(() ->{
+                    DataUtils.transactionPageController.setPromptTextForRegulatory();
+                    DataUtils.transactionPageController.setPromptTextForStaff();
                     assignStaffValue();
                     try {
                         calculatePageNumber();

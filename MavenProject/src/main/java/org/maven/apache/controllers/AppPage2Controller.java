@@ -724,7 +724,7 @@ public class AppPage2Controller implements Initializable {
         regulatoryAmountList.add(regulatoryAmountThree);
     }
 
-    private void setPromptTextForRegulatory() {
+    public void setPromptTextForRegulatory() {
         List<List<Item>> itemList = CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL);
         List<String> resultList = new ArrayList<>();
         if(itemList != null && !itemList.isEmpty()){
@@ -743,7 +743,7 @@ public class AppPage2Controller implements Initializable {
         cargoNameTextField.setItems(FXCollections.observableList(resultList));
     }
 
-    private void setPromptTextForStaff() {
+    public void setPromptTextForStaff() {
         List<List<Staff>> staffList = StaffCachedUtils.getLists(StaffCachedUtils.listType.ALL);
         List<String> resultList = new ArrayList<>();
         if(!staffList.isEmpty() && staffList != null){
@@ -2536,6 +2536,10 @@ public class AppPage2Controller implements Initializable {
             try {
                 refreshCache();
                 Platform.runLater(()->{
+                    DataUtils.transactionPageController.setPromptTextForRegulatory();
+                    DataUtils.transactionPageController.setPromptTextForStaff();
+                    DataUtils.appPage2Controller.setPromptTextForRegulatory();
+                    DataUtils.appPage2Controller.setPromptTextForStaff();
                     fillCargoBoxesInformation(buttonSelected);
                 });
             } catch (UnsupportedPojoException e) {
