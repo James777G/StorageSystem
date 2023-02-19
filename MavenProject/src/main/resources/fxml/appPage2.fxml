@@ -676,7 +676,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </MFXCircleToggleNode>
-            <MFXGenericDialog fx:id="transactionDialog" headerText="Transaction Details" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseTransactionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
+            <MFXGenericDialog fx:id="transactionDialog" headerText="Transaction Details" maxHeight="400.0" maxWidth="900.0" minHeight="400.0" minWidth="900.0" onClose="#onCloseTransactionDialog" prefHeight="400.0" prefWidth="900.0" showAlwaysOnTop="false" showMinimize="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="90.0">
                <left>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
@@ -776,7 +776,7 @@
                               <Font name="Calibri Bold" size="14.0" />
                            </font>
                         </Label>
-                        <MFXFilterComboBox fx:id="staffNameInDetails" floatMode="BORDER" floatingText=" Name " layoutX="252.0" layoutY="136.0" prefHeight="25.0" prefWidth="170.0">
+                        <MFXFilterComboBox fx:id="staffNameInDetails" floatMode="BORDER" floatingText=" Name " layoutX="252.0" layoutY="136.0" prefHeight="25.0" prefWidth="170.0" stylesheets="@../css/filterCombo.css">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></MFXFilterComboBox>
