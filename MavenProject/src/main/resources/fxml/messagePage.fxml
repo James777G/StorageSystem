@@ -71,7 +71,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </AnchorPane>
-            <JFXButton fx:id="refreshButton" layoutX="1023.0" layoutY="4.0" onAction="#onRefresh" prefHeight="32.0" prefWidth="107.0" style="-fx-background-color: #223c40;" text="Refresh" textFill="WHITE">
+            <JFXButton fx:id="refreshButton" layoutX="1023.0" layoutY="4.0" onAction="#onRefresh" prefHeight="32.0" prefWidth="107.0" style="-fx-background-color: #223c40;" text="Refresh" textFill="WHITE" AnchorPane.bottomAnchor="3.3333333333333357" AnchorPane.leftAnchor="1024.0" AnchorPane.rightAnchor="109.66666666666667" AnchorPane.topAnchor="4.0">
                <font>
                   <Font name="Calibri Bold" size="15.0" />
                </font>
@@ -263,7 +263,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="1156.0" layoutY="515.0" pickOnBounds="false" prefHeight="80.0" prefWidth="60.0" AnchorPane.bottomAnchor="17.0" AnchorPane.rightAnchor="20.0">
+      <AnchorPane layoutX="1126.0" layoutY="535.0" pickOnBounds="false" prefHeight="80.0" prefWidth="60.0" AnchorPane.bottomAnchor="34.0" AnchorPane.rightAnchor="55.0">
          <children>
             <AnchorPane fx:id="addButton" layoutX="4.0" layoutY="8.0" onMouseClicked="#onClickAddButton" onMouseEntered="#onEnterAddButton" onMouseExited="#onExitAddButton" pickOnBounds="false" prefHeight="60.0" prefWidth="60.0" styleClass="addPane" stylesheets="@../css/transactionPage.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <effect>

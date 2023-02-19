@@ -1549,7 +1549,7 @@ public class AppPage2Controller implements Initializable {
                     cargoAmountLabels[indexTaken].setText(String.valueOf(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0).get(indexTaken).getUnit()));
                     staffNameLabels[indexTaken].setText(TransactionCachedUtils.getLists(TransactionCachedUtils.listType.TAKEN_DATE_DESC_4).get(0).get(indexTaken).getStaffName());
                 }
-                System.out.println("=======================================");
+
 
                 for (int indexRestock = 0; indexRestock < restockBoxNumber; indexRestock++) {
                     dateTransactionListInAppPage[indexRestock + 2] = TransactionCachedUtils.getLists(TransactionCachedUtils.listType.RESTOCK_DATE_DESC_4).get(0).get(indexRestock);
@@ -1559,7 +1559,6 @@ public class AppPage2Controller implements Initializable {
                 }
             }
             case TAKEN -> {
-                System.out.println("=======================================");
                 enableNode(redTakenLabel);
                 disableNode(greenRestockLabel);
                 try{

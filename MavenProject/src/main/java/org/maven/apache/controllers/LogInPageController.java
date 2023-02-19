@@ -382,11 +382,15 @@ public class LogInPageController implements Initializable {
                                         setFieldStatus(false);
                                     });
                                 }
-                                Scene finalScene = scene;
-                                Platform.runLater(() -> {
-                                    stage.setScene(finalScene);
-                                    stage.show();
-                                });
+                                try{
+                                    Scene finalScene = scene;
+                                    Platform.runLater(() -> {
+                                        stage.setScene(finalScene);
+                                        stage.show();
+                                    });
+                                }catch(RuntimeException e){
+                                    throw new RuntimeException(e);
+                                }
                             });
                         } else {
                             Platform.runLater(() -> {
