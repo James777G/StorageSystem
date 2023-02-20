@@ -220,10 +220,10 @@ public class WarehouseController implements Initializable {
     }
 
     private void setTotalPrice(){
-        int totalPrice = 0;
+        double totalPrice = 0;
         for (int i = 0; i < CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).size(); i++){
             for (int j = 0; j < CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(i).size(); j++){
-                totalPrice = totalPrice + Integer.valueOf(CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(i).get(j).getDescription().split("%%")[0]) * CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(i).get(j).getUnit();
+                totalPrice = totalPrice + Double.valueOf(CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(i).get(j).getDescription().split("%%")[0]) * CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(i).get(j).getUnit();
             }
         }
         DataUtils.totalPriceLabel.setText(String.valueOf("Total Price: " + totalPrice));
