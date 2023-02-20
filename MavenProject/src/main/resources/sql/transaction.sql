@@ -4,11 +4,11 @@ use ItemBase;
 create table if not exists TransactionTable
 (
     ID          int                          not null unique auto_increment,
-    ItemName    varchar(50)                  not null,
-    StaffName   varchar(50)                  NOT NULL,
+    ItemName    varchar(200)                  not null,
+    StaffName   varchar(100)                  NOT NULL,
     Status      enum('TAKEN', 'RESTOCK')     not null,
     Unit        int                          not null,
-    TransactionTime  varchar(30)             not null,
+    TransactionTime  varchar(50)             not null,
     Purpose     varchar(300)
 );
 

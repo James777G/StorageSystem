@@ -1,10 +1,10 @@
 use ItemBase;
 create table if not exists UserTable(
 id int not null unique auto_increment,
-name varchar(50)  not null,
-username varchar(20) unique not null,
-password varchar(20) not null,
-emailAddress varchar(50)
+name varchar(100)  not null,
+username varchar(100) unique not null,
+password varchar(100) not null,
+emailAddress varchar(100)
 );
 
 insert into UserTable(name, username, password, emailAddress) values

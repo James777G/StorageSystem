@@ -4,9 +4,9 @@ use ItemBase;
 
 create table if not exists ItemTable(
 ItemID int not null unique auto_increment,
-ItemName varchar(50) unique not null,
+ItemName varchar(200) unique not null,
 Unit int not null,
-Description varchar(100)
+Description varchar(200)
 );
 
 insert into ItemTable(ItemName, Unit) values

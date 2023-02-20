@@ -5,8 +5,8 @@ use ItemBase;
 
 create table if not exists MessageTable(
 MessageID  int not null unique auto_increment,
-StaffName varchar(40) not null,
-Category varchar(40) not null,
+StaffName varchar(100) not null,
+Category varchar(100) not null,
 Information varchar(300) not null,
 MessageTime date not null,
 Star int not null default 0
