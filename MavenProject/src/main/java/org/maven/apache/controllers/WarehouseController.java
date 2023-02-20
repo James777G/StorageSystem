@@ -216,6 +216,17 @@ public class WarehouseController implements Initializable {
         }));
         blockPane.setVisible(false);
         hideDeleteImageViews();
+        setTotalPrice();
+    }
+
+    private void setTotalPrice(){
+        int totalPrice = 0;
+        for (int i = 0; i < CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).size(); i++){
+            for (int j = 0; j < CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(i).size(); j++){
+                totalPrice = totalPrice + Integer.valueOf(CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(i).get(j).getDescription().split("%%")[0]) * CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(i).get(j).getUnit();
+            }
+        }
+        DataUtils.totalPriceLabel.setText(String.valueOf("Total Price: " + totalPrice));
     }
 
     private void initializeTransactionPaneList() {
@@ -1124,6 +1135,7 @@ public class WarehouseController implements Initializable {
                         calculatePageSize();
                         setTableContents();
                         generateItemList(0);
+                        setTotalPrice();
                     } catch (UnsupportedPojoException e) {
                         throw new RuntimeException(e);
                     }

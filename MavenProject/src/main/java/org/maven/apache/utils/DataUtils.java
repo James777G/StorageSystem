@@ -1,6 +1,7 @@
 package org.maven.apache.utils;
 
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.layout.AnchorPane;
 import org.maven.apache.controllers.AppPage2Controller;
@@ -39,5 +40,7 @@ public class DataUtils {
     public static User currentUser;
 
     public static MFXGenericDialog publicSettingsDialog;
+
+    public static Label totalPriceLabel;
 
 }

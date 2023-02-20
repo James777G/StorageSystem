@@ -627,7 +627,7 @@
             </AnchorPane>
          </center>
       </MFXGenericDialog>
-      <AnchorPane fx:id="addItemPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
+      <AnchorPane fx:id="addItemPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white; -fx-background-radius: 10;" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
          <children>
             <Label layoutX="421.0" layoutY="156.0" opacity="0.4" prefHeight="128.0" prefWidth="320.0" rotate="-38.7" text="CARGO" textFill="#9de4ed59">
                <font>
@@ -711,6 +711,11 @@
                   </TextField>
                </children>
             </AnchorPane>
+            <Label layoutX="130.0" layoutY="162.0" text="Unit Price eg888%%abc" textFill="RED">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="deleteItemPane" layoutX="351.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f6f6f6; -fx-background-radius: 15;" visible="false" AnchorPane.bottomAnchor="460.0" AnchorPane.leftAnchor="351.0" AnchorPane.rightAnchor="349.0" AnchorPane.topAnchor="90.0">

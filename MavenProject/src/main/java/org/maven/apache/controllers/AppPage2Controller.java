@@ -388,6 +388,9 @@ public class AppPage2Controller implements Initializable {
     private Label regulatoryWarnMessage;
 
     @FXML
+    public Label totalPriceLabel;
+
+    @FXML
     private TextField searchField;
 
     @FXML
@@ -625,6 +628,7 @@ public class AppPage2Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        DataUtils.totalPriceLabel = totalPriceLabel;
         cachedTransactionService.updateAllCachedTransactionData();
         regulatoryService.updateAllRegulatoryData();
         emailService.updateCachedEmailData();

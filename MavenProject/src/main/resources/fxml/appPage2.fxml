@@ -981,6 +981,11 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
+            <Label fx:id="totalPriceLabel" layoutX="176.0" layoutY="22.0" prefHeight="17.0" prefWidth="99.0" text="Total Price: 100" textFill="RED">
+               <font>
+                  <Font name="Calibri Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="blockPane" opacity="0.75" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: grey;" visible="false" AnchorPane.bottomAnchor="0.0" />
