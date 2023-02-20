@@ -981,7 +981,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <Label fx:id="totalPriceLabel" layoutX="162.0" layoutY="22.0" prefHeight="17.0" prefWidth="262.0" text="Total Price: 100" textFill="#223c40">
+            <Label fx:id="totalPriceLabel" alignment="CENTER" layoutX="162.0" layoutY="22.0" prefHeight="17.0" prefWidth="262.0" text="Total Price: 100" textFill="#223c40">
                <font>
                   <Font name="Calibri Bold" size="18.0" />
                </font>

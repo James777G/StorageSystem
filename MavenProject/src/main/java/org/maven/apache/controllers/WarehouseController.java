@@ -226,7 +226,7 @@ public class WarehouseController implements Initializable {
                 totalPrice = totalPrice + Double.valueOf(CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(i).get(j).getDescription().split("%%")[0]) * CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(i).get(j).getUnit();
             }
         }
-        DataUtils.totalPriceLabel.setText(String.valueOf("Total Price: " + totalPrice));
+        DataUtils.totalPriceLabel.setText(String.valueOf("Total Price: $" + totalPrice));
     }
 
     private void initializeTransactionPaneList() {
