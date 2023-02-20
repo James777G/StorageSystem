@@ -56,7 +56,8 @@ public class ExcelConverterServiceProvider implements ExcelConverterService {
         row.createCell(1).setCellValue("Item Name");
         row.createCell(2).setCellValue("Item Unit");
         row.createCell(3).setCellValue("Item Description");
-
+        row.createCell(4).setCellValue("Price");
+        row.createCell(5).setCellValue("Total Price");
         List<Item> itemList = itemService.selectAll();
         for (Item item : itemList) {
             HSSFRow newRow = sheet.createRow(sheet.getLastRowNum() + 1);
@@ -65,6 +66,14 @@ public class ExcelConverterServiceProvider implements ExcelConverterService {
             newRow.createCell(1).setCellValue(item.getItemName());
             newRow.createCell(2).setCellValue(item.getUnit());
             newRow.createCell(3).setCellValue(item.getDescription());
+            newRow.createCell(3).setCellValue(item.getDescription().split("%%")[0]);
+            try{
+                newRow.createCell(4).setCellValue(Integer.valueOf(item.getDescription().split("%%")[0]) * item.getUnit());
+            }catch (Exception e){
+                newRow.createCell(4).setCellValue("ERROR");
+            }
+
+
         }
     }
 

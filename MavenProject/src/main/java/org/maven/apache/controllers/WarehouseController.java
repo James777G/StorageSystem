@@ -219,14 +219,25 @@ public class WarehouseController implements Initializable {
         setTotalPrice();
     }
 
+    /**
+     * set and display the price of all current stored cargos
+     */
     private void setTotalPrice(){
         double totalPrice = 0;
+        boolean isCaught = false;
         for (int i = 0; i < CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).size(); i++){
             for (int j = 0; j < CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(i).size(); j++){
-                totalPrice = totalPrice + Double.valueOf(CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(i).get(j).getDescription().split("%%")[0]) * CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(i).get(j).getUnit();
+                try{
+                    totalPrice = totalPrice + Double.valueOf(CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(i).get(j).getDescription().split("%%")[0]) * CargoCachedUtils.getLists(CargoCachedUtils.listType.ALL).get(i).get(j).getUnit();
+                }catch (Exception e){
+                    DataUtils.totalPriceLabel.setText(String.valueOf("ERROR"));
+                }
+
             }
         }
-        DataUtils.totalPriceLabel.setText(String.valueOf("Total Price: $" + totalPrice));
+        if (!isCaught){
+            DataUtils.totalPriceLabel.setText(String.valueOf("Total Price: $" + totalPrice));
+        }
     }
 
     private void initializeTransactionPaneList() {
